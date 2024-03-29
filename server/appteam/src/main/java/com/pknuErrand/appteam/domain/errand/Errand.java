@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity(name = "errand")
 public class Errand {
@@ -19,7 +18,7 @@ public class Errand {
     private long errandNo;
 
     @Column
-    private long orderNo;
+    private long orderNo; // 심부름 시킨사람의 pk
 
     @Column
     private String title;
@@ -51,4 +50,18 @@ public class Errand {
 
     @Column
     private long erranderNo; // 심부름꾼의 pk
+
+    public Errand(ErrandRequestDto requestDto) {
+        this.orderNo = requestDto.getOrderNo();
+        this.title = requestDto.getTitle();
+        this.destination = requestDto.getDestination();
+        this.latitude = requestDto.getLatitude();
+        this.longitude = requestDto.getLongitude();
+        this.due = requestDto.getDue();
+        this.detail = requestDto.getDetail();
+        this.reward = requestDto.getReward();
+        this.isCash = requestDto.isCash();
+        this.status = requestDto.getStatus();
+        this.erranderNo = requestDto.getErranderNo();
+    }
 }
