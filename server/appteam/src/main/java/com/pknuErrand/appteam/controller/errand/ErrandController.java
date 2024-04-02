@@ -4,6 +4,7 @@ package com.pknuErrand.appteam.controller.errand;
 import com.pknuErrand.appteam.domain.errand.ErrandRequestDto;
 import com.pknuErrand.appteam.domain.errand.ErrandResponseDto;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
+import com.pknuErrand.appteam.service.errand.ErrandService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,19 +14,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/errand")
 public class ErrandController {
-    /**
+
     private final ErrandService errandService;
-     + 생성자 주입
-    **/
+    ErrandController(ErrandService errandService) {
+        this.errandService = errandService;
+    }
+
 
     @PostMapping /** Eraand 등록 **/
-    public ResponseEntity<ErrandRequestDto> createErrand(@RequestBody ErrandRequestDto errandRequestDto) {
-        /**
-         * Errand를 entity(db)에 저장하는 로직
-         */
+    public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandRequestDto errandRequestDto) {
         return ResponseEntity.ok()
-                .body(errand);
+                .body(errandService.createErrand(errandRequestDto));
     }
+
     @GetMapping
     public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
         /**
