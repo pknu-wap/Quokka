@@ -12,23 +12,23 @@ import java.sql.Timestamp;
 public class ErrandResponseDto { // from Entity
     private long orderNo; // 심부름 시킨사람의 pk
 
-    private String title;
+    private String title; // 심부름 제목
 
-    private String destination;
+    private String destination; // 도착지
 
-    private double latitude;
+    private double latitude; // 위도
 
-    private double longitude;
+    private double longitude; // 경도
 
     private Timestamp due; // 몇시까지?
 
-    private String detail;
+    private String detail; // 상세 내용
 
-    private int reward;
+    private int reward; // 보수금액
 
-    private boolean isCash;
+    private boolean isCash; // 현금 계좌이체 선택
 
-    private Status status;
+    private Status status; // 상태
 
     private long erranderNo; // 심부름꾼의 pk
 
