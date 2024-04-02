@@ -27,20 +27,18 @@ public class ErrandController {
                 .body(errandService.createErrand(errandRequestDto));
     }
 
-    @GetMapping
-    public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
-        /**
-         * 모든 Errand를 불러오는 로직
-         */
-        return ResponseEntity.ok()
-                .body(list~~)
-    }
-    @GetMapping("/{id}")   /** Errand 하나 조회 **/
-    public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
-        /**
-         * Errand pk id로부터 하나의 errand를 불러오는 로작
-         */
-        return ResponseEntity.ok()
-                .body(errand)
-    }
+//    @GetMapping
+//    public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
+//        /**
+//         * 모든 Errand를 불러오는 로직
+//         */
+//        return ResponseEntity.ok();
+//    }
+//    @GetMapping("/{id}")   /** Errand 하나 조회 **/
+//    public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
+//        /**
+//         * Errand pk id로부터 하나의 errand를 불러오는 로작
+//         */
+//        return ResponseEntity.ok();
+//    }
 }
