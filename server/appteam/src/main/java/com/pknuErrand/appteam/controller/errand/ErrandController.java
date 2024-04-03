@@ -27,28 +27,25 @@ public class ErrandController {
     }
 
 
-    @Operation(summary = "심부름 요청서" , description = "심부름 요청서 등록")
-    @PostMapping /** Eraand 등록 **/
+    @Operation(summary = "요청서 등록" , description = "심부름 요청서 등록")
+    @PostMapping
     public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandRequestDto errandRequestDto) {
         return ResponseEntity.ok()
                 .body(errandService.createErrand(errandRequestDto));
     }
 
-    @Operation(summary = "심부름 요청서" , description = "심부름 요청서 전부 불러오기")
-    @GetMapping /** Errand 전부 불러오기 **/
+    @Operation(summary = "요청서 전부 불러오기" , description = "심부름 요청서 전부 불러오기")
+    @GetMapping
     public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
         List<ErrandResponseDto> errandResponseDtoList = errandService.findAllErrand();
         return ResponseEntity.ok()
                 .body(errandResponseDtoList);
     }
 
-
-
-//    @GetMapping("/{id}")   /** Errand 하나 조회 **/
-//    public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
-//        /**
-//         * Errand pk id로부터 하나의 errand를 불러오는 로작
-//         */
-//        return ResponseEntity.ok();
-//    }
+    @Operation(summary = "요청서 하나 불러오기" , description = "요청서의 PK (id) 를 통해 불러오기")
+    @GetMapping("/{id}")  
+    public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
+        return ResponseEntity.ok()
+                .body(errandService.findErrandById(id));
+    }
 }

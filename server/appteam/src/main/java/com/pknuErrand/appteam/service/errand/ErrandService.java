@@ -36,4 +36,10 @@ public class ErrandService {
             errandResponseDtoList.add(new ErrandResponseDto(errand));
         return errandResponseDtoList;
     }
+
+    @Transactional
+    public ErrandResponseDto findErrandById(long id) {
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+        return new ErrandResponseDto(errand);
+    }
 }
