@@ -5,6 +5,7 @@ import com.pknuErrand.appteam.domain.errand.ErrandRequestDto;
 import com.pknuErrand.appteam.domain.errand.ErrandResponseDto;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.service.errand.ErrandService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public class ErrandController {
     }
 
 
+    @Operation(summary = "심부름 요청서" , description = "심부름 요청서 등록")
     @PostMapping /** Eraand 등록 **/
     public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandRequestDto errandRequestDto) {
         return ResponseEntity.ok()
                 .body(errandService.createErrand(errandRequestDto));
     }
 
+    @Operation(summary = "심부름 요청서" , description = "심부름 요청서 전부 불러오기")
     @GetMapping /** Errand 전부 불러오기 **/
     public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
         List<ErrandResponseDto> errandResponseDtoList = errandService.findAllErrand();
