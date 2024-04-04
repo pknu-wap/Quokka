@@ -47,5 +47,5 @@ public class ErrandController {
     public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
                 .body(errandService.findErrandById(id));
-    } // 
+    } // 로그인페이지 완료!!
 }
