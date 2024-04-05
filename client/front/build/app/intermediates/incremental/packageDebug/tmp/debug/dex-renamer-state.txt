@@ -1,0 +1,4 @@
+#Fri Apr 05 13:42:51 KST 2024
+base.0=C\:\\Users\\user\\Desktop\\project\\2024-1_App1\\client\\front\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
