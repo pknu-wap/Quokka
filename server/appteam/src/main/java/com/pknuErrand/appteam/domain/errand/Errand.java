@@ -1,6 +1,7 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
+import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,10 @@ public class Errand {
     @Column
     private long errandNo;
 
-    @Column
-    private long orderNo; // 심부름 시킨사람의 pk
+
+    @ManyToOne // 이 어노테이션 걸면 자동으로 getter를 해주나.. ?
+    @JoinColumn
+    private Member orderNo; // 심부름 시킨사람의 pk
 
     @Column
     private Timestamp createdDate; // 등록한 date
@@ -52,8 +55,9 @@ public class Errand {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column
-    private long erranderNo; // 심부름꾼의 pk
+    @ManyToOne
+    @JoinColumn
+    private Member erranderNo; // 심부름꾼
 
     public Errand(ErrandRequestDto requestDto) {
         this.orderNo = requestDto.getOrderNo();
