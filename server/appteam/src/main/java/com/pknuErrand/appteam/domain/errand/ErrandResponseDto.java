@@ -1,5 +1,6 @@
 package com.pknuErrand.appteam.domain.errand;
 
+import com.pknuErrand.appteam.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrandResponseDto { // from Entity
-    private long orderNo; // 심부름 시킨사람의 pk
+    private Member orderNo; // 심부름 시킨사람
 
     private Timestamp createdDate; // 등록한 date
 
@@ -32,7 +33,7 @@ public class ErrandResponseDto { // from Entity
 
     private Status status; // 상태
 
-    private long erranderNo; // 심부름꾼의 pk
+    private Member erranderNo; // 심부름꾼
 
     public ErrandResponseDto(Errand errand) {
         this.orderNo = errand.getOrderNo();
