@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 public class ErrandResponseDto { // from Entity
     private long orderNo; // 심부름 시킨사람의 pk
 
+    private Timestamp createdDate; // 등록한 date
+
     private String title; // 심부름 제목
 
     private String destination; // 도착지
@@ -34,6 +36,7 @@ public class ErrandResponseDto { // from Entity
 
     public ErrandResponseDto(Errand errand) {
         this.orderNo = errand.getOrderNo();
+        this.createdDate = errand.getCreatedDate();
         this.title = errand.getTitle();
         this.destination = errand.getDestination();
         this.latitude = errand.getLatitude();
