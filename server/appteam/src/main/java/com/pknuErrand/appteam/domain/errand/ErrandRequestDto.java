@@ -1,5 +1,6 @@
 package com.pknuErrand.appteam.domain.errand;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.sql.Timestamp;
 public class ErrandRequestDto { // to Entity
 
     private long orderNo; // 심부름 시킨사람의 pk
+
+    private Timestamp createdDate; // 등록한 date
 
     private String title;
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Getter
@@ -19,6 +20,9 @@ public class Errand {
 
     @Column
     private long orderNo; // 심부름 시킨사람의 pk
+
+    @Column
+    private Timestamp createdDate; // 등록한 date
 
     @Column
     private String title;
