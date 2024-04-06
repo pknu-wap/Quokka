@@ -41,6 +41,7 @@ public class ErrandService {
                 .reward(errandSaveRequestDto.getReward())
                 .isCash(errandSaveRequestDto.isCash())
                 .status(errandSaveRequestDto.getStatus())
+                .erranderNo(null)
                 .build();
         errandRepository.save(saveErrand);
         return new ErrandResponseDto(saveErrand);
