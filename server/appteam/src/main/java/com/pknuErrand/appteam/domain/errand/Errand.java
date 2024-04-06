@@ -5,9 +5,7 @@ import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Getter
@@ -59,17 +57,20 @@ public class Errand {
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
-    public Errand(ErrandRequestDto requestDto) {
-        this.orderNo = requestDto.getOrderNo();
-        this.title = requestDto.getTitle();
-        this.destination = requestDto.getDestination();
-        this.latitude = requestDto.getLatitude();
-        this.longitude = requestDto.getLongitude();
-        this.due = requestDto.getDue();
-        this.detail = requestDto.getDetail();
-        this.reward = requestDto.getReward();
-        this.isCash = requestDto.isCash();
-        this.status = requestDto.getStatus();
-        this.erranderNo = requestDto.getErranderNo();
+    public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
+                  double latitude, double longitude, Timestamp due, String detail,
+                  int reward, boolean isCash, Status status, Member erranderNo) {
+        this.orderNo = orderNo;
+        this.createdDate = createdDate;
+        this.title = title;
+        this.destination = destination;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.due = due;
+        this.detail = detail;
+        this.reward = reward;
+        this.isCash = isCash;
+        this.status = status;
+        this.erranderNo = erranderNo;
     }
 }

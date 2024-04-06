@@ -1,8 +1,10 @@
 package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
-import com.pknuErrand.appteam.domain.errand.ErrandRequestDto;
-import com.pknuErrand.appteam.domain.errand.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandRequestDto;
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +24,25 @@ public class ErrandService {
     }
 
     @Transactional
-    public ErrandResponseDto createErrand(ErrandRequestDto errandRequestDto) {
-        Errand saveErrand = new Errand(errandRequestDto);
+    public ErrandResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
+        /**
+         *    Member orderMember = memberService.findMemberById(errandSaveRequestDto.getOrderNo());
+         *    member service 추가되면 수정 필요
+         */
+        Errand saveErrand = new ErrandBuilder()
+                .orderNo(errandSaveRequestDto.getOrderNo())
+                .createdDate(errandSaveRequestDto.getCreatedDate())
+                .title(errandSaveRequestDto.getTitle())
+                .destination(errandSaveRequestDto.getDestination())
+                .longitude(errandSaveRequestDto.getLongitude())
+                .longitude(errandSaveRequestDto.getLongitude())
+                .due(errandSaveRequestDto.getDue())
+                .detail(errandSaveRequestDto.getDetail())
+                .reward(errandSaveRequestDto.getReward())
+                .isCash(errandSaveRequestDto.isCash())
+                .status(errandSaveRequestDto.getStatus())
+                .erranderNo(null)
+                .build();
         errandRepository.save(saveErrand);
         return new ErrandResponseDto(saveErrand);
     }

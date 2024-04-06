@@ -1,9 +1,8 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
-import com.pknuErrand.appteam.domain.errand.ErrandRequestDto;
-import com.pknuErrand.appteam.domain.errand.ErrandResponseDto;
-import com.pknuErrand.appteam.repository.errand.ErrandRepository;
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,9 +28,9 @@ public class ErrandController {
 
     @Operation(summary = "요청서 등록" , description = "심부름 요청서 등록")
     @PostMapping
-    public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandRequestDto errandRequestDto) {
+    public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
         return ResponseEntity.ok()
-                .body(errandService.createErrand(errandRequestDto));
+                .body(errandService.createErrand(errandSaveRequestDto));
     }
 
     @Operation(summary = "요청서 전부 불러오기" , description = "심부름 요청서 전부 불러오기")

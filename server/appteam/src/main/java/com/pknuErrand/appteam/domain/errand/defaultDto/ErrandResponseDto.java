@@ -1,5 +1,7 @@
-package com.pknuErrand.appteam.domain.errand;
+package com.pknuErrand.appteam.domain.errand.defaultDto;
 
+import com.pknuErrand.appteam.domain.errand.Errand;
+import com.pknuErrand.appteam.domain.errand.Status;
 import com.pknuErrand.appteam.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
