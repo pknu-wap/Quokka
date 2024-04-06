@@ -1,8 +1,8 @@
 package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
-import com.pknuErrand.appteam.domain.errand.ErrandRequestDto;
-import com.pknuErrand.appteam.domain.errand.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandRequestDto;
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
