@@ -1,6 +1,7 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
+import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
@@ -35,10 +36,10 @@ public class ErrandController {
 
     @Operation(summary = "요청서 전부 불러오기" , description = "심부름 요청서 전부 불러오기")
     @GetMapping
-    public ResponseEntity<List<ErrandResponseDto>> getAllErrand() {
-        List<ErrandResponseDto> errandResponseDtoList = errandService.findAllErrand();
+    public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {
+        List<ErrandListResponseDto> errandListResponseDto = errandService.findAllErrand();
         return ResponseEntity.ok()
-                .body(errandResponseDtoList);
+                .body(errandListResponseDto);
     }
 
     @Operation(summary = "요청서 하나 불러오기" , description = "요청서의 PK (id) 를 통해 불러오기")
