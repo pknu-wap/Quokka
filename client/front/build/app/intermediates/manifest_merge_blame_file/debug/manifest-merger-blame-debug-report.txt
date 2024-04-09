@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.front"
+3    package="com.example.client"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -42,9 +42,9 @@
 33-->[androidx.core:core:1.6.0] C:\Users\user\.gradle\caches\transforms-3\2579a7de00054bf46a8dbc332552f622\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 34        android:debuggable="true"
 35        android:icon="@mipmap/ic_launcher"
-36        android:label="front" >
+36        android:label="client" >
 37        <activity
-38            android:name="com.example.front.MainActivity"
+38            android:name="com.example.client.MainActivity"
 39            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 40            android:exported="true"
 41            android:hardwareAccelerated="true"

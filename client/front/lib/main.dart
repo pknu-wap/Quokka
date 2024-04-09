@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'page5.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MaterialApp(home: MyApp()));
+}
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}): super (key: key);
 
@@ -49,7 +52,10 @@ class MyApp extends StatelessWidget {
                           icon: Icon(Icons.add,size: 100,color: Color(0xff8D8D8D),),
 
                           onPressed: () {
-                            print('add button is clicked');
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (BuildContext context) => Page5(),
+                                ),
+                            );
                           },
                         ),
                       ),

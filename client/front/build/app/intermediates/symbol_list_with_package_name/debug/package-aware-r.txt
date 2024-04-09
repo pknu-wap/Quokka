@@ -1,4 +1,4 @@
-com.example.front
+com.example.client
 attr activityAction
 attr activityName
 attr alpha
