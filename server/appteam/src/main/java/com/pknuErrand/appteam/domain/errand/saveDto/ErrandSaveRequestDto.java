@@ -13,10 +13,9 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Getter
 public class ErrandSaveRequestDto { // to Entity
-
-    private Long orderNo; // 심부름 시킨사람 pk
+    
     /**
-     *  pk 를 통해 가져온다.
+     *  게시글 등록하는 member의 정보는 jwt에서 추출
      */
 
     private Timestamp createdDate; // 등록한 date

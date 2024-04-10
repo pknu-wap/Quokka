@@ -29,9 +29,9 @@ public class ErrandService {
     @Transactional
     public ErrandResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
         /**
-         *    member service 추가되면 수정 필요
+         *    security context holder에서 인가된 사용자의 id를 받아오고 findById를 통해 member 객체 불러올 예정
          */
-        Member orderMember = memberService.findMemberById(errandSaveRequestDto.getOrderNo());
+        Member orderMember = null;
         
         Errand saveErrand = new ErrandBuilder()
                 .orderNo(orderMember)
