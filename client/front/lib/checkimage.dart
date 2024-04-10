@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'signupsuccess.dart';
 class Check_Image extends StatelessWidget {
   const Check_Image({Key? key}): super (key: key);
 
@@ -141,11 +141,17 @@ class Check_Image extends StatelessWidget {
 
                   ),
                   child: Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) => Signup_Success(),
+                            ),);
+                      },
                     child: Text('확인', style: TextStyle(fontSize: 16,
                       fontFamily: 'Pretendard', letterSpacing: 0.01,color: Color(0xffFFFFFF),
                     ),),),
                       //keyboardType: TextInputType.text, api로 입력받는 기능 추가해야함
-                  ),
+                  ),),
                 Container(
                     margin: EdgeInsets.only(left: 20.0, top: 12.0),
                     child: Text('* 해당 정보가 일치하지 않으면 이전 페이지로 돌아가 재촬영 하세요.', style: TextStyle(
