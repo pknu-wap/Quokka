@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'uploadimage.dart';
 void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -159,6 +158,9 @@ class _LogInState extends State<LogIn> {
 
                           TextButton(
                             onPressed: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (BuildContext context) => Upload_Image(),
+                                  ),);
                               // Respond to button press
                               // 누르면 다음 페이지로 이동
                             },
