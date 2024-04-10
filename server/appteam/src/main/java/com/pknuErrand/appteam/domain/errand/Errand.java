@@ -5,11 +5,13 @@ import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity(name = "errand")
 public class Errand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,20 +59,4 @@ public class Errand {
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
-    public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
-                  double latitude, double longitude, Timestamp due, String detail,
-                  int reward, boolean isCash, Status status, Member erranderNo) {
-        this.orderNo = orderNo;
-        this.createdDate = createdDate;
-        this.title = title;
-        this.destination = destination;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.due = due;
-        this.detail = detail;
-        this.reward = reward;
-        this.isCash = isCash;
-        this.status = status;
-        this.erranderNo = erranderNo;
-    }
 }
