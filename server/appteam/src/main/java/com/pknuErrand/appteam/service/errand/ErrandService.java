@@ -2,9 +2,10 @@ package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
-import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandListResponseDto;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandRequestDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
@@ -61,10 +62,23 @@ public class ErrandService {
                     memberErrandDto, errand.getCreatedDate(), errand.getTitle(),
                     errand.getDestination(), errand.getReward(), errand.getStatus()
             );
-            errandListResponseDtoList.add(ErrandListResponseDto);
+            errandListResponseDtoList.add(errandListResponseDto);
         }
         return errandListResponseDtoList;
     }
+
+    @Transactional
+    public ErrandDetailResponseDto findErrandById(long id) {
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+        MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
+        ErrandDetailResponseDto errandDetailResponseDto = new ErrandDetailResponseDto(
+                memberErrandDto, errand.getCreatedDate(), errand.getTitle(), errand.getDestination(),
+                errand.getLatitude(), errand.getLongitude(), errand.getDue(), errand.getDetail(),
+                errand.getReward(), errand.isCash(), errand.getStatus()
+        );
+        return errandDetailResponseDto;
+    }
+
     @Transactional
     /**
      *    member domain 추가되면 확인 필요
@@ -76,9 +90,5 @@ public class ErrandService {
         return new MemberErrandDto(memberNo, nickname, score);
     }
 
-    @Transactional
-    public ErrandResponseDto findErrandById(long id) {
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
-        return new ErrandResponseDto(errand);
-    }
+
 }

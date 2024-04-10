@@ -1,8 +1,9 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
-import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandListResponseDto;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +45,7 @@ public class ErrandController {
 
     @Operation(summary = "요청서 하나 불러오기" , description = "요청서의 PK (id) 를 통해 불러오기")
     @GetMapping("/{id}")  
-    public ResponseEntity<ErrandResponseDto> getOneErrand(@PathVariable Long id) {
+    public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
                 .body(errandService.findErrandById(id));
     } 
