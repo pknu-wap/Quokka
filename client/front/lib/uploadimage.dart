@@ -27,7 +27,7 @@ class Upload_Image extends StatelessWidget {
                     height: 25.0,
                     child:
                     Text('본인인증', style: TextStyle(
-                      fontFamily: 'paybooc',fontSize: 20,
+                      fontFamily: 'paybooc',fontSize: 20, fontWeight: FontWeight.bold,
                       letterSpacing: 0.01, color: Color(0xff111111),
                     )),
                   ))),
