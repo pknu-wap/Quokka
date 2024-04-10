@@ -42,7 +42,7 @@ class Upload_Image extends StatelessWidget {
                 Container(margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                   child: Stack(
                     children: <Widget>[
-                      Image.asset('assets/images/Rectangle 1.png',width: 320, height: 202, fit : BoxFit.cover),
+                      Image.asset('assets/Rectangle 1.png',width: 320, height: 202, fit : BoxFit.cover),
                       Positioned(
                         left: 0, right: 0, top: 0, bottom: 0,
                         child: IconButton(
@@ -79,7 +79,7 @@ class Upload_Image extends StatelessWidget {
                         Container(
                           width: 139.58, height: 256.44,
                           margin: EdgeInsets.only(left: 22.0, top: 18.0),
-                          child: Image.asset('assets/images/IMG_8528 1.png',),)
+                          child: Image.asset('assets/upload_image_sample.png',),)
                       ],
                     )
                 )
