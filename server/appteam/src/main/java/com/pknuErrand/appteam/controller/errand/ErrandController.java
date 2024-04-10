@@ -48,5 +48,12 @@ public class ErrandController {
     public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
                 .body(errandService.findErrandById(id));
-    } 
+    }
+
+    @Operation(summary = "요청서 수락하기", description = "요청서 수락요청을 통해 errand status 변경하기")
+    @GetMapping("/{id}/accept")
+    public ResponseEntity<ErrandDetailResponseDto> acceptErrand(@PathVariable Long id) {
+        return ResponseEntity.ok()
+                .body(errandService.acceptErrand(id));
+    }
 }

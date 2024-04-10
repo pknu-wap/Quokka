@@ -2,8 +2,8 @@ package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
+import com.pknuErrand.appteam.domain.errand.Status;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
-import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandRequestDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
@@ -32,7 +32,7 @@ public class ErrandService {
         /**
          *    security context holder에서 인가된 사용자의 id를 받아오고 findById를 통해 member 객체 불러올 예정
          */
-        Member orderMember = null;
+        Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
         
         Errand saveErrand = new ErrandBuilder()
                 .orderNo(orderMember)
@@ -69,7 +69,7 @@ public class ErrandService {
 
     @Transactional
     public ErrandDetailResponseDto findErrandById(long id) {
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
         ErrandDetailResponseDto errandDetailResponseDto = new ErrandDetailResponseDto(
                 memberErrandDto, errand.getCreatedDate(), errand.getTitle(), errand.getDestination(),
@@ -79,6 +79,20 @@ public class ErrandService {
         return errandDetailResponseDto;
     }
 
+    @Transactional
+    public ErrandDetailResponseDto acceptErrand(Long id) {
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        Member errander = null;  /** 인가된 사용자 정보 불러오기 **/
+
+        /** 실제 entity에 업데이트 하는 부분의 트랜잭션을 분리하여 변경 내용이 flush 되어 바로 변경된 errand정보를 response 할 수 있도록 한다. **/
+        changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
+        return findErrandById(id);
+    }
+
+    @Transactional
+    public void changeErrandStatusAndSetErrander(Errand errand, Status newStatus, Member errander) {
+        errand.changeErrandStatusAndSetErrander(newStatus, errander);
+    }
     @Transactional
     /**
      *    member domain 추가되면 확인 필요
