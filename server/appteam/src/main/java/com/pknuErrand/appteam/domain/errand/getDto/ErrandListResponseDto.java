@@ -5,6 +5,7 @@ import com.pknuErrand.appteam.domain.errand.Status;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ErrandListResponseDto { // from Entity
     private MemberErrandDto order; // 심부름 시킨사람
 

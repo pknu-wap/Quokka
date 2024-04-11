@@ -52,30 +52,46 @@ public class ErrandService {
         return new ErrandResponseDto(saveErrand);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ErrandListResponseDto> findAllErrand() {
         List<Errand> errandList = errandRepository.findAll();
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
         for(Errand errand : errandList) {
             MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
-            ErrandListResponseDto errandListResponseDto = new ErrandListResponseDto(
-                    memberErrandDto, errand.getCreatedDate(), errand.getTitle(),
-                    errand.getDestination(), errand.getReward(), errand.getStatus()
-            );
+
+            ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
+                    .order(memberErrandDto)
+                    .createdDate(errand.getCreatedDate())
+                    .title(errand.getTitle())
+                    .destination(errand.getDestination())
+                    .reward(errand.getReward())
+                    .status(errand.getStatus())
+                    .build();
+
             errandListResponseDtoList.add(errandListResponseDto);
         }
         return errandListResponseDtoList;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ErrandDetailResponseDto findErrandById(long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
-        ErrandDetailResponseDto errandDetailResponseDto = new ErrandDetailResponseDto(
-                memberErrandDto, errand.getCreatedDate(), errand.getTitle(), errand.getDestination(),
-                errand.getLatitude(), errand.getLongitude(), errand.getDue(), errand.getDetail(),
-                errand.getReward(), errand.isCash(), errand.getStatus()
-        );
+
+        ErrandDetailResponseDto errandDetailResponseDto = ErrandDetailResponseDto.builder()
+                .order(memberErrandDto)
+                .createdDate(errand.getCreatedDate())
+                .title(errand.getTitle())
+                .destination(errand.getDestination())
+                .latitude(errand.getLatitude())
+                .longitude(errand.getLongitude())
+                .due(errand.getDue())
+                .detail(errand.getDetail())
+                .reward(errand.getReward())
+                .isCash(errand.isCash())
+                .status(errand.getStatus())
+                .build();
+
         return errandDetailResponseDto;
     }
 
