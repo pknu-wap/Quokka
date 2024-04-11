@@ -88,8 +88,9 @@ public class ErrandService {
                 .due(errand.getDue())
                 .detail(errand.getDetail())
                 .reward(errand.getReward())
-                .isCash(errand.isCash())
+                .isCash(errand.getIsCash())
                 .status(errand.getStatus())
+                .isMyErrand(memberErrandDto.getErrandNo() == 5) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;

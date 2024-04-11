@@ -31,7 +31,7 @@ public class ErrandResponseDto { // from Entity
 
     private int reward; // 보수금액
 
-    private boolean isCash; // 현금 계좌이체 선택
+    private Boolean isCash; // 현금 계좌이체 선택
 
     private Status status; // 상태
 
@@ -47,7 +47,7 @@ public class ErrandResponseDto { // from Entity
         this.due = errand.getDue();
         this.detail = errand.getDetail();
         this.reward = errand.getReward();
-        this.isCash = errand.isCash();
+        this.isCash = errand.getIsCash();
         this.status = errand.getStatus();
         this.erranderNo = errand.getErranderNo();
     }
