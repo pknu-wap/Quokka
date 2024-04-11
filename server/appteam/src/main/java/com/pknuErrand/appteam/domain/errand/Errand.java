@@ -48,7 +48,7 @@ public class Errand {
     private int reward;
 
     @Column
-    private boolean isCash;
+    private Boolean isCash;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -64,7 +64,7 @@ public class Errand {
     }
     public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
-                  int reward, boolean isCash, Status status, Member erranderNo) {
+                  int reward, Boolean isCash, Status status, Member erranderNo) {
         this.orderNo = orderNo;
         this.createdDate = createdDate;
         this.title = title;

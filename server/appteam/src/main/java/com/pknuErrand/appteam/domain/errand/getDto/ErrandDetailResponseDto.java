@@ -31,7 +31,9 @@ public class ErrandDetailResponseDto {
 
     private int reward; // 보수금액
 
-    private boolean isCash; // 현금 계좌이체 선택
+    private Boolean isCash; // 현금 계좌이체 선택
 
     private Status status; // 상태
+
+    private Boolean isMyErrand; // 본인 게시물인가?
 }

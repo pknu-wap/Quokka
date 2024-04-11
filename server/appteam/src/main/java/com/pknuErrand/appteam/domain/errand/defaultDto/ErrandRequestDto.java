@@ -32,7 +32,7 @@ public class ErrandRequestDto { // to Entity
 
     private int reward;
 
-    private boolean isCash;
+    private Boolean isCash;
 
     private Status status;
 
