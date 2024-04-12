@@ -30,7 +30,7 @@ public class ErrandService {
          *    member service 추가되면 수정 필요
          */
         Errand saveErrand = new ErrandBuilder()
-                .orderNo(errandSaveRequestDto.getOrderNo())
+//                .orderNo(errandSaveRequestDto.getOrderNo())
                 .createdDate(errandSaveRequestDto.getCreatedDate())
                 .title(errandSaveRequestDto.getTitle())
                 .destination(errandSaveRequestDto.getDestination())
