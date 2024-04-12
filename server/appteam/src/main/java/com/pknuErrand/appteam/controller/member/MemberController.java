@@ -4,7 +4,6 @@ import com.pknuErrand.appteam.domain.member.MemberFormDto;
 import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

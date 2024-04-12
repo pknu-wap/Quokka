@@ -4,7 +4,6 @@ import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberFormDto;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

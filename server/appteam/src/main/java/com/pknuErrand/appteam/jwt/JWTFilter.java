@@ -1,15 +1,14 @@
 package com.pknuErrand.appteam.jwt;
 
-import com.pknuErrand.appteam.domain.member.Member;
-import com.pknuErrand.appteam.domain.member.MemberFormDto;
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
 import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -57,7 +56,6 @@ public class JWTFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
-        // userEntity 원본 그대로 둠..
         //userEntity를 생성하여 값 set
         MemberUserDetailsDto memberData = new MemberUserDetailsDto(username,role,"tempPW");
 
