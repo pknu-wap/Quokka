@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.jwt;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberFormDto;
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
+import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,20 +58,17 @@ public class JWTFilter extends OncePerRequestFilter {
         String role = jwtUtil.getRole(token);
 
         // userEntity 원본 그대로 둠..
-/*        //userEntity를 생성하여 값 set
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(username);
-        userEntity.setPassword("temppassword");
-        userEntity.setRole(role);
+        //userEntity를 생성하여 값 set
+        MemberUserDetailsDto memberData = new MemberUserDetailsDto(username,role,"tempPW");
 
         // MemberDetails에 회원 정보 객체 담기
-        MemberUserDetails memberUserDetails = new MemberUserDetails(member);
+        MemberUserDetails memberUserDetails = new MemberUserDetails(memberData);
 
         // Spring Security 인증 토큰 생성
         Authentication authToken = new UsernamePasswordAuthenticationToken(memberUserDetails, null, memberUserDetails.getAuthorities());
 
         // 세션에 사용자 등록
-        SecurityContextHolder.getContext().setAuthentication(authToken);*/
+        SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);
 

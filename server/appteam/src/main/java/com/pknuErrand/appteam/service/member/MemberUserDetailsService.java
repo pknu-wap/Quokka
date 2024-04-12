@@ -2,6 +2,7 @@ package com.pknuErrand.appteam.service.member;
 
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
+import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,7 +23,15 @@ public class MemberUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
         // DB에서 조회
-        Member memberData = memberRepository.findByName(mail);  // findByUsername
+        Member member = memberRepository.findByName(mail);  // findByUsername
+
+        /** 추가 **/
+        MemberUserDetailsDto memberData = new MemberUserDetailsDto(
+                member.getMail(),
+                member.getRole(),
+                member.getPw()
+        );
+        /** 추가 **/
 
         if (memberData != null) {
             

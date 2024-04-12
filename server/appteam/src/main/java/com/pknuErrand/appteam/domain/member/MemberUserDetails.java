@@ -9,10 +9,11 @@ import java.util.List;
 
 public class MemberUserDetails implements UserDetails {
 
-    private final Member member;
+    private final MemberUserDetailsDto memberUserDetailsDto;
 
-    public MemberUserDetails(Member member) {
-        this.member = member;
+    public MemberUserDetails(MemberUserDetailsDto memberUserDetailsDto) {
+
+        this.memberUserDetailsDto = memberUserDetailsDto;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class MemberUserDetails implements UserDetails {
             @Override
             public String getAuthority() {
 
-                return member.getRole();
+                return memberUserDetailsDto.getRole();
             }
         });
 
@@ -36,13 +37,13 @@ public class MemberUserDetails implements UserDetails {
     @Override
     public String getPassword() {
 
-        return member.getPw();
+        return memberUserDetailsDto.getPw();
     }
 
     @Override
     public String getUsername() {
 
-        return member.getMail(); // get할거 바꿀시 수정
+        return memberUserDetailsDto.getMail(); // get할거 바꿀시 수정
     }
 
     @Override
