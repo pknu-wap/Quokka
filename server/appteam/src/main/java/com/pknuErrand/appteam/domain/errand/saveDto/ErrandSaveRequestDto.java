@@ -36,7 +36,7 @@ public class ErrandSaveRequestDto { // to Entity
 
     private boolean isCash;
 
-    private Status status;
+    // private Status status;
 
     /**
      *  request 받을 때 (save하려고 정보를 받을 때) 담당자 정보는 가져올 필요가 없다.
