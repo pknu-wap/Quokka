@@ -56,4 +56,11 @@ public class ErrandController {
         return ResponseEntity.ok()
                 .body(errandService.acceptErrand(id));
     }
+
+    @Operation(summary = "요청서 수정하기", description = "요청서 수정을 통해 errand field 변경하기")
+    @PutMapping("/{id}")
+    public ResponseEntity<ErrandDetailResponseDto> updateErrand(@PathVariable Long id, @RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
+        return ResponseEntity.ok()
+                .body(errandService.updateErrand(id, errandSaveRequestDto));
+    }
 }

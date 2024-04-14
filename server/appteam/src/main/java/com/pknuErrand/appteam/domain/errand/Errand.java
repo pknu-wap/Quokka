@@ -1,8 +1,10 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
+import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +63,21 @@ public class Errand {
     public void changeErrandStatusAndSetErrander(Status status, Member errander) {
         this.status = status;
         erranderNo = errander;
+    }
+
+    public void updateErrand(Timestamp createdDate, String title, String destination,
+                             double latitude, double longitude, Timestamp due, String detail,
+                             int reward, Boolean isCash, Status status) {
+        this.createdDate = createdDate;
+        this.title = title;
+        this.destination = destination;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.due = due;
+        this.detail = detail;
+        this.reward = reward;
+        this.isCash = isCash;
+        this.status = status;
     }
     public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
