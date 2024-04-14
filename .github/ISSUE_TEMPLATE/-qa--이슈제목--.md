@@ -1,7 +1,7 @@
 ---
 name: "[QA] 이슈제목~~"
 about: 문제가 있거나 기획이 바뀌어 변경하게 되는 기능
-title: ''
+title: "[QA] 이슈제목~~"
 labels: ''
 assignees: ''
 

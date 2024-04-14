@@ -1,9 +1,9 @@
 ---
 name: "[BUG] 이슈 제목"
 about: 버그 발생시 사용
-title: ''
+title: "[BUG] 이슈 제목"
 labels: ''
-assignees: ''
+assignees: unh6unh6
 
 ---
 

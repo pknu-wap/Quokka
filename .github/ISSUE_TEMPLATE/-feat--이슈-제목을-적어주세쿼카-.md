@@ -1,7 +1,7 @@
 ---
 name: "[FEAT] 이슈 제목을 적어주세쿼카~"
 about: 기능추가 등등
-title: ''
+title: "[FEAT] 이슈 제목을 적어주세쿼카~"
 labels: ''
 assignees: ''
 
