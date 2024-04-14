@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pknuErrand.appteam.domain.errand.Status.RECRUITING;
+
 @Service
 public class ErrandService {
 
@@ -45,7 +47,7 @@ public class ErrandService {
                 .detail(errandSaveRequestDto.getDetail())
                 .reward(errandSaveRequestDto.getReward())
                 .isCash(errandSaveRequestDto.isCash())
-                .status(errandSaveRequestDto.getStatus())
+                .status(RECRUITING)
                 .erranderNo(null)
                 .build();
         errandRepository.save(saveErrand);
@@ -130,6 +132,9 @@ public class ErrandService {
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/
         }
+        if(!errand.getStatus().equals(RECRUITING)) {
+            throw new IllegalArgumentException("진행중이거나 완료된 심부름은 수정이 불가능합니다."); /** 커스텀 Exception 생성 필요 **/
+        }
         errand.updateErrand(errandSaveRequestDto.getCreatedDate(),
                 errandSaveRequestDto.getTitle(),
                 errandSaveRequestDto.getDestination(),
@@ -138,8 +143,8 @@ public class ErrandService {
                 errandSaveRequestDto.getDue(),
                 errandSaveRequestDto.getDetail(),
                 errandSaveRequestDto.getReward(),
-                errandSaveRequestDto.isCash(),
-                errandSaveRequestDto.getStatus());
+                errandSaveRequestDto.isCash());
+
         return findErrandById(id);
     }
 }

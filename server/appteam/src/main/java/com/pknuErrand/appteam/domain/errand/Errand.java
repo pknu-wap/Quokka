@@ -67,7 +67,7 @@ public class Errand {
 
     public void updateErrand(Timestamp createdDate, String title, String destination,
                              double latitude, double longitude, Timestamp due, String detail,
-                             int reward, Boolean isCash, Status status) {
+                             int reward, Boolean isCash) {
         this.createdDate = createdDate;
         this.title = title;
         this.destination = destination;
@@ -77,7 +77,6 @@ public class Errand {
         this.detail = detail;
         this.reward = reward;
         this.isCash = isCash;
-        this.status = status;
     }
     public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
