@@ -63,4 +63,10 @@ public class ErrandController {
         return ResponseEntity.ok()
                 .body(errandService.updateErrand(id, errandSaveRequestDto));
     }
+
+    @Operation(summary = "요청서 삭제하기", description = "요청서 삭제")
+    @DeleteMapping("/{id}")
+    public void deleteErrand(@PathVariable Long id) {
+        errandService.deleteErrand(id);
+    }
 }

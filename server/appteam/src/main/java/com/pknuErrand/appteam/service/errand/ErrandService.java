@@ -147,4 +147,17 @@ public class ErrandService {
 
         return findErrandById(id);
     }
+
+    @Transactional
+    public void deleteErrand(Long id) {
+        Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        if(!errand.getOrderNo().equals(orderMember)) {
+            throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/
+        }
+        if(!errand.getStatus().equals(RECRUITING)) {
+            throw new IllegalArgumentException("진행중이거나 완료된 심부름은 수정이 불가능합니다."); /** 커스텀 Exception 생성 필요 **/
+        }
+        errandRepository.delete(errand);
+    }
 }
