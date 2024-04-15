@@ -4,7 +4,7 @@ package com.pknuErrand.appteam.controller.errand;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequest;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,7 +53,7 @@ public class ErrandController {
 
     @Operation(summary = "메인화면 요청서 불러오기 (무한스크롤)", description = "정렬방법, 커서위치, 게시물 갯수를 입력받아 요청서를 불러온다")
     @GetMapping
-    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrand(ErrandPaginationRequest pageInfo) {
+    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrand(ErrandPaginationRequestVo pageInfo) {
         return ResponseEntity.ok()
                 .body(errandService.findPaginationErrand(pageInfo));
     }

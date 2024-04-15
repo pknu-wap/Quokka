@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ErrandPaginationRequest {
+public class ErrandPaginationRequestVo {
     private Long pk;
     private String cursor;
     private int limit;

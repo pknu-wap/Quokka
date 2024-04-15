@@ -7,7 +7,7 @@ import com.pknuErrand.appteam.domain.errand.Status;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequest;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class ErrandService {
         return new ErrandResponseDto(saveErrand);
     }
     @Transactional(readOnly = true)
-    public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequest pageInfo) {
+    public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequestVo pageInfo) {
         if(pageInfo.getLimit() <= 0)
             throw new IllegalArgumentException("limit은 1보다 같거나 커야합니다.");
         List<Errand> errandList = null;
