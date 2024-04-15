@@ -18,7 +18,7 @@ public class ErrandSaveRequestDto { // to Entity
      *  게시글 등록하는 member의 정보는 jwt에서 추출
      */
 
-    private Timestamp createdDate; // 등록한 date
+    private String createdDate; // 등록한 date
 
     private String title;
 

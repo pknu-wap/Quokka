@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "errand")
+@Entity(name = "Errand")
 public class Errand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,12 +21,12 @@ public class Errand {
     private long errandNo;
 
 
-    @ManyToOne // 이 어노테이션 걸면 자동으로 getter를 해주나.. ?
+    @ManyToOne
     @JoinColumn
     private Member orderNo; // 심부름 시킨사람의 pk
 
     @Column
-    private Timestamp createdDate; // 등록한 date
+    private String createdDate; // 등록한 date
 
     @Column
     private String title;
@@ -65,7 +65,7 @@ public class Errand {
         erranderNo = errander;
     }
 
-    public void updateErrand(Timestamp createdDate, String title, String destination,
+    public void updateErrand(String createdDate, String title, String destination,
                              double latitude, double longitude, Timestamp due, String detail,
                              int reward, Boolean isCash) {
         this.createdDate = createdDate;
@@ -78,7 +78,7 @@ public class Errand {
         this.reward = reward;
         this.isCash = isCash;
     }
-    public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
+    public Errand(Member orderNo, String createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
                   int reward, Boolean isCash, Status status, Member erranderNo) {
         this.orderNo = orderNo;

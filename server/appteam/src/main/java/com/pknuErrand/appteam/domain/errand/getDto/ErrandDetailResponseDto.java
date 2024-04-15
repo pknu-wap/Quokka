@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class ErrandDetailResponseDto {
     private MemberErrandDto order; // 심부름 시킨사람
 
-    private Timestamp createdDate; // 등록한 date
+    private String createdDate; // 등록한 date
 
     private String title; // 심부름 제목
 

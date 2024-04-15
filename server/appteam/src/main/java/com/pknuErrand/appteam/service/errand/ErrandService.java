@@ -2,10 +2,12 @@ package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
+import com.pknuErrand.appteam.domain.errand.Sort;
 import com.pknuErrand.appteam.domain.errand.Status;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
+import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequest;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +55,55 @@ public class ErrandService {
                 .build();
         errandRepository.save(saveErrand);
         return new ErrandResponseDto(saveErrand);
+    }
+    @Transactional(readOnly = true)
+    public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequest pageInfo) {
+        if(pageInfo.getLimit() <= 0)
+            throw new IllegalArgumentException("limit은 1보다 같거나 커야합니다.");
+        List<Errand> errandList = null;
+        if(pageInfo.getSort() == Sort.LATEST) {
+            if(pageInfo.getStatus() == null)
+                errandList = errandRepository.findErrandByLatest(pageInfo.getPk(),(String)pageInfo.getCursor(), pageInfo.getLimit());
+            else
+                errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getStatus().toString());
+        }
+        else if(pageInfo.getSort() == Sort.REWARD) {
+            if(pageInfo.getStatus() == null)
+               errandList = errandRepository.findErrandByReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit());
+            else
+                errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(),Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getStatus().toString());
+        }
+        else if(pageInfo.getSort() == Sort.DISTANCE) {
+            /** 추가 거리 계산 로직 필요함 **/
+        }
+
+        /**
+         * dto안에 list build 메소드 추가 예정
+         */
+        List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
+
+        /** for test
+        for(Errand errand : errandList) {
+            System.out.println(errand.getErrandNo() + " / " + errand.getTitle());
+        }
+        System.out.println("--------------------------------------");
+         **/
+
+        for(Errand errand : errandList) {
+            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
+
+            ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
+                    .order(memberErrandDto)
+                    .createdDate(errand.getCreatedDate())
+                    .title(errand.getTitle())
+                    .destination(errand.getDestination())
+                    .reward(errand.getReward())
+                    .status(errand.getStatus())
+                    .build();
+
+            errandListResponseDtoList.add(errandListResponseDto);
+        }
+        return errandListResponseDtoList;
     }
 
     @Transactional(readOnly = true)
@@ -111,14 +163,15 @@ public class ErrandService {
     public void changeErrandStatusAndSetErrander(Errand errand, Status newStatus, Member errander) {
         errand.changeErrandStatusAndSetErrander(newStatus, errander);
     }
+
     @Transactional
     /**
      *    member domain 추가되면 확인 필요
      */
     public MemberErrandDto buildMemberErrandDto(Member member) {
         long memberNo = member.getMemberNo();
-        String nickname = member.getNickname();
-        double score = member.getScore();
+        String nickname ="tempNick"; // member.getNickname();
+        double score = 0.2; // member.getScore();
         return new MemberErrandDto(memberNo, nickname, score);
     }
 
