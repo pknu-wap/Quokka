@@ -1,16 +1,19 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
+import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "errand")
+@Entity(name = "Errand")
 public class Errand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,12 +21,12 @@ public class Errand {
     private long errandNo;
 
 
-    @ManyToOne // 이 어노테이션 걸면 자동으로 getter를 해주나.. ?
+    @ManyToOne
     @JoinColumn
     private Member orderNo; // 심부름 시킨사람의 pk
 
     @Column
-    private Timestamp createdDate; // 등록한 date
+    private String createdDate; // 등록한 date
 
     @Column
     private String title;
@@ -47,7 +50,7 @@ public class Errand {
     private int reward;
 
     @Column
-    private boolean isCash;
+    private Boolean isCash;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -57,9 +60,27 @@ public class Errand {
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
-    public Errand(Member orderNo, Timestamp createdDate, String title, String destination,
+    public void changeErrandStatusAndSetErrander(Status status, Member errander) {
+        this.status = status;
+        erranderNo = errander;
+    }
+
+    public void updateErrand(String createdDate, String title, String destination,
+                             double latitude, double longitude, Timestamp due, String detail,
+                             int reward, Boolean isCash) {
+        this.createdDate = createdDate;
+        this.title = title;
+        this.destination = destination;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.due = due;
+        this.detail = detail;
+        this.reward = reward;
+        this.isCash = isCash;
+    }
+    public Errand(Member orderNo, String createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
-                  int reward, boolean isCash, Status status, Member erranderNo) {
+                  int reward, Boolean isCash, Status status, Member erranderNo) {
         this.orderNo = orderNo;
         this.createdDate = createdDate;
         this.title = title;

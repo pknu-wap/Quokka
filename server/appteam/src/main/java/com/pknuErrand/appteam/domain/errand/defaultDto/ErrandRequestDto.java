@@ -16,7 +16,7 @@ public class ErrandRequestDto { // to Entity
 
     private Member orderNo; // 심부름 시킨사람
 
-    private Timestamp createdDate; // 등록한 date
+    private String createdDate; // 등록한 date
 
     private String title;
 
@@ -32,7 +32,7 @@ public class ErrandRequestDto { // to Entity
 
     private int reward;
 
-    private boolean isCash;
+    private Boolean isCash;
 
     private Status status;
 
