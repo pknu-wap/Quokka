@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class ErrandBuilder {
 
     private Member orderNo;
-    private Timestamp createdDate;
+    private String createdDate;
     private String title;
     private String destination;
     private double latitude;
@@ -25,7 +25,7 @@ public class ErrandBuilder {
         return this;
     }
 
-    public ErrandBuilder createdDate(Timestamp createdDate) {
+    public ErrandBuilder createdDate(String createdDate) {
         this.createdDate = createdDate;
         return this;
     }
