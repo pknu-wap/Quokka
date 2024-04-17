@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:front/uploadimage.dart';
 import 'signupsuccess.dart';
 class Check_Image extends StatelessWidget {
-  const Check_Image({Key? key}): super (key: key);
+  const Check_Image({Key? key, required Student Student}): super (key: key);
 
   @override
   Widget build(BuildContext context) {
