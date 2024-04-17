@@ -51,4 +51,4 @@ class _MainState extends State<Main> {
       ),
     );
   }
-}
+} // 로그인 기능 만듬.
