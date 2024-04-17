@@ -39,6 +39,7 @@ public class ErrandService {
         Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
         
         Errand saveErrand = new ErrandBuilder()
+
                 .orderNo(orderMember)
                 .createdDate(errandSaveRequestDto.getCreatedDate())
                 .title(errandSaveRequestDto.getTitle())
