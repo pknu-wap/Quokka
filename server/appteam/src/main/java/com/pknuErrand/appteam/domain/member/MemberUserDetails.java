@@ -14,7 +14,10 @@ public class MemberUserDetails implements UserDetails {
     public MemberUserDetails(MemberUserDetailsDto memberUserDetailsDto) {
 
         this.memberUserDetailsDto = memberUserDetailsDto;
+
     }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -31,7 +34,7 @@ public class MemberUserDetails implements UserDetails {
             }
         });
 
-        return List.of();
+        return collection;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MemberUserDetails implements UserDetails {
     @Override
     public String getUsername() {
 
-        return memberUserDetailsDto.getMail(); // get할거 바꿀시 수정
+        return String.valueOf(memberUserDetailsDto.getId());
     }
 
     @Override

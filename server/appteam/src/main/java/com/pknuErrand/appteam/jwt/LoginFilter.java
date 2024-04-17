@@ -46,8 +46,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
 
         String username = memberUserDetails.getUsername();
+        System.out.println(username);
 
-        Collection<? extends GrantedAuthority> authorities = memberUserDetails.getAuthorities();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
 

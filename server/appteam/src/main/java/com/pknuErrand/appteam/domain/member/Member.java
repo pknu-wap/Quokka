@@ -15,7 +15,7 @@ public class Member {
     private long memberNo; // 사용자 고유 번호
 
     @NonNull
-    @Column(unique = true)
+//    @Column(unique = true)
     private String mail; // 학교 메일
 
     @NonNull
@@ -26,7 +26,7 @@ public class Member {
 
     @NonNull
     @Column(unique = true)
-    private Long id; // 학번 == 아이디
+    private String id; // 학번 == 아이디
 
     @NonNull
     private String pw; // 비밀번호

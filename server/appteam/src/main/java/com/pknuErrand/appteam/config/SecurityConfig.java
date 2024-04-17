@@ -13,7 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -66,7 +65,7 @@ public class SecurityConfig {
 
         http
                 // 지정된 필터 앞에 커스텀 필터를 추가
-                .addFilterBefore(new JWTFilter(jwtUtil), LogoutFilter.class);
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         // AuthenticationManager()와 JWTUtil 인수 전달
         http

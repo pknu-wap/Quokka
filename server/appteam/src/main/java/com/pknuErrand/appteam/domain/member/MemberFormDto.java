@@ -5,22 +5,17 @@ import lombok.Setter;
 
 @Getter @Setter
 public class MemberFormDto {
-    private long memberNo;
 
-    private String mail;
+    private String mail; // 메일
 
-    private String department;
+    private String department; // 학과
 
-    private String name;
+    private String name; // 이름
 
-    private long id;
+    private String id; // 학번
 
-    private String pw;
+    private String pw; // 비밀번호
 
-    private String nickname;
-
-    private double score;
-
-    private String role;
+    private String nickname; // 닉네임
 
 }

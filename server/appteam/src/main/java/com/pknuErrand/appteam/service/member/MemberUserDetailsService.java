@@ -20,14 +20,14 @@ public class MemberUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 
         // DB에서 조회
-        Member member = memberRepository.findByName(mail);  // findByUsername
+        Member member = memberRepository.findById(id);  // findByUsername
 
         /** 추가 **/
         MemberUserDetailsDto memberData = new MemberUserDetailsDto(
-                member.getMail(),
+                member.getId(),
                 member.getRole(),
                 member.getPw()
         );
