@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:front/uploadimage.dart';
-import 'signupsuccess.dart';
+import 'package:front/upload_image.dart';
+import 'profile.dart';
 class Check_Image extends StatelessWidget {
   const Check_Image({Key? key, required Student Student}): super (key: key);
 
@@ -145,7 +145,7 @@ class Check_Image extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) => Signup_Success(),
+                            MaterialPageRoute(builder: (BuildContext context) => ProfileScreen(),
                             ),);
                       },
                     child: Text('확인', style: TextStyle(fontSize: 16,

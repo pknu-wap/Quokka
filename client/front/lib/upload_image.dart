@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'checkimage.dart';
+import 'check_image.dart';
 import 'dart:convert';
 class Upload_Image extends StatefulWidget {
   const Upload_Image({Key? key}) : super(key: key);
@@ -40,7 +40,13 @@ class _Upload_ImageState extends State<Upload_Image> {
     setState(() {
       parsedtext = result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
       extractInfoFromText();
-    });
+      if (s1.name != '' && s1.studentID != '' && s1.major != '') {
+        // Navigate to the next page with the populated s1 object
+        Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => Check_Image(Student: s1),
+            ),);
+       }});
   }
   void extractInfoFromText() {
     int index = parsedtext.indexOf('남은시간');
@@ -115,7 +121,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                 margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Stack(
                   children: <Widget>[
-                    Image.asset('assets/Rectangle 1.png', width: 320, height: 202, fit: BoxFit.cover),
+                    Image.asset('assets/images/Rectangle 1.png', width: 320, height: 202, fit: BoxFit.cover),
                     Positioned(
                       left: 0, right: 0, top: 0, bottom: 0,
                       child: IconButton(
@@ -128,10 +134,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                           // 이 버튼을 누르면 갤러리가 열리고 이미지를 가져오도록 설정
                           parsethetext();
                           initState();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) => Check_Image(Student: s1),
-                            ),
-                          );
+
                         },
                       ),
                     ),
@@ -168,9 +171,13 @@ class _Upload_ImageState extends State<Upload_Image> {
                               color: Color(0xff373737),
                             ),
                           ),
-                          Text(s1.name, style: const TextStyle(fontSize: 10)),
-                          Text(s1.studentID, style: const TextStyle(fontSize: 10)),
-                          Text(s1.major, style: const TextStyle(fontSize: 10)),
+                          Column(
+                            children: [
+                              Text(s1.name, style: const TextStyle(fontSize: 10)),
+                              Text(s1.studentID, style: const TextStyle(fontSize: 10)),
+                              Text(s1.major, style: const TextStyle(fontSize: 10)),
+                            ]
+                          )
                         ],
                       ),
                     ),
@@ -178,7 +185,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                       width: 139.58,
                       height: 256.44,
                       margin: const EdgeInsets.only(left: 22.0, top: 18.0),
-                      child: Image.asset('assets/upload_image_sample.png'),
+                      child: Image.asset('assets/images/upload_image_sample.png'),
                     ),
 
                   ],

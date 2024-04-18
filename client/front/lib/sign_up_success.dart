@@ -78,7 +78,7 @@ class ConfettiState extends State<Confetti> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/firework.png'), // 배경 이미지
+                image: AssetImage('assets/images/firework.png'), // 배경 이미지
               ),
             ),
           ),
@@ -88,7 +88,7 @@ class ConfettiState extends State<Confetti> {
             top: 387,
             child: Transform.rotate(
               angle: 4.73 * (3.141592653589793 / 180), //회전
-              child: Image.asset('assets/Subtract.png', //폭죽 본체 이미지
+              child: Image.asset('assets/images/Subtract.png', //폭죽 본체 이미지
                 width: 67.5,
                 height: 95.43,
               ),
