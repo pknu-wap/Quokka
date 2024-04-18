@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'profile.dart'; // 파일 호출
+import 'upload_image.dart'; // 파일 호출
 
 //현재 화면에서 뒤로가기
 class SignUpScreen extends StatefulWidget {
@@ -291,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ProfileScreen()));
+                                              Upload_Image()));
                                   style:
                                   ButtonStyle(
                                     minimumSize: MaterialStateProperty.all(

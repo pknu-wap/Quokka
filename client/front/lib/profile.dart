@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'sign_up_success.dart';
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
   @override
@@ -447,6 +447,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                                   print('doubleCheck Button Clicked!');
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (BuildContext context) => Signup_Success(),
+                                    ),);
                                 }
                               : null,
                           style: ButtonStyle(
