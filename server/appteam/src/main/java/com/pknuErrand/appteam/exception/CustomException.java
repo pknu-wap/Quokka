@@ -16,7 +16,7 @@ public class CustomException extends RuntimeException{
         this.message = errorCode.getMessage();
     }
 
-    CustomException(ErrorCode errorCode, String message) {
+    public CustomException(ErrorCode errorCode, String message) {
         super(errorCode.getMessage());
         this.name = errorCode.name();
         this.httpStatus = errorCode.getHttpStatus();

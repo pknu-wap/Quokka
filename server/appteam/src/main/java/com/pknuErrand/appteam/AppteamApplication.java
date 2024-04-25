@@ -9,6 +9,7 @@ public class AppteamApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(AppteamApplication.class, args);
+
 	}
 
 }
