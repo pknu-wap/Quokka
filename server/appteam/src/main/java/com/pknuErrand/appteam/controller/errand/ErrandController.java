@@ -37,7 +37,7 @@ public class ErrandController {
 
     @Operation(summary = "요청서 등록" , description = "심부름 요청서 등록")
     @PostMapping
-    public ResponseEntity<ErrandResponseDto> createErrand(@RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
+    public ResponseEntity<?> createErrand(@RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
         return ResponseEntity.ok()
                 .body(errandService.createErrand(errandSaveRequestDto));
     }

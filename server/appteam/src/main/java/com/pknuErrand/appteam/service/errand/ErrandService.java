@@ -35,12 +35,11 @@ public class ErrandService {
     }
 
     @Transactional
-    public ErrandResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
+    public ErrandDetailResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
 
         Member orderMember = memberService.getLoginMember();
         
         Errand saveErrand = new ErrandBuilder()
-
                 .orderNo(orderMember)
                 .createdDate(errandSaveRequestDto.getCreatedDate())
                 .title(errandSaveRequestDto.getTitle())
@@ -56,7 +55,7 @@ public class ErrandService {
                 .build();
         errandRepository.save(saveErrand);
         /** return 타입 ErrandDetailReponseDto 로 수정 **/
-        return new ErrandResponseDto(saveErrand);
+        return findErrandById(saveErrand.getErrandNo());
     }
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequestVo pageInfo) {
