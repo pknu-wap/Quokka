@@ -43,7 +43,7 @@ public class ErrandController {
     }
 
 
-    @Operation(summary = "요청서 전부 불러오기" , description = "심부름 요청서 전부 불러오기")
+    @Operation(summary = "요청서 전부 불러오기" , description = "사용 X")
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {
         List<ErrandListResponseDto> errandListResponseDto = errandService.findAllErrand();
@@ -51,7 +51,7 @@ public class ErrandController {
                 .body(errandListResponseDto);
     }
 
-    @Operation(summary = "요청서 하나 불러오기" , description = "요청서의 PK (id) 를 통해 불러오기")
+    @Operation(summary = "요청서 하나 불러오기" , description = "사용 X")
     @GetMapping("/{id}")  
     public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()

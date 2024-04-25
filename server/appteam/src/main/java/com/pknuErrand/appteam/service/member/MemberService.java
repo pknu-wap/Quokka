@@ -49,6 +49,8 @@ public class MemberService{
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         String username = userDetails.getUsername();
+        if(username == null)
+            throw new IllegalArgumentException("로그인 되어있는 사용자 정보 없음");
         return findMemberById(username);
     }
 }
