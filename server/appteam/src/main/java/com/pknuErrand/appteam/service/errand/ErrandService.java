@@ -12,6 +12,7 @@ import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
+import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,18 +26,18 @@ import static com.pknuErrand.appteam.domain.errand.Status.RECRUITING;
 public class ErrandService {
 
     private final ErrandRepository errandRepository;
+    private final MemberService memberService;
 
     @Autowired
-    ErrandService(ErrandRepository errandRepository) {
+    ErrandService(ErrandRepository errandRepository, MemberService memberService) {
         this.errandRepository = errandRepository;
+        this.memberService = memberService;
     }
 
     @Transactional
     public ErrandResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
-        /**
-         *    security context holder에서 인가된 사용자의 id를 받아오고 findById를 통해 member 객체 불러올 예정
-         */
-        Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
+
+        Member orderMember = memberService.getLoginMember();
         
         Errand saveErrand = new ErrandBuilder()
 
@@ -45,7 +46,7 @@ public class ErrandService {
                 .title(errandSaveRequestDto.getTitle())
                 .destination(errandSaveRequestDto.getDestination())
                 .longitude(errandSaveRequestDto.getLongitude())
-                .longitude(errandSaveRequestDto.getLongitude())
+                .latitude(errandSaveRequestDto.getLatitude())
                 .due(errandSaveRequestDto.getDue())
                 .detail(errandSaveRequestDto.getDetail())
                 .reward(errandSaveRequestDto.getReward())
@@ -54,6 +55,7 @@ public class ErrandService {
                 .erranderNo(null)
                 .build();
         errandRepository.save(saveErrand);
+        /** return 타입 ErrandDetailReponseDto 로 수정 **/
         return new ErrandResponseDto(saveErrand);
     }
     @Transactional(readOnly = true)
@@ -111,7 +113,7 @@ public class ErrandService {
         List<Errand> errandList = errandRepository.findAll();
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
         for(Errand errand : errandList) {
-            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
+            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
 
             ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
                     .order(memberErrandDto)
@@ -144,7 +146,7 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(memberErrandDto.getErrandNo() == 5) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(memberErrandDto.getErrandNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
@@ -153,8 +155,10 @@ public class ErrandService {
     @Transactional
     public ErrandDetailResponseDto acceptErrand(Long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
-        Member errander = null;  /** 인가된 사용자 정보 불러오기 **/
-
+        Member errander = memberService.getLoginMember();
+        /** 본인 게시물이라면 예외 발생 **/
+        if(errand.getOrderNo().getMemberNo() == errander.getMemberNo())
+            throw new IllegalArgumentException("본인 게시물을 수락할 수 없습니다.");
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
         return findErrandById(id);
     }
@@ -165,22 +169,17 @@ public class ErrandService {
     }
 
     @Transactional
-    /**
-     *    member domain 추가되면 확인 필요
-     */
     public MemberErrandDto buildMemberErrandDto(Member member) {
         long memberNo = member.getMemberNo();
-        String nickname ="tempNick"; // member.getNickname();
-        double score = 0.2; // member.getScore();
+        String nickname = member.getNickname();
+        double score = member.getScore();
         return new MemberErrandDto(memberNo, nickname, score);
     }
 
     @Transactional
     public ErrandDetailResponseDto updateErrand(Long id, ErrandSaveRequestDto errandSaveRequestDto) {
-        /**
-         *    security context holder에서 인가된 사용자의 id를 받아오고 findById를 통해 member 객체 불러올 예정
-         */
-        Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
+
+        Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/
@@ -203,7 +202,7 @@ public class ErrandService {
 
     @Transactional
     public void deleteErrand(Long id) {
-        Member orderMember = null; /** 인가된 사용자 정보 불러오기 **/
+        Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/

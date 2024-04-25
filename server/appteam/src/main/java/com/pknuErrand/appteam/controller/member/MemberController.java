@@ -5,6 +5,7 @@ import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -21,7 +22,7 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/join")
-    public String SignUpProcess(MemberFormDto memberFormDto) {
+    public String SignUpProcess(@RequestBody MemberFormDto memberFormDto) {
 
         memberService.SignUpProcess(memberFormDto);
 

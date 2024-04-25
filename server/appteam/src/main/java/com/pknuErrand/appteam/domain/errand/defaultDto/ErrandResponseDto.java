@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrandResponseDto { // from Entity
+
     private Member orderNo; // 심부름 시킨사람
 
     private String createdDate; // 등록한 date
