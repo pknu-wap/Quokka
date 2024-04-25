@@ -1,6 +1,7 @@
 package com.pknuErrand.appteam.jwt;
 
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JWTUtil {
 
@@ -30,7 +32,9 @@ public class JWTUtil {
     }
 
     public Boolean isExpired(String token) {
-
+        Date expiredData = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration();
+        log.info("해당 토큰의 만료기간 = {}", expiredData);
+        log.info("현재 spring server 시간 = {}", new Date());
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 

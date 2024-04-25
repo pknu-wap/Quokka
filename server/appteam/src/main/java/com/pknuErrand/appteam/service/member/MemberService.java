@@ -4,6 +4,8 @@ import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberFormDto;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,16 @@ public class MemberService{
         String nickname = memberFormDto.getNickname();
 
         memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 0, "ROLE_ADMIN"));
+    }
+    public Member findMemberById(String id) {
+        Member member = memberRepository.findById(id);
+        return member;
+    }
+
+    public Member getLoginMember() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String username = userDetails.getUsername();
+        return findMemberById(username);
     }
 }

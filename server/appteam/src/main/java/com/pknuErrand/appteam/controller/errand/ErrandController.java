@@ -6,9 +6,12 @@ import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.service.errand.ErrandService;
+import com.pknuErrand.appteam.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,16 +19,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Tag(name = "Errand", description = "Errand 관련 API")
 @Controller
 @RequestMapping("/errand")
 public class ErrandController {
 
     private final ErrandService errandService;
+    private final MemberService memberService;
 
     @Autowired
-    ErrandController(ErrandService errandService) {
+    ErrandController(ErrandService errandService, MemberService memberService) {
         this.errandService = errandService;
+        this.memberService = memberService;
     }
 
 
@@ -77,5 +83,14 @@ public class ErrandController {
     @DeleteMapping("/{id}")
     public void deleteErrand(@PathVariable Long id) {
         errandService.deleteErrand(id);
+    }
+
+    @GetMapping("/loginTest")
+    public void 로그인테스트() {
+        Member member = memberService.getLoginMember();
+        log.info("member id = {}", member.getId());
+        log.info("member name = {}", member.getName());
+        if(member == null)
+            log.warn("member is null");
     }
 }
