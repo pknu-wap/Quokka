@@ -12,17 +12,18 @@ class Upload_Image extends StatefulWidget {
   @override
   _Upload_ImageState createState() => _Upload_ImageState();
 }
+
 class Student {
-  String studentID;
-  String major;
   String name;
-  Student(this.studentID, this.major, this.name);
+  String major;
+  String studentID;
+  Student(this.name, this.major, this.studentID);
 }
 
 class _Upload_ImageState extends State<Upload_Image> {
   String parsedtext = ''; // 추출된 텍스트를 저장할 String 변수
 
-  Student s1 = Student('','','');
+   Student s1 = Student('','','');
 
   parsethetext() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -43,7 +44,7 @@ class _Upload_ImageState extends State<Upload_Image> {
         // Navigate to the next page with the populated s1 object
         Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (BuildContext context) => Check_Image(Student: s1),
+                builder: (context) => Check_Image(s1: s1)
             ),);
        }});
   }
@@ -61,7 +62,7 @@ class _Upload_ImageState extends State<Upload_Image> {
       // 추출된 텍스트에서 학번, 이름, 전공 추출
       if (splitText.length >= 3) {
         setState(() {
-          s1 = Student(splitText[2],splitText[0],splitText[1]); // s1에 객체 저장
+          s1 = Student(splitText[0],splitText[1],splitText[2]); // s1에 객체 저장
         });
       }
     }

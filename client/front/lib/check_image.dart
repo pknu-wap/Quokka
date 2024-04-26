@@ -1,11 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'upload_image.dart';
 import 'package:front/upload_image.dart';
 import 'profile.dart';
+// class Student {
+//   String studentID;
+//   String major;
+//   String name;
+//   Student(this.studentID, this.major, this.name);
+// }
+// final Student s1;
+
+//   final String studentID;
+//   final String major;
+//   final String name;
+//
+//   const Check_Image(this.studentID, this.major, this.name)
 
 class Check_Image extends StatelessWidget {
-  Check_Image( {Key? key, required Student Student, }): super (key: key);
+  final Student s1;
+  Check_Image( {Key? key, required this.s1, }): super (key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,7 +64,7 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text("컴퓨터공학전공", style: TextStyle(
+                    child: Text(s1.major, style: TextStyle(
                       fontSize: 13, fontFamily: 'Pretendard',
                       letterSpacing: 0.01, color: Color(0xff404040),
                     ),),
@@ -68,7 +84,7 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text("202112165", style: TextStyle(
+                    child: Text(s1.studentID, style: TextStyle(
                         fontSize: 13, fontFamily: 'Pretendard',
                         letterSpacing: 0.01, color: Color(0xff404040),
                       ),),
@@ -88,7 +104,7 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text("이강민", style: TextStyle(
+                    child: Text(s1.name, style: TextStyle(
                       fontSize: 13, fontFamily: 'Pretendard',
                       letterSpacing: 0.01, color: Color(0xff404040),
                     ),),
