@@ -11,6 +11,8 @@ import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberErrandDto;
+import com.pknuErrand.appteam.exception.CustomException;
+import com.pknuErrand.appteam.exception.ErrorCode;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,6 @@ public class ErrandService {
                 .erranderNo(null)
                 .build();
         errandRepository.save(saveErrand);
-        /** return 타입 ErrandDetailReponseDto 로 수정 **/
         return findErrandById(saveErrand.getErrandNo());
     }
     @Transactional(readOnly = true)
@@ -130,7 +131,7 @@ public class ErrandService {
 
     @Transactional(readOnly = true)
     public ErrandDetailResponseDto findErrandById(long id) {
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
 
         ErrandDetailResponseDto errandDetailResponseDto = ErrandDetailResponseDto.builder()
@@ -153,11 +154,11 @@ public class ErrandService {
 
     @Transactional
     public ErrandDetailResponseDto acceptErrand(Long id) {
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         Member errander = memberService.getLoginMember();
         /** 본인 게시물이라면 예외 발생 **/
         if(errand.getOrderNo().getMemberNo() == errander.getMemberNo())
-            throw new IllegalArgumentException("본인 게시물을 수락할 수 없습니다.");
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물을 수락할 수 없습니다.");
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
         return findErrandById(id);
     }
@@ -181,10 +182,10 @@ public class ErrandService {
         Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         if(!errand.getOrderNo().equals(orderMember)) {
-            throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 수정할 수 있습니다.");
         }
         if(!errand.getStatus().equals(RECRUITING)) {
-            throw new IllegalArgumentException("진행중이거나 완료된 심부름은 수정이 불가능합니다."); /** 커스텀 Exception 생성 필요 **/
+            throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errand.updateErrand(errandSaveRequestDto.getCreatedDate(),
                 errandSaveRequestDto.getTitle(),
@@ -204,10 +205,10 @@ public class ErrandService {
         Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
         if(!errand.getOrderNo().equals(orderMember)) {
-            throw new IllegalArgumentException("게시물 수정 권한 없음"); /** 커스텀 Exception 생성 필요 **/
+            throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 삭제할 수 있습니다.");
         }
         if(!errand.getStatus().equals(RECRUITING)) {
-            throw new IllegalArgumentException("진행중이거나 완료된 심부름은 수정이 불가능합니다."); /** 커스텀 Exception 생성 필요 **/
+            throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errandRepository.delete(errand);
     }

@@ -7,6 +7,8 @@ import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
 import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
+import com.pknuErrand.appteam.exception.CustomException;
+import com.pknuErrand.appteam.exception.ErrorCode;
 import com.pknuErrand.appteam.service.errand.ErrandService;
 import com.pknuErrand.appteam.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -93,4 +95,5 @@ public class ErrandController {
         if(member == null)
             log.warn("member is null");
     }
+
 }
