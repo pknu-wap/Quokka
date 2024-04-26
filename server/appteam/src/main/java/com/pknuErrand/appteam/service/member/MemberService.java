@@ -9,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-
 @Service
 @Transactional
 public class MemberService{
@@ -52,5 +49,13 @@ public class MemberService{
         if(username == null)
             throw new IllegalArgumentException("로그인 되어있는 사용자 정보 없음");
         return findMemberById(username);
+    }
+
+    public boolean checkMail(String mail) {
+        return memberRepository.existsByMail(mail);
+    }
+
+    public boolean checkNickname(String nickname) {
+        return memberRepository.existsByNickname(nickname);
     }
 }

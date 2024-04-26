@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class MemberFormDto {
 
-    private String mail; // 메일
+    private String mail; // 이메일
 
     private String department; // 학과
 

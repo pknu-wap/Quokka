@@ -25,13 +25,11 @@ public class MemberUserDetailsService implements UserDetailsService {
         // DB에서 조회
         Member member = memberRepository.findById(id);  // findByUsername
 
-        /** 추가 **/
         MemberUserDetailsDto memberData = new MemberUserDetailsDto(
                 member.getId(),
                 member.getRole(),
                 member.getPw()
         );
-        /** 추가 **/
 
         if (memberData != null) {
             

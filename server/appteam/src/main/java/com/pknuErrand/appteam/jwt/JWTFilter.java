@@ -2,8 +2,6 @@ package com.pknuErrand.appteam.jwt;
 
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
 import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
-import com.pknuErrand.appteam.exception.CustomException;
-import com.pknuErrand.appteam.exception.ErrorCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,9 +37,9 @@ public class JWTFilter extends OncePerRequestFilter {
 
             System.out.println("token null");
             filterChain.doFilter(request, response);
+            return;
 
         }
-
         String token = authorization.split(" ")[1];
 
         log.info("토큰시간 검증 이전");
