@@ -12,7 +12,7 @@
 .buildlog/
 .history
 .svn/
-
+pubspec.lock
 # IntelliJ related
 *.iml
 *.ipr
@@ -116,7 +116,6 @@ unlinked_spec.ds
 **/windows/flutter/generated_plugin_registrant.cc
 **/windows/flutter/generated_plugin_registrant.h
 **/windows/flutter/generated_plugins.cmake
-
 # Linux
 **/linux/flutter/generated_plugin_registrant.cc
 **/linux/flutter/generated_plugin_registrant.h
@@ -136,3 +135,4 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
