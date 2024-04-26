@@ -59,7 +59,7 @@ public class SecurityConfig {
         // 경로별 인가
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/*","/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll() // swagger 경로 인가
+                        .requestMatchers("/app1-api.html","/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll() // swagger 경로 인가
                         .requestMatchers("/login", "/", "/join").permitAll() // 로그인, 회원가입 페이지
                         .anyRequest().authenticated());
 

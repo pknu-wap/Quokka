@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class MemberUserDetails implements UserDetails {
 
@@ -17,14 +16,11 @@ public class MemberUserDetails implements UserDetails {
 
     }
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        // 주석 해도 되긴 되는데 검증 필요
         collection.add(new GrantedAuthority() {
 
             @Override

@@ -1,8 +1,6 @@
 package com.pknuErrand.appteam.jwt;
 
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
-import com.pknuErrand.appteam.exception.CustomException;
-import com.pknuErrand.appteam.exception.ErrorCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
