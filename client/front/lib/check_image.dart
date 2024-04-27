@@ -2,21 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'upload_image.dart';
-import 'package:front/upload_image.dart';
 import 'profile.dart';
-// class Student {
-//   String studentID;
-//   String major;
-//   String name;
-//   Student(this.studentID, this.major, this.name);
-// }
-// final Student s1;
-
-//   final String studentID;
-//   final String major;
-//   final String name;
-//
-//   const Check_Image(this.studentID, this.major, this.name)
 
 class Check_Image extends StatelessWidget {
   final Student s1;

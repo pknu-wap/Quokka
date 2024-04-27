@@ -2,6 +2,8 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:async';
+import 'main_post_page.dart';
 class Signup_Success extends StatelessWidget {
   const Signup_Success({Key? key}): super (key: key);
 
@@ -41,6 +43,10 @@ class ConfettiState extends State<Confetti> {
     _controllerCenter =
         ConfettiController(duration: const Duration(seconds: 10));
     super.initState();
+    Timer(Duration(seconds: 5), () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Main_post_page()));
+    });
   }
 
   @override
