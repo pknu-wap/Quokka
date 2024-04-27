@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -54,8 +55,12 @@ public class MailService {
             throw new CustomException(ErrorCode.EXPIRED_TIME, "유효시간 5분이 지났습니다.");
         }
     }
-    public void clearMemoryStorage() {
-        mailMemoryRepository.clear();
+    public void clearExpiredEntryInMemoryStorage() {
+        Map<String, VerificationCode> map = mailMemoryRepository.getStorage();
+        for(Map.Entry<String, VerificationCode> entry : map.entrySet()) {
+            if(entry.getValue().getExpiredTime().isBefore(LocalDateTime.now()))
+                mailMemoryRepository.remove(entry.getKey());
+        }
     }
 
     public Boolean isValidMailFormat(String email) {
