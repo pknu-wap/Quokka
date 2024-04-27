@@ -13,8 +13,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController(); // 이메일 입력란의 상태 관리
   TextEditingController verificationCodeController =
       TextEditingController(); // 인증 코드 입력란의 상태 관리
+
   bool isEmailButtonEnabled = false; // 이메일 전송 버튼의 활성화 상태 = 비활성화
   bool isVerifyButtonEnabled = false; // 인증 번호 버튼의 활성화 상태 = 비활성화
+
+// 정규 표현식을 사용하여 이메일 주소 유효성 검사
+  bool isValidEmail(String email) {
+    String emailPattern = r'^[a-zA-Z0-9+-\_.]+@pukyong\.ac\.kr$';
+    RegExp regExp = RegExp(emailPattern);
+    return regExp.hasMatch(email);
+  }
+
+// 이메일 인증 번호 받기 버튼 상태 업데이트
+  void updateEmailButtonState() {
+    String enteredEmail = emailController.text.trim();
+
+    if (isValidEmail(enteredEmail)) {
+      print("정상적 작동");
+      // 이메일 형식이 올바르고 pknu.ac.kr 도메인을 포함하는 경우
+      // 이메일 인증 번호 받기 버튼을 활성화
+      setState(() {
+        isEmailButtonEnabled = true;
+      });
+    } else {
+      // 그 외의 경우 버튼 비활성화
+      setState(() {
+        isEmailButtonEnabled = false;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -32,17 +59,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void updateEmailButtonState() {
-    // 이메일 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
-    setState(() {
-      isEmailButtonEnabled = emailController.text.isNotEmpty;
-    });
-  }
+  // void updateEmailButtonState() {
+  //   // 이메일 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
+  //   setState(() {
+  //     isEmailButtonEnabled = emailController.text.isNotEmpty;
+  //   });
+  // }
 
   void updateVerifyButtonState() {
     // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
       isVerifyButtonEnabled = verificationCodeController.text.isNotEmpty;
+      print("정상작동1");
     });
   }
 
@@ -141,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: emailController,
                           decoration: InputDecoration(
                             /* labelText: '학번',*/
-                            hintText: '이메일 주소를 입력하세요 ex) pknu.ac.kr',
+                            hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
                             hintStyle: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'Pretendard',
