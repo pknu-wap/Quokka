@@ -32,8 +32,8 @@ public class MailController {
     }
 
     @GetMapping("/mail/memoryStorageClear")
-    public String clearMemoryStorage() {
-        mailService.clearMemoryStorage();
-        return "인증번호 저장 메모리 스토리지 clear 완료";
+    public String clearExpiredEntryInMemoryStorage() {
+        mailService.clearExpiredEntryInMemoryStorage();
+        return "인증번호 저장 메모리 스토리지 내 유효시간이 지난 데이터 clear 완료";
     }
 }

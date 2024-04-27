@@ -1,12 +1,14 @@
 package com.pknuErrand.appteam.repository;
 
 import com.pknuErrand.appteam.domain.Mail.VerificationCode;
+import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Getter
 @Repository
 public class MailMemoryRepository {
 
@@ -26,9 +28,5 @@ public class MailMemoryRepository {
 
     public void remove(String mail) {
         storage.remove(mail);
-    }
-
-    public void clear() {
-        storage.clear();
     }
 }
