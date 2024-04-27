@@ -12,7 +12,7 @@ public class AppteamApplication {
 
 		SpringApplication.run(AppteamApplication.class, args);
 
-		System.out.println("develop - BE Branch");
+		//System.out.println("develop - BE Branch");
 
 	}
 

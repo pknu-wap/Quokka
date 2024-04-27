@@ -60,7 +60,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/app1-api.html","/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll() // swagger 경로 인가
-                        .requestMatchers("/login", "/", "/join").permitAll() // 로그인, 회원가입 페이지
+                        .requestMatchers("/login", "/", "/join", "/mail/**").permitAll() // 로그인, 회원가입 페이지
                         .anyRequest().authenticated());
 
         http
