@@ -43,8 +43,8 @@ class ConfettiState extends State<Confetti> {
     _controllerCenter =
         ConfettiController(duration: const Duration(seconds: 10));
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.push(
+    Timer(Duration(seconds: 5), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
+      Navigator.push( //맘에 안들면 바로 수정할게요..
           context, MaterialPageRoute(builder: (context) => Main_post_page()));
     });
   }
