@@ -179,7 +179,7 @@ public class ErrandService {
     public ErrandDetailResponseDto updateErrand(Long id, ErrandSaveRequestDto errandSaveRequestDto) {
 
         Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND,"해당 심부름 없음"));
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 수정할 수 있습니다.");
         }
