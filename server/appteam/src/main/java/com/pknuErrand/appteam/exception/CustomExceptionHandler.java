@@ -13,11 +13,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ExceptionResponseDto> customExceptionHandler(CustomException e) {
 
-        log.warn("{} / {} / {}\n\n", e.getName(), e.getHttpStatus(), e.getMessage());
+        log.warn("{} / {} / {}\n\n", e.getCode(), e.getHttpStatus(), e.getMessage());
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(ExceptionResponseDto.builder()
-                        .name(e.getName())
+                        .name(e.getCode())
                         .httpStatus(e.getHttpStatus())
                         .message(e.getMessage())
                         .build());
