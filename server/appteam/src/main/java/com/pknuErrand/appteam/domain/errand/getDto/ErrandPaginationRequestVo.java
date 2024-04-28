@@ -12,5 +12,4 @@ public class ErrandPaginationRequestVo {
     private String cursor;
     private int limit;
     private Status status;
-    private Sort sort;
 }
