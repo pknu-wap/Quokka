@@ -7,6 +7,42 @@ class Main_post_page extends StatefulWidget {
   _Main_post_pageState createState() => _Main_post_pageState();
 }
 class _Main_post_pageState extends State<Main_post_page> {
+  bool button1state = true; //초기 설정 값
+  bool button2state = false;
+  bool button3state = false;
+  Color button1_text_color = Color(0xff7C2E1A); //초기 색상 값
+  Color button1_border_color = Color(0xff7C3D1A);
+  Color button2_text_color = Color(0xff4A4A4A);
+  Color button2_border_color = Color(0xffB1B1B1);
+  Color button3_text_color = Color(0xff4A4A4A);
+  Color button3_border_color = Color(0xffB1B1B1);
+
+  void changeState(){ //색 변경
+    setState(() {
+      if(button1state)
+      {button1_text_color = Color(0xff7C2E1A);
+        button1_border_color = Color(0xff7C3D1A);}
+      else
+        {button1_text_color = Color(0xff4A4A4A);
+          button1_border_color = Color(0xffB1B1B1);}
+
+      if(button2state)
+      {button2_text_color = Color(0xff7C2E1A);
+        button2_border_color = Color(0xff7C3D1A);}
+      else
+      {button2_text_color = Color(0xff4A4A4A);
+        button2_border_color = Color(0xffB1B1B1);}
+
+      if(button3state)
+      {button3_text_color = Color(0xff7C2E1A);
+      button3_border_color = Color(0xff7C3D1A);}
+      else
+      {button3_text_color = Color(0xff4A4A4A);
+      button3_border_color = Color(0xffB1B1B1);}
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,9 +94,12 @@ class _Main_post_pageState extends State<Main_post_page> {
               Container(
                 child: Row(
                   children: [
-                    GestureDetector(
+                    GestureDetector( //버튼1
                       onTap: () {
-                        // 버튼 클릭 시 실행될 동작
+                        button1state = true;
+                        button2state = false;
+                        button3state = false;
+                        changeState();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 27, top: 19.0),
@@ -70,19 +109,22 @@ class _Main_post_pageState extends State<Main_post_page> {
                               child: Container(width: 70, height: 32,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFBFBFB),
-                                  border: Border.all(color: Color(0xFF7C3D1A), width: 1,),
+                                  border: Border.all(color: button1_border_color, width: 1,),
                                   borderRadius: BorderRadius.circular(10),
                                 ),),), // Text
                             Positioned(left: 16.72, top: 7.72,
                               child: Text('최신순', style: TextStyle(
                                   fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500, fontSize: 14,
-                                  letterSpacing: 0.001, color: Color(0xFF7C2E1A),
+                                  letterSpacing: 0.001, color: button1_text_color,
                                 ),),),
                           ],),),),
-                    GestureDetector(
+                    GestureDetector( //버튼2
                       onTap: () {
-                        // 버튼 클릭 시 실행될 동작
+                        button1state = false;
+                        button2state = true;
+                        button3state = false;
+                        changeState();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -92,19 +134,22 @@ class _Main_post_pageState extends State<Main_post_page> {
                               child: Container(width: 70, height: 32,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFBFBFB),
-                                  border: Border.all(color: Color(0xFFB1B1B1), width: 1,),
+                                  border: Border.all(color: button2_border_color, width: 1,),
                                   borderRadius: BorderRadius.circular(10),
                                 ),),), // Text
                             Positioned(left: 16.72, top: 7.72,
                               child: Text('금액순', style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 14,
-                                letterSpacing: 0.001, color: Color(0xFF4A4A4A),
+                                letterSpacing: 0.001, color: button2_text_color,
                               ),),),
                           ],),),),
-                    GestureDetector(
+                    GestureDetector( //버튼3
                       onTap: () {
-                        // 버튼 클릭 시 실행될 동작
+                        button1state = false;
+                        button2state = false;
+                        button3state = true;
+                        changeState();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -114,14 +159,14 @@ class _Main_post_pageState extends State<Main_post_page> {
                               child: Container(width: 70, height: 32,
                                 decoration: BoxDecoration(
                                   color: Color(0xFFFBFBFB),
-                                  border: Border.all(color: Color(0xFFB1B1B1), width: 1,),
+                                  border: Border.all(color: button3_border_color, width: 1,),
                                   borderRadius: BorderRadius.circular(10),
                                 ),),), // Text
                             Positioned(left: 16.72, top: 7.72,
                               child: Text('거리순', style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 14,
-                                letterSpacing: 0.001, color: Color(0xFF4A4A4A),
+                                letterSpacing: 0.001, color: button3_text_color,
                               ),),),
                           ],),),)
                   ],
