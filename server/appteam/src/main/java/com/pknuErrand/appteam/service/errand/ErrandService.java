@@ -40,7 +40,7 @@ public class ErrandService {
     public ErrandDetailResponseDto createErrand(ErrandSaveRequestDto errandSaveRequestDto) {
 
         Member orderMember = memberService.getLoginMember();
-        
+
         Errand saveErrand = new ErrandBuilder()
                 .orderNo(orderMember)
                 .createdDate(errandSaveRequestDto.getCreatedDate())
@@ -58,47 +58,52 @@ public class ErrandService {
         errandRepository.save(saveErrand);
         return findErrandById(saveErrand.getErrandNo());
     }
+
     @Transactional(readOnly = true)
-    public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequestVo pageInfo) {
-        if(pageInfo.getLimit() <= 0)
+    public void checkLimitAndThrowException(int limit) {
+        if (limit <= 0)
             throw new CustomException(ErrorCode.INVALID_VALUE, "limit은 1보다 같거나 커야합니다.");
+    }
 
+    @Transactional(readOnly = true)
+    public List<ErrandListResponseDto> findPaginationErrandByLatest(ErrandPaginationRequestVo pageInfo) {
+
+        checkLimitAndThrowException(pageInfo.getLimit());
         List<Errand> errandList = null;
-        if(pageInfo.getSort() == Sort.LATEST) {
-            if(!pageInfo.getCursor().contains("-"))
-                throw new CustomException(ErrorCode.INVALID_FORMAT, "LATEST (최신순) 일때는 Cursor에 현재 date를 넣어주세요.");
-            else if(pageInfo.getStatus() == null)
-                errandList = errandRepository.findErrandByLatest(pageInfo.getPk(),(String)pageInfo.getCursor(), pageInfo.getLimit());
-            else
-                errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getStatus().toString());
-        }
-        else if(pageInfo.getSort() == Sort.REWARD) {
-            try {
-                if (Integer.parseInt(pageInfo.getCursor()) < 0)
-                    throw new CustomException(ErrorCode.INVALID_VALUE, "Cursor에 0원 이상의 값을 넣어주세요.");
-            } catch (NumberFormatException e) {
-                throw new CustomException(ErrorCode.INVALID_FORMAT, "REWARD (금액순) 일때는 Cursor에 0이상의 정수(금액)를 넣어주세요.");
-            }
-            if(pageInfo.getStatus() == null)
-               errandList = errandRepository.findErrandByReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit());
-            else
-                errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(),Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getStatus().toString());
-        }
-        else if(pageInfo.getSort() == Sort.DISTANCE) {
-            /** 추가 거리 계산 로직 필요함 **/
-        }
 
-        /**
-         * dto안에 list build 메소드 추가 예정
-         */
+        if (!pageInfo.getCursor().contains("-"))
+            throw new CustomException(ErrorCode.INVALID_FORMAT, "Cursor에 날짜/시간 형식을 넣어주세요.");
+        else if (pageInfo.getStatus() == null)
+            errandList = errandRepository.findErrandByLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit());
+        else
+            errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getStatus().toString());
+
+        return getFilteredErrandList(errandList);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ErrandListResponseDto> findPaginationErrandByReward(ErrandPaginationRequestVo pageInfo) {
+
+        checkLimitAndThrowException(pageInfo.getLimit());
+        List<Errand> errandList = null;
+
+        try {
+            if (Integer.parseInt(pageInfo.getCursor()) < 0)
+                throw new CustomException(ErrorCode.INVALID_VALUE, "Cursor에 0원 이상의 값을 넣어주세요.");
+        } catch (NumberFormatException e) {
+            throw new CustomException(ErrorCode.INVALID_FORMAT, "REWARD (금액순) 일때는 Cursor에 0이상의 정수(금액)를 넣어주세요.");
+        }
+        if (pageInfo.getStatus() == null)
+            errandList = errandRepository.findErrandByReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit());
+        else
+            errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getStatus().toString());
+
+        return getFilteredErrandList(errandList);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ErrandListResponseDto> getFilteredErrandList(List<Errand> errandList) {
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
-
-        /** for test
-        for(Errand errand : errandList) {
-            System.out.println(errand.getErrandNo() + " / " + errand.getTitle());
-        }
-        System.out.println("--------------------------------------");
-         **/
 
         for(Errand errand : errandList) {
             MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
@@ -120,22 +125,7 @@ public class ErrandService {
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> findAllErrand() {
         List<Errand> errandList = errandRepository.findAll();
-        List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
-        for(Errand errand : errandList) {
-            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
-
-            ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
-                    .order(memberErrandDto)
-                    .createdDate(errand.getCreatedDate())
-                    .title(errand.getTitle())
-                    .destination(errand.getDestination())
-                    .reward(errand.getReward())
-                    .status(errand.getStatus())
-                    .build();
-
-            errandListResponseDtoList.add(errandListResponseDto);
-        }
-        return errandListResponseDtoList;
+        return getFilteredErrandList(errandList);
     }
 
     @Transactional(readOnly = true)

@@ -60,11 +60,18 @@ public class ErrandController {
                 .body(errandService.findErrandById(id));
     }
 
-    @Operation(summary = "메인화면 요청서 불러오기 (무한스크롤)", description = "정렬방법, 커서위치, 게시물 갯수를 입력받아 요청서를 불러온다")
-    @GetMapping
-    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrand(ErrandPaginationRequestVo pageInfo) {
+    @Operation(summary = "최신순으로 페이지네이션 불러오기")
+    @GetMapping("/latest")
+    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrandByLatest(ErrandPaginationRequestVo pageInfo) {
         return ResponseEntity.ok()
-                .body(errandService.findPaginationErrand(pageInfo));
+                .body(errandService.findPaginationErrandByLatest(pageInfo));
+    }
+
+    @Operation(summary = "금액순으로 페이지네이션 불러오기")
+    @GetMapping("/reward")
+    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrandByReward(ErrandPaginationRequestVo pageInfo) {
+        return ResponseEntity.ok()
+                .body(errandService.findPaginationErrandByReward(pageInfo));
     }
 
     @Operation(summary = "요청서 수락하기", description = "요청서 수락요청을 통해 errand status 변경하기")
