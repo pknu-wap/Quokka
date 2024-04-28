@@ -1,5 +1,6 @@
 package com.pknuErrand.appteam.domain.member;
 
+import com.pknuErrand.appteam.dto.member.MemberUserDetailsDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

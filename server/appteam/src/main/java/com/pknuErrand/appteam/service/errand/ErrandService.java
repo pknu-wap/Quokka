@@ -2,15 +2,13 @@ package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
-import com.pknuErrand.appteam.domain.errand.Sort;
-import com.pknuErrand.appteam.domain.errand.Status;
-import com.pknuErrand.appteam.domain.errand.getDto.ErrandListResponseDto;
-import com.pknuErrand.appteam.domain.errand.defaultDto.ErrandResponseDto;
-import com.pknuErrand.appteam.domain.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.domain.errand.getDto.ErrandPaginationRequestVo;
-import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
-import com.pknuErrand.appteam.domain.member.MemberErrandDto;
+import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
@@ -22,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pknuErrand.appteam.domain.errand.Status.RECRUITING;
+import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 
 @Service
 public class ErrandService {

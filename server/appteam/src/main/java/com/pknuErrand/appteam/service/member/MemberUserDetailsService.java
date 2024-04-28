@@ -2,7 +2,7 @@ package com.pknuErrand.appteam.service.member;
 
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
-import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
+import com.pknuErrand.appteam.dto.member.MemberUserDetailsDto;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

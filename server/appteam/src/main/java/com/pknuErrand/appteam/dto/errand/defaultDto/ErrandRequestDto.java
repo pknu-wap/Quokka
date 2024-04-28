@@ -1,8 +1,7 @@
-package com.pknuErrand.appteam.domain.errand.defaultDto;
+package com.pknuErrand.appteam.dto.errand.defaultDto;
 
-import com.pknuErrand.appteam.domain.errand.Status;
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.domain.member.Member;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

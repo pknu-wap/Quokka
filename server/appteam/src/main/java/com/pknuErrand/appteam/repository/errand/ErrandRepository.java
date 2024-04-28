@@ -1,6 +1,5 @@
 package com.pknuErrand.appteam.repository.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
-import com.pknuErrand.appteam.domain.errand.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

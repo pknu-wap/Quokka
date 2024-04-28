@@ -1,7 +1,6 @@
-package com.pknuErrand.appteam.domain.errand.getDto;
+package com.pknuErrand.appteam.dto.errand.getDto;
 
-import com.pknuErrand.appteam.domain.errand.Sort;
-import com.pknuErrand.appteam.domain.errand.Status;
+import com.pknuErrand.appteam.Enum.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

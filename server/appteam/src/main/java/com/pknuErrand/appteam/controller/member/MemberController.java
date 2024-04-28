@@ -1,8 +1,7 @@
 package com.pknuErrand.appteam.controller.member;
 
-import com.pknuErrand.appteam.domain.member.MemberFormDto;
+import com.pknuErrand.appteam.dto.member.MemberFormDto;
 import com.pknuErrand.appteam.service.member.MemberService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

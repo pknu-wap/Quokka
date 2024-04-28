@@ -1,13 +1,11 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
-import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
 

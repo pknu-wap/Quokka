@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.domain.errand;
+package com.pknuErrand.appteam.Enum;
 
 public enum Sort {
     LATEST, DISTANCE, REWARD;

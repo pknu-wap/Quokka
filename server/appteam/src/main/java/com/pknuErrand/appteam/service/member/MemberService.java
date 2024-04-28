@@ -1,7 +1,7 @@
 package com.pknuErrand.appteam.service.member;
 
 import com.pknuErrand.appteam.domain.member.Member;
-import com.pknuErrand.appteam.domain.member.MemberFormDto;
+import com.pknuErrand.appteam.dto.member.MemberFormDto;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.context.SecurityContextHolder;
