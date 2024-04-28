@@ -8,6 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -51,8 +56,19 @@ public class MemberService{
         return findMemberById(username);
     }
 
-    public boolean checkMail(String mail) {
-        return memberRepository.existsByMail(mail);
+    @Transactional
+    public Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validatorResult = new HashMap<>();
+
+        for (FieldError error : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+        return validatorResult;
+    }
+
+    public boolean checkId(String Id) {
+        return memberRepository.existsById(Id);
     }
 
     public boolean checkNickname(String nickname) {

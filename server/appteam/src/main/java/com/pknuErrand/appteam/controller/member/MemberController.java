@@ -6,7 +6,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @ResponseBody
@@ -22,26 +26,33 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/join")
-    public String SignUpProcess(@RequestBody MemberFormDto memberFormDto) {
+    public String SignUpProcess(@Valid @RequestBody MemberFormDto memberFormDto, Errors errors, Model model) {
 
+        if(errors.hasErrors()) {
+            // 회원가입 실패시 입력 데이터 값을 유지
+            model.addAttribute("memberFormDto", memberFormDto);
+
+            Map<String, String> validatorResult = memberService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+        }
         memberService.SignUpProcess(memberFormDto);
 
         return "회원가입 완료";
     }
 
-    // 이메일 중복확인
-    @GetMapping("/{mail}/exists")
-    public ResponseEntity<Boolean> CheckMail(@PathVariable(value = "mail") String mail) {
+    // 학번 중복확인
+    @GetMapping("/join/{id}/idExists")
+    public ResponseEntity<Boolean> CheckId(@PathVariable(value = "id") String id) {
 
-        System.out.println(mail + "\n\n");
-        return ResponseEntity.ok(memberService.checkMail(mail));
+        return ResponseEntity.ok(memberService.checkId(id));
     }
 
     // 닉네임 중복확인
-    @GetMapping("/{nickname}/nicknameexists")
+    @GetMapping("/join/{nickname}/nicknameExists")
     public ResponseEntity<Boolean> CheckNickname(@PathVariable(value = "nickname") String nickname) {
 
-        System.out.println(nickname + " \n\n");
         return ResponseEntity.ok(memberService.checkNickname(nickname));
     }
 }
