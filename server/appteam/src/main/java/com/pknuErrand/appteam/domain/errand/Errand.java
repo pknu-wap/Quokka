@@ -1,24 +1,32 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
+import com.pknuErrand.appteam.domain.errand.saveDto.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "errand")
+@Entity(name = "Errand")
 public class Errand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column
     private long errandNo;
 
+
+    @ManyToOne
+    @JoinColumn
+    private Member orderNo; // 심부름 시킨사람의 pk
+
     @Column
-    private long orderNo; // 심부름 시킨사람의 pk
+    private String createdDate; // 등록한 date
 
     @Column
     private String title;
@@ -42,26 +50,48 @@ public class Errand {
     private int reward;
 
     @Column
-    private boolean isCash;
+    private Boolean isCash;
 
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column
-    private long erranderNo; // 심부름꾼의 pk
+    @ManyToOne
+    @JoinColumn
+    private Member erranderNo; // 심부름꾼
 
-    public Errand(ErrandRequestDto requestDto) {
-        this.orderNo = requestDto.getOrderNo();
-        this.title = requestDto.getTitle();
-        this.destination = requestDto.getDestination();
-        this.latitude = requestDto.getLatitude();
-        this.longitude = requestDto.getLongitude();
-        this.due = requestDto.getDue();
-        this.detail = requestDto.getDetail();
-        this.reward = requestDto.getReward();
-        this.isCash = requestDto.isCash();
-        this.status = requestDto.getStatus();
-        this.erranderNo = requestDto.getErranderNo();
+    public void changeErrandStatusAndSetErrander(Status status, Member errander) {
+        this.status = status;
+        erranderNo = errander;
+    }
+
+    public void updateErrand(String createdDate, String title, String destination,
+                             double latitude, double longitude, Timestamp due, String detail,
+                             int reward, Boolean isCash) {
+        this.createdDate = createdDate;
+        this.title = title;
+        this.destination = destination;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.due = due;
+        this.detail = detail;
+        this.reward = reward;
+        this.isCash = isCash;
+    }
+    public Errand(Member orderNo, String createdDate, String title, String destination,
+                  double latitude, double longitude, Timestamp due, String detail,
+                  int reward, Boolean isCash, Status status, Member erranderNo) {
+        this.orderNo = orderNo;
+        this.createdDate = createdDate;
+        this.title = title;
+        this.destination = destination;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.due = due;
+        this.detail = detail;
+        this.reward = reward;
+        this.isCash = isCash;
+        this.status = status;
+        this.erranderNo = erranderNo;
     }
 }
