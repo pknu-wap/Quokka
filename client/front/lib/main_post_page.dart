@@ -10,14 +10,16 @@ class _Main_post_pageState extends State<Main_post_page> {
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
+  bool isCheckBox = false;
   Color button1_text_color = Color(0xff7C2E1A); //초기 색상 값
   Color button1_border_color = Color(0xff7C3D1A);
   Color button2_text_color = Color(0xff4A4A4A);
   Color button2_border_color = Color(0xffB1B1B1);
   Color button3_text_color = Color(0xff4A4A4A);
   Color button3_border_color = Color(0xffB1B1B1);
+  Color checkbox_text_color = Color(0xff606060);
 
-  void changeState(){ //색 변경
+  void change_Button_State(){ //색 변경
     setState(() {
       if(button1state)
       {button1_text_color = Color(0xff7C2E1A);
@@ -41,6 +43,16 @@ class _Main_post_pageState extends State<Main_post_page> {
       button3_border_color = Color(0xffB1B1B1);}
     });
   }
+  void change_checkbox_state()
+  {
+    setState(() {
+      if(isCheckBox)
+       checkbox_text_color = Color(0xff292929);
+      else
+        checkbox_text_color = Color(0xff606060);
+    });
+  }
+
 
 
   @override
@@ -69,19 +81,29 @@ class _Main_post_pageState extends State<Main_post_page> {
                           letterSpacing: 0.01,
                           color: Color(0xff111111),
                         ),),),
-                    SizedBox(width: 158),
-                    Container(
-                      margin : const EdgeInsets.only(top: 35.0),
+                    SizedBox(width: 194),
+                    Container(width: 23.0, height: 21.91,
+                      margin : const EdgeInsets.only(top: 35.0,right: 14),
                       child: IconButton(
+                        style: IconButton.styleFrom(
+                          minimumSize: Size.zero,
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
                         onPressed:
                             () {},
                         icon: Image.asset('assets/images/search_icon.png',
                         ),
                       ),
                     ),
-                    Container(
+                    Container(width: 23.0, height: 21.91,
                       margin : const EdgeInsets.only(top: 34.0,right: 21.31),
                       child: IconButton(
+                        style: IconButton.styleFrom(
+                          minimumSize: Size.zero,
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
                         onPressed: () {
                         },
                         icon: Image.asset('assets/images/alarm_icon.png',
@@ -99,7 +121,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                         button1state = true;
                         button2state = false;
                         button3state = false;
-                        changeState();
+                        change_Button_State();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 27, top: 19.0),
@@ -124,7 +146,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                         button1state = false;
                         button2state = true;
                         button3state = false;
-                        changeState();
+                        change_Button_State();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -149,7 +171,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                         button1state = false;
                         button2state = false;
                         button3state = true;
-                        changeState();
+                        change_Button_State();
                       },
                       child: Container(width: 70, height: 32,
                         margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -172,56 +194,44 @@ class _Main_post_pageState extends State<Main_post_page> {
                   ],
                 ),
               ),
-              SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              Container(
+                child: Row(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 22.0, top: 36.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 9.0),
-                            child: const Text(
-                              '업로드 파일 예시',
-                              style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.01,
-                                color: Color(0xff373737),
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            '파일 형식  jpg / png',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontSize: 12,
-                              letterSpacing: 0.01,
-                              color: Color(0xff373737),
-                            ),
-                          ),
-                          Column(
-                              children: [
-                                Text('', style: const TextStyle(fontSize: 10)),
-                                Text('', style: const TextStyle(fontSize: 10)),
-                                Text('', style: const TextStyle(fontSize: 10)),
-                              ]
-                          )
-                        ],
+                    Container( width: 20, height: 20,
+                      margin: EdgeInsets.only(left: 27, top: 16.36),
+                      child: Checkbox(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: const VisualDensity(
+                          horizontal: VisualDensity.minimumDensity,
+                          vertical: VisualDensity.minimumDensity,
+                        ),
+                        side: MaterialStateBorderSide.resolveWith(
+                              (states) => BorderSide(width: 1.0, color: Color(0xffC5C5C5)),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        activeColor: Color(0xffA97651),
+                        value: isCheckBox,
+                        onChanged: (value) {
+                          setState(() {
+                            isCheckBox = value!;
+                            change_checkbox_state();
+                          });
+                        },
                       ),
                     ),
-                    Container(
-                      width: 139.58,
-                      height: 256.44,
-                      margin: const EdgeInsets.only(left: 22.0, top: 18.0),
-                      child: Image.asset('assets/images/upload_image_sample.png'),
-                    ),
-
+                    Container( height: 17,
+                      margin: EdgeInsets.only(left: 2.28, top: 14.86),
+                      child: Text('진행 중 모아보기', style: TextStyle(
+                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500, fontSize: 14,
+                        letterSpacing: 0.001, color: checkbox_text_color,
+                      ),),
+                    )
                   ],
                 ),
-              )
+              ),
+
             ],
           ),
         ),
