@@ -13,7 +13,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ExceptionResponseDto> customExceptionHandler(CustomException e) {
 
-        log.error("{} / {} / {}\n\n", e.getName(), e.getHttpStatus(), e.getMessage());
+        log.warn("{} / {} / {}\n\n", e.getName(), e.getHttpStatus(), e.getMessage());
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(ExceptionResponseDto.builder()
@@ -29,11 +29,11 @@ public class CustomExceptionHandler {
         log.error("Exception / {}", e.getMessage());
         e.printStackTrace();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ExceptionResponseDto.builder()
                         .name(e.toString().split(":")[0])
-                        .httpStatus(HttpStatus.BAD_REQUEST)
-                        .message(e.getMessage())
+                        .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .message(e.getMessage() + "\n계속 발생하면 백엔드팀에 문의하셈")
                         .build());
     }
 

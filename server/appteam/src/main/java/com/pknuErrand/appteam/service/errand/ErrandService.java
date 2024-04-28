@@ -61,15 +61,24 @@ public class ErrandService {
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> findPaginationErrand(ErrandPaginationRequestVo pageInfo) {
         if(pageInfo.getLimit() <= 0)
-            throw new IllegalArgumentException("limit은 1보다 같거나 커야합니다.");
+            throw new CustomException(ErrorCode.INVALID_VALUE, "limit은 1보다 같거나 커야합니다.");
+
         List<Errand> errandList = null;
         if(pageInfo.getSort() == Sort.LATEST) {
-            if(pageInfo.getStatus() == null)
+            if(!pageInfo.getCursor().contains("-"))
+                throw new CustomException(ErrorCode.INVALID_FORMAT, "LATEST (최신순) 일때는 Cursor에 현재 date를 넣어주세요.");
+            else if(pageInfo.getStatus() == null)
                 errandList = errandRepository.findErrandByLatest(pageInfo.getPk(),(String)pageInfo.getCursor(), pageInfo.getLimit());
             else
                 errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getStatus().toString());
         }
         else if(pageInfo.getSort() == Sort.REWARD) {
+            try {
+                if (Integer.parseInt(pageInfo.getCursor()) < 0)
+                    throw new CustomException(ErrorCode.INVALID_VALUE, "Cursor에 0원 이상의 값을 넣어주세요.");
+            } catch (NumberFormatException e) {
+                throw new CustomException(ErrorCode.INVALID_FORMAT, "REWARD (금액순) 일때는 Cursor에 0이상의 정수(금액)를 넣어주세요.");
+            }
             if(pageInfo.getStatus() == null)
                errandList = errandRepository.findErrandByReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit());
             else
@@ -203,7 +212,7 @@ public class ErrandService {
     @Transactional
     public void deleteErrand(Long id) {
         Member orderMember = memberService.getLoginMember(); /** 인가된 사용자 정보 불러오기 **/
-        Errand errand = errandRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 심부름 없음"));
+        Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 삭제할 수 있습니다.");
         }

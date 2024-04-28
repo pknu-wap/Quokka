@@ -11,14 +11,14 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
 
     @Query(value = "SELECT * " +
             "FROM errand " +
-            "WHERE (created_date = :cursor AND errand_no > :pk) OR created_date > :cursor " +
-            "ORDER BY created_date ASC, errand_no DESC LIMIT :limit", nativeQuery = true)
+            "WHERE (created_date = :cursor AND errand_no > :pk) OR created_date < :cursor " +
+            "ORDER BY created_date DESC, errand_no DESC LIMIT :limit", nativeQuery = true)
     List<Errand> findErrandByLatest(@Param("pk") Long pk, @Param("cursor") String cursor, @Param("limit") int limit);
 
     @Query(value = "SELECT * " +
             "FROM errand " +
-            "WHERE (status = :status) AND ((created_date = :cursor AND errand_no > :pk) OR created_date > :cursor) " +
-            "ORDER BY created_date ASC, errand_no DESC LIMIT :limit", nativeQuery = true)
+            "WHERE (status = :status) AND ((created_date = :cursor AND errand_no > :pk) OR created_date < :cursor) " +
+            "ORDER BY created_date DESC, errand_no DESC LIMIT :limit", nativeQuery = true)
     List<Errand> findErrandByStatusAndLatest(@Param("pk") Long pk, @Param("cursor") String cursor, @Param("limit") int limit,
                                              @Param("status") String status);
 
