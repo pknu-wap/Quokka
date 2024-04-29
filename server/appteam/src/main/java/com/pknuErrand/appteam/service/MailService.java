@@ -43,8 +43,8 @@ public class MailService {
 
     public void checkCode(String mail, String code) {
         if(!mailMemoryRepository.isContainsMail(mail))
-            throw new CustomException(ErrorCode.INVALID_VALUE, "인증번호 보내기 요청을 하지않은 mail 입니다.");
-        VerificationCode verificationCode = mailMemoryRepository.findByMail(mail).orElseThrow(() -> new CustomException(ErrorCode.INVALID_VALUE, "저장소에 key(mail)은 저장되어있지만 value(code)가 저장되어있지 않습니다. 백엔드팀에 보고바람."));
+            throw new CustomException(ErrorCode.MAIL_NOT_FOUND, "해당 mail을 찾을 수 없습니다.");
+        VerificationCode verificationCode = mailMemoryRepository.findByMail(mail).orElseThrow(() -> new CustomException(ErrorCode.SERVER_ERROR, "저장소에 key(mail)은 저장되어있지만 value(code)가 저장되어있지 않습니다. 백엔드팀에 보고바람."));
         if(!verificationCode.getCode().equals(code))
             throw new CustomException(ErrorCode.INVALID_VALUE, "인증번호가 틀립니다.");
 

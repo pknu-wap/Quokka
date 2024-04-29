@@ -156,6 +156,9 @@ public class ErrandService {
         /** 본인 게시물이라면 예외 발생 **/
         if(errand.getOrderNo().getMemberNo() == errander.getMemberNo())
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물을 수락할 수 없습니다.");
+        if(!errand.getStatus().equals(RECRUITING)) {
+            throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수락이 불가능합니다.");
+        }
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
         return findErrandById(id);
     }

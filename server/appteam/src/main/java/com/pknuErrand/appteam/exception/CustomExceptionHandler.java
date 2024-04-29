@@ -17,7 +17,7 @@ public class CustomExceptionHandler {
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(ExceptionResponseDto.builder()
-                        .name(e.getCode())
+                        .code(e.getCode())
                         .httpStatus(e.getHttpStatus())
                         .message(e.getMessage())
                         .build());
@@ -31,7 +31,7 @@ public class CustomExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ExceptionResponseDto.builder()
-                        .name(e.toString().split(":")[0])
+                        .code(e.toString().split(":")[0])
                         .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                         .message(e.getMessage() + "\n계속 발생하면 백엔드팀에 문의하셈")
                         .build());
