@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 @Getter
 @Builder
 public class ExceptionResponseDto {
-    private final String name;
+    private final String code;
     private final HttpStatus httpStatus;
     private final String message;
 
