@@ -42,6 +42,7 @@ public class MemberService{
 
         memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 0, "ROLE_ADMIN"));
     }
+
     public Member findMemberById(String id) {
         Member member = memberRepository.findById(id);
         return member;

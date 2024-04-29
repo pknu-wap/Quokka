@@ -26,20 +26,8 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/join")
-    public String SignUpProcess(@Valid @RequestBody MemberFormDto memberFormDto, Errors errors, Model model) {
-
-        if(errors.hasErrors()) {
-            // 회원가입 실패시 입력 데이터 값을 유지
-            model.addAttribute("memberFormDto", memberFormDto);
-
-            Map<String, String> validatorResult = memberService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-        }
+    public void SignUpProcess(@Valid @RequestBody MemberFormDto memberFormDto) {
         memberService.SignUpProcess(memberFormDto);
-
-        return "회원가입 완료";
     }
 
     // 학번 중복확인
