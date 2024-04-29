@@ -30,7 +30,8 @@ public class CustomExceptionHandler {
     public ResponseEntity<ExceptionResponseDto> validExceptionHandler(MethodArgumentNotValidException e) {
 
         FieldError fieldError = e.getBindingResult().getFieldError();
-        String message = fieldError.getDefaultMessage() + " / " + fieldError.getField() + " = " + fieldError.getRejectedValue();
+        String message = fieldError.getDefaultMessage() + " / " +
+                "[" + fieldError.getField() + "]" + " = " + "[" + fieldError.getRejectedValue() + "]";
 
         log.warn("Valid Exception / {}\n\n", message);
 
