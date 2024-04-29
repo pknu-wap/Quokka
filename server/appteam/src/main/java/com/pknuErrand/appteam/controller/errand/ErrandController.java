@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,10 +42,11 @@ public class ErrandController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "저장 성공", content = @Content(schema = @Schema(implementation = ErrandDetailResponseDto.class))) ,
+            @ApiResponse(responseCode = "415", description = "데이터가 잘못되었음 (공백 , null 등)", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "요청서 등록" , description = "심부름 요청서 등록")
     @PostMapping
-    public ResponseEntity<?> createErrand(@RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
+    public ResponseEntity<?> createErrand(@Valid @RequestBody ErrandSaveRequestDto errandSaveRequestDto) {
         return ResponseEntity.ok()
                 .body(errandService.createErrand(errandSaveRequestDto));
     }
