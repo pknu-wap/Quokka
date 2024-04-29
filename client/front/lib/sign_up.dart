@@ -15,7 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController(); // 인증 코드 입력란의 상태 관리
 
   bool isEmailButtonEnabled = false; // 이메일 전송 버튼의 활성화 상태 = 비활성화
-  bool isVerifyCodeEnabled = false; // 인증 번호 텍스트 필드의 활성화 상태 = 비활성화
+  bool isVerificationCodeEnabled = false; // 인증 번호 텍스트 필드의 활성화 상태 = 비활성화
   bool isVerifyButtonEnabled = false; // 인증 번호 확인 버튼의 활성화 상태 = 비활성화
 
   @override
@@ -66,13 +66,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
       if (isEmailButtonEnabled){
-        isVerifyCodeEnabled = true; // 인증번호 텍스트 필드
+        isVerificationCodeEnabled = true; // 인증번호 텍스트 필드
         isVerifyButtonEnabled = true; // 인증번호 확인 버튼
       }
     });
   }
 
-/*class _SignUpScreenState extends State<SignUpScreen> {*/
+  String actualVerificationCode = "123456"; // 이메일 인증번호 받기 버튼 클릭 시, 실제로 전송된 인증 번호를 저장할 변수
+  String errorMessage = ''; // 오류 메시지를 저장할 변수
+
+  // 실제로 전송된 인증번호와 사용자가 입력한 인증번호가 같은지 확인
+  void checkVerificationCode() {
+    String enteredCode = verificationCodeController.text.trim(); // 사용자가 입력한 인정번호
+    // 사용자가 입력한 인증 번호가 실제로 전송된 인증 번호와 일치할 때,
+    if (enteredCode == actualVerificationCode) {
+      // 다음 화면으로 이동하기
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Upload_Image())
+      );
+   }else{
+      // 사용자가 입력한 인증 번호가 실제로 전송된 인증 번호와 일치하지 않을 때,
+      setState(() {
+        errorMessage = "인증 번호가 일치하지 않습니다.";
+      });
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // title: Text("인증 번호"),
+             content: Text("인증 번호가 일치하지 않습니다."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("확인"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,13 +245,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       Container(
                         margin: EdgeInsets.only(top: 0),
-                        // 비밀번호 텍스트 필드에 대한 마진 설정
+                        // 인증번호 텍스트 필드에 대한 마진 설정
                         child: ElevatedButton(
                           onPressed: isEmailButtonEnabled
                               ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                                   setState(() {
-                                    isVerifyCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
+                                    isVerificationCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
                                   });
                                   print('Email Button Clicked!');
                                 }
@@ -256,9 +296,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Text(
                             "인증 번호",
                             style: TextStyle(
-                              color: Color(0xFF373737),
+                              fontSize: 14,
+                              fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
-                              fontSize: 13,
+                              color: Color(0xFF373737),
                             ),
                           ),
                         ),
@@ -275,13 +316,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintStyle: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400),
+                                fontWeight: FontWeight.w400
+                            ),
                             filled: true,
                             fillColor: Color(0xFFE5E5E5),
                             labelStyle: TextStyle(
                                 color: Color(0xFF404040),
                                 fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400),
+                                fontWeight: FontWeight.w400
+                            ),
                             contentPadding:
                                 EdgeInsets.only(left: 11, right: 11),
                             // 텍스트를 수직으로 가운데 정렬
@@ -304,11 +347,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           keyboardType: TextInputType.number,
-                          obscureText: true, // 비밀번호 안보이도록 하는 것
-                          enabled: isVerifyCodeEnabled, // 비밀번호 텍스트 필드 활성화 여부 결정
-                        ),
-                      ), // 비밀번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 비밀번호 숨기기)
-
+                          obscureText: true, // 인증 번호 안보이도록 하는 것
+                          enabled: isVerificationCodeEnabled, // 인증 번호 텍스트 필드 활성화 여부 결정
+                          ),
+                        ), // 인증 번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 인증 번호 숨기기)
                       Container(
                         margin: EdgeInsets.only(top: 0),
                         child: ElevatedButton(
@@ -317,16 +359,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                                   print('Verify Button Clicked!');
 
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Upload_Image()));
-                                  style:
-                                  ButtonStyle(
-                                    minimumSize: MaterialStateProperty.all(
-                                        Size(100, 29)),
-                                  );
+                                  checkVerificationCode();
                                 }
                               : null,
                           style: ButtonStyle(
@@ -361,7 +394,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-// 로그인 버튼 까지의 여백
+                      Container(
+                        margin: EdgeInsets.only(left: 22.0, top: 21.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            errorMessage,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xE33939),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
