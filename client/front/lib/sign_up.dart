@@ -15,33 +15,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController(); // 인증 코드 입력란의 상태 관리
 
   bool isEmailButtonEnabled = false; // 이메일 전송 버튼의 활성화 상태 = 비활성화
-  bool isVerifyButtonEnabled = false; // 인증 번호 버튼의 활성화 상태 = 비활성화
-
-// 정규 표현식을 사용하여 이메일 주소 유효성 검사
-  bool isValidEmail(String email) {
-    String emailPattern = r'^[a-zA-Z0-9+-\_.]+@pukyong\.ac\.kr$';
-    RegExp regExp = RegExp(emailPattern);
-    return regExp.hasMatch(email);
-  }
-
-// 이메일 인증 번호 받기 버튼 상태 업데이트
-  void updateEmailButtonState() {
-    String enteredEmail = emailController.text.trim();
-
-    if (isValidEmail(enteredEmail)) {
-      print("정상적 작동");
-      // 이메일 형식이 올바르고 pknu.ac.kr 도메인을 포함하는 경우
-      // 이메일 인증 번호 받기 버튼을 활성화
-      setState(() {
-        isEmailButtonEnabled = true;
-      });
-    } else {
-      // 그 외의 경우 버튼 비활성화
-      setState(() {
-        isEmailButtonEnabled = false;
-      });
-    }
-  }
+  bool isVerifyCodeEnabled = false; // 인증 번호 텍스트 필드의 활성화 상태 = 비활성화
+  bool isVerifyButtonEnabled = false; // 인증 번호 확인 버튼의 활성화 상태 = 비활성화
 
   @override
   void initState() {
@@ -59,18 +34,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  // void updateEmailButtonState() {
-  //   // 이메일 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
-  //   setState(() {
-  //     isEmailButtonEnabled = emailController.text.isNotEmpty;
-  //   });
-  // }
+  // 정규 표현식을 사용하여 이메일 주소 유효성 검사
+  bool isValidEmail(String email) {
+    String emailPattern = r'^[a-zA-Z0-9+-\_.]+@pukyong\.ac\.kr$';
+    RegExp regExp = RegExp(emailPattern);
+    return regExp.hasMatch(email);
+  }
+
+// 이메일 인증 번호 받기 버튼 상태 업데이트
+  void updateEmailButtonState() {
+    String enteredEmail = emailController.text.trim();
+
+    if (isValidEmail(enteredEmail)) {
+      // 이메일 형식이 올바르고 pknu.ac.kr 도메인을 포함하는 경우
+      // 이메일 인증 번호 받기 버튼을 활성화
+      setState(() {
+        isEmailButtonEnabled = true;
+      });
+    } else {
+      // 그 외의 경우 버튼 비활성화
+      setState(() {
+        isEmailButtonEnabled = false;
+      });
+    }
+  }
+  // 이메일 인증 번호 받기 버튼 활성화 -> 버튼 클릭 시 -> 확인 버튼 활성화
+  // -> 인증 번호 텍스트 필드 활성화
+  // enterdEmail인증번호 필요, 인증번호 확인 버튼 클릭 시(비교) -> 참이면 다음 페이지 이동/ 거짓이면 경고 메시지 띄우기
 
   void updateVerifyButtonState() {
     // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
-      isVerifyButtonEnabled = verificationCodeController.text.isNotEmpty;
-      print("정상작동1");
+      if (isEmailButtonEnabled){
+        isVerifyCodeEnabled = true; // 인증번호 텍스트 필드
+        isVerifyButtonEnabled = true; // 인증번호 확인 버튼
+      }
     });
   }
 
@@ -212,6 +210,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: isEmailButtonEnabled
                               ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
+                                  setState(() {
+                                    isVerifyCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
+                                  });
                                   print('Email Button Clicked!');
                                 }
                               : null,
@@ -304,6 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           keyboardType: TextInputType.number,
                           obscureText: true, // 비밀번호 안보이도록 하는 것
+                          enabled: isVerifyCodeEnabled, // 비밀번호 텍스트 필드 활성화 여부 결정
                         ),
                       ), // 비밀번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 비밀번호 숨기기)
 
