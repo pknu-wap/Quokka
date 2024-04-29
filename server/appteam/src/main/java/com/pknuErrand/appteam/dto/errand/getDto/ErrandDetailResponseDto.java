@@ -1,8 +1,7 @@
-package com.pknuErrand.appteam.domain.errand.getDto;
+package com.pknuErrand.appteam.dto.errand.getDto;
 
-import com.pknuErrand.appteam.domain.errand.Status;
-import com.pknuErrand.appteam.domain.member.Member;
-import com.pknuErrand.appteam.domain.member.MemberErrandDto;
+import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

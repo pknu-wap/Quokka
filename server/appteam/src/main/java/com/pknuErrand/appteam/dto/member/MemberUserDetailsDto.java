@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.domain.member;
+package com.pknuErrand.appteam.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

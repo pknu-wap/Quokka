@@ -1,7 +1,7 @@
 package com.pknuErrand.appteam.domain.errand;
 
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.domain.member.Member;
-import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 

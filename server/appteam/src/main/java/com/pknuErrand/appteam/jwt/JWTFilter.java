@@ -1,7 +1,7 @@
 package com.pknuErrand.appteam.jwt;
 
 import com.pknuErrand.appteam.domain.member.MemberUserDetails;
-import com.pknuErrand.appteam.domain.member.MemberUserDetailsDto;
+import com.pknuErrand.appteam.dto.member.MemberUserDetailsDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,7 @@
-package com.pknuErrand.appteam.domain.errand.saveDto;
+package com.pknuErrand.appteam.dto.errand.defaultDto;
 
-import com.pknuErrand.appteam.domain.errand.Status;
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.domain.member.Member;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +11,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class ErrandSaveRequestDto { // to Entity
-    
-    /**
-     *  게시글 등록하는 member의 정보는 jwt에서 추출
-     */
+public class ErrandRequestDto { // to Entity
+
+    private Member orderNo; // 심부름 시킨사람
 
     private String createdDate; // 등록한 date
 
@@ -34,11 +31,10 @@ public class ErrandSaveRequestDto { // to Entity
 
     private int reward;
 
-    private boolean isCash;
+    private Boolean isCash;
 
-    // private Status status;
+    private Status status;
 
-    /**
-     *  request 받을 때 (save하려고 정보를 받을 때) 담당자 정보는 가져올 필요가 없다.
-     */
+    private Member erranderNo; // 심부름꾼
+
 }
