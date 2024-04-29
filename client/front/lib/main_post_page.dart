@@ -179,6 +179,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(children: [
           Container(

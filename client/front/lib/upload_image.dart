@@ -70,6 +70,7 @@ class _Upload_ImageState extends State<Upload_Image> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -171,13 +172,6 @@ class _Upload_ImageState extends State<Upload_Image> {
                               color: Color(0xff373737),
                             ),
                           ),
-                          Column(
-                            children: [
-                              Text(s1.name, style: const TextStyle(fontSize: 10)),
-                              Text(s1.studentID, style: const TextStyle(fontSize: 10)),
-                              Text(s1.major, style: const TextStyle(fontSize: 10)),
-                            ]
-                          )
                         ],
                       ),
                     ),

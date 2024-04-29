@@ -11,6 +11,7 @@ class Check_Image extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
               centerTitle: true,
