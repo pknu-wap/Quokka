@@ -6,8 +6,29 @@ class Post_List_view extends StatefulWidget{
   @override
   Post_List_viewState createState() => Post_List_viewState();
 }
+class Post{ //게시글에 담긴 정보들
+  String? username; //닉네임
+  double? scope; //별점
+  String? title; //게시글 제목
+  String? locate; //위치
+  int? price; //보수
+  bool? state; //상태 (진행중 or 완료됨)
+  int? time; //시간 (n분전)
+  Post(this.username, this.scope, this.title,
+      this.locate, this.price, this.state, this.time);
+  String getState() { //상태에 따라 텍스트 출력
+    if(state == null)
+        return "";
+    else if(state!) //true일 때 진행중
+      return "진행중";
+    else //false일 때 완료됨
+      return "완료됨";
+  }
+}
 class Post_List_viewState extends State<Post_List_view>{
-  var price = NumberFormat('###,###,###,###');
+  var priceFormat = NumberFormat('###,###,###,###');
+  Post p1 = Post("정다은", 4.8, "스타벅스 유스베리티 따뜻한 거",
+      "디자인관 1층", 2000, true, 1);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -30,7 +51,7 @@ class Post_List_viewState extends State<Post_List_view>{
                               children: [
                                 Container( height: 14,
                                   margin: EdgeInsets.only(left: 15, top: 16),
-                                  child: Text("정다은", style: TextStyle(
+                                  child: Text("${p1.username}", style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w300, fontSize: 12,
                                     letterSpacing: 0.01, color: Color(0xff7E7E7E),
@@ -38,7 +59,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                 ),
                                 Container( height:14,
                                   margin: EdgeInsets.only(top: 16),
-                                  child: Text(" 4.8점", style: TextStyle(
+                                  child: Text(" ${p1.scope}점", style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w300, fontSize: 12,
                                     letterSpacing: 0.01, color: Color(0xff7E7E7E),
@@ -49,7 +70,7 @@ class Post_List_viewState extends State<Post_List_view>{
                         ),
                         Container( //게시글 제목
                           margin: EdgeInsets.only(top: 8,left: 15,),
-                          child: Text("스타벅스 유스베리티 따뜻한 거", style: TextStyle(
+                          child: Text("${p1.title}", style: TextStyle(
                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w600, fontSize: 16,
                             letterSpacing: 0.01, color: Color(0xff111111),
@@ -59,13 +80,13 @@ class Post_List_viewState extends State<Post_List_view>{
                             child: Row( //위치, 가격
                               children: [
                                 Container( margin: EdgeInsets.only(left: 15, top: 10),
-                                  child: Text("디자인관 1층   ", style: TextStyle(
+                                  child: Text("${p1.locate}   ", style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w500, fontSize: 13,
                                     letterSpacing: 0.01, color: Color(0xff000000),
                                   ),),),
                                 Container( margin: EdgeInsets.only(top: 10),
-                                  child: Text("\u20A9${price.format(2000)}", style: TextStyle(
+                                  child: Text("\u20A9${priceFormat.format(p1.price)}", style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w500, fontSize: 13,
                                     letterSpacing: 0.01, color: Color(0xffEC5147),
@@ -79,7 +100,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                     color: Color(0xffAA7651),
                                   ),
                                   child: Center(
-                                    child: Text("진행중", style: TextStyle(
+                                    child: Text(p1.getState(), style: TextStyle(
                                         fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                         fontWeight: FontWeight.w500, fontSize: 11,
                                         letterSpacing: 0.01, color: Color(0xffFFFFFF)
@@ -88,7 +109,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(left: 80.64, top: 17.95),
-                                  child: Text("1분 전",style: TextStyle(
+                                  child: Text("${p1.time}분 전",style: TextStyle(
                                       fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400, fontSize: 12,
                                       letterSpacing: 0.001, color: Color(0xff434343)
