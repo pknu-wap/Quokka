@@ -38,6 +38,7 @@ class _Upload_ImageState extends State<Upload_Image> {
     var post = await http.post(Uri.parse(url),body: payload,headers: header);
     var result = jsonDecode(post.body); // 추출 결과를 받아서 result에 저장
     setState(() {
+      print(result);
       parsedtext = result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
       extractInfoFromText();
       if (s1.name != '' && s1.studentID != '' && s1.major != '') {
@@ -50,6 +51,12 @@ class _Upload_ImageState extends State<Upload_Image> {
   }
   void extractInfoFromText() {
     int index = parsedtext.indexOf('남은시간');
+    if(index == -1)
+      index = parsedtext.indexOf('남은');
+    if(index == -1)
+      index = parsedtext.indexOf('시간');
+    if(index == -1)
+      index = parsedtext.indexOf('은시');
     if (index != -1) {
       // "남은시간"을 기준으로 분할하여 앞 부분은 잘라냄
       String remainingText = parsedtext.substring(index);
@@ -70,6 +77,7 @@ class _Upload_ImageState extends State<Upload_Image> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -134,7 +142,6 @@ class _Upload_ImageState extends State<Upload_Image> {
                           // 이 버튼을 누르면 갤러리가 열리고 이미지를 가져오도록 설정
                           parsethetext();
                           initState();
-
                         },
                       ),
                     ),
@@ -171,13 +178,6 @@ class _Upload_ImageState extends State<Upload_Image> {
                               color: Color(0xff373737),
                             ),
                           ),
-                          Column(
-                            children: [
-                              Text(s1.name, style: const TextStyle(fontSize: 10)),
-                              Text(s1.studentID, style: const TextStyle(fontSize: 10)),
-                              Text(s1.major, style: const TextStyle(fontSize: 10)),
-                            ]
-                          )
                         ],
                       ),
                     ),

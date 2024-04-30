@@ -11,6 +11,7 @@ class ProfileScreen extends StatefulWidget {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _ProfileScreenState extends State<ProfileScreen> {
+
   // String passwordText = ""; // 비밀번호 오류 메시지
   // Color passwordTextColor = Color(0xFF404040); // 비밀번호 색깔 설정
 
@@ -27,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       TextEditingController(); // 비밀번호 입력란의 상태 관리
   TextEditingController passwordCheckController =
       TextEditingController(); // 비밀번호 확인 입력란의 상태 관리
+
   bool isNicknameEnabled = true;
   bool isNicknameButtonClickable = false; // 중복 확인 버튼 상태 = 비활성화
   bool isPasswordEnabled = false;
@@ -227,11 +229,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fontSize: 20,
               ),
             ),
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
           Form(
             child: Theme(
               data: ThemeData(
@@ -297,6 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 margin: EdgeInsets.only(right: 9.98),
                                 // 닉네임 텍스트 필드와 중복확인 버튼 사이의 간격
                                 child: TextField(
+
                                   maxLength: maxNicknameLength,
                                   // 최대 길이 설정
                                   onChanged: (text) {
@@ -524,7 +522,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 10),
-
                       Container(
                         margin: EdgeInsets.only(left: 24, top: 25),
                         child: Align(
