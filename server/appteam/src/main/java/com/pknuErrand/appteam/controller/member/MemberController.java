@@ -1,6 +1,8 @@
 package com.pknuErrand.appteam.controller.member;
 
 import com.pknuErrand.appteam.dto.member.MemberFormDto;
+import com.pknuErrand.appteam.exception.CustomException;
+import com.pknuErrand.appteam.exception.ErrorCode;
 import com.pknuErrand.appteam.service.member.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +31,17 @@ public class MemberController {
 
     // 학번 중복확인
     @GetMapping("/join/{id}/idExists")
-    public ResponseEntity<Boolean> CheckId(@PathVariable(value = "id") String id) {
-        
-        return ResponseEntity.ok(memberService.checkId(id));
+    public void CheckId(@PathVariable(value = "id") String id) {
+
+        if(!memberService.checkId(id))
+            throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 학번입니다.");
     }
 
     // 닉네임 중복확인
     @GetMapping("/join/{nickname}/nicknameExists")
-    public ResponseEntity<Boolean> CheckNickname(@PathVariable(value = "nickname") String nickname) {
+    public void CheckNickname(@PathVariable(value = "nickname") String nickname) {
 
-        return ResponseEntity.ok(memberService.checkNickname(nickname));
+        if(!memberService.checkNickname(nickname))
+            throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 닉네임입니다.");
     }
 }
