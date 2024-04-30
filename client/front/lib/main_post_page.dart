@@ -512,7 +512,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                       child: Align(alignment: Alignment.centerRight,
                                           child: Container( //시간
                                             margin: EdgeInsets.only(right: 14, top: 17.95),
-                                            child: Text("${p1.time}분 전",
+                                            child: Text("${p5.time}분 전",
                                               style: TextStyle(
                                                   fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                                   fontWeight: FontWeight.w400, fontSize: 12,

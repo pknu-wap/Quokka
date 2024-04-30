@@ -3,10 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'upload_image.dart';
 import 'profile.dart';
-
-class Check_Image extends StatelessWidget {
+class Check_Image extends StatefulWidget{
   final Student s1;
   Check_Image( {Key? key, required this.s1, }): super (key: key);
+  @override
+  Check_ImageState createState() => Check_ImageState();
+}
+class Check_ImageState extends State<Check_Image> {
+  final int IDLength = 9;
+  late Student s1;
+  late TextEditingController _MajorController;
+  late TextEditingController _IDController;
+  late TextEditingController _NameController;
+  late bool isIDValid = s1.studentID.trim().length == IDLength;
+  @override
+  void initState(){
+    super.initState();
+    s1 = widget.s1;
+    _MajorController =
+        TextEditingController(text:s1.major.trim());
+    _IDController =
+        TextEditingController(text:s1.studentID.trim());
+    _NameController =
+        TextEditingController(text:s1.name.trim());
+    _IDController.addListener(() {
+      setState(() {
+        isIDValid = _IDController.text.length == IDLength
+        && int.tryParse(_IDController.text) != null;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +83,16 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text(s1.major, style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: 'Pretendard',
-                      letterSpacing: 0.01,
-                      color: Color(0xff404040),
-                    ),),
+                    child: TextField(
+                      controller: _MajorController,
+                      decoration: InputDecoration(
+                          hintStyle: TextStyle(
+                            fontSize: 13, fontFamily: 'Pretendard',
+                            letterSpacing: 0.01, color: Color(0xff404040),
+                          )
+                      ),
+                      keyboardType: TextInputType.text,
+                    )
                   ),
                 ),
                   Container(
@@ -79,10 +109,18 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text(s1.studentID, style: TextStyle(
-                        fontSize: 13, fontFamily: 'Pretendard',
-                        letterSpacing: 0.01, color: Color(0xff404040),
-                      ),),
+                    child: TextField(
+                      maxLength: IDLength,
+                      controller: _IDController,
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(
+                            fontSize: 13, fontFamily: 'Pretendard',
+                            letterSpacing: 0.01, color: Color(0xff404040),
+                          ),
+                          counterText: '',
+                        ),
+                      keyboardType: TextInputType.number,
+                    )
                   ),
                 ),
                 Container(
@@ -99,10 +137,16 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: Text(s1.name, style: TextStyle(
-                      fontSize: 13, fontFamily: 'Pretendard',
-                      letterSpacing: 0.01, color: Color(0xff404040),
-                    ),),
+                    child: TextField(
+                      controller: _NameController,
+                      decoration: InputDecoration(
+                          hintStyle: TextStyle(
+                            fontSize: 13, fontFamily: 'Pretendard',
+                            letterSpacing: 0.01, color: Color(0xff404040),
+                          )
+                      ),
+                      keyboardType: TextInputType.text,
+                    )
                   ),
                 ),
                 Container(
@@ -114,7 +158,7 @@ class Check_Image extends StatelessWidget {
                   width: 320,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Color(0xff7C3D1A),
+                    color: isIDValid ? Color(0xff7C3D1A) : Colors.grey,
                       border: Border.all(
                         width: 0.5,
                         color: Color(0xffACACAC),
@@ -124,11 +168,13 @@ class Check_Image extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) => ProfileScreen(),
-                            ),);
-                      },
+                      onPressed: isIDValid
+                      ? () {
+                      Navigator.of(context).push(
+                      MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()),
+                     );
+                    }
+                    : null,
                     child: Text('확인', style: TextStyle(fontSize: 16,
                       fontFamily: 'Pretendard', letterSpacing: 0.01,color: Color(0xffFFFFFF),
                     ),),),
@@ -136,7 +182,7 @@ class Check_Image extends StatelessWidget {
                   ),),
                 Container(
                     margin: EdgeInsets.only(left: 20.0, top: 12.0),
-                    child: Text('* 해당 정보가 일치하지 않으면 이전 페이지로 돌아가 재촬영 하세요.', style: TextStyle(
+                    child: Text('* 해당 정보가 일치하지 않으면 알맞게 바꿔주세요.', style: TextStyle(
                       fontFamily: 'Pretendard',fontSize: 12, fontWeight: FontWeight.w400,
                       letterSpacing: 0.01, color: Color(0xffFF4B4B),))),
               ],
