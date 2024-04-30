@@ -1,7 +1,6 @@
 package com.pknuErrand.appteam.domain.member;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
