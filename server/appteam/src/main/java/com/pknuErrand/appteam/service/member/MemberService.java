@@ -8,11 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -27,12 +22,8 @@ public class MemberService{
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    private void validateDuplicateMember(Member member) {
-        if(memberRepository.findById(member.getId()) != null)
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-    }
-
     public void SignUpProcess(MemberFormDto memberFormDto) {
+
         String mail = memberFormDto.getMail();
         String department = memberFormDto.getDepartment();
         String name = memberFormDto.getName();
@@ -44,11 +35,13 @@ public class MemberService{
     }
 
     public Member findMemberById(String id) {
+
         Member member = memberRepository.findById(id);
         return member;
     }
 
     public Member getLoginMember() {
+
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         String username = userDetails.getUsername();
@@ -57,22 +50,13 @@ public class MemberService{
         return findMemberById(username);
     }
 
-    @Transactional
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
-
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
-        }
-        return validatorResult;
-    }
-
     public boolean checkId(String Id) {
+
         return memberRepository.existsById(Id);
     }
 
     public boolean checkNickname(String nickname) {
+
         return memberRepository.existsByNickname(nickname);
     }
 }

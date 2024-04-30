@@ -8,16 +8,18 @@ import lombok.Setter;
 @Getter @Setter
 public class MemberFormDto {
 
-    @Email
+    @Email // 이메일 형태 검사
     @NotNull
     @Column(unique = true)
     @NotBlank(message = "이메일 주소를 입력해주세요.")
     private String mail; // 이메일
 
     @NotNull
+    @NotBlank(message = "학과를 입력해주세요.")
     private String department; // 학과
 
     @NotNull
+    @NotBlank(message = "이름을 입력해주세요.")
     private String name; // 이름
 
     @NotNull
@@ -26,15 +28,14 @@ public class MemberFormDto {
     private String id; // 학번
 
     @NotNull
-    @NotBlank(message = "비밀번호를 입력하세요.")
     // 비밀번호 영어 대,소문자, 숫자, 특수문자
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$", message = "비밀번호는 8 ~ 20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$", message = "비밀번호는 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8 ~ 20자로 입력해주세요.")
     private String pw; // 비밀번호
 
     @NotNull
     @Column(unique = true)
     // 특수문자 불가, 영어든 한글이든 숫자든 2 ~ 12글자
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,12}$", message = "닉네임은 특수문자를 제외한 2 ~ 12자리여야 합니다.")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,12}$", message = "닉네임은 공백과 특수문자를 제외한 2 ~ 12자리여야 합니다.")
     private String nickname; // 닉네임
 
 }
