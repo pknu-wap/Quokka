@@ -11,7 +11,6 @@ class ProfileScreen extends StatefulWidget {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _ProfileScreenState extends State<ProfileScreen> {
-
   // String passwordText = ""; // 비밀번호 오류 메시지
   // Color passwordTextColor = Color(0xFF404040); // 비밀번호 색깔 설정
 
@@ -23,12 +22,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final int maxPasswordCheckLength = 20; // 비밀번호 확인 최대 길이 설정
 
   TextEditingController nicknameController =
-      TextEditingController(); // 닉네임 입력란의 상태 관리 -> 중복확인
+  TextEditingController(); // 닉네임 입력란의 상태 관리 -> 중복확인
   TextEditingController passwordController =
-      TextEditingController(); // 비밀번호 입력란의 상태 관리
+  TextEditingController(); // 비밀번호 입력란의 상태 관리
   TextEditingController passwordCheckController =
-      TextEditingController(); // 비밀번호 확인 입력란의 상태 관리
-
+  TextEditingController(); // 비밀번호 확인 입력란의 상태 관리
   bool isNicknameEnabled = true;
   bool isNicknameButtonClickable = false; // 중복 확인 버튼 상태 = 비활성화
   bool isPasswordEnabled = false;
@@ -100,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void checkNicknameAvailable() {
     String enteredNickname = nicknameController.text;
     bool isAvailable =
-        isValidNickname(enteredNickname); // 사용자가 입력한 닉네임을 심심이와 비교
+    isValidNickname(enteredNickname); // 사용자가 입력한 닉네임을 심심이와 비교
 
     setState(() {
       // 닉네임 사용 가능 -> 사용 가능 메시지 출력 -> 중복 확인 버튼 비활성화 -> 비밀번호 텍스트 필드 입력 가능
@@ -229,6 +227,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fontSize: 20,
               ),
             ),
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
           Form(
             child: Theme(
               data: ThemeData(
@@ -294,7 +297,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 margin: EdgeInsets.only(right: 9.98),
                                 // 닉네임 텍스트 필드와 중복확인 버튼 사이의 간격
                                 child: TextField(
-
                                   maxLength: maxNicknameLength,
                                   // 최대 길이 설정
                                   onChanged: (text) {
@@ -319,7 +321,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         fontFamily: 'Pretendard',
                                         fontWeight: FontWeight.w400),
                                     contentPadding:
-                                        EdgeInsets.only(left: 10, right: 10),
+                                    EdgeInsets.only(left: 10, right: 10),
                                     // 텍스트를 수직으로 가운데 정렬
                                     border: InputBorder.none,
                                     // 밑줄 없애기
@@ -330,7 +332,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       borderSide: BorderSide(
                                           color: Color(0xFFACACAC),
                                           width: 0.5 // 테두리 굵기
-                                          ),
+                                      ),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -338,10 +340,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       borderSide: BorderSide(
                                           color: Color(0xFFACACAC),
                                           width: 0.5 // 테두리 굵기
-                                          ),
+                                      ),
                                     ),
                                     counterText:
-                                        '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                                    '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                                   ),
                                   keyboardType: TextInputType.emailAddress,
                                 ),
@@ -353,26 +355,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: ElevatedButton(
                                 onPressed: isNicknameButtonClickable
                                     ? () {
-                                        // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
-                                        checkNicknameDuplicate();
-                                        // checkNicknameAvailable(); // 비교해서 메시지 출력
-                                        // // apt
-                                        // setState(() {
-                                        //   isPasswordEnabled = true; // 닉네임 중복 확인 버튼 비활성화 + 메시지 색깔이 초록색일 때,
-                                        // });
-                                      }
+                                  // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
+                                  checkNicknameDuplicate();
+                                  // checkNicknameAvailable(); // 비교해서 메시지 출력
+                                  // // apt
+                                  // setState(() {
+                                  //   isPasswordEnabled = true; // 닉네임 중복 확인 버튼 비활성화 + 메시지 색깔이 초록색일 때,
+                                  // });
+                                }
                                     : null,
                                 style: ButtonStyle(
                                   padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry>(
+                                      EdgeInsetsGeometry>(
                                       EdgeInsets.all(10.01)),
 
                                   backgroundColor:
-                                      isNicknameButtonClickable // 텍스트 지우면 다시 비활성화 되도록 만들기
-                                          ? MaterialStateProperty.all<Color>(
-                                              Color(0xFF7C3D1A))
-                                          : MaterialStateProperty.all<Color>(
-                                              Color(0xFFBD9E8C)),
+                                  isNicknameButtonClickable // 텍스트 지우면 다시 비활성화 되도록 만들기
+                                      ? MaterialStateProperty.all<Color>(
+                                      Color(0xFF7C3D1A))
+                                      : MaterialStateProperty.all<Color>(
+                                      Color(0xFFBD9E8C)),
 
                                   // 버튼의 크기 설정
                                   minimumSize: MaterialStateProperty.all<Size>(
@@ -412,7 +414,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               color: isValidNickname(nicknameController.text) &&
-                                      !isDuplicateNickname
+                                  !isDuplicateNickname
                                   ? Color(0XFF2BBD28)
                                   : Color(0XFFE33939),
                             ),
@@ -490,38 +492,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // 밑줄 없애기
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                              BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                              BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                              ),
                             ),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
                                   isPasswordButtonVisible =
-                                      !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                  !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
                                 });
                               },
                               icon: isPasswordButtonVisible
                                   ? Image.asset('assets/images/open eye.png')
                                   : Image.asset(
-                                      'assets/images/close eye.png'), // 이미지 아이콘 설정
+                                  'assets/images/close eye.png'), // 이미지 아이콘 설정
                             ),
                             counterText:
-                                '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                            '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
                           enabled: isPasswordEnabled,
                         ),
                       ),
                       SizedBox(height: 10),
+
                       Container(
                         margin: EdgeInsets.only(left: 24, top: 25),
                         child: Align(
@@ -575,35 +578,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                              BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                              BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                              ),
                             ),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
                                   isPasswordCheckButtonVisible =
-                                      !isPasswordCheckButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                  !isPasswordCheckButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
                                 });
                               },
                               icon: isPasswordCheckButtonVisible
                                   ? Image.asset('assets/images/open eye.png')
                                   : Image.asset(
-                                      'assets/images/close eye.png'), // 이미지 아이콘 설정
+                                  'assets/images/close eye.png'), // 이미지 아이콘 설정
                             ),
                             counterText:
-                                '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                            '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: isPasswordCheckEnabled,
+                          // enabled: isPasswordCheckEnabled,
                         ),
                       ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
 
@@ -614,23 +617,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: ElevatedButton(
                             onPressed: isPasswordCheckButtonEnabled
                                 ? () {
-                                    // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
-                                    print('doubleCheck Button Clicked!');
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            Signup_Success(),
-                                      ),
-                                    );
-                                  }
+                              // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
+                              print('doubleCheck Button Clicked!');
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Signup_Success(),
+                                ),
+                              );
+                            }
                                 : null,
                             style: ButtonStyle(
                               // 버튼의 배경색 변경하기
                               backgroundColor: isPasswordCheckButtonEnabled
                                   ? MaterialStateProperty.all<Color>(
-                                      Color(0xFF7C3D1A))
+                                  Color(0xFF7C3D1A))
                                   : MaterialStateProperty.all<Color>(
-                                      Color(0xFFBD9E8C)),
+                                  Color(0xFFBD9E8C)),
                               /*backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),*/
                               // 0xFF로 시작하는 16진수 색상 코드 사용,
                               // 버튼의 크기 정하기
