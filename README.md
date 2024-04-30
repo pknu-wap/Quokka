@@ -34,3 +34,9 @@
   
   <br>
 </div>
+
+  <div align=center><h1> 협업 전략</h1></div>
+<ul>
+
+<li><a href = https://github.com/pknu-wap/2024-1_App1/wiki/%F0%9F%92%A1Git-Flow> Git Flow 전략 </a></li>
+</ul>
