@@ -60,10 +60,11 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '학번',
                     hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
                         fontSize: 15,
                         color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
+                    ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
                     filled: true,
@@ -102,10 +103,11 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '비밀번호',
                     hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
                         fontSize: 15,
                         color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
+                    ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
                     filled: true,

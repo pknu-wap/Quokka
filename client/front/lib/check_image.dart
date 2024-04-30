@@ -30,8 +30,11 @@ class Check_Image extends StatelessWidget {
                     height: 25.0,
                     child:
                     Text('회원가입', style: TextStyle(
-                      fontFamily: 'paybooc',fontSize: 20, fontWeight: FontWeight.bold,
-                      letterSpacing: 0.01, color: Color(0xff111111),
+                      fontFamily: 'paybooc',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.01,
+                      color: Color(0xff111111),
                     )),
                   ))),
           body: Container(
@@ -40,8 +43,11 @@ class Check_Image extends StatelessWidget {
               children: [Container(
                   margin: EdgeInsets.only(left: 24.0, top: 30.0),
                   child: Text('학부 / 학과', style: TextStyle(
-                    fontFamily: 'Pretendard',fontSize: 14, fontWeight: FontWeight.bold,
-                    letterSpacing: 0.01, color: Color(0xff373737),))),
+                    fontFamily: 'Pretendard',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.01,
+                    color: Color(0xff373737),))),
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
                   width: 320, height: 38,
@@ -52,8 +58,10 @@ class Check_Image extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.0, top: 12.0),
                     child: Text(s1.major, style: TextStyle(
-                      fontSize: 13, fontFamily: 'Pretendard',
-                      letterSpacing: 0.01, color: Color(0xff404040),
+                      fontSize: 13,
+                      fontFamily: 'Pretendard',
+                      letterSpacing: 0.01,
+                      color: Color(0xff404040),
                     ),),
                   ),
                 ),

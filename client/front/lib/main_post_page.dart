@@ -65,13 +65,13 @@ class Post_List_viewState extends State<Post_List_view>{
                                     letterSpacing: 0.01, color: Color(0xff000000),
                                   ),),),
                                 Container( margin: EdgeInsets.only(top: 10),
-                                  child: Text("${price.format(2000)}\u20A9", style: TextStyle(
+                                  child: Text("\u20A9${price.format(2000)}", style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w500, fontSize: 13,
                                     letterSpacing: 0.01, color: Color(0xffEC5147),
                                   ),),),
                                 Container(
-                                  margin: EdgeInsets.only(left: 11.0, top: 10.0),
+                                  margin: EdgeInsets.only(left: 11.0, top: 8.95),
                                   padding: EdgeInsets.all(2),
                                   width: 44.36, height: 18.1,
                                   decoration: BoxDecoration(
@@ -379,7 +379,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                       children: [
                         Container(
                           width: 22, height: 22,
-                          margin : const EdgeInsets.only(left: 44, top: 20.0),
+                          margin : const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
                           child: IconButton(
                             style: IconButton.styleFrom(
                               minimumSize: Size.zero,
@@ -389,11 +389,11 @@ class _Main_post_pageState extends State<Main_post_page> {
                       onPressed: () {
                       },
                       icon: Image.asset('assets/images/home_icon.png',
-                        color: Color(0xffADADAD),
+                        color: Color(0xff545454),
                       ),
                     ),),
                   Container(width: 19.31, height: 23.81,
-                    margin : const EdgeInsets.only(top: 20.0),
+                    margin : const EdgeInsets.only(top: 20.0, bottom: 17.32),
                     child: IconButton(
                       style: IconButton.styleFrom(
                         minimumSize: Size.zero,
@@ -407,7 +407,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                       ),
                     ),),
                   Container(width: 22.0, height: 22,
-                    margin : const EdgeInsets.only(top: 20.0),
+                    margin : const EdgeInsets.only(top: 20.0, bottom: 17.32),
                     child: IconButton(
                       style: IconButton.styleFrom(
                         minimumSize: Size.zero,
@@ -421,7 +421,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                       ),
                     ),),
                   Container(width: 21.95, height: 24.21,
-                    margin : const EdgeInsets.only(top: 20.0, right: 43.92),
+                    margin : const EdgeInsets.only(top: 20.0,bottom: 17.32, right: 43.92),
                     child: IconButton(
                       style: IconButton.styleFrom(
                         minimumSize: Size.zero,
