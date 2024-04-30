@@ -9,10 +9,11 @@ class SignUpScreen extends StatefulWidget {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController emailController =
-      TextEditingController(); // 이메일 입력란의 상태 관리
-  TextEditingController verificationCodeController =
-      TextEditingController(); // 인증 코드 입력란의 상태 관리
+  final int minverificationLength = 6; // 닉네임 최소 길이 설정
+  final int maxverificationLength = 6; // 닉네임 최대 길이 설정
+
+  TextEditingController emailController = TextEditingController(); // 이메일 입력란의 상태 관리
+  TextEditingController verificationCodeController = TextEditingController(); // 인증 코드 입력란의 상태 관리
 
   bool isEmailButtonEnabled = false; // 이메일 전송 버튼의 활성화 상태 = 비활성화
   bool isVerificationCodeEnabled = false; // 인증 번호 텍스트 필드의 활성화 상태 = 비활성화
@@ -58,10 +59,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
     }
   }
-  // 이메일 인증 번호 받기 버튼 활성화 -> 버튼 클릭 시 -> 확인 버튼 활성화
-  // -> 인증 번호 텍스트 필드 활성화
-  // enterdEmail인증번호 필요, 인증번호 확인 버튼 클릭 시(비교) -> 참이면 다음 페이지 이동/ 거짓이면 경고 메시지 띄우기
-
   void updateVerifyButtonState() {
     // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
@@ -146,30 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: Column(
         children: [
-          // Padding(padding: EdgeInsets.only(top: 50)),
-          /*Center(
-            child: Text(
-              "회원가입",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),*/
           Form(
-            child: Theme(
-              data: ThemeData(
-                primaryColor: Color(0xFFE5E5E5), //텍스트 박스 만들기
-                inputDecorationTheme: InputDecorationTheme(
-                  labelStyle: TextStyle(
-                      color: Color(0xFF9E9E9E),
-                      fontSize: 13.0,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-              // 텍스트 박스 속 글자 색 블랙
               child: Container(
                 // padding: EdgeInsets.all(40.0),
                 // 키보드가 올라와서 만약 스크린 영역을 차지하는 경우 스크롤이 되도록
@@ -221,23 +195,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             contentPadding:
                                 EdgeInsets.only(left: 14, right: 14),
                             // 텍스트를 수직으로 가운데 정렬
-                            border: InputBorder.none,
+                            // border: InputBorder.none,
                             // 밑줄 없애기
-
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
                               borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                                  color: Color(0xFFACACAC),
+                                  width: 0.5 // 테두리 굵기
+                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderRadius:
+                            //       BorderRadius.all(Radius.circular(10.0)),
+                            //   borderSide: BorderSide(
+                            //       color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                            //       ),
+                            // ),
+                            // enabledBorder: OutlineInputBorder(
+                            //   borderRadius:
+                            //       BorderRadius.all(Radius.circular(10.0)),
+                            //   borderSide: BorderSide(
+                            //       color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                            //       ),
+                            // ),
                           ),
                           keyboardType: TextInputType.emailAddress,
                         ),
@@ -328,23 +308,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             contentPadding:
                                 EdgeInsets.only(left: 11, right: 11),
                             // 텍스트를 수직으로 가운데 정렬
-                            border: InputBorder.none,
+                            // border: InputBorder.none,
                             // 밑줄 없애기
-
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                    color: Color(0xFFACACAC),
+                                    width: 0.5 // 테두리 굵기
+                                      ),
+                              ),
                           ),
                           keyboardType: TextInputType.number,
                           obscureText: true, // 인증 번호 안보이도록 하는 것
@@ -414,7 +386,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-          ),
+          // ),
         ],
       ),
     );
