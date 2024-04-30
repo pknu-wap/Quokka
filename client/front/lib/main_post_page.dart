@@ -29,6 +29,24 @@ class Post{ //게시글에 담긴 정보들
 class Post_List_viewState extends State<Post_List_view>{
   ScrollController _scrollController = ScrollController();
   int itemCount = 1;
+  Color decide_color(bool? state){
+    Color state_color;
+    if(state == null)
+      {
+        state_color = Color(0xffCCB9AB);
+        return state_color;
+      }
+    else if(state)
+      {
+        state_color = Color(0xffAA7651);
+        return state_color;
+      }
+    else
+      {
+        state_color = Color(0xffCCB9AB);
+        return state_color;
+      }
+  }
   @override
   void initState(){
     super.initState();
@@ -52,10 +70,10 @@ class Post_List_viewState extends State<Post_List_view>{
       "디자인관 1층", 2000, true, 1);
   Post p2 = Post("정다은", 4.8, "아아 2잔 10분내로 오면+1000",
       "중앙도서관 2층", 2000, false, 4);
-  Post p3 = Post("정다은", 4.8, "충전기 한시간만 빌려주세요",
+  Post p3 = Post("정다은", 4.8, "프린트 ㅃㄹㅃㄹ 제발요",
+      "c25-101", 3000, true, 10);
+  Post p4 = Post("정다은", 4.8, "충전기 한시간만 빌려주세요",
       "중앙도서관 1층", 1000, false, 15);
-  Post p4 = Post("정다은", 4.8, "스타벅스 유스베리티 따뜻한 거",
-      "디자인관 1층", 2000, true, 1);
   Post p5 = Post("정다은", 4.8, "밥 같이 먹어 줄 사람? 밥사드림",
       "", 0, null, 0);
 
@@ -133,7 +151,7 @@ class Post_List_viewState extends State<Post_List_view>{
                           width: 44.36, height: 18.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            color: Color(0xffAA7651),
+                            color: decide_color(p1.state),
                           ),
                           child: Center( //상태
                             child: Text(p1.getState(), style: TextStyle(
@@ -219,7 +237,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                     width: 44.36, height: 18.1,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: Color(0xffAA7651),
+                                      color: decide_color(p2.state),
                                     ),
                                     child: Center( //상태
                                       child: Text(p2.getState(), style: TextStyle(
@@ -306,7 +324,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                     width: 44.36, height: 18.1,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: Color(0xffAA7651),
+                                      color: decide_color(p3.state),
                                     ),
                                     child: Center( //상태
                                       child: Text(p3.getState(), style: TextStyle(
@@ -393,7 +411,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                     width: 44.36, height: 18.1,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: Color(0xffAA7651),
+                                      color: decide_color(p4.state),
                                     ),
                                     child: Center( //상태
                                       child: Text(p4.getState(), style: TextStyle(
@@ -480,7 +498,7 @@ class Post_List_viewState extends State<Post_List_view>{
                                     width: 44.36, height: 18.1,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: Color(0xffAA7651),
+                                      color: decide_color(p5.state),
                                     ),
                                     child: Center( //상태
                                       child: Text(p5.getState(), style: TextStyle(
