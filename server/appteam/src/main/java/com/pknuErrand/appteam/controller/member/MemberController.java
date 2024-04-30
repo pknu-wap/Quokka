@@ -33,7 +33,7 @@ public class MemberController {
     @GetMapping("/join/{id}/idExists")
     public void CheckId(@PathVariable(value = "id") String id) {
 
-        if(!memberService.checkId(id))
+        if(memberService.checkId(id))
             throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 학번입니다.");
     }
 
