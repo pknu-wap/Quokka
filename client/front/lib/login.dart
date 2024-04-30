@@ -107,6 +107,7 @@ class _LogInState extends State<LogIn> {
                         fontWeight: FontWeight.w400),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
+
                     filled: true,
                     fillColor: Color(0xFFE5E5E5),
                     labelStyle: TextStyle(color: Colors.black),
