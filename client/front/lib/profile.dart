@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/upload_image.dart';
+import 'package:http/http.dart' as http;
 import 'sign_up_success.dart';
 
 //현재 화면에서 뒤로가기
@@ -52,6 +54,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isPasswordCheckButtonVisible = false; // 비밀번호 확인 버튼 눈
   bool isPasswordCheckButtonEnabled = false; // 비밀번호 확인 버튼
   bool isDuplicateNickname = false;
+  bool DuplicateFalg = false;
+
+  String Nickname = "";
+
+  Request(String nickname) async{
+    print(nickname);
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String param = "/$nickname/nicknameExists";
+    print(url + param);
+
+    try {
+      var response = await http.get(Uri.parse(url+param));
+      print(response.statusCode);
+      if (response.statusCode == 200){
+        DuplicateFalg = true;
+        setState(() {
+          print("200");
+          // 중복x
+          nicknameText = "사용 가능한 닉네임이에요.";
+          nicknameTextColor = Color(0xFF2BBD28);
+        });
+      } else {
+        print("비정상 요청");
+        DuplicateFalg = false;
+        setState(() {
+          nicknameText = "이미 사용하고 있는 닉네임이에요.";
+          nicknameTextColor = Color(0xFFE33939);
+        });
+      }
+    }catch(e) {
+      print(e.toString());
+    }
+  }
 
   @override
   void initState() {
@@ -99,13 +134,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,12}$');
     return nicknameRegex.hasMatch(nickname);
   }
-  bool isNicknameDuplicate(String nickname, String enteredNickname){
-    nickname = "suhyun113"; // 기존에 존재하던 닉네임
-    enteredNickname = nicknameController.text;
-
-    if(enteredNickname == nickname) return false;
-    else return true;
-  }
+  // bool isNicknameDuplicate(String nickname, String enteredNickname){
+  //   nickname = Nickname; // 기존에 존재하던 닉네임
+  //   enteredNickname = nicknameController.text;
+  //
+  //   if(enteredNickname == nickname) return false;
+  //   else return true;
+  // }
 
   void checkNicknameAvailable(){
     String enteredNickname = nicknameController.text;
@@ -123,23 +158,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  void checkNicknameDuplicate(){
-    String nickname = "suhyun113";
-    String enteredNickname = nicknameController.text;
-    bool isNicknameDuplicated = isNicknameDuplicate(nickname, enteredNickname);
-
-    setState(() {
-        // 중복확인 검사
-        if (isNicknameDuplicated == false) { // 중복
-          nicknameText = "이미 사용하고 있는 닉네임이에요.";
-          nicknameTextColor = Color(0xFFE33939);
-        }
-        else { // 중복x
-          nicknameText = "사용 가능한 닉네임이에요.";
-          nicknameTextColor = Color(0xFF2BBD28);
-        }
-    });
-  }
+  // void checkNicknameDuplicate(String Nick){
+  //   String nickname = Nick;
+  //   String enteredNickname = nicknameController.text;
+  //   // bool isNicknameDuplicated = isNicknameDuplicate(nickname, enteredNickname);
+  //
+  //   setState(() {
+  //       // 중복확인 검사
+  //       if ( == false) { // 중복
+  //         nicknameText = "이미 사용하고 있는 닉네임이에요.";
+  //         nicknameTextColor = Color(0xFFE33939);
+  //       }
+  //       else { // 중복x
+  //         nicknameText = "사용 가능한 닉네임이에요.";
+  //         nicknameTextColor = Color(0xFF2BBD28);
+  //       }
+  //   });
+  // }
 
 
   bool isValidPassword1(String password) {
@@ -405,7 +440,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPressed: isNicknameButtonClickable
                                     ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
-                                  checkNicknameDuplicate();
+                                  // checkNicknameDuplicate();
+                                  Nickname = nicknameController.text;
+                                  Request(Nickname);
                                 }
                                     : null,
                                 style: ButtonStyle(
@@ -705,24 +742,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
 
                       Container(
-                          margin: EdgeInsets.only(top: 33),
+                          margin: EdgeInsets.only(top: 12),
                           width: 320,
                           height: 40,
                           child: ElevatedButton(
                             onPressed: passwordCheckText == ""
                                 ? () {
                               // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
-                              if (!isNicknameButtonClickable){
-                                nicknameText = "중복 확인 버튼을 눌러주세요.";
-                                nicknameTextColor = Color(0xFFE33939);
-                              }
                               print('doubleCheck Button Clicked!');
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Signup_Success(),
-                                ),
-                              );
+
+                              if (DuplicateFalg){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Signup_Success(),
+                                  ),
+                                );
+                              } else {
+                                setState(() {
+                                  nicknameText = "중복 확인 버튼을 눌러주세요.";
+                                  nicknameTextColor = Color(0xFFE33939);
+                                });
+                              }
                             }
                                 : null,
                             style: ButtonStyle(
