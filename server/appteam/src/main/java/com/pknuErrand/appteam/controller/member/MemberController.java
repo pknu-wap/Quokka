@@ -61,7 +61,7 @@ public class MemberController {
     @GetMapping("/{nickname}/nicknameExists")
     public void CheckNickname(@PathVariable(value = "nickname") String nickname) {
         
-        if(!memberService.checkNickname(nickname))
+        if(memberService.checkNickname(nickname))
             throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 닉네임입니다.");
     }
 }
