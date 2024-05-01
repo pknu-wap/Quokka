@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 import 'upload_image.dart';
 import 'profile.dart';
 class Check_Image extends StatefulWidget{
@@ -16,6 +19,33 @@ class Check_ImageState extends State<Check_Image> {
   late TextEditingController _IDController;
   late TextEditingController _NameController;
   late bool isIDValid = s1.studentID.trim().length == IDLength;
+  request(String ID) async{
+    print(ID);
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String param = "/$ID/idExists";
+    print(url + param);
+    // Map<String, String> userData = {
+    //     //   'username': username,
+    //     //   'password': password,
+    //     // };
+    //     // String jsonBody = json.encode(userData);
+    try {
+      var response = await http.get(Uri.parse(url+param));
+      if (response.statusCode == 200) {
+        Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+            context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+      }
+      else {
+        String jsonString = response.body;
+        Map<String, dynamic> error = jsonDecode(jsonString);
+        print("code : " + error['code'].toString() + "\n");
+        print("httpStatusCode : " + error['httpStatusCode'].toString() + "\n");
+        print("message : " + error['message'].toString() + "\n");
+      }
+    } catch(e) {
+      print(e.toString());
+    }
+  }
   @override
   void initState(){
     super.initState();
@@ -170,9 +200,8 @@ class Check_ImageState extends State<Check_Image> {
                     child: TextButton(
                       onPressed: isIDValid
                       ? () {
-                      Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()),
-                     );
+                        request(_IDController.text);
+
                     }
                     : null,
                     child: Text('확인', style: TextStyle(fontSize: 16,
