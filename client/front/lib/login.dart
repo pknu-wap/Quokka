@@ -30,6 +30,7 @@ class _LogInState extends State<LogIn> {
   bool isVisible = false;
   TextEditingController _UsernameController = TextEditingController();
   TextEditingController _PasswordController = TextEditingController();
+
   request(String username, String password) async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
     String param = "?username=$username&password=$password";
@@ -197,10 +198,11 @@ class _LogInState extends State<LogIn> {
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
               Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       margin: EdgeInsets.only(right: 11.0, top: 17.0),
+                      // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
                      child: Visibility(visible: isVisible,
                        child: Text(
                          "잘못된 학번 또는 비밀번호입니다.",
@@ -213,27 +215,27 @@ class _LogInState extends State<LogIn> {
                        ),
                      ),
                     ),
-                          GestureDetector(
-                            onTap: () {
-                              // 클릭 시 수행할 작업을 여기에 추가하세요
-                              print("비밀번호 찾기 버튼이 클릭되었습니다.");
-                              // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(right: 14.0, top: 16.0),
-                              width: 66,
-                              height: 14,
-                              child: Text(
-                                "비밀번호 찾기",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF555555),
-                                ),
-                              ),
-                        ),
-                    ),
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           // 클릭 시 수행할 작업을 여기에 추가하세요
+                    //           print("비밀번호 찾기 버튼이 클릭되었습니다.");
+                    //           // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
+                    //         },
+                    //         child: Container(
+                    //           margin: EdgeInsets.only(right: 14.0, top: 16.0),
+                    //           width: 66,
+                    //           height: 14,
+                    //           child: Text(
+                    //             "비밀번호 찾기",
+                    //             style: TextStyle(
+                    //               fontSize: 10,
+                    //               fontFamily: 'Pretendard',
+                    //               fontWeight: FontWeight.w400,
+                    //               color: Color(0xFF555555),
+                    //             ),
+                    //           ),
+                    //     ),
+                    // ),
                   ],
                 ),
               ),
