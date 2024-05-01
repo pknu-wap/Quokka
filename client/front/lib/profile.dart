@@ -11,8 +11,8 @@ class ProfileScreen extends StatefulWidget {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _ProfileScreenState extends State<ProfileScreen> {
-  // String passwordText = ""; // 비밀번호 오류 메시지
-  // Color passwordTextColor = Color(0xFF404040); // 비밀번호 색깔 설정
+  String passwordText = ""; // 비밀번호 오류 메시지
+  Color passwordTextColor = Color(0xFF404040); // 비밀번호 색깔 설정
 
   final int minNicknameLength = 2; // 닉네임 최소 길이 설정
   final int maxNicknameLength = 12; // 닉네임 최대 길이 설정
@@ -142,58 +142,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  // String PasswordText = "";
-  //
-  // bool isValidPassword1(String nickname) {
-  //   // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-  //   final RegExp password1Regex = RegExp(r'^[A-Z]{8,20}$');
-  //   return password1Regex.hasMatch(nickname);
-  // }
-  //
-  // bool isValidPassword2(String nickname) {
-  //   // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-  //   final RegExp password2Regex = RegExp(r'^[a-z]{8,20}$');
-  //   return password2Regex.hasMatch(nickname);
-  // }
-  //
-  // bool isValidPassword3(String nickname) {
-  //   // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-  //   final RegExp password3Regex = RegExp(r'^[0-9]{8,20}$');
-  //   return password3Regex.hasMatch(nickname);
-  // }
-  //
-  // bool isValidPassword4(String nickname) {
-  //   // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-  //   final RegExp password4Regex = RegExp(r'^[$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$');
-  //   return password4Regex.hasMatch(nickname);
-  // }
+  String PasswordText = "";
 
-  // void checkPasswordAvailable() {
-  //   String enteredPassword = passwordController.text;
-  //   bool isPasswordAvailable = isValidPassword1(
-  //       enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
-  //
-  //   setState(() {
-  //     // 닉네임 사용 가능 -> 사용 가능 메시지 출력 -> 중복 확인 버튼 비활성화 -> 비밀번호 텍스트 필드 입력 가능
-  //     if (isPasswordAvailable) { // 닉네임 텍스트 필드 입력시
-  //       passwordTextColor:
-  //       null; // 기본 색상
-  //       passwordText; // 오류 메시지 없음
-  //     } else {
-  //       passwordTextColor = Color(0xFFCC5C5C); // 오류 색상
-  //       // 각 조건에 따른 오류 메시지 출력
-  //       if (!isValidPassword1(enteredPassword)) {
-  //         passwordText = "영문 대문자가 포함되어야 합니다.";
-  //       } else if (!isValidPassword2(enteredPassword)) {
-  //         passwordText = "영문 소문자가 포함되어야 합니다.";
-  //       } else if (!isValidPassword3(enteredPassword)) {
-  //         passwordText = "숫자가 포함되어야 합니다.";
-  //       } else if (!isValidPassword4(enteredPassword)) {
-  //         passwordText = "특수문자가 포함되어야 합니다.";
-  //       }
-  //     }
-  //   });
-  // }
+  bool isValidPassword1(String nickname) {
+    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
+    final RegExp password1Regex = RegExp(r'^[A-Z]{8,20}$');
+    return password1Regex.hasMatch(nickname);
+  }
+
+  bool isValidPassword2(String nickname) {
+    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
+    final RegExp password2Regex = RegExp(r'^[a-z]{8,20}$');
+    return password2Regex.hasMatch(nickname);
+  }
+
+  bool isValidPassword3(String nickname) {
+    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
+    final RegExp password3Regex = RegExp(r'^[0-9]{8,20}$');
+    return password3Regex.hasMatch(nickname);
+  }
+
+  bool isValidPassword4(String nickname) {
+    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
+    final RegExp password4Regex = RegExp(r'^[$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$');
+    return password4Regex.hasMatch(nickname);
+  }
+
+  void checkPasswordAvailable() {
+    String enteredPassword = passwordController.text;
+    bool isPasswordAvailable = isValidPassword1(
+        enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
+
+    setState(() {
+      // 닉네임 사용 가능 -> 사용 가능 메시지 출력 -> 중복 확인 버튼 비활성화 -> 비밀번호 텍스트 필드 입력 가능
+      if (isPasswordAvailable) { // 닉네임 텍스트 필드 입력시
+        passwordTextColor:
+        null; // 기본 색상
+        passwordText; // 오류 메시지 없음
+      } else {
+        passwordTextColor = Color(0xFFCC5C5C); // 오류 색상
+        // 각 조건에 따른 오류 메시지 출력
+        if (!isValidPassword1(enteredPassword)) {
+          passwordText = "영문 대문자가 포함되어야 합니다.";
+        } else if (!isValidPassword2(enteredPassword)) {
+          passwordText = "영문 소문자가 포함되어야 합니다.";
+        } else if (!isValidPassword3(enteredPassword)) {
+          passwordText = "숫자가 포함되어야 합니다.";
+        } else if (!isValidPassword4(enteredPassword)) {
+          passwordText = "특수문자가 포함되어야 합니다.";
+        }
+      }
+    });
+  }
 
   bool CheckPassword() {
     return passwordController.text == passwordCheckController.text;
@@ -269,7 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "영문, 한글을 포함한 2~12자리로 입력해 주세요. (공백 및 특수문자 불가)",
+                            "공백 및 특수문자를 제외한 2~12자로 입력해 주세요.",
                             style: TextStyle(
                               color: Color(0xFF9E9E9E),
                               fontFamily: 'Pretendard',
@@ -357,11 +357,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
                                   checkNicknameDuplicate();
-                                  // checkNicknameAvailable(); // 비교해서 메시지 출력
-                                  // // apt
-                                  // setState(() {
-                                  //   isPasswordEnabled = true; // 닉네임 중복 확인 버튼 비활성화 + 메시지 색깔이 초록색일 때,
-                                  // });
                                 }
                                     : null,
                                 style: ButtonStyle(
@@ -443,7 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            '영문 대문자, 소문자, 숫자, 특수부호를 포함하여 8~20자로 입력해주세요.',
+                            '영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.',
                             style: TextStyle(
                               color: Color(0xFF9E9E9E),
                               fontFamily: 'Pretendard',
