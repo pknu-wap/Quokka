@@ -97,11 +97,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
 
     try{
+      // Map<String, dynamic> userJson = u1.toJson();
       var response = await http.post(Uri.parse(url),
                           body: jsonEncode(u1.toJson()),
                           headers: {"Content-Type": "application/json"});
           if(response.statusCode == 200) {
             print('200');
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
+
+            print(u1.pw);
+            print(u1.nickname);
+
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) =>
@@ -110,13 +119,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           } else{
             print(response.statusCode);
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
+
+            // String str = u1.id;
+            //
+            // List<String> charList = str.split('');
+            //
+            // for (String char in charList) {
+            //   print(char);
+            //   print("\n");
+            // }
+
+            print(u1.pw);
+            print(u1.nickname);
           }
     } catch(e) {
       print(e.toString());
     }
-
-
-
   }
 
   @override
@@ -124,8 +146,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // 위젯의 초기 상태 설정 = 닉네임 입력란의 상태 변화 감지
     super.initState();
     u1 = widget.u1;
-    User user = User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
-    Map<String, dynamic> userJson = user.toJson();
 
     nicknameController.addListener(updateNicknameButtonState);
     passwordController.addListener(updateNicknameState);
