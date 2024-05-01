@@ -8,6 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/check_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/check_image.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/upload_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/upload_image.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +35,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -50,7 +53,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/101/로그인-api-연동&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop-FE&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/wap/2024-1_App1/client/front&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -66,6 +69,10 @@
       <option name="workingDirectory" value="$PROJECT_DIR$/front" />
       <method v="2" />
     </configuration>
+    <configuration name="check_image_act" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/front/lib/check_image.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_act" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/front/lib/main.dart" />
       <method v="2" />
@@ -73,6 +80,7 @@
     <list>
       <item itemvalue="Dart Command Line App.main.dart" />
       <item itemvalue="Flutter.main_act" />
+      <item itemvalue="Flutter.check_image_act" />
     </list>
     <recent_temporary>
       <list>

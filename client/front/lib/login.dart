@@ -198,10 +198,10 @@ class _LogInState extends State<LogIn> {
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
               Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,//이거 end로 이동
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 11.0, top: 17.0),
+                      margin: EdgeInsets.only(top: 17.0),//비밀번호 찾기 생기면 margin 11로
                       // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
                      child: Visibility(visible: isVisible,
                        child: Text(

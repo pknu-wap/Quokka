@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,18 +6,18 @@ import 'package:http/http.dart' as http;
 import 'upload_image.dart';
 import 'profile.dart';
 class Check_Image extends StatefulWidget{
-  final Student s1;
-  Check_Image( {Key? key, required this.s1, }): super (key: key);
+  final User u1;
+  Check_Image( {Key? key, required this.u1, }): super (key: key);
   @override
   Check_ImageState createState() => Check_ImageState();
 }
 class Check_ImageState extends State<Check_Image> {
   final int IDLength = 9;
-  late Student s1;
+  late User u1;
   late TextEditingController _MajorController;
   late TextEditingController _IDController;
   late TextEditingController _NameController;
-  late bool isIDValid = s1.studentID.trim().length == IDLength;
+  late bool isIDValid = u1.id.trim().length == IDLength;
   request(String ID) async{
     print(ID);
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
@@ -33,7 +32,7 @@ class Check_ImageState extends State<Check_Image> {
       var response = await http.get(Uri.parse(url+param));
       if (response.statusCode == 200) {
         Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-            context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+            context, MaterialPageRoute(builder: (context) => ProfileScreen(u1:u1)));
       }
       else {
         String jsonString = response.body;
@@ -49,19 +48,37 @@ class Check_ImageState extends State<Check_Image> {
   @override
   void initState(){
     super.initState();
-    s1 = widget.s1;
+    u1 = widget.u1;
     _MajorController =
-        TextEditingController(text:s1.major.trim());
+        TextEditingController(text:u1.department.trim());
     _IDController =
-        TextEditingController(text:s1.studentID.trim());
+        TextEditingController(text:u1.id.trim());
     _NameController =
-        TextEditingController(text:s1.name.trim());
+        TextEditingController(text:u1.name.trim());
     _IDController.addListener(() {
       setState(() {
         isIDValid = _IDController.text.length == IDLength
         && int.tryParse(_IDController.text) != null;
+        if(isIDValid)
+            u1 = User(u1.mail,_MajorController.text,_NameController.text,_IDController.text,'','');
       });
-    });
+    },);
+    _NameController.addListener(() {
+      setState(() {
+        isIDValid = _IDController.text.length == IDLength
+            && int.tryParse(_IDController.text) != null;
+        if(isIDValid)
+          u1 = User(u1.mail,_MajorController.text,_NameController.text,_IDController.text,'','');
+      });
+    },);
+    _MajorController.addListener(() {
+      setState(() {
+        isIDValid = _IDController.text.length == IDLength
+            && int.tryParse(_IDController.text) != null;
+        if(isIDValid)
+          u1 = User(u1.mail,_MajorController.text,_NameController.text,_IDController.text,'','');
+      });
+    },);
   }
 
   @override
@@ -116,6 +133,7 @@ class Check_ImageState extends State<Check_Image> {
                     child: TextField(
                       controller: _MajorController,
                       decoration: InputDecoration(
+                          border: InputBorder.none,
                           hintStyle: TextStyle(
                             fontSize: 13, fontFamily: 'Pretendard',
                             letterSpacing: 0.01, color: Color(0xff404040),
@@ -143,6 +161,7 @@ class Check_ImageState extends State<Check_Image> {
                       maxLength: IDLength,
                       controller: _IDController,
                         decoration: InputDecoration(
+                          border: InputBorder.none,
                           hintStyle: TextStyle(
                             fontSize: 13, fontFamily: 'Pretendard',
                             letterSpacing: 0.01, color: Color(0xff404040),
@@ -170,6 +189,7 @@ class Check_ImageState extends State<Check_Image> {
                     child: TextField(
                       controller: _NameController,
                       decoration: InputDecoration(
+                          border: InputBorder.none,
                           hintStyle: TextStyle(
                             fontSize: 13, fontFamily: 'Pretendard',
                             letterSpacing: 0.01, color: Color(0xff404040),
@@ -199,7 +219,7 @@ class Check_ImageState extends State<Check_Image> {
                   child: Center(
                     child: TextButton(
                       onPressed: isIDValid
-                      ? () {
+                      ? () { //학번이 타당하면 request실행, u1데이터는 담겨있음
                         request(_IDController.text);
 
                     }

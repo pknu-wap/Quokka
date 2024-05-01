@@ -166,9 +166,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // 사용자가 입력한 인증 번호가 실제로 전송된 인증 번호와 일치할 때,
     print(statusCode);
     if (statusCode == 200) {
-      // 다음 화면으로 이동하기
+      // 다음 화면으로 이동하면서 email주소를 넘김
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Upload_Image()));
+          context, MaterialPageRoute(builder: (context) => Upload_Image(requestMail: requestMail)));
     } else if(statusCode == 400){
       showDialog(
         context: context,

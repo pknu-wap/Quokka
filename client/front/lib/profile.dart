@@ -1,16 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:front/upload_image.dart';
 import 'sign_up_success.dart';
 
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
+  final User u1;
+  ProfileScreen( {Key? key, required this.u1, }): super (key: key);
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _ProfileScreenState extends State<ProfileScreen> {
+  late User u1;
   String passwordText = ""; // 비밀번호 오류 메시지
   Color passwordTextColor = Color(0xFF404040); // 비밀번호 오류 메시지 색깔 설정
   Color passwordFilledColor = Color(0xFFF0F0F0); // 텍스트 필드 색깔
