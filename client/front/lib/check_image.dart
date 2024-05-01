@@ -40,6 +40,22 @@ class Check_ImageState extends State<Check_Image> {
         print("code : " + error['code'].toString() + "\n");
         print("httpStatusCode : " + error['httpStatusCode'].toString() + "\n");
         print("message : " + error['message'].toString() + "\n");
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text("이미 가입된 학번입니다."),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("확인"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     } catch(e) {
       print(e.toString());
@@ -49,6 +65,7 @@ class Check_ImageState extends State<Check_Image> {
   void initState(){
     super.initState();
     u1 = widget.u1;
+    u1.id = u1.id.trim();
     _MajorController =
         TextEditingController(text:u1.department.trim());
     _IDController =
