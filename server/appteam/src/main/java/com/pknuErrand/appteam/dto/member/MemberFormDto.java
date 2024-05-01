@@ -32,7 +32,7 @@ public class MemberFormDto {
 
     @NotNull
     // 특수문자 불가, 영어든 한글이든 숫자든 2 ~ 12글자
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,12}$", message = "닉네임은 공백과 특수문자를 제외한 2 ~ 12자리여야 합니다.")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z0-9-_]{2,12}$", message = "닉네임은 공백과 특수문자를 제외한 2 ~ 12자리여야 합니다.")
     private String nickname; // 닉네임
 
 }
