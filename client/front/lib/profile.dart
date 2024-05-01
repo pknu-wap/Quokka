@@ -98,8 +98,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     try{
       var response = await http.post(Uri.parse(url),
-                            body: jsonEncode(u1),
-                            headers: {"Content-Type": "application/json"});
+                          body: jsonEncode(u1.toJson()),
+                          headers: {"Content-Type": "application/json"});
           if(response.statusCode == 200) {
             print('200');
             Navigator.of(context).push(
@@ -124,6 +124,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // 위젯의 초기 상태 설정 = 닉네임 입력란의 상태 변화 감지
     super.initState();
     u1 = widget.u1;
+    User user = User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
+    Map<String, dynamic> userJson = user.toJson();
+
     nicknameController.addListener(updateNicknameButtonState);
     passwordController.addListener(updateNicknameState);
     passwordCheckController.addListener(updatePasswordCheckButtonState);
@@ -786,6 +789,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                               if (DuplicateFlag){
                                 joinRequest(u1);
+                                print("Join");
                               } else {
                                 setState(() {
                                   nicknameText = "중복 확인 버튼을 눌러주세요.";

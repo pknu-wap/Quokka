@@ -21,8 +21,20 @@ class User {
   String id; //학번          *이 페이지에서 임시로 받는 값*
   String pw; //비밀번호
   String nickname; //닉네임  *profile.dart에서 받는값*
+
   User(this.mail, this.department, this.name,
       this.id, this.pw, this.nickname);
+
+  Map<String, dynamic> toJson(){
+    return {
+      "mail" : mail,
+      "department" : department,
+      "name" : name,
+      "id" : id,
+      "pw" : pw,
+      "nickname" : nickname,
+    };
+  }
 }
 
 class _Upload_ImageState extends State<Upload_Image> {
