@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'sign_up.dart'; // 파일 호출
+import 'sign_up.dart';
+import 'main_post_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,10 +60,11 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '학번',
                     hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
                         fontSize: 15,
                         color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
+                    ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
                     filled: true,
@@ -101,12 +103,14 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '비밀번호',
                     hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
                         fontSize: 15,
                         color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
+                    ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
+
                     filled: true,
                     fillColor: Color(0xFFE5E5E5),
                     labelStyle: TextStyle(color: Colors.black),
@@ -131,8 +135,8 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
-                    print('Login Button Clicked!');
+                    Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                        context, MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
