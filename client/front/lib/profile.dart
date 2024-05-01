@@ -4,12 +4,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/upload_image.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'sign_up_success.dart';
 
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
   final User u1;
-  ProfileScreen( {Key? key, required this.u1, }): super (key: key);
+  ProfileScreen( {Key? key, required this.u1}): super (key: key);
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -54,11 +55,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isPasswordCheckButtonVisible = false; // 비밀번호 확인 버튼 눈
   bool isPasswordCheckButtonEnabled = false; // 비밀번호 확인 버튼
   bool isDuplicateNickname = false;
-  bool DuplicateFalg = false;
+  bool DuplicateFlag = false;
 
   String Nickname = "";
+  String Password = "";
 
-  Request(String nickname) async{
+  duplicateRequest(String nickname) async{
     print(nickname);
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
     String param = "/$nickname/nicknameExists";
@@ -68,16 +70,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
       var response = await http.get(Uri.parse(url+param));
       print(response.statusCode);
       if (response.statusCode == 200){
-        DuplicateFalg = true;
+        Nickname = nickname;
+        DuplicateFlag = true;
         setState(() {
           print("200");
           // 중복x
+          u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
           nicknameText = "사용 가능한 닉네임이에요.";
           nicknameTextColor = Color(0xFF2BBD28);
         });
       } else {
         print("비정상 요청");
-        DuplicateFalg = false;
+        DuplicateFlag = false;
         setState(() {
           nicknameText = "이미 사용하고 있는 닉네임이에요.";
           nicknameTextColor = Color(0xFFE33939);
@@ -86,6 +90,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }catch(e) {
       print(e.toString());
     }
+  }
+
+  joinRequest(User u1) async{
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+
+    try{
+      var response = await http.post(Uri.parse(url),
+                            body: jsonEncode(u1),
+                            headers: {"Content-Type": "application/json"});
+          if(response.statusCode == 200) {
+            print('200');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    Signup_Success(),
+              ),
+            );
+          } else{
+            print(response.statusCode);
+          }
+    } catch(e) {
+      print(e.toString());
+    }
+
+
+
   }
 
   @override
@@ -268,6 +298,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     setState(() {
       if (isPasswordCheckAvailable) {
+        Password = passwordCheckController.text;
+        u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,u1.nickname);
         passwordCheckText = "";
         passwordCheckFilledColor = Color(0xFFF0F0F0);
         passwordCheckFontColor = Color(0xFF969696);
@@ -441,8 +473,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
                                   // checkNicknameDuplicate();
-                                  Nickname = nicknameController.text;
-                                  Request(Nickname);
+                                  duplicateRequest(nicknameController.text);
                                 }
                                     : null,
                                 style: ButtonStyle(
@@ -751,13 +782,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                               print('doubleCheck Button Clicked!');
 
-                              if (DuplicateFalg){
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Signup_Success(),
-                                  ),
-                                );
+                              if (DuplicateFlag){
+                                joinRequest(u1);
                               } else {
                                 setState(() {
                                   nicknameText = "중복 확인 버튼을 눌러주세요.";
