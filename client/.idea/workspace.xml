@@ -8,8 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/check_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/check_image.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/upload_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/upload_image.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
