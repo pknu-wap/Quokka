@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_success.dart';
 
+
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
   final User u1;
@@ -75,8 +76,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {
           print("200");
           // 중복x
-          u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
-          nicknameText = "사용 가능한 닉네임이에요.";
+          u1 = new User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
+          nicknameText = "중복 확인이 완료되었습니다.";
           nicknameTextColor = Color(0xFF2BBD28);
         });
       } else {
@@ -122,6 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // 위젯의 초기 상태 설정 = 닉네임 입력란의 상태 변화 감지
     super.initState();
+    u1 = widget.u1;
     nicknameController.addListener(updateNicknameButtonState);
     passwordController.addListener(updateNicknameState);
     passwordCheckController.addListener(updatePasswordCheckButtonState);
@@ -298,12 +300,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     setState(() {
       if (isPasswordCheckAvailable) {
-        Password = passwordCheckController.text;
-        u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,u1.nickname);
         passwordCheckText = "";
         passwordCheckFilledColor = Color(0xFFF0F0F0);
         passwordCheckFontColor = Color(0xFF969696);
         passwordCheckBorderColor = Color(0xFFACACAC);
+        Password = passwordCheckController.text;
+        u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,u1.nickname);
         // 학인 버튼 활성화
       } else {
         passwordCheckText = "비밀번호가 일치하지 않아요.";
@@ -641,7 +643,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: nicknameText == "사용이 가능한 닉네임이에요.",
+                          enabled: nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ),
 
