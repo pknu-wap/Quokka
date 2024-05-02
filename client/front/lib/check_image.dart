@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'upload_image.dart';
 import 'profile.dart';
-
 class Check_Image extends StatefulWidget {
   final User u1;
 

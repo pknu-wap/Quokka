@@ -23,7 +23,6 @@ class LogIn extends StatefulWidget {
   State<LogIn> createState() => _LogInState();
 
 }
-
 class _LogInState extends State<LogIn> {
   final int maxStudentIdLength = 9; // 학번 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
@@ -31,6 +30,7 @@ class _LogInState extends State<LogIn> {
   bool isVisible = false;
   TextEditingController _UsernameController = TextEditingController();
   TextEditingController _PasswordController = TextEditingController();
+
 
   request(String username, String password) async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
@@ -47,7 +47,6 @@ class _LogInState extends State<LogIn> {
       }
       else
         {
-          print('비정상 요청');
           setState(() {
             isVisible = true;
           });
