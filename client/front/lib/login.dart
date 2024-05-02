@@ -22,7 +22,6 @@ class LogIn extends StatefulWidget {
   @override
   State<LogIn> createState() => _LogInState();
 }
-
 class _LogInState extends State<LogIn> {
   final int maxStudentIdLength = 9; // 학번 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
@@ -46,13 +45,14 @@ class _LogInState extends State<LogIn> {
             //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
             context,
             MaterialPageRoute(builder: (context) => Main_post_page()));
-      } else {
-        print('비정상 요청');
-        setState(() {
-          isVisible = true;
-        });
-      }
-    } catch (e) {
+      } else
+        {
+          setState(() {
+            isVisible = true;
+          });
+        }
+
+    } catch(e) {
       print(e.toString());
     }
   }

@@ -57,13 +57,14 @@ class _Upload_ImageState extends State<Upload_Image> {
       print(result);
       parsedtext = result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
       extractInfoFromText();
-      if (u1.name != '' && u1.id != '' && u1.department != '') {
+      //if (u1.name != '' && u1.id != '' && u1.department != '') {
         // Navigate to the next page with the populated s1 object
         Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (context) => Check_Image(u1: u1)
             ),);
-       }});
+       //}
+  });
   }
   void extractInfoFromText() {
     int index = parsedtext.indexOf('남은시간');
