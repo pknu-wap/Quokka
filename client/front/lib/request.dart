@@ -70,37 +70,6 @@ class _RequestState extends State<Request> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: false,
-      //   elevation: 0.0,
-      //   leading: Padding(
-      //     padding: EdgeInsets.only(top: 26.0),
-      //     child: IconButton(
-      //       icon: Icon(Icons.arrow_back_ios),
-      //       onPressed: () {
-      //         Navigator.of(context).pop();
-      //       },
-      //     ),
-      //   ),
-      //   title: Padding(
-      //     padding: EdgeInsets.only(top:35.0),
-      //     child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Text(
-      //         '요청서 작성하기',
-      //         style: TextStyle(
-      //           color: Color(0xFF111111),
-      //           fontFamily: 'Paybooc',
-      //           fontWeight: FontWeight.w700,
-      //           fontSize: 20,
-      //         ),
-      //       ),
-      //   ],
-      //   ),
-      //   ),
-      // ),
-
       body:
       Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,20 +105,47 @@ class _RequestState extends State<Request> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 24, top: 34.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "제목",
-                            style: TextStyle(
-                              color: Color(0xFF373737),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                        // margin: EdgeInsets.only(top: 34),
+                        // // 전체 마진
+                        // width: 35,
+                        // // 25 + 3 + 7 = 35
+                        // height: 17,
+                        // // 텍스트 필드의 높이 설정
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            // Expanded(
+                            //   child:
+                              Container(
+                                margin: EdgeInsets.only(top: 34,left: 15),
+                                // 일정 텍스트
+                                child: Text(
+                                  '제목',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                              ),
+                            // ),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 34,left: 5),
+                              // 일정 텍스트
+                              child: Text(
+                                '*',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                          ],
+                        ),),
 
                       Container(
                         margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 5.0),
