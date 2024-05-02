@@ -466,8 +466,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                             keyboardType: TextInputType.number,
-                            obscureText: true,
-                            // 인증 번호 안보이도록 하는 것
+                            // obscureText: true, // 인증 번호 안보이도록 하는 것
                             enabled: isVerificationCodeEnabled, // 인증 번호 텍스트 필드 활성화 여부 결정
                           ),
                         ), // 인증 번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 인증 번호 숨기기)
