@@ -392,8 +392,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Container(
                         margin: EdgeInsets.only(top: 9.74),
                         // 전체 마진
-                        width: 321,
-                        // 245 + 9.98 + 66.02
+                        width: 320,
+                        // 245 + 8.98 + 66.02
                         height: 38,
                         // 텍스트 필드의 높이 설정
 
@@ -627,7 +627,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: nicknameText == "중복 확인이 완료되었습니다.",
+                          enabled: nicknameText == "사용이 가능한 닉네임이에요." || nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ),
 
@@ -731,7 +731,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: passwordText == "",
+                          enabled: nicknameText == "사용이 가능한 닉네임이에요." || nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
 
