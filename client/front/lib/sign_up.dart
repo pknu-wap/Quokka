@@ -36,11 +36,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   String requestMail = "";
 
-  int _seconds = 300;  // 5분
+  int _seconds = 300;  // 인증번호 시간 5분으로 초기화
   bool _isRunning = false;
   late Timer _timer;
   // _SignUpScreenState() : _timer = Timer(Duration(seconds: 0), () {});
 
+  // 이메일 확인 API 연동
   emailRequest(String mail) async {
     print(mail);
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail";
@@ -51,8 +52,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         requestMail = mail;
         setState(() {
           isVerificationCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
-          _resetTimer();
-          _startTimer();
+          _resetTimer(); // 인증번호 타이머 초기화
+          _startTimer(); // 인증번호 타이머 재시작
         });
     }
     else {
@@ -112,6 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
 
+  // 인증번호 확인 API 연동
   codeRequest(String mail, String code) async {
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail/check";
     String param = "?mail=$mail&code=$code";
@@ -147,6 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
+
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -210,14 +213,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _timer.cancel(); // 타이머 계속 실행 중인 경우 dispose 시에 취소해야 함.
     super.dispose();
   }
-  void _resetTimer(){
+  void _resetTimer(){ // 타이머가 화면에 반영되도록 함
     setState(() {
       _seconds = 300; //5분
     });
   }
-  void _startTimer() {
-    _isRunning = true;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {// 1초마다 반복되는 타이머 생성
+  void _startTimer() { // 타이머 실행
+    _isRunning = true; // false상태였는데, true가 되면, 타이머 실행
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {// 5분을 받아서 1초마다 반복되는 타이머 생성
       setState(() {
         if (_seconds > 0) {
           _seconds --; // 시간이 갈 수록 1씩 감소하기
@@ -229,13 +232,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
+  // 화면에 보이는 타이머 형태
   String _formatTime(int seconds) {
     int minutes = seconds ~/ 60;
     int remainingSeconds = seconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
-  // 정규 표현식을 사용하여 이메일 주소 유효성 검사
+  // 정규 표현식을 사용 -> 이메일 주소 유효성 검사
   bool isValidEmail(String email) {
     String emailPattern = r'^[a-zA-Z0-9+-\_.]+@pukyong\.ac\.kr$';
     RegExp regExp = RegExp(emailPattern);
@@ -244,13 +248,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 // 이메일 인증 번호 받기 버튼 상태 업데이트
   void updateEmailButtonState() {
-    String enteredEmail = emailController.text.trim();
+    String enteredEmail = emailController.text.trim(); // 사용자가 입력한 이메일
 
     if (isValidEmail(enteredEmail)) {
-      // 이메일 형식이 올바르고 pknu.ac.kr 도메인을 포함하는 경우
-      // 이메일 인증 번호 받기 버튼을 활성화
+      // 이메일이 @pukyong.ac.kr 형식을 지켰는가
       setState(() {
-        isEmailButtonEnabled = true;
+        isEmailButtonEnabled = true; // 이메일 인증 번호 받기 버튼을 활성화
       });
     } else {
       // 그 외의 경우 버튼 비활성화
@@ -259,18 +262,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
     }
   }
-
+// 인증 번호 확인 버튼 상태 업데이트
   void updateVerifyButtonState() {
-    // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
       if (isEmailButtonEnabled) {
-        isVerificationCodeEnabled = true; // 인증번호 텍스트 필드
-        isVerifyButtonEnabled = true; // 인증번호 확인 버튼
+        isVerificationCodeEnabled = true; // 인증번호 텍스트 필드 활성화
+        isVerifyButtonEnabled = true; // 인증번호 확인 버튼 활성화
       }
     });
   }
 
-  // String actualVerificationCode = "123456"; // 이메일 인증번호 받기 버튼 클릭 시, 실제로 전송된 인증 번호를 저장할 변수
   String errorMessage = ''; // 오류 메시지를 저장할 변수
 
   // 실제로 전송된 인증번호와 사용자가 입력한 인증번호가 같은지 확인
@@ -305,7 +306,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            // title: Text("인증 번호"),
             content: Text("만료된 인증번호입니다."),
             actions: <Widget>[
               TextButton(
@@ -356,15 +356,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           Form(
             child: Container(
-              // padding: EdgeInsets.all(40.0),
-              // 키보드가 올라와서 만약 스크린 영역을 차지하는 경우 스크롤이 되도록
-              // SingleChildScrollView으로 감싸 줌
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 22, top: 33.0),
-                      // 비밀번호 텍스트 필드에 대한 마진 설정
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -381,7 +377,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     Container(
                       margin: EdgeInsets.only(top: 11.0),
-                      // 이메일 주소 텍스트 필드에 대한 마진 설정
                       width: 320,
                       height: 38,
                       child: TextField(
@@ -521,8 +516,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                             keyboardType: TextInputType.number,
-                            obscureText: true,
-                            // 인증 번호 안보이도록 하는 것
+                            // obscureText: true, // 인증 번호 안보이도록 하는 것
                             enabled: isVerificationCodeEnabled, // 인증 번호 텍스트 필드 활성화 여부 결정
                           ),
                         ), // 인증 번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 인증 번호 숨기기)
@@ -549,7 +543,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: ElevatedButton(
                         onPressed: isVerifyButtonEnabled
                             ? () {
-                                // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                                 print('Verify Button Clicked!');
                                 String enteredCode = verificationCodeController.text.trim(); // 사용자가 입력한 인증번호
                                 codeRequest(requestMail, enteredCode);
@@ -562,9 +555,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   Color(0xFF7C3D1A))
                               : MaterialStateProperty.all<Color>(
                                   Color(0xFFBD9E8C)),
-                          /*backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),*/
-                          // 0xFF로 시작하는 16진수 색상 코드 사용,
-                          // 버튼의 크기 정하기
                           minimumSize:
                               MaterialStateProperty.all<Size>(Size(320, 40)),
                           // 버튼의 모양 변경하기

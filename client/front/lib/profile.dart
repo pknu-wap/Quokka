@@ -124,15 +124,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             print(u1.name);
             print(u1.id.length);
 
-            // String str = u1.id;
-            //
-            // List<String> charList = str.split('');
-            //
-            // for (String char in charList) {
-            //   print(char);
-            //   print("\n");
-            // }
-
             print(u1.pw);
             print(u1.nickname);
           }
@@ -189,13 +180,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,12}$');
     return nicknameRegex.hasMatch(nickname);
   }
-  // bool isNicknameDuplicate(String nickname, String enteredNickname){
-  //   nickname = Nickname; // 기존에 존재하던 닉네임
-  //   enteredNickname = nicknameController.text;
-  //
-  //   if(enteredNickname == nickname) return false;
-  //   else return true;
-  // }
 
   void checkNicknameAvailable(){
     String enteredNickname = nicknameController.text;
@@ -212,24 +196,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     });
   }
-
-  // void checkNicknameDuplicate(String Nick){
-  //   String nickname = Nick;
-  //   String enteredNickname = nicknameController.text;
-  //   // bool isNicknameDuplicated = isNicknameDuplicate(nickname, enteredNickname);
-  //
-  //   setState(() {
-  //       // 중복확인 검사
-  //       if ( == false) { // 중복
-  //         nicknameText = "이미 사용하고 있는 닉네임이에요.";
-  //         nicknameTextColor = Color(0xFFE33939);
-  //       }
-  //       else { // 중복x
-  //         nicknameText = "사용 가능한 닉네임이에요.";
-  //         nicknameTextColor = Color(0xFF2BBD28);
-  //       }
-  //   });
-  // }
 
 
   bool isValidPassword1(String password) {
@@ -426,8 +392,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Container(
                         margin: EdgeInsets.only(top: 9.74),
                         // 전체 마진
-                        width: 321,
-                        // 245 + 9.98 + 66.02
+                        width: 320,
+                        // 245 + 8.98 + 66.02
                         height: 38,
                         // 텍스트 필드의 높이 설정
 
@@ -551,11 +517,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               color: nicknameTextColor
-
-                              // isValidNickname(nicknameController.text) &&
-                              //     !isDuplicateNickname
-                              //     ? Color(0XFF2BBD28)
-                              //     : Color(0XFFE33939),
                             ),
                           ),
                         ),
@@ -666,7 +627,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: nicknameText == "중복 확인이 완료되었습니다.",
+                          enabled: nicknameText == "사용이 가능한 닉네임이에요." || nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ),
 
@@ -681,10 +642,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               color: passwordTextColor
-                              // color: isValidNickname(nicknameController.text) &&
-                              //     !isDuplicateNickname
-                              //     ? Color(0XFF2BBD28)
-                              //     : Color(0XFFE33939),
                             ),
                           ),
                         ),
@@ -709,9 +666,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(top: 9),
                         width: 320,
                         height: 38,
-                        // 텍스트 필드의 높이 설정
-                        /*child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 0),*/
                         // 가로 패딩 추가
                         child: TextField(
                           maxLength: maxPasswordCheckLength,
@@ -746,7 +700,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
                               ),
-                            ),                              // 밑줄 없애기
+                            ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                               BorderRadius.all(Radius.circular(10.0)),
@@ -777,7 +731,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: passwordText == "",
+                          enabled: nicknameText == "사용이 가능한 닉네임이에요." || nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
 
@@ -825,9 +779,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Color(0xFF7C3D1A))
                                   : MaterialStateProperty.all<Color>(
                                   Color(0xFFBD9E8C)),
-                              /*backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),*/
-                              // 0xFF로 시작하는 16진수 색상 코드 사용,
-                              // 버튼의 크기 정하기
                               minimumSize: MaterialStateProperty.all<Size>(
                                   Size(320, 40)),
                               // 버튼의 모양 변경하기
