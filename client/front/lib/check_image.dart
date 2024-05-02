@@ -177,22 +177,24 @@ class Check_ImageState extends State<Check_Image> {
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: TextField(
-                      controller: _MajorController,
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        letterSpacing: 0.01,
-                        color: Color(0xff404040),
-                      ),
-                      decoration: InputDecoration(
-                            border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.text,
-                    )),
-              ),
+                  padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
+                  child: TextField(
+                    controller: _MajorController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      letterSpacing: 0.01,
+                      color: Color(0xff404040),
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(bottom: 13),
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+                ),
 
               Container(
                   margin: EdgeInsets.only(left: 22.0, top: 28.0),
@@ -204,6 +206,7 @@ class Check_ImageState extends State<Check_Image> {
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ))),
+
               // 학번 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
@@ -218,24 +221,27 @@ class Check_ImageState extends State<Check_Image> {
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.only(left: 10.0, top: 12.0),
-                    child: TextField(
-                      maxLength: IDLength,
-                      controller: _IDController,
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        letterSpacing: 0.01,
-                        color: Color(0xff404040),
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        counterText: '',
-                      ),
-                      keyboardType: TextInputType.number,
-                    )),
+                  padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
+                  child: TextField(
+                    maxLength: IDLength,
+                    controller: _IDController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      letterSpacing: 0.01,
+                      color: Color(0xff404040),
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(bottom: 13),
+                      border: InputBorder.none,
+                      counterText: '',
+                    ),
+                    keyboardType: TextInputType.number,
+                  ),
+                )
               ),
+
               Container(
                   margin: EdgeInsets.only(left: 22.0, top: 28.0),
                   child: Text('이름',
@@ -260,7 +266,7 @@ class Check_ImageState extends State<Check_Image> {
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.only(left: 10.0, top: 12.0),
+                    padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
                     child: TextField(
                       controller: _NameController,
                       style: TextStyle(
@@ -270,10 +276,12 @@ class Check_ImageState extends State<Check_Image> {
                         color: Color(0xff404040),
                       ),
                       decoration: InputDecoration(
-                          border: InputBorder.none,
-                         ),
+                        contentPadding: EdgeInsets.only(bottom: 13),
+                        border: InputBorder.none,
+                      ),
                       keyboardType: TextInputType.text,
-                    )),
+                    )
+                )
               ),
               //설명
               Container(
