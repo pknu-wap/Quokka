@@ -68,61 +68,61 @@ class _RequestState extends State<Request> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 10.0, top: 33.0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  SizedBox(width: 10), // 아이콘과 텍스트 사이의 간격 조정
-                  Text(
-                    '요청서 작성하기',
-                    style: TextStyle(
-                      color: Color(0xFF111111),
-                      fontFamily: 'Paybooc',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 10.0, top: 33.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                  ),
-             ],
-              ),
-            ),
-                  Container(
-                    margin: EdgeInsets.only(top: 34, left: 15),
-                    child: Row(
-                      children: [
-                        Text(
-                          '제목',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFFFFFF),
-                          ),
-                        ),
-                        SizedBox(width: 5), // 텍스트와 '*' 사이의 간격 조정
-                        Text(
-                          '*',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFFFFFFFF),
-                          ),
-                        ),
-                      ],
+                    SizedBox(width: 10), // 아이콘과 텍스트 사이의 간격 조정
+                    Text(
+                      '요청서 작성하기',
+                      style: TextStyle(
+                        color: Color(0xFF111111),
+                        fontFamily: 'Paybooc',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Container(
+                margin: EdgeInsets.only(top: 34, left: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      '제목',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                    ),
+                    SizedBox(width: 5), // 텍스트와 '*' 사이의 간격 조정
+                    Text(
+                      '*',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
