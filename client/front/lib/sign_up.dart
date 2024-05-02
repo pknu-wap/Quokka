@@ -1,27 +1,13 @@
 import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'upload_image.dart'; // 파일 호출
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 //현재 화면에서 뒤로가기
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
-class Error{
-  String code;
-  var httpStatus;
-  String message;
-  Error(this.code,this.httpStatus,this.message);
-  factory Error.fromJson(Map<String, dynamic> json) {
-    return Error(
-      json['code'],
-      json['httpStatus'],
-      json['message'],
-    );
-  }
-}
+
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _SignUpScreenState extends State<SignUpScreen> {
   final int minverificationLength = 6; // 닉네임 최소 길이 설정
@@ -34,164 +20,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isVerificationCodeEnabled = false; // 인증 번호 텍스트 필드의 활성화 상태 = 비활성화
   bool isVerifyButtonEnabled = false; // 인증 번호 확인 버튼의 활성화 상태 = 비활성화
 
-  String requestMail = "";
-
-  int _seconds = 300;  // 5분
+  int _seconds = 5;
   bool _isRunning = false;
   late Timer _timer;
   // _SignUpScreenState() : _timer = Timer(Duration(seconds: 0), () {});
-
-  emailRequest(String mail) async {
-    print(mail);
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail";
-    String param = "?mail=$mail";
-    var response = await http.get(Uri.parse(url + param));
-    if (response.statusCode == 200) {
-        print(response.statusCode);
-        requestMail = mail;
-        setState(() {
-          isVerificationCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
-          _resetTimer();
-          _startTimer();
-        });
-    }
-    else {
-      Map<String, dynamic> json = jsonDecode(response.body);
-      Error error = Error.fromJson(json);
-      if(response.statusCode == 400)
-      {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("이미 사용중인 이메일입니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-      else if(response.statusCode == 415)
-        {
-          print(error.httpStatus+'\n');
-          print(error.message+'\n');
-          print(error.code+'\n');
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                content: Text("메일 주소 형식이 잘못됐습니다."),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text("확인"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }
-      else
-        {
-          print(error.httpStatus+'\n');
-          print(error.message+'\n');
-          print(error.code+'\n');
-        }
-    }
-  }
-
-
-  codeRequest(String mail, String code) async {
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail/check";
-    String param = "?mail=$mail&code=$code";
-    var response = await http.get(Uri.parse(url + param));
-    if (response.statusCode == 200) {
-      checkVerificationCode(response.statusCode);
-    }
-    else {
-      Map<String, dynamic> json = jsonDecode(response.body);
-      Error error = Error.fromJson(json);
-      if (response.statusCode == 400) {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("인증번호가 틀립니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-      else if (response.statusCode == 404) {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("해당 메일주소를 찾을 수 없습니다."), //먼가 이상함 -> 필요한가?
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-      else if (response.statusCode == 408) {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("만료된 인증번호입니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-      else {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
-      }
-    }
-  }
 
 
   @override
@@ -212,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
   void _resetTimer(){
     setState(() {
-      _seconds = 300; //5분
+      _seconds = 180;
     });
   }
   void _startTimer() {
@@ -223,7 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _seconds --; // 시간이 갈 수록 1씩 감소하기
         } else {
           _resetTimer(); // 시간이 다 지나가면 타이머를 리셋하기
-          _isRunning = false;
         }
       });
     });
@@ -264,49 +95,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // 인증 코드 입력란의 텍스트 변경 감지하여 이메일 전성 버튼의 활성화 상태 업데이트
     setState(() {
       if (isEmailButtonEnabled) {
+        //타이머 활성화 시키기
         isVerificationCodeEnabled = true; // 인증번호 텍스트 필드
         isVerifyButtonEnabled = true; // 인증번호 확인 버튼
       }
     });
   }
 
-  // String actualVerificationCode = "123456"; // 이메일 인증번호 받기 버튼 클릭 시, 실제로 전송된 인증 번호를 저장할 변수
+  String actualVerificationCode = "123456"; // 이메일 인증번호 받기 버튼 클릭 시, 실제로 전송된 인증 번호를 저장할 변수
   String errorMessage = ''; // 오류 메시지를 저장할 변수
 
   // 실제로 전송된 인증번호와 사용자가 입력한 인증번호가 같은지 확인
-  void checkVerificationCode(int statusCode) {
+  void checkVerificationCode() {
+    String enteredCode =
+        verificationCodeController.text.trim(); // 사용자가 입력한 인증번호
     // 사용자가 입력한 인증 번호가 실제로 전송된 인증 번호와 일치할 때,
-    print(statusCode);
-    if (statusCode == 200) {
-      // 다음 화면으로 이동하면서 email주소를 넘김
+    if (enteredCode == actualVerificationCode) {
+      // 다음 화면으로 이동하기
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Upload_Image(requestMail: requestMail)));
-    } else if(statusCode == 400){
+          context, MaterialPageRoute(builder: (context) => Upload_Image()));
+    } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             // title: Text("인증 번호"),
             content: Text("인증 번호가 일치하지 않습니다."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("확인"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-    else if(statusCode == 408) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            // title: Text("인증 번호"),
-            content: Text("만료된 인증번호입니다."),
             actions: <Widget>[
               TextButton(
                 child: Text("확인"),
@@ -426,8 +240,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: ElevatedButton(
                         onPressed: isEmailButtonEnabled
                             ? () {
-                          emailRequest(emailController.text);
                                 // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
+                                setState(() {
+                                  isVerificationCodeEnabled = true; // 이메일 인증번호 받기 버튼 클릭 시 비밀번호 텍스트 필드 활성화
+                                  _resetTimer();
+                                  _startTimer();
+                                });
                                 // startTimer();
                                 print('Email Button Clicked!');
                               }
@@ -551,8 +369,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ? () {
                                 // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                                 print('Verify Button Clicked!');
-                                String enteredCode = verificationCodeController.text.trim(); // 사용자가 입력한 인증번호
-                                codeRequest(requestMail, enteredCode);
+
+                                checkVerificationCode();
                               }
                             : null,
                         style: ButtonStyle(

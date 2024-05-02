@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
-import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
@@ -21,42 +20,12 @@ class MyApp extends StatelessWidget {
 class LogIn extends StatefulWidget {
   @override
   State<LogIn> createState() => _LogInState();
-
 }
+
 class _LogInState extends State<LogIn> {
   final int maxStudentIdLength = 9; // 학번 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
   final int maxPasswordLength = 20; // 비밀번호 최대 길이 설정
-  bool isVisible = false;
-  TextEditingController _UsernameController = TextEditingController();
-  TextEditingController _PasswordController = TextEditingController();
-
-
-  request(String username, String password) async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
-    String param = "?username=$username&password=$password";
-    print(url + param);
-    try {
-      var post = await http.post(Uri.parse(url+param));
-      if (post.statusCode == 200) {
-        setState(() {
-          isVisible = false;
-        });
-        Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-            context, MaterialPageRoute(builder: (context) => Main_post_page()));
-      }
-      else
-        {
-          setState(() {
-            isVisible = true;
-          });
-        }
-
-    } catch(e) {
-      print(e.toString());
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +52,6 @@ class _LogInState extends State<LogIn> {
                 height: 50,
                 child: TextField(
                   maxLength: maxStudentIdLength, // 최대 길이 설정
-                  controller: _UsernameController,
                   onChanged: (text) {
                     if (text.length > maxStudentIdLength) {
                       print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
@@ -124,7 +92,6 @@ class _LogInState extends State<LogIn> {
                 height: 50,
                 child: TextField(
                   maxLength: maxPasswordLength,
-                  controller: _PasswordController,
                   // 비밀번호 텍스트 필드의 최대 길이 설정
                   onChanged: (text) {
                     if (text.length < minPasswordLength) {
@@ -168,7 +135,8 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    request(_UsernameController.text, _PasswordController.text);
+                    Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                        context, MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
@@ -196,52 +164,28 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,//이거 end로 이동
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 17.0),//비밀번호 찾기 생기면 margin 11로
-                      // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
-                     child: Visibility(visible: isVisible,
-                       child: Text(
-                         "잘못된 학번 또는 비밀번호입니다.",
-                         style: TextStyle(
-                           fontSize: 14,
-                           fontFamily: 'Pretendard',
-                           fontWeight: FontWeight.w400,
-                           color: Color(0xFFEC5147),
-                         ),
-                       ),
-                     ),
+
+              GestureDetector(
+                onTap: () {
+                  // 클릭 시 수행할 작업을 여기에 추가하세요
+                  print("비밀번호 찾기 버튼이 클릭되었습니다.");
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 273.0, top: 16.0),
+                  width: 66,
+                  height: 14,
+                  child: Text(
+                    "비밀번호 찾기",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF555555),
                     ),
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           // 클릭 시 수행할 작업을 여기에 추가하세요
-                    //           print("비밀번호 찾기 버튼이 클릭되었습니다.");
-                    //           // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
-                    //         },
-                    //         child: Container(
-                    //           margin: EdgeInsets.only(right: 14.0, top: 16.0),
-                    //           width: 66,
-                    //           height: 14,
-                    //           child: Text(
-                    //             "비밀번호 찾기",
-                    //             style: TextStyle(
-                    //               fontSize: 10,
-                    //               fontFamily: 'Pretendard',
-                    //               fontWeight: FontWeight.w400,
-                    //               color: Color(0xFF555555),
-                    //             ),
-                    //           ),
-                    //     ),
-                    // ),
-                  ],
+                  ),
                 ),
               ),
-
-
-
+              // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
 
               // GestureDetector(
               //   onTap: () {
@@ -270,7 +214,9 @@ class _LogInState extends State<LogIn> {
                 // height: 16,
                 child: TextButton(
                   onPressed: () {
+                    // Respond to button press
                     // 누르면 다음 페이지로 이동
+                    print('Login Button Clicked!');
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpScreen()));
                   },
