@@ -7,23 +7,39 @@ import 'package:image_picker/image_picker.dart';
 import 'check_image.dart';
 import 'dart:convert';
 class Upload_Image extends StatefulWidget {
-  const Upload_Image({Key? key}) : super(key: key);
+  final String requestMail;
+  const Upload_Image( {Key? key, required this.requestMail}) : super(key: key);
 
   @override
   _Upload_ImageState createState() => _Upload_ImageState();
 }
 
-class Student {
-  String name;
-  String major;
-  String studentID;
-  Student(this.name, this.major, this.studentID);
+class User {
+  String mail; //이메일      *sign_up.dart에서 받음*
+  String department; //전공  *이 페이지에서 임시로 받는 값* 본 데이터는 check_image.dart에서 받음
+  String name; //이름        *이 페이지에서 임시로 받는 값*
+  String id; //학번          *이 페이지에서 임시로 받는 값*
+  String pw; //비밀번호       *profile.dart에서 받는값*
+  String nickname; //닉네임  *profile.dart에서 받는값*
+
+  User(this.mail, this.department, this.name,
+      this.id, this.pw, this.nickname);
+
+  Map<String, dynamic> toJson(){
+    return {
+      "mail" : mail,
+      "department" : department,
+      "name" : name,
+      "id" : id,
+      "pw" : pw,
+      "nickname" : nickname,
+    };
+  }
 }
 
 class _Upload_ImageState extends State<Upload_Image> {
   String parsedtext = ''; // 추출된 텍스트를 저장할 String 변수
-
-   Student s1 = Student('','','');
+  late User u1 = User('','','','','','');
 
   parsethetext() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -41,13 +57,14 @@ class _Upload_ImageState extends State<Upload_Image> {
       print(result);
       parsedtext = result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
       extractInfoFromText();
-      if (s1.name != '' && s1.studentID != '' && s1.major != '') {
+      //if (u1.name != '' && u1.id != '' && u1.department != '') {
         // Navigate to the next page with the populated s1 object
         Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => Check_Image(s1: s1)
+                builder: (context) => Check_Image(u1: u1)
             ),);
-       }});
+       //}
+  });
   }
   void extractInfoFromText() {
     int index = parsedtext.indexOf('남은시간');
@@ -69,7 +86,8 @@ class _Upload_ImageState extends State<Upload_Image> {
       // 추출된 텍스트에서 학번, 이름, 전공 추출
       if (splitText.length >= 3) {
         setState(() {
-          s1 = Student(splitText[0],splitText[1],splitText[2]); // s1에 객체 저장
+          //splitText[0]: 이름, splitText[1]: 전공, splitText[2]: 학번
+          u1 = User(widget.requestMail,splitText[1],splitText[0],splitText[2],'',''); // s1에 객체 저장
         });
       }
     }

@@ -1,18 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:front/upload_image.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'sign_up_success.dart';
+
 
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
+  final User u1;
+  ProfileScreen( {Key? key, required this.u1}): super (key: key);
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _ProfileScreenState extends State<ProfileScreen> {
+  late User u1;
+  String nicknameText = ""; // 닉네임 오류 메시지
+  Color nicknameTextColor = Color(0xFF404040);
+
   String passwordText = ""; // 비밀번호 오류 메시지
-  Color passwordTextColor = Color(0xFF404040); // 비밀번호 색깔 설정
+  Color passwordTextColor = Color(0xFF404040); // 비밀번호 오류 메시지 색깔 설정
+  Color passwordFilledColor = Color(0xFFF0F0F0); // 텍스트 필드 색깔
+  Color passwordFontColor = Color(0xFFF0F0F0); // 텍스트 필드 속 텍스트 색깔
+  Color passwordBorderColor = Color(0xFFACACAC); //테두리 색깔
+
+  String passwordCheckText = "";
+  // 바로 오류 메시지 띄우기
+  Color passwordCheckTextColor = Color(0xFF404040);
+  Color passwordCheckFilledColor = Color(0xFFF0F0F0);
+  Color passwordCheckFontColor = Color(0xFFF0F0F0);
+  Color passwordCheckBorderColor = Color(0xFFACACAC);
 
   final int minNicknameLength = 2; // 닉네임 최소 길이 설정
   final int maxNicknameLength = 12; // 닉네임 최대 길이 설정
@@ -35,11 +56,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isPasswordCheckButtonVisible = false; // 비밀번호 확인 버튼 눈
   bool isPasswordCheckButtonEnabled = false; // 비밀번호 확인 버튼
   bool isDuplicateNickname = false;
+  bool DuplicateFlag = false;
+
+  String Nickname = "";
+  String Password = "";
+
+  duplicateRequest(String nickname) async{
+    print(nickname);
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String param = "/$nickname/nicknameExists";
+    print(url + param);
+
+    try {
+      var response = await http.get(Uri.parse(url+param));
+      print(response.statusCode);
+      if (response.statusCode == 200){
+        Nickname = nickname;
+        DuplicateFlag = true;
+        setState(() {
+          print("200");
+          // 중복x
+          u1 = new User(u1.mail,u1.department,u1.name,u1.id,Password,Nickname);
+          nicknameText = "중복 확인이 완료되었습니다.";
+          nicknameTextColor = Color(0xFF2BBD28);
+        });
+      } else {
+        print("비정상 요청");
+        DuplicateFlag = false;
+        setState(() {
+          nicknameText = "이미 사용하고 있는 닉네임이에요.";
+          nicknameTextColor = Color(0xFFE33939);
+        });
+      }
+    }catch(e) {
+      print(e.toString());
+    }
+  }
+
+  joinRequest(User u1) async{
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+
+    try{
+      // Map<String, dynamic> userJson = u1.toJson();
+      var response = await http.post(Uri.parse(url),
+                          body: jsonEncode(u1.toJson()),
+                          headers: {"Content-Type": "application/json"});
+          if(response.statusCode == 200) {
+            print('200');
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
+
+            print(u1.pw);
+            print(u1.nickname);
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    Signup_Success(),
+              ),
+            );
+          } else{
+            print(response.statusCode);
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
+
+            // String str = u1.id;
+            //
+            // List<String> charList = str.split('');
+            //
+            // for (String char in charList) {
+            //   print(char);
+            //   print("\n");
+            // }
+
+            print(u1.pw);
+            print(u1.nickname);
+          }
+    } catch(e) {
+      print(e.toString());
+    }
+  }
 
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 닉네임 입력란의 상태 변화 감지
     super.initState();
+    u1 = widget.u1;
+
     nicknameController.addListener(updateNicknameButtonState);
     passwordController.addListener(updateNicknameState);
     passwordCheckController.addListener(updatePasswordCheckButtonState);
@@ -69,9 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void updatePasswordCheckButtonState() {
     // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
-    // setState(() {
-    //   isPasswordCheckButtonEnabled = passwordCheckController.text.isNotEmpty;
-    // });
     setState(() {
       if (isPasswordEnabled) {
         isPasswordCheckEnabled = true; // 비밀번호 확인 텍스트 필드
@@ -80,123 +184,162 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  //유효성 검증
-  bool isValidNickname(String nickname) {
-    // 영문, 한글을 포함한 2~12자리, 공백 및 특수문자 불가능
+  bool isValidNickname(String nickname){
+    // 공백 및 특수문자 제외
     final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,12}$');
     return nicknameRegex.hasMatch(nickname);
   }
+  // bool isNicknameDuplicate(String nickname, String enteredNickname){
+  //   nickname = Nickname; // 기존에 존재하던 닉네임
+  //   enteredNickname = nicknameController.text;
+  //
+  //   if(enteredNickname == nickname) return false;
+  //   else return true;
+  // }
 
-  String nicknameAvailableText = "중복 확인 버튼을 눌러주세요.";
-
-  bool isNicknameAvailable(String nickname) {
-    return nickname != "suhyun113"; // 입력된 닉네임이 '심심이'가 아니면 사용 가능한 닉네임
-    // 값이 true -> 다름 -> 사용 가능 메시지/ 값이 false -> 같음 -> 사용 불가, 다시 입력 필요
-  }
-
-  // 사용자가 입력한 닉네임과 기존에 존재하던 닉네임과 중복 비교
-  void checkNicknameAvailable() {
+  void checkNicknameAvailable(){
     String enteredNickname = nicknameController.text;
-    bool isAvailable =
-    isValidNickname(enteredNickname); // 사용자가 입력한 닉네임을 심심이와 비교
+    bool isNicknameAvailable = isValidNickname(enteredNickname);
 
     setState(() {
-      // 닉네임 사용 가능 -> 사용 가능 메시지 출력 -> 중복 확인 버튼 비활성화 -> 비밀번호 텍스트 필드 입력 가능
-      if (isAvailable) {
-        // 닉네임 텍스트 필드 입력시
-        isNicknameButtonClickable = true; // 중복확인 버튼 활성화
-        nicknameAvailableText = "사용이 가능한 닉네임이에요.";
-        // } else if (isValidNickname(enteredNickname)){
-        //   isNicknameButtonClickable = false; // 더 이상 중복 확인 필요 없음
-        //   nicknameAvailableText = "사용 가능한 닉네임이에요.";
-        // 닉네임 사용 불가 -> 사용 불가 메시지 출력 -> 비밀번호 입력 불가
-      } else {
-        isNicknameButtonClickable = false;
-        nicknameAvailableText = "사용이 어려운 닉네임이에요.";
+      if (isNicknameAvailable) { // 유효성 검사 성공
+        nicknameText = "사용이 가능한 닉네임이에요.";
+        nicknameTextColor = Color(0xFF2BBD28);
+      } else { // 유효성 검사 실패
+        nicknameText = "사용이 어려운 닉네임이에요.";
+        nicknameTextColor = Color(0xFFE33939);
+        // 각 조건에 따른 오류 메시지 출력
       }
     });
   }
 
-  void checkNicknameDuplicate() {
-    String name = nicknameController.text;
-    setState(() {
-      if (isNicknameAvailable(name)) {
-        /** 비밀번호 버튼 활성화 **/
-        isPasswordEnabled = true;
-        nicknameAvailableText = "사용하는 사람이 없는 닉네임이예요";
-      } else {
-        nicknameAvailableText = "중복된 닉네임이예요.";
-        isDuplicateNickname = true;
-      }
-    });
+  // void checkNicknameDuplicate(String Nick){
+  //   String nickname = Nick;
+  //   String enteredNickname = nicknameController.text;
+  //   // bool isNicknameDuplicated = isNicknameDuplicate(nickname, enteredNickname);
+  //
+  //   setState(() {
+  //       // 중복확인 검사
+  //       if ( == false) { // 중복
+  //         nicknameText = "이미 사용하고 있는 닉네임이에요.";
+  //         nicknameTextColor = Color(0xFFE33939);
+  //       }
+  //       else { // 중복x
+  //         nicknameText = "사용 가능한 닉네임이에요.";
+  //         nicknameTextColor = Color(0xFF2BBD28);
+  //       }
+  //   });
+  // }
+
+
+  bool isValidPassword1(String password) {
+    // 영문 대문자 최소 1개 이상
+    final RegExp password1Regex = RegExp(r'^(?=.*[A-Z])');
+    return password1Regex.hasMatch(password);
   }
 
-  void updatePasswordState() {
-    setState(() {
-      if (isNicknameButtonClickable &&
-          nicknameAvailableText == "사용 가능한 닉네임이에요.") {
-        // 중복확인 버튼 비활성화
-        isNicknameButtonClickable = false;
-        isPasswordEnabled = true; // 비밀번호 텍스트 필드
-      }
-    });
+  bool isValidPassword2(String password) {
+    // 적어도 영문 소문자 최소 1개 이상
+    final RegExp password2Regex = RegExp(r'^(?=.*[a-z])');
+    return password2Regex.hasMatch(password);
   }
 
-  String PasswordText = "";
-
-  bool isValidPassword1(String nickname) {
-    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-    final RegExp password1Regex = RegExp(r'^[A-Z]{8,20}$');
-    return password1Regex.hasMatch(nickname);
+  bool isValidPassword3(String password) {
+    // 숫자 최소 1개 이상
+    final RegExp password3Regex = RegExp(r'^(?=.*[\d])');
+    return password3Regex.hasMatch(password);
   }
 
-  bool isValidPassword2(String nickname) {
-    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-    final RegExp password2Regex = RegExp(r'^[a-z]{8,20}$');
-    return password2Regex.hasMatch(nickname);
+  bool isValidPassword4(String password) {
+    // 특수문자 최소 1개 이상
+    final RegExp password4Regex = RegExp(r'^(?=.*[`$@!%*#?~^<>,.;:/()&+=])');
+    return password4Regex.hasMatch(password);
   }
 
-  bool isValidPassword3(String nickname) {
-    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-    final RegExp password3Regex = RegExp(r'^[0-9]{8,20}$');
-    return password3Regex.hasMatch(nickname);
-  }
-
-  bool isValidPassword4(String nickname) {
-    // 영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.
-    final RegExp password4Regex = RegExp(r'^[$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$');
-    return password4Regex.hasMatch(nickname);
+  bool isValidPassword(String password) {
+    // 영문 대문자, 소문자, 숫자, 특수문자 이외의 문자는 입력 불가능
+    final RegExp passwordRegex = RegExp(r'^[A-Za-z\d`$@!%*#?~^<>,.;:/()&+=]{8,20}$');
+    // final RegExp passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[`$@!%*#?~^<>,.;:/()&+=])[A-Za-z\d`$@!%*#?~^<>,.;:/()&+=]{8,20}$');
+    return passwordRegex.hasMatch(password);
   }
 
   void checkPasswordAvailable() {
     String enteredPassword = passwordController.text;
-    bool isPasswordAvailable = isValidPassword1(
-        enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
+    bool isPasswordAvailable = isValidPassword(enteredPassword);
+    bool isPassword1Available = isValidPassword1(enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
+    bool isPassword2Available = isValidPassword2(enteredPassword);
+    bool isPassword3Available = isValidPassword3(enteredPassword);
+    bool isPassword4Available = isValidPassword4(enteredPassword);
 
     setState(() {
       // 닉네임 사용 가능 -> 사용 가능 메시지 출력 -> 중복 확인 버튼 비활성화 -> 비밀번호 텍스트 필드 입력 가능
-      if (isPasswordAvailable) { // 닉네임 텍스트 필드 입력시
-        passwordTextColor:
-        null; // 기본 색상
-        passwordText; // 오류 메시지 없음
-      } else {
-        passwordTextColor = Color(0xFFCC5C5C); // 오류 색상
-        // 각 조건에 따른 오류 메시지 출력
-        if (!isValidPassword1(enteredPassword)) {
+      if (isPasswordAvailable) { // 유효성 검사 만족 -> 최소 1개 이상이어야 하는 문자들 검사
+        if (!isPassword1Available) {
           passwordText = "영문 대문자가 포함되어야 합니다.";
-        } else if (!isValidPassword2(enteredPassword)) {
+          passwordTextColor = Color(0xFFE33939);
+          passwordFilledColor = Color(0xFFFFDDDD);
+          passwordFontColor = Color(0xFFE33939);
+          passwordBorderColor = Color(0xFFFA4343);
+        } else if (!isPassword2Available) {
           passwordText = "영문 소문자가 포함되어야 합니다.";
-        } else if (!isValidPassword3(enteredPassword)) {
+          passwordTextColor = Color(0xFFE33939);
+          passwordFilledColor = Color(0xFFFFDDDD);
+          passwordFontColor = Color(0xFFE33939);
+          passwordBorderColor = Color(0xFFFA4343);
+        } else if (!isPassword3Available) {
           passwordText = "숫자가 포함되어야 합니다.";
-        } else if (!isValidPassword4(enteredPassword)) {
+          passwordTextColor = Color(0xFFE33939);
+          passwordFilledColor = Color(0xFFFFDDDD);
+          passwordFontColor = Color(0xFFE33939);
+          passwordBorderColor = Color(0xFFFA4343);
+        } else if (!isPassword4Available) {
           passwordText = "특수문자가 포함되어야 합니다.";
+          passwordTextColor = Color(0xFFE33939);
+          passwordFilledColor = Color(0xFFFFDDDD);
+          passwordFontColor = Color(0xFFE33939);
+          passwordBorderColor = Color(0xFFFA4343);
         }
+        else {
+          passwordText = "";
+          passwordFilledColor = Color(0xFFF0F0F0);
+          passwordFontColor = Color(0xFF969696);
+          passwordBorderColor = Color(0xFFACACAC);
+        }
+      } else { // 사용하면 안 되는 문자 사용
+        passwordText = "비밀번호 형식이 올바르지 않아요.";
+        // 바로 오류 메시지 띄우기
+        passwordTextColor = Color(0xFFE33939);
+        passwordFilledColor = Color(0xFFFFDDDD);
+        passwordFontColor = Color(0xFFE33939);
+        passwordBorderColor = Color(0xFFFA4343);
+        // 각 조건에 따른 오류 메시지 출력
+
       }
     });
   }
 
-  bool CheckPassword() {
-    return passwordController.text == passwordCheckController.text;
+  void CheckPassword() {
+    bool isPasswordCheckAvailable = passwordController.text == passwordCheckController.text;
+
+    setState(() {
+      if (isPasswordCheckAvailable) {
+        passwordCheckText = "";
+        passwordCheckFilledColor = Color(0xFFF0F0F0);
+        passwordCheckFontColor = Color(0xFF969696);
+        passwordCheckBorderColor = Color(0xFFACACAC);
+        Password = passwordCheckController.text;
+        u1 = User(u1.mail,u1.department,u1.name,u1.id,Password,u1.nickname);
+        // 학인 버튼 활성화
+      } else {
+        passwordCheckText = "비밀번호가 일치하지 않아요.";
+        // 바로 오류 메시지 띄우기
+        passwordCheckTextColor = Color(0xFFE33939);
+        passwordCheckFilledColor = Color(0xFFFFDDDD);
+        passwordCheckFontColor = Color(0xFFE33939);
+        passwordCheckBorderColor = Color(0xFFFA4343);
+        // 각 조건에 따른 오류 메시지 출력
+      }
+    });
   }
 
   @override
@@ -287,9 +430,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // 245 + 9.98 + 66.02
                         height: 38,
                         // 텍스트 필드의 높이 설정
-                        /*child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 0),*/
-                        // 가로 패딩 추가
+
                         child: Row(
                           children: [
                             Expanded(
@@ -356,7 +497,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPressed: isNicknameButtonClickable
                                     ? () {
                                   // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
-                                  checkNicknameDuplicate();
+                                  // checkNicknameDuplicate();
+                                  duplicateRequest(nicknameController.text);
                                 }
                                     : null,
                                 style: ButtonStyle(
@@ -397,21 +539,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
 
-                      // 중복확인 버튼 클릭 시, 출력
+                      // 닉네임 오류 메시지
                       Container(
                         margin: EdgeInsets.only(left: 22, top: 6.5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            nicknameAvailableText,
+                            nicknameText,
                             style: TextStyle(
                               fontSize: 12,
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              color: isValidNickname(nicknameController.text) &&
-                                  !isDuplicateNickname
-                                  ? Color(0XFF2BBD28)
-                                  : Color(0XFFE33939),
+                              color: nicknameTextColor
+
+                              // isValidNickname(nicknameController.text) &&
+                              //     !isDuplicateNickname
+                              //     ? Color(0XFF2BBD28)
+                              //     : Color(0XFFE33939),
                             ),
                           ),
                         ),
@@ -462,6 +606,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           maxLength: maxPasswordLength,
                           // 최대 길이 설정
                           onChanged: (text) {
+                            checkPasswordAvailable(); //체크해서 비밀번호 텍스트 필드 아래에 메시지 출력
+
                             if (text.length < minPasswordLength) {
                               print('최소 $minPasswordLength자 이상 입력해주세요.');
                             } else if (text.length > maxPasswordLength) {
@@ -476,20 +622,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // 초기에 오류 메시지 표시x
                             hintStyle: TextStyle(fontSize: 10),
                             filled: true,
-                            fillColor: Color(0xFFF0F0F0),
+                            fillColor: passwordFilledColor,
                             labelStyle: TextStyle(
-                                color: Color(0xFF404040),
+                                color: passwordFontColor,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400),
                             contentPadding: EdgeInsets.only(left: 11.58),
                             // 텍스트를 수직으로 가운데 정렬
-                            border: InputBorder.none,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(
+                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                              ),
+                            ),                              // 밑줄 없애기
                             // 밑줄 없애기
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                               BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                                  color: passwordBorderColor, width: 0.5 // 테두리 굵기
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -502,8 +654,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
-                                  isPasswordButtonVisible =
-                                  !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                  isPasswordButtonVisible = !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
                                 });
                               },
                               icon: isPasswordButtonVisible
@@ -515,13 +666,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          enabled: isPasswordEnabled,
+                          enabled: nicknameText == "중복 확인이 완료되었습니다.",
                         ),
                       ),
-                      SizedBox(height: 10),
 
                       Container(
-                        margin: EdgeInsets.only(left: 24, top: 25),
+                        margin: EdgeInsets.only(left: 22, top: 7),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            passwordText,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              color: passwordTextColor
+                              // color: isValidNickname(nicknameController.text) &&
+                              //     !isDuplicateNickname
+                              //     ? Color(0XFF2BBD28)
+                              //     : Color(0XFFE33939),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 24, top: 4),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -548,6 +717,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           maxLength: maxPasswordCheckLength,
                           // 최대 길이 설정
                           onChanged: (text) {
+                            CheckPassword();
+
                             if (text.length < minPasswordCheckLength) {
                               print('최소 $minPasswordCheckLength자 이상 입력해주세요.');
                             } else if (text.length > maxPasswordCheckLength) {
@@ -561,21 +732,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: InputDecoration(
                             hintStyle: TextStyle(fontSize: 10),
                             filled: true,
-                            fillColor: Color(0xFFF0F0F0),
+                            fillColor: passwordCheckFilledColor,
                             labelStyle: TextStyle(
-                                color: Color(0xFF404040),
+                                color: passwordCheckFontColor,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400),
                             contentPadding: EdgeInsets.only(left: 11.58),
                             // 텍스트를 수직으로 가운데 정렬
-                            border: InputBorder.none,
                             // 밑줄 없애기
-
-                            focusedBorder: OutlineInputBorder(
+                            border: OutlineInputBorder(
                               borderRadius:
                               BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
                                   color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                              ),
+                            ),                              // 밑줄 없애기
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(
+                                  color: passwordCheckBorderColor, width: 0.5 // 테두리 굵기
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -601,30 +777,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
                           ),
                           keyboardType: TextInputType.text,
-                          // enabled: isPasswordCheckEnabled,
+                          enabled: passwordText == "",
                         ),
                       ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
 
                       Container(
-                          margin: EdgeInsets.only(top: 33),
+                        margin: EdgeInsets.only(left: 24, top: 7),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            passwordCheckText,
+                            style: TextStyle(
+                              color: passwordCheckTextColor,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                          margin: EdgeInsets.only(top: 12),
                           width: 320,
                           height: 40,
                           child: ElevatedButton(
-                            onPressed: isPasswordCheckButtonEnabled
+                            onPressed: passwordCheckText == ""
                                 ? () {
                               // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
                               print('doubleCheck Button Clicked!');
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Signup_Success(),
-                                ),
-                              );
+
+                              if (DuplicateFlag){
+                                joinRequest(u1);
+                                print("Join");
+                              } else {
+                                setState(() {
+                                  nicknameText = "중복 확인 버튼을 눌러주세요.";
+                                  nicknameTextColor = Color(0xFFE33939);
+                                });
+                              }
                             }
                                 : null,
                             style: ButtonStyle(
                               // 버튼의 배경색 변경하기
-                              backgroundColor: isPasswordCheckButtonEnabled
+                              backgroundColor: passwordCheckText == ""
                                   ? MaterialStateProperty.all<Color>(
                                   Color(0xFF7C3D1A))
                                   : MaterialStateProperty.all<Color>(
