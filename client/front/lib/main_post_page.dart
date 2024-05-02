@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'request.dart';
 
 class Post_List_view extends StatefulWidget{
   @override
@@ -824,6 +825,13 @@ class _Main_post_pageState extends State<Main_post_page> {
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                Request(),
+                          ),
+                        );
+
                       },
                       icon: Image.asset('assets/images/add_icon.png',
                         color: Color(0xffADADAD),

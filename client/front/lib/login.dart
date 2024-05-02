@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
 class LogIn extends StatefulWidget {
   @override
   State<LogIn> createState() => _LogInState();
-
 }
 
 class _LogInState extends State<LogIn> {
@@ -32,32 +31,31 @@ class _LogInState extends State<LogIn> {
   TextEditingController _UsernameController = TextEditingController();
   TextEditingController _PasswordController = TextEditingController();
 
-  request(String username, String password) async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
+  request(String username, String password) async {
+    String url =
+        "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
     String param = "?username=$username&password=$password";
     print(url + param);
     try {
-      var post = await http.post(Uri.parse(url+param));
+      var post = await http.post(Uri.parse(url + param));
       if (post.statusCode == 200) {
         setState(() {
           isVisible = false;
         });
-        Navigator.push( //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-            context, MaterialPageRoute(builder: (context) => Main_post_page()));
+        Navigator.push(
+            //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+            context,
+            MaterialPageRoute(builder: (context) => Main_post_page()));
+      } else {
+        print('비정상 요청');
+        setState(() {
+          isVisible = true;
+        });
       }
-      else
-        {
-          print('비정상 요청');
-          setState(() {
-            isVisible = true;
-          });
-        }
-
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +81,8 @@ class _LogInState extends State<LogIn> {
                 width: 320,
                 height: 50,
                 child: TextField(
-                  maxLength: maxStudentIdLength, // 최대 길이 설정
+                  maxLength: maxStudentIdLength,
+                  // 최대 길이 설정
                   controller: _UsernameController,
                   onChanged: (text) {
                     if (text.length > maxStudentIdLength) {
@@ -93,10 +92,10 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '학번',
                     hintStyle: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                        color: Color(0xFF404040),
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      color: Color(0xFF404040),
                     ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
@@ -137,10 +136,10 @@ class _LogInState extends State<LogIn> {
                   decoration: InputDecoration(
                     hintText: '비밀번호',
                     hintStyle: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                        color: Color(0xFF404040),
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      color: Color(0xFF404040),
                     ),
                     contentPadding: EdgeInsets.only(left: 17, right: 17),
                     // 텍스트를 수직으로 가운데 정렬
@@ -199,22 +198,24 @@ class _LogInState extends State<LogIn> {
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
               Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,//이거 end로 이동
+                  mainAxisAlignment: MainAxisAlignment.center, //이거 end로 이동
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 17.0),//비밀번호 찾기 생기면 margin 11로
+                      margin: EdgeInsets.only(top: 17.0),
+                      //비밀번호 찾기 생기면 margin 11로
                       // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
-                     child: Visibility(visible: isVisible,
-                       child: Text(
-                         "잘못된 학번 또는 비밀번호입니다.",
-                         style: TextStyle(
-                           fontSize: 14,
-                           fontFamily: 'Pretendard',
-                           fontWeight: FontWeight.w400,
-                           color: Color(0xFFEC5147),
-                         ),
-                       ),
-                     ),
+                      child: Visibility(
+                        visible: isVisible,
+                        child: Text(
+                          "잘못된 학번 또는 비밀번호입니다.",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFEC5147),
+                          ),
+                        ),
+                      ),
                     ),
                     //       GestureDetector(
                     //         onTap: () {
@@ -240,9 +241,6 @@ class _LogInState extends State<LogIn> {
                   ],
                 ),
               ),
-
-
-
 
               // GestureDetector(
               //   onTap: () {
