@@ -140,6 +140,10 @@ class _Upload_ImageState extends State<Upload_Image> {
                         ),
                         onPressed: () {
                           // 이 버튼을 누르면 갤러리가 열리고 이미지를 가져오도록 설정
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (context) => Check_Image(u1: u1)
+                          //   ),);
                           parsethetext();
                           initState();
                         },
