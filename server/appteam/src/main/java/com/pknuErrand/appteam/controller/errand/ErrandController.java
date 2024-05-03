@@ -50,6 +50,17 @@ public class ErrandController {
         return ResponseEntity.ok()
                 .body(errandService.createErrand(errandSaveRequestDto));
     }
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandDetailResponseDto.class))) ,
+            @ApiResponse(responseCode = "404", description = "심부름 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
+    })
+    @Operation(summary = "요청서 하나 불러오기" , description = "심부름 요청서 불러오기")
+    @GetMapping("/{id}")
+    public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
+        return ResponseEntity.ok()
+                .body(errandService.findErrandById(id));
+    }
+
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))) ,
@@ -130,10 +141,5 @@ public class ErrandController {
                 .body(errandListResponseDto);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
-        return ResponseEntity.ok()
-                .body(errandService.findErrandById(id));
-    }
 
 }

@@ -22,12 +22,8 @@ public class MemberService{
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    private void validateDuplicateMember(Member member) {
-        if(memberRepository.findById(member.getId()) != null)
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-    }
-
     public void SignUpProcess(MemberFormDto memberFormDto) {
+
         String mail = memberFormDto.getMail();
         String department = memberFormDto.getDepartment();
         String name = memberFormDto.getName();
@@ -37,12 +33,15 @@ public class MemberService{
 
         memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 0, "ROLE_ADMIN"));
     }
+
     public Member findMemberById(String id) {
+
         Member member = memberRepository.findById(id);
         return member;
     }
 
     public Member getLoginMember() {
+
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         String username = userDetails.getUsername();
@@ -51,11 +50,13 @@ public class MemberService{
         return findMemberById(username);
     }
 
-    public boolean checkMail(String mail) {
-        return memberRepository.existsByMail(mail);
+    public boolean checkId(String Id) {
+
+        return memberRepository.existsById(Id);
     }
 
     public boolean checkNickname(String nickname) {
+
         return memberRepository.existsByNickname(nickname);
     }
 }
