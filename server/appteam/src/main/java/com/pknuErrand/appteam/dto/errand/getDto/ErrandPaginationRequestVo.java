@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.dto.errand.getDto;
 import com.pknuErrand.appteam.Enum.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter

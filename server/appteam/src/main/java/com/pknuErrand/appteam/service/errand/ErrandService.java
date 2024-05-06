@@ -104,7 +104,7 @@ public class ErrandService {
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
 
         for(Errand errand : errandList) {
-            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
+            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
 
             ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
                     .order(memberErrandDto)
@@ -145,7 +145,7 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(memberErrandDto.getErranderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(memberErrandDto.getOrderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
