@@ -19,7 +19,7 @@
 | **이제희** | **민경윤** | **김수현** | **이강민** | **정다은** |
 | :------: |  :------: | :------: | :------: | :------: |
 | [<img src="https://avatars.githubusercontent.com/JehuiLee" height=150 width=150> <br/> @JehuiLee](https://github.com/JehuiLee) | [<img src="https://avatars.githubusercontent.com/unh6unh6" height=150 width=150> <br/> @unh6unh6](https://github.com/unh6unh6) | [<img src="https://avatars.githubusercontent.com/suhyun113" height=150 width=150> <br/> @suhyun113](https://github.com/suhyun113) | [<img src="https://avatars.githubusercontent.com/mututu17" height=150 width=150> <br/> @mututu17](https://github.com/mututu17) | [![쿼카캐](https://github.com/pknu-wap/2024-1_App1/assets/142780364/722c5729-8f0f-443f-9049-2b8e7694bab9) <br/> 정다은]() |
-| BE |  BE | FE | FE | DESIGN |
+| **백엔드** |  **백엔드** | **프론트엔드** | **프론트엔드** | **디자이너** |
 
 </div>
 

@@ -108,6 +108,7 @@ public class ErrandService {
 
             ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
                     .order(memberErrandDto)
+                    .errandNo(errand.getErrandNo())
                     .createdDate(errand.getCreatedDate())
                     .title(errand.getTitle())
                     .destination(errand.getDestination())
@@ -133,6 +134,7 @@ public class ErrandService {
 
         ErrandDetailResponseDto errandDetailResponseDto = ErrandDetailResponseDto.builder()
                 .order(memberErrandDto)
+                .errandNo(errand.getErrandNo())
                 .createdDate(errand.getCreatedDate())
                 .title(errand.getTitle())
                 .destination(errand.getDestination())
@@ -143,7 +145,7 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(memberErrandDto.getErrandNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(memberErrandDto.getErranderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
