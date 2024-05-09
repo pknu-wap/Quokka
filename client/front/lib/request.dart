@@ -27,10 +27,9 @@ class _RequestState extends State<Request> {
 
   // 일정 토글 버튼 변수 선언
   String result = "";
-  bool isImmediately = false; // 맨 처음 고정 값
+  bool isImmediately = true; // 맨 처음 고정 값
   bool isReservation = false;
-  bool _isButtonSelected = false; // 토글 버튼 전체 선택 여부
-  late List<bool> isSelected;
+  late List<bool> isSelected = [isImmediately, isReservation];
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
   @override
@@ -41,7 +40,7 @@ class _RequestState extends State<Request> {
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     // isSelected = List.filled(2, false); // isSeleted 초기화
-    isSelected = List.generate(2, (_) => false); // 버튼 개수에 맞게 수정
+    // isSelected = List.generate(2, (_) => false); // 버튼 개수에 맞게 수정
   }
 
   @override
@@ -92,7 +91,6 @@ class _RequestState extends State<Request> {
     setState(() {
       for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
         isSelected[buttonIndex] = buttonIndex == index;
-        // isSelected[buttonIndex] = (buttonIndex == index) ? !isSelected[index] : false;
       }
     });
   }
@@ -256,7 +254,7 @@ class _RequestState extends State<Request> {
                       child: ToggleButtons(
                         borderRadius: BorderRadius.circular(8.0),
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
-                        children: [
+                        children: <Widget>[
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 17),
                             child: Text(
