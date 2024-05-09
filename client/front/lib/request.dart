@@ -20,10 +20,17 @@ class _RequestState extends State<Request> {
   TextEditingController titleController = TextEditingController();
   TextEditingController destinationController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-
+  // 텍스트 필드 변수 선언
   bool isTitleEnabled = false;
   bool isDestinationEnabled = false;
   bool isPriceEnabled = false;
+
+  // 일정 토글 버튼 변수 선언
+  String result = "";
+  bool isImmediately = true; // 맨 처음 고정 값
+  bool isReservation = false;
+  late List<bool> isSelected;
+  // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
   @override
   void initState() {
@@ -207,6 +214,39 @@ class _RequestState extends State<Request> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              // 토글 버튼 만들기
+                              margin: EdgeInsets.only(left: 24),
+                              child:  Text(
+                                '일정',
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  letterSpacing: 0.01,
+                                  color: Color(0xff111111),
+                                ),
+                              ),
+                            ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 2),
+                            child: Text(
+                              '*',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                letterSpacing: 0.01,
+                                color: Color(0xffF05252),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
