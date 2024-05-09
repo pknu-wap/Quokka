@@ -84,9 +84,9 @@ class _RequestState extends State<Request> {
                     Text(
                       '요청서 작성하기',
                       style: TextStyle(
-                        color: Color(0xff111111),
                         fontFamily: 'Paybooc',
                         fontWeight: FontWeight.w700,
+                        color: Color(0xff111111),
                         fontSize: 20,
                       ),
                     ),
@@ -103,9 +103,10 @@ class _RequestState extends State<Request> {
                         child:  Text(
                           '제목',
                           style: TextStyle(
-                            fontSize: 14,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            letterSpacing: 0.01,
                             color: Color(0xff111111),
                           ),
                         ),
@@ -116,9 +117,10 @@ class _RequestState extends State<Request> {
                       child: Text(
                         '*',
                         style: TextStyle(
-                          fontSize: 14,
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          letterSpacing: 0.01,
                           color: Color(0xffF05252),
                         ),
                       ),
@@ -156,6 +158,56 @@ class _RequestState extends State<Request> {
                     ),
                     keyboardType: TextInputType.text,
                   ),
+                ),
+              ),
+
+              // 일정 텍스트
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 24),
+                        child:  Text(
+                          '일정',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            letterSpacing: 0.01,
+                            color: Color(0xff111111),
+                          ),
+                        ),
+                      ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 2),
+                      child: Text(
+                        '*',
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          letterSpacing: 0.01,
+                          color: Color(0xffF05252),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 121),
+                      child: Text(
+                        '예약은 최대 ?시간 이후까지 가능해요.',
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          letterSpacing: 0.01,
+                          color: Color(0xff111111),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
