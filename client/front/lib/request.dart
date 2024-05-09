@@ -126,8 +126,38 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-
-
+              //텍스트 필드
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
+                width: 320,
+                height: 38,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Color(0xff2D2D2D),
+                      width: 0.5 // 테두리 굵기
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  color: Color(0xffF5F5F5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 24,left: 22, right: 20),
+                  child: TextField(
+                    controller: titleController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      letterSpacing: 0.01,
+                      color: Color(0xff252525),
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(bottom: 13),
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              ),
 
             ],
           ),
