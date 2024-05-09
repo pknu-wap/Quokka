@@ -27,7 +27,7 @@ class _RequestState extends State<Request> {
 
   // 일정 토글 버튼 변수 선언
   String result = "";
-  bool isImmediately = true; // 맨 처음 고정 값
+  bool isImmediately = false; // 맨 처음 고정 값
   bool isReservation = false;
   late List<bool> isSelected;
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
@@ -39,6 +39,7 @@ class _RequestState extends State<Request> {
     titleController.addListener(updateTitleState);
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
+    isSelected = List.filled(2, false); // isSeleted 초기화
   }
 
   @override
@@ -68,6 +69,18 @@ class _RequestState extends State<Request> {
     // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
     setState(() {
       isPriceEnabled = priceController.text.isNotEmpty;
+    });
+  }
+
+  void toggleSelect(int index){
+    setState(() {
+      for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++){
+        if (buttonIndex == index){
+          isSelected[buttonIndex] = true;
+        } else{
+          isSelected[buttonIndex] = false;
+        }
+      }
     });
   }
 
@@ -138,8 +151,8 @@ class _RequestState extends State<Request> {
               //텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                width: 320,
-                height: 38,
+                // width: 320,
+                // height: 38,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: Color(0xff2D2D2D),
@@ -222,18 +235,41 @@ class _RequestState extends State<Request> {
                             child: Container(
                               // 토글 버튼 만들기
                               margin: EdgeInsets.only(left: 24),
-                              child:  Text(
-                                '일정',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  letterSpacing: 0.01,
-                                  color: Color(0xff111111),
-                                ),
+                              child: ToggleButtons(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16),
+                                    child: Text(
+                                      '일정',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        letterSpacing: 0.01,
+                                        color: Color(0xff111111),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        '일정',
+                                        style: TextStyle(
+                                          fontFamily: 'Pretendard',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                          letterSpacing: 0.01,
+                                          color: Color(0xff111111),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                    isSelected: isSelected,
+                                    onPressed: toggleSelect,
                               ),
                             ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                           ),
+
                           Container(
                             margin: EdgeInsets.only(right: 2),
                             child: Text(
@@ -247,9 +283,9 @@ class _RequestState extends State<Request> {
                               ),
                             ),
                           ),
-                  ],
-                ),
-              ),
+                        ],
+                      ),
+                    ),
 
             ],
           ),
