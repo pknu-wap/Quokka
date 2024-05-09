@@ -72,7 +72,7 @@ class _RequestState extends State<Request> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 10.0, top: 33.0),
+                padding: EdgeInsets.only(left: 19.0, top: 34.0),
                 child: Row(
                   children: [
                     IconButton(
@@ -81,11 +81,10 @@ class _RequestState extends State<Request> {
                         Navigator.of(context).pop();
                       },
                     ),
-                    SizedBox(width: 10), // 아이콘과 텍스트 사이의 간격 조정
                     Text(
                       '요청서 작성하기',
                       style: TextStyle(
-                        color: Color(0xFF111111),
+                        color: Color(0xff111111),
                         fontFamily: 'Paybooc',
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
@@ -95,31 +94,41 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 34, left: 15),
+                margin: EdgeInsets.only(top: 34),
                 child: Row(
                   children: [
-                    Text(
-                      '제목',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFFFFFFF),
-                      ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 24),
+                        child:  Text(
+                          '제목',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff111111),
+                          ),
+                        ),
+                      ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                     ),
-                    SizedBox(width: 5), // 텍스트와 '*' 사이의 간격 조정
-                    Text(
-                      '*',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFFFFFFF),
+                    Container(
+                      margin: EdgeInsets.only(right: 300),
+                      child: Text(
+                        '*',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xffF05252),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+
+
+
             ],
           ),
         ),
