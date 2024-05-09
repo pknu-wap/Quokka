@@ -29,6 +29,7 @@ class _RequestState extends State<Request> {
   String result = "";
   bool isImmediately = false; // 맨 처음 고정 값
   bool isReservation = false;
+  bool _isButtonSelected = false; // 토글 버튼 전체 선택 여부
   late List<bool> isSelected;
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
@@ -39,7 +40,8 @@ class _RequestState extends State<Request> {
     titleController.addListener(updateTitleState);
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
-    isSelected = List.filled(2, false); // isSeleted 초기화
+    // isSelected = List.filled(2, false); // isSeleted 초기화
+    isSelected = List.generate(2, (_) => false); // 버튼 개수에 맞게 수정
   }
 
   @override
@@ -72,14 +74,25 @@ class _RequestState extends State<Request> {
     });
   }
 
-  void toggleSelect(int index){
+  // void toggleSelect(int index){
+  //   setState(() {
+  //     isSelected[index] = !isSelected[index];
+  //     // if (index == null) {
+  //     // disabledColor: Colors.red;
+  //     // }
+  //       // if (buttonIndex == index){
+  //       //   isSelected[buttonIndex] = false;
+  //       // } else{
+  //       //   isSelected[buttonIndex] = true;
+  //       // }
+  //   });
+  // }
+
+  void toggleSelect(int index) {
     setState(() {
-      for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++){
-        if (buttonIndex == index){
-          isSelected[buttonIndex] = true;
-        } else{
-          isSelected[buttonIndex] = false;
-        }
+      for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+        isSelected[buttonIndex] = buttonIndex == index;
+        // isSelected[buttonIndex] = (buttonIndex == index) ? !isSelected[index] : false;
       }
     });
   }
@@ -236,10 +249,13 @@ class _RequestState extends State<Request> {
                 children: [
                   Expanded(
                     child: Container(
+                      width: 106,
+                      height: 31,
                       // 토글 버튼 만들기
                       margin: EdgeInsets.only(left: 24),
                       child: ToggleButtons(
                         borderRadius: BorderRadius.circular(8.0),
+                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 17),
@@ -274,10 +290,11 @@ class _RequestState extends State<Request> {
                     ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                   ),
 
+                  // 시간 상세 설정 카테고리
                   Container(
                     margin: EdgeInsets.only(right: 2),
                     child: Text(
-                      '*',
+                      '',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w500,
