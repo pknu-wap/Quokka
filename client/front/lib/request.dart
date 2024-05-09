@@ -151,8 +151,8 @@ class _RequestState extends State<Request> {
               //텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                // width: 320,
-                // height: 38,
+                width: 320,
+                height: 38,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: Color(0xff2D2D2D),
@@ -227,65 +227,72 @@ class _RequestState extends State<Request> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Row(
+                  ],
+                ),
+              ),
+            Container(
+              margin: EdgeInsets.only(top: 7),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      // 토글 버튼 만들기
+                      margin: EdgeInsets.only(left: 24),
+                      child: ToggleButtons(
+                        borderRadius: BorderRadius.circular(8.0),
                         children: [
-                          Expanded(
-                            child: Container(
-                              // 토글 버튼 만들기
-                              margin: EdgeInsets.only(left: 24),
-                              child: ToggleButtons(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
-                                    child: Text(
-                                      '일정',
-                                      style: TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                        letterSpacing: 0.01,
-                                        color: Color(0xff111111),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 16),
-                                      child: Text(
-                                        '일정',
-                                        style: TextStyle(
-                                          fontFamily: 'Pretendard',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          letterSpacing: 0.01,
-                                          color: Color(0xff111111),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                    isSelected: isSelected,
-                                    onPressed: toggleSelect,
-                              ),
-                            ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.only(right: 2),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 17),
                             child: Text(
-                              '*',
+                              '즉시',
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
                                 letterSpacing: 0.01,
-                                color: Color(0xffF05252),
+                                color: Color(0xff2E2E2E),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 17),
+                            child: Text(
+                              '예약',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,
+                                color: Color(0xff2E2E2E),
                               ),
                             ),
                           ),
                         ],
+                        isSelected: isSelected,
+                        onPressed: toggleSelect,
+                      ),
+                    ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(right: 2),
+                    child: Text(
+                      '*',
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        letterSpacing: 0.01,
+                        color: Color(0xffF05252),
                       ),
                     ),
+                  ),
+                ],
+               ),
+              ),
+
+
+
 
             ],
           ),
