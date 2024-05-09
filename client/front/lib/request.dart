@@ -87,10 +87,14 @@ class _RequestState extends State<Request> {
   //   });
   // }
 
-  void toggleSelect(int index) {
+  void toggleSelect(int newindex) {
     setState(() {
-      for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
-        isSelected[buttonIndex] = buttonIndex == index;
+      for (int index = 0; index < isSelected.length; index++) {
+        if (index == newindex){
+          isSelected[index] = true;
+        } else{
+          isSelected[index] = false;
+        }
       }
     });
   }
@@ -254,6 +258,7 @@ class _RequestState extends State<Request> {
                       child: ToggleButtons(
                         borderRadius: BorderRadius.circular(8.0),
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
+                        // renderBorder: false,
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 17),
