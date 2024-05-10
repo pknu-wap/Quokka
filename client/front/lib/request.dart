@@ -339,7 +339,7 @@ class _RequestState extends State<Request> {
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 13),
+                            margin: EdgeInsets.only(left: 10),
                             child: DropdownButton<int>(
                               underline: Container(), // dropdownButton 밑줄 제거
                               value: _selectedHour,
@@ -348,8 +348,8 @@ class _RequestState extends State<Request> {
                                   _selectedHour = newValue!;
                                 });
                               },
-                              icon: Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xff808080)),
-                              items: List.generate(24, (index) {
+                              icon: Icon(Icons.keyboard_arrow_down, size: 17, color: Color(0xff808080)),
+                              items: List.generate(24, (index) { // 0~23시
                                 return DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(
@@ -380,7 +380,7 @@ class _RequestState extends State<Request> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 14),
+                            margin: EdgeInsets.only(left: 10),
                             child: DropdownButton<int>(
                               underline: Container(), // dropdownButton 밑줄 제거
                               value: _selectedMinute,
@@ -389,8 +389,8 @@ class _RequestState extends State<Request> {
                                   _selectedMinute = newValue!;
                                 });
                               },
-                              icon: Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xff808080)),
-                              items: List.generate(59, (index) {
+                              icon: Icon(Icons.keyboard_arrow_down, size: 17, color: Color(0xff808080)),
+                              items: List.generate(60, (index) {  // 0~59분
                                 return DropdownMenuItem<int>(
                                   value: index,
                                   child: Text(
@@ -408,7 +408,7 @@ class _RequestState extends State<Request> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 4),
+                            margin: EdgeInsets.only(right: 2),
                             child: Text(
                               '분',
                               style: TextStyle(
@@ -416,12 +416,12 @@ class _RequestState extends State<Request> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
                                 letterSpacing: 0.01,
-                                color: Color(0x4F4F4F),
+                                color: Color(0xff4F4F4F),
                               ),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 0),
+                            margin: EdgeInsets.only(left: 4),
                             child: Text(
                               '까지',
                               style: TextStyle(
@@ -437,37 +437,6 @@ class _RequestState extends State<Request> {
                         ],
                       ),
                     )
-
-
-
-
-                  // Container(
-                  //   margin: EdgeInsets.only(right: 71),
-                  //   width: 146,
-                  //   height: 31,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //         color: Color(0xffC77749), // 박스 테두리 색상
-                  //         width: 0.5 // 테두리 굵기
-                  //     ),
-                  //     borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  //     color: Color(0xffF5F5F5), // 박스 배경 색상
-                  //   ),
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(top: 8, left: 13, right: 14),
-                  //     child: Text(
-                  //       '^ 13시      ^ 20분 까지',
-                  //       style: TextStyle(
-                  //         fontFamily: 'Pretendard',
-                  //         fontWeight: FontWeight.w400,
-                  //         fontSize: 12,
-                  //         letterSpacing: 0.01,
-                  //         color: Color(0xff252525),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
 
                 ],
                ),
