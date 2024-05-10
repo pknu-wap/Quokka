@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 // import 'package:http/http.dart' as http;
@@ -19,6 +20,7 @@ class Request extends StatefulWidget {
 class _RequestState extends State<Request> {
   TextEditingController titleController = TextEditingController();
   TextEditingController destinationController = TextEditingController();
+  TextEditingController detailAddressController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   // 텍스트 필드 변수 선언
   bool isTitleEnabled = false;
@@ -371,9 +373,48 @@ class _RequestState extends State<Request> {
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
                       letterSpacing: 0.01,
-                      color: Color(0xff252525),
+                      color: Color(0xff373737),
                     ),
                     decoration: InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              ),
+              // 상세 주소 텍스트 필드
+              Container(
+                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
+                width: 318,
+                height: 31,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Color(0xff2D2D2D),
+                      width: 0.5 // 테두리 굵기
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  color: Color(0xffF5F5F5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 9.75,left: 8, right: 8),
+                  child: TextField(
+                    controller: detailAddressController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      letterSpacing: 0.01,
+                      color: Color(0xff373737),
+                    ),
+                    decoration: InputDecoration(
+                      hintText: '상세 주소를 입력해주세요. ex) 중앙도서관 1층 데스크',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        letterSpacing: 0.01,
+                        color: Color(0xff878787),
+                      ),
                       border: InputBorder.none,
                     ),
                     keyboardType: TextInputType.text,
