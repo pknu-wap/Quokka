@@ -282,7 +282,7 @@ class _RequestState extends State<Request> {
                       child: ToggleButtons(
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
                         // 선택되지 않은 버튼 배경색
-                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
+                        borderColor: Colors.grey, // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(5.0),
 
@@ -659,11 +659,11 @@ class _RequestState extends State<Request> {
                       width: 119,
                       height: 31,
                       // 토글 버튼 만들기
-                      margin: EdgeInsets.only(right: 85),
+                      margin: EdgeInsets.only(right: 86),
                       child: ToggleButtons(
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
 
-                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
+                        borderColor: Colors.grey, // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(5.0),
 
@@ -686,7 +686,7 @@ class _RequestState extends State<Request> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            padding: EdgeInsets.symmetric(horizontal: 14),
                             child: Text(
                               '현금',
                               style: TextStyle(
