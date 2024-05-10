@@ -33,6 +33,7 @@ class _RequestState extends State<Request> {
   // 일정 토글 버튼 변수 선언
   bool isImmediately = true; // 맨 처음 고정 값
   bool isReservation = false;
+  bool isDetailVisible = false; // 예약 버튼 클릭 시 상세 시간 설정
   late List<bool> isSelected1 = [isImmediately, isReservation];
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
@@ -96,6 +97,11 @@ class _RequestState extends State<Request> {
       for (int index = 0; index < isSelected1.length; index++) {
         if (index == newindex){
           isSelected1[index] = true;
+          if (index == 1) { // 예약 버튼을 눌렀을 때
+            isDetailVisible = true;
+          } else {  // 즉시 버튼을 눌렀을 때
+            isDetailVisible = false;
+          }
         } else{
           isSelected1[index] = false;
         }
@@ -312,6 +318,7 @@ class _RequestState extends State<Request> {
                     ),
                   ),
 
+                  if (isDetailVisible)
                   // 시간 상세 설정 카테고리
                   Container(
                     margin: EdgeInsets.only(right: 71),
