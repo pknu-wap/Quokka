@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'request.dart';
 class PostWidget extends StatelessWidget {
   final String? username; //닉네임
@@ -149,7 +151,54 @@ class PostWidget extends StatelessWidget {
 
   }
 }
-
+class order{
+  int orderNo;
+  String nickname; //닉네임
+  double score; //평점
+  order(this.orderNo, this.nickname, this.score);
+  factory order.fromJson(Map<String, dynamic> json) {
+    return order(
+      json['orderNo'],
+      json['nickname'],
+      json['score'],
+    );
+  }
+}
+class Post{//게시글에 담긴 정보들
+  order o1;
+  int errandNo; //게시글 번호
+  String createdDate; //생성된 날짜
+  String title; //게시글 제목
+  String destination; //위치
+  int reward; //보수
+  String status; //상태 (모집중 or 진행중 or 완료됨)
+  Post(this.o1, this.errandNo, this.title, this.createdDate,
+      this.destination, this.reward, this.status);
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      order.fromJson(json['order']),
+      json['errandNo'],
+      json['createdDate'],
+      json['title'],
+      json['destination'],
+      json['reward'],
+      json['status'],
+    );
+  }
+}
+class Error{
+  String code;
+  var httpStatus;
+  String message;
+  Error(this.code,this.httpStatus,this.message);
+  factory Error.fromJson(Map<String, dynamic> json) {
+    return Error(
+      json['code'],
+      json['httpStatus'],
+      json['message'],
+    );
+  }
+}
 class Post_List_view extends StatefulWidget{
   @override
   Post_List_viewState createState() => Post_List_viewState();
@@ -202,23 +251,62 @@ class Post_List_view extends StatefulWidget{
       "time": 0,
     },
   ];
-class Post{ //게시글에 담긴 정보들
-  String? username; //닉네임
-  double? scope; //별점
-  String? title; //게시글 제목
-  String? locate; //위치
-  int? price; //보수
-  bool? state; //상태 (진행중 or 완료됨)
-  int? time; //시간 (n분전)
-  Post(this.username, this.scope, this.title,
-      this.locate, this.price, this.state, this.time);
-
-}
 class Post_List_viewState extends State<Post_List_view>{
+  ErrandLatestInit() async{
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
+        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=3&status=";
+
+    try{
+      // Map<String, dynamic> userJson = u1.toJson();
+      var response = await http.get(Uri.parse(url),
+          //body: jsonEncode(u1.toJson()),
+          headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1MDQ5NDM1LCJleHAiOjE3MTU0MDk0MzV9.wTasONtC6qu0ItlfJSXMRg7qEUPNxFzNHBWF1kIfMO0"});
+      if(response.statusCode == 200) {
+        List<dynamic> result = jsonDecode(response.body);
+        for (var item in result) {
+          Post p1 = Post.fromJson(item);
+          print('200');
+          print(p1.o1.orderNo);
+          print(p1.o1.nickname);
+          print(p1.o1.score);
+          print(p1.errandNo);
+          print(p1.title);
+          print(p1.createdDate);
+          print(p1.destination);
+          print(p1.reward);
+          print(p1.status);
+        }
+
+      }
+      else{
+        print("error");
+        Map<String, dynamic> json = jsonDecode(response.body);
+        Error error = Error.fromJson(json);
+        if(error.code == "INVALID_FORMAT") {
+          print(error.httpStatus);
+          print(error.message);
+        }
+        else if(error.code == "INVALID_VALUE")
+        {
+          print(error.httpStatus);
+          print(error.message);
+        }
+        else
+        {
+          print(error.code);
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+    } catch(e) {
+      print(e.toString());
+    }
+  }
   ScrollController _scrollController = ScrollController();
   @override
   void initState(){
     super.initState();
+    ErrandLatestInit();
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent)
