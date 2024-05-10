@@ -6,8 +6,6 @@ import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
 import 'request.dart'; // 요청서 작성 페이지 연결
 
-void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
