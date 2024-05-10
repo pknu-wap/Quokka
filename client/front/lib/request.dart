@@ -37,6 +37,10 @@ class _RequestState extends State<Request> {
   late List<bool> isSelected1 = [isImmediately, isReservation];
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
+  // 일정 상세 시간 변수 선언
+  int _selectedHour = 0; // 선택된 시간 저장
+  int _selectedMinute = 0; // 선택된 분 저장
+
   // 결제 방법 토글 버튼 변수 선언
   bool isAccountTransfer = true;
   bool isCash = false;
@@ -320,32 +324,150 @@ class _RequestState extends State<Request> {
 
                   if (isDetailVisible)
                   // 시간 상세 설정 카테고리
-                  Container(
-                    margin: EdgeInsets.only(right: 71),
-                    width: 146,
-                    height: 31,
-                    decoration: BoxDecoration(
-                      border: Border.all(
+                    Container(
+                      margin: EdgeInsets.only(right: 69),
+                      width: 146,
+                      height: 31,
+                      decoration: BoxDecoration(
+                        border: Border.all(
                           color: Color(0xffC77749), // 박스 테두리 색상
-                          width: 0.5 // 테두리 굵기
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                      color: Color(0xffF5F5F5), // 박스 배경 색상
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 8, left: 13, right: 14),
-                      child: Text(
-                        '^ 13시      ^ 20분 까지',
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          letterSpacing: 0.01,
-                          color: Color(0xff252525),
+                          width: 0.5, // 테두리 굵기
                         ),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xffF5F5F5), // 박스 배경 색상
                       ),
-                    ),
-                  ),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 13),
+                            child: DropdownButton<int>(
+                              underline: Container(), // dropdownButton 밑줄 제거
+                              value: _selectedHour,
+                              onChanged: (int? newValue) {
+                                setState(() {
+                                  _selectedHour = newValue!;
+                                });
+                              },
+                              icon: Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xff808080)),
+                              items: List.generate(24, (index) {
+                                return DropdownMenuItem<int>(
+                                  value: index,
+                                  child: Text(
+                                    '$index',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      letterSpacing: 0.01,
+                                      color: Color(0xffC77749),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 5),
+                            child: Text(
+                              '시',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                letterSpacing: 0.01,
+                                color: Color(0xff4F4F4F),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 14),
+                            child: DropdownButton<int>(
+                              underline: Container(), // dropdownButton 밑줄 제거
+                              value: _selectedMinute,
+                              onChanged: (int? newValue) {
+                                setState(() {
+                                  _selectedMinute = newValue!;
+                                });
+                              },
+                              icon: Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xff808080)),
+                              items: List.generate(59, (index) {
+                                return DropdownMenuItem<int>(
+                                  value: index,
+                                  child: Text(
+                                    '$index',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      letterSpacing: 0.01,
+                                      color: Color(0xffC77749),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 4),
+                            child: Text(
+                              '분',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                letterSpacing: 0.01,
+                                color: Color(0x4F4F4F),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 0),
+                            child: Text(
+                              '까지',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                letterSpacing: 0.01,
+                                color: Color(0xffC77749),
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    )
+
+
+
+
+                  // Container(
+                  //   margin: EdgeInsets.only(right: 71),
+                  //   width: 146,
+                  //   height: 31,
+                  //   decoration: BoxDecoration(
+                  //     border: Border.all(
+                  //         color: Color(0xffC77749), // 박스 테두리 색상
+                  //         width: 0.5 // 테두리 굵기
+                  //     ),
+                  //     borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  //     color: Color(0xffF5F5F5), // 박스 배경 색상
+                  //   ),
+                  //   child: Padding(
+                  //     padding: EdgeInsets.only(top: 8, left: 13, right: 14),
+                  //     child: Text(
+                  //       '^ 13시      ^ 20분 까지',
+                  //       style: TextStyle(
+                  //         fontFamily: 'Pretendard',
+                  //         fontWeight: FontWeight.w400,
+                  //         fontSize: 12,
+                  //         letterSpacing: 0.01,
+                  //         color: Color(0xff252525),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+
 
                 ],
                ),
@@ -550,7 +672,13 @@ class _RequestState extends State<Request> {
                               color: Color(0xff111111),
                             ),
                             decoration: InputDecoration(
-                              prefixIcon: Image.asset('assets/images/₩.png'),
+                              // prefixIcon: Image.asset('assets/images/₩.png'),
+                              prefixIcon: Image.asset(
+                                  'assets/images/₩.png',
+                                color: Color(0xff7C7C7C),
+                                width: 11,
+                                height: 14,
+                              ),
                               border: InputBorder.none,
                             ),
                             keyboardType: TextInputType.number,
