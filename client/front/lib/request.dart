@@ -28,9 +28,9 @@ class _RequestState extends State<Request> {
   bool isTitleEnabled = false;
   bool isDestinationEnabled = false;
   bool isPriceEnabled = false;
+  bool isRequestEnabled = false;
 
   // 일정 토글 버튼 변수 선언
-  String result = "";
   bool isImmediately = true; // 맨 처음 고정 값
   bool isReservation = false;
   late List<bool> isSelected1 = [isImmediately, isReservation];
@@ -41,6 +41,8 @@ class _RequestState extends State<Request> {
   bool isCash = false;
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
+  bool isCompletedEnabled = false; // 작성 완료 버튼
+
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
@@ -48,6 +50,7 @@ class _RequestState extends State<Request> {
     titleController.addListener(updateTitleState);
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
+    requestController.addListener(updateRequestState);
   }
 
   @override
@@ -56,6 +59,7 @@ class _RequestState extends State<Request> {
     titleController.dispose();
     destinationController.dispose();
     priceController.dispose();
+    requestController.dispose();
     super.dispose();
   }
 
@@ -77,6 +81,13 @@ class _RequestState extends State<Request> {
     // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
     setState(() {
       isPriceEnabled = priceController.text.isNotEmpty;
+    });
+  }
+
+  void updateRequestState() {
+    // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
+    setState(() {
+      isRequestEnabled = requestController.text.isNotEmpty;
     });
   }
 
@@ -666,7 +677,48 @@ class _RequestState extends State<Request> {
                   ),
                 ),
               ),
-
+              // 작성 완료 버튼 만들기
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 110.6),
+                child: ElevatedButton(
+                  onPressed: () {
+                    print("요청서 작성 완료");
+                  },
+                  style: ButtonStyle(
+                    // 버튼의 배경색 변경하기
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          if (isTitleEnabled &&
+                            isDestinationEnabled &&
+                            isPriceEnabled &&
+                            isRequestEnabled) {
+                            return Color(0xFF7C3D1A); // 활성화된 배경색(모든 텍스트 필드 비어있지 않은 경우)
+                          } else {
+                            return Color(0xFFBD9E8C); // 비활성화 배경색(하나의 텍스트 필드라도 비어있는 경우)
+                          }
+                        }
+                    ),
+                    // 버튼의 크기 정하기
+                    minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                    // 버튼의 모양 변경하기
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            5), // 원하는 모양에 따라 BorderRadius 조절
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    '작성 완료',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                ),
+              ),
 
 
             ],
