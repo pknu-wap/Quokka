@@ -22,6 +22,8 @@ class _RequestState extends State<Request> {
   TextEditingController destinationController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController requestController = TextEditingController();
+
   // 텍스트 필드 변수 선언
   bool isTitleEnabled = false;
   bool isDestinationEnabled = false;
@@ -586,8 +588,10 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
+
+              // 요청사항 텍스트
               Container(
-                margin: EdgeInsets.only(top: 27),
+                margin: EdgeInsets.only(top: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -619,6 +623,47 @@ class _RequestState extends State<Request> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              // 요청사항 텍스트 필드
+              Container(
+                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 8.0),
+                width: 318,
+                height: 67.4,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Color(0xff2D2D2D),
+                      width: 0.5 // 테두리 굵기
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  color: Color(0xffF5F5F5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 2,left: 10, right: 10), // hintText Padding이 이상해서 임의로 설정
+                  child: TextField(
+                    controller: requestController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      letterSpacing: 0.01,
+                      color: Color(0xff111111),
+                    ),
+                    decoration: InputDecoration(
+                      hintText: '심부름 내용에 대한 간단한 설명을 적어주세요.\nex) 한 잔만 시럽 2번 추가해 주세요.',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        letterSpacing: 0.01,
+                        color: Color(0xff878787),
+                      ),
+                      border: InputBorder.none,
+                    ),
+                    maxLines: null, // 입력 텍스트가 필요한 만큼 자동으로 늘어남
+                    minLines: 1, // 최소한 1줄 표시
+                    keyboardType: TextInputType.multiline, // 여러 줄 입력 가능하도록 하기
+                  ),
                 ),
               ),
 
