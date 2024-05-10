@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5b21be5b-2c8c-4bd1-b7ab-c208ec551126" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/main_post_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/main_post_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +49,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feature/123/게시글-페이지-연동",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "E:/wap/2024-1_App1/client/front",
     "project.structure.last.edited": "Modules",
@@ -94,5 +94,16 @@
       <updated>1712238729526</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

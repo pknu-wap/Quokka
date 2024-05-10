@@ -3,11 +3,205 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'request.dart';
+class PostWidget extends StatelessWidget {
+  final String? username; //닉네임
+  final double? scope; //별점
+  final String? title; //게시글 제목
+  final String? locate; //위치
+  final int? price; //보수
+  final bool? state; //상태 (진행중 or 완료됨)
+  final int? time; //시간 (n분전)
+  const PostWidget({
+    Key? key,
+    required this.username,
+    required this.scope,
+    required this.title,
+    required this.locate,
+    required this.price,
+    required this.state,
+    required this.time,
+  }) : super(key: key);
+
+  String getState() { //상태에 따라 텍스트 출력
+    if(state == null)
+      return "";
+    else if(state!) //true일 때 진행중
+      return "진행중";
+    else //false일 때 완료됨
+      return "완료됨";
+  }
+  Color decide_color(bool? state){
+    Color state_color;
+    if(state == null)
+    {
+      state_color = Color(0xffCCB9AB);
+      return state_color;
+    }
+    else if(state)
+    {
+      state_color = Color(0xffAA7651);
+      return state_color;
+    }
+    else
+    {
+      state_color = Color(0xffCCB9AB);
+      return state_color;
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    var priceFormat = NumberFormat('###,###,###,###');
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              print('Container1 clicked!');
+            },
+            child: Container( width: 322, height: 100, //게시글 1개
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Container(
+                        child: Row( //닉네임, 평점
+                          children: [
+                            Container( height: 14, //닉네임
+                              margin: EdgeInsets.only(left: 15, top: 16),
+                              child: Text("${username}", style: TextStyle(
+                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w300, fontSize: 12,
+                                letterSpacing: 0.01, color: Color(0xff7E7E7E),
+                              ),),
+                            ),
+                            Container( height:14, //평점
+                              margin: EdgeInsets.only(top: 16),
+                              child: Text(" ${scope}점", style: TextStyle(
+                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w300, fontSize: 12,
+                                letterSpacing: 0.01, color: Color(0xff7E7E7E),
+                              ),),
+                            )
+                          ],
+                        )
+                    ),
+                    Container( //게시글 제목
+                      margin: EdgeInsets.only(top: 8,left: 15,),
+                      child: Text("${title}", style: TextStyle(
+                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w600, fontSize: 16,
+                        letterSpacing: 0.01, color: Color(0xff111111),
+                      ),),
+                    ),
+                    Container(
+                        child: Row( //위치, 가격
+                          children: [
+                            Container( margin: EdgeInsets.only(left: 15, top: 10),
+                              child: Text("${locate}   ", style: TextStyle(
+                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500, fontSize: 13,
+                                letterSpacing: 0.01, color: Color(0xff000000),
+                              ),),),
+                            Container( margin: EdgeInsets.only(top: 10),
+                              child: Text("\u20A9${priceFormat.format(price)}", style: TextStyle(
+                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500, fontSize: 13,
+                                letterSpacing: 0.01, color: Color(0xffEC5147),
+                              ),),),
+                            Container(
+                              margin: EdgeInsets.only(left: 11.0, top: 8.95),
+                              padding: EdgeInsets.all(2),
+                              width: 44.36, height: 18.1,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                color: decide_color(state),
+                              ),
+                              child: Center( //상태
+                                child: Text(getState(), style: TextStyle(
+                                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500, fontSize: 11,
+                                    letterSpacing: 0.01, color: Color(0xffFFFFFF)
+                                ),),
+                              ),
+                            ),
+                            Expanded(
+                                child: Align(alignment: Alignment.centerRight,
+                                    child: Container( //시간
+                                      margin: EdgeInsets.only(right: 14, top: 17.95),
+                                      child: Text("${time}분 전",
+                                        style: TextStyle(
+                                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w400, fontSize: 12,
+                                            letterSpacing: 0.001, color: Color(0xff434343)),
+                                      ),))),
+                          ],)),
+                  ],
+                )
+            ),
+
+          ),
+          Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
+        ],
+      ),
+
+    );
+
+
+  }
+}
 
 class Post_List_view extends StatefulWidget{
   @override
   Post_List_viewState createState() => Post_List_viewState();
 }
+  // 예시 데이터
+  final List<Map<String, dynamic>> posts = [
+    {
+      "username": "정다은",
+      "scope": 4.8,
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "locate": "디자인관 1층",
+      "price": 2000,
+      "state": true,
+      "time": 1,
+    },
+    {
+      "username": "정다은",
+      "scope": 4.8,
+      "title": "아아 2잔 10분내로 오면+1000",
+      "locate": "중앙도서관 2층",
+      "price": 2000,
+      "state": false,
+      "time": 4,
+    },
+    {
+      "username": "정다은",
+      "scope": 4.8,
+      "title": "프린트 ㅃㄹㅃㄹ 제발요",
+      "locate": "c25-101",
+      "price": 3000,
+      "state": true,
+      "time": 10,
+    },
+    {
+      "username": "정다은",
+      "scope": 4.8,
+      "title": "충전기 한시간만 빌려주세요",
+      "locate": "중앙도서관 1층",
+      "price": 1000,
+      "state": false,
+      "time": 15,
+    },
+    {
+      "username": "정다은",
+      "scope": 4.8,
+      "title": "밥 같이 먹어 줄 사람? 밥사드림",
+      "locate": "",
+      "price": 0,
+      "state": null,
+      "time": 0,
+    },
+  ];
 class Post{ //게시글에 담긴 정보들
   String? username; //닉네임
   double? scope; //별점
@@ -18,36 +212,10 @@ class Post{ //게시글에 담긴 정보들
   int? time; //시간 (n분전)
   Post(this.username, this.scope, this.title,
       this.locate, this.price, this.state, this.time);
-  String getState() { //상태에 따라 텍스트 출력
-    if(state == null)
-        return "";
-    else if(state!) //true일 때 진행중
-      return "진행중";
-    else //false일 때 완료됨
-      return "완료됨";
-  }
+
 }
 class Post_List_viewState extends State<Post_List_view>{
   ScrollController _scrollController = ScrollController();
-  int itemCount = 1;
-  Color decide_color(bool? state){
-    Color state_color;
-    if(state == null)
-      {
-        state_color = Color(0xffCCB9AB);
-        return state_color;
-      }
-    else if(state)
-      {
-        state_color = Color(0xffAA7651);
-        return state_color;
-      }
-    else
-      {
-        state_color = Color(0xffCCB9AB);
-        return state_color;
-      }
-  }
   @override
   void initState(){
     super.initState();
@@ -56,7 +224,7 @@ class Post_List_viewState extends State<Post_List_view>{
           _scrollController.position.maxScrollExtent)
       {
         setState(() {
-          itemCount++;
+          //itemCount++;
         });
       }
     });
@@ -66,468 +234,28 @@ class Post_List_viewState extends State<Post_List_view>{
     _scrollController.dispose();
     super.dispose();
   }
-  var priceFormat = NumberFormat('###,###,###,###');
-  Post p1 = Post("정다은", 4.8, "스타벅스 유스베리티 따뜻한 거",
-      "디자인관 1층", 2000, true, 1);
-  Post p2 = Post("정다은", 4.8, "아아 2잔 10분내로 오면+1000",
-      "중앙도서관 2층", 2000, false, 4);
-  Post p3 = Post("정다은", 4.8, "프린트 ㅃㄹㅃㄹ 제발요",
-      "c25-101", 3000, true, 10);
-  Post p4 = Post("정다은", 4.8, "충전기 한시간만 빌려주세요",
-      "중앙도서관 1층", 1000, false, 15);
-  Post p5 = Post("정다은", 4.8, "밥 같이 먹어 줄 사람? 밥사드림",
-      "", 0, null, 0);
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: _scrollController,
-          shrinkWrap: true,
-          itemCount: itemCount,
-          itemBuilder: (context, index){
         return Container( width: 322, height: 581, //게시글 큰틀
             margin: EdgeInsets.only(left: 19),
             decoration: BoxDecoration(
               color: Color(0xffFFFFFF),
             ),
-            child: Column(
-              children: [
-                //게시물 1
-                GestureDetector(
-                onTap: () {
-                  print('Container1 clicked!');
-                },
-                child: Container( width: 322, height: 100, //게시글 1개
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                Container(
-                    child: Row( //닉네임, 평점
-                      children: [
-                        Container( height: 14, //닉네임
-                          margin: EdgeInsets.only(left: 15, top: 16),
-                          child: Text("${p1.username}", style: TextStyle(
-                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w300, fontSize: 12,
-                            letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                          ),),
-                        ),
-                        Container( height:14, //평점
-                          margin: EdgeInsets.only(top: 16),
-                          child: Text(" ${p1.scope}점", style: TextStyle(
-                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w300, fontSize: 12,
-                            letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                          ),),
-                        )
-                      ],
-                    )
-                ),
-                Container( //게시글 제목
-                  margin: EdgeInsets.only(top: 8,left: 15,),
-                  child: Text("${p1.title}", style: TextStyle(
-                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w600, fontSize: 16,
-                    letterSpacing: 0.01, color: Color(0xff111111),
-                  ),),
-                ),
-                Container(
-                    child: Row( //위치, 가격
-                      children: [
-                        Container( margin: EdgeInsets.only(left: 15, top: 10),
-                          child: Text("${p1.locate}   ", style: TextStyle(
-                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500, fontSize: 13,
-                            letterSpacing: 0.01, color: Color(0xff000000),
-                          ),),),
-                        Container( margin: EdgeInsets.only(top: 10),
-                          child: Text("\u20A9${priceFormat.format(p1.price)}", style: TextStyle(
-                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500, fontSize: 13,
-                            letterSpacing: 0.01, color: Color(0xffEC5147),
-                          ),),),
-                        Container(
-                          margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                          padding: EdgeInsets.all(2),
-                          width: 44.36, height: 18.1,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            color: decide_color(p1.state),
-                          ),
-                          child: Center( //상태
-                            child: Text(p1.getState(), style: TextStyle(
-                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500, fontSize: 11,
-                                letterSpacing: 0.01, color: Color(0xffFFFFFF)
-                            ),),
-                          ),
-                        ),
-                              Expanded(
-                                  child: Align(alignment: Alignment.centerRight,
-                                child: Container( //시간
-                                  margin: EdgeInsets.only(right: 14, top: 17.95),
-                                  child: Text("${p1.time}분 전",
-                                    style: TextStyle(
-                                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w400, fontSize: 12,
-                                        letterSpacing: 0.001, color: Color(0xff434343)),
-                                  ),))),
-                            ],)),
-                ],
-            )
-        ),),
-                //게시글 간에 수평선
-                Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
-                //게시물 2
-                GestureDetector(
-                  onTap: () {
-                    print('Container2 clicked!');
-                  }, //게시물 2
-                  child: Container( width: 322, height: 100, //게시글 2번
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:[
-                          Container(
-                              child: Row( //닉네임, 평점
-                                children: [
-                                  Container( height: 14, //닉네임
-                                    margin: EdgeInsets.only(left: 15, top: 16),
-                                    child: Text("${p2.username}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  ),
-                                  Container( height:14, //평점
-                                    margin: EdgeInsets.only(top: 16),
-                                    child: Text(" ${p2.scope}점", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  )
-                                ],
-                              )
-                          ),
-                          Container( //게시글 제목
-                            margin: EdgeInsets.only(top: 8,left: 15,),
-                            child: Text("${p2.title}", style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600, fontSize: 16,
-                              letterSpacing: 0.01, color: Color(0xff111111),
-                            ),),
-                          ),
-                          Container(
-                              child: Row( //위치, 가격
-                                children: [
-                                  Container( margin: EdgeInsets.only(left: 15, top: 10),
-                                    child: Text("${p2.locate}   ", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xff000000),
-                                    ),),),
-                                  Container( margin: EdgeInsets.only(top: 10),
-                                    child: Text("\u20A9${priceFormat.format(p2.price)}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xffEC5147),
-                                    ),),),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                                    padding: EdgeInsets.all(2),
-                                    width: 44.36, height: 18.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: decide_color(p2.state),
-                                    ),
-                                    child: Center( //상태
-                                      child: Text(p2.getState(), style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 11,
-                                          letterSpacing: 0.01, color: Color(0xffFFFFFF)
-                                      ),),
-                                    ),
-                                  ),
-                                  Expanded(
-                                      child: Align(alignment: Alignment.centerRight,
-                                          child: Container( //시간
-                                            margin: EdgeInsets.only(right: 14, top: 17.95),
-                                            child: Text("${p2.time}분 전",
-                                              style: TextStyle(
-                                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                                  fontWeight: FontWeight.w400, fontSize: 12,
-                                                  letterSpacing: 0.001, color: Color(0xff434343)),
-                                            ),))),
-                                ],)),
-                        ],
-                      )
-                  ),
-                ),
-                //게시글 간에 수평선
-                Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
-                //게시물 3
-                GestureDetector(
-                  onTap: () {
-                    print('Container3 clicked!');
-                  }, //게시물 3
-                  child: Container( width: 322, height: 100, //게시글 3번
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:[
-                          Container(
-                              child: Row( //닉네임, 평점
-                                children: [
-                                  Container( height: 14, //닉네임
-                                    margin: EdgeInsets.only(left: 15, top: 16),
-                                    child: Text("${p3.username}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  ),
-                                  Container( height:14, //평점
-                                    margin: EdgeInsets.only(top: 16),
-                                    child: Text(" ${p3.scope}점", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  )
-                                ],
-                              )
-                          ),
-                          Container( //게시글 제목
-                            margin: EdgeInsets.only(top: 8,left: 15,),
-                            child: Text("${p3.title}", style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600, fontSize: 16,
-                              letterSpacing: 0.01, color: Color(0xff111111),
-                            ),),
-                          ),
-                          Container(
-                              child: Row( //위치, 가격
-                                children: [
-                                  Container( margin: EdgeInsets.only(left: 15, top: 10),
-                                    child: Text("${p3.locate}   ", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xff000000),
-                                    ),),),
-                                  Container( margin: EdgeInsets.only(top: 10),
-                                    child: Text("\u20A9${priceFormat.format(p3.price)}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xffEC5147),
-                                    ),),),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                                    padding: EdgeInsets.all(2),
-                                    width: 44.36, height: 18.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: decide_color(p3.state),
-                                    ),
-                                    child: Center( //상태
-                                      child: Text(p3.getState(), style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 11,
-                                          letterSpacing: 0.01, color: Color(0xffFFFFFF)
-                                      ),),
-                                    ),
-                                  ),
-                                  Expanded(
-                                      child: Align(alignment: Alignment.centerRight,
-                                          child: Container( //시간
-                                            margin: EdgeInsets.only(right: 14, top: 17.95),
-                                            child: Text("${p3.time}분 전",
-                                              style: TextStyle(
-                                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                                  fontWeight: FontWeight.w400, fontSize: 12,
-                                                  letterSpacing: 0.001, color: Color(0xff434343)),
-                                            ),))),
-                                ],)),
-                        ],
-                      )
-                  ),
-                ),
-                //게시글 간에 수평선
-                Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
-                //게시물 4
-                GestureDetector(
-                  onTap: () {
-                    print('Container4 clicked!');
-                  }, //게시물 4
-                  child: Container( width: 322, height: 100, //게시글 4번
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:[
-                          Container(
-                              child: Row( //닉네임, 평점
-                                children: [
-                                  Container( height: 14, //닉네임
-                                    margin: EdgeInsets.only(left: 15, top: 16),
-                                    child: Text("${p4.username}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  ),
-                                  Container( height:14, //평점
-                                    margin: EdgeInsets.only(top: 16),
-                                    child: Text(" ${p4.scope}점", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  )
-                                ],
-                              )
-                          ),
-                          Container( //게시글 제목
-                            margin: EdgeInsets.only(top: 8,left: 15,),
-                            child: Text("${p4.title}", style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600, fontSize: 16,
-                              letterSpacing: 0.01, color: Color(0xff111111),
-                            ),),
-                          ),
-                          Container(
-                              child: Row( //위치, 가격
-                                children: [
-                                  Container( margin: EdgeInsets.only(left: 15, top: 10),
-                                    child: Text("${p4.locate}   ", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xff000000),
-                                    ),),),
-                                  Container( margin: EdgeInsets.only(top: 10),
-                                    child: Text("\u20A9${priceFormat.format(p4.price)}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xffEC5147),
-                                    ),),),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                                    padding: EdgeInsets.all(2),
-                                    width: 44.36, height: 18.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: decide_color(p4.state),
-                                    ),
-                                    child: Center( //상태
-                                      child: Text(p4.getState(), style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 11,
-                                          letterSpacing: 0.01, color: Color(0xffFFFFFF)
-                                      ),),
-                                    ),
-                                  ),
-                                  Expanded(
-                                      child: Align(alignment: Alignment.centerRight,
-                                          child: Container( //시간
-                                            margin: EdgeInsets.only(right: 14, top: 17.95),
-                                            child: Text("${p4.time}분 전",
-                                              style: TextStyle(
-                                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                                  fontWeight: FontWeight.w400, fontSize: 12,
-                                                  letterSpacing: 0.001, color: Color(0xff434343)),
-                                            ),))),
-                                ],)),
-                        ],
-                      )
-                  ),
-                ),
-                //게시글 간에 수평선
-                Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
-                //게시물 5
-                GestureDetector(
-                  onTap: () {
-                    print('Container5 clicked!');
-                  }, //게시물 5
-                  child: Container( width: 322, height: 100, //게시글 5번
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:[
-                          Container(
-                              child: Row( //닉네임, 평점
-                                children: [
-                                  Container( height: 14, //닉네임
-                                    margin: EdgeInsets.only(left: 15, top: 16),
-                                    child: Text("${p5.username}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  ),
-                                  Container( height:14, //평점
-                                    margin: EdgeInsets.only(top: 16),
-                                    child: Text(" ${p5.scope}점", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w300, fontSize: 12,
-                                      letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                                    ),),
-                                  )
-                                ],
-                              )
-                          ),
-                          Container( //게시글 제목
-                            margin: EdgeInsets.only(top: 8,left: 15,),
-                            child: Text("${p5.title}", style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600, fontSize: 16,
-                              letterSpacing: 0.01, color: Color(0xff111111),
-                            ),),
-                          ),
-                          Container(
-                              child: Row( //위치, 가격
-                                children: [
-                                  Container( margin: EdgeInsets.only(left: 15, top: 10),
-                                    child: Text("${p5.locate}   ", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xff000000),
-                                    ),),),
-                                  Container( margin: EdgeInsets.only(top: 10),
-                                    child: Text("\u20A9${priceFormat.format(p5.price)}", style: TextStyle(
-                                      fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w500, fontSize: 13,
-                                      letterSpacing: 0.01, color: Color(0xffEC5147),
-                                    ),),),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                                    padding: EdgeInsets.all(2),
-                                    width: 44.36, height: 18.1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      color: decide_color(p5.state),
-                                    ),
-                                    child: Center( //상태
-                                      child: Text(p5.getState(), style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 11,
-                                          letterSpacing: 0.01, color: Color(0xffFFFFFF)
-                                      ),),
-                                    ),
-                                  ),
-                                  Expanded(
-                                      child: Align(alignment: Alignment.centerRight,
-                                          child: Container( //시간
-                                            margin: EdgeInsets.only(right: 14, top: 17.95),
-                                            child: Text("${p5.time}분 전",
-                                              style: TextStyle(
-                                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                                  fontWeight: FontWeight.w400, fontSize: 12,
-                                                  letterSpacing: 0.001, color: Color(0xff434343)),
-                                            ),))),
-                                ],)),
-                        ],
-                      )
-                  ),
-                ),
-              ],
-            )
-        );
-      },
+            child: ListView.builder(
+            controller: _scrollController,
+            shrinkWrap: true,
+            itemCount: posts.length,
+            itemBuilder: (BuildContext context, int index){
+            return PostWidget(
+              username: posts[index]["username"],
+              scope: posts[index]["scope"],
+              title: posts[index]["title"],
+              locate: posts[index]["locate"],
+              price: posts[index]["price"],
+              state: posts[index]["state"],
+              time: posts[index]["time"],
+          );
+        },),
     );
   }
 }
