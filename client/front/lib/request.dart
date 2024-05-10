@@ -232,7 +232,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
             Container(
-              margin: EdgeInsets.only(top: 7),
+              margin: EdgeInsets.only(top: 7, left: 22),
               child: Row(
                 children: [
                   Expanded(
@@ -240,7 +240,7 @@ class _RequestState extends State<Request> {
                       width: 106,
                       height: 31,
                       // 토글 버튼 만들기
-                      margin: EdgeInsets.only(left: 24),
+                      margin: EdgeInsets.only(left: 0),
                       child: ToggleButtons(
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
@@ -285,18 +285,37 @@ class _RequestState extends State<Request> {
 
                   // 시간 상세 설정 카테고리
                   Container(
-                    margin: EdgeInsets.only(right: 2),
-                    child: Text(
-                      '',
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        letterSpacing: 0.01,
-                        color: Color(0xffF05252),
+                    margin: EdgeInsets.only(right: 71),
+                    width: 146,
+                    height: 31,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color(0xffC77749), // 박스 테두리 색상
+                          width: 0.5 // 테두리 굵기
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                      color: Color(0xffF5F5F5), // 박스 배경 색상
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 24,left: 22, right: 20),
+                      child: TextField(
+                        controller: titleController,
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          letterSpacing: 0.01,
+                          color: Color(0xff252525),
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(bottom: 13),
+                        ),
+                        keyboardType: TextInputType.text,
                       ),
                     ),
                   ),
+
                 ],
                ),
               ),
