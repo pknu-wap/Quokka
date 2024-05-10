@@ -274,7 +274,7 @@ class _RequestState extends State<Request> {
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(5.0),
 
                         selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
                         selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
@@ -282,7 +282,7 @@ class _RequestState extends State<Request> {
                         // renderBorder: false,
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 17),
+                            padding: EdgeInsets.symmetric(horizontal: 15),
                             child: Text(
                               '즉시',
                               style: TextStyle(
@@ -294,7 +294,7 @@ class _RequestState extends State<Request> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 17),
+                            padding: EdgeInsets.symmetric(horizontal: 15),
                             child: Text(
                               '예약',
                               style: TextStyle(
@@ -528,7 +528,7 @@ class _RequestState extends State<Request> {
                               color: Color(0xff2D2D2D),
                               width: 0.5 // 테두리 굵기
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           color: Color(0xffF5F5F5),
                         ),
                         child: Padding(
@@ -560,7 +560,7 @@ class _RequestState extends State<Request> {
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(5.0),
 
                         selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
                         selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
