@@ -73,20 +73,6 @@ class _RequestState extends State<Request> {
     });
   }
 
-  // void toggleSelect(int index){
-  //   setState(() {
-  //     isSelected[index] = !isSelected[index];
-  //     // if (index == null) {
-  //     // disabledColor: Colors.red;
-  //     // }
-  //       // if (buttonIndex == index){
-  //       //   isSelected[buttonIndex] = false;
-  //       // } else{
-  //       //   isSelected[buttonIndex] = true;
-  //       // }
-  //   });
-  // }
-
   void toggleSelect(int newindex) {
     setState(() {
       for (int index = 0; index < isSelected.length; index++) {
