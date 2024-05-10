@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
-import 'request.dart'; // 요청서 작성 페이지 연결
 
 class MyApp extends StatelessWidget {
   @override
@@ -167,14 +166,7 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Request(),
-                      ),
-                    );
-
-                    // request(_UsernameController.text, _PasswordController.text);
+                    request(_UsernameController.text, _PasswordController.text);
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
