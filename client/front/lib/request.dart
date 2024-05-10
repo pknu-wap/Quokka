@@ -200,7 +200,7 @@ class _RequestState extends State<Request> {
                       width: 0.5 // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffF5F5F5), // 텍스트 필드 배경색
+                  color: Color(0xffFFFFFF), // 텍스트 필드 배경색
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(top: 7.5,left: 10, right: 10),
@@ -282,11 +282,13 @@ class _RequestState extends State<Request> {
                       margin: EdgeInsets.only(left: 0),
                       child: ToggleButtons(
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
+
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(5.0),
 
                         selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
+                        fillColor: Color(0xffFFFFFF), // 선택된 버튼 배경색
                         selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
 
                         // renderBorder: false,
@@ -334,7 +336,7 @@ class _RequestState extends State<Request> {
                           width: 0.5, // 테두리 굵기
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        color: Color(0xffF5F5F5), // 박스 배경 색상
+                        color: Color(0xffFFFFFF), // 박스 배경 색상
                       ),
                       child: Row(
                         children: [
@@ -488,7 +490,7 @@ class _RequestState extends State<Request> {
                       width: 0.5 // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffF5F5F5),
+                  color: Color(0xffFFFFFF),
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(top: 7.5,left: 7.5, right: 7.5),
@@ -519,7 +521,7 @@ class _RequestState extends State<Request> {
                       width: 0.5 // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffF5F5F5),
+                  color: Color(0xffFFFFFF),
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(top: 9.75,left: 8, right: 8),
@@ -627,7 +629,7 @@ class _RequestState extends State<Request> {
                               width: 0.5 // 테두리 굵기
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          color: Color(0xffF5F5F5),
+                          color: Color(0xffFFFFFF),
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(top: 8,left: 0, right: 10),
@@ -662,11 +664,13 @@ class _RequestState extends State<Request> {
                       margin: EdgeInsets.only(right: 85),
                       child: ToggleButtons(
                         color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
+
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(5.0),
 
                         selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
+                        fillColor: Color(0xffFFFFFF), // 선택된 버튼 배경색
                         selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
 
                         // renderBorder: false,
@@ -751,7 +755,7 @@ class _RequestState extends State<Request> {
                       width: 0.5 // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffF5F5F5),
+                  color: Color(0xffFFFFFF),
                 ),
                 child: Padding(
                   padding: EdgeInsets.only(top: 2,left: 10, right: 10), // hintText Padding이 이상해서 임의로 설정
