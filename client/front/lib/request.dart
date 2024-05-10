@@ -242,10 +242,13 @@ class _RequestState extends State<Request> {
                       // 토글 버튼 만들기
                       margin: EdgeInsets.only(left: 24),
                       child: ToggleButtons(
+                        color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
+                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
                         borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(8.0),
-                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
-                        selectedBorderColor: Color(0xffC77749),
+
+                        selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
+                        selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
 
                         // renderBorder: false,
                         children: <Widget>[
@@ -258,7 +261,6 @@ class _RequestState extends State<Request> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13,
                                 letterSpacing: 0.01,
-                                color: Color(0xff2E2E2E),
                               ),
                             ),
                           ),
@@ -271,7 +273,6 @@ class _RequestState extends State<Request> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13,
                                 letterSpacing: 0.01,
-                                color: Color(0xff2E2E2E),
                               ),
                             ),
                           ),
