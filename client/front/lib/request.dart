@@ -29,7 +29,6 @@ class _RequestState extends State<Request> {
   bool isDestinationEnabled = false;
   bool isPriceEnabled = false;
   bool isRequestEnabled = false;
-
   // 일정 토글 버튼 변수 선언
   bool isImmediately = true; // 맨 처음 고정 값
   bool isReservation = false;
@@ -291,7 +290,6 @@ class _RequestState extends State<Request> {
                         fillColor: Color(0xffFFFFFF), // 선택된 버튼 배경색
                         selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
 
-                        // renderBorder: false,
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15),
