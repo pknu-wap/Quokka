@@ -297,21 +297,16 @@ class _RequestState extends State<Request> {
                       color: Color(0xffF5F5F5), // 박스 배경 색상
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 24,left: 22, right: 20),
-                      child: TextField(
-                        controller: titleController,
+                      padding: EdgeInsets.only(top: 8, left: 13, right: 14),
+                      child: Text(
+                        '^ 13시      ^ 20분 까지',
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 13,
+                          fontSize: 12,
                           letterSpacing: 0.01,
                           color: Color(0xff252525),
                         ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(bottom: 13),
-                        ),
-                        keyboardType: TextInputType.text,
                       ),
                     ),
                   ),
