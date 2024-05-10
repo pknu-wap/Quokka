@@ -422,7 +422,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
 
-              // 심부름 값 텍스트
+              // 심부름 값 텍스트, 결제 방법 텍스트
               Container(
                 margin: EdgeInsets.only(top: 19.5),
                 child: Row(
@@ -484,6 +484,63 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
+              // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
+              Container(
+                margin: EdgeInsets.only(top: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      // 심부름 값 텍스트 필드
+                      child: Container(
+                        margin: EdgeInsets.only(left: 22.0),
+                        width: 104,
+                        height: 31,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Color(0xff2D2D2D),
+                              width: 0.5 // 테두리 굵기
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                          color: Color(0xffF5F5F5),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 7.5,left: 7.5, right: 7.5),
+                          child: TextField(
+                            controller: priceController,
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              letterSpacing: 0.01,
+                              color: Color(0xff111111),
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Image.asset('assets/images/₩.png'),
+                              border: InputBorder.none,
+                            ),
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 86),
+                      child: Text(
+                        '*',
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          letterSpacing: 0.01,
+                          color: Color(0xffF05252),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+
 
             ],
           ),
