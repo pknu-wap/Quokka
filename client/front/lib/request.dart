@@ -314,8 +314,42 @@ class _RequestState extends State<Request> {
                 ],
                ),
               ),
-
-
+              // 도착지 텍스트
+              Container(
+                margin: EdgeInsets.only(top: 27),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 24),
+                        child:  Text(
+                          '도착지',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            letterSpacing: 0.01,
+                            color: Color(0xff111111),
+                          ),
+                        ),
+                      ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 289),
+                      child: Text(
+                        '*',
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          letterSpacing: 0.01,
+                          color: Color(0xffF05252),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
 
             ],
