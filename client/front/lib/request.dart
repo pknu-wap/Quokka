@@ -151,19 +151,19 @@ class _RequestState extends State<Request> {
               ),
               //텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                width: 320,
-                height: 38,
+                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 9.0),
+                width: 318,
+                height: 31,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: Color(0xff2D2D2D),
+                      color: Color(0xff2D2D2D), // 테두리 색상
                       width: 0.5 // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffF5F5F5),
+                  color: Color(0xffF5F5F5), // 텍스트 필드 배경색
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 24,left: 22, right: 20),
+                  padding: EdgeInsets.only(top: 7.5,left: 10, right: 10),
                   child: TextField(
                     controller: titleController,
                     style: TextStyle(
@@ -175,7 +175,6 @@ class _RequestState extends State<Request> {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(bottom: 13),
                     ),
                     keyboardType: TextInputType.text,
                   ),
@@ -348,6 +347,37 @@ class _RequestState extends State<Request> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              // 도착지 입력 텍스트 필드 생성
+              Container(
+                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
+                width: 318,
+                height: 31,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Color(0xff2D2D2D),
+                      width: 0.5 // 테두리 굵기
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  color: Color(0xffF5F5F5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 7.5,left: 7.5, right: 7.5),
+                  child: TextField(
+                    controller: destinationController,
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      letterSpacing: 0.01,
+                      color: Color(0xff252525),
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
                 ),
               ),
 
