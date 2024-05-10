@@ -256,8 +256,11 @@ class _RequestState extends State<Request> {
                       // 토글 버튼 만들기
                       margin: EdgeInsets.only(left: 24),
                       child: ToggleButtons(
+                        borderWidth: 0.5,
                         borderRadius: BorderRadius.circular(8.0),
                         borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
+                        selectedBorderColor: Color(0xffC77749),
+
                         // renderBorder: false,
                         children: <Widget>[
                           Padding(
