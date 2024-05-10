@@ -31,8 +31,13 @@ class _RequestState extends State<Request> {
   String result = "";
   bool isImmediately = true; // 맨 처음 고정 값
   bool isReservation = false;
-  late List<bool> isSelected = [isImmediately, isReservation];
+  late List<bool> isSelected1 = [isImmediately, isReservation];
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
+
+  // 결제 방법 토글 버튼 변수 선언
+  bool isAccountTransfer = true;
+  bool isCash = false;
+  late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
   @override
   void initState() {
@@ -41,8 +46,6 @@ class _RequestState extends State<Request> {
     titleController.addListener(updateTitleState);
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
-    // isSelected = List.filled(2, false); // isSeleted 초기화
-    // isSelected = List.generate(2, (_) => false); // 버튼 개수에 맞게 수정
   }
 
   @override
@@ -75,13 +78,25 @@ class _RequestState extends State<Request> {
     });
   }
 
-  void toggleSelect(int newindex) {
+  void toggleSelect1(int newindex) {
     setState(() {
-      for (int index = 0; index < isSelected.length; index++) {
+      for (int index = 0; index < isSelected1.length; index++) {
         if (index == newindex){
-          isSelected[index] = true;
+          isSelected1[index] = true;
         } else{
-          isSelected[index] = false;
+          isSelected1[index] = false;
+        }
+      }
+    });
+  }
+
+  void toggleSelect2(int newindex) {
+    setState(() {
+      for (int index = 0; index < isSelected2.length; index++) {
+        if (index == newindex){
+          isSelected2[index] = true;
+        } else{
+          isSelected2[index] = false;
         }
       }
     });
@@ -278,10 +293,10 @@ class _RequestState extends State<Request> {
                             ),
                           ),
                         ],
-                        isSelected: isSelected,
-                        onPressed: toggleSelect,
+                        isSelected: isSelected1,
+                        onPressed: toggleSelect1,
                       ),
-                    ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                    ),
                   ),
 
                   // 시간 상세 설정 카테고리
@@ -486,13 +501,13 @@ class _RequestState extends State<Request> {
               ),
               // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
               Container(
-                margin: EdgeInsets.only(top: 8),
+                margin: EdgeInsets.only(top: 8, left: 22.0),
                 child: Row(
                   children: [
                     Expanded(
                       // 심부름 값 텍스트 필드
                       child: Container(
-                        margin: EdgeInsets.only(left: 22.0),
+                        margin: EdgeInsets.only(left: 0, right: 29),
                         width: 104,
                         height: 31,
                         decoration: BoxDecoration(
@@ -504,7 +519,7 @@ class _RequestState extends State<Request> {
                           color: Color(0xffF5F5F5),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 7.5,left: 7.5, right: 7.5),
+                          padding: EdgeInsets.only(top: 8,left: 0, right: 10),
                           child: TextField(
                             controller: priceController,
                             style: TextStyle(
@@ -524,16 +539,48 @@ class _RequestState extends State<Request> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 86),
-                      child: Text(
-                        '*',
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          letterSpacing: 0.01,
-                          color: Color(0xffF05252),
-                        ),
+                      width: 119,
+                      height: 31,
+                      // 토글 버튼 만들기
+                      margin: EdgeInsets.only(right: 85),
+                      child: ToggleButtons(
+                        color: Color(0xff2E2E2E), // 선택되지 않은 버튼 텍스트 색상
+                        borderColor: Color(0xffF2F2F2), // 토글 버튼 테두리 색상
+                        borderWidth: 0.5,
+                        borderRadius: BorderRadius.circular(8.0),
+
+                        selectedColor: Color(0xffC77749), // 선택된 버튼 텍스트 색상
+                        selectedBorderColor: Color(0xffC77749), // 선택된 버튼 테두리 색상
+
+                        // renderBorder: false,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text(
+                              '계좌이체',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text(
+                              '현금',
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,
+                              ),
+                            ),
+                          ),
+                        ],
+                        isSelected: isSelected2,
+                        onPressed: toggleSelect2,
                       ),
                     ),
                   ],
