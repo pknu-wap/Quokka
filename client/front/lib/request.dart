@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'map.dart';
 
-// import 'package:http/http.dart' as http;
+
+// import 'package:http/http.dart' as http; // 백엔드와 연동 시 필요
 import 'dart:convert';
 
 import 'package:front/main.dart';
@@ -493,10 +492,10 @@ class _RequestState extends State<Request> {
               GestureDetector(
                 onTap: () {
                   print("도착지 텍스트 필드 클릭");
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => MapScreen()), // 지도 페이지로 이동
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Map()), // 지도 페이지로 이동
+                  );
                 },
                 child: Container(
                 margin: EdgeInsets.only(top: 6),
