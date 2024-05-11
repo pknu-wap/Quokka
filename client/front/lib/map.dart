@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
 
-//현재 화면에서 뒤로가기
-class Map extends StatefulWidget {
+
+class MyApp extends StatelessWidget {
   @override
-  _MapState createState() => _MapState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Naver Map',
+      home: NaverMap(),
+    );
+  }
+}
+
+class NaverMap extends StatefulWidget {
+  @override
+  _NaverMapState createState() => _NaverMapState();
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
-class _MapState extends State<Map> {
+class _NaverMapState extends State<NaverMap> {
   TextEditingController destinationController = TextEditingController();
 
 
@@ -39,6 +49,7 @@ class _MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(title: const Text('NaverMap Test')),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
