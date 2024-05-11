@@ -42,7 +42,7 @@ class _NMapState extends State<NMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("보물지도"),
+      appBar: AppBar(title: Text("도착지 검색"),
       ),
       body: Container(
           child: NaverMap(
