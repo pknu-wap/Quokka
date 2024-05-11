@@ -659,39 +659,55 @@ class _RequestState extends State<Request> {
                     Expanded(
                       // 심부름 값 텍스트 필드
                       child: Container(
-                        margin: EdgeInsets.only(left: 0, right: 29),
-                        width: 104,
-                        height: 31,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Container(
+                              width: 104,
+                              height: 31,
+                              decoration: BoxDecoration(
+                                border:
+                                Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                                ),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                color: Color(0xffFFFFFF),
                               ),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          color: Color(0xffFFFFFF),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 2, left: 0, right: 10),
-                          child: TextField(
-                            controller: priceController,
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              letterSpacing: 0.01,
-                              color: Color(0xff111111),
-                            ),
-                            decoration: InputDecoration(
-                              // prefixIcon: Image.asset('assets/images/₩.png'),
-                              prefixIcon: Image.asset(
-                                'assets/images/₩.png',
-                                color: Color(0xff7C7C7C),
-                                width: 11,
-                                height: 14,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
+                                child: TextField(
+                                  controller: destinationController,
+                                  style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13,
+                                    letterSpacing: 0.01,
+                                    color: Color(0xff373737),
+                                  ),
+                                  decoration: InputDecoration(
+                                    // contentPadding: EdgeInsets.only(left: 11.58),
+                                    border: InputBorder.none,
+                                  ),
+                                  keyboardType: TextInputType.text,
+                                ),
                               ),
-                              border: InputBorder.none,
                             ),
-                            keyboardType: TextInputType.number,
-                          ),
+
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 9, top: 3),
+                                  color: Colors.transparent,
+                                  child: Image.asset(
+                                              'assets/images/₩.png',
+                                              color: Color(0xff7C7C7C),
+                                              width: 11,
+                                              height: 14,
+                                            ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
