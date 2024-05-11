@@ -13,7 +13,7 @@ class _MapState extends State<Map> {
 
 
   bool isDestinationEnabled = false;  // 텍스트 필드 변수 선언
-  bool isCompletedEnabled = false; // 작성 완료 버튼
+  bool isCompletedEnabled = false; // 도착지로 설정할게요 버튼
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _MapState extends State<Map> {
                       },
                     ),
                     Text(
-                      '요청서 작성하기',
+                      '도착지 찾기',
                       style: TextStyle(
                         fontFamily: 'Paybooc',
                         fontWeight: FontWeight.w700,
