@@ -30,7 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_naver_map: ^1.0.2
+  flutter_naver_map: ^1.0.0-dev.5
+#  flutter_naver_map: ^1.0.2
   confetti: ^0.7.0
   image_picker: ^1.0.0
   http: ^0.13.5
