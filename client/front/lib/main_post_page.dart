@@ -10,8 +10,8 @@ class PostWidget extends StatelessWidget {
   final String nickname; //닉네임
   final double score; //평점
   final int errandNo; //게시글 번호
+  final String createdDate; //생성시간
   final String title; //제목
-  final String createdDate; //생성 시간
   final String destination; //목적지
   final int reward; //보수
   final String status; //상태 (모집중, 진행중, 완료됨)
@@ -21,8 +21,8 @@ class PostWidget extends StatelessWidget {
     required this.nickname,
     required this.score,
     required this.errandNo,
-    required this.title,
     required this.createdDate,
+    required this.title,
     required this.destination,
     required this.reward,
     required this.status,
@@ -177,7 +177,7 @@ class Post{//게시글에 담긴 정보들
   String destination; //위치
   int reward; //보수
   String status; //상태 (모집중 or 진행중 or 완료됨)
-  Post(this.o1, this.errandNo, this.title, this.createdDate,
+  Post(this.o1, this.errandNo, this.createdDate, this.title,
       this.destination, this.reward, this.status);
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
@@ -209,15 +209,12 @@ class Post_List_view extends StatefulWidget{
   Post_List_viewState createState() => Post_List_viewState();
 }
   // 데이터 저장
-  final List<Map<String, dynamic>> posts = [
-
-  ];
+  final List<Map<String, dynamic>> posts = [];
 class Post_List_viewState extends State<Post_List_view>{
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=3&status=";
+        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=";
       var response = await http.get(Uri.parse(url),
-          //body: jsonEncode(u1.toJson()),
           headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1MDQ5NDM1LCJleHAiOjE3MTU0MDk0MzV9.wTasONtC6qu0ItlfJSXMRg7qEUPNxFzNHBWF1kIfMO0"});
       if(response.statusCode == 200) {
         List<dynamic> result = jsonDecode(response.body);
@@ -228,15 +225,17 @@ class Post_List_viewState extends State<Post_List_view>{
             "nickname": p1.o1.nickname,
             "score": p1.o1.score,
             "errandNo": p1.errandNo,
-            "title": p1.title,
             "createdDate": p1.createdDate,
+            "title": p1.title,
             "destination": p1.destination,
             "reward": p1.reward,
             "status": p1.status,
           });
           print('200');
         }
-        setState(() {});
+        setState(() {
+
+        });
       }
       else{
         print("error");
@@ -259,6 +258,60 @@ class Post_List_viewState extends State<Post_List_view>{
         }
       }
   }
+  ErrandLatestAdd() async{
+    Map<String, dynamic> lastPost = posts.last;
+    int lasterrandNo = lastPost['errandNo'];
+    String lastcreatedDate = lastPost['createdDate'];
+    String lastCreatedDate = utf8.decode(lastcreatedDate.runes.toList());
+    print(lasterrandNo);
+    print(lastCreatedDate);
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
+        "latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=";
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1MDQ5NDM1LCJleHAiOjE3MTU0MDk0MzV9.wTasONtC6qu0ItlfJSXMRg7qEUPNxFzNHBWF1kIfMO0"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        Post p1 = Post.fromJson(item);
+        posts.add({
+          "orderNo": p1.o1.orderNo,
+          "nickname": p1.o1.nickname,
+          "score": p1.o1.score,
+          "errandNo": p1.errandNo,
+          "createdDate": p1.createdDate,
+          "title": p1.title,
+          "destination": p1.destination,
+          "reward": p1.reward,
+          "status": p1.status,
+        });
+        print('200');
+        print(lasterrandNo);
+        print(lastCreatedDate);
+      }
+      setState(() {
+      });
+    }
+    else{
+      print("error");
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else if(error.code == "INVALID_VALUE")
+      {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else
+      {
+        print(error.code);
+        print(error.httpStatus);
+        print(error.message);
+      }
+    }
+  }
   ScrollController _scrollController = ScrollController();
   @override
   void initState(){
@@ -269,7 +322,7 @@ class Post_List_viewState extends State<Post_List_view>{
           _scrollController.position.maxScrollExtent)
       {
         setState(() {
-          //itemCount++;
+          ErrandLatestAdd();
         });
       }
     });
@@ -304,8 +357,8 @@ class Post_List_viewState extends State<Post_List_view>{
               nickname: decodedNickname,
               score: posts[index]["score"],
               errandNo: posts[index]["errandNo"],
-              title: decodedTitle,
               createdDate: decodedCreatedDate,
+              title: decodedTitle,
               destination: decodedDestination,
               reward: posts[index]["reward"],
               status: posts[index]["status"],
