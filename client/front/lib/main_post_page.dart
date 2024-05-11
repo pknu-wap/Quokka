@@ -6,40 +6,45 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
 class PostWidget extends StatelessWidget {
-  final String? username; //닉네임
-  final double? scope; //별점
-  final String? title; //게시글 제목
-  final String? locate; //위치
-  final int? price; //보수
-  final bool? state; //상태 (진행중 or 완료됨)
-  final int? time; //시간 (n분전)
+  final int orderNo; //요청서 번호
+  final String nickname; //닉네임
+  final double score; //평점
+  final int errandNo; //게시글 번호
+  final String title; //제목
+  final String createdDate; //생성 시간
+  final String destination; //목적지
+  final int reward; //보수
+  final String status; //상태 (모집중, 진행중, 완료됨)
   const PostWidget({
     Key? key,
-    required this.username,
-    required this.scope,
+    required this.orderNo,
+    required this.nickname,
+    required this.score,
+    required this.errandNo,
     required this.title,
-    required this.locate,
-    required this.price,
-    required this.state,
-    required this.time,
+    required this.createdDate,
+    required this.destination,
+    required this.reward,
+    required this.status,
   }) : super(key: key);
 
   String getState() { //상태에 따라 텍스트 출력
-    if(state == null)
-      return "";
-    else if(state!) //true일 때 진행중
+    if(status == "RECRUITING")
+      {
+        return "모집중";
+      }
+    else if(status == "IN_PROGRESS")
       return "진행중";
-    else //false일 때 완료됨
+    else if(status == "DONE")
       return "완료됨";
+    else
+      {
+        return "";
+      }
   }
-  Color decide_color(bool? state){
+  Color decide_color(String state){
     Color state_color;
-    if(state == null)
-    {
-      state_color = Color(0xffCCB9AB);
-      return state_color;
-    }
-    else if(state)
+    if(state == "RECRUITING")
     {
       state_color = Color(0xffAA7651);
       return state_color;
@@ -70,7 +75,7 @@ class PostWidget extends StatelessWidget {
                           children: [
                             Container( height: 14, //닉네임
                               margin: EdgeInsets.only(left: 15, top: 16),
-                              child: Text("${username}", style: TextStyle(
+                              child: Text("${nickname}", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w300, fontSize: 12,
                                 letterSpacing: 0.01, color: Color(0xff7E7E7E),
@@ -78,7 +83,7 @@ class PostWidget extends StatelessWidget {
                             ),
                             Container( height:14, //평점
                               margin: EdgeInsets.only(top: 16),
-                              child: Text(" ${scope}점", style: TextStyle(
+                              child: Text(" ${score}점", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w300, fontSize: 12,
                                 letterSpacing: 0.01, color: Color(0xff7E7E7E),
@@ -99,13 +104,13 @@ class PostWidget extends StatelessWidget {
                         child: Row( //위치, 가격
                           children: [
                             Container( margin: EdgeInsets.only(left: 15, top: 10),
-                              child: Text("${locate}   ", style: TextStyle(
+                              child: Text("${destination}   ", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 13,
                                 letterSpacing: 0.01, color: Color(0xff000000),
                               ),),),
                             Container( margin: EdgeInsets.only(top: 10),
-                              child: Text("\u20A9${priceFormat.format(price)}", style: TextStyle(
+                              child: Text("\u20A9${priceFormat.format(reward)}", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 13,
                                 letterSpacing: 0.01, color: Color(0xffEC5147),
@@ -116,7 +121,7 @@ class PostWidget extends StatelessWidget {
                               width: 44.36, height: 18.1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                color: decide_color(state),
+                                color: decide_color(status),
                               ),
                               child: Center( //상태
                                 child: Text(getState(), style: TextStyle(
@@ -130,7 +135,7 @@ class PostWidget extends StatelessWidget {
                                 child: Align(alignment: Alignment.centerRight,
                                     child: Container( //시간
                                       margin: EdgeInsets.only(right: 14, top: 17.95),
-                                      child: Text("${time}분 전",
+                                      child: Text("${createdDate}",
                                         style: TextStyle(
                                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                             fontWeight: FontWeight.w400, fontSize: 12,
@@ -203,61 +208,14 @@ class Post_List_view extends StatefulWidget{
   @override
   Post_List_viewState createState() => Post_List_viewState();
 }
-  // 예시 데이터
+  // 데이터 저장
   final List<Map<String, dynamic>> posts = [
-    {
-      "username": "정다은",
-      "scope": 4.8,
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "locate": "디자인관 1층",
-      "price": 2000,
-      "state": true,
-      "time": 1,
-    },
-    {
-      "username": "정다은",
-      "scope": 4.8,
-      "title": "아아 2잔 10분내로 오면+1000",
-      "locate": "중앙도서관 2층",
-      "price": 2000,
-      "state": false,
-      "time": 4,
-    },
-    {
-      "username": "정다은",
-      "scope": 4.8,
-      "title": "프린트 ㅃㄹㅃㄹ 제발요",
-      "locate": "c25-101",
-      "price": 3000,
-      "state": true,
-      "time": 10,
-    },
-    {
-      "username": "정다은",
-      "scope": 4.8,
-      "title": "충전기 한시간만 빌려주세요",
-      "locate": "중앙도서관 1층",
-      "price": 1000,
-      "state": false,
-      "time": 15,
-    },
-    {
-      "username": "정다은",
-      "scope": 4.8,
-      "title": "밥 같이 먹어 줄 사람? 밥사드림",
-      "locate": "",
-      "price": 0,
-      "state": null,
-      "time": 0,
-    },
+
   ];
 class Post_List_viewState extends State<Post_List_view>{
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=3&status=";
-
-    try{
-      // Map<String, dynamic> userJson = u1.toJson();
       var response = await http.get(Uri.parse(url),
           //body: jsonEncode(u1.toJson()),
           headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1MDQ5NDM1LCJleHAiOjE3MTU0MDk0MzV9.wTasONtC6qu0ItlfJSXMRg7qEUPNxFzNHBWF1kIfMO0"});
@@ -265,18 +223,20 @@ class Post_List_viewState extends State<Post_List_view>{
         List<dynamic> result = jsonDecode(response.body);
         for (var item in result) {
           Post p1 = Post.fromJson(item);
+          posts.add({
+            "orderNo": p1.o1.orderNo,
+            "nickname": p1.o1.nickname,
+            "score": p1.o1.score,
+            "errandNo": p1.errandNo,
+            "title": p1.title,
+            "createdDate": p1.createdDate,
+            "destination": p1.destination,
+            "reward": p1.reward,
+            "status": p1.status,
+          });
           print('200');
-          print(p1.o1.orderNo);
-          print(p1.o1.nickname);
-          print(p1.o1.score);
-          print(p1.errandNo);
-          print(p1.title);
-          print(p1.createdDate);
-          print(p1.destination);
-          print(p1.reward);
-          print(p1.status);
         }
-
+        setState(() {});
       }
       else{
         print("error");
@@ -298,9 +258,6 @@ class Post_List_viewState extends State<Post_List_view>{
           print(error.message);
         }
       }
-    } catch(e) {
-      print(e.toString());
-    }
   }
   ScrollController _scrollController = ScrollController();
   @override
@@ -334,14 +291,24 @@ class Post_List_viewState extends State<Post_List_view>{
             shrinkWrap: true,
             itemCount: posts.length,
             itemBuilder: (BuildContext context, int index){
+              String nickname = posts[index]["nickname"];
+              String title = posts[index]['title'];
+              String destination = posts[index]['destination'];
+              String createdDate = posts[index]["createdDate"];
+              String decodedNickname = utf8.decode(nickname.runes.toList());
+              String decodedTitle = utf8.decode(title.runes.toList());
+              String decodedDestination = utf8.decode(destination.runes.toList());
+              String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
             return PostWidget(
-              username: posts[index]["username"],
-              scope: posts[index]["scope"],
-              title: posts[index]["title"],
-              locate: posts[index]["locate"],
-              price: posts[index]["price"],
-              state: posts[index]["state"],
-              time: posts[index]["time"],
+              orderNo: posts[index]["orderNo"],
+              nickname: decodedNickname,
+              score: posts[index]["score"],
+              errandNo: posts[index]["errandNo"],
+              title: decodedTitle,
+              createdDate: decodedCreatedDate,
+              destination: decodedDestination,
+              reward: posts[index]["reward"],
+              status: posts[index]["status"],
           );
         },),
     );
