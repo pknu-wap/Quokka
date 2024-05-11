@@ -5,8 +5,6 @@ import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
