@@ -489,36 +489,59 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-              // 도착지 입력 텍스트 필드 생성
+              // 도착지 텍스트
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
-                width: 318,
-                height: 31,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                margin: EdgeInsets.only(top: 6),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Container(
+                      width: 318,
+                      height: 31,
+                      decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                                    ),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            color: Color(0xffFFFFFF),
                           ),
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffFFFFFF),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
-                  child: TextField(
-                    controller: destinationController,
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      letterSpacing: 0.01,
-                      color: Color(0xff373737),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 7.5, left: 0, right: 7.5),
+                            child: TextField(
+                              controller: destinationController,
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,
+                                color: Color(0xff373737),
+                              ),
+                              decoration: InputDecoration(
+                                // contentPadding: EdgeInsets.only(left: 11.58),
+                                border: InputBorder.none,
+                              ),
+                              keyboardType: TextInputType.text,
+                            ),
+                          ),
+                        ),
+
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 9, top: 3),
+                          color: Colors.transparent,
+                          child: Icon(
+                              Icons.search,
+                            color: Color(0xffB9BCC6),
+                          ),
+                        ),
+                      ),
                     ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                    keyboardType: TextInputType.text,
-                  ),
+                  ],
                 ),
               ),
+
               // 상세 주소 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
