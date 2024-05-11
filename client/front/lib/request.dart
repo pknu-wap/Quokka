@@ -492,6 +492,7 @@ class _RequestState extends State<Request> {
               // 도착지 텍스트 필드
               GestureDetector(
                 onTap: () {
+                  print("도착지 텍스트 필드 클릭");
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(builder: (context) => MapScreen()), // 지도 페이지로 이동
