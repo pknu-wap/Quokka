@@ -100,6 +100,38 @@ class _MapState extends State<Map> {
                   ],
                 ),
               ),
+              // 도착지로 설정할게요 버튼 만들기
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 110.6),
+                child: ElevatedButton(
+                  onPressed: () {
+                    print("도착지 설정 완료");
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xFF7C3D1A)),
+                    // 버튼의 크기 정하기
+                    minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                    // 버튼의 모양 변경하기
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            5), // 원하는 모양에 따라 BorderRadius 조절
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    '도착지로 설정할게요',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                ),
+              ),
+
 
 
 
