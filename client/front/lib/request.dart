@@ -506,7 +506,7 @@ class _RequestState extends State<Request> {
                             color: Color(0xffFFFFFF),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.only(top: 7.5, left: 0, right: 7.5),
+                            padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
                             child: TextField(
                               controller: destinationController,
                               style: TextStyle(
