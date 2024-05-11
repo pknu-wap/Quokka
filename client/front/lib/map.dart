@@ -5,105 +5,143 @@ import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-void map() async{
-  await _initialize();
-  runApp(const NaverMapApp());
+void map() {
+  runApp(const Map());
 }
 
-Future<void> _initialize() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await NaverMapSdk.instance.initialize(
-    clientId: 'a2gzk9vug1', // 클라이언트 ID 설정
-    onAuthFailed: (e) => log("네이버 지도 인증 오류 : $e", name: "onAuthFailed")
-  );
-}
-
-class NaverMapApp extends StatelessWidget {
-  final int? testId;
-
-  const NaverMapApp({super.key, this.testId});
-
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-      home: testId == null
-          ? const FirstPage()
-          : TestPage(key: Key("testPage_$testId")));
-}
-
-class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key}) : super(key: key);
+class Map extends StatelessWidget {
+  const Map({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('First Page')),
-        body: Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TestPage()));
-                },
-                child: const Text('Go to Second Page'))));
-  }
-}
-
-class TestPage extends StatefulWidget {
-  const TestPage({Key? key}) : super(key: key);
-
-  @override
-  State<TestPage> createState() => TestPageState();
-}
-
-class TestPageState extends State<TestPage> {
-  late NaverMapController _mapController;
-  final Completer<NaverMapController> mapControllerCompleter = Completer();
-
-  @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final pixelRatio = mediaQuery.devicePixelRatio;
-    final mapSize =
-    Size(mediaQuery.size.width - 32, mediaQuery.size.height - 72);
-    final physicalSize =
-    Size(mapSize.width * pixelRatio, mapSize.height * pixelRatio);
-
-    print("physicalSize: $physicalSize");
-
-    return Scaffold(
-      backgroundColor: const Color(0xFF343945),
-      body: Center(
-          child: SizedBox(
-              width: mapSize.width,
-              height: mapSize.height,
-              // color: Colors.greenAccent,
-              child: _naverMapSection())),
+    return MaterialApp(
+      title: 'Map',
+      home: NMap()
     );
   }
-
-  Widget _naverMapSection() => NaverMap(
-    options: const NaverMapViewOptions(
-        indoorEnable: true,
-        locationButtonEnable: false,
-        consumeSymbolTapEvents: false),
-    onMapReady: (controller) async {
-      _mapController = controller;
-      mapControllerCompleter.complete(controller);
-      log("onMapReady", name: "onMapReady");
-    },
-  );
 }
 
+class NMap extends StatefulWidget {
+  const NMap({super.key});
 
+  @override
+  State<NMap> createState() => _NMapState();
+}
+
+class _NMapState extends State<NMap> {
+  final NCameraPosition position = NCameraPosition(
+      target: NLatLng(35.13354860000066, 129.10231956595868),
+      zoom: 12
+  );
+  // 뷰포트 -> Latitude : 위도(38), Longitude : 경도(127) -> 처음 시작 위치
+  // https://map.naver.com/p/entry/place/12104897?c=15.19,0,0,0,dh
+  // 위도 : 35.13354860000066
+  // 경도 : 129.10231956595868
+  // 주소 : 부산 남구 대연동 430-1 => 부경대학교 대연캠퍼스
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("보물지도"),
+      ),
+      body: Container(
+          child: NaverMap(
+          ),
+      ),
+    );
+  }
+}
+
+// void map() async{
+//   await _initialize();
+//   runApp(const NaverMapApp());
+// }
+//
+// Future<void> _initialize() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await NaverMapSdk.instance.initialize( // 네이버 지도 SDK 초기화 확인
+//     clientId: '<a2gzk9vug1>', // 클라이언트 ID 설정
+//     onAuthFailed: (ex) => log("네이버 지도 인증 오류 : $ex")
+//   );
+// }
+//
+// class NaverMapApp extends StatelessWidget {
+//   final int? testId;
+//
+//   const NaverMapApp({super.key, this.testId});
+//
+//   @override
+//   Widget build(BuildContext context) => MaterialApp(
+//       home: testId == null
+//           ? const FirstPage()
+//           : TestPage(key: Key("testPage_$testId")));
+// }
+//
+// class FirstPage extends StatelessWidget {
+//   const FirstPage({Key? key}) : super(key: key);
+//
 //   @override
 //   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Naver Map',
-//       home: NaverMap(),
-//     );
+//     return Scaffold(
+//         appBar: AppBar(title: const Text('First Page')),
+//         body: Center(
+//             child: ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                           builder: (context) => const TestPage()));
+//                 },
+//                 child: const Text('Go to Second Page'))));
 //   }
 // }
+//
+// class TestPage extends StatefulWidget {
+//   const TestPage({Key? key}) : super(key: key);
+//
+//   @override
+//   State<TestPage> createState() => TestPageState();
+// }
+//
+// class TestPageState extends State<TestPage> {
+//   late NaverMapController _mapController;
+//   final Completer<NaverMapController> mapControllerCompleter = Completer();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final mediaQuery = MediaQuery.of(context);
+//     final pixelRatio = mediaQuery.devicePixelRatio;
+//     final mapSize =
+//     Size(mediaQuery.size.width - 32, mediaQuery.size.height - 72);
+//     final physicalSize =
+//     Size(mapSize.width * pixelRatio, mapSize.height * pixelRatio);
+//
+//     print("physicalSize: $physicalSize");
+//
+//     return Scaffold(
+//       backgroundColor: const Color(0xFF343945),
+//       body: Center(
+//           child: SizedBox(
+//               width: mapSize.width,
+//               height: mapSize.height,
+//               // color: Colors.greenAccent,
+//               child: _naverMapSection())),
+//     );
+//   }
+//
+//   Widget _naverMapSection() => NaverMap(
+//     options: const NaverMapViewOptions(
+//         indoorEnable: true,
+//         locationButtonEnable: false,
+//         consumeSymbolTapEvents: false),
+//     onMapReady: (controller) async {
+//       _mapController = controller;
+//       mapControllerCompleter.complete(controller);
+//       log("onMapReady", name: "onMapReady");
+//     },
+//   );
+// }
+
 
 
 // class NaverMap extends StatefulWidget {

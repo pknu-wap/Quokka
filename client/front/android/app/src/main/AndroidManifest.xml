@@ -5,6 +5,10 @@
         android:label="front"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.example.front.API_KEY"
+            android:value="6u7KnDb7x72D6NGzwgaXaOhOTJ2La86CH97CEp1A"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
