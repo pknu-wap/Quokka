@@ -489,8 +489,15 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-              // 도착지 텍스트
-              Container(
+              // 도착지 텍스트 필드
+              GestureDetector(
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => MapScreen()), // 지도 페이지로 이동
+                  // );
+                },
+                child: Container(
                 margin: EdgeInsets.only(top: 6),
                 child: Stack(
                   clipBehavior: Clip.none,
@@ -541,6 +548,7 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
+            ),
 
               // 상세 주소 텍스트 필드
               Container(
