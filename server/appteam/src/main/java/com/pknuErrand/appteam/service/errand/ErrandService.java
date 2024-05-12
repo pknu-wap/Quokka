@@ -54,7 +54,7 @@ public class ErrandService {
                 .erranderNo(null)
                 .build();
         errandRepository.save(saveErrand);
-        return findErrandById(saveErrand.getErrandNo());
+        return findErrandDetailById(saveErrand.getErrandNo());
     }
 
     @Transactional(readOnly = true)
@@ -126,9 +126,13 @@ public class ErrandService {
         List<Errand> errandList = errandRepository.findAll();
         return getFilteredErrandList(errandList);
     }
+    @Transactional(readOnly = true)
+    public Errand findErrandById(long id) {
+        return errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
+    }
 
     @Transactional(readOnly = true)
-    public ErrandDetailResponseDto findErrandById(long id) {
+    public ErrandDetailResponseDto findErrandDetailById(long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
 
@@ -162,7 +166,7 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수락이 불가능합니다.");
         }
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
-        return findErrandById(id);
+        return findErrandDetailById(id);
     }
 
     @Transactional
@@ -199,7 +203,7 @@ public class ErrandService {
                 errandSaveRequestDto.getReward(),
                 errandSaveRequestDto.isCash());
 
-        return findErrandById(id);
+        return findErrandDetailById(id);
     }
 
     @Transactional

@@ -39,6 +39,9 @@ public class MemberService{
         Member member = memberRepository.findById(id);
         return member;
     }
+    public Member findMemberByMemberNo(long id) {
+        return memberRepository.findMemberByMemberNo(id);
+    }
 
     public Member getLoginMember() {
 

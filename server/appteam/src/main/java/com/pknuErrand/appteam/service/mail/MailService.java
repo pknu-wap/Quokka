@@ -1,6 +1,6 @@
 package com.pknuErrand.appteam.service.mail;
 
-import com.pknuErrand.appteam.domain.Mail.VerificationCode;
+import com.pknuErrand.appteam.domain.mail.VerificationCode;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
 import com.pknuErrand.appteam.repository.mail.MailMemoryRepository;
