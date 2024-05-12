@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
-import 'package:flutter_kakao_map/flutter_kakao_map.dart';
-import 'package:flutter_kakao_map/kakao_maps_flutter_platform_interface.dart';
+import 'package com.kakao.vectormap.camera';
 
 void map() {
   runApp(KakaoMap());
