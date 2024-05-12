@@ -494,7 +494,7 @@ class _RequestState extends State<Request> {
                   print("도착지 텍스트 필드 클릭");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => NMap()), // 지도 페이지로 이동
+                    MaterialPageRoute(builder: (context) => KakaoMapTest()), // 지도 페이지로 이동
                   );
                 },
                 child: Container(
