@@ -673,7 +673,7 @@ class _RequestState extends State<Request> {
                                 color: Color(0xffFFFFFF),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
+                                padding: EdgeInsets.only(top: 1, left: 27, right: 7.5),
                                 child: TextField(
                                   controller: priceController,
                                   style: TextStyle(
@@ -684,7 +684,6 @@ class _RequestState extends State<Request> {
                                     color: Color(0xff373737),
                                   ),
                                   decoration: InputDecoration(
-                                    // contentPadding: EdgeInsets.only(left: 11.58),
                                     border: InputBorder.none,
                                   ),
                                   keyboardType: TextInputType.text,
@@ -696,7 +695,7 @@ class _RequestState extends State<Request> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Container(
-                                  padding: EdgeInsets.only(left: 9, top: 3),
+                                  padding: EdgeInsets.only(left: 9, top: 6),
                                   color: Colors.transparent,
                                   child: Image.asset(
                                               'assets/images/₩.png',
