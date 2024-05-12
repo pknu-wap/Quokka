@@ -1,6 +1,6 @@
 package com.pknuErrand.appteam.dto.errand.getDto;
 
-import com.pknuErrand.appteam.Enum.ErrandStatus;
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +24,6 @@ public class ErrandListResponseDto { // from Entity
 
     private int reward; // 보수금액
 
-    private ErrandStatus errandStatus; // 상태
+    private Status status; // 상태
 
 }

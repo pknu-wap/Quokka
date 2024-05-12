@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.repository;
+package com.pknuErrand.appteam.repository.mail;
 
 import com.pknuErrand.appteam.domain.Mail.VerificationCode;
 import lombok.Getter;

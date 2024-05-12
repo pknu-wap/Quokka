@@ -1,8 +1,7 @@
 package com.pknuErrand.appteam.controller.mail;
 
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
-import com.pknuErrand.appteam.service.MailService;
+import com.pknuErrand.appteam.service.mail.MailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

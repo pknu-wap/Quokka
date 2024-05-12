@@ -1,5 +1,5 @@
 package com.pknuErrand.appteam.Enum;
 
-public enum ErrandStatus {
+public enum Status {
     RECRUITING, IN_PROGRESS, DONE;
 }

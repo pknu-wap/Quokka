@@ -2,7 +2,7 @@ package com.pknuErrand.appteam.service.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
-import com.pknuErrand.appteam.Enum.ErrandStatus;
+import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pknuErrand.appteam.Enum.ErrandStatus.RECRUITING;
+import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 
 @Service
 public class ErrandService {
@@ -71,10 +71,10 @@ public class ErrandService {
 
         if (!pageInfo.getCursor().contains("-"))
             throw new CustomException(ErrorCode.INVALID_FORMAT, "Cursor에 날짜/시간 형식을 넣어주세요.");
-        else if (pageInfo.getErrandStatus() == null)
+        else if (pageInfo.getStatus() == null)
             errandList = errandRepository.findErrandByLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit());
         else
-            errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getErrandStatus().toString());
+            errandList = errandRepository.findErrandByStatusAndLatest(pageInfo.getPk(), (String) pageInfo.getCursor(), pageInfo.getLimit(), pageInfo.getStatus().toString());
 
         return getFilteredErrandList(errandList);
     }
@@ -91,10 +91,10 @@ public class ErrandService {
         } catch (NumberFormatException e) {
             throw new CustomException(ErrorCode.INVALID_FORMAT, "REWARD (금액순) 일때는 Cursor에 0이상의 정수(금액)를 넣어주세요.");
         }
-        if (pageInfo.getErrandStatus() == null)
+        if (pageInfo.getStatus() == null)
             errandList = errandRepository.findErrandByReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit());
         else
-            errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getErrandStatus().toString());
+            errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getStatus().toString());
 
         return getFilteredErrandList(errandList);
     }
@@ -113,7 +113,7 @@ public class ErrandService {
                     .title(errand.getTitle())
                     .destination(errand.getDestination())
                     .reward(errand.getReward())
-                    .errandStatus(errand.getErrandStatus())
+                    .status(errand.getStatus())
                     .build();
 
             errandListResponseDtoList.add(errandListResponseDto);
@@ -144,7 +144,7 @@ public class ErrandService {
                 .detail(errand.getDetail())
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
-                .errandStatus(errand.getErrandStatus())
+                .status(errand.getStatus())
                 .isMyErrand(memberErrandDto.getOrderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
@@ -158,16 +158,16 @@ public class ErrandService {
         /** 본인 게시물이라면 예외 발생 **/
         if(errand.getOrderNo().getMemberNo() == errander.getMemberNo())
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물을 수락할 수 없습니다.");
-        if(!errand.getErrandStatus().equals(RECRUITING)) {
+        if(!errand.getStatus().equals(RECRUITING)) {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수락이 불가능합니다.");
         }
-        changeErrandStatusAndSetErrander(errand, ErrandStatus.IN_PROGRESS, errander);
+        changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
         return findErrandById(id);
     }
 
     @Transactional
-    public void changeErrandStatusAndSetErrander(Errand errand, ErrandStatus newErrandStatus, Member errander) {
-        errand.changeErrandStatusAndSetErrander(newErrandStatus, errander);
+    public void changeErrandStatusAndSetErrander(Errand errand, Status newStatus, Member errander) {
+        errand.changeErrandStatusAndSetErrander(newStatus, errander);
     }
 
     @Transactional
@@ -186,7 +186,7 @@ public class ErrandService {
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 수정할 수 있습니다.");
         }
-        if(!errand.getErrandStatus().equals(RECRUITING)) {
+        if(!errand.getStatus().equals(RECRUITING)) {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errand.updateErrand(errandSaveRequestDto.getCreatedDate(),
@@ -209,7 +209,7 @@ public class ErrandService {
         if(!errand.getOrderNo().equals(orderMember)) {
             throw new CustomException(ErrorCode.UNAUTHORIZED_ACCESS, "본인 게시물만 삭제할 수 있습니다.");
         }
-        if(!errand.getErrandStatus().equals(RECRUITING)) {
+        if(!errand.getStatus().equals(RECRUITING)) {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errandRepository.delete(errand);
