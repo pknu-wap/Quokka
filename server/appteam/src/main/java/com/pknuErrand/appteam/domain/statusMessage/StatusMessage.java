@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.domain.status;
+package com.pknuErrand.appteam.domain.statusMessage;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.member.Member;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Entity(name = "Status")
-public class Status {
+public class StatusMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column
@@ -24,7 +24,7 @@ public class Status {
 
     @ManyToOne
     @JoinColumn
-    private Errand errandNo;
+    private Errand errandNo; // 심부름 번호
 
     @Column
     private String contents; // 현황 정보
@@ -33,7 +33,7 @@ public class Status {
     private LocalDateTime created;
 
     @Builder
-    public Status(Member erranderNo, Errand errandNo, String contents) {
+    public StatusMessage(Member erranderNo, Errand errandNo, String contents) {
         this.erranderNo = erranderNo;
         this.errandNo = errandNo;
         this.contents = contents;

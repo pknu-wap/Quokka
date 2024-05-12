@@ -58,7 +58,7 @@ public class ErrandController {
     @GetMapping("/{id}")
     public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
-                .body(errandService.findErrandById(id));
+                .body(errandService.findErrandDetailById(id));
     }
 
 
