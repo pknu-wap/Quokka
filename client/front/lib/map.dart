@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'; // 환경변수 로드하기
 import 'package:flutter_kakao_maps/flutter_kakao_maps.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
+
+
+  await dotenv.load();
 }
+
 
 class MyApp extends StatelessWidget {
   @override
