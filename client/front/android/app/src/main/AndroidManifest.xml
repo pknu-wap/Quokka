@@ -3,9 +3,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        <meta-data
-            android:name="com.kakao.sdk.APPKey"
-            android:value="e91dab914a69e26e3f70ced372c8943f"/>
         android:label="front"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -39,6 +36,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="e91dab914a69e26e3f70ced372c8943f" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility?hl=en and
