@@ -24,7 +24,7 @@ public class Status {
 
     @ManyToOne
     @JoinColumn
-    private Errand errandNo;
+    private Errand errandNo; // 심부름 번호
 
     @Column
     private String contents; // 현황 정보

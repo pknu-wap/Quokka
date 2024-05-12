@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.controller;
+package com.pknuErrand.appteam.controller.mail;
 
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;

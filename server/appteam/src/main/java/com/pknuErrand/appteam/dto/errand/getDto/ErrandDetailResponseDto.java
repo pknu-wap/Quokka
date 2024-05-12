@@ -1,6 +1,6 @@
 package com.pknuErrand.appteam.dto.errand.getDto;
 
-import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.Enum.ErrandStatus;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +34,7 @@ public class ErrandDetailResponseDto {
 
     private Boolean isCash; // 현금 계좌이체 선택
 
-    private Status status; // 상태
+    private ErrandStatus errandStatus; // 상태
 
     private Boolean isMyErrand; // 본인 게시물인가?
 }

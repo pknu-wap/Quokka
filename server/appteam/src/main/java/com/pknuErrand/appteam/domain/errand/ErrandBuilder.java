@@ -1,6 +1,6 @@
 package com.pknuErrand.appteam.domain.errand;
 
-import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.Enum.ErrandStatus;
 import com.pknuErrand.appteam.domain.member.Member;
 
 import java.sql.Timestamp;
@@ -17,7 +17,7 @@ public class ErrandBuilder {
     private String detail;
     private int reward;
     private boolean isCash;
-    private Status status;
+    private ErrandStatus errandStatus;
     private Member erranderNo;
 
     public ErrandBuilder orderNo(Member orderNo) {
@@ -70,8 +70,8 @@ public class ErrandBuilder {
         return this;
     }
 
-    public ErrandBuilder status(Status status) {
-        this.status = status;
+    public ErrandBuilder status(ErrandStatus errandStatus) {
+        this.errandStatus = errandStatus;
         return this;
     }
 
@@ -81,6 +81,6 @@ public class ErrandBuilder {
     }
 
     public Errand build() {
-        return new Errand(orderNo, createdDate, title, destination, latitude, longitude, due, detail, reward, isCash, status, erranderNo);
+        return new Errand(orderNo, createdDate, title, destination, latitude, longitude, due, detail, reward, isCash, errandStatus, erranderNo);
     }
 }

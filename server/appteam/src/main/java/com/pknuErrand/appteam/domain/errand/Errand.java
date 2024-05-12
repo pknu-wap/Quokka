@@ -1,7 +1,7 @@
 package com.pknuErrand.appteam.domain.errand;
 
 
-import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.Enum.ErrandStatus;
 import com.pknuErrand.appteam.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -52,14 +52,14 @@ public class Errand {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private ErrandStatus errandStatus;
 
     @ManyToOne
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
-    public void changeErrandStatusAndSetErrander(Status status, Member errander) {
-        this.status = status;
+    public void changeErrandStatusAndSetErrander(ErrandStatus errandStatus, Member errander) {
+        this.errandStatus = errandStatus;
         erranderNo = errander;
     }
 
@@ -78,7 +78,7 @@ public class Errand {
     }
     public Errand(Member orderNo, String createdDate, String title, String destination,
                   double latitude, double longitude, Timestamp due, String detail,
-                  int reward, Boolean isCash, Status status, Member erranderNo) {
+                  int reward, Boolean isCash, ErrandStatus errandStatus, Member erranderNo) {
         this.orderNo = orderNo;
         this.createdDate = createdDate;
         this.title = title;
@@ -89,7 +89,7 @@ public class Errand {
         this.detail = detail;
         this.reward = reward;
         this.isCash = isCash;
-        this.status = status;
+        this.errandStatus = errandStatus;
         this.erranderNo = erranderNo;
     }
 }

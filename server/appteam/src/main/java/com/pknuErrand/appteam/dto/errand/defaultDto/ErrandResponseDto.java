@@ -1,7 +1,7 @@
 package com.pknuErrand.appteam.dto.errand.defaultDto;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
-import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.Enum.ErrandStatus;
 import com.pknuErrand.appteam.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +34,7 @@ public class ErrandResponseDto { // from Entity
 
     private Boolean isCash; // 현금 계좌이체 선택
 
-    private Status status; // 상태
+    private ErrandStatus errandStatus; // 상태
 
     private Member erranderNo; // 심부름꾼
 
@@ -49,7 +49,7 @@ public class ErrandResponseDto { // from Entity
         this.detail = errand.getDetail();
         this.reward = errand.getReward();
         this.isCash = errand.getIsCash();
-        this.status = errand.getStatus();
+        this.errandStatus = errand.getErrandStatus();
         this.erranderNo = errand.getErranderNo();
     }
 
