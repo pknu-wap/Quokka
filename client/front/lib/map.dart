@@ -1,49 +1,28 @@
-import 'dart:async';
-import 'dart:developer';
-// import 'dart:js_interop';
 import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
-import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_kakao_map/flutter_kakao_map.dart';
+import 'package:flutter_kakao_map/kakao_maps_flutter_platform_interface.dart';
 
-void map() async {
-  await initializeNaverMapSdk(); // 네이버 지도 SDK 초기화
-  runApp( Map());
+void map() {
+  runApp(KakaoMap());
 }
 
-Future<void> initializeNaverMapSdk() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // 네이버 지도 SDK 초기화
-  await NaverMapSdk.instance.initialize(
-    clientId: 'a2gzk9vug1',
-    onAuthFailed: (ex) => print("네이버 지도 인증 오류: $ex"),
-  );
-}
-
-class Map extends StatelessWidget {
-  // const Map({super.key});
-
+class KakaoMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Map',
-      home: NMap()
+      title: 'KaKao Map',
+      home: KakaoMapTest(),
     );
   }
 }
 
-class NMap extends StatefulWidget {
-  const NMap({super.key});
-
+class KakaoMapTest extends StatefulWidget {
   @override
-  State<NMap> createState() => _NMapState();
+  _KakaoMapTestState createState() => _KakaoMapTestState();
 }
 
-class _NMapState extends State<NMap> {
-  final NCameraPosition position = NCameraPosition(
-      target: NLatLng(35.13354860000066, 129.10231956595868),
-      zoom: 12
-  );
+class _KakaoMapTestState extends State<KakaoMapTest> {
   // 뷰포트 -> Latitude : 위도(38), Longitude : 경도(127) -> 처음 시작 위치
   // https://map.naver.com/p/entry/place/12104897?c=15.19,0,0,0,dh
   // 위도 : 35.13354860000066
@@ -53,115 +32,26 @@ class _NMapState extends State<NMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("도착지 검색"),
+      appBar: AppBar(title: const Text("도착지 검색"),
       ),
-      body: Container(
-          child: NaverMap(
-          ),
+      body: Column(
+        children: [],
       ),
     );
   }
 }
 
-// void map() async{
-//   await _initialize();
-//   runApp(const NaverMapApp());
-// }
-//
-// Future<void> _initialize() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await NaverMapSdk.instance.initialize( // 네이버 지도 SDK 초기화 확인
-//     clientId: '<a2gzk9vug1>', // 클라이언트 ID 설정
-//     onAuthFailed: (ex) => log("네이버 지도 인증 오류 : $ex")
-//   );
-// }
-//
-// class NaverMapApp extends StatelessWidget {
-//   final int? testId;
-//
-//   const NaverMapApp({super.key, this.testId});
-//
-//   @override
-//   Widget build(BuildContext context) => MaterialApp(
-//       home: testId == null
-//           ? const FirstPage()
-//           : TestPage(key: Key("testPage_$testId")));
-// }
-//
-// class FirstPage extends StatelessWidget {
-//   const FirstPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(title: const Text('First Page')),
-//         body: Center(
-//             child: ElevatedButton(
-//                 onPressed: () {
-//                   Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                           builder: (context) => const TestPage()));
-//                 },
-//                 child: const Text('Go to Second Page'))));
-//   }
-// }
-//
-// class TestPage extends StatefulWidget {
-//   const TestPage({Key? key}) : super(key: key);
-//
-//   @override
-//   State<TestPage> createState() => TestPageState();
-// }
-//
-// class TestPageState extends State<TestPage> {
-//   late NaverMapController _mapController;
-//   final Completer<NaverMapController> mapControllerCompleter = Completer();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final mediaQuery = MediaQuery.of(context);
-//     final pixelRatio = mediaQuery.devicePixelRatio;
-//     final mapSize =
-//     Size(mediaQuery.size.width - 32, mediaQuery.size.height - 72);
-//     final physicalSize =
-//     Size(mapSize.width * pixelRatio, mapSize.height * pixelRatio);
-//
-//     print("physicalSize: $physicalSize");
-//
-//     return Scaffold(
-//       backgroundColor: const Color(0xFF343945),
-//       body: Center(
-//           child: SizedBox(
-//               width: mapSize.width,
-//               height: mapSize.height,
-//               // color: Colors.greenAccent,
-//               child: _naverMapSection())),
-//     );
-//   }
-//
-//   Widget _naverMapSection() => NaverMap(
-//     options: const NaverMapViewOptions(
-//         indoorEnable: true,
-//         locationButtonEnable: false,
-//         consumeSymbolTapEvents: false),
-//     onMapReady: (controller) async {
-//       _mapController = controller;
-//       mapControllerCompleter.complete(controller);
-//       log("onMapReady", name: "onMapReady");
-//     },
-//   );
-// }
 
 
 
-// class NaverMap extends StatefulWidget {
+
+// class KakaoMapTest extends StatefulWidget {
 //   @override
-//   _NaverMapState createState() => _NaverMapState();
+//   _KakaoMapTestState createState() => _KakaoMapTestState();
 // }
 //
 // // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
-// class _NaverMapState extends State<NaverMap> {
+// class _KakaoMapTestState extends State<KakaoMapTest> {
 //   TextEditingController destinationController = TextEditingController();
 //
 //
@@ -192,7 +82,7 @@ class _NMapState extends State<NMap> {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//       // appBar: AppBar(title: const Text('NaverMap Test')),
+//       // appBar: AppBar(title: const Text('KakaoMapTestTest')),
 //       body: Container(
 //         child: SingleChildScrollView(
 //           child: Column(
@@ -236,7 +126,7 @@ class _NMapState extends State<NMap> {
 //                             color: Color(0xff111111),
 //                           ),
 //                         ),
-//                       ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+//                       ),
 //                     ),
 //                     Container(
 //                       margin: EdgeInsets.only(right: 300),
