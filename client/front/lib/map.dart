@@ -1,43 +1,91 @@
-import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
-import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
-import 'package com.kakao.vectormap.camera';
+import 'package:flutter/material.dart';
+import 'package:flutter_kakao_maps/flutter_kakao_maps.dart';
 
-void map() {
-  runApp(KakaoMap());
+void main() {
+  runApp(MyApp());
 }
 
-class KakaoMap extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'KaKao Map',
-      home: KakaoMapTest(),
+      home: MapScreen(),
     );
   }
 }
 
-class KakaoMapTest extends StatefulWidget {
-  @override
-  _KakaoMapTestState createState() => _KakaoMapTestState();
-}
-
-class _KakaoMapTestState extends State<KakaoMapTest> {
-  // 뷰포트 -> Latitude : 위도(38), Longitude : 경도(127) -> 처음 시작 위치
-  // https://map.naver.com/p/entry/place/12104897?c=15.19,0,0,0,dh
-  // 위도 : 35.13354860000066
-  // 경도 : 129.10231956595868
-  // 주소 : 부산 남구 대연동 430-1 => 부경대학교 대연캠퍼스
-
+class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("도착지 검색"),
+      appBar: AppBar(
+        title: Text('Kakao Maps Example'),
       ),
-      body: Column(
-        children: [],
+      body: KakaoMapView(
+        apiKey: '7972051103bcff311b3a026cd40ef913', // 여기에 발급받은 Kakao Maps API 키를 입력합니다.
+        initialMapType: MapType.normal,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(37.5665, 126.9780), // 서울의 좌표
+          zoom: 11,
+        ),
       ),
     );
   }
+}
+
+
+
+
+
+
+
+
+
+
+// import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
+// import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
+// import 'package com.kakao.vectormap.camera';
+//
+// void map() {
+//   runApp(KakaoMap());
+// }
+//
+// class KakaoMap extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'KaKao Map',
+//       home: KakaoMapTest(),
+//     );
+//   }
+// }
+//
+// class KakaoMapTest extends StatefulWidget {
+//   @override
+//   _KakaoMapTestState createState() => _KakaoMapTestState();
+// }
+//
+// class _KakaoMapTestState extends State<KakaoMapTest> {
+//   // 뷰포트 -> Latitude : 위도(38), Longitude : 경도(127) -> 처음 시작 위치
+//   // https://map.naver.com/p/entry/place/12104897?c=15.19,0,0,0,dh
+//   // 위도 : 35.13354860000066
+//   // 경도 : 129.10231956595868
+//   // 주소 : 부산 남구 대연동 430-1 => 부경대학교 대연캠퍼스
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("도착지 검색"),
+//       ),
+//       body: Column(
+//         children: [
+//           Container(
+//             KakaoMapSdk.init(this, "");
+//           )
+//         ],
+//       ),
+//     );
+//   }
 }
 
 
