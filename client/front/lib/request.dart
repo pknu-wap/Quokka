@@ -675,7 +675,7 @@ class _RequestState extends State<Request> {
                               child: Padding(
                                 padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
                                 child: TextField(
-                                  controller: destinationController,
+                                  controller: priceController,
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,

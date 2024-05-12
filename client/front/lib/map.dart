@@ -5,12 +5,23 @@ import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-void map() {
-  runApp(const Map());
+void map() async {
+  await initializeNaverMapSdk(); // 네이버 지도 SDK 초기화
+  runApp( Map());
+}
+
+Future<void> initializeNaverMapSdk() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 네이버 지도 SDK 초기화
+  await NaverMapSdk.instance.initialize(
+    clientId: 'a2gzk9vug1',
+    onAuthFailed: (ex) => print("네이버 지도 인증 오류: $ex"),
+  );
 }
 
 class Map extends StatelessWidget {
-  const Map({super.key});
+  // const Map({super.key});
 
   @override
   Widget build(BuildContext context) {
