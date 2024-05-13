@@ -1,61 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // 환경변수 로드하기
-import 'package:flutter_kakao_maps/flutter_kakao_maps.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 
 void main() async {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: 'assets/env/.env');
 
+  // 앱 초기화 시점에 필요한 설정을 수행합니다.
+  AuthRepository.initialize(
+    appKey: dotenv.env['APP_KEY'] ?? '',
+    baseUrl: dotenv.env['BASE_URL'] ?? '',
+  );
 
-  await dotenv.load();
+  runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MapScreen(),
+      title: 'Kakao Map Test',
+      home: KakaoMapTest(),
     );
   }
 }
 
-class MapScreen extends StatelessWidget {
+class KakaoMapTest extends StatefulWidget {
+  const KakaoMapTest({Key? key}) : super(key: key);
+
+  @override
+  State<KakaoMapTest> createState() => _KakaoMapTestState();
+}
+
+class _KakaoMapTestState extends State<KakaoMapTest> {
+  @override
+  void initState() {
+    super.initState();
+    // 필요한 초기화 작업을 수행합니다.
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kakao Maps Example'),
+        title: const Text('Kakao Map Test'),
       ),
-      body: KakaoMapView(
-        apiKey: '7972051103bcff311b3a026cd40ef913', // 여기에 발급받은 Kakao Maps API 키를 입력합니다.
-        initialMapType: MapType.normal,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(37.5665, 126.9780), // 서울의 좌표
-          zoom: 11,
-        ),
-      ),
+      body: const KakaoMap(),
     );
   }
 }
 
 
-
-
-
-
-
-
-
-
+// import 'package:flutter_dotenv/flutter_dotenv.dart'; // 환경변수 로드하기
 // import 'package:flutter/material.dart'; // icon 사용하기 위해 필요
 // import 'package:flutter/widgets.dart'; // text컨트롤러 사용하기 위해 필요
-// import 'package com.kakao.vectormap.camera';
+// import 'package:flutter_kakao_maps_sdk/flutter_kakao_maps_sdk.dart';
+// import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 //
 // void map() {
-//   runApp(KakaoMap());
+//   runApp(Map(appKey:));
 // }
 //
-// class KakaoMap extends StatelessWidget {
+// class Map extends StatelessWidget {
+//   final String appKey; // late 키워드를 사용하여 나중에 초기화될 것임을 선언
+//   // const Map({super.key});
+//   Map({Key? key, required this.appKey});
+//
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
@@ -66,11 +78,14 @@ class MapScreen extends StatelessWidget {
 // }
 //
 // class KakaoMapTest extends StatefulWidget {
+//   const KakaoMapTest({super.key});
+//
 //   @override
-//   _KakaoMapTestState createState() => _KakaoMapTestState();
+//   State<KakaoMapTest> createState() => _KakaoMapTestState();
 // }
 //
 // class _KakaoMapTestState extends State<KakaoMapTest> {
+//   TextEditingController mapController = TextEditingController();
 //   // 뷰포트 -> Latitude : 위도(38), Longitude : 경도(127) -> 처음 시작 위치
 //   // https://map.naver.com/p/entry/place/12104897?c=15.19,0,0,0,dh
 //   // 위도 : 35.13354860000066
@@ -80,18 +95,52 @@ class MapScreen extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//       appBar: AppBar(title: const Text("도착지 검색"),
+//       appBar: AppBar(
+//         title: Text("도착지 검색"),
+//     ),
+//       body: KakaoMap(
+//         // onMapCreated: ((controller) {
+//         //   mapController = controller;
+//         // }),
 //       ),
-//       body: Column(
-//         children: [
-//           Container(
-//             KakaoMapSdk.init(this, "");
-//           )
-//         ],
-//       ),
+    //   Column(
+    //   children: [
+    //   // 도착지로 설정할게요 버튼 만들기
+    //           Container(
+    //             margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 110.6),
+    //             child: ElevatedButton(
+    //               onPressed: () {
+    //                 print("도착지 설정 완료");
+    //               },
+    //               style: ButtonStyle(
+    //                 backgroundColor: MaterialStateProperty.all<Color>(
+    //                     Color(0xFF7C3D1A)),
+    //                 // 버튼의 크기 정하기
+    //                 minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+    //                 // 버튼의 모양 변경하기
+    //                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    //                   RoundedRectangleBorder(
+    //                     borderRadius: BorderRadius.circular(
+    //                         5), // 원하는 모양에 따라 BorderRadius 조절
+    //                   ),
+    //                 ),
+    //               ),
+    //               child: Text(
+    //                 '도착지로 설정할게요',
+    //                 style: TextStyle(
+    //                   fontSize: 14,
+    //                   fontFamily: 'Pretendard',
+    //                   fontWeight: FontWeight.w600,
+    //                   color: Color(0xFFFFFFFF),
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    // ],
+    //   ),
 //     );
 //   }
-}
+// }
 
 
 

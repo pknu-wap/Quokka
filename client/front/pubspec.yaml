@@ -32,8 +32,10 @@ dependencies:
     sdk: flutter
   flutter_naver_map: ^1.0.0-dev.5
 #  flutter_naver_map: ^1.0.2
+  flutter_kakao_maps_sdk: ^0.3.0
   kakao_map_plugin: ^0.3.0
   flutter_dotenv: ^5.1.0
+  dio: ^4.0.0
   confetti: ^0.7.0
   image_picker: ^1.0.0
   http: ^0.13.5
