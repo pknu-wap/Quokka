@@ -213,9 +213,7 @@ class Main_post_page extends StatefulWidget {
   _Main_post_pageState createState() => _Main_post_pageState();
 }
 class _Main_post_pageState extends State<Main_post_page> {
-  List<Map<String, dynamic>> latestposts = [];
-  List<Map<String, dynamic>> rewardposts = [];
-  late int length;
+  List<Map<String, dynamic>> posts = [];
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
@@ -231,7 +229,7 @@ class _Main_post_pageState extends State<Main_post_page> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         Post p1 = Post.fromJson(item);
-        latestposts.add({
+        posts.add({
           "orderNo": p1.o1.orderNo,
           "nickname": p1.o1.nickname,
           "score": p1.o1.score,
@@ -276,7 +274,7 @@ class _Main_post_pageState extends State<Main_post_page> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         Post p1 = Post.fromJson(item);
-        rewardposts.add({
+        posts.add({
           "orderNo": p1.o1.orderNo,
           "nickname": p1.o1.nickname,
           "score": p1.o1.score,
@@ -313,7 +311,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     }
   }
   ErrandLatestAdd() async{
-    Map<String, dynamic> lastPost = latestposts.last;
+    Map<String, dynamic> lastPost = posts.last;
     int lasterrandNo = lastPost['errandNo'];
     String lastcreatedDate = lastPost['createdDate'];
     String lastCreatedDate = utf8.decode(lastcreatedDate.runes.toList());
@@ -327,7 +325,7 @@ class _Main_post_pageState extends State<Main_post_page> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         Post p1 = Post.fromJson(item);
-        latestposts.add({
+        posts.add({
           "orderNo": p1.o1.orderNo,
           "nickname": p1.o1.nickname,
           "score": p1.o1.score,
@@ -367,7 +365,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     }
   }
   ErrandRewardAdd() async{
-    Map<String, dynamic> lastPost = rewardposts.last;
+    Map<String, dynamic> lastPost = posts.last;
     int lasterrandNo = lastPost['errandNo'];
     int lastreward = lastPost['reward'];
     print(lasterrandNo);
@@ -380,7 +378,7 @@ class _Main_post_pageState extends State<Main_post_page> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         Post p1 = Post.fromJson(item);
-        rewardposts.add({
+        posts.add({
           "orderNo": p1.o1.orderNo,
           "nickname": p1.o1.nickname,
           "score": p1.o1.score,
@@ -421,8 +419,6 @@ class _Main_post_pageState extends State<Main_post_page> {
   void initState(){
     super.initState();
     ErrandLatestInit(); //최신순 요청서 5개
-    ErrandRewardInit(); //금액순 요청서 5개를 미리 가지고옴
-
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
@@ -572,6 +568,8 @@ class _Main_post_pageState extends State<Main_post_page> {
                           button2state = false;
                           button3state = false;
                           change_Button_State();
+                          posts.clear();
+                          ErrandLatestInit();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
@@ -598,6 +596,8 @@ class _Main_post_pageState extends State<Main_post_page> {
                           button2state = true;
                           button3state = false;
                           change_Button_State();
+                          posts.clear();
+                          ErrandRewardInit();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
@@ -669,10 +669,11 @@ class _Main_post_pageState extends State<Main_post_page> {
                             setState(() {
                               isCheckBox = value!;
                               change_checkbox_state();
-                              latestposts.clear();
-                              rewardposts.clear();
-                              ErrandLatestInit();
-                              ErrandRewardInit();
+                              posts.clear();
+                              if(button1state)
+                                ErrandLatestInit();
+                              else if(button2state)
+                                ErrandRewardInit();
                             });
                           },
                         ),
@@ -698,54 +699,29 @@ class _Main_post_pageState extends State<Main_post_page> {
                     child: ListView.builder(
                       controller: _scrollController,
                       shrinkWrap: true,
-                      itemCount: latestposts.length,
+                      itemCount: posts.length,
                       itemBuilder: (BuildContext context, int index){
-                        String Lnickname = latestposts[index]["nickname"];
-                        String Ltitle = latestposts[index]['title'];
-                        String Ldestination = latestposts[index]['destination'];
-                        String LcreatedDate = latestposts[index]["createdDate"];
-                        String LdecodedNickname = utf8.decode(Lnickname.runes.toList());
-                        String LdecodedTitle = utf8.decode(Ltitle.runes.toList());
-                        String LdecodedDestination = utf8.decode(Ldestination.runes.toList());
-                        String LdecodedCreatedDate = utf8.decode(LcreatedDate.runes.toList());
-
-                        String Rnickname = rewardposts[index]["nickname"];
-                        String Rtitle = rewardposts[index]['title'];
-                        String Rdestination = rewardposts[index]['destination'];
-                        String RcreatedDate = rewardposts[index]["createdDate"];
-                        String RdecodedNickname = utf8.decode(Rnickname.runes.toList());
-                        String RdecodedTitle = utf8.decode(Rtitle.runes.toList());
-                        String RdecodedDestination = utf8.decode(Rdestination.runes.toList());
-                        String RdecodedCreatedDate = utf8.decode(RcreatedDate.runes.toList());
-                        if(button1state) //버튼 상태에 따라 최신순을 보여줌
-                            {
+                        String nickname = posts[index]["nickname"];
+                        String title = posts[index]['title'];
+                        String destination = posts[index]['destination'];
+                        String createdDate = posts[index]["createdDate"];
+                        String decodedNickname = utf8.decode(nickname.runes.toList());
+                        String decodedTitle = utf8.decode(title.runes.toList());
+                        String decodedDestination = utf8.decode(destination.runes.toList());
+                        String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
                           return PostWidget(
-                            orderNo: latestposts[index]["orderNo"],
-                            nickname: LdecodedNickname,
-                            score: latestposts[index]["score"],
-                            errandNo: latestposts[index]["errandNo"],
-                            createdDate: LdecodedCreatedDate,
-                            title: LdecodedTitle,
-                            destination: LdecodedDestination,
-                            reward: latestposts[index]["reward"],
-                            status: latestposts[index]["status"],
+                            orderNo: posts[index]["orderNo"],
+                            nickname: decodedNickname,
+                            score: posts[index]["score"],
+                            errandNo: posts[index]["errandNo"],
+                            createdDate: decodedCreatedDate,
+                            title: decodedTitle,
+                            destination: decodedDestination,
+                            reward: posts[index]["reward"],
+                            status: posts[index]["status"],
                           );
                         }
-                        else if(button2state) //버튼 상태에 따라 금액순을 보여줌
-                            {
-                          return PostWidget(
-                            orderNo: rewardposts[index]["orderNo"],
-                            nickname: RdecodedNickname,
-                            score: rewardposts[index]["score"],
-                            errandNo: rewardposts[index]["errandNo"],
-                            createdDate: RdecodedCreatedDate,
-                            title: RdecodedTitle,
-                            destination: RdecodedDestination,
-                            reward: rewardposts[index]["reward"],
-                            status: rewardposts[index]["status"],
-                          );
-                        }
-                      },),
+                      ),
                   ),
                 ),
 
