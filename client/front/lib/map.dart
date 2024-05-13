@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:kakao_map_plugin/kakao_map_plugin.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'; // 환경변수 .env 로드
+import 'package:kakao_map_plugin/kakao_map_plugin.dart'; // Kakao map
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +12,7 @@ void main() async {
   // @override
   // void initState() {
   //   super.initState();
-  //   appKey = '0f07f39ac1feda9399b1e274406fe695';
+  //   appKey = '0f07f39ac1feda9399b1e274406fe695';       // 초기화 오류 발생해서 appKey가 .env파일에서 안 불러와지나 싶어서 여기서 바로 적어봤는데도 오류가 발생함.
   // }
 
   AuthRepository.initialize(
