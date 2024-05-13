@@ -210,59 +210,57 @@ class Error{
     );
   }
 }
-class Post_List_view extends StatefulWidget{
-  @override
-  Post_List_viewState createState() => Post_List_viewState();
-}
-  // 데이터 저장
 
-class Post_List_viewState extends State<Post_List_view>{
+class Main_post_page extends StatefulWidget {
+  const Main_post_page({Key? key}) : super(key: key);
+  @override
+  _Main_post_pageState createState() => _Main_post_pageState();
+}
+class _Main_post_pageState extends State<Main_post_page> {
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=";
-      var response = await http.get(Uri.parse(url),
-          headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
-      if(response.statusCode == 200) {
-        List<dynamic> result = jsonDecode(response.body);
-        for (var item in result) {
-          Post p1 = Post.fromJson(item);
-          latestposts.add({
-            "orderNo": p1.o1.orderNo,
-            "nickname": p1.o1.nickname,
-            "score": p1.o1.score,
-            "errandNo": p1.errandNo,
-            "createdDate": p1.createdDate,
-            "title": p1.title,
-            "destination": p1.destination,
-            "reward": p1.reward,
-            "status": p1.status,
-          });
-          print('200');
-        }
-        setState(() {
-
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        Post p1 = Post.fromJson(item);
+        latestposts.add({
+          "orderNo": p1.o1.orderNo,
+          "nickname": p1.o1.nickname,
+          "score": p1.o1.score,
+          "errandNo": p1.errandNo,
+          "createdDate": p1.createdDate,
+          "title": p1.title,
+          "destination": p1.destination,
+          "reward": p1.reward,
+          "status": p1.status,
         });
+        print('200');
       }
-      else{
-        print("error");
-        Map<String, dynamic> json = jsonDecode(response.body);
-        Error error = Error.fromJson(json);
-        if(error.code == "INVALID_FORMAT") {
-          print(error.httpStatus);
-          print(error.message);
-        }
-        else if(error.code == "INVALID_VALUE")
-        {
-          print(error.httpStatus);
-          print(error.message);
-        }
-        else
-        {
-          print(error.code);
-          print(error.httpStatus);
-          print(error.message);
-        }
+      setState(() {});
+    }
+    else{
+      print("error");
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        print(error.httpStatus);
+        print(error.message);
       }
+      else if(error.code == "INVALID_VALUE")
+      {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else
+      {
+        print(error.code);
+        print(error.httpStatus);
+        print(error.message);
+      }
+    }
   }
   ErrandRewardInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
@@ -422,7 +420,7 @@ class Post_List_viewState extends State<Post_List_view>{
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
-      {
+          {
         setState(() {
           ErrandLatestAdd(); //최신순 요청서 5개
           ErrandRewardAdd(); //금액순 요청서 5개를 추가로 들고옴
@@ -443,73 +441,6 @@ class Post_List_viewState extends State<Post_List_view>{
       curve: Curves.easeOut,
     );
   }
-  @override
-  Widget build(BuildContext context) {
-        return Container( width: 322, height: 581, //게시글 큰틀
-            margin: EdgeInsets.only(left: 19),
-            decoration: BoxDecoration(
-              color: Color(0xffFFFFFF),
-            ),
-            child: ListView.builder(
-            controller: _scrollController,
-            shrinkWrap: true,
-            itemCount: latestposts.length,
-            itemBuilder: (BuildContext context, int index){
-              String Lnickname = latestposts[index]["nickname"];
-              String Ltitle = latestposts[index]['title'];
-              String Ldestination = latestposts[index]['destination'];
-              String LcreatedDate = latestposts[index]["createdDate"];
-              String LdecodedNickname = utf8.decode(Lnickname.runes.toList());
-              String LdecodedTitle = utf8.decode(Ltitle.runes.toList());
-              String LdecodedDestination = utf8.decode(Ldestination.runes.toList());
-              String LdecodedCreatedDate = utf8.decode(LcreatedDate.runes.toList());
-
-              String Rnickname = rewardposts[index]["nickname"];
-              String Rtitle = rewardposts[index]['title'];
-              String Rdestination = rewardposts[index]['destination'];
-              String RcreatedDate = rewardposts[index]["createdDate"];
-              String RdecodedNickname = utf8.decode(Rnickname.runes.toList());
-              String RdecodedTitle = utf8.decode(Rtitle.runes.toList());
-              String RdecodedDestination = utf8.decode(Rdestination.runes.toList());
-              String RdecodedCreatedDate = utf8.decode(RcreatedDate.runes.toList());
-              if(button1state) //버튼 상태에 따라 최신순을 보여줌
-              {
-                  return PostWidget(
-                    orderNo: latestposts[index]["orderNo"],
-                    nickname: LdecodedNickname,
-                    score: latestposts[index]["score"],
-                    errandNo: latestposts[index]["errandNo"],
-                    createdDate: LdecodedCreatedDate,
-                    title: LdecodedTitle,
-                    destination: LdecodedDestination,
-                    reward: latestposts[index]["reward"],
-                    status: latestposts[index]["status"],
-                  );
-                }
-              else if(button2state) //버튼 상태에 따라 금액순을 보여줌
-              {
-                return PostWidget(
-                  orderNo: rewardposts[index]["orderNo"],
-                  nickname: RdecodedNickname,
-                  score: rewardposts[index]["score"],
-                  errandNo: rewardposts[index]["errandNo"],
-                  createdDate: RdecodedCreatedDate,
-                  title: RdecodedTitle,
-                  destination: RdecodedDestination,
-                  reward: rewardposts[index]["reward"],
-                  status: rewardposts[index]["status"],
-                );
-              }
-        },),
-    );
-  }
-}
-class Main_post_page extends StatefulWidget {
-  const Main_post_page({Key? key}) : super(key: key);
-  @override
-  _Main_post_pageState createState() => _Main_post_pageState();
-}
-class _Main_post_pageState extends State<Main_post_page> {
   bool isCheckBox = false;
   Color button1_text_color = Color(0xff7C2E1A); //초기 색상 값
   Color button1_border_color = Color(0xff7C3D1A);
@@ -553,8 +484,6 @@ class _Main_post_pageState extends State<Main_post_page> {
         checkbox_text_color = Color(0xff606060);
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -625,6 +554,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           button2state = false;
                           button3state = false;
                           change_Button_State();
+                          scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
                           margin: const EdgeInsets.only(left: 27, top: 19.0),
@@ -650,6 +580,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           button2state = true;
                           button3state = false;
                           change_Button_State();
+                          scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
                           margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -675,6 +606,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           button2state = false;
                           button3state = true;
                           change_Button_State();
+                          scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
                           margin: const EdgeInsets.only(left: 11, top: 19.0),
@@ -736,7 +668,63 @@ class _Main_post_pageState extends State<Main_post_page> {
                 ),
                 SizedBox(height:16.36),
                 Flexible(
-                  child: Post_List_view(),
+                  child: Container( width: 322, height: 581, //게시글 큰틀
+                    margin: EdgeInsets.only(left: 19),
+                    decoration: BoxDecoration(
+                      color: Color(0xffFFFFFF),
+                    ),
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      shrinkWrap: true,
+                      itemCount: latestposts.length,
+                      itemBuilder: (BuildContext context, int index){
+                        String Lnickname = latestposts[index]["nickname"];
+                        String Ltitle = latestposts[index]['title'];
+                        String Ldestination = latestposts[index]['destination'];
+                        String LcreatedDate = latestposts[index]["createdDate"];
+                        String LdecodedNickname = utf8.decode(Lnickname.runes.toList());
+                        String LdecodedTitle = utf8.decode(Ltitle.runes.toList());
+                        String LdecodedDestination = utf8.decode(Ldestination.runes.toList());
+                        String LdecodedCreatedDate = utf8.decode(LcreatedDate.runes.toList());
+
+                        String Rnickname = rewardposts[index]["nickname"];
+                        String Rtitle = rewardposts[index]['title'];
+                        String Rdestination = rewardposts[index]['destination'];
+                        String RcreatedDate = rewardposts[index]["createdDate"];
+                        String RdecodedNickname = utf8.decode(Rnickname.runes.toList());
+                        String RdecodedTitle = utf8.decode(Rtitle.runes.toList());
+                        String RdecodedDestination = utf8.decode(Rdestination.runes.toList());
+                        String RdecodedCreatedDate = utf8.decode(RcreatedDate.runes.toList());
+                        if(button1state) //버튼 상태에 따라 최신순을 보여줌
+                            {
+                          return PostWidget(
+                            orderNo: latestposts[index]["orderNo"],
+                            nickname: LdecodedNickname,
+                            score: latestposts[index]["score"],
+                            errandNo: latestposts[index]["errandNo"],
+                            createdDate: LdecodedCreatedDate,
+                            title: LdecodedTitle,
+                            destination: LdecodedDestination,
+                            reward: latestposts[index]["reward"],
+                            status: latestposts[index]["status"],
+                          );
+                        }
+                        else if(button2state) //버튼 상태에 따라 금액순을 보여줌
+                            {
+                          return PostWidget(
+                            orderNo: rewardposts[index]["orderNo"],
+                            nickname: RdecodedNickname,
+                            score: rewardposts[index]["score"],
+                            errandNo: rewardposts[index]["errandNo"],
+                            createdDate: RdecodedCreatedDate,
+                            title: RdecodedTitle,
+                            destination: RdecodedDestination,
+                            reward: rewardposts[index]["reward"],
+                            status: rewardposts[index]["status"],
+                          );
+                        }
+                      },),
+                  ),
                 ),
 
               ],
