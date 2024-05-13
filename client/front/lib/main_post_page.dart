@@ -428,8 +428,14 @@ class _Main_post_pageState extends State<Main_post_page> {
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
           {
         setState(() {
-          ErrandLatestAdd(); //최신순 요청서 5개
-          ErrandRewardAdd(); //금액순 요청서 5개를 추가로 들고옴
+          if(button1state)
+           {
+              ErrandLatestAdd(); //최신순 요청서 5개
+           }
+           else if(button2state)
+           {
+               ErrandRewardAdd(); //금액순 요청서 5개
+           }
         });
       }
     });
@@ -663,12 +669,10 @@ class _Main_post_pageState extends State<Main_post_page> {
                             setState(() {
                               isCheckBox = value!;
                               change_checkbox_state();
-                              List<Map<String, dynamic>> copy1 = latestposts;
-                              copy1.removeWhere((post) => post['status'] != 'RECRUITING');
-                              latestposts = copy1;
-                              List<Map<String, dynamic>> copy2 = rewardposts;
-                              copy2.removeWhere((post) => post['status'] != 'RECRUITING');
-                              rewardposts = copy2;
+                              latestposts.clear();
+                              rewardposts.clear();
+                              ErrandLatestInit();
+                              ErrandRewardInit();
                             });
                           },
                         ),
