@@ -5,11 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
-final List<Map<String, dynamic>> latestposts = [];
-final List<Map<String, dynamic>> rewardposts = [];
-bool button1state = true; //초기 설정 값
-bool button2state = false;
-bool button3state = false;
+
 
 class PostWidget extends StatelessWidget {
   final int orderNo; //요청자 번호
@@ -217,9 +213,18 @@ class Main_post_page extends StatefulWidget {
   _Main_post_pageState createState() => _Main_post_pageState();
 }
 class _Main_post_pageState extends State<Main_post_page> {
+  List<Map<String, dynamic>> latestposts = [];
+  List<Map<String, dynamic>> rewardposts = [];
+  late int length;
+  bool button1state = true; //초기 설정 값
+  bool button2state = false;
+  bool button3state = false;
+  bool isCheckBox = false;
+  String status = "";
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=";
+        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
+
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
     if(response.statusCode == 200) {
@@ -264,7 +269,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   }
   ErrandRewardInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "reward?pk=-1&cursor=1000000&limit=5&status=";
+        "reward?pk=-1&cursor=1000000&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
     if(response.statusCode == 200) {
@@ -315,7 +320,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     print(lasterrandNo);
     print(lastCreatedDate);
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=";
+        "latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
     if(response.statusCode == 200) {
@@ -368,7 +373,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     print(lasterrandNo);
     print(lastreward);
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=";
+        "reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
     if(response.statusCode == 200) {
@@ -417,6 +422,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     super.initState();
     ErrandLatestInit(); //최신순 요청서 5개
     ErrandRewardInit(); //금액순 요청서 5개를 미리 가지고옴
+
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
@@ -441,7 +447,6 @@ class _Main_post_pageState extends State<Main_post_page> {
       curve: Curves.easeOut,
     );
   }
-  bool isCheckBox = false;
   Color button1_text_color = Color(0xff7C2E1A); //초기 색상 값
   Color button1_border_color = Color(0xff7C3D1A);
   Color button2_text_color = Color(0xff4A4A4A);
@@ -479,9 +484,16 @@ class _Main_post_pageState extends State<Main_post_page> {
   {
     setState(() {
       if(isCheckBox)
-       checkbox_text_color = Color(0xff292929);
+        {
+          checkbox_text_color = Color(0xff292929);
+          status = "RECRUITING";
+        }
+
       else
-        checkbox_text_color = Color(0xff606060);
+        {
+          checkbox_text_color = Color(0xff606060);
+          status = "";
+        }
     });
   }
 
@@ -651,6 +663,12 @@ class _Main_post_pageState extends State<Main_post_page> {
                             setState(() {
                               isCheckBox = value!;
                               change_checkbox_state();
+                              List<Map<String, dynamic>> copy1 = latestposts;
+                              copy1.removeWhere((post) => post['status'] != 'RECRUITING');
+                              latestposts = copy1;
+                              List<Map<String, dynamic>> copy2 = rewardposts;
+                              copy2.removeWhere((post) => post['status'] != 'RECRUITING');
+                              rewardposts = copy2;
                             });
                           },
                         ),
