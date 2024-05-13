@@ -528,6 +528,7 @@ class _RequestState extends State<Request> {
                                 border: InputBorder.none,
                               ),
                               keyboardType: TextInputType.text,
+                              enabled: isCompletedEnabled,
                             ),
                           ),
                         ),
@@ -559,7 +560,7 @@ class _RequestState extends State<Request> {
                   border:
                       Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
                           ),
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffFFFFFF),
                 ),
                 child: Padding(

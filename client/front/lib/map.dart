@@ -7,6 +7,14 @@ void main() async {
   await dotenv.load(fileName: 'assets/env/.env');
 
   // 앱 초기화 시점에 필요한 설정을 수행합니다.
+  late String appKey = dotenv.env['APP_KEY'] ?? '';
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   appKey = '0f07f39ac1feda9399b1e274406fe695';
+  // }
+
   AuthRepository.initialize(
     appKey: dotenv.env['APP_KEY'] ?? '',
     baseUrl: dotenv.env['BASE_URL'] ?? '',
