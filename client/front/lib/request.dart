@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'map.dart';
 
 // import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import 'package:front/main.dart';
+// import 'dart:convert';
+//
+// import 'package:front/main.dart';
 // import 'main_post_page.dart'; // +버튼 클릭 시
 
 //현재 화면에서 뒤로가기
