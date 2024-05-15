@@ -79,6 +79,10 @@ class _NaverMapTestState extends State<NaverMapTest> {
                               NLayerGroup.building, // 건물 레이어
                               NLayerGroup.transit, // 대중교통 레이어
                             ],
+                            // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
+                            scrollGesturesFriction: 0.5, // 스크롤
+                            zoomGesturesFriction: 0.5, // 줌
+
                             initialCameraPosition: NCameraPosition(
                                 target: NLatLng(35.13345439211669, 129.1021265479746),
                                 // 위도, 경도
