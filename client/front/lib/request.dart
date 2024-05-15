@@ -493,10 +493,10 @@ class _RequestState extends State<Request> {
               GestureDetector(
                 onTap: () {
                   print("도착지 텍스트 필드 클릭");
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => NaverMapTest()), // 지도 페이지로 이동
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NaverMapTest()), // 지도 페이지로 이동
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 6),
