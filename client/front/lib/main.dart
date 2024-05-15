@@ -15,7 +15,7 @@ void main() async {
       print("********* 네이버맵 인증오류 : $ex *********");
     },
   );
-  await dotenv.load(fileName: 'assets/env/.env');
+  // await dotenv.load(fileName: 'assets/env/.env');
   runApp(MyApp());
 }
 
