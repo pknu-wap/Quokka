@@ -139,9 +139,10 @@ class _NaverMapTestState extends State<NaverMapTest> {
                               child: Container(
                                 padding: EdgeInsets.only(left: 268, top: 3),
                                 color: Colors.transparent,
-                                child: Icon(
-                                  Icons.close,
-                                  color: Color(0xffB9BCC6),
+                                child: Image.asset(
+                                  'assets/images/close_circle.png',
+                                  width: 20.43,
+                                  height: 20.43,
                                 ),
                               ),
                             ),
