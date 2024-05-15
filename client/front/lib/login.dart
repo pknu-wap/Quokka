@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() => runApp(MyApp());
@@ -41,8 +40,10 @@ class _LogInState extends State<LogIn> {
     try {
       var post = await http.post(Uri.parse(url + param));
       if (post.statusCode == 200) {
-        String? token = post.headers["Authorization"];
+        Map<String, dynamic> headers = post.headers;
+        String? token = headers["authorization"];
         print("token: $token");
+        final Token = await storage.write(key: 'TOKEN', value: token);
         setState(() {
           isVisible = false;
         });

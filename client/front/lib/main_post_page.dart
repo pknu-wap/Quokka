@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+final storage = FlutterSecureStorage();
 
 class PostWidget extends StatelessWidget {
   final int orderNo; //요청자 번호
@@ -219,12 +220,13 @@ class _Main_post_pageState extends State<Main_post_page> {
   bool button3state = false;
   bool isCheckBox = false;
   String status = "";
+  String? token = "";
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
-
+    token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
+        headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
@@ -268,8 +270,9 @@ class _Main_post_pageState extends State<Main_post_page> {
   ErrandRewardInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "reward?pk=-1&cursor=1000000&limit=5&status=$status";
+    token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
+        headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
@@ -317,10 +320,11 @@ class _Main_post_pageState extends State<Main_post_page> {
     String lastCreatedDate = utf8.decode(lastcreatedDate.runes.toList());
     print(lasterrandNo);
     print(lastCreatedDate);
+    token = await storage.read(key: 'TOKEN');
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
+        headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
@@ -370,10 +374,11 @@ class _Main_post_pageState extends State<Main_post_page> {
     int lastreward = lastPost['reward'];
     print(lasterrandNo);
     print(lastreward);
+    token = await storage.read(key: 'TOKEN');
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0cmluZyIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzE1NDIxNTY5LCJleHAiOjE3MTU3ODE1Njl9.4MKt_VafJW6ZzniWQRlOBxKKDOyujvmsZvxI5sYiG7M"});
+        headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
