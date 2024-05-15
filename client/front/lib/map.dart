@@ -30,6 +30,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
       isDestinationEnabled = destinationController.text.isNotEmpty;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
