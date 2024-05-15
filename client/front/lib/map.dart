@@ -34,11 +34,59 @@ class _NaverMapTestState extends State<NaverMapTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NaverMap(
-        options: const NaverMapViewOptions(),
-        onMapReady: (controller) {
-          print("네이버 맵 로딩됨!");
-        },
+      body: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 19.0, top: 34.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  Text(
+                    '도착지 찾기',
+                    style: TextStyle(
+                      fontFamily: 'Paybooc',
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xff111111),
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // 네이버 지도
+            Container(
+              margin: EdgeInsets.only(left: 0, top: 25.55),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: <Widget>[
+                  Container(
+                    width: 318.85,
+                    height: 508.67,
+                    margin: EdgeInsets.only(left: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: NaverMap(
+                        options: const NaverMapViewOptions(),
+                        onMapReady: (controller) {
+                          print("네이버 맵 로딩됨!");
+                        },
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+
+
+          ],
+        ),
       ),
     );
   }
