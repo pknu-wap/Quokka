@@ -13,6 +13,19 @@ class test extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0.0,
+            leading: Padding(
+              padding: const EdgeInsets.only(top: 26.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ),
         body: Container(
           color: Colors.white,
           child: Text("$errandNo", style: TextStyle(

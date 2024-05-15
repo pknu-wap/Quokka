@@ -698,6 +698,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                       color: Color(0xffFFFFFF),
                     ),
                     child: ListView.builder(
+                        padding: EdgeInsets.only(top: 0.1, bottom: 45),
                       controller: _scrollController,
                       shrinkWrap: true,
                       itemCount: posts.length,
