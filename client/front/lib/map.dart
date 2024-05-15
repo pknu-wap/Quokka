@@ -74,14 +74,18 @@ class _NaverMapTestState extends State<NaverMapTest> {
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
                           options: const NaverMapViewOptions(
+                            mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
+                            activeLayerGroups: [ // 표시할 정보
+                              NLayerGroup.building, // 건물 레이어
+                              NLayerGroup.transit, // 대중교통 레이어
+                            ],
                             initialCameraPosition: NCameraPosition(
-                                // target: NLatLng(latitude, longitude),
                                 target: NLatLng(35.13345439211669, 129.1021265479746),
                                 // 위도, 경도
                                 // 부경대 대연캠퍼스
-                                // 위도 : 35.13345439211669
-                                // 경도 : 129.1021265479746
-                                zoom: 13, // 지도의 초기 줌 레벨
+                                // 위도 latitude : 35.13345439211669
+                                // 경도 longitude : 129.1021265479746
+                                zoom: 14, // 지도의 초기 줌 레벨
                                 bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
                                 tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
                             ),
