@@ -81,36 +81,59 @@ class _NaverMapTestState extends State<NaverMapTest> {
                   ),
                   // 도착지 찾기 텍스트 필드
                   Container(
-                    width: 283.97,
-                    height: 40,
-                    margin: EdgeInsets.only(left: 16.86, top: 18.82),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color(0xffD3D3D3),
-                        width: 0.5, // 테두리 굵기
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Color(0xffFFFFFF), // 필드 배경색
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 12, left: 37.65, right: 37.65),
-                      child: TextField(
-                        controller: destinationController,
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 13,
-                          letterSpacing: 0.01,
-                          color: Color(0xff1D1D1D),
+                    margin: EdgeInsets.only(top: 18.82),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: <Widget>[
+                        Container(
+                          width: 283.97,
+                          height: 40,
+                          margin: EdgeInsets.only(left: 16.86),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Color(0xffD3D3D3), width: 1 // 테두리 굵기
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Color(0xffFFFFFF),
+                          ),
+                          child: Padding(
+                            padding:
+                            EdgeInsets.only(top: 0, left: 37.65, right: 37.65),
+                            child: TextField(
+                              controller: destinationController,
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,
+                                color: Color(0xff373737),
+                              ),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                              keyboardType: TextInputType.text,
+                              // enabled: isCompletedEnabled,
+                            ),
+                          ),
                         ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: EdgeInsets.only(left: 26, top: 3),
+                              color: Colors.transparent,
+                              child: Icon(
+                                Icons.search,
+                                color: Color(0xffB9BCC6),
+                              ),
+                            ),
+                          ),
                         ),
-                        keyboardType: TextInputType.text,
-                        // enabled: isCompletedEnabled,
-                      ),
+
+                      ],
                     ),
                   ),
+
                 ],
               ),
             ),
