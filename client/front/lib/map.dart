@@ -73,7 +73,13 @@ class _NaverMapTestState extends State<NaverMapTest> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
+                          forceGesture: true,
+                          // SingleChildScrollView 안에서 사용하므로, NaverMap에
+                          // 전달되는 제스처 무시 현상 방지 위함
                           options: const NaverMapViewOptions(
+                            locationButtonEnable: true, // 내 위치 버튼 활성화
+                            logoClickEnable: false, // 네이버 로고 클릭 비활성화
+
                             mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
                             activeLayerGroups: [ // 표시할 정보
                               NLayerGroup.building, // 건물 레이어
