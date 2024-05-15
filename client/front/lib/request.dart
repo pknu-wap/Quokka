@@ -193,9 +193,9 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-              //텍스트 필드
+              //제목 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 9.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
                 width: 318,
                 height: 31,
                 decoration: BoxDecoration(
@@ -554,7 +554,7 @@ class _RequestState extends State<Request> {
               ),
               // 상세 주소 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
                 width: 318,
                 height: 31,
                 decoration: BoxDecoration(
@@ -655,7 +655,7 @@ class _RequestState extends State<Request> {
               ),
               // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
               Container(
-                margin: EdgeInsets.only(top: 8, left: 22.0),
+                margin: EdgeInsets.only(top: 8, left: 20.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -808,7 +808,7 @@ class _RequestState extends State<Request> {
               ),
               // 요청사항 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 8.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 8.0),
                 width: 318,
                 height: 67.4,
                 decoration: BoxDecoration(
@@ -852,7 +852,7 @@ class _RequestState extends State<Request> {
               ),
               // 작성 완료 버튼 만들기
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 110.6),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 110.6),
                 child: ElevatedButton(
                   onPressed: () {
                     print("요청서 작성 완료");
