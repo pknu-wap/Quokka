@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-// 환경변수 .env 로드
 class NaverMapTest extends StatefulWidget {
   @override
   State<NaverMapTest> createState() => _NaverMapTestState();
@@ -30,5 +29,16 @@ class _NaverMapTestState extends State<NaverMapTest> {
     setState(() {
       isDestinationEnabled = destinationController.text.isNotEmpty;
     });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NaverMap(
+        options: const NaverMapViewOptions(),
+        onMapReady: (controller) {
+          print("네이버 맵 로딩됨!");
+        },
+      ),
+    );
   }
 }
