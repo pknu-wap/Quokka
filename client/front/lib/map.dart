@@ -114,7 +114,39 @@ class _NaverMapTestState extends State<NaverMapTest> {
                 ],
               ),
             ),
-
+            // 도착지로 설정할게요 버튼
+            Container(
+              margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
+              child: ElevatedButton(
+                onPressed: isDestinationEnabled
+                    ? () {
+                  print("도착지로 설정하게요 클릭!");
+                }
+                    : null,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    isDestinationEnabled ? Color(0xFF7C3D1A) : Color(0xFFBD9E8C),
+                  ),
+                  // 버튼의 크기 정하기
+                  minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                  // 버튼의 모양 변경하기
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
+                    ),
+                  ),
+                ),
+                child: Text(
+                  '도착지로 설정할게요',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ),
+              ),
+            ),
 
           ],
         ),
