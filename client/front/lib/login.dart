@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
@@ -29,8 +30,8 @@ class _LogInState extends State<LogIn> {
   TextEditingController _PasswordController = TextEditingController();
 
   request(String username, String password) async {
-    String url =
-        "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}login";
     String param = "?username=$username&password=$password";
     print(url + param);
     try {
