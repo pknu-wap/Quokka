@@ -9,13 +9,15 @@ import 'upload_image.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: 'assets/env/.env');
+
   await NaverMapSdk.instance.initialize(
-    clientId: 'a2gzk9vug1',
+    clientId: dotenv.env['CLIENT_ID'] ?? '',
     onAuthFailed: (ex) {
       print("********* 네이버맵 인증오류 : $ex *********");
     },
   );
-  await dotenv.load(fileName: 'assets/env/.env');
+
   runApp(MyApp());
 }
 
