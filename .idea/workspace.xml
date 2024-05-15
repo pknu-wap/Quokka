@@ -19,9 +19,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2eddxsbJ3GTEwKY1UidS1nLmh0x" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,7 +36,7 @@
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/wap/2024-1_App1/client",
+    "last_opened_file_path": "E:/125/2024-1_App1/client",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
