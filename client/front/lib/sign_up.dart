@@ -1,5 +1,6 @@
 import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'upload_image.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -44,7 +45,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // 이메일 확인 API 연동
   emailRequest(String mail) async {
     print(mail);
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}mail";
     String param = "?mail=$mail";
     var response = await http.get(Uri.parse(url + param));
     if (response.statusCode == 200) {
@@ -115,7 +117,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // 인증번호 확인 API 연동
   codeRequest(String mail, String code) async {
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/mail/check";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}mail/check";
     String param = "?mail=$mail&code=$code";
     var response = await http.get(Uri.parse(url + param));
     if (response.statusCode == 200) {
