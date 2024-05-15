@@ -711,6 +711,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                         String decodedDestination = utf8.decode(destination.runes.toList());
                         String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
                         return GestureDetector(
+                          behavior: HitTestBehavior.translucent, //게시글 전체를 클릭영역으로 만들어주는 코드
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
