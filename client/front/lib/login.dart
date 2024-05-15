@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +25,7 @@ class LogIn extends StatefulWidget {
   State<LogIn> createState() => _LogInState();
 }
 class _LogInState extends State<LogIn> {
+  final storage = FlutterSecureStorage();
   final int maxStudentIdLength = 9; // 학번 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
   final int maxPasswordLength = 20; // 비밀번호 최대 길이 설정
@@ -38,6 +41,8 @@ class _LogInState extends State<LogIn> {
     try {
       var post = await http.post(Uri.parse(url + param));
       if (post.statusCode == 200) {
+        String? token = post.headers["Authorization"];
+        print("token: $token");
         setState(() {
           isVisible = false;
         });
