@@ -9,6 +9,10 @@ class NaverMapTest extends StatefulWidget {
 class _NaverMapTestState extends State<NaverMapTest> {
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
+  // 선택된 좌표 타입 (0: 마커 생성 불가능, 1: 가능)
+  int selectType = 0;
+  // 선택 좌표 표시 마커
+  NMarker selAreaMarker = NMarker(id: "select", position: const NLatLng(0, 0));
 
   @override
   void initState() {
@@ -88,6 +92,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
                             scrollGesturesFriction: 0.5, // 스크롤
                             zoomGesturesFriction: 0.5, // 줌
+
+
 
                             initialCameraPosition: NCameraPosition(
                                 target: NLatLng(35.13345439211669, 129.1021265479746),
