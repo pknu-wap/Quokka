@@ -35,143 +35,161 @@ class _NaverMapTestState extends State<NaverMapTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 19.0, top: 34.0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  Text(
-                    '도착지 찾기',
-                    style: TextStyle(
-                      fontFamily: 'Paybooc',
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff111111),
-                      fontSize: 20,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 19.0, top: 34.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                  ),
-                ],
+                    Text(
+                      '도착지 찾기',
+                      style: TextStyle(
+                        fontFamily: 'Paybooc',
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff111111),
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // 네이버 지도
-            Container(
-              margin: EdgeInsets.only(left: 0, top: 25.55),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: <Widget>[
-                  Container(
-                    width: 318.85,
-                    height: 508.67,
-                    margin: EdgeInsets.only(left: 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: NaverMap(
-                        options: const NaverMapViewOptions(),
-                        onMapReady: (controller) {
-                          print("네이버 맵 로딩됨!");
-                        },
+              // 네이버 지도
+              Container(
+                margin: EdgeInsets.only(left: 0, top: 25.55),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Container(
+                      width: 318.85,
+                      height: 508.67,
+                      margin: EdgeInsets.only(left: 0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: NaverMap(
+                          options: const NaverMapViewOptions(),
+                          onMapReady: (controller) {
+                            print("네이버 맵 로딩됨!");
+                          },
+                        ),
+                      ),
+                    ),
+                    // 도착지 찾기 텍스트 필드
+                    Container(
+                      margin: EdgeInsets.only(top: 18.82),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: <Widget>[
+                          Container(
+                            width: 283.97,
+                            height: 40,
+                            margin: EdgeInsets.only(left: 16.86),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Color(0xffD3D3D3), width: 1 // 테두리 굵기
+                                  ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Color(0xffFFFFFF),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 0, left: 37.65, right: 37.65),
+                              child: TextField(
+                                controller: destinationController,
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
+                                  letterSpacing: 0.01,
+                                  color: Color(0xff373737),
+                                ),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                keyboardType: TextInputType.text,
+                                // enabled: isCompletedEnabled,
+                              ),
+                            ),
+                          ),
+                          // 검색 아이콘
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                padding: EdgeInsets.only(left: 26, top: 3),
+                                color: Colors.transparent,
+                                child: Icon(
+                                  Icons.search,
+                                  color: Color(0xffB9BCC6),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // 닫기 버튼 아이콘
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                padding: EdgeInsets.only(left: 268, top: 3),
+                                color: Colors.transparent,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Color(0xffB9BCC6),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // 도착지로 설정할게요 버튼
+              Container(
+                margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
+                child: ElevatedButton(
+                  onPressed: isDestinationEnabled
+                      ? () {
+                          print("도착지로 설정하게요 클릭!");
+                        }
+                      : null,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      isDestinationEnabled
+                          ? Color(0xFF7C3D1A)
+                          : Color(0xFFBD9E8C),
+                    ),
+                    // 버튼의 크기 정하기
+                    minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                    // 버튼의 모양 변경하기
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            5), // 원하는 모양에 따라 BorderRadius 조절
                       ),
                     ),
                   ),
-                  // 도착지 찾기 텍스트 필드
-                  Container(
-                    margin: EdgeInsets.only(top: 18.82),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: <Widget>[
-                        Container(
-                          width: 283.97,
-                          height: 40,
-                          margin: EdgeInsets.only(left: 16.86),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Color(0xffD3D3D3), width: 1 // 테두리 굵기
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Color(0xffFFFFFF),
-                          ),
-                          child: Padding(
-                            padding:
-                            EdgeInsets.only(top: 0, left: 37.65, right: 37.65),
-                            child: TextField(
-                              controller: destinationController,
-                              style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 13,
-                                letterSpacing: 0.01,
-                                color: Color(0xff373737),
-                              ),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                              keyboardType: TextInputType.text,
-                              // enabled: isCompletedEnabled,
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              padding: EdgeInsets.only(left: 26, top: 3),
-                              color: Colors.transparent,
-                              child: Icon(
-                                Icons.search,
-                                color: Color(0xffB9BCC6),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-                ],
-              ),
-            ),
-            // 도착지로 설정할게요 버튼
-            Container(
-              margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
-              child: ElevatedButton(
-                onPressed: isDestinationEnabled
-                    ? () {
-                  print("도착지로 설정하게요 클릭!");
-                }
-                    : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    isDestinationEnabled ? Color(0xFF7C3D1A) : Color(0xFFBD9E8C),
-                  ),
-                  // 버튼의 크기 정하기
-                  minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
-                  // 버튼의 모양 변경하기
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
+                  child: Text(
+                    '도착지로 설정할게요',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFFFFFF),
                     ),
                   ),
                 ),
-                child: Text(
-                  '도착지로 설정할게요',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
               ),
-            ),
-
-          ],
+            ],
+          ),
         ),
       ),
     );
