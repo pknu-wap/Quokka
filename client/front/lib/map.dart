@@ -73,7 +73,19 @@ class _NaverMapTestState extends State<NaverMapTest> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
-                          options: const NaverMapViewOptions(),
+                          options: const NaverMapViewOptions(
+                            initialCameraPosition: NCameraPosition(
+                                // target: NLatLng(latitude, longitude),
+                                target: NLatLng(35.13345439211669, 129.1021265479746),
+                                // 위도, 경도
+                                // 부경대 대연캠퍼스
+                                // 위도 : 35.13345439211669
+                                // 경도 : 129.1021265479746
+                                zoom: 13, // 지도의 초기 줌 레벨
+                                bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+                                tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+                            ),
+                          ),
                           onMapReady: (controller) {
                             print("네이버 맵 로딩됨!");
                           },
