@@ -43,7 +43,9 @@ class _LogInState extends State<LogIn> {
         Map<String, dynamic> headers = post.headers;
         String? token = headers["authorization"];
         print("token: $token");
-        final Token = await storage.write(key: 'TOKEN', value: token);
+        await storage.write(key: 'TOKEN', value: token);
+        //이제 앱 전역에서 토큰을 사용할 수 있음
+        //지울 때는 이걸로 지워야함 await storage.delete(key: 'TOKEN); ex: 로그아웃
         setState(() {
           isVisible = false;
         });

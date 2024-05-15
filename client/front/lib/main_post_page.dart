@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
+import 'testpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 
@@ -65,11 +66,7 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: () {
-              print('Container1 clicked!');
-            },
-            child: Container( width: 322, height: 100, //게시글 1개
+          Container( width: 322, height: 100, //게시글 1개
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
@@ -146,8 +143,7 @@ class PostWidget extends StatelessWidget {
                                       ),))),
                           ],)),
                   ],
-                )
-            ),
+                ),
 
           ),
           Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
@@ -446,7 +442,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     _scrollController.dispose();
     super.dispose();
   }
-  @override
+
   void scrollToTop() {
     _scrollController.animateTo( // 애니메이션과 함께 맨 위로 스크롤
       0,
@@ -714,7 +710,14 @@ class _Main_post_pageState extends State<Main_post_page> {
                         String decodedTitle = utf8.decode(title.runes.toList());
                         String decodedDestination = utf8.decode(destination.runes.toList());
                         String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
-                          return PostWidget(
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => test(errandNo: posts[index]["errandNo"])
+                              ),);
+                          },
+                          child: PostWidget(
                             orderNo: posts[index]["orderNo"],
                             nickname: decodedNickname,
                             score: posts[index]["score"],
@@ -724,7 +727,8 @@ class _Main_post_pageState extends State<Main_post_page> {
                             destination: decodedDestination,
                             reward: posts[index]["reward"],
                             status: posts[index]["status"],
-                          );
+                          ),
+                        );
                         }
                       ),
                   ),
