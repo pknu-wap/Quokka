@@ -79,7 +79,38 @@ class _NaverMapTestState extends State<NaverMapTest> {
                       ),
                     ),
                   ),
-
+                  // 도착지 찾기 텍스트 필드
+                  Container(
+                    width: 283.97,
+                    height: 40,
+                    margin: EdgeInsets.only(left: 16.86, top: 18.82),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(0xffD3D3D3),
+                        width: 0.5, // 테두리 굵기
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Color(0xffFFFFFF), // 필드 배경색
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 12, left: 37.65, right: 37.65),
+                      child: TextField(
+                        controller: destinationController,
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          letterSpacing: 0.01,
+                          color: Color(0xff1D1D1D),
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        keyboardType: TextInputType.text,
+                        // enabled: isCompletedEnabled,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
