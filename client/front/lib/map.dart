@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class NaverMapTest extends StatefulWidget {
+  final String destinationText;
+  const NaverMapTest({super.key, required this.destinationText});
+
   @override
   State<NaverMapTest> createState() => _NaverMapTestState();
 }
@@ -28,7 +31,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
     destinationController.addListener(updateDestinationState);
-    myLatLng = NLatLng(35.134384930841364, 129.10592409493796);
+    myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
     marker = NMarker(
           id: "test",
           position: myLatLng,
@@ -64,7 +67,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pop(context, destinationController.text);
                       },
                     ),
                     Text(
@@ -106,12 +109,12 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             zoomGesturesFriction: 0.5, // 줌
 
                             initialCameraPosition: NCameraPosition(
-                                target: NLatLng(35.134384930841364, 129.10592409493796),
+                                target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
                                 // 위도, 경도
                                 // 부경대 대연캠퍼스
                                 // 위도 latitude : 35.134384930841364
                                 // 경도 longitude : 129.10592409493796
-                                zoom: 16, // 지도의 초기 줌 레벨
+                                zoom: 14.5, // 지도의 초기 줌 레벨
                                 bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
                                 tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
                             ),
@@ -232,7 +235,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                 child: ElevatedButton(
                   onPressed: isDestinationEnabled
                       ? () {
-                          Navigator.of(context).pop();
+                          Navigator.pop(context, destinationController.text);
                           print("도착지로 설정하게요 클릭!");
                         }
                       : null,

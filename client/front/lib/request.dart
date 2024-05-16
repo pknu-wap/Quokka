@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -49,6 +51,7 @@ class _RequestState extends State<Request> {
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
   bool isCompletedEnabled = false; // 작성 완료 버튼
+  String destinationValue = ""; // 도착지 정보
 
   @override
   void initState() {
@@ -58,6 +61,8 @@ class _RequestState extends State<Request> {
     destinationController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
+
+    // destinationValue = widget.value;
   }
 
   @override
@@ -494,11 +499,16 @@ class _RequestState extends State<Request> {
               GestureDetector(
                 onTap: () {
                   print("도착지 텍스트 필드 클릭");
-                  Navigator.push(
+                  final result = Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NaverMapTest()), // 지도 페이지로 이동
+                        // builder: (context) => NaverMapTest(context, destinationController.text)
+                        // builder: (context) => NaverMapTest(destinationText: destinationController.text
+                            builder: (context) => NaverMapTest(destinationText: '',
+                        )
+                    ), // 지도 페이지로 이동
                   );
+                  log(result.toString());
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 6),
@@ -531,7 +541,7 @@ class _RequestState extends State<Request> {
                               border: InputBorder.none,
                             ),
                             keyboardType: TextInputType.text,
-                            enabled: isCompletedEnabled,
+                            // enabled: isCompletedEnabled,
                           ),
                         ),
                       ),
