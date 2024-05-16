@@ -10,10 +10,18 @@ class NaverMapTest extends StatefulWidget {
 class _NaverMapTestState extends State<NaverMapTest> {
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
+  // bool isMarkerVisible = true; // 마커가 보이는 경우
 
   late NLatLng myLatLng;
   late NMarker marker;
   // final iconImage = NOverlayImage.fromAssetImage('assets/images/location.png');
+
+  void _clearTextFieldAndMarker() {
+    setState(() {
+      destinationController.clear(); // 도착지 텍스트 필드 초기화
+      marker.setIsVisible(false);
+    });
+  }
 
   @override
   void initState() {
@@ -98,16 +106,17 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             zoomGesturesFriction: 0.5, // 줌
 
                             initialCameraPosition: NCameraPosition(
-                                target: NLatLng(35.13345439211669, 129.1021265479746),
+                                target: NLatLng(35.134384930841364, 129.10592409493796),
                                 // 위도, 경도
                                 // 부경대 대연캠퍼스
-                                // 위도 latitude : 35.13345439211669
-                                // 경도 longitude : 129.1021265479746
+                                // 위도 latitude : 35.134384930841364
+                                // 경도 longitude : 129.10592409493796
                                 zoom: 16, // 지도의 초기 줌 레벨
                                 bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
                                 tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
                             ),
                           ),
+
                           onMapReady: (controller) {
                             controller.addOverlay(marker);
                             print("네이버 맵 로딩됨!");
@@ -121,15 +130,18 @@ class _NaverMapTestState extends State<NaverMapTest> {
 
                             setState(() {
                               marker.setPosition(latLng);
+                              marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                             });
                           },
 
                           onSymbolTapped: (symbol) {
-                            var cap = symbol.caption;
-                            log(cap);
-                            marker.setPosition(symbol.position);
+                            setState(() {
+                              marker.setPosition(symbol.position);  // marker 위치 이동
+                              destinationController.text = symbol.caption.split("\n")[1];  // 텍스트 필드에 심볼 이름 설정
+                              marker.setIsVisible(true);
+                            });
+                            log(symbol.caption);
                           },
-
                           forceGesture: true,
                           // SingleChildScrollView 안에서 사용하므로, NaverMap에
                           // 전달되는 제스처 무시 현상 방지 위함
@@ -156,7 +168,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             ),
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  top: 0, left: 37.65, right: 37.65),
+                                  bottom: 6, left: 37.65, right: 37.65),
                               child: TextField(
                                 controller: destinationController,
                                 style: TextStyle(
@@ -192,14 +204,19 @@ class _NaverMapTestState extends State<NaverMapTest> {
                           Positioned.fill(
                             child: Align(
                               alignment: Alignment.centerLeft,
-                              child: Container(
-                                padding: EdgeInsets.only(left: 268, top: 3),
-                                color: Colors.transparent,
-                                child: Image.asset(
-                                  'assets/images/close_circle.png',
-                                  width: 20.43,
-                                  height: 20.43,
-                                ),
+                              child: GestureDetector(
+                                onTap: () { // 버튼 클릭 시 도착지 텍스트 필드 초기화
+                                  _clearTextFieldAndMarker();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 268, top: 3),
+                                    color: Colors.transparent,
+                                    child: Image.asset(
+                                      'assets/images/close_circle.png',
+                                      width: 20.43,
+                                      height: 20.43,
+                                    ),
+                                  ),
                               ),
                             ),
                           ),
