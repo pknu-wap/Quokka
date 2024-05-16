@@ -232,6 +232,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                 child: ElevatedButton(
                   onPressed: isDestinationEnabled
                       ? () {
+                          Navigator.of(context).pop();
                           print("도착지로 설정하게요 클릭!");
                         }
                       : null,
