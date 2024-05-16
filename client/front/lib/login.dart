@@ -167,7 +167,12 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    request(_UsernameController.text, _PasswordController.text);
+                    // request(_UsernameController.text, _PasswordController.text);
+
+                    Navigator.push(
+                      //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                        context,
+                        MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기

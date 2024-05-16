@@ -12,7 +12,10 @@ class _NaverMapTestState extends State<NaverMapTest> {
   // 선택된 좌표 타입 (0: 마커 생성 불가능, 1: 가능)
   int selectType = 0;
   // 선택 좌표 표시 마커
-  NMarker selAreaMarker = NMarker(id: "select", position: const NLatLng(0, 0));
+  final marker = NMarker(id: "test", position: NLatLng(35.13345439211669, 129.1021265479746));
+
+  get model => null;
+
 
   @override
   void initState() {
@@ -77,9 +80,6 @@ class _NaverMapTestState extends State<NaverMapTest> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
-                          forceGesture: true,
-                          // SingleChildScrollView 안에서 사용하므로, NaverMap에
-                          // 전달되는 제스처 무시 현상 방지 위함
                           options: const NaverMapViewOptions(
                             locationButtonEnable: true, // 내 위치 버튼 활성화
                             logoClickEnable: false, // 네이버 로고 클릭 비활성화
@@ -93,8 +93,6 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             scrollGesturesFriction: 0.5, // 스크롤
                             zoomGesturesFriction: 0.5, // 줌
 
-
-
                             initialCameraPosition: NCameraPosition(
                                 target: NLatLng(35.13345439211669, 129.1021265479746),
                                 // 위도, 경도
@@ -107,8 +105,12 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             ),
                           ),
                           onMapReady: (controller) {
+                            controller.addOverlay(marker);
                             print("네이버 맵 로딩됨!");
                           },
+                          forceGesture: true,
+                          // SingleChildScrollView 안에서 사용하므로, NaverMap에
+                          // 전달되는 제스처 무시 현상 방지 위함
                         ),
                       ),
                     ),
@@ -228,3 +230,4 @@ class _NaverMapTestState extends State<NaverMapTest> {
     );
   }
 }
+
