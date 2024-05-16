@@ -46,7 +46,48 @@ class PostWidget extends StatelessWidget {
         return "";
       }
   }
-  Color decide_color(String state){
+  Color decide_box_color(String state){
+    Color state_color;
+    if(state == "RECRUITING")
+    {
+      state_color = Color(0xffFFFFFF);
+      return state_color;
+    }
+    else if(state == "IN_PROGRESS")
+    {
+      state_color = Color(0xffAA7651);
+      return state_color;
+    }
+    else if(state == "DONE")
+    {
+      state_color = Color(0xffCCB9AB);
+      return state_color;
+    }
+    else
+    {
+        state_color = Color(0xffCCB9AB);
+        return state_color;
+    }
+  }
+  Color decide_text_color(String state){
+    Color state_color;
+    if(state == "RECRUITING")
+    {
+      state_color = Color(0xffAA7651);
+      return state_color;
+    }
+    else if(state == "IN_PROGRESS" || state == "DONE")
+    {
+      state_color = Color(0xffFFFFFF);
+      return state_color;
+    }
+    else
+    {
+      state_color = Color(0xffFFFFFF);
+      return state_color;
+    }
+  }
+  Color decide_border(String state){
     Color state_color;
     if(state == "RECRUITING")
     {
@@ -55,7 +96,7 @@ class PostWidget extends StatelessWidget {
     }
     else
     {
-      state_color = Color(0xffCCB9AB);
+      state_color = Colors.transparent;
       return state_color;
     }
   }
@@ -121,13 +162,14 @@ class PostWidget extends StatelessWidget {
                               width: 44.36, height: 18.1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                color: decide_color(status),
+                                color: decide_box_color(status),
+                                border: Border.all(color: decide_border(status),width: 1),
                               ),
                               child: Center( //상태
                                 child: Text(getState(), style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w500, fontSize: 11,
-                                    letterSpacing: 0.01, color: Color(0xffFFFFFF)
+                                    letterSpacing: 0.01, color: decide_text_color(status)
                                 ),),
                               ),
                             ),
@@ -681,7 +723,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                       ),
                       Container( height: 17,
                         margin: EdgeInsets.only(left: 2.28, top: 14.86),
-                        child: Text('진행 중 모아보기', style: TextStyle(
+                        child: Text('모집 중 모아보기', style: TextStyle(
                           fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w500, fontSize: 14,
                           letterSpacing: 0.001, color: checkbox_text_color,
