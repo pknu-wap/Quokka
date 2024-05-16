@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
@@ -13,15 +16,16 @@ class _NaverMapTestState extends State<NaverMapTest> {
   bool isDestinationEnabled = false;
   // 선택된 좌표 타입 (0: 마커 생성 불가능, 1: 가능)
   int selectType = 0;
+
   // 선택 좌표 표시 마커
   final marker = NMarker(
     id: "test",
-    position: NLatLng(35.13345439211669, 129.1021265479746),
-    // anchor: const NPoint(0.5, 0.5),
-    // size: const Size(35, 35),
-    // iconTintColor: Colors.red,
-    // icon: const NOverlayImage.fromAssetImage('assets/images/location.png'),
+    position: NLatLng(35.134384930841364, 129.10592409493796),
+    // icon: iconImage,
   );
+
+  // final iconImage = NOverlayImage.fromAssetImage('assets/images/location.png');
+  late NMarker selectedMarker;
 
   @override
   void initState() {
@@ -114,15 +118,41 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             controller.addOverlay(marker);
                             print("네이버 맵 로딩됨!");
                           },
+
                           onMapTapped: (point, latLng) {
+                            // 지도가 터치될 때마다 마커의 위치를 업데이트
+                            log(point.toString());
+                            print("marker 이동!");
+                            log(latLng.toString());
+
+                            setState(() {
+                              selectedMarker = NMarker(
+                                id: "selectedMarker",
+                                position: latLng,
+                              );
+                            });
+
+
+
                             // setState(() {
-                            //   // 마커의 위치를 클릭한 위치로 업데이트
-                            //   marker = NMarker(
-                            //     id: marker.id,
+                            //   selectedMarker = NMarker(
+                            //     id: "selectedMarker",
                             //     position: latLng,
+                            //     // icon: marker.icon, // 아이콘은 그대로 유지
                             //   );
                             // });
                           },
+
+                          // onMapTapped: (point, latLng) {
+                          //   setState(() {
+                          //     // 새로운 NMarker 객체를 생성하여 마커의 위치를 클릭한 위치로 업데이트
+                          //     selectedMarker = NMarker(
+                          //       id: marker.id, // 이전 마커의 id를 유지합니다.
+                          //       position: latLng,
+                          //       // 다른 속성들은 유지하거나 필요에 따라 변경할 수 있습니다.
+                          //     );
+                          //   });
+                          // },
                           forceGesture: true,
                           // SingleChildScrollView 안에서 사용하므로, NaverMap에
                           // 전달되는 제스처 무시 현상 방지 위함
