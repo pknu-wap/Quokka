@@ -103,7 +103,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                                 // 부경대 대연캠퍼스
                                 // 위도 latitude : 35.13345439211669
                                 // 경도 longitude : 129.1021265479746
-                                zoom: 14, // 지도의 초기 줌 레벨
+                                zoom: 16, // 지도의 초기 줌 레벨
                                 bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
                                 tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
                             ),
@@ -122,6 +122,12 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             setState(() {
                               marker.setPosition(latLng);
                             });
+                          },
+
+                          onSymbolTapped: (symbol) {
+                            var cap = symbol.caption;
+                            log(cap);
+                            marker.setPosition(symbol.position);
                           },
 
                           forceGesture: true,
