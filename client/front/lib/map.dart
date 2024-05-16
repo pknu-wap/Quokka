@@ -6,16 +6,22 @@ class NaverMapTest extends StatefulWidget {
   State<NaverMapTest> createState() => _NaverMapTestState();
 }
 
+
+
 class _NaverMapTestState extends State<NaverMapTest> {
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
   // 선택된 좌표 타입 (0: 마커 생성 불가능, 1: 가능)
   int selectType = 0;
   // 선택 좌표 표시 마커
-  final marker = NMarker(id: "test", position: NLatLng(35.13345439211669, 129.1021265479746));
-
-  get model => null;
-
+  final marker = NMarker(
+    id: "test",
+    position: NLatLng(35.13345439211669, 129.1021265479746),
+    // anchor: const NPoint(0.5, 0.5),
+    // size: const Size(35, 35),
+    // iconTintColor: Colors.red,
+    // icon: const NOverlayImage.fromAssetImage('assets/images/location.png'),
+  );
 
   @override
   void initState() {
@@ -107,6 +113,15 @@ class _NaverMapTestState extends State<NaverMapTest> {
                           onMapReady: (controller) {
                             controller.addOverlay(marker);
                             print("네이버 맵 로딩됨!");
+                          },
+                          onMapTapped: (point, latLng) {
+                            // setState(() {
+                            //   // 마커의 위치를 클릭한 위치로 업데이트
+                            //   marker = NMarker(
+                            //     id: marker.id,
+                            //     position: latLng,
+                            //   );
+                            // });
                           },
                           forceGesture: true,
                           // SingleChildScrollView 안에서 사용하므로, NaverMap에
