@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class NaverMapTest extends StatefulWidget {
-  final String destinationText;
-  const NaverMapTest({super.key, required this.destinationText});
+  // final String destinationText;
+  const NaverMapTest({Key? key}) : super(key: key);
 
   @override
   State<NaverMapTest> createState() => _NaverMapTestState();

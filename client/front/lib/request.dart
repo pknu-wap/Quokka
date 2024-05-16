@@ -56,6 +56,13 @@ class _RequestState extends State<Request> {
 
   late NLatLng myLatLng;
   late NMarker marker;
+  // late NMarker markerIcon;
+  // @override
+  // void setCustomMapMarker() async {
+  //   final markerIcon = await NOverlayImage.fromAssetImage(
+  //   'assets/images/location.png',
+  //   );
+  // }
 
   @override
   void initState() {
@@ -71,7 +78,7 @@ class _RequestState extends State<Request> {
     marker = NMarker(
       id: "test",
       position: myLatLng,
-      // icon: iconImage,
+      // icon: markerIcon,
     );
   }
 
@@ -506,21 +513,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               // 네이버 미니 지도
-              GestureDetector(
-                onTap: () {
-                  print("도착지 미니 지도 클릭!");
-                  final result = Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        // builder: (context) => NaverMapTest(context, destinationController.text)
-                        // builder: (context) => NaverMapTest(destinationText: destinationController.text
-                            builder: (context) => NaverMapTest(destinationText: '',
-                        )
-                    ), // 지도 페이지로 이동
-                  );
-                  log(result.toString());
-                },
-                child: Container(
+          Container(
                 width: 318.85,
                 height: 120,
                 margin: EdgeInsets.only(left: 0, top: 6),
@@ -539,9 +532,6 @@ class _RequestState extends State<Request> {
                         NLayerGroup.building, // 건물 레이어
                         NLayerGroup.transit, // 대중교통 레이어
                       ],
-                      // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
-                      // scrollGesturesFriction: 0.5, // 스크롤
-                      // zoomGesturesFriction: 0.5, // 줌
 
                       initialCameraPosition: NCameraPosition(
                           target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
@@ -560,17 +550,26 @@ class _RequestState extends State<Request> {
                       print("네이버 맵 로딩됨!");
                     },
 
-                    // onMapTapped: (point, latLng) {
-                    //   // 지도가 터치될 때마다 마커의 위치를 업데이트
-                    //   print("marker 이동!");
-                    //   log(point.toString());
-                    //   log(latLng.toString());
-                    //
-                    //   setState(() {
-                    //     marker.setPosition(latLng);
-                    //     marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                    //   });
-                    // },
+                    onMapTapped: (point, latLng) {
+                      // 지도가 터치될 때마다 마커의 위치를 업데이트
+                      print("도착지 미니 지도 클릭!");
+                      setState(() {
+                              Navigator.push(
+                                //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                                  context,
+                                  MaterialPageRoute(builder: (context) => NaverMapTest())
+                              );
+                      });
+
+                      // print("marker 이동!");
+                      // log(point.toString());
+                      // log(latLng.toString());
+                      //
+                      // setState(() {
+                      //   marker.setPosition(latLng);
+                      //   marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                      // });
+                    },
                     //
                     // onSymbolTapped: (symbol) {
                     //   setState(() {
@@ -586,9 +585,6 @@ class _RequestState extends State<Request> {
                   ),
                 ),
               ),
-            ),
-
-
 
               // // 도착지 텍스트 필드
               // GestureDetector(

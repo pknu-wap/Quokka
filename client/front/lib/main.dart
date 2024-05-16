@@ -18,6 +18,10 @@ void main() async {
     },
   );
 
+  // final markerIcon = await NOverlayImage.fromAssetImage(
+  //   'assets/images/location.png',
+  // );
+
   runApp(MyApp());
 }
 
