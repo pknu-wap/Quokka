@@ -14,17 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatusMessageResponseDto {
-    private Member erranderNo; // 심부름 꾼
-
-    private Errand errandNo; // 심부름 번호
-
     private String contents; // 현황 정보
 
     private LocalDateTime created;
 
     public StatusMessageResponseDto(StatusMessage statusMessage) {
-        this.erranderNo = statusMessage.getErranderNo();
-        this.errandNo = statusMessage.getErrandNo();
         this.contents = statusMessage.getContents();
         this.created = statusMessage.getCreated();
     }
