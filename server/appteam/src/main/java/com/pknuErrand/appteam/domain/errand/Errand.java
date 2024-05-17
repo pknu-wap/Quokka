@@ -58,6 +58,10 @@ public class Errand {
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
+    @OneToOne
+    @JoinColumn
+    private ErrandCompletionStatus errandCompletionStatus;
+
     public void changeErrandStatusAndSetErrander(Status status, Member errander) {
         this.status = status;
         erranderNo = errander;
@@ -91,5 +95,6 @@ public class Errand {
         this.isCash = isCash;
         this.status = status;
         this.erranderNo = erranderNo;
+        this.errandCompletionStatus = new ErrandCompletionStatus(this);
     }
 }

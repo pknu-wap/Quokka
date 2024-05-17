@@ -149,7 +149,6 @@ public class ErrandController {
                 .body(list);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {
         List<ErrandListResponseDto> errandListResponseDto = errandService.findAllErrand();

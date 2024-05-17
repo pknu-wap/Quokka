@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.domain.errand.ErrandCompletionStatus;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
@@ -12,6 +13,7 @@ import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
+import com.pknuErrand.appteam.repository.errand.ErrandCompletionStatusRepository;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,13 @@ import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 public class ErrandService {
 
     private final ErrandRepository errandRepository;
+    private final ErrandCompletionStatusRepository errandCompletionStatusRepository;
     private final MemberService memberService;
 
     @Autowired
-    ErrandService(ErrandRepository errandRepository, MemberService memberService) {
+    ErrandService(ErrandRepository errandRepository, MemberService memberService, ErrandCompletionStatusRepository errandCompletionStatusRepository) {
         this.errandRepository = errandRepository;
+        this.errandCompletionStatusRepository = errandCompletionStatusRepository;
         this.memberService = memberService;
     }
 
@@ -54,6 +58,7 @@ public class ErrandService {
                 .status(RECRUITING)
                 .erranderNo(null)
                 .build();
+        errandCompletionStatusRepository.save(saveErrand.getErrandCompletionStatus());
         errandRepository.save(saveErrand);
         return findErrandDetailById(saveErrand.getErrandNo());
     }
