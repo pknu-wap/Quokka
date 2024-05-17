@@ -782,6 +782,27 @@ class _Main_post_pageState extends State<Main_post_page> {
             ),
           ),
           Positioned(
+            bottom: 88.5, right: 26.27,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 56, height: 56,
+                    margin : const EdgeInsets.only(),
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: () {
+                      },
+                      icon: Image.asset('assets/images/Quokka.png', width: 56, height: 56, fit: BoxFit.cover),
+                    ),),
+                ]
+            ),
+          ),
+          Positioned(
               bottom: 0, left: 0, right: 0,
               child: Container( width: 364, height: 64,
                      decoration: BoxDecoration(
