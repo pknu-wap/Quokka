@@ -158,7 +158,7 @@ class PostWidget extends StatelessWidget {
                               ),),),
                             Container(
                               margin: EdgeInsets.only(left: 11.0, top: 8.95),
-                              padding: EdgeInsets.all(2),
+                              padding: EdgeInsets.only(left: 2, right: 2),
                               width: 44.36, height: 18.1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
