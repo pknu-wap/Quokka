@@ -120,10 +120,21 @@ public class ErrandController {
     })
     @Operation(summary = "요청서 삭제하기", description = "요청서 삭제")
     @DeleteMapping("/{id}")
-    public void deleteErrand(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteErrand(@PathVariable Long id) {
         errandService.deleteErrand(id);
+        return ResponseEntity.ok().build();
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "진행중인 심부름 있음") ,
+            @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음") ,
+    })
+    @Operation(summary = "사용자의 진행중인 심부름 여부 확인")
+    @GetMapping("/in-progress")
+    public ResponseEntity<Void> checkInProgressErrandExist() {
+        errandService.checkInProgressErrandExist();
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {

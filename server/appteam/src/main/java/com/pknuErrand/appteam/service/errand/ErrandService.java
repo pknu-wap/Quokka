@@ -218,4 +218,14 @@ public class ErrandService {
         }
         errandRepository.delete(errand);
     }
+
+    @Transactional
+    public void checkInProgressErrandExist() {
+        Member member = memberService.getLoginMember();
+        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
+        if(inProgressErrandList.size() == 0)
+            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
+        for(Errand errand: inProgressErrandList)
+            System.out.println(errand.getErrandNo());
+    }
 }
