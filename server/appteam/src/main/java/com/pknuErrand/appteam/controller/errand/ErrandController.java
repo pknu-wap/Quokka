@@ -4,6 +4,7 @@ package com.pknuErrand.appteam.controller.errand;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
@@ -130,11 +131,20 @@ public class ErrandController {
             @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음") ,
     })
     @Operation(summary = "사용자의 진행중인 심부름 여부 확인")
-    @GetMapping("/in-progress")
+    @GetMapping("/in-progress/exist")
     public ResponseEntity<Void> checkInProgressErrandExist() {
         errandService.checkInProgressErrandExist();
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "사용자의 진행중인 심부름 불러오기")
+    @GetMapping("/in-progress")
+    public ResponseEntity<List<InProgressErrandListResponseDto>> getInProgressErrand() {
+        List<InProgressErrandListResponseDto> list = errandService.getInProgressErrand();
+        return ResponseEntity.ok()
+                .body(list);
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {

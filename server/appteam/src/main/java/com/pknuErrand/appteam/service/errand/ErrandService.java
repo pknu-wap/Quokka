@@ -6,6 +6,7 @@ import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
@@ -225,7 +226,26 @@ public class ErrandService {
         List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
         if(inProgressErrandList.size() == 0)
             throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
-        for(Errand errand: inProgressErrandList)
-            System.out.println(errand.getErrandNo());
+//        for(Errand errand: inProgressErrandList)
+//            System.out.println(errand.getErrandNo());
+    }
+
+    @Transactional
+    public List<InProgressErrandListResponseDto> getInProgressErrand() {
+        Member member = memberService.getLoginMember();
+        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
+        if(inProgressErrandList.size() == 0)
+            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
+        List<InProgressErrandListResponseDto> filteredinProgressErrandList = new ArrayList<>();
+        for(Errand errand : inProgressErrandList) {
+            InProgressErrandListResponseDto filteredErrand = InProgressErrandListResponseDto.builder()
+                    .errandNo(errand.getErrandNo())
+                    .title(errand.getTitle())
+                    .due(errand.getDue())
+                    .isUserOrder(errand.getOrderNo().equals(member))
+                    .build();
+            filteredinProgressErrandList.add(filteredErrand);
+        }
+        return filteredinProgressErrandList;
     }
 }
