@@ -124,14 +124,6 @@ public class ErrandController {
         errandService.deleteErrand(id);
     }
 
-    @GetMapping("/loginTest")
-    public void 로그인테스트() {
-        Member member = memberService.getLoginMember();
-        log.info("member id = {}", member.getId());
-        log.info("member name = {}", member.getName());
-        if(member == null)
-            log.warn("member is null");
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {
