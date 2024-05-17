@@ -224,33 +224,4 @@ public class ErrandService {
         }
         errandRepository.delete(errand);
     }
-
-    @Transactional
-    public void checkInProgressErrandExist() {
-        Member member = memberService.getLoginMember();
-        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
-        if(inProgressErrandList.size() == 0)
-            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
-//        for(Errand errand: inProgressErrandList)
-//            System.out.println(errand.getErrandNo());
-    }
-
-    @Transactional
-    public List<InProgressErrandListResponseDto> getInProgressErrand() {
-        Member member = memberService.getLoginMember();
-        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
-        if(inProgressErrandList.size() == 0)
-            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
-        List<InProgressErrandListResponseDto> filteredinProgressErrandList = new ArrayList<>();
-        for(Errand errand : inProgressErrandList) {
-            InProgressErrandListResponseDto filteredErrand = InProgressErrandListResponseDto.builder()
-                    .errandNo(errand.getErrandNo())
-                    .title(errand.getTitle())
-                    .due(errand.getDue())
-                    .isUserOrder(errand.getOrderNo().equals(member))
-                    .build();
-            filteredinProgressErrandList.add(filteredErrand);
-        }
-        return filteredinProgressErrandList;
-    }
 }

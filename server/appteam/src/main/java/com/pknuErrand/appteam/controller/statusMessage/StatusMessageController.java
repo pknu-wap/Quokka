@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.controller.statusMessage;
 
 import com.pknuErrand.appteam.domain.statusMessage.StatusMessage;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageRequestDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageResponseDto;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
@@ -55,6 +56,30 @@ public class StatusMessageController {
                 .body(statusMessageService.getStatusMessageList(errandNo));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "진행중인 심부름 있음") ,
+            @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음") ,
+    })
+    @Operation(summary = "사용자의 진행중인 심부름 여부 확인")
+    @GetMapping("/errand/in-progress/exist")
+    public ResponseEntity<Void> checkInProgressErrandExist() {
+        statusMessageService.checkInProgressErrandExist();
+        return ResponseEntity.ok().build();
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "진행중인 심부름 있음", content = @Content(schema = @Schema(implementation = InProgressErrandListResponseDto.class))) ,
+            @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
+    })
+    @Operation(summary = "사용자의 진행중인 심부름 불러오기")
+    @GetMapping("/errand/in-progress")
+    public ResponseEntity<List<InProgressErrandListResponseDto>> getInProgressErrand() {
+        List<InProgressErrandListResponseDto> list = statusMessageService.getInProgressErrand();
+        return ResponseEntity.ok()
+                .body(list);
+    }
+
+    
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "errander 완료처리 성공"),
             @ApiResponse(responseCode = "401\nUNAUTHORIZED_ACCESS", description = "사용자가 errander가 아님", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))),
