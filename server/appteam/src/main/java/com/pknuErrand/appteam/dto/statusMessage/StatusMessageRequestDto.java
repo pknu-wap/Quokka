@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class StatusMessageRequestDto {
     private Long erranderNo; // 심부름 꾼
 
-    private Long errandNo; // 심부름 번호
+ //   private Long errandNo; // 심부름 번호
 
-    private String contents; // 현황 정보
+    private String contents; // 메세지
 
 }
