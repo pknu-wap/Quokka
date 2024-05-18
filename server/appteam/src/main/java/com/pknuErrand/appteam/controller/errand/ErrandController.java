@@ -126,29 +126,6 @@ public class ErrandController {
         return ResponseEntity.ok().build();
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "진행중인 심부름 있음") ,
-            @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음") ,
-    })
-    @Operation(summary = "사용자의 진행중인 심부름 여부 확인")
-    @GetMapping("/in-progress/exist")
-    public ResponseEntity<Void> checkInProgressErrandExist() {
-        errandService.checkInProgressErrandExist();
-        return ResponseEntity.ok().build();
-    }
-
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "진행중인 심부름 있음", content = @Content(schema = @Schema(implementation = InProgressErrandListResponseDto.class))) ,
-            @ApiResponse(responseCode = "404", description = "진행중인 심부름 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
-    })
-    @Operation(summary = "사용자의 진행중인 심부름 불러오기")
-    @GetMapping("/in-progress")
-    public ResponseEntity<List<InProgressErrandListResponseDto>> getInProgressErrand() {
-        List<InProgressErrandListResponseDto> list = errandService.getInProgressErrand();
-        return ResponseEntity.ok()
-                .body(list);
-    }
-
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {

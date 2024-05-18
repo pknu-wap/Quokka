@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.domain.errand.ErrandCompletionStatus;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
@@ -12,6 +13,7 @@ import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
+import com.pknuErrand.appteam.repository.errand.ErrandCompletionStatusRepository;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,13 @@ import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 public class ErrandService {
 
     private final ErrandRepository errandRepository;
+    private final ErrandCompletionStatusRepository errandCompletionStatusRepository;
     private final MemberService memberService;
 
     @Autowired
-    ErrandService(ErrandRepository errandRepository, MemberService memberService) {
+    ErrandService(ErrandRepository errandRepository, MemberService memberService, ErrandCompletionStatusRepository errandCompletionStatusRepository) {
         this.errandRepository = errandRepository;
+        this.errandCompletionStatusRepository = errandCompletionStatusRepository;
         this.memberService = memberService;
     }
 
@@ -54,6 +58,7 @@ public class ErrandService {
                 .status(RECRUITING)
                 .erranderNo(null)
                 .build();
+        errandCompletionStatusRepository.save(saveErrand.getErrandCompletionStatus());
         errandRepository.save(saveErrand);
         return findErrandDetailById(saveErrand.getErrandNo());
     }
@@ -218,34 +223,5 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errandRepository.delete(errand);
-    }
-
-    @Transactional
-    public void checkInProgressErrandExist() {
-        Member member = memberService.getLoginMember();
-        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
-        if(inProgressErrandList.size() == 0)
-            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
-//        for(Errand errand: inProgressErrandList)
-//            System.out.println(errand.getErrandNo());
-    }
-
-    @Transactional
-    public List<InProgressErrandListResponseDto> getInProgressErrand() {
-        Member member = memberService.getLoginMember();
-        List<Errand> inProgressErrandList = errandRepository.findInProgressErrand(member.getMemberNo());
-        if(inProgressErrandList.size() == 0)
-            throw new CustomException(ErrorCode.ERRAND_NOT_FOUND);
-        List<InProgressErrandListResponseDto> filteredinProgressErrandList = new ArrayList<>();
-        for(Errand errand : inProgressErrandList) {
-            InProgressErrandListResponseDto filteredErrand = InProgressErrandListResponseDto.builder()
-                    .errandNo(errand.getErrandNo())
-                    .title(errand.getTitle())
-                    .due(errand.getDue())
-                    .isUserOrder(errand.getOrderNo().equals(member))
-                    .build();
-            filteredinProgressErrandList.add(filteredErrand);
-        }
-        return filteredinProgressErrandList;
     }
 }
