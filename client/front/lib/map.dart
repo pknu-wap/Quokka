@@ -199,20 +199,20 @@ class _NaverMapTestState extends State<NaverMapTest> {
                               ),
                             ),
                           ),
-                          // 검색 아이콘
-                          Positioned.fill(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                padding: EdgeInsets.only(left: 26, top: 3),
-                                color: Colors.transparent,
-                                child: Icon(
-                                  Icons.search,
-                                  color: Color(0xffB9BCC6),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // // 검색 아이콘
+                          // Positioned.fill(
+                          //   child: Align(
+                          //     alignment: Alignment.centerLeft,
+                          //     child: Container(
+                          //       padding: EdgeInsets.only(left: 26, top: 3),
+                          //       color: Colors.transparent,
+                          //       child: Icon(
+                          //         Icons.search,
+                          //         color: Color(0xffB9BCC6),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           // 닫기 버튼 아이콘
                           Positioned.fill(
                             child: Align(
