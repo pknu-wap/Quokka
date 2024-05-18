@@ -53,19 +53,10 @@ class _RequestState extends State<Request> {
   bool isCash = false;
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
-  bool isCompletedEnabled = false; // 작성 완료 버튼
-  String destinationValue = ""; // 도착지 정보
-
-  NCameraPosition cameraPosition = new NCameraPosition(
-      target: NLatLng(35.134384930841364, 129.10592409493796),
-      zoom: 14.5, // 지도의 초기 줌 레벨
-      bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
-      tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임),
-  );
-  late NLatLng myLatLng;
-  late NMarker marker;
+  late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
+  late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
   NLatLng value = NLatLng(0, 0);
-  late NaverMapController mapController;
+  late NaverMapController mapController; // 지도 컨트롤
 
   // late NMarker markerIcon;
   // @override
@@ -566,20 +557,10 @@ class _RequestState extends State<Request> {
                     onMapReady: (controller) {
                       log("request.dart로 이동!");
                       log(value.toString());
-                      controller.addOverlay(marker);
+                      controller.addOverlay(marker); // 마커를 지도 위에 올리기
                       mapController = controller;
                       print("네이버 맵 로딩됨!");
                     },
-
-                    // onMapTapped: (point, latLng) async {
-                    //   // 지도가 터치될 때마다 마커의 위치를 업데이트
-                    //   print("도착지 미니 지도 클릭!");
-                    //   Navigator.push(
-                    //     //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-                    //       context,
-                    //       MaterialPageRoute(builder: (context) => NaverMapTest(value: value)),
-                    //   );
-                    // },
 
                     onMapTapped: (point, latLng) async {
                       // 지도가 터치될 때마다 마커의 위치를 업데이트
@@ -613,7 +594,7 @@ class _RequestState extends State<Request> {
                       });
                       final cameraPosition = NCameraPosition(
                           target: NLatLng(value.latitude, value.longitude),
-                          zoom: 15
+                          zoom: 14.5
                       );
                       final cameraUpdate = NCameraUpdate.fromCameraPosition(cameraPosition);
                       cameraUpdate.setAnimation(
@@ -622,92 +603,13 @@ class _RequestState extends State<Request> {
                       );
                       mapController.updateCamera(cameraUpdate);
                       log("지도의 심볼 클릭 -> 미니 지도에 표시");
-                      // mapController.updateCamera(
-                      //     NCameraUpdate.scrollAndZoomTo(
-                      //     target : NLatLng(value.latitude, value.longitude),
-                      // );
-                      // log(value.toString());
-                      // log(symbol.caption.toString());
                     },
-                    // onCameraChange: (NCameraUpdateReason reason, bool animated) {
-                    //   NCameraUpdate.scrollAndZoomTo(
-                    //     target: NLatLng(value.latitude, value.longitude),
-                    //   );
-                    // },
                     forceGesture: true,
                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
                     // 전달되는 제스처 무시 현상 방지 위함
                   ),
                 ),
               ),
-
-              // // 기존의 도착지 텍스트 필드
-              // GestureDetector(
-              //   onTap: () {
-              //     print("도착지 텍스트 필드 클릭");
-              //     final result = Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           // builder: (context) => NaverMapTest(context, destinationController.text)
-              //           // builder: (context) => NaverMapTest(destinationText: destinationController.text
-              //               builder: (context) => NaverMapTest(destinationText: '',
-              //           )
-              //       ), // 지도 페이지로 이동
-              //     );
-              //     log(result.toString());
-              //   },
-              //   child: Container(
-              //     margin: EdgeInsets.only(top: 6),
-              //     child: Stack(
-              //       clipBehavior: Clip.none,
-              //       children: <Widget>[
-              //         Container(
-              //           width: 318,
-              //           height: 31,
-              //           decoration: BoxDecoration(
-              //             border: Border.all(
-              //                 color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
-              //                 ),
-              //             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              //             color: Color(0xffFFFFFF),
-              //           ),
-              //           child: Padding(
-              //             padding:
-              //                 EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
-              //             child: TextField(
-              //               controller: destinationController,
-              //               style: TextStyle(
-              //                 fontFamily: 'Pretendard',
-              //                 fontWeight: FontWeight.w400,
-              //                 fontSize: 13,
-              //                 letterSpacing: 0.01,
-              //                 color: Color(0xff373737),
-              //               ),
-              //               decoration: InputDecoration(
-              //                 border: InputBorder.none,
-              //               ),
-              //               keyboardType: TextInputType.text,
-              //               // enabled: isCompletedEnabled,
-              //             ),
-              //           ),
-              //         ),
-              //         Positioned.fill(
-              //           child: Align(
-              //             alignment: Alignment.centerLeft,
-              //             child: Container(
-              //               padding: EdgeInsets.only(left: 9, top: 3),
-              //               color: Colors.transparent,
-              //               child: Icon(
-              //                 Icons.search,
-              //                 color: Color(0xffB9BCC6),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               // 상세 주소 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
