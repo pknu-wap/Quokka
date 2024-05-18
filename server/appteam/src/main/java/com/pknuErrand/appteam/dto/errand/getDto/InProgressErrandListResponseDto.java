@@ -14,6 +14,6 @@ import java.sql.Timestamp;
 public class InProgressErrandListResponseDto {
     private long errandNo;
     private String title;
-    private Timestamp due;
+    private String due;
     private Boolean isUserOrder;
 }
