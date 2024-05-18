@@ -54,6 +54,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
   void updateDestinationState() {
     // 중복확인 입력란의 텍스트 변경 감지하여 버튼의 도착지 활성화 상태 업데이트
     setState(() {
+      // isDestinationEnabled = destinationController.text.isNotEmpty;
       isDestinationEnabled = destinationController.text.isNotEmpty;
     });
   }
@@ -251,11 +252,16 @@ class _NaverMapTestState extends State<NaverMapTest> {
                         }
                       : null,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      isDestinationEnabled
-                          ? Color(0xFF7C3D1A)
-                          : Color(0xFFBD9E8C),
-                    ),
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          if (marker.isVisible) {
+                            return Color(
+                                0xFF7C3D1A); // 활성화된 배경색(모든 텍스트 필드 비어있지 않은 경우)
+                          } else {
+                            return Color(
+                                0xFFBD9E8C); // 비활성화 배경색(하나의 텍스트 필드라도 비어있는 경우)
+                          }
+                        }),
                     // 버튼의 크기 정하기
                     minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
                     // 버튼의 모양 변경하기
