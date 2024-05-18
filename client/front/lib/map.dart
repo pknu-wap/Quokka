@@ -138,6 +138,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
 
                             setState(() {
                               returnValue = latLng; // 위치 저장
+                              destinationController.clear(); // 도착지 텍스트 필드 초기화
                               marker.setPosition(latLng);
                               marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                             });
