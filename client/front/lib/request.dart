@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:intl/intl.dart';
 import 'map.dart';
 
 // import 'package:http/http.dart' as http;
@@ -55,9 +56,16 @@ class _RequestState extends State<Request> {
   bool isCompletedEnabled = false; // 작성 완료 버튼
   String destinationValue = ""; // 도착지 정보
 
+  NCameraPosition cameraPosition = new NCameraPosition(
+      target: NLatLng(35.134384930841364, 129.10592409493796),
+      zoom: 14.5, // 지도의 초기 줌 레벨
+      bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+      tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임),
+  );
   late NLatLng myLatLng;
   late NMarker marker;
   NLatLng value = NLatLng(0, 0);
+  late NaverMapController mapController;
 
   // late NMarker markerIcon;
   // @override
@@ -559,6 +567,7 @@ class _RequestState extends State<Request> {
                       log("request.dart로 이동!");
                       log(value.toString());
                       controller.addOverlay(marker);
+                      mapController = controller;
                       print("네이버 맵 로딩됨!");
                     },
 
@@ -588,6 +597,12 @@ class _RequestState extends State<Request> {
                         marker.setPosition(value);
                         marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                       });
+                      mapController.updateCamera(
+                        NCameraUpdate.scrollAndZoomTo(
+                          target : NLatLng(value.latitude, value.longitude),
+                          zoom: 14.5
+                          ),
+                        );
                       log(value.toString());
                     },
 
@@ -596,9 +611,29 @@ class _RequestState extends State<Request> {
                         marker.setPosition(value);  // marker 위치 이동
                         marker.setIsVisible(true);
                       });
-                      log(value.toString());
+                      final cameraPosition = NCameraPosition(
+                          target: NLatLng(value.latitude, value.longitude),
+                          zoom: 15
+                      );
+                      final cameraUpdate = NCameraUpdate.fromCameraPosition(cameraPosition);
+                      cameraUpdate.setAnimation(
+                          animation: NCameraAnimation.fly,
+                          duration: Duration(seconds: 2)
+                      );
+                      mapController.updateCamera(cameraUpdate);
+                      log("지도의 심볼 클릭 -> 미니 지도에 표시");
+                      // mapController.updateCamera(
+                      //     NCameraUpdate.scrollAndZoomTo(
+                      //     target : NLatLng(value.latitude, value.longitude),
+                      // );
+                      // log(value.toString());
                       // log(symbol.caption.toString());
                     },
+                    // onCameraChange: (NCameraUpdateReason reason, bool animated) {
+                    //   NCameraUpdate.scrollAndZoomTo(
+                    //     target: NLatLng(value.latitude, value.longitude),
+                    //   );
+                    // },
                     forceGesture: true,
                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
                     // 전달되는 제스처 무시 현상 방지 위함
