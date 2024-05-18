@@ -516,9 +516,16 @@ class _RequestState extends State<Request> {
           Container(
                 width: 318.85,
                 height: 120,
-                margin: EdgeInsets.only(left: 0, top: 6),
+                margin: EdgeInsets.only(left: 2, top: 6),
+            decoration: BoxDecoration(
+              border:
+              Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Color(0xffFFFFFF),
+            ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(5),
                   child: NaverMap(
                     options: const NaverMapViewOptions(
                       scrollGesturesEnable: false, // 스크롤 비활성화
@@ -560,25 +567,7 @@ class _RequestState extends State<Request> {
                                   MaterialPageRoute(builder: (context) => NaverMapTest())
                               );
                       });
-
-                      // print("marker 이동!");
-                      // log(point.toString());
-                      // log(latLng.toString());
-                      //
-                      // setState(() {
-                      //   marker.setPosition(latLng);
-                      //   marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                      // });
                     },
-                    //
-                    // onSymbolTapped: (symbol) {
-                    //   setState(() {
-                    //     marker.setPosition(symbol.position);  // marker 위치 이동
-                    //     destinationController.text = symbol.caption.split("\n")[1];  // 텍스트 필드에 심볼 이름 설정
-                    //     marker.setIsVisible(true);
-                    //   });
-                    //   log(symbol.caption);
-                    // },
                     forceGesture: true,
                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
                     // 전달되는 제스처 무시 현상 방지 위함
@@ -586,7 +575,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
 
-              // // 도착지 텍스트 필드
+              // // 기존의 도착지 텍스트 필드
               // GestureDetector(
               //   onTap: () {
               //     print("도착지 텍스트 필드 클릭");
