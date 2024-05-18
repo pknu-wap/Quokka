@@ -25,7 +25,7 @@ public class ErrandRequestDto { // to Entity
 
     private double longitude;
 
-    private Timestamp due; // 몇시까지?
+    private String due; // 몇시까지?
 
     private String detail;
 

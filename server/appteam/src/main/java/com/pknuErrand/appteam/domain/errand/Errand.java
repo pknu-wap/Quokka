@@ -39,7 +39,7 @@ public class Errand {
     private double longitude;
 
     @Column
-    private Timestamp due; // 몇시까지?
+    private String due; // 몇시까지?
 
     @Column
     private String detail;
@@ -68,7 +68,7 @@ public class Errand {
     }
 
     public void updateErrand(String createdDate, String title, String destination,
-                             double latitude, double longitude, Timestamp due, String detail,
+                             double latitude, double longitude, String due, String detail,
                              int reward, Boolean isCash) {
         this.createdDate = createdDate;
         this.title = title;
@@ -81,7 +81,7 @@ public class Errand {
         this.isCash = isCash;
     }
     public Errand(Member orderNo, String createdDate, String title, String destination,
-                  double latitude, double longitude, Timestamp due, String detail,
+                  double latitude, double longitude, String due, String detail,
                   int reward, Boolean isCash, Status status, Member erranderNo) {
         this.orderNo = orderNo;
         this.createdDate = createdDate;

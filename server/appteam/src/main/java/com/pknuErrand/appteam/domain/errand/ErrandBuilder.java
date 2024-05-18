@@ -13,7 +13,7 @@ public class ErrandBuilder {
     private String destination;
     private double latitude;
     private double longitude;
-    private Timestamp due;
+    private String due;
     private String detail;
     private int reward;
     private boolean isCash;
@@ -50,7 +50,7 @@ public class ErrandBuilder {
         return this;
     }
 
-    public ErrandBuilder due(Timestamp due) {
+    public ErrandBuilder due(String due) {
         this.due = due;
         return this;
     }
