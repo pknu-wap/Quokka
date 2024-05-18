@@ -16,6 +16,7 @@ import 'map.dart';
 
 //현재 화면에서 뒤로가기
 class Request extends StatefulWidget {
+  const Request({super.key});
   @override
   _RequestState createState() => _RequestState();
 }
@@ -56,6 +57,8 @@ class _RequestState extends State<Request> {
 
   late NLatLng myLatLng;
   late NMarker marker;
+  NLatLng value = NLatLng(0, 0);
+
   // late NMarker markerIcon;
   // @override
   // void setCustomMapMarker() async {
@@ -553,20 +556,48 @@ class _RequestState extends State<Request> {
                     ),
 
                     onMapReady: (controller) {
+                      log("request.dart로 이동!");
+                      log(value.toString());
                       controller.addOverlay(marker);
                       print("네이버 맵 로딩됨!");
                     },
 
-                    onMapTapped: (point, latLng) {
+                    // onMapTapped: (point, latLng) async {
+                    //   // 지도가 터치될 때마다 마커의 위치를 업데이트
+                    //   print("도착지 미니 지도 클릭!");
+                    //   Navigator.push(
+                    //     //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => NaverMapTest(value: value)),
+                    //   );
+                    // },
+
+                    onMapTapped: (point, latLng) async {
                       // 지도가 터치될 때마다 마커의 위치를 업데이트
-                      print("도착지 미니 지도 클릭!");
+                      print("marker 이동!");
+                      final returnValue = await Navigator.push(
+                            //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                              context,
+                              MaterialPageRoute(builder: (context) => NaverMapTest(value: value)),
+                          );
+                      // log(point.toString());
+                      // log(latLng.toString());
+
                       setState(() {
-                              Navigator.push(
-                                //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-                                  context,
-                                  MaterialPageRoute(builder: (context) => NaverMapTest())
-                              );
+                        value = returnValue;
+                        marker.setPosition(value);
+                        marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                       });
+                      log(value.toString());
+                    },
+
+                    onSymbolTapped: (symbol) {
+                      setState(() {
+                        marker.setPosition(value);  // marker 위치 이동
+                        marker.setIsVisible(true);
+                      });
+                      log(value.toString());
+                      // log(symbol.caption.toString());
                     },
                     forceGesture: true,
                     // SingleChildScrollView 안에서 사용하므로, NaverMap에

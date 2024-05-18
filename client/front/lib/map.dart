@@ -4,7 +4,9 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class NaverMapTest extends StatefulWidget {
   // final String destinationText;
-  const NaverMapTest({Key? key}) : super(key: key);
+  // const NaverMapTest({Key? key}) : super(key: key);
+  final NLatLng value;
+  const NaverMapTest({super.key, required this.value});
 
   @override
   State<NaverMapTest> createState() => _NaverMapTestState();
@@ -17,6 +19,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
 
   late NLatLng myLatLng;
   late NMarker marker;
+  NLatLng returnValue = NLatLng(0, 0);
+
   // final iconImage = NOverlayImage.fromAssetImage('assets/images/location.png');
 
   void _clearTextFieldAndMarker() {
@@ -37,6 +41,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
           position: myLatLng,
           // icon: iconImage,
         );
+    returnValue = widget.value;
   }
 
   @override
@@ -67,7 +72,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       onPressed: () {
-                        Navigator.pop(context, destinationController.text);
+                        Navigator.pop(context);
                       },
                     ),
                     Text(
@@ -128,22 +133,26 @@ class _NaverMapTestState extends State<NaverMapTest> {
                           onMapTapped: (point, latLng) {
                             // 지도가 터치될 때마다 마커의 위치를 업데이트
                             print("marker 이동!");
-                            log(point.toString());
-                            log(latLng.toString());
+                            // log(point.toString());
+                            // log(latLng.toString());
 
                             setState(() {
+                              returnValue = latLng; // 위치 저장
                               marker.setPosition(latLng);
                               marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                             });
+                            log(returnValue.toString());
                           },
 
                           onSymbolTapped: (symbol) {
                             setState(() {
+                              returnValue = symbol.position; // 위치 저장
                               marker.setPosition(symbol.position);  // marker 위치 이동
                               destinationController.text = symbol.caption.split("\n")[1];  // 텍스트 필드에 심볼 이름 설정
                               marker.setIsVisible(true);
                             });
-                            log(symbol.caption);
+                            log(returnValue.toString());
+                            log(symbol.caption.toString());
                           },
                           forceGesture: true,
                           // SingleChildScrollView 안에서 사용하므로, NaverMap에
@@ -235,7 +244,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
                 child: ElevatedButton(
                   onPressed: isDestinationEnabled
                       ? () {
-                          Navigator.pop(context, destinationController.text);
+                          Navigator.pop(context, returnValue);
+                          log(returnValue.toString());
                           print("도착지로 설정하게요 클릭!");
                         }
                       : null,
