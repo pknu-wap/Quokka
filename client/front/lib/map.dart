@@ -1,6 +1,25 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geolocator/geolocator.dart';
+
+Future<bool> _determinePermission() async {
+  bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    return Future.value(false);
+  }
+  LocationPermission permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if(permission == LocationPermission.denied){
+      return Future.value(false);
+    }
+  }
+  if (permission == LocationPermission.deniedForever){
+    return Future.value(false);
+  }
+  return Future.value(true);
+}
 
 class NaverMapTest extends StatefulWidget {
   // final String destinationText;
