@@ -917,6 +917,8 @@ class _RequestState extends State<Request> {
                 child: ElevatedButton(
                   onPressed: () {
                     print("요청서 작성 완료");
+                    DateTime currentTime = DateTime.now();
+                    log(currentTime.toString());
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
