@@ -273,7 +273,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       children: [
                         // 네이버 지도
                         Container(
-                          margin: EdgeInsets.only(left: 19, top: 42),
+                          margin: EdgeInsets.only(left: 19, top: 50),
                           decoration: BoxDecoration(
                             border:
                                 Border.all(color: Color(0xffC6C6C6), width: 1),
@@ -353,8 +353,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
                     Flexible(
                       child: Container(
-                        width: 322,
-                        height: 581,
+                        width: 320,
+                        height: 305.85,
                         //게시글 큰틀
                         margin: EdgeInsets.only(left: 19, top: 18.9),
                         decoration: BoxDecoration(
@@ -421,6 +421,39 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             }),
                       ),
                     ),
+                    // 제가 할게요! 버튼
+                    Container(
+                      margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          print("제가 할게요! 클릭");
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),
+                          // 버튼의 크기 정하기
+                          minimumSize: MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                          // 버튼의 모양 변경하기
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  5), // 원하는 모양에 따라 BorderRadius 조절
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          '제가 할게요!',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
                     ],
                 )
             ),
