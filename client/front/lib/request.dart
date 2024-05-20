@@ -25,14 +25,13 @@ class Request extends StatefulWidget {
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
   TextEditingController titleController = TextEditingController();
-  TextEditingController destinationController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController requestController = TextEditingController();
 
   // 텍스트 필드 변수 선언
   bool isTitleEnabled = false;
-  bool isDestinationEnabled = false;
+  bool isDetailAddressEnabled = false;
   bool isPriceEnabled = false;
   bool isRequestEnabled = false;
 
@@ -71,7 +70,7 @@ class _RequestState extends State<Request> {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
     titleController.addListener(updateTitleState);
-    destinationController.addListener(updateDestinationState);
+    detailAddressController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
 
@@ -88,7 +87,7 @@ class _RequestState extends State<Request> {
   void dispose() {
     // 위젯이 제거될 때 호출됨
     titleController.dispose();
-    destinationController.dispose();
+    detailAddressController.dispose();
     priceController.dispose();
     requestController.dispose();
     super.dispose();
@@ -104,7 +103,7 @@ class _RequestState extends State<Request> {
 
   void updateDestinationState() {
     setState(() {
-      isDestinationEnabled = destinationController.text.isNotEmpty;
+      isDetailAddressEnabled = detailAddressController.text.isNotEmpty;
     });
   }
 
@@ -920,7 +919,7 @@ class _RequestState extends State<Request> {
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
                       if (isTitleEnabled &&
-                          isDestinationEnabled &&
+                          isDetailAddressEnabled &&
                           isPriceEnabled &&
                           isRequestEnabled) {
                         return Color(
