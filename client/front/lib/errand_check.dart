@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'errand_write.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ final storage = FlutterSecureStorage(); // 토큰 받기
 //   //   required this.errandNo,
 //   // }) : super(key: key);
 
-class ErrandCheck extends StatelessWidget {
+class ErrandCheckWidget extends StatelessWidget {
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
   final double score; //평점
@@ -34,7 +35,7 @@ class ErrandCheck extends StatelessWidget {
   final bool isCash; // 계좌이체, 현금
   final String status; //상태 (모집중, 진행중, 완료됨)
   final bool isMyErrand; // 내가 작성자인지
-  const ErrandCheck({
+  const ErrandCheckWidget({
     Key? key,
     required this.orderNo,
     required this.nickname,
@@ -53,6 +54,7 @@ class ErrandCheck extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
+  // ErrandCheck 페이지
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,35 +63,37 @@ class ErrandCheck extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 10),
+                // margin: EdgeInsets.only(top: 10),
                 color: Colors.white,
-                child: Text("$errandNo", style: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 100,
-                  color: Color(0xFF404040),
-                 ),
+                child: Text(
+                  "${errandNo}",
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 100,
+                    color: Color(0xFF404040),
+                  ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 5),
                 color: Colors.white,
-                child: Text("$errandNo", style: TextStyle(
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 100,
-                  color: Color(0xFF404040),
-                ),
+                child: Text(
+                  "${nickname}",
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 100,
+                    color: Color(0xFF404040),
+                  ),
                 ),
               ),
-
             ],
           ),
         ),
       ),
     );
   }
-
 }
 
 // order 구조체
@@ -107,6 +111,7 @@ class order {
     );
   }
 }
+
 // Errand 구조체
 class Errand {
   // 게시글에 담긴 정보들
@@ -123,10 +128,20 @@ class Errand {
   bool isCash; // 계좌이체, 현금
   String status; //상태 (모집중 or 진행중 or 완료됨)
   bool isMyErrand; // 내 요청서인지 아닌지 확인
-  Errand(this.o1, this.errandNo, this.createdDate, this.title,
-      this.destination, this.latitude, this.longitude,
-      this.due, this.detail, this.reward, this.isCash,
-      this.status, this.isMyErrand);
+  Errand(
+      this.o1,
+      this.errandNo,
+      this.createdDate,
+      this.title,
+      this.destination,
+      this.latitude,
+      this.longitude,
+      this.due,
+      this.detail,
+      this.reward,
+      this.isCash,
+      this.status,
+      this.isMyErrand);
 
   factory Errand.fromJson(Map<String, dynamic> json) {
     return Errand(
@@ -146,6 +161,7 @@ class Errand {
     );
   }
 }
+
 // Error 구조체
 class Error {
   String code;
@@ -165,13 +181,16 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
+
   const MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+
+  // const MainErrandCheck({Key? key}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
 }
 
-  class _MainErrandCheckState extends State<MainErrandCheck> {
+class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
   String status = "";
   String? token = "";
@@ -186,8 +205,8 @@ class MainErrandCheck extends StatefulWidget {
     print(url + param);
 
     token = await storage.read(key: 'TOKEN');
-    var response = await http.get(Uri.parse(url + param),
-        headers: {"Authorization": "$token"});
+    var response = await http
+        .get(Uri.parse(url + param), headers: {"Authorization": "$token"});
 
     if (response.statusCode == 200) {
       List<dynamic> result = jsonDecode(response.body);
@@ -226,7 +245,7 @@ class MainErrandCheck extends StatefulWidget {
   @override
   void initState() {
     super.initState();
-    errandNo = widget.errandNo;
+    // errandNo = widget.errandNo;
     myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
     marker = NMarker(
       id: "도착지",
@@ -239,251 +258,592 @@ class MainErrandCheck extends StatefulWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Color(0xffF6F6F6),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      // 네이버 지도
-                      Container(
-                        margin: EdgeInsets.only(left: 19, top: 49),
-                        decoration: BoxDecoration(
-                          border:
-                          Border.all(color: Color(0xffC6C6C6), width: 1
+        body: Stack(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffF6F6F6),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // 네이버 지도
+                        Container(
+                          margin: EdgeInsets.only(left: 19, top: 42),
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Color(0xffC6C6C6), width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Color(0xffFFFFFF),
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          width: 320,
+                          height: 212,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: NaverMap(
+                              options: const NaverMapViewOptions(
+                                logoClickEnable: false,
+                                // 네이버 로고 클릭 비활성화
+
+                                mapType: NMapType.basic,
+                                // 지도 유형 : 기본 지도(기본 값)
+                                activeLayerGroups: [
+                                  // 표시할 정보
+                                  NLayerGroup.building, // 건물 레이어
+                                  NLayerGroup.transit, // 대중교통 레이어
+                                ],
+                                // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
+                                scrollGesturesFriction: 0.5,
+                                // 스크롤
+                                zoomGesturesFriction: 0.5,
+                                // 줌
+
+                                initialCameraPosition: NCameraPosition(
+                                    target: NLatLng(35.134384930841364,
+                                        129.10592409493796), // 내 위치
+                                    // 위도, 경도
+                                    // 부경대 대연캠퍼스
+                                    // 위도 latitude : 35.134384930841364
+                                    // 경도 longitude : 129.10592409493796
+                                    zoom: 14.5, // 지도의 초기 줌 레벨
+                                    bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+                                    tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+                                    ),
+                              ),
+
+                              onMapReady: (controller) {
+                                controller.addOverlay(marker);
+                                print("네이버 맵 로딩됨!");
+                              },
+
+                              onMapTapped: (point, latLng) {
+                                // 지도가 터치될 때마다 마커의 위치를 업데이트
+                                print("marker 이동!");
+                                // log(point.toString());
+                                // log(latLng.toString());
+
+                                setState(() {
+                                  marker.setPosition(latLng);
+                                  marker.setIsVisible(
+                                      true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                                });
+                              },
+
+                              onSymbolTapped: (symbol) {
+                                setState(() {
+                                  marker.setPosition(
+                                      symbol.position); // marker 위치 이동
+                                  marker.setIsVisible(true);
+                                });
+                                log(symbol.caption.toString());
+                              },
+                              forceGesture: true,
+                              // SingleChildScrollView 안에서 사용하므로, NaverMap에
+                              // 전달되는 제스처 무시 현상 방지 위함
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    )),
+
+                    Flexible(
+                      child: Container(
+                        width: 322,
+                        height: 581,
+                        //게시글 큰틀
+                        margin: EdgeInsets.only(left: 19, top: 18.9),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
                         ),
-                        width: 320,
-                        height: 212,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: NaverMap(
-                            options: const NaverMapViewOptions(
-                              logoClickEnable: false,
-                              // 네이버 로고 클릭 비활성화
+                        child: ListView.builder(
+                            padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                            // controller: _scrollController,
+                            shrinkWrap: true,
+                            itemCount: errands.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              String nickname = errands[index]["nickname"];
+                              String createdDate =
+                                  errands[index]["createdDate"];
+                              String title = errands[index]['title'];
+                              String destination =
+                                  errands[index]['destination'];
+                              String due = errands[index]['due'];
+                              String detail = errands[index]['detail'];
+                              String status = errands[index]['status'];
 
-                              mapType: NMapType.basic,
-                              // 지도 유형 : 기본 지도(기본 값)
-                              activeLayerGroups: [ // 표시할 정보
-                                NLayerGroup.building, // 건물 레이어
-                                NLayerGroup.transit, // 대중교통 레이어
-                              ],
-                              // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
-                              scrollGesturesFriction: 0.5,
-                              // 스크롤
-                              zoomGesturesFriction: 0.5,
-                              // 줌
-
-                              initialCameraPosition: NCameraPosition(
-                                  target: NLatLng(35.134384930841364,
-                                      129.10592409493796), // 내 위치
-                                  // 위도, 경도
-                                  // 부경대 대연캠퍼스
-                                  // 위도 latitude : 35.134384930841364
-                                  // 경도 longitude : 129.10592409493796
-                                  zoom: 14.5, // 지도의 초기 줌 레벨
-                                  bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
-                                  tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
-                              ),
-                            ),
-
-                            onMapReady: (controller) {
-                              controller.addOverlay(marker);
-                              print("네이버 맵 로딩됨!");
-                            },
-
-                            onMapTapped: (point, latLng) {
-                              // 지도가 터치될 때마다 마커의 위치를 업데이트
-                              print("marker 이동!");
-                              // log(point.toString());
-                              // log(latLng.toString());
-
-                              setState(() {
-                                marker.setPosition(latLng);
-                                marker.setIsVisible(
-                                    true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                              });
-                            },
-
-                            onSymbolTapped: (symbol) {
-                              setState(() {
-                                marker.setPosition(
-                                    symbol.position); // marker 위치 이동
-                                marker.setIsVisible(true);
-                              });
-                              log(symbol.caption.toString());
-                            },
-                            forceGesture: true,
-                            // SingleChildScrollView 안에서 사용하므로, NaverMap에
-                            // 전달되는 제스처 무시 현상 방지 위함
-                          ),
-                        ),
+                              String decodedNickname =
+                                  utf8.decode(nickname.runes.toList());
+                              String decodedCreatedDate =
+                                  utf8.decode(createdDate.runes.toList());
+                              String decodedTitle =
+                                  utf8.decode(title.runes.toList());
+                              String decodedDestination =
+                                  utf8.decode(destination.runes.toList());
+                              String decodedDue =
+                                  utf8.decode(due.runes.toList());
+                              String decodedDetail =
+                                  utf8.decode(detail.runes.toList());
+                              String decodedStatus =
+                                  utf8.decode(status.runes.toList());
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                //게시글 전체를 클릭영역으로 만들어주는 코드
+                                onTap: () {
+                                  // Navigator.of(context).push(
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
+                                  //   ),);
+                                },
+                                child: ErrandCheckWidget(
+                                  orderNo: errands[index]["orderNo"],
+                                  nickname: decodedNickname,
+                                  score: errands[index]["score"],
+                                  errandNo: errands[index]["errandNo"],
+                                  createdDate: decodedCreatedDate,
+                                  title: decodedTitle,
+                                  destination: decodedDestination,
+                                  latitude: errands[index]["latitude"],
+                                  longitude: errands[index]["longitude"],
+                                  due: decodedDue,
+                                  detail: decodedDetail,
+                                  reward: errands[index]["reward"],
+                                  isCash: errands[index]["isCash"],
+                                  status: decodedStatus,
+                                  isMyErrand: errands[index]["isMyErrand"],
+                                ),
+                              );
+                            }),
                       ),
-
-                      // Flexible(
-                      //   child: Container(
-                      //     width: 322,
-                      //     height: 581,
-                      //     //게시글 큰틀
-                      //     margin: EdgeInsets.only(left: 19),
-                      //     decoration: BoxDecoration(
-                      //       color: Color(0xffFFFFFF),
-                      //     ),
-                      //     child: ListView.builder(
-                      //         padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                      //         shrinkWrap: true,
-                      //         itemCount: posts.length,
-                      //         itemBuilder: (BuildContext context, int index) {
-                      //           String nickname = posts[index]["nickname"];
-                      //           String title = posts[index]['title'];
-                      //           String destination = posts[index]['destination'];
-                      //           String createdDate = posts[index]["createdDate"];
-                      //           String decodedNickname = utf8.decode(nickname.runes
-                      //               .toList());
-                      //           String decodedTitle = utf8.decode(title.runes
-                      //               .toList());
-                      //           String decodedDestination = utf8.decode(destination
-                      //               .runes.toList());
-                      //           String decodedCreatedDate = utf8.decode(createdDate
-                      //               .runes.toList());
-                      //           return GestureDetector(
-                      //             behavior: HitTestBehavior.translucent,
-                      //             //게시글 전체를 클릭영역으로 만들어주는 코드
-                      //             onTap: () {
-                      //               Navigator.of(context).push(
-                      //                 MaterialPageRoute(
-                      //                     builder: (context) =>
-                      //                         ErrandCheck(
-                      //                             errandNo: posts[index]["errandNo"])
-                      //                 ),
-                      //               );
-                      //             },
-                      //             child: PostWidget(
-                      //               orderNo: posts[index]["orderNo"],
-                      //               nickname: decodedNickname,
-                      //               score: posts[index]["score"],
-                      //               errandNo: posts[index]["errandNo"],
-                      //               createdDate: decodedCreatedDate,
-                      //               title: decodedTitle,
-                      //               destination: decodedDestination,
-                      //               reward: posts[index]["reward"],
-                      //               status: posts[index]["status"],
-                      //             ),
-                      //           );
-                      //         }
-                      //     ),
-                      //   ),
-                      // ),
-
+                    ),
                     ],
-                  ),
-                ),
-              ],
+                )
             ),
-          ),
-          Positioned(
-            bottom: 0, left: 0, right: 0,
-            child: Container(width: 364, height: 64,
-              decoration: BoxDecoration(
-                color: Color(0xffFFFFFF),
-                border: Border.all(
-                  color: Color(0xffCFCFCF),
-                  width: 0.5,),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromRGBO(185, 185, 185, 0.25),
-                    offset: Offset(5, -1),
-                    blurRadius: 5,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 22, height: 22,
-                    margin: const EdgeInsets.only(
-                        left: 44, top: 20.0, bottom: 17.32),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {},
-                      icon: Image.asset('assets/images/home_icon.png',
-                        color: Color(0xff545454),
-                      ),
-                    ),
-                  ),
-                  Container(width: 19.31, height: 23.81,
-                    margin: const EdgeInsets.only(
-                        top: 20.0, bottom: 17.32),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {},
-                      icon: Image.asset('assets/images/human_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),
-                  ),
-                  Container(width: 22.0, height: 22,
-                    margin: const EdgeInsets.only(
-                        top: 20.0, bottom: 17.32),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (BuildContext context) =>
-                        //         Request(),
-                        //   ),
-                        // );
-                      },
-                      icon: Image.asset('assets/images/add_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),),
-                  Container(width: 21.95, height: 24.21,
-                    margin: const EdgeInsets.only(
-                        top: 20.0, bottom: 17.32, right: 43.92),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {},
-                      icon: Image.asset(
-                        'assets/images/history_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+
+                    // 내비게이션 바
+                    Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                            width: 364,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: Color(0xffFFFFFF),
+                              border: Border.all(
+                                color: Color(0xffCFCFCF),
+                                width: 0.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(185, 185, 185, 0.25),
+                                  offset: Offset(5, -1),
+                                  blurRadius: 5,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 22,
+                                    height: 22,
+                                    margin: const EdgeInsets.only(
+                                        left: 44, top: 20.0, bottom: 17.32),
+                                    child: IconButton(
+                                      style: IconButton.styleFrom(
+                                        minimumSize: Size.zero,
+                                        padding: EdgeInsets.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'assets/images/home_icon.png',
+                                        color: Color(0xff545454),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 19.31,
+                                    height: 23.81,
+                                    margin: const EdgeInsets.only(
+                                        top: 20.0, bottom: 17.32),
+                                    child: IconButton(
+                                      style: IconButton.styleFrom(
+                                        minimumSize: Size.zero,
+                                        padding: EdgeInsets.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'assets/images/human_icon.png',
+                                        color: Color(0xffADADAD),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 22.0,
+                                    height: 22,
+                                    margin: const EdgeInsets.only(
+                                        top: 20.0, bottom: 17.32),
+                                    child: IconButton(
+                                      style: IconButton.styleFrom(
+                                        minimumSize: Size.zero,
+                                        padding: EdgeInsets.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Request(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Image.asset(
+                                        'assets/images/add_icon.png',
+                                        color: Color(0xffADADAD),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 21.95,
+                                    height: 24.21,
+                                    margin: const EdgeInsets.only(
+                                        top: 20.0, bottom: 17.32, right: 43.92),
+                                    child: IconButton(
+                                      style: IconButton.styleFrom(
+                                        minimumSize: Size.zero,
+                                        padding: EdgeInsets.zero,
+                                        tapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'assets/images/history_icon.png',
+                                        color: Color(0xffADADAD),
+                                      ),
+                                    ),
+                                  ),
+                                ])))
+
+          ],
         ),
       ),
     );
   }
 }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         body: Stack(children: [
+//           Container(
+//             decoration: BoxDecoration(
+//               color: Color(0xffF6F6F6),
+//             ),
+//             child: Column(
+//               // crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Container(
+//                   child: Row(
+//                     // mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       // 네이버 지도
+//                       Container(
+//                         margin: EdgeInsets.only(left: 19, top: 0),
+//                         decoration: BoxDecoration(
+//                           border:
+//                           Border.all(color: Color(0xffC6C6C6), width: 1
+//                           ),
+//                           borderRadius: BorderRadius.all(Radius.circular(10)),
+//                           color: Color(0xffFFFFFF),
+//                         ),
+//                         width: 320,
+//                         height: 212,
+//                         child: ClipRRect(
+//                           borderRadius: BorderRadius.circular(10),
+//                           child: NaverMap(
+//                             options: const NaverMapViewOptions(
+//                               logoClickEnable: false,
+//                               // 네이버 로고 클릭 비활성화
+//
+//                               mapType: NMapType.basic,
+//                               // 지도 유형 : 기본 지도(기본 값)
+//                               activeLayerGroups: [ // 표시할 정보
+//                                 NLayerGroup.building, // 건물 레이어
+//                                 NLayerGroup.transit, // 대중교통 레이어
+//                               ],
+//                               // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
+//                               scrollGesturesFriction: 0.5,
+//                               // 스크롤
+//                               zoomGesturesFriction: 0.5,
+//                               // 줌
+//
+//                               initialCameraPosition: NCameraPosition(
+//                                   target: NLatLng(35.134384930841364,
+//                                       129.10592409493796), // 내 위치
+//                                   // 위도, 경도
+//                                   // 부경대 대연캠퍼스
+//                                   // 위도 latitude : 35.134384930841364
+//                                   // 경도 longitude : 129.10592409493796
+//                                   zoom: 14.5, // 지도의 초기 줌 레벨
+//                                   bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+//                                   tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+//                               ),
+//                             ),
+//
+//                             onMapReady: (controller) {
+//                               controller.addOverlay(marker);
+//                               print("네이버 맵 로딩됨!");
+//                             },
+//
+//                             onMapTapped: (point, latLng) {
+//                               // 지도가 터치될 때마다 마커의 위치를 업데이트
+//                               print("marker 이동!");
+//                               // log(point.toString());
+//                               // log(latLng.toString());
+//
+//                               setState(() {
+//                                 marker.setPosition(latLng);
+//                                 marker.setIsVisible(
+//                                     true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+//                               });
+//                             },
+//
+//                             onSymbolTapped: (symbol) {
+//                               setState(() {
+//                                 marker.setPosition(
+//                                     symbol.position); // marker 위치 이동
+//                                 marker.setIsVisible(true);
+//                               });
+//                               log(symbol.caption.toString());
+//                             },
+//                             forceGesture: true,
+//                             // SingleChildScrollView 안에서 사용하므로, NaverMap에
+//                             // 전달되는 제스처 무시 현상 방지 위함
+//                           ),
+//                         ),
+//                       ),
+//
+//                       Flexible(
+//                         child: Container(
+//                           width: 322,
+//                           height: 581,
+//                           //게시글 큰틀
+//                           margin: EdgeInsets.only(left: 19.01, top: 18.9),
+//                           decoration: BoxDecoration(
+//                             color: Color(0xffFFFFFF),
+//                           ),
+//                           child: ListView.builder(
+//                               padding: EdgeInsets.only(top: 0.1, bottom: 45),
+//                               shrinkWrap: true,
+//                               itemCount: errands.length,
+//                               itemBuilder: (BuildContext context, int index) {
+//                                 String nickname = errands[index]["nickname"];
+//                                 String createdDate = errands[index]["createdDate"];
+//                                 String title = errands[index]['title'];
+//                                 String destination = errands[index]['destination'];
+//                                 String due = errands[index]['due'];
+//                                 String detail = errands[index]['detail'];
+//                                 String status = errands[index]['status'];
+//
+//                                 String decodedNickname = utf8.decode(nickname.runes.toList());
+//                                 String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
+//                                 String decodedTitle = utf8.decode(title.runes.toList());
+//                                 String decodedDestination = utf8.decode(destination.runes.toList());
+//                                 String decodedDue = utf8.decode(due.runes.toList());
+//                                 String decodedDetail = utf8.decode(detail.runes.toList());
+//                                 String decodedStatus = utf8.decode(status.runes.toList());
+//                                 return GestureDetector(
+//                                   // behavior: HitTestBehavior.translucent,
+//                                   //게시글 전체를 클릭영역으로 만들어주는 코드
+//                                   // onTap: () {
+//                                   //   Navigator.of(context).push(
+//                                   //     MaterialPageRoute(
+//                                   //         builder: (context) =>
+//                                   //             ErrandCheck(
+//                                   //                 errandNo: posts[index]["errandNo"])
+//                                   //     ),
+//                                   //   );
+//                                   // },
+//                                   child: ErrandCheckWidget(
+//                                     orderNo: errands[index]["orderNo"],
+//                                     nickname: decodedNickname,
+//                                     score: errands[index]["score"],
+//                                     errandNo: errands[index]["errandNo"],
+//                                     createdDate: decodedCreatedDate,
+//                                     title: decodedTitle,
+//                                     destination: decodedDestination,
+//                                     latitude: errands[index]["latitude"],
+//                                     longitude: errands[index]["longitude"],
+//                                     due: decodedDue,
+//                                     detail: decodedDetail,
+//                                     reward: errands[index]["reward"],
+//                                     isCash: errands[index]["isCash"],
+//                                     status: decodedStatus,
+//                                     isMyErrand: errands[index]["isMyErrand"],
+//                                   ),
+//                                 );
+//                               }
+//                           ),
+//                         ),
+//                       ),
+//                       // 도착지로 설정할게요 버튼
+//                       Container(
+//                         margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+//                         child: ElevatedButton(
+//                           onPressed: () {
+//                             Navigator.pop(context);
+//                             print("도착지로 설정하게요 클릭!");
+//                           },
+//                           style: ButtonStyle(
+//                             // backgroundColor: MaterialStateProperty.resolveWith<Color>(
+//                             //         (Set<MaterialState> states) {
+//                             //       if (marker.isVisible) {
+//                             //         return Color(
+//                             //             0xFF7C3D1A); // 활성화된 배경색(모든 텍스트 필드 비어있지 않은 경우)
+//                             //       } else {
+//                             //         return Color(
+//                             //             0xFFBD9E8C); // 비활성화 배경색(하나의 텍스트 필드라도 비어있는 경우)
+//                             //       }
+//                             //     }),
+//                             // 버튼의 크기 정하기
+//                             minimumSize: MaterialStateProperty.all<Size>(Size(318, 46.65)),
+//                             // 버튼의 모양 변경하기
+//                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//                               RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(
+//                                     5), // 원하는 모양에 따라 BorderRadius 조절
+//                               ),
+//                             ),
+//                           ),
+//                           child: Text(
+//                             '제가 할게요!',
+//                             style: TextStyle(
+//                               fontSize: 14,
+//                               fontFamily: 'Pretendard',
+//                               fontWeight: FontWeight.w600,
+//                               color: Color(0xFFFFFFFF),
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//               ],
+//             ),
+//           ),
+//
+//           // 네비게이션 바
+//           Positioned(
+//             bottom: 0, left: 0, right: 0,
+//             child: Container(width: 364, height: 64,
+//               decoration: BoxDecoration(
+//                 color: Color(0xffFFFFFF),
+//                 border: Border.all(
+//                   color: Color(0xffCFCFCF),
+//                   width: 0.5,),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Color.fromRGBO(185, 185, 185, 0.25),
+//                     offset: Offset(5, -1),
+//                     blurRadius: 5,
+//                     spreadRadius: 1,
+//                   ),
+//                 ],
+//               ),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Container(
+//                     width: 22, height: 22,
+//                     margin: const EdgeInsets.only(
+//                         left: 44, top: 20.0, bottom: 17.32),
+//                     child: IconButton(
+//                       style: IconButton.styleFrom(
+//                         minimumSize: Size.zero,
+//                         padding: EdgeInsets.zero,
+//                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+//                       ),
+//                       onPressed: () {},
+//                       icon: Image.asset('assets/images/home_icon.png',
+//                         color: Color(0xff545454),
+//                       ),
+//                     ),
+//                   ),
+//                   Container(width: 19.31, height: 23.81,
+//                     margin: const EdgeInsets.only(
+//                         top: 20.0, bottom: 17.32),
+//                     child: IconButton(
+//                       style: IconButton.styleFrom(
+//                         minimumSize: Size.zero,
+//                         padding: EdgeInsets.zero,
+//                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+//                       ),
+//                       onPressed: () {},
+//                       icon: Image.asset('assets/images/human_icon.png',
+//                         color: Color(0xffADADAD),
+//                       ),
+//                     ),
+//                   ),
+//                   Container(width: 22.0, height: 22,
+//                     margin: const EdgeInsets.only(
+//                         top: 20.0, bottom: 17.32),
+//                     child: IconButton(
+//                       style: IconButton.styleFrom(
+//                         minimumSize: Size.zero,
+//                         padding: EdgeInsets.zero,
+//                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+//                       ),
+//                       onPressed: () {
+//                         // Navigator.of(context).push(
+//                         //   MaterialPageRoute(
+//                         //     builder: (BuildContext context) =>
+//                         //         Request(),
+//                         //   ),
+//                         // );
+//                       },
+//                       icon: Image.asset('assets/images/add_icon.png',
+//                         color: Color(0xffADADAD),
+//                       ),
+//                     ),),
+//                   Container(width: 21.95, height: 24.21,
+//                     margin: const EdgeInsets.only(
+//                         top: 20.0, bottom: 17.32, right: 43.92),
+//                     child: IconButton(
+//                       style: IconButton.styleFrom(
+//                         minimumSize: Size.zero,
+//                         padding: EdgeInsets.zero,
+//                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+//                       ),
+//                       onPressed: () {},
+//                       icon: Image.asset(
+//                         'assets/images/history_icon.png',
+//                         color: Color(0xffADADAD),
+//                       ),
+//                     ),
+//                   ),
+//                 ]
+//               ),
+//             ),
+//           ),
+//         ],
+//         ),
+//       ),
+//     ],
+//     ),
+//     ),
+//     );
+//   }
+// }
