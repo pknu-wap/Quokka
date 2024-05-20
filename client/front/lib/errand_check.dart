@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -23,17 +24,74 @@ class ErrandCheck extends StatefulWidget {
   @override
   State createState() => _ErrandCheckState();
 }
+// order 구조체
+class order {
+  int orderNo;
+  String nickname; // 닉네임
+  double score; // 평점
+  order(this.orderNo, this.nickname, this.score);
+  factory order.fromJson(Map<String, dynamic> json) {
+    return order(
+      json['orderNo'],
+      json['nickname'],
+      json['score'],
+    );
+  }
+}
+
+class Errand { // 게시글에 담긴 정보들
+  order o1;
+  int errandNo; //게시글 번호
+  String createdDate; //생성된 날짜
+  String title; //게시글 제목
+  String destination; //위치
+  double latitude; // 위도
+  double longitude; // 경도
+  String due; // 일정 시간
+  String detail; // 상세정보
+  int reward; // 심부름 값
+  bool isCash; // 계좌이체, 현금
+  String status; //상태 (모집중 or 진행중 or 완료됨)
+  Post(this.o1, this.errandNo, this.createdDate, this.title,
+      this.destination, this.reward, this.status);
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      order.fromJson(json['order']),
+      json['errandNo'],
+      json['createdDate'],
+      json['title'],
+      json['destination'],
+      json['reward'],
+      json['status'],
+    );
+  }
+
+}
 
 class _ErrandCheckState extends State<ErrandCheck> {
+  List<Map<String, dynamic>> errands = [];
   late int errandNo;
   late NLatLng myLatLng;
   late NMarker marker;
 
   request(String id) async {
+    log(id);
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}errand";
     String param = "/$id";
     print(url + param);
+
+    try {
+      var response = await http.get(Uri.parse(url+param));
+      print(response.statusCode);
+      if (response.statusCode == 200){
+        List<dynamic> result = jsonDecode(response.body);
+        // Errand errand = Errand.fromJson(result);
+
+
+
+      }
+    }
   }
 
   @override
@@ -157,6 +215,8 @@ class _ErrandCheckState extends State<ErrandCheck> {
     );
   }
 }
+
+
 
 
 
