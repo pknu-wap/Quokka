@@ -38,7 +38,7 @@ class order {
     );
   }
 }
-
+// Errand 구조체
 class Errand { // 게시글에 담긴 정보들
   order o1;
   int errandNo; //게시글 번호
@@ -52,17 +52,26 @@ class Errand { // 게시글에 담긴 정보들
   int reward; // 심부름 값
   bool isCash; // 계좌이체, 현금
   String status; //상태 (모집중 or 진행중 or 완료됨)
-  Post(this.o1, this.errandNo, this.createdDate, this.title,
-      this.destination, this.reward, this.status);
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
+  bool isMyErrand; // 내 요청서인지 아닌지 확인
+  Errand(this.o1, this.errandNo, this.createdDate, this.title,
+      this.destination, this.latitude, this.longitude,
+      this.due, this.detail, this.reward, this.isCash,
+      this.status, this.isMyErrand);
+  factory Errand.fromJson(Map<String, dynamic> json) {
+    return Errand(
       order.fromJson(json['order']),
       json['errandNo'],
       json['createdDate'],
       json['title'],
       json['destination'],
+      json['latitude'],
+      json['longitude'],
+      json['due'],
+      json['detail'],
       json['reward'],
+      json['isCash'],
       json['status'],
+      json['isMyErrand'],
     );
   }
 
