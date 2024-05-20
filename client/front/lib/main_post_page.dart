@@ -259,6 +259,25 @@ class _Main_post_pageState extends State<Main_post_page> {
   bool isCheckBox = false;
   String status = "";
   String? token = "";
+  bool isVisible = false;
+  InprogressExist() async{
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress/exist";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+     print("exist");
+      setState(() {
+        isVisible = true;
+      });
+    }
+    else {
+      print("no one");
+      setState(() {
+        isVisible = false;
+      });
+    }
+  }
   ErrandLatestInit() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
         "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
@@ -462,6 +481,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   void initState(){
     super.initState();
     ErrandLatestInit(); //최신순 요청서 5개
+    InprogressExist(); //진행중인 심부름이 있는지 확인
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
@@ -475,6 +495,7 @@ class _Main_post_pageState extends State<Main_post_page> {
            {
                ErrandRewardAdd(); //금액순 요청서 5개
            }
+          InprogressExist(); //진행중인 심부름이 있는지 확인
         });
       }
     });
@@ -613,6 +634,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           change_Button_State();
                           posts.clear();
                           ErrandLatestInit();
+                          InprogressExist();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
@@ -641,6 +663,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           change_Button_State();
                           posts.clear();
                           ErrandRewardInit();
+                          InprogressExist();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
@@ -779,6 +802,72 @@ class _Main_post_pageState extends State<Main_post_page> {
                 ),
 
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 88.5, right: 26.27,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 56, height: 56,
+                    margin : const EdgeInsets.only(),
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return  Container(
+                              height: 389,
+                              child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                              Container(
+                              decoration: BoxDecoration(
+                              color: Color(0xffF2F2F2),
+                              border: Border(
+                                top: BorderSide(width: 0.5, color: Colors.grey),
+                              ),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0),
+                              ),
+                            ),
+                            ),
+                            Positioned(
+                            top: 13.47, left: 127.74,
+                            child: Container(
+                              width: 104.51, height: 5,
+                              decoration: BoxDecoration(
+                                color: Color(0xffAEAEAE),
+                              border: Border.all(
+                              width: 5,
+                              color: Color(0xffAEAEAE),),
+                              borderRadius: BorderRadius.all(Radius.circular(20.0),),
+                            ),
+                           ),
+                          ),],
+                         ),
+                        );
+                          },
+                        );
+                      },
+                      icon: Image.asset('assets/images/Quokka.png', width: 56, height: 56, fit: BoxFit.cover),
+                    ),),
+              Container(
+                width: 12, height: 12,
+                margin : const EdgeInsets.only(bottom: 42.86),
+                  child: Visibility(
+                    visible: isVisible,
+                    child: Image.asset('assets/images/red_dot_alarm.png', width: 12, height: 12, fit: BoxFit.cover),
+                  ),
+              ),
+                ]
             ),
           ),
           Positioned(
