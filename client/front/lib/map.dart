@@ -1,19 +1,9 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 
-// Future<Position> _getPosition() async{
-//   Position position = await Geolocator.getCurrentPosition();
-//   setState(() {
-//     latitude = position.latitude.toString();
-//     longitude = position.longitude.toString();
-//   });
-// }
-//
-// _getPosition().then((position) {
-// print("Template position check ${position.latitude}, ${position.longitude}");
-// }).onError((error, stackTrace) => null);
 
 class NaverMapTest extends StatefulWidget {
   // final String destinationText;
@@ -26,11 +16,15 @@ class NaverMapTest extends StatefulWidget {
 }
 
 class _NaverMapTestState extends State<NaverMapTest> {
-  void getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    log("내 위치");
-    log(position.toString());
-  }
+
+
+  // void getLocation() async {
+  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  //   log("내 위치");
+  //   log(position.toString());
+  // }
+
+
   // String? latitude;
   // String? longitude;
   //
@@ -70,6 +64,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
+    // 이후 권한 설정 관련 코드 추가 예정 -> 한 번 권한 허용 받으면 이후 권한 받을 필요 없음.
     // getGeoData();
     destinationController.addListener(updateDestinationState);
     myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
@@ -174,6 +169,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             // log(point.toString());
                             // log(latLng.toString());
 
+
+
                             setState(() {
                               returnValue = latLng; // 위치 저장
                               destinationController.clear(); // 도착지 텍스트 필드 초기화
@@ -193,6 +190,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             log(returnValue.toString());
                             log(symbol.caption.toString());
                           },
+
+
                           forceGesture: true,
                           // SingleChildScrollView 안에서 사용하므로, NaverMap에
                           // 전달되는 제스처 무시 현상 방지 위함
@@ -281,7 +280,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
               Container(
                 margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
                 child: ElevatedButton(
-                  onPressed: isDestinationEnabled
+                  onPressed: marker.isVisible
                       ? () {
                           Navigator.pop(context, returnValue);
                           log(returnValue.toString());

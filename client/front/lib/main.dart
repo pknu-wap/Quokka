@@ -40,6 +40,19 @@ void main() async {
   //   'assets/images/location.png',
   // );
 
+  // Future<Position> _getPosition() async{
+  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  //   // setState(() {
+  //   //   latitude = position.latitude.toString();
+  //   //   longitude = position.longitude.toString();
+  //   // });
+  //   return position;
+  // }
+  //
+  // _getPosition().then((position) {
+  //   print("Template position check ${position.latitude}, ${position.longitude}");
+  // }).onError((error, stackTrace) => null);
+
   runApp(MyApp());
 }
 
