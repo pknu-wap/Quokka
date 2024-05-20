@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'errand_write.dart';
-import 'testpage.dart';
+import 'errand_check.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 
@@ -758,7 +758,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => test(errandNo: posts[index]["errandNo"])
+                                  builder: (context) => ErrandCheck(errandNo: posts[index]["errandNo"])
                               ),);
                           },
                           child: PostWidget(
