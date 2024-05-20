@@ -74,7 +74,20 @@ class Errand { // 게시글에 담긴 정보들
       json['isMyErrand'],
     );
   }
-
+}
+// Error 구조체
+class Error {
+  String code;
+  var httpStatus;
+  String message;
+  Error(this.code,this.httpStatus,this.message);
+  factory Error.fromJson(Map<String, dynamic> json) {
+    return Error(
+      json['code'],
+      json['httpStatus'],
+      json['message'],
+    );
+  }
 }
 
 class _ErrandCheckState extends State<ErrandCheck> {
