@@ -219,7 +219,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             ),
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  bottom: 6, left: 37.65, right: 37.65),
+                                  bottom: 6, left: 15.65, right: 37.65),
                               child: TextField(
                                 controller: destinationController,
                                 style: TextStyle(
