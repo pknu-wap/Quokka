@@ -92,28 +92,45 @@ class Error {
 
 class _ErrandCheckState extends State<ErrandCheck> {
   List<Map<String, dynamic>> errands = [];
+  String status = "";
+  String? token = "";
   late int errandNo;
   late NLatLng myLatLng;
   late NMarker marker;
 
-  request(String id) async {
-    log(id);
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand";
-    String param = "/$id";
-    print(url + param);
+  ErrandReading(String id) async {
+  String base_url = dotenv.env['BASE_URL'] ?? '';
+  String url = "${base_url}errand";
+  String param = "/$id";
+  print(url + param);
 
-    try {
-      var response = await http.get(Uri.parse(url+param));
-      print(response.statusCode);
-      if (response.statusCode == 200){
-        List<dynamic> result = jsonDecode(response.body);
-        // Errand errand = Errand.fromJson(result);
+  token = await storage.read(key: 'TOKEN');
+  var response = await http.get(Uri.parse(url+param),
+    headers: {"Authorization" : "$token"});
 
-
-
-      }
+  if (response.statusCode == 200){
+    List<dynamic> result = jsonDecode(response.body);
+    Errand errand = Errand.fromJson(result);
+    errands.add({
+      "orderNo": errand.o1.orderNo,
+      "nickname": errand.o1.nickname,
+      "score": errand.o1.score,
+      "errandNo": errand.errandNo,
+      "createdDate": errand.createdDate,
+      "title": errand.title,
+      "destination": errand.destination,
+      "latitude" : errand.latitude,
+      "longitude" : errand.longitude,
+      "due" : errand.due,
+      "detail" : errand.detail,
+      "reward": errand.reward,
+      "isCash" : errand.isCash,
+      "status": errand.status,
+      "isMyErrand" : errand.isMyErrand,
+    });
+    print('200');
     }
+  setState(() {});
   }
 
   @override
