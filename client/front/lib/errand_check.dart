@@ -177,7 +177,6 @@ class _ErrandCheckState extends State<ErrandCheck> {
                   borderRadius: BorderRadius.circular(10),
                   child: NaverMap(
                     options: const NaverMapViewOptions(
-                      locationButtonEnable: true, // 내 위치 버튼 활성화
                       logoClickEnable: false, // 네이버 로고 클릭 비활성화
 
                       mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
