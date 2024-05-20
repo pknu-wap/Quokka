@@ -3,23 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 
-Future<bool> _determinePermission() async {
-  bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    return Future.value(false);
-  }
-  LocationPermission permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if(permission == LocationPermission.denied){
-      return Future.value(false);
-    }
-  }
-  if (permission == LocationPermission.deniedForever){
-    return Future.value(false);
-  }
-  return Future.value(true);
-}
+// Future<Position> _getPosition() async{
+//   Position position = await Geolocator.getCurrentPosition();
+//   setState(() {
+//     latitude = position.latitude.toString();
+//     longitude = position.longitude.toString();
+//   });
+// }
+//
+// _getPosition().then((position) {
+// print("Template position check ${position.latitude}, ${position.longitude}");
+// }).onError((error, stackTrace) => null);
 
 class NaverMapTest extends StatefulWidget {
   // final String destinationText;
@@ -32,6 +26,29 @@ class NaverMapTest extends StatefulWidget {
 }
 
 class _NaverMapTestState extends State<NaverMapTest> {
+  void getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    log("내 위치");
+    log(position.toString());
+  }
+  // String? latitude;
+  // String? longitude;
+  //
+  // getGeoData() async {
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       return Future.error('permissions are denied');
+  //     }
+  //   }
+  //   Position position await Geolocator.getCurrentPosition();
+  //   setState(() {
+  //     latitude.position.latitude.toString();
+  //     longitude.position.longitude.toString();
+  //   });
+  // }
+
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
   // bool isMarkerVisible = true; // 마커가 보이는 경우
@@ -53,6 +70,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
+    // getGeoData();
     destinationController.addListener(updateDestinationState);
     myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
     marker = NMarker(
