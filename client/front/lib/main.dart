@@ -10,8 +10,6 @@ import 'package:geolocator/geolocator.dart';
 import 'login.dart';
 import 'main_post_page.dart';
 final storage = FlutterSecureStorage();
-void main() => runApp(MyApp());
-
 // Future<bool> _determinePermission() async {
 //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 //   if (!serviceEnabled) {
@@ -58,7 +56,7 @@ void main() async {
   //   print("Template position check ${position.latitude}, ${position.longitude}");
   // }).onError((error, stackTrace) => null);
 
-  //runApp(MyApp());
+  runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
   Check_Token(BuildContext context) async {
