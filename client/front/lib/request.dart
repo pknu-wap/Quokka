@@ -752,7 +752,7 @@ class _RequestState extends State<Request> {
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                   ),
-                                  keyboardType: TextInputType.text,
+                                  keyboardType: TextInputType.number,
                                 ),
                               ),
                             ),
