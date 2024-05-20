@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'upload_image.dart';
 import 'profile.dart';
@@ -28,8 +29,8 @@ class Check_ImageState extends State<Check_Image> {
   //학번 중복 검사 API
   request(String ID) async {
     print(ID);
-    String url =
-        "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}join";
     String param = "/$ID/idExists";
     print(url + param);
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front/upload_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -62,7 +63,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   duplicateRequest(String nickname) async{
     print(nickname);
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}join";
     String param = "/$nickname/nicknameExists";
     print(url + param);
 
@@ -93,7 +95,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   joinRequest(User u1) async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/join";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}join";
 
     try{
       // Map<String, dynamic> userJson = u1.toJson();

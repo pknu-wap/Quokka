@@ -4,11 +4,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'login.dart';
 import 'main_post_page.dart';
 final storage = FlutterSecureStorage();
 void main() => runApp(MyApp());
 
+// Future<bool> _determinePermission() async {
+//   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//   if (!serviceEnabled) {
+//     return Future.value(false);
+//   }
+//   LocationPermission permission = await Geolocator.checkPermission();
+//   if (permission == LocationPermission.denied) {
+//     permission = await Geolocator.requestPermission();
+//     if(permission == LocationPermission.denied){
+//       return Future.value(false);
+//     }
+//   }
+//   if (permission == LocationPermission.deniedForever){
+//     return Future.value(false);
+//   }
+//   return Future.value(true);
+// }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: 'assets/env/.env');
+
+  await NaverMapSdk.instance.initialize(
+    clientId: dotenv.env['CLIENT_ID'] ?? '',
+    onAuthFailed: (ex) {
+      print("********* 네이버맵 인증오류 : $ex *********");
+    },
+  );
+
+  // final markerIcon = await NOverlayImage.fromAssetImage(
+  //   'assets/images/location.png',
+  // );
+
+  // Future<Position> _getPosition() async{
+  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  //   // setState(() {
+  //   //   latitude = position.latitude.toString();
+  //   //   longitude = position.longitude.toString();
+  //   // });
+  //   return position;
+  // }
+  //
+  // _getPosition().then((position) {
+  //   print("Template position check ${position.latitude}, ${position.longitude}");
+  // }).onError((error, stackTrace) => null);
+
+  //runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   Check_Token(BuildContext context) async {
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/token/isValid";
@@ -57,6 +108,18 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
+  void getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+  }
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getGeoData();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

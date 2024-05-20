@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_naver_map: ^1.1.1
+  geolocator: ^12.0.0
+  flutter_dotenv: ^5.1.0
   confetti: ^0.7.0
   image_picker: ^1.0.0
   http: ^0.13.5
@@ -63,6 +66,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/env/.env
 
   fonts:
     - family: Pretendard

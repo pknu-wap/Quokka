@@ -1,32 +1,39 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:intl/intl.dart';
+import 'map.dart';
 
 // import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import 'package:front/main.dart';
+// import 'dart:convert';
+//
+// import 'package:front/main.dart';
 // import 'main_post_page.dart'; // +버튼 클릭 시
 
 //현재 화면에서 뒤로가기
 class Request extends StatefulWidget {
+  const Request({super.key});
   @override
   _RequestState createState() => _RequestState();
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
+  final int maxTitleLength = 20; // 제목 최대 길이 설정
+
   TextEditingController titleController = TextEditingController();
-  TextEditingController destinationController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController requestController = TextEditingController();
 
   // 텍스트 필드 변수 선언
   bool isTitleEnabled = false;
-  bool isDestinationEnabled = false;
+  bool isDetailAddressEnabled = false;
   bool isPriceEnabled = false;
   bool isRequestEnabled = false;
 
@@ -47,23 +54,42 @@ class _RequestState extends State<Request> {
   bool isCash = false;
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
-  bool isCompletedEnabled = false; // 작성 완료 버튼
+  late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
+  late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
+  NLatLng value = NLatLng(0, 0);
+  late NaverMapController mapController; // 지도 컨트롤
+
+  // late NMarker markerIcon;
+  // @override
+  // void setCustomMapMarker() async {
+  //   final markerIcon = await NOverlayImage.fromAssetImage(
+  //   'assets/images/location.png',
+  //   );
+  // }
 
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
     titleController.addListener(updateTitleState);
-    destinationController.addListener(updateDestinationState);
+    detailAddressController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
+
+    // destinationValue = widget.value;
+    myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
+    marker = NMarker(
+      id: "test",
+      position: myLatLng,
+      // icon: markerIcon,
+    );
   }
 
   @override
   void dispose() {
     // 위젯이 제거될 때 호출됨
     titleController.dispose();
-    destinationController.dispose();
+    detailAddressController.dispose();
     priceController.dispose();
     requestController.dispose();
     super.dispose();
@@ -79,7 +105,7 @@ class _RequestState extends State<Request> {
 
   void updateDestinationState() {
     setState(() {
-      isDestinationEnabled = destinationController.text.isNotEmpty;
+      isDetailAddressEnabled = detailAddressController.text.isNotEmpty;
     });
   }
 
@@ -158,7 +184,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 34),
+                margin: EdgeInsets.only(top: 28),
                 child: Row(
                   children: [
                     Expanded(
@@ -192,9 +218,9 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-              //텍스트 필드
+              //제목 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 9.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
                 width: 318,
                 height: 31,
                 decoration: BoxDecoration(
@@ -208,6 +234,7 @@ class _RequestState extends State<Request> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 7.5, left: 10, right: 10),
                   child: TextField(
+                    maxLength: maxTitleLength,
                     controller: titleController,
                     style: TextStyle(
                       fontFamily: 'Pretendard',
@@ -218,6 +245,7 @@ class _RequestState extends State<Request> {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
+                      counterText: '',
                     ),
                     keyboardType: TextInputType.text,
                   ),
@@ -226,7 +254,7 @@ class _RequestState extends State<Request> {
 
               // 일정 텍스트
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: EdgeInsets.only(top: 14),
                 child: Row(
                   children: [
                     Expanded(
@@ -274,7 +302,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 7, left: 22),
+                margin: EdgeInsets.only(top: 6, left: 22),
                 child: Row(
                   children: [
                     Expanded(
@@ -455,7 +483,7 @@ class _RequestState extends State<Request> {
               ),
               // 도착지 텍스트
               Container(
-                margin: EdgeInsets.only(top: 27),
+                margin: EdgeInsets.only(top: 18),
                 child: Row(
                   children: [
                     Expanded(
@@ -489,46 +517,112 @@ class _RequestState extends State<Request> {
                   ],
                 ),
               ),
-              // 도착지 입력 텍스트 필드 생성
-              Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
-                width: 318,
-                height: 31,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+              // 네이버 미니 지도
+          Container(
+                width: 318.85,
+                height: 120,
+                margin: EdgeInsets.only(left: 2, top: 6),
+            decoration: BoxDecoration(
+              border:
+              Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Color(0xffFFFFFF),
+            ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: NaverMap(
+                    options: const NaverMapViewOptions(
+                      scrollGesturesEnable: false, // 스크롤 비활성화
+                      zoomGesturesEnable: false, // 줌 비활성화
+
+                      // locationButtonEnable: true, // 내 위치 버튼 활성화
+                      logoClickEnable: false, // 네이버 로고 클릭 비활성화
+
+                      mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
+                      activeLayerGroups: [ // 표시할 정보
+                        NLayerGroup.building, // 건물 레이어
+                        NLayerGroup.transit, // 대중교통 레이어
+                      ],
+
+                      initialCameraPosition: NCameraPosition(
+                          target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
+                          // 위도, 경도
+                          // 부경대 대연캠퍼스
+                          // 위도 latitude : 35.134384930841364
+                          // 경도 longitude : 129.10592409493796
+                          zoom: 14.5, // 지도의 초기 줌 레벨
+                          bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+                          tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+                      ),
+                    ),
+
+                    onMapReady: (controller) {
+                      log("request.dart로 이동!");
+                      log(value.toString());
+                      controller.addOverlay(marker); // 마커를 지도 위에 올리기
+                      mapController = controller;
+                      print("네이버 맵 로딩됨!");
+                    },
+
+                    onMapTapped: (point, latLng) async {
+                      // 지도가 터치될 때마다 마커의 위치를 업데이트
+                      print("marker 이동!");
+                      final returnValue = await Navigator.push(
+                            //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                              context,
+                              MaterialPageRoute(builder: (context) => NaverMapTest(value: value)),
+                          );
+                      // log(point.toString());
+                      // log(latLng.toString());
+
+                      setState(() {
+                        value = returnValue;
+                        marker.setPosition(value);
+                        marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                      });
+                      mapController.updateCamera(
+                        NCameraUpdate.scrollAndZoomTo(
+                          target : NLatLng(value.latitude, value.longitude),
+                          zoom: 14.5
                           ),
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: Color(0xffFFFFFF),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 7.5, left: 7.5, right: 7.5),
-                  child: TextField(
-                    controller: destinationController,
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      letterSpacing: 0.01,
-                      color: Color(0xff373737),
-                    ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                    keyboardType: TextInputType.text,
+                        );
+                      log(value.toString());
+                    },
+
+                    onSymbolTapped: (symbol) {
+                      setState(() {
+                        marker.setPosition(value);  // marker 위치 이동
+                        marker.setIsVisible(true);
+                      });
+                      final cameraPosition = NCameraPosition(
+                          target: NLatLng(value.latitude, value.longitude),
+                          zoom: 14.5
+                      );
+                      final cameraUpdate = NCameraUpdate.fromCameraPosition(cameraPosition);
+                      cameraUpdate.setAnimation(
+                          animation: NCameraAnimation.fly,
+                          duration: Duration(seconds: 2)
+                      );
+                      mapController.updateCamera(cameraUpdate);
+                      log("지도의 심볼 클릭 -> 미니 지도에 표시");
+                    },
+                    forceGesture: true,
+                    // SingleChildScrollView 안에서 사용하므로, NaverMap에
+                    // 전달되는 제스처 무시 현상 방지 위함
                   ),
                 ),
               ),
               // 상세 주소 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 6.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
                 width: 318,
                 height: 31,
                 decoration: BoxDecoration(
                   border:
                       Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
                           ),
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffFFFFFF),
                 ),
                 child: Padding(
@@ -560,7 +654,7 @@ class _RequestState extends State<Request> {
 
               // 심부름 값 텍스트, 결제 방법 텍스트
               Container(
-                margin: EdgeInsets.only(top: 19.5),
+                margin: EdgeInsets.only(top: 18),
                 child: Row(
                   children: [
                     Expanded(
@@ -622,45 +716,62 @@ class _RequestState extends State<Request> {
               ),
               // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
               Container(
-                margin: EdgeInsets.only(top: 8, left: 22.0),
+                margin: EdgeInsets.only(top: 6, left: 20.0),
                 child: Row(
                   children: [
                     Expanded(
                       // 심부름 값 텍스트 필드
                       child: Container(
-                        margin: EdgeInsets.only(left: 0, right: 29),
-                        width: 104,
-                        height: 31,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Container(
+                              width: 104,
+                              height: 31,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Color(0xff2D2D2D),
+                                    width: 0.5 // 테두리 굵기
+                                    ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                                color: Color(0xffFFFFFF),
                               ),
-                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                          color: Color(0xffFFFFFF),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 2, left: 0, right: 10),
-                          child: TextField(
-                            controller: priceController,
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              letterSpacing: 0.01,
-                              color: Color(0xff111111),
-                            ),
-                            decoration: InputDecoration(
-                              // prefixIcon: Image.asset('assets/images/₩.png'),
-                              prefixIcon: Image.asset(
-                                'assets/images/₩.png',
-                                color: Color(0xff7C7C7C),
-                                width: 11,
-                                height: 14,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    top: 1, left: 27, right: 7.5),
+                                child: TextField(
+                                  controller: priceController,
+                                  style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13,
+                                    letterSpacing: 0.01,
+                                    color: Color(0xff373737),
+                                  ),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                ),
                               ),
-                              border: InputBorder.none,
                             ),
-                            keyboardType: TextInputType.number,
-                          ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 9, top: 6),
+                                  color: Colors.transparent,
+                                  child: Image.asset(
+                                    'assets/images/₩.png',
+                                    color: Color(0xff7C7C7C),
+                                    width: 11,
+                                    height: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -722,7 +833,7 @@ class _RequestState extends State<Request> {
 
               // 요청사항 텍스트
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: EdgeInsets.only(top: 18),
                 child: Row(
                   children: [
                     Expanded(
@@ -758,7 +869,7 @@ class _RequestState extends State<Request> {
               ),
               // 요청사항 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 22.0, right: 20.0, top: 8.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
                 width: 318,
                 height: 67.4,
                 decoration: BoxDecoration(
@@ -802,17 +913,19 @@ class _RequestState extends State<Request> {
               ),
               // 작성 완료 버튼 만들기
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 110.6),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
                 child: ElevatedButton(
                   onPressed: () {
                     print("요청서 작성 완료");
+                    DateTime currentTime = DateTime.now();
+                    log(currentTime.toString());
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
                       if (isTitleEnabled &&
-                          isDestinationEnabled &&
+                          isDetailAddressEnabled &&
                           isPriceEnabled &&
                           isRequestEnabled) {
                         return Color(

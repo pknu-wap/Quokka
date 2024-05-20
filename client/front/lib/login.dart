@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
@@ -31,8 +32,8 @@ class _LogInState extends State<LogIn> {
   TextEditingController _PasswordController = TextEditingController();
 
   request(String username, String password) async {
-    String url =
-        "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/login";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}login";
     String param = "?username=$username&password=$password";
     print(url + param);
     try {
@@ -175,6 +176,11 @@ class _LogInState extends State<LogIn> {
                 child: ElevatedButton(
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
+
+                    // Navigator.push(
+                    //   //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
