@@ -18,15 +18,80 @@ final storage = FlutterSecureStorage(); // 토큰 받기
 //   //   required this.errandNo,
 //   // }) : super(key: key);
 
-class ErrandCheck extends StatefulWidget {
-  final int errandNo;
-
-  // const ErrandCheck({Key? key, required this.errandNo}) : super(key: key);
-  const ErrandCheck({super.key, required this.errandNo});
+class ErrandCheck extends StatelessWidget {
+  final int orderNo; //요청자 번호
+  final String nickname; //닉네임
+  final double score; //평점
+  final int errandNo; //게시글 번호
+  final String createdDate; //요청서 생성 시간
+  final String title; //제목
+  final String destination; //도착지
+  final double latitude; // 위도
+  final double longitude; // 경도
+  final String due; // 일정 시간
+  final String detail; // 요청사항
+  final int reward; //심부름 값
+  final bool isCash; // 계좌이체, 현금
+  final String status; //상태 (모집중, 진행중, 완료됨)
+  final bool isMyErrand; // 내가 작성자인지
+  const ErrandCheck({
+    Key? key,
+    required this.orderNo,
+    required this.nickname,
+    required this.score,
+    required this.errandNo,
+    required this.createdDate,
+    required this.title,
+    required this.destination,
+    required this.latitude,
+    required this.longitude,
+    required this.due,
+    required this.detail,
+    required this.reward,
+    required this.isCash,
+    required this.status,
+    required this.isMyErrand,
+  }) : super(key: key);
 
   @override
-  State createState() => _ErrandCheckState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                color: Colors.white,
+                child: Text("$errandNo", style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 100,
+                  color: Color(0xFF404040),
+                 ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                color: Colors.white,
+                child: Text("$errandNo", style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 100,
+                  color: Color(0xFF404040),
+                ),
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 }
+
 // order 구조체
 class order {
   int orderNo;
@@ -98,7 +163,15 @@ class Error {
   }
 }
 
-class _ErrandCheckState extends State<ErrandCheck> {
+class MainErrandCheck extends StatefulWidget {
+  final int errandNo;
+  const MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+
+  @override
+  State createState() => _MainErrandCheckState();
+}
+
+  class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
   String status = "";
   String? token = "";
@@ -160,115 +233,6 @@ class _ErrandCheckState extends State<ErrandCheck> {
       position: myLatLng,
     );
   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         child: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               // 네이버 지도
-//               Container(
-//                 margin: EdgeInsets.only(left: 19, top: 49),
-//                 decoration: BoxDecoration(
-//                   border:
-//                     Border.all(color: Color(0xffC6C6C6), width: 1
-//                     ),
-//                   borderRadius: BorderRadius.all(Radius.circular(10)),
-//                   color: Color(0xffFFFFFF),
-//                 ),
-//                 width: 320,
-//                 height: 212,
-//                 child: ClipRRect(
-//                   borderRadius: BorderRadius.circular(10),
-//                   child: NaverMap(
-//                     options: const NaverMapViewOptions(
-//                       logoClickEnable: false, // 네이버 로고 클릭 비활성화
-//
-//                       mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
-//                       activeLayerGroups: [ // 표시할 정보
-//                         NLayerGroup.building, // 건물 레이어
-//                         NLayerGroup.transit, // 대중교통 레이어
-//                       ],
-//                       // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
-//                       scrollGesturesFriction: 0.5, // 스크롤
-//                       zoomGesturesFriction: 0.5, // 줌
-//
-//                       initialCameraPosition: NCameraPosition(
-//                           target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
-//                           // 위도, 경도
-//                           // 부경대 대연캠퍼스
-//                           // 위도 latitude : 35.134384930841364
-//                           // 경도 longitude : 129.10592409493796
-//                           zoom: 14.5, // 지도의 초기 줌 레벨
-//                           bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
-//                           tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
-//                       ),
-//                     ),
-//
-//                     onMapReady: (controller) {
-//                       controller.addOverlay(marker);
-//                       print("네이버 맵 로딩됨!");
-//                     },
-//
-//                     onMapTapped: (point, latLng) {
-//                       // 지도가 터치될 때마다 마커의 위치를 업데이트
-//                       print("marker 이동!");
-//                       // log(point.toString());
-//                       // log(latLng.toString());
-//
-//                       setState(() {
-//                         marker.setPosition(latLng);
-//                         marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-//                       });
-//                     },
-//
-//                     onSymbolTapped: (symbol) {
-//                       setState(() {
-//                         marker.setPosition(symbol.position);  // marker 위치 이동
-//                         marker.setIsVisible(true);
-//                       });
-//                       log(symbol.caption.toString());
-//                     },
-//
-//
-//                     forceGesture: true,
-//                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
-//                     // 전달되는 제스처 무시 현상 방지 위함
-//                   ),
-//                 ),
-//               ),
-//
-//               Container(
-//                 margin: EdgeInsets.only(top: 10),
-//                 color: Colors.white,
-//                 child: Text("$errandNo", style: TextStyle(
-//                   fontFamily: 'Pretendard',
-//                   fontWeight: FontWeight.w400,
-//                   fontSize: 100,
-//                   color: Color(0xFF404040),
-//                  ),
-//                 ),
-//               ),
-//               Container(
-//                 margin: EdgeInsets.only(top: 10),
-//                 color: Colors.white,
-//                 child: Text("$errandNo", style: TextStyle(
-//                   fontFamily: 'Pretendard',
-//                   fontWeight: FontWeight.w400,
-//                   fontSize: 100,
-//                   color: Color(0xFF404040),
-//                 ),
-//                 ),
-//               ),
-//
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
 
   @override
   Widget build(BuildContext context) {
