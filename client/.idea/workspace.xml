@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b21be5b-2c8c-4bd1-b7ab-c208ec551126" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/check_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/check_image.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/main_post_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/main_post_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/front/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/front/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/front/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/front/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/front/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +54,9 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.android.tools.idea.streaming.zoom.toolbar.visible&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/114-마진-패딩값-조정-에러-처리-함수수정&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop-FE&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/wap/2024-1_App1/client/front&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -96,5 +101,16 @@
       <updated>1712238729526</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

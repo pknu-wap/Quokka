@@ -56,7 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isPasswordCheckEnabled = false;
   bool isPasswordCheckButtonVisible = false; // 비밀번호 확인 버튼 눈
   bool isPasswordCheckButtonEnabled = false; // 비밀번호 확인 버튼
-  bool isDuplicateNickname = false;
   bool DuplicateFlag = false;
 
   String Nickname = "";

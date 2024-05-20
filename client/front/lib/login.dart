@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'sign_up.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -22,6 +23,7 @@ class LogIn extends StatefulWidget {
   State<LogIn> createState() => _LogInState();
 }
 class _LogInState extends State<LogIn> {
+  final storage = FlutterSecureStorage();
   final int maxStudentIdLength = 9; // 학번 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
   final int maxPasswordLength = 20; // 비밀번호 최대 길이 설정
@@ -37,6 +39,12 @@ class _LogInState extends State<LogIn> {
     try {
       var post = await http.post(Uri.parse(url + param));
       if (post.statusCode == 200) {
+        Map<String, dynamic> headers = post.headers;
+        String? token = headers["authorization"];
+        print("token: $token");
+        await storage.write(key: 'TOKEN', value: token);
+        //이제 앱 전역에서 토큰을 사용할 수 있음
+        //지울 때는 이걸로 지워야함 await storage.delete(key: 'TOKEN); ex: 로그아웃
         setState(() {
           isVisible = false;
         });

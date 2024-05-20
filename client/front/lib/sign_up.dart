@@ -61,11 +61,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     else {
       Map<String, dynamic> json = jsonDecode(response.body);
       Error error = Error.fromJson(json);
-      if(response.statusCode == 400)
+      if(error.code == "DUPLICATE_DATA")
       {
-        print(error.httpStatus+'\n');
-        print(error.message+'\n');
-        print(error.code+'\n');
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -83,11 +80,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           },
         );
       }
-      else if(response.statusCode == 415)
+      else if(error.code == "INVALID_FORMAT")
         {
-          print(error.httpStatus+'\n');
-          print(error.message+'\n');
-          print(error.code+'\n');
           showDialog(
             context: context,
             builder: (BuildContext context) {
