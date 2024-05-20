@@ -24,6 +24,8 @@ class Request extends StatefulWidget {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
+  final int maxTitleLength = 20; // 제목 최대 길이 설정
+
   TextEditingController titleController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -232,6 +234,7 @@ class _RequestState extends State<Request> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 7.5, left: 10, right: 10),
                   child: TextField(
+                    maxLength: maxTitleLength,
                     controller: titleController,
                     style: TextStyle(
                       fontFamily: 'Pretendard',
@@ -242,6 +245,7 @@ class _RequestState extends State<Request> {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
+                      counterText: '',
                     ),
                     keyboardType: TextInputType.text,
                   ),
