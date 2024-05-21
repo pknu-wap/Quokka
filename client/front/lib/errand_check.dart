@@ -539,12 +539,13 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisSize: MainAxisSize.min, // 중앙 정렬
                                   children: [
                                     Image.asset(
                                       'assets/images/Pencil_2_.png', // Replace with your image asset path
-                                      width: 19.12, // Adjust the size as needed
-                                      height: 19.12, // Adjust the size as needed
+                                      width: 19.12,
+                                      height: 19.12,
+                                      color: Color(0xFF7F7F7F),
                                     ),
                                     SizedBox(width: 6.55), // Adjust the space between icon and text as needed
                                     Text(
@@ -583,14 +584,26 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                '삭제하기',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFFF0000),
-                                ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/Trash_can_2_.png', // Replace with your image asset path
+                                    width: 17.35, // Adjust the size as needed
+                                    height: 21.11, // Adjust the size as needed
+                                    color: Color(0xffFF2929),
+                                  ),
+                                  SizedBox(width: 8.3), // Adjust the space between icon and text as needed
+                                  Text(
+                                    '삭제하기',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFFF0000),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
