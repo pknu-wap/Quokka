@@ -82,7 +82,7 @@ class ErrandCheckWidget extends StatelessWidget {
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
                           fontSize: 14,
-                          letterSpacing: 0.01,
+                          letterSpacing: 0.001,
                           color: Color(0xff575757),
                         ),
                       ),
@@ -116,28 +116,28 @@ class ErrandCheckWidget extends StatelessWidget {
                 )),
                 //게시글 제목
                 Container(
-                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 8.6),
+                  margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
                       fontSize: 20,
-                      letterSpacing: 0.01,
+                      letterSpacing: 0.001,
                       color: Color(0xff111111),
                     ),
                   ),
                 ),
                 // 심부름 값
                 Container(
-                  margin: EdgeInsets.only(top: 11.52),
+                  margin: EdgeInsets.only(top: 11.52, left: 13.4),
                   child: Text(
-                    "\u20A9${priceFormat.format(reward)}원",
+                    "\u20A9 ${priceFormat.format(reward)} 원",
                     style: TextStyle(
                       fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w700,
                       fontSize: 20,
-                      letterSpacing: 0.01,
+                      letterSpacing: 0.001,
                       color: Color(0xff7C3D1A),
                     ),
                   ),
