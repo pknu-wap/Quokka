@@ -155,7 +155,6 @@ class ErrandCheckWidget extends StatelessWidget {
                             // Replace with your image asset path
                             width: 12.2, // Adjust the size as needed
                             height: 16.77, // Adjust the size as needed
-                            color: Color(0xffCFB6A5),
                           ),
                         ),
                         // 상세 주소 텍스트
@@ -190,97 +189,91 @@ class ErrandCheckWidget extends StatelessWidget {
                       ],
                     )),
 
-
                 Container(
+                    margin: EdgeInsets.only(top: 8.28),
                     child: Row(
-                  //상세 주소
-                  children: [
-
-                    Expanded(
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              //시간
-                              margin: EdgeInsets.only(right: 14, top: 17.95),
-                              child: Text(
-                                "${createdDate}",
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    letterSpacing: 0.001,
-                                    color: Color(0xff434343)),
-                              ),
-                            ))),
-                  ],
-                )),
-
-                Container(
-                    child: Row(
-                  //일정, 업로드 시간
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 15, top: 10),
-                      child: Text(
-                        "상세 주소${destination}   ",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13,
-                          letterSpacing: 0.01,
-                          color: Color(0xff000000),
+                      children: [
+                        // 시계 이미지
+                        Container(
+                          margin: EdgeInsets.only(left: 18.53),
+                          child: Image.asset(
+                            'assets/images/clock.png',
+                            width: 15.08, // Adjust the size as needed
+                            height: 15.08, // Adjust the size as needed
+                          ),
                         ),
-                      ),
+                        // 일정 텍스트
+                        Container(
+                          margin: EdgeInsets.only(left: 6.23),
+                          child: Text(
+                            "일정",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              letterSpacing: 0.001,
+                              color: Color(0xffBC9F9F),
+                            ),
+                          ),
+                        ),
+                        // 일정
+                        Container(
+                          margin: EdgeInsets.only(left: 6),
+                          child: Text(
+                            "${due}",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              letterSpacing: 0.001,
+                              color: Color(0xff505050),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          //게시글 올린 시간
+                          margin: EdgeInsets.only(left: 2),
+                          child: Text(
+                            "${createdDate}",
+                            style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                letterSpacing: 0.001,
+                                color: Color(0xff434343)),
+                          ),
+                        ),
+                      ],
+                    )),
+                // 실선
+                Container(
+                  margin: EdgeInsets.only(top: 24.68, left: 12.01, right: 9.99),
+                  height: 1.0,
+                  width: 298,
+                  color: Color(0xffDBDBDB),
+                ),
+                // 요청 사항
+                Container(
+                  margin: EdgeInsets.only(top: 15.61, left: 20.66, right: 19.34),
+                  child:  Text(
+                    "${detail}",
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      letterSpacing: 0.001,
+                      color: Color(0xff111111),
                     ),
-                    Expanded(
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              //시간
-                              margin: EdgeInsets.only(right: 14, top: 17.95),
-                              child: Text(
-                                "${createdDate}",
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    letterSpacing: 0.001,
-                                    color: Color(0xff434343)),
-                              ),
-                            ))),
-                  ],
-                )),
+                  ),
+                ),
               ],
             ),
           ),
-          Container(
-              child: Center(
-                  child: Container(
-                      width: 312,
-                      child:
-                          Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
         ],
       ),
     );
   }
 }
-
-// Container(
-// margin: EdgeInsets.only(top: 10),
-// color: Colors.white,
-// child: Text(
-// "${errandNo}",
-// style: TextStyle(
-// fontFamily: 'Pretendard',
-// fontWeight: FontWeight.w400,
-// fontSize: 100,
-// color: Color(0xFF404040),
-// ),
-// ),
-// ),
 
 // order 구조체
 class order {
