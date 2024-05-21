@@ -542,11 +542,11 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Image.asset(
-                                      'assets/your_image.png', // Replace with your image asset path
-                                      width: 20, // Adjust the size as needed
-                                      height: 20, // Adjust the size as needed
+                                      'assets/images/Pencil_2_.png', // Replace with your image asset path
+                                      width: 19.12, // Adjust the size as needed
+                                      height: 19.12, // Adjust the size as needed
                                     ),
-                                    SizedBox(width: 8), // Adjust the space between icon and text as needed
+                                    SizedBox(width: 6.55), // Adjust the space between icon and text as needed
                                     Text(
                                       '수정하기',
                                       style: TextStyle(
