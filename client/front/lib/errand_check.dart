@@ -70,12 +70,12 @@ class ErrandCheckWidget extends StatelessWidget {
               children: [
                 //닉네임, 평점
                 Container(
+                    margin: EdgeInsets.only(top: 13.01),
                     child: Row(
                   children: [
                     //닉네임
                     Container(
-                      height: 14,
-                      margin: EdgeInsets.only(left: 13.4, top: 13.01),
+                      margin: EdgeInsets.only(left: 13.4),
                       child: Text(
                         "${nickname}",
                         style: TextStyle(
@@ -87,21 +87,31 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // 평점 커카 이미지
+                    Container(
+                      margin: EdgeInsets.only(left: 9.1),
+                      child: Image.asset(
+                        'assets/images/score_icon.png',
+                        // Replace with your image asset path
+                        width: 11.77, // Adjust the size as needed
+                        height: 11.77, // Adjust the size as needed
+                        color: Color(0xffCFB6A5),
+                      ),
+                    ),
                     //평점
                     Container(
-                      height: 14.01,
-                      margin: EdgeInsets.only(top: 16),
+                      margin: EdgeInsets.only(left: 2.82),
                       child: Text(
                         " ${score}점",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
                           fontSize: 13,
-                          letterSpacing: 0.01,
+                          letterSpacing: -0.03,
                           color: Color(0xffCFB6A5),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 )),
                 //게시글 제목
