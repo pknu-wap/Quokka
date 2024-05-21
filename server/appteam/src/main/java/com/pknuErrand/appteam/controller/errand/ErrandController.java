@@ -4,6 +4,7 @@ package com.pknuErrand.appteam.controller.errand;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
@@ -58,7 +59,7 @@ public class ErrandController {
     @GetMapping("/{id}")
     public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
-                .body(errandService.findErrandById(id));
+                .body(errandService.findErrandDetailById(id));
     }
 
 
@@ -121,18 +122,11 @@ public class ErrandController {
     })
     @Operation(summary = "요청서 삭제하기", description = "요청서 삭제")
     @DeleteMapping("/{id}")
-    public void deleteErrand(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteErrand(@PathVariable Long id) {
         errandService.deleteErrand(id);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/loginTest")
-    public void 로그인테스트() {
-        Member member = memberService.getLoginMember();
-        log.info("member id = {}", member.getId());
-        log.info("member name = {}", member.getName());
-        if(member == null)
-            log.warn("member is null");
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {

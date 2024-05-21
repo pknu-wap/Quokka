@@ -34,8 +34,8 @@ public class ErrandSaveRequestDto { // to Entity
     @NotNull(message = "longitude를 입력하세요.")
     private double longitude;
 
-    @NotNull(message = "마감시간을 입력하세요.")
-    private Timestamp due; // 몇시까지?
+    @NotBlank(message = "마감시간을 입력하세요.")
+    private String due; // 몇시까지?
 
     @NotBlank(message = "상세내용을 입력하세요.")
     private String detail;

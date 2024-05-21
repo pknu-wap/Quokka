@@ -1,5 +1,6 @@
 package com.pknuErrand.appteam.repository.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
+import com.pknuErrand.appteam.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,5 +34,10 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
             "ORDER BY reward DESC, errand_no DESC LIMIT :limit", nativeQuery = true)
     List<Errand> findErrandByStatusAndReward(@Param("pk") Long pk, @Param("cursor") int cursor, @Param("limit") int limit,
                                               @Param("status") String status);
+
+    @Query(value = "SELECT * " +
+            "FROM errand " +
+            "WHERE ((errander_no_member_no =:memberNo) OR (order_no_member_no =:memberNo)) AND (status = 'IN_PROGRESS')", nativeQuery = true)
+    List<Errand> findInProgressErrand(@Param("memberNo") Long memberNo);
 
 }
