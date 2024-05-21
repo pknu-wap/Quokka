@@ -357,8 +357,6 @@ class MainErrandCheck extends StatefulWidget {
 
   MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
 
-  // const MainErrandCheck({Key? key}) : super(key: key);
-
   @override
   State createState() => _MainErrandCheckState();
 }
@@ -416,6 +414,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   void initState() {
     super.initState();
     errandNo = widget.errandNo;
+    // myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
     myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
     marker = NMarker(
       id: "도착지",
@@ -587,7 +586,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   utf8.decode(status.runes.toList());
                               return GestureDetector(
                                 // behavior: HitTestBehavior.translucent,
-                                //게시글 전체를 클릭영역으로 만들어주는 코드
+                                //게시글 전체를 클릭 영역으로 만들어주는 코드
                                 child: ErrandCheckWidget(
                                   orderNo: errands[index]["orderNo"],
                                   nickname: decodedNickname,
