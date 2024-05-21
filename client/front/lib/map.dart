@@ -43,6 +43,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
   //   });
   // }
 
+
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
   // bool isMarkerVisible = true; // 마커가 보이는 경우
@@ -59,7 +60,26 @@ class _NaverMapTestState extends State<NaverMapTest> {
       marker.setIsVisible(false);
     });
   }
+  Future<Position> getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
 
+    return position;
+  }
+  Future<void> initLocation() async {
+    Position position = await getCurrentLocation();
+
+    log(position.latitude.toString());
+    log(position.longitude.toString());
+    setState(() {
+      myLatLng = NLatLng(position.latitude, position.longitude);
+      marker = NMarker(
+        id: "test",
+        position: myLatLng,
+      );
+    });
+    returnValue = widget.value;
+  }
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
@@ -67,13 +87,14 @@ class _NaverMapTestState extends State<NaverMapTest> {
     // 이후 권한 설정 관련 코드 추가 예정 -> 한 번 권한 허용 받으면 이후 권한 받을 필요 없음.
     // getGeoData();
     destinationController.addListener(updateDestinationState);
-    myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
-    marker = NMarker(
-          id: "test",
-          position: myLatLng,
-          // icon: iconImage,
-        );
-    returnValue = widget.value;
+    initLocation();
+    // myLatLng = NLatLng(position.latitude, position.longitude);//(35.134384930841364, 129.10592409493796); // 자신의 위치
+    // marker = NMarker(
+    //       id: "test",
+    //       position: myLatLng,
+    //       // icon: iconImage,
+    //     );
+    // returnValue = widget.value;
   }
 
   @override
