@@ -60,78 +60,166 @@ class ErrandCheckWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var priceFormat = NumberFormat('###,###,###,###');
     return Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container( width: 320, height: 305.85, //게시글 1개
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 320, height: 305.85, //게시글 1개
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //닉네임, 평점
+                Container(
+                    child: Row(
+                  children: [
+                    //닉네임
                     Container(
-                        child: Row( //닉네임, 평점
-                          children: [
-                            Container( height: 14, //닉네임
-                              margin: EdgeInsets.only(left: 15, top: 0),
-                              child: Text("${nickname}", style: TextStyle(
-                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w300, fontSize: 12,
-                                letterSpacing: 0.01, color: Color(0xff111111),
-                              ),),
-                            ),
-                            Container( height:14, //평점
-                              margin: EdgeInsets.only(top: 16),
-                              child: Text(" ${score}점", style: TextStyle(
-                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w300, fontSize: 12,
-                                letterSpacing: 0.01, color: Color(0xff7E7E7E),
-                              ),),
-                            )
-                          ],
-                        )
+                      height: 14,
+                      margin: EdgeInsets.only(left: 13.4, top: 13.01),
+                      child: Text(
+                        "${nickname}",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 14,
+                          letterSpacing: 0.01,
+                          color: Color(0xff575757),
+                        ),
+                      ),
                     ),
-                    Container( //게시글 제목
-                      margin: EdgeInsets.only(top: 8,left: 15,),
-                      child: Text("${title}", style: TextStyle(
-                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w600, fontSize: 16,
-                        letterSpacing: 0.01, color: Color(0xff111111),
-                      ),),
-                    ),
+                    //평점
                     Container(
-                        child: Row( //위치, 가격
-                          children: [
-                            Container( margin: EdgeInsets.only(left: 15, top: 10),
-                              child: Text("${destination}   ", style: TextStyle(
-                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500, fontSize: 13,
-                                letterSpacing: 0.01, color: Color(0xff000000),
-                              ),),),
-                            Container( margin: EdgeInsets.only(top: 10),
-                              child: Text("\u20A9${priceFormat.format(reward)}", style: TextStyle(
-                                fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500, fontSize: 13,
-                                letterSpacing: 0.01, color: Color(0xffEC5147),
-                              ),),),
-                            Expanded(
-                                child: Align(alignment: Alignment.centerRight,
-                                    child: Container( //시간
-                                      margin: EdgeInsets.only(right: 14, top: 17.95),
-                                      child: Text("${createdDate}",
-                                        style: TextStyle(
-                                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w400, fontSize: 12,
-                                            letterSpacing: 0.001, color: Color(0xff434343)),
-                                      ),))),
-                          ],)),
+                      height: 14.01,
+                      margin: EdgeInsets.only(top: 16),
+                      child: Text(
+                        " ${score}점",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 13,
+                          letterSpacing: 0.01,
+                          color: Color(0xffCFB6A5),
+                        ),
+                      ),
+                    )
                   ],
+                )),
+                //게시글 제목
+                Container(
+                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 8.6),
+                  child: Text(
+                    "${title}",
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      letterSpacing: 0.01,
+                      color: Color(0xff111111),
+                    ),
+                  ),
+                ),
+                // 심부름 값
+                Container(
+                  margin: EdgeInsets.only(top: 11.52),
+                  child: Text(
+                    "\u20A9${priceFormat.format(reward)}원",
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                      letterSpacing: 0.01,
+                      color: Color(0xff7C3D1A),
+                    ),
+                  ),
                 ),
 
-              ),
-              Container(child: Center(child: Container(width: 312, child: Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
-            ],
-    ),
+                Container(
+                    child: Row(
+                  //상세 주소
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 22.06),
+                      child: Text(
+                        "상세 주소 ${destination}   ",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                          letterSpacing: 0.01,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              //시간
+                              margin: EdgeInsets.only(right: 14, top: 17.95),
+                              child: Text(
+                                "${createdDate}",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    letterSpacing: 0.001,
+                                    color: Color(0xff434343)),
+                              ),
+                            ))),
+                  ],
+                )),
 
-        );
+                Container(
+                    child: Row(
+                  //일정, 업로드 시간
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 10),
+                      child: Text(
+                        "상세 주소${destination}   ",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                          letterSpacing: 0.01,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              //시간
+                              margin: EdgeInsets.only(right: 14, top: 17.95),
+                              child: Text(
+                                "${createdDate}",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    letterSpacing: 0.001,
+                                    color: Color(0xff434343)),
+                              ),
+                            ))),
+                  ],
+                )),
+              ],
+            ),
+          ),
+          Container(
+              child: Center(
+                  child: Container(
+                      width: 312,
+                      child:
+                          Divider(color: Color(0xffDBDBDB), thickness: 0.5)))),
+        ],
+      ),
+    );
   }
 }
 
@@ -235,7 +323,7 @@ class Error {
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
 
-  const MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
 
   // const MainErrandCheck({Key? key}) : super(key: key);
 
@@ -251,39 +339,36 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   late NLatLng myLatLng;
   late NMarker marker;
 
-  Future<void> ErrandReading(String id) async {
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand";
+  Future<void> errandReading(String id) async {
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand";
     String param = "/$id";
     print(url + param);
 
     token = await storage.read(key: 'TOKEN');
-    var response = await http.get(Uri.parse(url + param),
-        headers: {"Authorization": "$token"});
+    var response = await http
+        .get(Uri.parse(url + param), headers: {"Authorization": "$token"});
 
     if (response.statusCode == 200) {
-      List<dynamic> result = jsonDecode(response.body);
-      for (var item in result) {
-        Errand errand = Errand.fromJson(item);
-        errands.add({
-          "orderNo": errand.o1.orderNo,
-          "nickname": errand.o1.nickname,
-          "score": errand.o1.score,
-          "errandNo": errand.errandNo,
-          "createdDate": errand.createdDate,
-          "title": errand.title,
-          "destination": errand.destination,
-          "latitude": errand.latitude,
-          "longitude": errand.longitude,
-          "due": errand.due,
-          "detail": errand.detail,
-          "reward": errand.reward,
-          "isCash": errand.isCash,
-          "status": errand.status,
-          "isMyErrand": errand.isMyErrand,
-        });
-        print('200');
-      }
+      Errand errand = Errand.fromJson(jsonDecode(response.body));
+      errands.add({
+        "orderNo": errand.o1.orderNo,
+        "nickname": errand.o1.nickname,
+        "score": errand.o1.score,
+        "errandNo": errand.errandNo,
+        "createdDate": errand.createdDate,
+        "title": errand.title,
+        "destination": errand.destination,
+        "latitude": errand.latitude,
+        "longitude": errand.longitude,
+        "due": errand.due,
+        "detail": errand.detail,
+        "reward": errand.reward,
+        "isCash": errand.isCash,
+        "status": errand.status,
+        "isMyErrand": errand.isMyErrand,
+      });
+      log("status code == 200, Json Data Parsed.");
       setState(() {});
     } else {
       print("error");
@@ -304,7 +389,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
       id: "도착지",
       position: myLatLng,
     );
-    ErrandReading(errandNo.toString());
+    errandReading(errandNo.toString());
   }
 
   // 메인 글 보기 화면
@@ -383,7 +468,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
                                 setState(() {
                                   marker.setPosition(latLng);
-                                  marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                                  marker.setIsVisible(
+                                      true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                                 });
                               },
 
@@ -401,7 +487,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             ),
                           ),
                         ),
-
                       ],
                     )),
 
@@ -447,7 +532,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               String decodedStatus =
                                   utf8.decode(status.runes.toList());
                               return GestureDetector(
-                                behavior: HitTestBehavior.translucent,
+                                // behavior: HitTestBehavior.translucent,
                                 //게시글 전체를 클릭영역으로 만들어주는 코드
                                 onTap: () {
                                   // Navigator.of(context).push(
@@ -479,36 +564,39 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
                     // if (isMyErrand == false)
                     // 제가 할게요! 버튼(글 보기 하는 사람)
-                    // Container(
-                    //   margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
-                    //   child: ElevatedButton(
-                    //     onPressed: () {
-                    //       Navigator.pop(context);
-                    //       print("제가 할게요! 클릭");
-                    //     },
-                    //     style: ButtonStyle(
-                    //       backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),
-                    //       // 버튼의 크기 정하기
-                    //       minimumSize: MaterialStateProperty.all<Size>(Size(318, 46.65)),
-                    //       // 버튼의 모양 변경하기
-                    //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //         RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(
-                    //               5), // 원하는 모양에 따라 BorderRadius 조절
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     child: Text(
-                    //       '제가 할게요!',
-                    //       style: TextStyle(
-                    //         fontSize: 14,
-                    //         fontFamily: 'Pretendard',
-                    //         fontWeight: FontWeight.w600,
-                    //         color: Color(0xFFFFFFFF),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Container(
+                      margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          print("제가 할게요! 클릭");
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF7C3D1A)),
+                          // 버튼의 크기 정하기
+                          minimumSize:
+                              MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                          // 버튼의 모양 변경하기
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  5), // 원하는 모양에 따라 BorderRadius 조절
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          '제가 할게요!',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                        ),
+                      ),
+                    ),
                     // else
                     // 수정하기, 삭제하기 버튼(글 보기 올린 사람)
                     Container(
@@ -524,30 +612,36 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   print("수정하기 버튼");
                                 },
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xffFFFFFF)),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color(0xffFFFFFF)),
                                   // 버튼의 크기 정하기
-                                  minimumSize: MaterialStateProperty.all<Size>(Size(151.73, 49.7)),
+                                  minimumSize: MaterialStateProperty.all<Size>(
+                                      Size(151.73, 49.7)),
                                   // 버튼의 모양 변경하기
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
-                                      side: BorderSide(
-                                        color: Color(0xff9B9B9B),
-                                        width: 1,
-                                      )
-                                    ),
+                                        borderRadius: BorderRadius.circular(5),
+                                        // 원하는 모양에 따라 BorderRadius 조절
+                                        side: BorderSide(
+                                          color: Color(0xff9B9B9B),
+                                          width: 1,
+                                        )),
                                   ),
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min, // 중앙 정렬
                                   children: [
                                     Image.asset(
-                                      'assets/images/Pencil_2_.png', // Replace with your image asset path
+                                      'assets/images/Pencil_2_.png',
+                                      // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
                                       color: Color(0xFF7F7F7F),
                                     ),
-                                    SizedBox(width: 6.55), // Adjust the space between icon and text as needed
+                                    SizedBox(width: 6.55),
+                                    // Adjust the space between icon and text as needed
                                     Text(
                                       '수정하기',
                                       style: TextStyle(
@@ -570,30 +664,36 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 print("삭제하기 버튼");
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(Color(0xffFFFFFF)),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xffFFFFFF)),
                                 // 버튼의 크기 정하기
-                                minimumSize: MaterialStateProperty.all<Size>(Size(151.73, 49.7)),
+                                minimumSize: MaterialStateProperty.all<Size>(
+                                    Size(151.73, 49.7)),
                                 // 버튼의 모양 변경하기
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
+                                      borderRadius: BorderRadius.circular(5),
+                                      // 원하는 모양에 따라 BorderRadius 조절
                                       side: BorderSide(
                                         color: Color(0xffFF6767),
                                         width: 1,
-                                      )
-                                  ),
+                                      )),
                                 ),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Image.asset(
-                                    'assets/images/Trash_can_2_.png', // Replace with your image asset path
+                                    'assets/images/Trash_can_2_.png',
+                                    // Replace with your image asset path
                                     width: 17.35, // Adjust the size as needed
                                     height: 21.11, // Adjust the size as needed
                                     color: Color(0xffFF2929),
                                   ),
-                                  SizedBox(width: 8.3), // Adjust the space between icon and text as needed
+                                  SizedBox(width: 8.3),
+                                  // Adjust the space between icon and text as needed
                                   Text(
                                     '삭제하기',
                                     style: TextStyle(
@@ -610,124 +710,115 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         ],
                       ),
                     ),
+                  ],
+                )),
 
-
-                    ],
-                )
-            ),
-
-                    // 내비게이션 바
-                    Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                            width: 364,
-                            height: 64,
-                            decoration: BoxDecoration(
-                              color: Color(0xffFFFFFF),
-                              border: Border.all(
-                                color: Color(0xffCFCFCF),
-                                width: 0.5,
+            // 내비게이션 바
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                    width: 364,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: Color(0xffFFFFFF),
+                      border: Border.all(
+                        color: Color(0xffCFCFCF),
+                        width: 0.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(185, 185, 185, 0.25),
+                          offset: Offset(5, -1),
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 22,
+                            height: 22,
+                            margin: const EdgeInsets.only(
+                                left: 44, top: 20.0, bottom: 17.32),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromRGBO(185, 185, 185, 0.25),
-                                  offset: Offset(5, -1),
-                                  blurRadius: 5,
-                                  spreadRadius: 1,
-                                ),
-                              ],
+                              onPressed: () {},
+                              icon: Image.asset(
+                                'assets/images/home_icon.png',
+                                color: Color(0xff545454),
+                              ),
                             ),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: 22,
-                                    height: 22,
-                                    margin: const EdgeInsets.only(
-                                        left: 44, top: 20.0, bottom: 17.32),
-                                    child: IconButton(
-                                      style: IconButton.styleFrom(
-                                        minimumSize: Size.zero,
-                                        padding: EdgeInsets.zero,
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      onPressed: () {},
-                                      icon: Image.asset(
-                                        'assets/images/home_icon.png',
-                                        color: Color(0xff545454),
-                                      ),
-                                    ),
+                          ),
+                          Container(
+                            width: 19.31,
+                            height: 23.81,
+                            margin:
+                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {},
+                              icon: Image.asset(
+                                'assets/images/human_icon.png',
+                                color: Color(0xffADADAD),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 22.0,
+                            height: 22,
+                            margin:
+                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Request(),
                                   ),
-                                  Container(
-                                    width: 19.31,
-                                    height: 23.81,
-                                    margin: const EdgeInsets.only(
-                                        top: 20.0, bottom: 17.32),
-                                    child: IconButton(
-                                      style: IconButton.styleFrom(
-                                        minimumSize: Size.zero,
-                                        padding: EdgeInsets.zero,
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      onPressed: () {},
-                                      icon: Image.asset(
-                                        'assets/images/human_icon.png',
-                                        color: Color(0xffADADAD),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 22.0,
-                                    height: 22,
-                                    margin: const EdgeInsets.only(
-                                        top: 20.0, bottom: 17.32),
-                                    child: IconButton(
-                                      style: IconButton.styleFrom(
-                                        minimumSize: Size.zero,
-                                        padding: EdgeInsets.zero,
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                Request(),
-                                          ),
-                                        );
-                                      },
-                                      icon: Image.asset(
-                                        'assets/images/add_icon.png',
-                                        color: Color(0xffADADAD),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 21.95,
-                                    height: 24.21,
-                                    margin: const EdgeInsets.only(
-                                        top: 20.0, bottom: 17.32, right: 43.92),
-                                    child: IconButton(
-                                      style: IconButton.styleFrom(
-                                        minimumSize: Size.zero,
-                                        padding: EdgeInsets.zero,
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                      ),
-                                      onPressed: () {},
-                                      icon: Image.asset(
-                                        'assets/images/history_icon.png',
-                                        color: Color(0xffADADAD),
-                                      ),
-                                    ),
-                                  ),
-                                ])))
-
+                                );
+                              },
+                              icon: Image.asset(
+                                'assets/images/add_icon.png',
+                                color: Color(0xffADADAD),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 21.95,
+                            height: 24.21,
+                            margin: const EdgeInsets.only(
+                                top: 20.0, bottom: 17.32, right: 43.92),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {},
+                              icon: Image.asset(
+                                'assets/images/history_icon.png',
+                                color: Color(0xffADADAD),
+                              ),
+                            ),
+                          ),
+                        ])))
           ],
         ),
       ),
