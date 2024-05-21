@@ -64,10 +64,11 @@ class ErrandCheckWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 320, height: 305.85, //게시글 1개
+            width: 320, height: 305.85,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if(isMyErrand == false) // 내가 쓴 게시글이 아니면 닉네임, 평점 생성
                 //닉네임, 평점
                 Container(
                     margin: EdgeInsets.only(top: 13.01),
@@ -116,6 +117,8 @@ class ErrandCheckWidget extends StatelessWidget {
                 )),
                 //게시글 제목
                 Container(
+                  // width: 288,
+                  // height: 48,
                   margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
