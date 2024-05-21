@@ -117,8 +117,6 @@ class ErrandCheckWidget extends StatelessWidget {
                 )),
                 //게시글 제목
                 Container(
-                  // width: 288,
-                  // height: 48,
                   margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
@@ -446,90 +444,113 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                   color: Color(0xffF6F6F6),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start, // 게시글 중앙 정렬
                   children: [
                     Container(
                         child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         // 네이버 지도
                         Container(
-                          margin: EdgeInsets.only(left: 19, top: 50),
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(color: Color(0xffC6C6C6), width: 1),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Color(0xffFFFFFF),
-                          ),
-                          width: 320,
-                          height: 212,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: NaverMap(
-                              options: const NaverMapViewOptions(
-                                logoClickEnable: false,
-                                // 네이버 로고 클릭 비활성화
+                          // margin: EdgeInsets.only(left: 19, top: 50),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                width: 320,
+                                height: 212,
+                                margin: EdgeInsets.only(left: 19, top: 50),
+                                      decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: Color(0xffC6C6C6), width: 1),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        color: Color(0xffFFFFFF),
+                                      ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                  child: NaverMap(
+                                    options: const NaverMapViewOptions(
+                                      logoClickEnable: false, // 네이버 로고 클릭 비활성화
 
-                                mapType: NMapType.basic,
-                                // 지도 유형 : 기본 지도(기본 값)
-                                activeLayerGroups: [
-                                  // 표시할 정보
-                                  NLayerGroup.building, // 건물 레이어
-                                  NLayerGroup.transit, // 대중교통 레이어
-                                ],
-                                // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
-                                scrollGesturesFriction: 0.5,
-                                // 스크롤
-                                zoomGesturesFriction: 0.5,
-                                // 줌
+                                      mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
+                                      activeLayerGroups: [ // 표시할 정보
+                                        NLayerGroup.building, // 건물 레이어
+                                        NLayerGroup.transit, // 대중교통 레이어
+                                      ],
+                                      // 제스처의 마찰계수 지정(0.0~1.0 -> 0: 미끄러움)
+                                      scrollGesturesFriction: 0.5, // 스크롤
+                                      zoomGesturesFriction: 0.5, // 줌
 
-                                initialCameraPosition: NCameraPosition(
-                                    target: NLatLng(35.134384930841364,
-                                        129.10592409493796), // 내 위치
-                                    // 위도, 경도
-                                    // 부경대 대연캠퍼스
-                                    // 위도 latitude : 35.134384930841364
-                                    // 경도 longitude : 129.10592409493796
-                                    zoom: 14.5, // 지도의 초기 줌 레벨
-                                    bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
-                                    tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+                                      initialCameraPosition: NCameraPosition(
+                                          target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
+                                          // 위도, 경도
+                                          // 부경대 대연캠퍼스
+                                          // 위도 latitude : 35.134384930841364
+                                          // 경도 longitude : 129.10592409493796
+                                          zoom: 14.5, // 지도의 초기 줌 레벨
+                                          bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
+                                          tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
+                                      ),
                                     ),
+
+                                    onMapReady: (controller) {
+                                      controller.addOverlay(marker);
+                                      print("네이버 맵 로딩됨!");
+                                    },
+
+                                    onMapTapped: (point, latLng) {
+                                      // 지도가 터치될 때마다 마커의 위치를 업데이트
+                                      print("marker 이동!");
+                                      // log(point.toString());
+                                      // log(latLng.toString());
+
+                                      setState(() {
+                                        marker.setPosition(latLng);
+                                        marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                                      });
+                                    },
+
+                                    onSymbolTapped: (symbol) {
+                                      setState(() {
+                                        marker.setPosition(symbol.position);  // marker 위치 이동
+                                        marker.setIsVisible(true);
+                                      });
+                                      log(symbol.caption.toString());
+                                    },
+
+                                    forceGesture: true,
+                                    // SingleChildScrollView 안에서 사용하므로, NaverMap에
+                                    // 전달되는 제스처 무시 현상 방지 위함
+                                  ),
+                                  ),
+                                ),
+                                    // 검색 아이콘
+                              Positioned.fill(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GestureDetector(
+                                    onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 30, bottom: 100),
+                                      color: Colors.transparent,
+                                      child: Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Color(0xff6B6B6B),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
 
-                              onMapReady: (controller) {
-                                controller.addOverlay(marker);
-                                print("네이버 맵 로딩됨!");
-                              },
 
-                              onMapTapped: (point, latLng) {
-                                // 지도가 터치될 때마다 마커의 위치를 업데이트
-                                print("marker 이동!");
-                                // log(point.toString());
-                                // log(latLng.toString());
-
-                                setState(() {
-                                  marker.setPosition(latLng);
-                                  marker.setIsVisible(
-                                      true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                                });
-                              },
-
-                              onSymbolTapped: (symbol) {
-                                setState(() {
-                                  marker.setPosition(
-                                      symbol.position); // marker 위치 이동
-                                  marker.setIsVisible(true);
-                                });
-                                log(symbol.caption.toString());
-                              },
-                              forceGesture: true,
-                              // SingleChildScrollView 안에서 사용하므로, NaverMap에
-                              // 전달되는 제스처 무시 현상 방지 위함
-                            ),
+                            ],
                           ),
                         ),
-                      ],
-                    )),
+                    ],
+                        ),
+                    ),
+
                     // 글 보기 하는 사람
                     if (errands[0]["isMyErrand"] == false)
                     Flexible(
