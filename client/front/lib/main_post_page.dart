@@ -851,7 +851,34 @@ class _Main_post_pageState extends State<Main_post_page> {
                               borderRadius: BorderRadius.all(Radius.circular(20.0),),
                             ),
                            ),
-                          ),],
+                          ),
+                                    Positioned(
+                                      top: 42.64, left: 19.64,
+                                      child: Container(
+                                        child: Text('메세지를 보낼 심부름 상대를 골라주세요', style: TextStyle(
+                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w500, fontSize: 16,
+                                          color: Color(0xff000000),
+                                        ),),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 85.39,
+                                      child: Container(
+                                        width: 360, height: 310.14,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFFFFF),
+                                          border: Border(
+                                            top: BorderSide(width: 0.1),
+                                          ),
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20.0),
+                                            topRight: Radius.circular(20.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                          ),
                         );
                           },
