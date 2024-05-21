@@ -600,7 +600,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       ),
                     ),
 
-                    // if (isMyErrand == false)
+                    if (errands[0]["isMyErrand"] == false)
                     // 제가 할게요! 버튼(글 보기 하는 사람)
                     Container(
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
@@ -635,7 +635,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         ),
                       ),
                     ),
-                    // else
+                    if (errands[0]["isMyErrand"] == true)
                     // 수정하기, 삭제하기 버튼(글 보기 올린 사람)
                     Container(
                       margin: EdgeInsets.only(top: 13.38),
