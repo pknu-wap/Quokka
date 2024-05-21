@@ -6,6 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'map.dart';
 
@@ -53,7 +55,6 @@ class _RequestState extends State<Request> {
   bool isAccountTransfer = true;
   bool isCash = false;
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
-
   late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
   late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
   NLatLng value = NLatLng(0, 0);
@@ -66,6 +67,27 @@ class _RequestState extends State<Request> {
   //   'assets/images/location.png',
   //   );
   // }
+  Future<Position> getCurrentLocation() async {
+    log("call geolocator");
+    try {
+      LocationPermission permission;
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.deniedForever) {
+          return Future.error('Location Not Available');
+        }
+      }
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      log("get position at geolocator");
+      return position;
+
+    } catch(e) {
+      log("exception: " + e.toString());
+      return Future.error("faild Geolocator");
+    }
+  }
 
   @override
   void initState() {
@@ -75,14 +97,22 @@ class _RequestState extends State<Request> {
     detailAddressController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
-
+    getCurrentLocation().then((position) {
+      setState(() {
+        myLatLng = NLatLng(position.latitude, position.longitude);
+        marker = NMarker(
+          id: "test",
+          position: myLatLng,
+        );
+      });
+    });
     // destinationValue = widget.value;
-    myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
-    marker = NMarker(
-      id: "test",
-      position: myLatLng,
-      // icon: markerIcon,
-    );
+    //myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 자신의 위치
+    // marker = NMarker(
+    //   id: "test",
+    //   position: myLatLng,
+    //   // icon: markerIcon,
+    // );
   }
 
   @override
@@ -532,7 +562,7 @@ class _RequestState extends State<Request> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: NaverMap(
-                    options: const NaverMapViewOptions(
+                    options: NaverMapViewOptions(
                       scrollGesturesEnable: false, // 스크롤 비활성화
                       zoomGesturesEnable: false, // 줌 비활성화
 
@@ -544,9 +574,8 @@ class _RequestState extends State<Request> {
                         NLayerGroup.building, // 건물 레이어
                         NLayerGroup.transit, // 대중교통 레이어
                       ],
-
                       initialCameraPosition: NCameraPosition(
-                          target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
+                          target: myLatLng,// 내 위치
                           // 위도, 경도
                           // 부경대 대연캠퍼스
                           // 위도 latitude : 35.134384930841364
