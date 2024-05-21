@@ -13,13 +13,6 @@ import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 
-// class ErrandCheck extends StatelessWidget {
-//
-//   // const ErrandCheck({
-//   //   Key? key,
-//   //   required this.errandNo,
-//   // }) : super(key: key);
-
 class ErrandCheckWidget extends StatelessWidget {
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
@@ -765,7 +758,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
-                                      color: Color(0xFF7F7F7F),
                                     ),
                                     SizedBox(width: 6.55),
                                     // Adjust the space between icon and text as needed
@@ -817,7 +809,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                     // Replace with your image asset path
                                     width: 17.35, // Adjust the size as needed
                                     height: 21.11, // Adjust the size as needed
-                                    color: Color(0xffFF2929),
                                   ),
                                   SizedBox(width: 8.3),
                                   // Adjust the space between icon and text as needed
