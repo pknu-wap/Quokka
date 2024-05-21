@@ -530,21 +530,20 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         ),
                       ],
                     )),
-
-                    // if (ErrandCheckWidget(errandNo))
+                    // 글 보기 하는 사람
+                    if (errands[0]["isMyErrand"] == false)
                     Flexible(
                       child: Container(
                         width: 320,
                         height: 305.85,
                         //게시글 큰틀
-                        margin: EdgeInsets.only(left: 19, top: 18.9),
+                        margin: EdgeInsets.only(left: 18, top: 15.51),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
                         ),
                         child: ListView.builder(
                             padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                            // controller: _scrollController,
                             shrinkWrap: true,
                             itemCount: errands.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -602,6 +601,78 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             }),
                       ),
                     ),
+
+                    // 글 보기 올린 사람
+                    if (errands[0]["isMyErrand"] == true)
+                      Flexible(
+                        child: Container(
+                          width: 320,
+                          height: 274.98,
+                          //게시글 큰틀
+                          margin: EdgeInsets.only(left: 19.01, top: 18.73),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Color(0xffFFFFFF),
+                          ),
+                          child: ListView.builder(
+                              padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                              shrinkWrap: true,
+                              itemCount: errands.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                String nickname = errands[index]["nickname"];
+                                String createdDate =
+                                errands[index]["createdDate"];
+                                String title = errands[index]['title'];
+                                String destination =
+                                errands[index]['destination'];
+                                String due = errands[index]['due'];
+                                String detail = errands[index]['detail'];
+                                String status = errands[index]['status'];
+
+                                String decodedNickname =
+                                utf8.decode(nickname.runes.toList());
+                                String decodedCreatedDate =
+                                utf8.decode(createdDate.runes.toList());
+                                String decodedTitle =
+                                utf8.decode(title.runes.toList());
+                                String decodedDestination =
+                                utf8.decode(destination.runes.toList());
+                                String decodedDue =
+                                utf8.decode(due.runes.toList());
+                                String decodedDetail =
+                                utf8.decode(detail.runes.toList());
+                                String decodedStatus =
+                                utf8.decode(status.runes.toList());
+                                return GestureDetector(
+                                  // behavior: HitTestBehavior.translucent,
+                                  //게시글 전체를 클릭영역으로 만들어주는 코드
+                                  onTap: () {
+                                    // Navigator.of(context).push(
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
+                                    //   ),);
+                                  },
+                                  child: ErrandCheckWidget(
+                                    orderNo: errands[index]["orderNo"],
+                                    nickname: decodedNickname,
+                                    score: errands[index]["score"],
+                                    errandNo: errands[index]["errandNo"],
+                                    createdDate: decodedCreatedDate,
+                                    title: decodedTitle,
+                                    destination: decodedDestination,
+                                    latitude: errands[index]["latitude"],
+                                    longitude: errands[index]["longitude"],
+                                    due: decodedDue,
+                                    detail: decodedDetail,
+                                    reward: errands[index]["reward"],
+                                    isCash: errands[index]["isCash"],
+                                    status: decodedStatus,
+                                    isMyErrand: errands[index]["isMyErrand"],
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
 
                     if (errands[0]["isMyErrand"] == false)
                     // 제가 할게요! 버튼(글 보기 하는 사람)
