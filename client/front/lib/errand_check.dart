@@ -574,12 +574,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               return GestureDetector(
                                 // behavior: HitTestBehavior.translucent,
                                 //게시글 전체를 클릭영역으로 만들어주는 코드
-                                onTap: () {
-                                  // Navigator.of(context).push(
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
-                                  //   ),);
-                                },
                                 child: ErrandCheckWidget(
                                   orderNo: errands[index]["orderNo"],
                                   nickname: decodedNickname,
