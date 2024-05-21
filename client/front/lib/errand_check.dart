@@ -142,25 +142,60 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 상세 주소
+                Container(
+                    margin: EdgeInsets.only(top: 22.06),
+                    child: Row(
+                      children: [
+                        // 마커 이미지
+                        Container(
+                          margin: EdgeInsets.only(left: 18.97),
+                          child: Image.asset(
+                            'assets/images/marker_small.png',
+                            // Replace with your image asset path
+                            width: 12.2, // Adjust the size as needed
+                            height: 16.77, // Adjust the size as needed
+                            color: Color(0xffCFB6A5),
+                          ),
+                        ),
+                        // 상세 주소 텍스트
+                        Container(
+                          margin: EdgeInsets.only(left: 7.67),
+                          child: Text(
+                            "상세 주소",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              letterSpacing: 0.001,
+                              color: Color(0xffBC9F9F),
+                            ),
+                          ),
+                        ),
+                        // 상세 주소 정보
+                        Container(
+                          margin: EdgeInsets.only(left: 7),
+                          child: Text(
+                            "${destination}",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              letterSpacing: 0.001,
+                              color: Color(0xff505050),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+
 
                 Container(
                     child: Row(
                   //상세 주소
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 15, top: 22.06),
-                      child: Text(
-                        "상세 주소 ${destination}   ",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13,
-                          letterSpacing: 0.01,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
+
                     Expanded(
                         child: Align(
                             alignment: Alignment.centerRight,
