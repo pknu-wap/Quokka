@@ -55,7 +55,7 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
-  // ErrandCheck 페이지
+  // 글보기 상세 페이지
   @override
   Widget build(BuildContext context) {
     var priceFormat = NumberFormat('###,###,###,###');
@@ -307,6 +307,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     ErrandReading(errandNo.toString());
   }
 
+  // 메인 글 보기 화면
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -382,8 +383,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
                                 setState(() {
                                   marker.setPosition(latLng);
-                                  marker.setIsVisible(
-                                      true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                                  marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                                 });
                               },
 
@@ -405,6 +405,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       ],
                     )),
 
+                    // if (ErrandCheckWidget(errandNo))
                     Flexible(
                       child: Container(
                         width: 320,
@@ -475,35 +476,125 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             }),
                       ),
                     ),
-                    // 제가 할게요! 버튼
+
+                    // if (isMyErrand == false)
+                    // 제가 할게요! 버튼(글 보기 하는 사람)
+                    // Container(
+                    //   margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+                    //   child: ElevatedButton(
+                    //     onPressed: () {
+                    //       Navigator.pop(context);
+                    //       print("제가 할게요! 클릭");
+                    //     },
+                    //     style: ButtonStyle(
+                    //       backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),
+                    //       // 버튼의 크기 정하기
+                    //       minimumSize: MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                    //       // 버튼의 모양 변경하기
+                    //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    //         RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(
+                    //               5), // 원하는 모양에 따라 BorderRadius 조절
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     child: Text(
+                    //       '제가 할게요!',
+                    //       style: TextStyle(
+                    //         fontSize: 14,
+                    //         fontFamily: 'Pretendard',
+                    //         fontWeight: FontWeight.w600,
+                    //         color: Color(0xFFFFFFFF),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // else
+                    // 수정하기, 삭제하기 버튼(글 보기 올린 사람)
                     Container(
-                      margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          print("제가 할게요! 클릭");
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7C3D1A)),
-                          // 버튼의 크기 정하기
-                          minimumSize: MaterialStateProperty.all<Size>(Size(318, 46.65)),
-                          // 버튼의 모양 변경하기
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  5), // 원하는 모양에 따라 BorderRadius 조절
+                      margin: EdgeInsets.only(top: 13.38),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 18),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  print("수정하기 버튼");
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xffFFFFFF)),
+                                  // 버튼의 크기 정하기
+                                  minimumSize: MaterialStateProperty.all<Size>(Size(151.73, 49.7)),
+                                  // 버튼의 모양 변경하기
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
+                                      side: BorderSide(
+                                        color: Color(0xff9B9B9B),
+                                        width: 1,
+                                      )
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'assets/your_image.png', // Replace with your image asset path
+                                      width: 20, // Adjust the size as needed
+                                      height: 20, // Adjust the size as needed
+                                    ),
+                                    SizedBox(width: 8), // Adjust the space between icon and text as needed
+                                    Text(
+                                      '수정하기',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF545454),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        child: Text(
-                          '제가 할게요!',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFFFFFFF),
+                          Container(
+                            margin: EdgeInsets.only(left: 17.55, right: 20.99),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                print("삭제하기 버튼");
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Color(0xffFFFFFF)),
+                                // 버튼의 크기 정하기
+                                minimumSize: MaterialStateProperty.all<Size>(Size(151.73, 49.7)),
+                                // 버튼의 모양 변경하기
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
+                                      side: BorderSide(
+                                        color: Color(0xffFF6767),
+                                        width: 1,
+                                      )
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                '삭제하기',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFFF0000),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
 
