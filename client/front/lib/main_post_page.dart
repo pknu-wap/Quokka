@@ -260,6 +260,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   String status = "";
   String? token = "";
   bool isVisible = false;
+  OverlayEntry? _overlayEntry; //하단바 오버레이
   InprogressExist() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress/exist";
     token = await storage.read(key: 'TOKEN');
@@ -476,10 +477,121 @@ class _Main_post_pageState extends State<Main_post_page> {
       }
     }
   }
+  void _insertOverlay() {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Container(
+          width: 364,
+          height: 64,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF),
+            border: Border.all(
+              color: Color(0xffCFCFCF),
+              width: 0.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(185, 185, 185, 0.25),
+                offset: Offset(5, -1),
+                blurRadius: 5,
+                spreadRadius: 1,
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 22,
+                height: 22,
+                margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/images/home_icon.png',
+                    color: Color(0xff545454),
+                  ),
+                ),
+              ),
+              Container(
+                width: 19.31,
+                height: 23.81,
+                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/images/human_icon.png',
+                    color: Color(0xffADADAD),
+                  ),
+                ),
+              ),
+              Container(
+                width: 22.0,
+                height: 22,
+                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => Request(),
+                      ),
+                    );
+                  },
+                  icon: Image.asset(
+                    'assets/images/add_icon.png',
+                    color: Color(0xffADADAD),
+                  ),
+                ),
+              ),
+              Container(
+                width: 21.95,
+                height: 24.21,
+                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/images/history_icon.png',
+                    color: Color(0xffADADAD),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
   ScrollController _scrollController = ScrollController();
   @override
   void initState(){
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _insertOverlay();
+    });
     ErrandLatestInit(); //최신순 요청서 5개
     InprogressExist(); //진행중인 심부름이 있는지 확인
     _scrollController.addListener((){
@@ -502,6 +614,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   }
   @override
   void dispose(){
+    _overlayEntry?.remove();
     _scrollController.dispose();
     super.dispose();
   }
@@ -897,88 +1010,6 @@ class _Main_post_pageState extends State<Main_post_page> {
                 ]
             ),
           ),
-          Positioned(
-              bottom: 0, left: 0, right: 0,
-              child: Container( width: 364, height: 64,
-                     decoration: BoxDecoration(
-                        color: Color(0xffFFFFFF),
-                          border: Border.all(
-                          color: Color(0xffCFCFCF),
-                          width: 0.5,),
-                     boxShadow: [
-                     BoxShadow(
-                     color: Color.fromRGBO(185, 185, 185, 0.25),
-                     offset: Offset(5, -1),blurRadius: 5, spreadRadius: 1,),],),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 22, height: 22,
-                          margin : const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
-                          child: IconButton(
-                            style: IconButton.styleFrom(
-                              minimumSize: Size.zero,
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                      onPressed: () {
-                      },
-                      icon: Image.asset('assets/images/home_icon.png',
-                        color: Color(0xff545454),
-                      ),
-                    ),),
-                  Container(width: 19.31, height: 23.81,
-                    margin : const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {
-                      },
-                      icon: Image.asset('assets/images/human_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),),
-                  Container(width: 22.0, height: 22,
-                    margin : const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                Request(),
-                          ),
-                        );
-
-                      },
-                      icon: Image.asset('assets/images/add_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),),
-                  Container(width: 21.95, height: 24.21,
-                    margin : const EdgeInsets.only(top: 20.0,bottom: 17.32, right: 43.92),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {
-                      },
-                      icon: Image.asset('assets/images/history_icon.png',
-                        color: Color(0xffADADAD),
-                      ),
-                    ),),
-
-                ]
-              )))
         ],)
         ),
     );
