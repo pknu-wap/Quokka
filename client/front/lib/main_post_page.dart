@@ -211,57 +211,142 @@ class InProgress_Errand_Widget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container( width: 360, height: 77, //심부름 1개
-      child: Column(
-        children: [
-          Container(child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children:[
-              Container( width: 32, height: 31,
-                child: Image.asset(
-                    'assets/images/running errand.png', width: 32, height: 31, fit: BoxFit.cover
-                ),
-              ), //이미지
+    if(!isUserOrder) {
+      return GestureDetector(
+        behavior: HitTestBehavior.translucent, //게시글 전체를 클릭영역으로 만들어주는 코드
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => test(errandNo: errandNo)
+            ),);
+        },
+        child:  Container( width: 360, height: 84.4, //심부름 1개 요청중
+          child: Column(
+            children: [
               Container(
-                child: Column(
+                margin: EdgeInsets.only(top: 26.4, left: 19.14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Text("${title}",
-                        style: TextStyle(
-                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w500, fontSize: 16,
-                            color: Color(0xff923D00)),
+                  children:[
+                    Container( width: 32, height: 31,
+                      child: Image.asset(
+                          'assets/images/running errand.png', width: 32, height: 31, fit: BoxFit.cover
                       ),
-                    ), //제목
+                    ), //이미지
                     Container(
-                        child: Text("${due}",
-                          style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400, fontSize: 13,
-                              color: Color(0xff9F9F9F)),
-                        ) ), //일정
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 14.52),
+                            child: Text("${title}",
+                              style: TextStyle(
+                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500, fontSize: 16,
+                                  color: Color(0xff923D00)),
+                            ),
+                          ), //제목
+                          Container(
+                              margin: EdgeInsets.only(left: 14.52),
+                              child: Text("${due}",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400, fontSize: 13,
+                                    color: Color(0xff9F9F9F)),
+                              ) ), //일정
+                        ],
+                      ),
+                    ), //
+                    Expanded(
+                        child: Align(alignment: Alignment.topRight,
+                          child: Container(
+                              margin: EdgeInsets.only(right: 20.77),
+                              child: Text("수행 중",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500, fontSize: 11,
+                                    color: Color(0xffCFA383)),
+                              )
+                          ), //텍스트 수행 중/요청 중
+                        )),// 텍스트(제목, 일정)
                   ],
-                ),
-              ), //텍스트(제목, 일정)
-              Container(
-                  child: Text("수행 중",
-                    style: TextStyle(
-                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500, fontSize: 11,
-                        color: Color(0xffCFA383)),
-                  )
-              ), //텍스트 수행 중/요청 중
+                ),),
+              Container(child: Center(child: Container(width: 317.66, child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
             ],
-          ),),
-          Container(child: Center(child: Container(width: 317.66, child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
-        ],
-      ),
+          ),
+        ),
+      );
 
+    }
+    else
+      {
+        return GestureDetector(
+        behavior: HitTestBehavior.translucent, //게시글 전체를 클릭영역으로 만들어주는 코드
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => test(errandNo: errandNo)
+            ),);
+        },
+        child:  Container( width: 360, height: 84.4, //심부름 1개 수행중
+          child: Column(
+            children: [
+              Container(margin: EdgeInsets.only(top: 26.4,left: 19.14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    Container( width: 32, height: 31,
+                      child: Image.asset(
+                          'assets/images/requesting errand.png', width: 32, height: 31, fit: BoxFit.cover
+                      ),
+                    ), //이미지
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 14.52),
+                            child: Text("${title}",
+                              style: TextStyle(
+                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500, fontSize: 16,
+                                  color: Color(0xff0D0D0D)),
+                            ),
+                          ), //제목
+                          Container(
+                              margin: EdgeInsets.only(left: 14.52),
+                              child: Text("${due}",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400, fontSize: 13,
+                                    color: Color(0xff9F9F9F)),
+                              ) ), //일정
+                        ],
+                      ),
+                    ), //텍스트(제목, 일정)
+                    Expanded(
+                        child: Align(alignment: Alignment.topRight,
+                          child: Container(
+                              margin: EdgeInsets.only(right: 20.77),
+                              child: Text("요청 중",
+                                style: TextStyle(
+                                    fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500, fontSize: 11,
+                                    color: Color(0xff959595)),
+                              )
+                          ), //텍스트 수행 중/요청 중
+                        )),
 
-    );
-
-
+                  ],
+                ),),
+              Container(child: Center(child: Container(width: 317.66, child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
+            ],
+          ),
+        ),
+        );
+      }
   }
 }
 class order{
