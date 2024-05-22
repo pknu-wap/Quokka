@@ -197,6 +197,73 @@ class PostWidget extends StatelessWidget {
 
   }
 }
+class InProgress_Errand_Widget extends StatelessWidget {
+  final int errandNo; //게시글 번호
+  final String title; //제목
+  final String due; //목적지
+  final bool isUserOrder; //내가 요청자인지 심부름꾼인지 여부
+  const InProgress_Errand_Widget({
+    Key? key,
+    required this.errandNo,
+    required this.title,
+    required this.due,
+    required this.isUserOrder,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container( width: 360, height: 77, //심부름 1개
+      child: Column(
+        children: [
+          Container(child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              Container( width: 32, height: 31,
+                child: Image.asset(
+                    'assets/images/running errand.png', width: 32, height: 31, fit: BoxFit.cover
+                ),
+              ), //이미지
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Text("${title}",
+                        style: TextStyle(
+                            fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500, fontSize: 16,
+                            color: Color(0xff923D00)),
+                      ),
+                    ), //제목
+                    Container(
+                        child: Text("${due}",
+                          style: TextStyle(
+                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400, fontSize: 13,
+                              color: Color(0xff9F9F9F)),
+                        ) ), //일정
+                  ],
+                ),
+              ), //텍스트(제목, 일정)
+              Container(
+                  child: Text("수행 중",
+                    style: TextStyle(
+                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500, fontSize: 11,
+                        color: Color(0xffCFA383)),
+                  )
+              ), //텍스트 수행 중/요청 중
+            ],
+          ),),
+          Container(child: Center(child: Container(width: 317.66, child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
+        ],
+      ),
+
+
+    );
+
+
+  }
+}
 class order{
   int orderNo;
   String nickname; //닉네임
@@ -232,6 +299,22 @@ class Post{//게시글에 담긴 정보들
     );
   }
 }
+class InProgress_Errand{//진행중인 심부름이 간략하게 담고 있는 정보들
+  int errandNo; //게시글 번호
+  String title; //게시글 제목
+  String due; //기간
+  bool isUserOrder; //내가 요청자인지 심부름꾼인지 여부
+  InProgress_Errand(this.errandNo, this.title,
+      this.due, this.isUserOrder);
+  factory InProgress_Errand.fromJson(Map<String, dynamic> json) {
+    return InProgress_Errand(
+      json['errandNo'],
+      json['title'],
+      json['due'],
+      json['isUserOrder'],
+    );
+  }
+}
 class Error{
   String code;
   var httpStatus;
@@ -253,6 +336,7 @@ class Main_post_page extends StatefulWidget {
 }
 class _Main_post_pageState extends State<Main_post_page> {
   List<Map<String, dynamic>> posts = [];
+  List<Map<String, dynamic>> errands = [];
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
@@ -277,6 +361,30 @@ class _Main_post_pageState extends State<Main_post_page> {
       setState(() {
         isVisible = false;
       });
+    }
+  }
+  InProgressErrandInit() async{
+    errands.clear();
+    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        InProgress_Errand e1 = InProgress_Errand.fromJson(item);
+        errands.add({
+          "errandNo": e1.errandNo,
+          "title": e1.title,
+          "due": e1.due,
+          "isUserOrder": e1.isUserOrder,
+        });
+        print('200');
+      }
+      setState(() {});
+    }
+    else {
+      print("진행중인 심부름 없음");
     }
   }
   ErrandLatestInit() async{
@@ -594,6 +702,7 @@ class _Main_post_pageState extends State<Main_post_page> {
     });
     ErrandLatestInit(); //최신순 요청서 5개
     InprogressExist(); //진행중인 심부름이 있는지 확인
+    InProgressErrandInit(); //진행중인 심부름 목록 불러오기
     _scrollController.addListener((){
       if(_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) //스크롤을 끝까지 내리면
@@ -608,6 +717,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                ErrandRewardAdd(); //금액순 요청서 5개
            }
           InprogressExist(); //진행중인 심부름이 있는지 확인
+          InProgressErrandInit(); //진행중인 심부름 목록 불러오기
         });
       }
     });
@@ -989,6 +1099,21 @@ class _Main_post_pageState extends State<Main_post_page> {
                                             topRight: Radius.circular(20.0),
                                           ),
                                         ),
+                                        child: errands.isEmpty
+                                            ? Center(child: Text("진행중인 심부름이 없습니다."))
+                                            : Column(
+                                          children: errands.map((errand) {
+                                            String decodedTitle = utf8.decode(errand["title"].runes.toList());
+                                            String decodedDue = utf8.decode(errand["due"].runes.toList());
+                                            return InProgress_Errand_Widget(
+                                                errandNo: errand["errandNo"],
+                                                title: decodedTitle,
+                                                due: decodedDue,
+                                                isUserOrder: errand["isUserOrder"],
+                                            );
+                                          }).toList(),
+                                        ),
+
                                       ),
                                     ),
                                   ],
