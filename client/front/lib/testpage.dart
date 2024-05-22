@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'main_post_page.dart';
 class test extends StatelessWidget {
   final int errandNo;
   const test({

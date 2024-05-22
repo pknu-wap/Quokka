@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
+import 'status_page.dart';
 import 'testpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
@@ -217,7 +218,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => test(errandNo: errandNo)
+                builder: (context) => statuspage(errandNo: errandNo)
             ),);
         },
         child:  Container( width: 360, height: 84.4, //심부름 1개 요청중
@@ -286,7 +287,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => test(errandNo: errandNo)
+                builder: (context) => statuspage(errandNo: errandNo)
             ),);
         },
         child:  Container( width: 360, height: 84.4, //심부름 1개 수행중
