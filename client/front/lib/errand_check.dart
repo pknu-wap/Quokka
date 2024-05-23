@@ -366,6 +366,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   String status = "";
   String? token = "";
   late int errandNo;
+  late double latitude;
+  late double longitude;
   late NLatLng myLatLng;
   late NMarker marker;
 
@@ -399,7 +401,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "isMyErrand": errand.isMyErrand,
       });
       log("status code == 200, Json Data Parsed.");
-      setState(() {});
+      setState(() {
+        latitude = errand.latitude;
+        longitude = errand.longitude;
+        myLatLng = NLatLng(latitude, longitude); // 백엔드에서 값 받아오기
+        marker = NMarker(
+          id: "도착지",
+          position: myLatLng,
+        );
+        // DB에 저장된 위도, 경도
+        log("latitude : $latitude");
+        log("longitude : $longitude");
+      });
     } else {
       print("error");
       Map<String, dynamic> json = jsonDecode(response.body);
@@ -415,11 +428,11 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     // myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
-    myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
-    marker = NMarker(
-      id: "도착지",
-      position: myLatLng,
-    );
+    // myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
+    // marker = NMarker(
+    //   id: "도착지",
+    //   position: myLatLng,
+    // );
     errandReading(errandNo.toString());
   }
 
@@ -489,25 +502,25 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       print("네이버 맵 로딩됨!");
                                     },
 
-                                    onMapTapped: (point, latLng) {
-                                      // 지도가 터치될 때마다 마커의 위치를 업데이트
-                                      print("marker 이동!");
-                                      // log(point.toString());
-                                      // log(latLng.toString());
-
-                                      setState(() {
-                                        marker.setPosition(latLng);
-                                        marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                                      });
-                                    },
-
-                                    onSymbolTapped: (symbol) {
-                                      setState(() {
-                                        marker.setPosition(symbol.position);  // marker 위치 이동
-                                        marker.setIsVisible(true);
-                                      });
-                                      log(symbol.caption.toString());
-                                    },
+                                    // onMapTapped: (point, latLng) {
+                                    //   // 지도가 터치될 때마다 마커의 위치를 업데이트
+                                    //   print("marker 이동!");
+                                    //   // log(point.toString());
+                                    //   // log(latLng.toString());
+                                    //
+                                    //   setState(() {
+                                    //     marker.setPosition(latLng);
+                                    //     marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                                    //   });
+                                    // },
+                                    //
+                                    // onSymbolTapped: (symbol) {
+                                    //   setState(() {
+                                    //     marker.setPosition(symbol.position);  // marker 위치 이동
+                                    //     marker.setIsVisible(true);
+                                    //   });
+                                    //   log(symbol.caption.toString());
+                                    // },
 
                                     forceGesture: true,
                                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
