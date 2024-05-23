@@ -1,5 +1,6 @@
 package com.pknuErrand.appteam.controller.member;
 
+import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberFormDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
@@ -64,4 +65,16 @@ public class MemberController {
         if(memberService.checkNickname(nickname))
             throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 닉네임입니다.");
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "평가 완료") ,
+            @ApiResponse(responseCode = "404\nUSER_NOT_FOUND", description = "유저 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
+    })
+    @Operation(summary = "상대방 평가", description = "상대방 1~5점으로 평가")
+    @PostMapping("/score")
+    public void getMemberScore(@RequestParam("id") String id, @RequestParam("score") double score) {
+
+        memberService.updateScore(id, score);
+    }
+
 }

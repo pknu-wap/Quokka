@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class MemberService{
@@ -31,7 +33,7 @@ public class MemberService{
         String pw = memberFormDto.getPw();
         String nickname = memberFormDto.getNickname();
 
-        memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 0, "ROLE_ADMIN"));
+        memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 100, "ROLE_ADMIN"));
     }
 
     public Member findMemberById(String id) {
@@ -62,4 +64,35 @@ public class MemberService{
 
         return memberRepository.existsByNickname(nickname);
     }
+
+    public void updateScore(String id, double score) {
+
+        Member member = memberRepository.findById(id);
+        if (member == null) {
+            throw new IllegalArgumentException("존재하지 않는 아이디");
+        }
+        double finScore = member.getScore() + calScore(score);
+        member.updateScore(finScore);
+        memberRepository.save(member);
+    }
+
+    double calScore(double score) {
+        double addScore = 0;
+        switch ((int)score) {
+            case 1:
+                addScore = -5;
+                break;
+            case 3:
+                addScore = 3;
+                break;
+            case 4:
+                addScore = 8;
+                break;
+            case 5:
+                addScore = 12;
+                break;
+        }
+        return addScore;
+    }
+
 }
