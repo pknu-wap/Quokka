@@ -1,6 +1,5 @@
 package com.pknuErrand.appteam.controller.member;
 
-import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberFormDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Member", description = "Member 관련 API")
 @Controller
 @ResponseBody
-@RequestMapping("/join")
 public class MemberController {
 
     private final MemberService memberService;
@@ -36,7 +34,7 @@ public class MemberController {
             @ApiResponse(responseCode = "415\nINVALID_FORMAT", description = "회원 가입 실패", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "회원 가입", description = "회원 가입 기능")
-    @PostMapping
+    @PostMapping("/join")
     public void SignUpProcess(@Valid @RequestBody MemberFormDto memberFormDto) {
 
         memberService.SignUpProcess(memberFormDto);
@@ -47,7 +45,7 @@ public class MemberController {
             @ApiResponse(responseCode = "400\nDUPLICATE_DATA", description = "중복된 학번입니다.", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "학번 중복 확인", description = "회원 가입 시 학번 중복 확인")
-    @GetMapping("/{id}/idExists")
+    @GetMapping("/join/{id}/idExists")
     public void CheckId(@PathVariable(value = "id") String id) {
 
         if(memberService.checkId(id))
@@ -59,7 +57,7 @@ public class MemberController {
             @ApiResponse(responseCode = "400\nDUPLICATE_DATA", description = "중복된 닉네임입니다.", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "닉네임 중복 확인", description = "회원 가입 시 닉네임 중복 확인")
-    @GetMapping("/{nickname}/nicknameExists")
+    @GetMapping("/join/{nickname}/nicknameExists")
     public void CheckNickname(@PathVariable(value = "nickname") String nickname) {
         
         if(memberService.checkNickname(nickname))
