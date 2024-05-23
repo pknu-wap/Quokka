@@ -178,7 +178,9 @@ class _statuspageState extends State<statuspage> {
                   decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
                     //color: Colors.blue,
-                    border: Border.all(color: Colors.transparent, width: 1,),
+                    border: Border(
+                      top: BorderSide(color: Colors.transparent, width: 1,),
+                    ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -383,6 +385,18 @@ class _statuspageState extends State<statuspage> {
                       ),
                         ],
                       ),),
+          // Container(
+          //   width: 320, height: 55.54,
+          //   margin: EdgeInsets.only(left: 3.45),
+          //   decoration: BoxDecoration(
+          //     color: Color(0xffEDEDED),
+          //     //color: Colors.blue,
+          //     border: Border(
+          //       bottom: BorderSide(color: Colors.transparent, width: 1,),
+          //       ),
+          //     borderRadius: BorderRadius.circular(10),
+          //   ),
+          // ),
 
           Container(
             margin: EdgeInsets.only(top: 24.08, left: 21),
