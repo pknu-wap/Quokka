@@ -23,10 +23,8 @@ class Status_Content_Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(width: 360, height: 84.4, //메시지 1개
-        child: Column(
-          children: [
-            Container(
+    return Container(width: 320, height: 80, //메시지 1개
+        child: Container(
               margin: EdgeInsets.only(top: 26.4, left: 19.14),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -40,53 +38,51 @@ class Status_Content_Widget extends StatelessWidget {
                     ),
                   ), //이미지
                   Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 14.52),
-                          child: Text("",
+                          decoration: BoxDecoration(
+                            color: Color(0xffC5AC9E),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text("${contents}",
                             style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Color(0xff923D00)),
+                                letterSpacing: 0.01,
+                                fontSize: 15,
+                                color: Color(0xff232323)),
                           ),
-                        ), //제목
+                        ), //
                         Container(
-                            margin: EdgeInsets.only(left: 14.52),
-                            child: Text("",
-                              style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 13,
-                                  color: Color(0xff9F9F9F)),
-                            )), //일정
+                          child: Column(
+                            children: [
+                              Container( width: 35.43, height: 35.43,
+                                  margin: EdgeInsets.only(left: 14.52),
+                                  child: Image.asset('assets/images/Quokka.png')),
+                              Container(
+                                child: Text("${created}",
+                                  style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 0.01,
+                                      fontSize: 14,
+                                      color: Color(0xff747474)),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),// 제목
+
                       ],
                     ),
                   ), //
-                  Expanded(
-                      child: Align(alignment: Alignment.topRight,
-                        child: Container(
-                            margin: EdgeInsets.only(right: 20.77),
-                            child: Text("수행 중",
-                              style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 11,
-                                  color: Color(0xffCFA383)),
-                            )
-                        ), //텍스트 수행 중/요청 중
-                      )), // 텍스트(제목, 일정)
                 ],
               ),),
-            Container(child: Center(child: Container(width: 317.66,
-                child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
-          ],
-        ),
       );
   }
 }
@@ -102,6 +98,7 @@ class statuspage extends StatefulWidget {
 }
 class _statuspageState extends State<statuspage> {
   late int errandNo;
+  List<Map<String, dynamic>> contents = [];
   void initState()
   {
     super.initState();
@@ -196,7 +193,209 @@ class _statuspageState extends State<statuspage> {
                     border: Border.all(color: Colors.transparent, width: 1,),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                ),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Container(width: 320, height: 70, //메시지 1개
+                    child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container( width: 247.18, height: 42.79,
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.only(left: 15),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffC5AC9E),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text("출발했어요",
+                                    style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 0.01,
+                                        fontSize: 15,
+                                        color: Color(0xff232323)),
+                                  ),
+                                ), //
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Container( width: 35.43, height: 35.43,
+                                          margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                                          child: Image.asset('assets/images/Quokka.png')),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                                        child: Text("11:20",
+                                          style: TextStyle(
+                                              fontFamily: 'Pretendard',
+                                              fontStyle: FontStyle.normal,
+                                              fontWeight: FontWeight.w400,
+                                              letterSpacing: 0.01,
+                                              fontSize: 14,
+                                              color: Color(0xff747474)),
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),// 제목
+
+                              ],
+                            ),
+                          ),
+                    ),
+                      Container(width: 320, height: 70, //메시지 1개
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container( width: 247.18, height: 42.79,
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(left: 15),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffC5AC9E),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text("지금 물건을 픽업했어요!",
+                                  style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.01,
+                                      fontSize: 15,
+                                      color: Color(0xff232323)),
+                                ),
+                              ), //
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Container( width: 35.43, height: 35.43,
+                                        margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                                        child: Image.asset('assets/images/Quokka.png')),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                                      child: Text("11:30",
+                                        style: TextStyle(
+                                            fontFamily: 'Pretendard',
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.01,
+                                            fontSize: 14,
+                                            color: Color(0xff747474)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),// 제목
+
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(width: 320, height: 70, //메시지 1개
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container( width: 247.18, height: 42.79,
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(left: 15),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffC5AC9E),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text("5분 뒤 도착해요!",
+                                  style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.01,
+                                      fontSize: 15,
+                                      color: Color(0xff232323)),
+                                ),
+                              ), //
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Container( width: 35.43, height: 35.43,
+                                        margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                                        child: Image.asset('assets/images/Quokka.png')),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                                      child: Text("11:49",
+                                        style: TextStyle(
+                                            fontFamily: 'Pretendard',
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.01,
+                                            fontSize: 14,
+                                            color: Color(0xff747474)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),// 제목
+
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(width: 320, height: 70, //메시지 1개
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container( width: 247.18, height: 42.79,
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(left: 15),
+                                decoration: BoxDecoration(
+                                  color: Color(0xff7C3D1A),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Text("완료했어요 !",
+                                  style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.01,
+                                      fontSize: 15,
+                                      color: Color(0xffFFFFFF)),
+                                ),
+                              ), //
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Container( width: 35.43, height: 35.43,
+                                        margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                                        child: Image.asset('assets/images/smiley Quokka.png')),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                                      child: Text("12:04",
+                                        style: TextStyle(
+                                            fontFamily: 'Pretendard',
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.01,
+                                            fontSize: 14,
+                                            color: Color(0xff747474)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),// 제목
+
+                            ],
+                          ),
+                        ),
+                      ),
+                        ],
+                      ),),
+
           Container(
             margin: EdgeInsets.only(top: 24.08, left: 21),
             child: ElevatedButton(
@@ -204,7 +403,8 @@ class _statuspageState extends State<statuspage> {
                 // 버튼 클릭 시 실행될 코드
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffB99988), // 배경색
+                // backgroundColor: Color(0xffB99988),
+                  backgroundColor: Color(0xff7C3D1A),// 배경색
                 fixedSize: Size(318, 45), // 너비와 높이
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
