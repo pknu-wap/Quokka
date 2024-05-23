@@ -14,6 +14,8 @@ import 'package:http/http.dart' as http;
 final storage = FlutterSecureStorage(); // 토큰 받기
 
 class ErrandCheckWidget extends StatelessWidget {
+  final DateTime currentTime = DateTime.now();
+
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
   final double score; //평점
@@ -29,7 +31,7 @@ class ErrandCheckWidget extends StatelessWidget {
   final bool isCash; // 계좌이체, 현금
   final String status; //상태 (모집중, 진행중, 완료됨)
   final bool isMyErrand; // 내가 작성자인지
-  const ErrandCheckWidget({
+  ErrandCheckWidget({
     Key? key,
     required this.orderNo,
     required this.nickname,
@@ -47,6 +49,22 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.status,
     required this.isMyErrand,
   }) : super(key: key);
+
+  // 현재 시간과 게시글 작성 시간의 차 계산
+  String timeDifference(DateTime currentTime, String createdDate) {
+    DateTime createdDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdDate);
+    Duration difference = currentTime.difference(createdDateTime);
+
+    if (difference.inDays > 0) {
+      return '${difference.inDays}일 전';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}시간 전';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}분 전';
+    } else {
+      return '방금 전';
+    }
+  }
 
   // 글보기 상세 페이지
   @override
@@ -214,7 +232,7 @@ class ErrandCheckWidget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 6),
                           child: Text(
-                            "${due}",
+                            "${due} 까지",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
@@ -225,10 +243,10 @@ class ErrandCheckWidget extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          //게시글 올린 시간
-                          margin: EdgeInsets.only(left: 2),
+                          //게시글 올린 시간으로부터 현재까지 지난 시간
+                          margin: EdgeInsets.only(left: 50, right: 18.6),
                           child: Text(
-                            "${createdDate}",
+                            timeDifference(currentTime, createdDate),
                             style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
