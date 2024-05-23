@@ -41,7 +41,9 @@ class _statuspageState extends State<statuspage> {
                             padding: EdgeInsets.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           icon: Image.asset(
                             'assets/images/arrow back.png',
                             color: Color(0xff6B6B6B),
@@ -99,22 +101,44 @@ class _statuspageState extends State<statuspage> {
                   ),
                 ),
                 Container(width: 355, height: 471.79,
-                  margin: EdgeInsets.only(top: 20.13),
+                  margin: EdgeInsets.only(left: 3.45, top: 20.13),
                   decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
+                    //color: Colors.blue,
                     border: Border.all(color: Colors.transparent, width: 1,),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                Container( width: 318, height: 45,
-                  child: Text("${errandNo}"),
-                  decoration: BoxDecoration(
-                    color: Color(0xffB99988),
+          Container(
+            margin: EdgeInsets.only(top: 24.08, left: 21),
+            child: ElevatedButton(
+              onPressed: () {
+                // 버튼 클릭 시 실행될 코드
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xffB99988), // 배경색
+                fixedSize: Size(318, 45), // 너비와 높이
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
+                ),
+              ),
+              child: Container( width: 318, height: 45,
+                alignment: Alignment.center,
+                child: Text(
+                  '심부름 완료',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.01,
+                    color: Color(0xffFFFFFF),
                   ),
                 ),
+              ),
+            ),
+          ),
               ],
             ),
-
           ),
         ),
     );
