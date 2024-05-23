@@ -361,7 +361,7 @@ class _RequestState extends State<Request> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
-                                '즉시',
+                                '오늘',
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
@@ -373,7 +373,7 @@ class _RequestState extends State<Request> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               child: Text(
-                                '예약',
+                                '내일',
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
