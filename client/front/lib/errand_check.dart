@@ -7,7 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
-import 'errand_write.dart';
+import 'request.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
 
@@ -242,9 +242,11 @@ class ErrandCheckWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        Expanded(
+                          child: Align(alignment: Alignment.centerRight,
+                          child: Container(
                           //게시글 올린 시간으로부터 현재까지 지난 시간
-                          margin: EdgeInsets.only(left: 50, right: 18.6),
+                          margin: EdgeInsets.only(right: 18.6),
                           child: Text(
                             timeDifference(currentTime, createdDate),
                             style: TextStyle(
@@ -254,6 +256,8 @@ class ErrandCheckWidget extends StatelessWidget {
                                 letterSpacing: 0.001,
                                 color: Color(0xff434343)),
                           ),
+                        ),
+                        ),
                         ),
                       ],
                     )),
