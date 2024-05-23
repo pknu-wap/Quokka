@@ -1,6 +1,95 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+class Status_Content{//진행중인 심부름이 간략하게 담고 있는 정보들
+  String contents; //메시지
+  String created; //메시지 생성 시간
+  Status_Content(this.contents, this.created);
+  factory Status_Content.fromJson(Map<String, dynamic> json) {
+    return Status_Content(
+      json['contents'],
+      json['created'],
+    );
+  }
+}
+class Status_Content_Widget extends StatelessWidget {
+  final String contents; //메시지
+  final String created; //메시지 생성 시간
+  const Status_Content_Widget({
+    Key? key,
+    required this.contents,
+    required this.created,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(width: 360, height: 84.4, //메시지 1개
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 26.4, left: 19.14),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(width: 32, height: 31,
+                    child: Image.asset(
+                        'assets/images/running errand.png', width: 32,
+                        height: 31,
+                        fit: BoxFit.cover
+                    ),
+                  ), //이미지
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 14.52),
+                          child: Text("",
+                            style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Color(0xff923D00)),
+                          ),
+                        ), //제목
+                        Container(
+                            margin: EdgeInsets.only(left: 14.52),
+                            child: Text("",
+                              style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
+                                  color: Color(0xff9F9F9F)),
+                            )), //일정
+                      ],
+                    ),
+                  ), //
+                  Expanded(
+                      child: Align(alignment: Alignment.topRight,
+                        child: Container(
+                            margin: EdgeInsets.only(right: 20.77),
+                            child: Text("수행 중",
+                              style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 11,
+                                  color: Color(0xffCFA383)),
+                            )
+                        ), //텍스트 수행 중/요청 중
+                      )), // 텍스트(제목, 일정)
+                ],
+              ),),
+            Container(child: Center(child: Container(width: 317.66,
+                child: Divider(color: Color(0xffC8C8C8), thickness: 0.5)))),
+          ],
+        ),
+      );
+  }
+}
 class statuspage extends StatefulWidget {
   final int errandNo;
   const statuspage({
@@ -11,7 +100,6 @@ class statuspage extends StatefulWidget {
   @override
   State<statuspage> createState() => _statuspageState();
 }
-
 class _statuspageState extends State<statuspage> {
   late int errandNo;
   void initState()
