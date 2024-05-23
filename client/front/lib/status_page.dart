@@ -23,67 +23,55 @@ class Status_Content_Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(width: 320, height: 80, //메시지 1개
-        child: Container(
-              margin: EdgeInsets.only(top: 26.4, left: 19.14),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(width: 320, height: 70, //메시지 1개
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container( width: 247.18, height: 42.79,
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(left: 15),
+              decoration: BoxDecoration(
+                color: Color(0xffC5AC9E),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text("${contents}",
+                style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.01,
+                    fontSize: 15,
+                    color: Color(0xff232323)),
+              ),
+            ), //
+            Container(
+              child: Column(
                 children: [
-                  Container(width: 32, height: 31,
-                    child: Image.asset(
-                        'assets/images/running errand.png', width: 32,
-                        height: 31,
-                        fit: BoxFit.cover
-                    ),
-                  ), //이미지
+                  Container( width: 35.43, height: 35.43,
+                      margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                      child: Image.asset('assets/images/Quokka.png')),
                   Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 14.52),
-                          decoration: BoxDecoration(
-                            color: Color(0xffC5AC9E),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text("${contents}",
-                            style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.01,
-                                fontSize: 15,
-                                color: Color(0xff232323)),
-                          ),
-                        ), //
-                        Container(
-                          child: Column(
-                            children: [
-                              Container( width: 35.43, height: 35.43,
-                                  margin: EdgeInsets.only(left: 14.52),
-                                  child: Image.asset('assets/images/Quokka.png')),
-                              Container(
-                                child: Text("${created}",
-                                  style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: 0.01,
-                                      fontSize: 14,
-                                      color: Color(0xff747474)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),// 제목
-
-                      ],
+                    margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                    child: Text("${created}",
+                      style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.01,
+                          fontSize: 14,
+                          color: Color(0xff747474)),
                     ),
-                  ), //
+                  ),
+
                 ],
-              ),),
-      );
+              ),
+            ),// 제목
+          ],
+        ),
+      ),
+    );
   }
 }
 class statuspage extends StatefulWidget {
