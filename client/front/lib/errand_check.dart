@@ -445,12 +445,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   void initState() {
     super.initState();
     errandNo = widget.errandNo;
-    // myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
-    // myLatLng = NLatLng(35.134384930841364, 129.10592409493796); // 백엔드에서 값 받아오기
-    // marker = NMarker(
-    //   id: "도착지",
-    //   position: myLatLng,
-    // );
     errandReading(errandNo.toString());
   }
 
@@ -491,7 +485,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                   child: NaverMap(
-                                    options: const NaverMapViewOptions(
+                                    options: NaverMapViewOptions(
                                       logoClickEnable: false, // 네이버 로고 클릭 비활성화
 
                                       mapType: NMapType.basic, // 지도 유형 : 기본 지도(기본 값)
@@ -504,7 +498,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       zoomGesturesFriction: 0.5, // 줌
 
                                       initialCameraPosition: NCameraPosition(
-                                          target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
+                                          target: NLatLng(latitude, longitude), // 내 위치
                                           // 위도, 경도
                                           // 부경대 대연캠퍼스
                                           // 위도 latitude : 35.134384930841364
@@ -519,26 +513,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       controller.addOverlay(marker);
                                       print("네이버 맵 로딩됨!");
                                     },
-
-                                    // onMapTapped: (point, latLng) {
-                                    //   // 지도가 터치될 때마다 마커의 위치를 업데이트
-                                    //   print("marker 이동!");
-                                    //   // log(point.toString());
-                                    //   // log(latLng.toString());
-                                    //
-                                    //   setState(() {
-                                    //     marker.setPosition(latLng);
-                                    //     marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                                    //   });
-                                    // },
-                                    //
-                                    // onSymbolTapped: (symbol) {
-                                    //   setState(() {
-                                    //     marker.setPosition(symbol.position);  // marker 위치 이동
-                                    //     marker.setIsVisible(true);
-                                    //   });
-                                    //   log(symbol.caption.toString());
-                                    // },
 
                                     forceGesture: true,
                                     // SingleChildScrollView 안에서 사용하므로, NaverMap에
