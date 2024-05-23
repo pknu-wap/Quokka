@@ -114,7 +114,7 @@ class PostWidget extends StatelessWidget {
                     Container(
                         child: Row( //닉네임, 평점
                           children: [
-                            Container( height: 14, //닉네임
+                            Container( //닉네임
                               margin: EdgeInsets.only(left: 15, top: 16),
                               child: Text("${nickname}", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -122,7 +122,7 @@ class PostWidget extends StatelessWidget {
                                 letterSpacing: 0.01, color: Color(0xff7E7E7E),
                               ),),
                             ),
-                            Container( height:14, //평점
+                            Container( //평점
                               margin: EdgeInsets.only(top: 16),
                               child: Text(" ${score}점", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
