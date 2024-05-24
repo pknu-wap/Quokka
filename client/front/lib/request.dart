@@ -24,6 +24,13 @@ class Request extends StatefulWidget {
   _RequestState createState() => _RequestState();
 }
 
+class ReturnValues {
+  final NLatLng value;
+  final double zoom;
+
+  ReturnValues({required this.value, required this.zoom});
+}
+
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
   final int maxTitleLength = 20; // 제목 최대 길이 설정
@@ -57,7 +64,9 @@ class _RequestState extends State<Request> {
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
   late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
   late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
+
   NOverlayImage destIcon = NOverlayImage.fromAssetImage("assets/images/map_dest.png");
+  double zoom = 14.5;
 
   NLatLng value = NLatLng(0, 0);
   late NaverMapController mapController; // 지도 컨트롤
@@ -577,7 +586,7 @@ class _RequestState extends State<Request> {
                           // 부경대 대연캠퍼스
                           // 위도 latitude : 35.134384930841364
                           // 경도 longitude : 129.10592409493796
-                          zoom: 14.5, // 지도의 초기 줌 레벨
+                          zoom: zoom, // 지도의 초기 줌 레벨
                           bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
                           tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
                       ),
@@ -597,23 +606,23 @@ class _RequestState extends State<Request> {
                       final returnValue = await Navigator.push(
                             //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
                               context,
-                              MaterialPageRoute(builder: (context) => NaverMapTest(value: value)),
+                              MaterialPageRoute(builder: (context) => NaverMapTest(value: value, zoom: zoom)),
                           );
                       // log(point.toString());
                       // log(latLng.toString());
 
                       setState(() {
-                        value = returnValue;
+                        value = returnValue.value;
+                        zoom = returnValue.zoom;
                         marker.setPosition(value);
                         marker.setIsVisible(true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
                       });
                       mapController.updateCamera(
                         NCameraUpdate.scrollAndZoomTo(
                           target : NLatLng(value.latitude, value.longitude),
-                          zoom: 14.5
+                          zoom: zoom,
                           ),
                         );
-                      log(value.toString());
                     },
 
                     onSymbolTapped: (symbol) {
@@ -623,7 +632,7 @@ class _RequestState extends State<Request> {
                       });
                       final cameraPosition = NCameraPosition(
                           target: NLatLng(value.latitude, value.longitude),
-                          zoom: 14.5
+                          zoom: zoom
                       );
                       final cameraUpdate = NCameraUpdate.fromCameraPosition(cameraPosition);
                       cameraUpdate.setAnimation(
