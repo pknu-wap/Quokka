@@ -40,10 +40,10 @@ class ErrandRequest {
   final String? due;
   final String? detail;
   final int reward;
-  final bool cash;
+  final bool isCash;
   ErrandRequest({required this.createdDate, required this.title, required this.destination,
     required this.latitude, required this.longitude, required this.due, required this.detail,
-    required this.reward, required this.cash});
+    required this.reward, required this.isCash});
 
   Map<String, dynamic> toJson(){
     return {
@@ -55,7 +55,7 @@ class ErrandRequest {
       "due" : due,
       "detail" : detail,
       "reward" : reward,
-      "cash" : cash
+      "isCash" : isCash
     };
   }
 }
@@ -147,7 +147,7 @@ class _RequestState extends State<Request> {
         due: setDue(),
         detail: requestController.text,
         reward: int.parse(priceController.text),
-        cash: isSelected2[1],
+        isCash: isSelected2[1],
     );
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
@@ -175,10 +175,8 @@ class _RequestState extends State<Request> {
   }
   String setDue() {
     DateTime now = DateTime.now();
-    print(now);
     if(isSelected1[1])
       now = now.add(Duration(days : 1));
-    print(now);
     DateTime due = DateTime(
         now.year,
       now.month,
@@ -186,7 +184,6 @@ class _RequestState extends State<Request> {
       _selectedHour,
       _selectedMinute
     );
-    print(due);
     return due.toString();
   }
 
