@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -5,11 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'errand_check.dart';
 import 'map.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+final storage = FlutterSecureStorage();
+
 
 // import 'package:http/http.dart' as http;
 // import 'dart:convert';
@@ -22,6 +30,34 @@ class Request extends StatefulWidget {
   const Request({super.key});
   @override
   _RequestState createState() => _RequestState();
+}
+class ErrandRequest {
+  final String? createdDate;
+  final String? title;
+  final String? destination;
+  final double latitude;
+  final double longitude;
+  final String? due;
+  final String? detail;
+  final int reward;
+  final bool isCash;
+  ErrandRequest({required this.createdDate, required this.title, required this.destination,
+    required this.latitude, required this.longitude, required this.due, required this.detail,
+    required this.reward, required this.isCash});
+
+  Map<String, dynamic> toJson(){
+    return {
+      "createdDate" : createdDate,
+      "title" : title,
+      "destination" : destination,
+      "latitude" : latitude,
+      "longitude" : longitude,
+      "due" : due,
+      "detail" : detail,
+      "reward" : reward,
+      "isCash" : isCash
+    };
+  }
 }
 
 class ReturnValues {
@@ -98,6 +134,57 @@ class _RequestState extends State<Request> {
       log("exception: " + e.toString());
       return Future.error("faild Geolocator");
     }
+  }
+  void errandPostRequest() async {
+    log("작성완료 request");
+    late ErrandRequest errand;
+    errand = ErrandRequest(
+        createdDate: DateTime.now().toString(),
+        title: titleController.text,
+        destination: detailAddressController.text,
+        latitude: value.latitude,
+        longitude: value.longitude,
+        due: setDue(),
+        detail: requestController.text,
+        reward: int.parse(priceController.text),
+        isCash: isSelected2[1],
+    );
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand";
+    String? token = await storage.read(key: 'TOKEN');
+    try {
+      var response = await http.post(Uri.parse(url),
+          body: jsonEncode(errand.toJson()),
+          headers: {"Authorization": "$token",
+            "Content-Type": "application/json"
+          });
+      if (response.statusCode == 200) {
+        int errandNo = jsonDecode(response.body)['errandNo'];
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => MainErrandCheck(errandNo: errandNo)
+            ),);
+      }
+      else {
+        print("ERROR : ");
+        print(jsonDecode(response.body));
+      }
+    } catch(e) {
+      log(e.toString());
+    }
+  }
+  String setDue() {
+    DateTime now = DateTime.now();
+    if(isSelected1[1])
+      now = now.add(Duration(days : 1));
+    DateTime due = DateTime(
+        now.year,
+      now.month,
+      now.day,
+      _selectedHour,
+      _selectedMinute
+    );
+    return due.toString();
   }
 
   @override
@@ -176,6 +263,7 @@ class _RequestState extends State<Request> {
         }
       }
     });
+    //print(isSelected1);
   }
 
   void toggleSelect2(int newindex) {
@@ -951,9 +1039,7 @@ class _RequestState extends State<Request> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
                 child: ElevatedButton(
                   onPressed: () {
-                    print("요청서 작성 완료");
-                    DateTime currentTime = DateTime.now();
-                    log(currentTime.toString());
+                    errandPostRequest();
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
