@@ -56,7 +56,7 @@ public class ErrandService {
                 .due(errandSaveRequestDto.getDue())
                 .detail(errandSaveRequestDto.getDetail())
                 .reward(errandSaveRequestDto.getReward())
-                .isCash(errandSaveRequestDto.isCash())
+                .isCash(errandSaveRequestDto.getIsCash())
                 .status(RECRUITING)
                 .erranderNo(null)
                 .build();
@@ -218,7 +218,7 @@ public class ErrandService {
                 errandSaveRequestDto.getDue(),
                 errandSaveRequestDto.getDetail(),
                 errandSaveRequestDto.getReward(),
-                errandSaveRequestDto.isCash());
+                errandSaveRequestDto.getIsCash());
 
         return findErrandDetailById(id);
     }

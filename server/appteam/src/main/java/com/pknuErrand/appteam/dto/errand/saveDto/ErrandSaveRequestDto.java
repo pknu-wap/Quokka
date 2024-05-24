@@ -44,7 +44,7 @@ public class ErrandSaveRequestDto { // to Entity
     private int reward;
 
     @NotNull(message = "현금인지 아닌지 입력하세요.")
-    private boolean isCash;
+    private Boolean isCash;
 
     // private Status status;
 
