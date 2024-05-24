@@ -41,6 +41,7 @@ class _Upload_ImageState extends State<Upload_Image> {
   String parsedtext = ''; // 추출된 텍스트를 저장할 String 변수
   late User u1 = User('','','','','','');
 
+
   parsethetext() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
@@ -50,6 +51,7 @@ class _Upload_ImageState extends State<Upload_Image> {
     var url = 'https://api.ocr.space/parse/image';
     var payload = {"base64Image": "data:image/png;base64,${img64.toString()}","language" :"kor"};
     var header = {"apikey" :"K88159020988957"};
+
 
     var post = await http.post(Uri.parse(url),body: payload,headers: header);
     var result = jsonDecode(post.body); // 추출 결과를 받아서 result에 저장
@@ -84,6 +86,7 @@ class _Upload_ImageState extends State<Upload_Image> {
       splitText.removeAt(0); // 첫 번째 요소인 "남은시간: 30"은 필요 없으므로 제거
 
       // 추출된 텍스트에서 학번, 이름, 전공 추출
+
       if (splitText.length >= 3) {
         setState(() {
           //splitText[0]: 이름, splitText[1]: 전공, splitText[2]: 학번
