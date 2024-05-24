@@ -155,10 +155,15 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(memberErrandDto.getOrderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(isMyErrand(errand, memberService.getLoginMember().getMemberNo())) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
+    }
+
+    @Transactional
+    public Boolean isMyErrand(Errand errand, Long memberNo)  {  /** Parameter : Errand 객체, Member pk (long) **/
+        return errand.getOrderNo().getMemberNo() == memberNo;
     }
 
     @Transactional
