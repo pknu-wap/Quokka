@@ -8,8 +8,9 @@ import 'package:geolocator/geolocator.dart';
 class NaverMapTest extends StatefulWidget {
   // final String destinationText;
   // const NaverMapTest({Key? key}) : super(key: key);
-  final NLatLng value;
   const NaverMapTest({super.key, required this.value});
+
+  final NLatLng value;
 
   @override
   State<NaverMapTest> createState() => _NaverMapTestState();
@@ -60,26 +61,26 @@ class _NaverMapTestState extends State<NaverMapTest> {
       marker.setIsVisible(false);
     });
   }
-  Future<Position> getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    return position;
-  }
-  Future<void> initLocation() async {
-    Position position = await getCurrentLocation();
-
-    log(position.latitude.toString());
-    log(position.longitude.toString());
-    setState(() {
-      myLatLng = NLatLng(position.latitude, position.longitude);
-      marker = NMarker(
-        id: "test",
-        position: myLatLng,
-      );
-    });
-    returnValue = widget.value;
-  }
+  // Future<Position> getCurrentLocation() async {
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //
+  //   return position;
+  // }
+  // Future<void> initLocation() async {
+  //   Position position = await getCurrentLocation();
+  //
+  //   log(position.latitude.toString());
+  //   log(position.longitude.toString());
+  //   setState(() {
+  //     myLatLng = NLatLng(position.latitude, position.longitude);
+  //     marker = NMarker(
+  //       id: "test",
+  //       position: myLatLng,
+  //     );
+  //   });
+  //   returnValue = widget.value;
+  // }
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
@@ -87,7 +88,13 @@ class _NaverMapTestState extends State<NaverMapTest> {
     // 이후 권한 설정 관련 코드 추가 예정 -> 한 번 권한 허용 받으면 이후 권한 받을 필요 없음.
     // getGeoData();
     destinationController.addListener(updateDestinationState);
-    initLocation();
+    setState(() {
+          myLatLng = widget.value;
+          marker = NMarker(
+            id: "test",
+            position: myLatLng,
+          );
+        });
     // myLatLng = NLatLng(position.latitude, position.longitude);//(35.134384930841364, 129.10592409493796); // 자신의 위치
     // marker = NMarker(
     //       id: "test",
@@ -154,7 +161,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
-                          options: const NaverMapViewOptions(
+                          options: NaverMapViewOptions(
                             locationButtonEnable: true, // 내 위치 버튼 활성화
                             logoClickEnable: false, // 네이버 로고 클릭 비활성화
 
@@ -168,7 +175,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             zoomGesturesFriction: 0.5, // 줌
 
                             initialCameraPosition: NCameraPosition(
-                                target: NLatLng(35.134384930841364, 129.10592409493796), // 내 위치
+                                target: myLatLng, // 내 위치
                                 // 위도, 경도
                                 // 부경대 대연캠퍼스
                                 // 위도 latitude : 35.134384930841364

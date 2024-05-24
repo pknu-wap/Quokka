@@ -100,6 +100,7 @@ class _RequestState extends State<Request> {
     getCurrentLocation().then((position) {
       setState(() {
         myLatLng = NLatLng(position.latitude, position.longitude);
+        value = myLatLng;
         marker = NMarker(
           id: "test",
           position: myLatLng,
