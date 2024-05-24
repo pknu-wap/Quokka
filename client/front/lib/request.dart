@@ -57,6 +57,8 @@ class _RequestState extends State<Request> {
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
   late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
   late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
+  NOverlayImage destIcon = NOverlayImage.fromAssetImage("assets/images/map_dest.png");
+
   NLatLng value = NLatLng(0, 0);
   late NaverMapController mapController; // 지도 컨트롤
 
@@ -105,6 +107,7 @@ class _RequestState extends State<Request> {
           id: "test",
           position: myLatLng,
         );
+        marker.setIcon(destIcon);
       });
     });
     // destinationValue = widget.value;

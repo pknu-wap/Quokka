@@ -51,6 +51,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
 
   late NLatLng myLatLng;
   late NMarker marker;
+  NOverlayImage destIcon = NOverlayImage.fromAssetImage("assets/images/map_dest.png");
   NLatLng returnValue = NLatLng(0, 0);
 
   // final iconImage = NOverlayImage.fromAssetImage('assets/images/location.png');
@@ -93,7 +94,9 @@ class _NaverMapTestState extends State<NaverMapTest> {
           marker = NMarker(
             id: "test",
             position: myLatLng,
+            //icon: Image.asset("assets/images/map_dest.png"),
           );
+          marker.setIcon(destIcon);
         });
     // myLatLng = NLatLng(position.latitude, position.longitude);//(35.134384930841364, 129.10592409493796); // 자신의 위치
     // marker = NMarker(

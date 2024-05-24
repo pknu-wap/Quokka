@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b21be5b-2c8c-4bd1-b7ab-c208ec551126" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front/assets/images/map_dest.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/assets/images/도착.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/map.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/request.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/request.dart" afterDir="false" />
@@ -38,12 +40,16 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2ede9J9gSiVYrv32kkpbkkb4aDW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Flutter.main_act.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -111,5 +117,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
