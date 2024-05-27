@@ -111,46 +111,47 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                       ],
                     )),
-
-      Container(
-          width: 217,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                  child: RichText(
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 4,
-                    // strutStyle: StrutStyle(fontSize: 16.0),
-                    textAlign: TextAlign.center, // 텍스트 가운데 정렬
-                    text: TextSpan(
-                        text:
-                        "아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w300,
-                          fontSize: 11,
-                          letterSpacing: 0.00,
-                          color: Color(0xff111111),
-                        )),
+              Container(
+                  width: 217,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                          child: RichText(
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 4,
+                            // strutStyle: StrutStyle(fontSize: 16.0),
+                            textAlign: TextAlign.center, // 텍스트 가운데 정렬
+                            text: TextSpan(
+                                text:
+                                "아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 11,
+                                  letterSpacing: 0.00,
+                                  color: Color(0xff111111),
+                                )),
+                          )
+                      ),
+                    ],
                   )),
-            ],
-          )),
-                // Container(
-                //   margin: EdgeInsets.only(top: 1, left: 93, right: 91),
-                //   child: Text(
-                //     "아래와 같이 심부름을 요청합니다."
-                //     "심부름 사항을 확인 후 완료 버튼을 통해 심부름을"
-                //     "확정해주시면 감사하겠습니다.",
-                //     style: TextStyle(
-                //       fontFamily: 'Pretendard',
-                //       fontWeight: FontWeight.w300,
-                //       fontSize: 11,
-                //       letterSpacing: 0.00,
-                //       color: Color(0xff111111),
-                //     ),
-                //   ),
-                // ),
+                // -아래- 텍스트
+                Container(
+                  margin: EdgeInsets.only(top: 11, left: 144, right: 151),
+                  child: Text(
+                    "-아래-",
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 11,
+                      letterSpacing: 0.00,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+
+
                         ],
                       ),
                   ),
