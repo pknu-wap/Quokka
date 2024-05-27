@@ -389,6 +389,14 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   String status = "";
   String? token = "";
   late int errandNo;
+  late String title;
+  late String name;
+  late String createdDate;
+  late String due;
+  late String destination;
+  late String detail;
+  late int reward;
+  late bool isCash;
   late double latitude;
   late double longitude;
   late NLatLng myLatLng;
@@ -699,14 +707,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         onPressed: () {
                           print("제가 할게요! 클릭");
                           // 심부름 요청서 팝업 느낌으로 띄우기
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
-                          //   ),);
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  MainShowErrand(errandNo: errandNo),
+                                  MainShowErrand(errandNo : errandNo, title: title,name: name,
+                                      createdDate: createdDate, due: due, destination: destination,
+                                      detail: detail, reward: reward, isCash: isCash),
                             ),
                           );
                         },
