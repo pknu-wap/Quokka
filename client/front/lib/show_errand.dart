@@ -32,56 +32,45 @@ Widget build(BuildContext context) {
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 17.55, right: 20.99),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                print("확인했어요. 버튼 클릭!");
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                MaterialStateProperty.all<Color>(
-                                    Color(0xff7C3D1A)),
-                                // 버튼의 크기 정하기
-                                minimumSize: MaterialStateProperty.all<Size>(
-                                    Size(151.73, 49.7)),
-                                // 버튼의 모양 변경하기
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      // 원하는 모양에 따라 BorderRadius 조절
-                                      side: BorderSide(
-                                        color: Color(0xffFF6767),
-                                        width: 1,
-                                      )),
+                        Container(
+                          margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              print("확인했어요. 클릭");
+                              // 심부름 요청서 팝업 느낌으로 띄우기
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
+                              //   ),);
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xFF7C3D1A)),
+                              // 버튼의 크기 정하기
+                              minimumSize:
+                              MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                              // 버튼의 모양 변경하기
+                              shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // 원하는 모양에 따라 BorderRadius 조절
                                 ),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/Trash_can_2_.png',
-                                    // Replace with your image asset path
-                                    width: 17.35, // Adjust the size as needed
-                                    height: 21.11, // Adjust the size as needed
-                                  ),
-                                  SizedBox(width: 8.3),
-                                  // Adjust the space between icon and text as needed
-                                  Text(
-                                    '삭제하기',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFFFF0000),
-                                    ),
-                                  ),
-                                ],
+                            ),
+                            child: Text(
+                              '확인했어요.',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFFFFFF),
                               ),
                             ),
                           ),
+                        ),
+
+
                         ],
                       ),
                     ),
