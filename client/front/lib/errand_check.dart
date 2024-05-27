@@ -389,16 +389,9 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   String status = "";
   String? token = "";
   late int errandNo;
-  late String title;
-  late String name;
-  late String createdDate;
-  late String due;
-  late String destination;
-  late String detail;
-  late int reward;
-  late bool isCash;
-  late double latitude;
-  late double longitude;
+
+  late double latitude = 0;
+  late double longitude = 0;
   late NLatLng myLatLng;
   late NMarker marker;
 
@@ -431,6 +424,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "status": errand.status,
         "isMyErrand": errand.isMyErrand,
       });
+
       log("status code == 200, Json Data Parsed.");
       setState(() {
         latitude = errand.latitude;
@@ -602,10 +596,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   utf8.decode(detail.runes.toList());
                               String decodedStatus =
                                   utf8.decode(status.runes.toList());
-                              return GestureDetector(
-                                // behavior: HitTestBehavior.translucent,
-                                //게시글 전체를 클릭 영역으로 만들어주는 코드
-                                child: ErrandCheckWidget(
+                              return ErrandCheckWidget(
                                   orderNo: errands[index]["orderNo"],
                                   nickname: decodedNickname,
                                   score: errands[index]["score"],
@@ -621,7 +612,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   isCash: errands[index]["isCash"],
                                   status: decodedStatus,
                                   isMyErrand: errands[index]["isMyErrand"],
-                                ),
                               );
                             }),
                       ),
@@ -668,16 +658,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 utf8.decode(detail.runes.toList());
                                 String decodedStatus =
                                 utf8.decode(status.runes.toList());
-                                return GestureDetector(
-                                  // behavior: HitTestBehavior.translucent,
-                                  //게시글 전체를 클릭영역으로 만들어주는 코드
-                                  onTap: () {
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
-                                    //   ),);
-                                  },
-                                  child: ErrandCheckWidget(
+                                return ErrandCheckWidget(
                                     orderNo: errands[index]["orderNo"],
                                     nickname: decodedNickname,
                                     score: errands[index]["score"],
@@ -693,7 +674,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                     isCash: errands[index]["isCash"],
                                     status: decodedStatus,
                                     isMyErrand: errands[index]["isMyErrand"],
-                                  ),
                                 );
                               }),
                         ),
@@ -710,11 +690,15 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  MainShowErrand(errandNo : errandNo, title: title,name: name,
-                                      createdDate: createdDate, due: due, destination: destination,
-                                      detail: detail, reward: reward, isCash: isCash),
+                                  MainShowErrand(errands : errands[0]),
                             ),
                           );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         MainShowErrand(errandNo : errandNo, title: title)
+                          //   ),
+                          // );
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

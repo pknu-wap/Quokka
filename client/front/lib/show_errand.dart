@@ -1,11 +1,36 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front/errand_check.dart';
 import 'package:front/main_post_page.dart';
 import 'package:front/request.dart';
 import 'package:intl/intl.dart';
 
-class ErrandCheckWidget extends StatelessWidget {
+
+class ShowErrandWidget extends StatelessWidget {
+  final int errandNo;
+  final String title;
+  final String name;
+  final String createdDate;
+  final String due;
+  final String destination;
+  final String detail;
+  final int reward;
+  final bool isCash;
+
+  ShowErrandWidget({
+    required this.errandNo,
+    required this.title,
+    required this.name,
+    required this.createdDate,
+    required this.due,
+    required this.destination,
+    required this.detail,
+    required this.reward,
+    required this.isCash,
+  });
+
   // 심부름 요청서 상세 페이지
   @override
   Widget build(BuildContext context) {
@@ -16,12 +41,15 @@ class ErrandCheckWidget extends StatelessWidget {
         children: [
           Container(
             width: 324, height: 576,
+            decoration: BoxDecoration(
+              color: Color(0xffFCFCF9),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                 // 심부름 요청서 제목
                   Container(
-                    margin: EdgeInsets.only(top: 26, left: 93, right: 91),
+                    margin: EdgeInsets.only(top: 29, left: 93, right: 91),
                     child: Text(
                       "심부름 요청서",
                       style: TextStyle(
@@ -71,7 +99,7 @@ class ErrandCheckWidget extends StatelessWidget {
                           width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
                           margin: EdgeInsets.only(left: 2.82),
                           child: Text(
-                            " 님의 탁월함과 열정에 감사하며",
+                            title,
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w300,
@@ -84,130 +112,9 @@ class ErrandCheckWidget extends StatelessWidget {
                       ],
                     )),
 
-                //   Container(
-                //       margin: EdgeInsets.only(top: 13.01),
-                //       child: Row(
-                //         children: [
-                //           //닉네임
-                //           Container(
-                //             margin: EdgeInsets.only(left: 13.4),
-                //             child: Text(
-                //               "${nickname}",
-                //               style: TextStyle(
-                //                 fontFamily: 'Pretendard',
-                //                 fontWeight: FontWeight.w300,
-                //                 fontSize: 14,
-                //                 letterSpacing: 0.001,
-                //                 color: Color(0xff575757),
-                //               ),
-                //             ),
-                //           ),
-                //           // 평점 커카 이미지
-                //           Container(
-                //             margin: EdgeInsets.only(left: 9.1),
-                //             child: Image.asset(
-                //               'assets/images/score_icon.png',
-                //               // Replace with your image asset path
-                //               width: 11.77, // Adjust the size as needed
-                //               height: 11.77, // Adjust the size as needed
-                //               color: Color(0xffCFB6A5),
-                //             ),
-                //           ),
-                //           //평점
-                //           Container(
-                //             margin: EdgeInsets.only(left: 2.82),
-                //             child: Text(
-                //               " ${score}점",
-                //               style: TextStyle(
-                //                 fontFamily: 'Pretendard',
-                //                 fontWeight: FontWeight.w300,
-                //                 fontSize: 13,
-                //                 letterSpacing: -0.03,
-                //                 color: Color(0xffCFB6A5),
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       )),
-                // //게시글 제목
-                // Container(
-                //   margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
-                //   child: Text(
-                //     "${title}",
-                //     style: TextStyle(
-                //       fontFamily: 'Pretendard',
-                //       fontWeight: FontWeight.w600,
-                //       fontSize: 20,
-                //       letterSpacing: 0.001,
-                //       color: Color(0xff111111),
-                //     ),
-                //   ),
-                // ),
-                // // 심부름 값
-                // Container(
-                //   margin: EdgeInsets.only(top: 11.52, left: 13.4),
-                //   child: Text(
-                //     "\u20A9 ${priceFormat.format(reward)} 원",
-                //     style: TextStyle(
-                //       fontFamily: 'Pretendard',
-                //       fontWeight: FontWeight.w700,
-                //       fontSize: 20,
-                //       letterSpacing: 0.001,
-                //       color: Color(0xff7C3D1A),
-                //     ),
-                //   ),
-                // ),
-                // // 상세 주소
-                // Container(
-                //     margin: EdgeInsets.only(top: 22.06),
-                //     child: Row(
-                //       children: [
-                //         // 마커 이미지
-                //         Container(
-                //           margin: EdgeInsets.only(left: 18.97),
-                //           child: Image.asset(
-                //             'assets/images/marker_small.png',
-                //             // Replace with your image asset path
-                //             width: 12.2, // Adjust the size as needed
-                //             height: 16.77, // Adjust the size as needed
-                //           ),
-                //         ),
-                //         // 상세 주소 텍스트
-                //         Container(
-                //           margin: EdgeInsets.only(left: 7.67),
-                //           child: Text(
-                //             "상세 주소",
-                //             style: TextStyle(
-                //               fontFamily: 'Pretendard',
-                //               fontWeight: FontWeight.w400,
-                //               fontSize: 12,
-                //               letterSpacing: 0.001,
-                //               color: Color(0xffBC9F9F),
-                //             ),
-                //           ),
-                //         ),
-                //         // 상세 주소 정보
-                //         Container(
-                //           margin: EdgeInsets.only(left: 7),
-                //           child: Text(
-                //             "${destination}",
-                //             style: TextStyle(
-                //               fontFamily: 'Pretendard',
-                //               fontStyle: FontStyle.normal,
-                //               fontWeight: FontWeight.w500,
-                //               fontSize: 13,
-                //               letterSpacing: 0.001,
-                //               color: Color(0xff505050),
-                //             ),
-                //           ),
-                //         ),
-                //       ],
-                //     )),
-
-
-              ],
-            ),
-          ),
+                        ],
+                      ),
+                  ),
         ],
       ),
     );
@@ -216,33 +123,29 @@ class ErrandCheckWidget extends StatelessWidget {
 
 
 class MainShowErrand extends StatefulWidget {
-  final int errandNo;
-  final String title;
-  final String name;
-  final String createdDate;
-  final String due;
-  final String destination;
-  final String detail;
-  final int reward;
-  final bool isCash;
+  // final int errandNo;
+  // final String title;
+  // final String name;
+  // final String createdDate;
+  // final String due;
+  // final String destination;
+  // final String detail;
+  // final int reward;
+  // final bool isCash;
+  final Map<String, dynamic> errands;
 
-  MainShowErrand({Key? key,
-    required this.errandNo,
-    required this.title,
-    required this.name,
-    required this.createdDate,
-    required this.due,
-    required this.destination,
-    required this.detail,
-    required this.reward,
-    required this.isCash,
+
+
+  MainShowErrand({
+    Key? key,
+    required this.errands
   }) : super(key: key);
 
   @override
-  State createState() => _MainErrandCheckState();
+  State createState() => _MainShowErrandState();
 }
 
-class _MainErrandCheckState extends State<MainShowErrand> {
+class _MainShowErrandState extends State<MainShowErrand> {
   late int errandNo;
   late String title;
   late String name;
@@ -256,15 +159,20 @@ class _MainErrandCheckState extends State<MainShowErrand> {
   @override
   void initState() {
     super.initState();
-    errandNo = widget.errandNo;
-    title = widget.title;
-    name = widget.name;
-    createdDate = widget.createdDate;
-    due = widget.due;
-    destination = widget.destination;
-    detail = widget.detail;
-    reward = widget.reward;
-    isCash = widget.isCash;
+    print(widget.errands);
+    errandNo = widget.errands["errandNo"];
+    title = widget.errands["title"];
+    name = widget.errands["nickname"];
+    createdDate = widget.errands["createdDate"];
+    due = widget.errands["due"];
+    destination = widget.errands["destination"];
+    detail = widget.errands["detail"];
+    reward = widget.errands["reward"];
+    isCash = widget.errands["isCash"];
+
+    print(title);
+    print(name);
+    print(createdDate);
   }
   // 메인 글 보기 화면
   @override
@@ -281,8 +189,6 @@ class _MainErrandCheckState extends State<MainShowErrand> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start, // 게시글 중앙 정렬
                   children: [
-
-
                     Container(
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.start,
@@ -300,18 +206,23 @@ class _MainErrandCheckState extends State<MainShowErrand> {
                                 child: ListView.builder(
                                     padding: EdgeInsets.only(top: 0.1, bottom: 45),
                                     itemBuilder: (BuildContext context, int index) {
-                                      String srrandtitle = title;
-                                      String sname = name;
-                                      String screatedDate = createdDate;
+                                      return ShowErrandWidget(
+                                        errandNo: errandNo,
+                                        title: title,
+                                        name: name,
+                                        createdDate: createdDate,
+                                        due: due,
+                                        destination: destination,
+                                        detail: detail,
+                                        reward: reward,
+                                        isCash: isCash,
 
-                                      return GestureDetector(
-                                        // behavior: HitTestBehavior.translucent,
-                                        //게시글 전체를 클릭 영역으로 만들어주는 코드
-                                        child:
-                                                );
-                                              }),
-                                            ),
-                                          ),
+                                      );
+                                    },
+                                  itemCount: 1,
+                          ),
+                        ),
+                      ),
 
                           // 확인했어요. 버튼
                           Container(
