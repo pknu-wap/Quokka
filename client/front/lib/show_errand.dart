@@ -37,7 +37,7 @@ class ShowErrandWidget extends StatelessWidget {
     var priceFormat = NumberFormat('###,###,###,###');
     return Container(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 324, height: 576,
@@ -45,7 +45,7 @@ class ShowErrandWidget extends StatelessWidget {
               color: Color(0xffFCFCF9),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start, // 세로축 기준으로 왼쪽 정렬
               children:[
                 // 심부름 요청서 제목
                   Container(
@@ -99,7 +99,7 @@ class ShowErrandWidget extends StatelessWidget {
                           width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
                           margin: EdgeInsets.only(left: 2.82),
                           child: Text(
-                            title,
+                            title.toString(),
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w300,
@@ -191,22 +191,19 @@ class _MainShowErrandState extends State<MainShowErrand> {
                   children: [
                     Container(
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           // 심부름 요청서 상세 부분
                           Flexible(
                               child: Container(
                                 width: 324,
                                 height: 576,
-                                margin: EdgeInsets.only(top: 5.05, left: 18),
+                                margin: EdgeInsets.only(top: 40, left: 18),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
                                   color: Color(0xffFCFCF9),
                                 ),
-                                child: ListView.builder(
-                                    padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return ShowErrandWidget(
+                                child:ShowErrandWidget(
                                         errandNo: errandNo,
                                         title: title,
                                         name: name,
@@ -216,52 +213,48 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         detail: detail,
                                         reward: reward,
                                         isCash: isCash,
-
-                                      );
-                                    },
-                                  itemCount: 1,
-                          ),
+                                      )
                         ),
                       ),
 
                           // 확인했어요. 버튼
-                          Container(
-                            margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                print("확인했어요. 클릭");
-                                // 심부름 요청서 팝업 느낌으로 띄우기
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
-                                //   ),);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    Color(0xFF7C3D1A)),
-                                // 버튼의 크기 정하기
-                                minimumSize:
-                                MaterialStateProperty.all<Size>(Size(318, 46.65)),
-                                // 버튼의 모양 변경하기
-                                shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        5), // 원하는 모양에 따라 BorderRadius 조절
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                '확인했어요.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
+                          //   child: ElevatedButton(
+                          //     onPressed: () {
+                          //       print("확인했어요. 클릭");
+                          //       // 심부름 요청서 팝업 느낌으로 띄우기
+                          //       // Navigator.of(context).push(
+                          //       //   MaterialPageRoute(
+                          //       //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
+                          //       //   ),);
+                          //     },
+                          //     style: ButtonStyle(
+                          //       backgroundColor: MaterialStateProperty.all<Color>(
+                          //           Color(0xFF7C3D1A)),
+                          //       // 버튼의 크기 정하기
+                          //       minimumSize:
+                          //       MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                          //       // 버튼의 모양 변경하기
+                          //       shape:
+                          //       MaterialStateProperty.all<RoundedRectangleBorder>(
+                          //         RoundedRectangleBorder(
+                          //           borderRadius: BorderRadius.circular(
+                          //               5), // 원하는 모양에 따라 BorderRadius 조절
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     child: Text(
+                          //       '확인했어요.',
+                          //       style: TextStyle(
+                          //         fontSize: 14,
+                          //         fontFamily: 'Pretendard',
+                          //         fontWeight: FontWeight.w600,
+                          //         color: Color(0xFFFFFFFF),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
 
                           ],
                         ),
