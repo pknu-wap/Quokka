@@ -7,6 +7,110 @@ import 'package:front/main_post_page.dart';
 import 'package:front/request.dart';
 import 'package:intl/intl.dart';
 
+class DataTableScreen extends StatelessWidget {
+  final int errandNo;
+  final String title;
+  final String name;
+  final String createdDate;
+  final String due;
+  final String destination;
+  final String detail;
+  final int reward;
+  final bool isCash;
+
+  DataTableScreen({
+    required this.errandNo,
+    required this.title,
+    required this.name,
+    required this.createdDate,
+    required this.due,
+    required this.destination,
+    required this.detail,
+    required this.reward,
+    required this.isCash,
+  });
+
+  late final List<Map<String, dynamic>> list = [
+    {
+      'list': "제목",
+      'content': utf8.decode(title.runes.toList()),
+    },
+    {
+      'list': "글 쓴 사람",
+      'content': utf8.decode(name.runes.toList()),
+    },
+    {
+      'list': "요청일",
+      'content': createdDate,
+    },
+    {
+      'list': "일정",
+      'content': due,
+    },
+    {
+      'list': "장소",
+      'content': utf8.decode(destination.runes.toList()),
+    },
+    {
+      'list': "요청사항",
+      'content': utf8.decode(detail.runes.toList()),
+    }
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle1 = TextStyle(
+      fontFamily: 'Pretendard',
+      fontWeight: FontWeight.w300,
+      fontSize: 11,
+      letterSpacing: 0.001,
+      color: Color(0xff111111),
+    );
+    final TextStyle textStyle2 = TextStyle(
+      fontFamily: 'SANGJUDajungdagam',
+      fontWeight: FontWeight.w300,
+      fontSize: 12,
+      letterSpacing: 0.00,
+      color: Color(0xff111111),
+    );
+    return Container(
+      child: Column(
+      children: [
+        DataTable(
+        border: TableBorder(
+          borderRadius: BorderRadius.circular(5),
+          horizontalInside: const BorderSide(color: Color(0xffF1F1F1)), // 가로 줄
+          // verticalInside: const BorderSide(color: Color(0xff000000)), // 세로 줄
+          // bottom: const BorderSide(color: Colors.black), // 맨 밑 줄
+          // left: const BorderSide(color: Colors.black), // 맨 앞 줄
+          // right: const BorderSide(color: Colors.black), // 맨 뒷 줄
+          // top: const BorderSide(color: Colors.black), // 맨 윗 줄
+        ),
+        showBottomBorder: true,
+        columns: const [
+          DataColumn(
+            label: Text("목록"),
+          ),
+          DataColumn(
+            label: Text(""),
+          ),
+        ],
+        rows: list.map<DataRow>((e) {
+          return DataRow(
+            cells: [
+              DataCell(
+                  Text(e['list'], style: textStyle1),),
+              DataCell(Text(e['content'], style: textStyle2)),
+            ],
+          );
+        }).toList(),
+      ),
+    ],
+    ),
+    );
+  }
+}
+
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
@@ -82,7 +186,7 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                         // 밑줄 텍스트 필드?
                         Container(
-                          margin: EdgeInsets.only(left: 9.1),
+                          margin: EdgeInsets.only(left: 2),
                           child: Text(
                             "__________",
                             style: TextStyle(
@@ -189,6 +293,17 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                       ],
                     )),
+                    DataTableScreen(
+                      errandNo: errandNo,
+                      title: title,
+                      name: name,
+                      createdDate: createdDate,
+                      due: due,
+                      destination: destination,
+                      detail: detail,
+                      reward: reward,
+                      isCash: isCash,
+                    ),
                   // 금액 및 결제 텍스트
                   Container(
                       margin: EdgeInsets.only(top: 13.65),
