@@ -107,13 +107,6 @@ class _RequestState extends State<Request> {
   NLatLng value = NLatLng(0, 0);
   late NaverMapController mapController; // 지도 컨트롤
 
-  // late NMarker markerIcon;
-  // @override
-  // void setCustomMapMarker() async {
-  //   final markerIcon = await NOverlayImage.fromAssetImage(
-  //   'assets/images/location.png',
-  //   );
-  // }
   Future<Position> getCurrentLocation() async {
     log("call geolocator");
     try {
