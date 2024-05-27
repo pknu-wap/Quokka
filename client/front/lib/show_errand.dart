@@ -151,6 +151,73 @@ class ShowErrandWidget extends StatelessWidget {
                   ),
                 ),
 
+                // 심부름 사항, 금액 및 결제
+                Container(
+                  width: 287,
+                  height: 328.85,
+                  margin: EdgeInsets.only(top: 14),
+                  alignment: Alignment.center, // 중앙 정렬
+                  decoration: BoxDecoration(
+                    color: Color(0xffF1F1F1),
+                  ),
+
+                child: Container(
+                    margin: EdgeInsets.only(top: 13.65),
+                    child: Row(
+                      children: [
+                        // 심부름 사항 네모 이미지
+                        Container(
+                          margin: EdgeInsets.only(left: 23.5),
+                          child: Image.asset("assets/images/small_rectangle.png")
+                        ),
+                        //심부름 사항 텍스트
+                        Container(
+                          margin: EdgeInsets.only(left: 5),
+                          child: Text(
+                            "심부름 사항",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 11,
+                              letterSpacing: 0.001,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+                        ),
+                        // 심부름 사항 목록 표
+                        Container(
+                          margin: EdgeInsets.only(left: 9.1),
+                          child: Text(
+                            "",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              letterSpacing: 0.00,
+                              color: Color(0xff111111),
+                            ),
+                          ),
+                        ),
+                        //님의... 길이에 따라 줄바꿈 텍스트 생성
+                        Container(
+                          width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
+                          margin: EdgeInsets.only(left: 2.82),
+                          child: Text(
+                            "님의 탁월함과 열정에 감사하며",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              letterSpacing: 0.00,
+                              color: Color(0xff111111),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+
+                ),
+
 
                         ],
                       ),
