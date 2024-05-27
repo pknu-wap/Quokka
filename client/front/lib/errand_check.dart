@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:front/show_errand.dart';
 import 'package:intl/intl.dart';
 import 'request.dart';
 import 'main_post_page.dart';
@@ -696,8 +697,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context);
                           print("제가 할게요! 클릭");
+                          // 심부름 요청서 팝업 느낌으로 띄우기
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
+                          //   ),);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MainShowErrand(errandNo: errandNo),
+                            ),
+                          );
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -876,7 +887,14 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 padding: EdgeInsets.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Main_post_page(),
+                                  ),
+                                );
+                              },
                               icon: Image.asset(
                                 'assets/images/home_icon.png',
                                 color: Color(0xff545454),
