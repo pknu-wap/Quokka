@@ -7,7 +7,7 @@ import 'package:front/main_post_page.dart';
 import 'package:front/request.dart';
 import 'package:intl/intl.dart';
 
-class DataTableScreen extends StatelessWidget {
+class TableScreen extends StatelessWidget {
   final int errandNo;
   final String title;
   final String name;
@@ -18,7 +18,7 @@ class DataTableScreen extends StatelessWidget {
   final int reward;
   final bool isCash;
 
-  DataTableScreen({
+  TableScreen({
     required this.errandNo,
     required this.title,
     required this.name,
@@ -32,27 +32,27 @@ class DataTableScreen extends StatelessWidget {
 
   late final List<Map<String, dynamic>> list = [
     {
-      'list': "제목",
+      'text': "제목",
       'content': utf8.decode(title.runes.toList()),
     },
     {
-      'list': "글 쓴 사람",
+      'text': "글 쓴 사람",
       'content': utf8.decode(name.runes.toList()),
     },
     {
-      'list': "요청일",
+      'text': "요청일",
       'content': createdDate,
     },
     {
-      'list': "일정",
+      'text': "일정",
       'content': due,
     },
     {
-      'list': "장소",
+      'text': "장소",
       'content': utf8.decode(destination.runes.toList()),
     },
     {
-      'list': "요청사항",
+      'text': "요청사항",
       'content': utf8.decode(detail.runes.toList()),
     }
   ];
@@ -73,40 +73,17 @@ class DataTableScreen extends StatelessWidget {
       letterSpacing: 0.00,
       color: Color(0xff111111),
     );
+
     return Container(
-      child: Column(
-      children: [
-        DataTable(
-        border: TableBorder(
-          borderRadius: BorderRadius.circular(5),
-          horizontalInside: const BorderSide(color: Color(0xffF1F1F1)), // 가로 줄
-          // verticalInside: const BorderSide(color: Color(0xff000000)), // 세로 줄
-          // bottom: const BorderSide(color: Colors.black), // 맨 밑 줄
-          // left: const BorderSide(color: Colors.black), // 맨 앞 줄
-          // right: const BorderSide(color: Colors.black), // 맨 뒷 줄
-          // top: const BorderSide(color: Colors.black), // 맨 윗 줄
-        ),
-        showBottomBorder: true,
-        columns: const [
-          DataColumn(
-            label: Text("목록"),
-          ),
-          DataColumn(
-            label: Text(""),
-          ),
-        ],
-        rows: list.map<DataRow>((e) {
-          return DataRow(
-            cells: [
-              DataCell(
-                  Text(e['list'], style: textStyle1),),
-              DataCell(Text(e['content'], style: textStyle2)),
-            ],
-          );
-        }).toList(),
+      child: Table(
+        border: TableBorder.all(),
+        children: List.generate(4, (index) {
+          return TableRow(children: [
+            TableCell(child: Center(child: Text(list[index]['text']))),
+            TableCell(child: Center(child: Text(list[index]['content']))),
+           ]);
+         }),
       ),
-    ],
-    ),
     );
   }
 }
@@ -293,7 +270,7 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                       ],
                     )),
-                    DataTableScreen(
+                    TableScreen(
                       errandNo: errandNo,
                       title: title,
                       name: name,
