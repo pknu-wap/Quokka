@@ -7,27 +7,21 @@ import 'package:front/main_post_page.dart';
 import 'package:front/request.dart';
 import 'package:intl/intl.dart';
 
-class TableScreen extends StatelessWidget {
-  final int errandNo;
+class TableScreen1 extends StatelessWidget {
   final String title;
   final String name;
   final String createdDate;
   final String due;
   final String destination;
   final String detail;
-  final int reward;
-  final bool isCash;
 
-  TableScreen({
-    required this.errandNo,
+  TableScreen1({
     required this.title,
     required this.name,
     required this.createdDate,
     required this.due,
     required this.destination,
     required this.detail,
-    required this.reward,
-    required this.isCash,
   });
   late DateTime datetime = DateFormat('yyyy-MM-dd').parse(createdDate); // 요청일 String을 DateTime으로 변환
   // 날짜를 yyyy.MM.dd 형식으로 변환하는 함수
@@ -82,7 +76,7 @@ class TableScreen extends StatelessWidget {
     // 심부름 사항 표
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        // borderRadius: BorderRadius.circular(10),
       ),
       child: Table(
         columnWidths: { // 표의 각 너비 조정
@@ -102,6 +96,9 @@ class TableScreen extends StatelessWidget {
           return TableRow(children: [
             TableCell(
                 child: Container(
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
+                  // ),
                   height: 30,
                   color: Color(0xff674333),
                  child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
@@ -117,6 +114,98 @@ class TableScreen extends StatelessWidget {
             ),
            ]);
          }),
+      ),
+    );
+  }
+}
+
+class TableScreen2 extends StatelessWidget {
+  final int reward;
+  final bool isCash;
+
+  TableScreen2({
+    required this.reward,
+    required this.isCash,
+  });
+
+  String isCashType(bool isCash) {
+    if (isCash == true){
+      return "현금결제";
+    }
+    else{
+      return "계좌이체";
+    }
+  }
+
+  late final List<Map<String, dynamic>> list = [
+    {
+      'text': "장소",
+      'content': "${reward}원",
+    },
+    {
+      'text': "요청 사항",
+      'content': isCashType(isCash),
+    }
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle1 = TextStyle(
+      fontFamily: 'Pretendard',
+      fontWeight: FontWeight.w300,
+      fontSize: 11,
+      letterSpacing: 0.001,
+      color: Color(0xffFFFFFF),
+    );
+    final TextStyle textStyle2 = TextStyle(
+      fontFamily: 'SANGJUDajungdagam',
+      fontWeight: FontWeight.w300,
+      fontSize: 12,
+      letterSpacing: 0.00,
+      color: Color(0xff111111),
+    );
+
+    // 금액 및 결제 표
+    return Container(
+      decoration: BoxDecoration(
+        // borderRadius: BorderRadius.circular(10),
+      ),
+      child: Table(
+        columnWidths: { // 표의 각 너비 조정
+          0: FixedColumnWidth(62),
+          1: FixedColumnWidth(176),
+        },
+        border: TableBorder.all(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xffF1F1F1),
+          // top: BorderSide(color: Color(0xffF1F1F1), width: 2), // 위쪽 테두리 색상 및 너비 설정
+          // bottom: BorderSide(color: Color(0xffF1F1F1), width: 2), // 아래쪽 테두리 색상 및 너비 설정
+          // left: BorderSide(color: Color(0xffF1F1F1), width: 2), // 왼쪽 테두리 색상 및 너비 설정
+          // right: BorderSide(color: Color(0xffF1F1F1), width: 2), // 오른쪽 테두리 색상 및 너비 설정
+          // horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
+        ),
+        children: List.generate(2, (index) {
+          return TableRow(children: [
+            TableCell(
+              child: Container(
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
+                // ),
+                  height: 30,
+                  color: Color(0xff674333),
+                  child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
+            ),
+            TableCell(
+              child: Container(
+                  height: 30,
+                  padding: EdgeInsets.all(9), // 왼쪽 정렬 띄우기 위함
+                  color: Color(0xffFFFFFF),
+                  child: Align(
+                      alignment: Alignment.centerLeft, // 왼쪽 정렬
+                      child: Text(list[index]['content'], style: textStyle2,))),
+            ),
+          ]);
+        }),
       ),
     );
   }
@@ -306,21 +395,18 @@ class ShowErrandWidget extends StatelessWidget {
                     )),
                     Container(
                       margin: EdgeInsets.only(top: 6.68),
-                      child: TableScreen(
-                      errandNo: errandNo,
+                      child: TableScreen1(
                       title: title,
                       name: name,
                       createdDate: createdDate,
                       due: due,
                       destination: destination,
                       detail: detail,
-                      reward: reward,
-                      isCash: isCash,
                     ),),
 
                   // 금액 및 결제 텍스트
                   Container(
-                      margin: EdgeInsets.only(top: 13.65),
+                      margin: EdgeInsets.only(top: 7.68),
                       child: Row(
                         children: [
                           // 금액 및 결제 네모 이미지
@@ -344,16 +430,20 @@ class ShowErrandWidget extends StatelessWidget {
                           ),
                         ],
                       )),
+                    // 금액 및 결제 표
+                    Container(
+                      margin: EdgeInsets.only(top: 6),
+                      child: TableScreen2(
+                        reward: reward,
+                        isCash: isCash,
+                      ),),
+                  ],
+                ),
+                ),
                     ],
-                ),
-
-
-                ),
-
-
-                        ],
-                      ),
                   ),
+                ),
+
 
 
         ],
