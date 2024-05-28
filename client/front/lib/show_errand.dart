@@ -29,6 +29,11 @@ class TableScreen extends StatelessWidget {
     required this.reward,
     required this.isCash,
   });
+  late DateTime datetime = DateFormat('yyyy-MM-dd').parse(createdDate); // 요청일 String을 DateTime으로 변환
+  // 날짜를 yyyy.MM.dd 형식으로 변환하는 함수
+  String formatDate(DateTime date) {
+    return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
+  }
 
   late final List<Map<String, dynamic>> list = [
     {
@@ -41,18 +46,18 @@ class TableScreen extends StatelessWidget {
     },
     {
       'text': "요청일",
-      'content': createdDate,
+      'content': formatDate(datetime),
     },
     {
       'text': "일정",
-      'content': due,
+      'content': "${due}까지",
     },
     {
       'text': "장소",
       'content': utf8.decode(destination.runes.toList()),
     },
     {
-      'text': "요청사항",
+      'text': "요청 사항",
       'content': utf8.decode(detail.runes.toList()),
     }
   ];
@@ -74,10 +79,11 @@ class TableScreen extends StatelessWidget {
       color: Color(0xff111111),
     );
 
+    // 심부름 사항 표
     return Container(
       child: Table(
         border: TableBorder.all(),
-        children: List.generate(4, (index) {
+        children: List.generate(6, (index) {
           return TableRow(children: [
             TableCell(child: Center(child: Text(list[index]['text'], style: textStyle1,))),
             TableCell(child: Center(child: Text(list[index]['content'], style: textStyle2,))),
