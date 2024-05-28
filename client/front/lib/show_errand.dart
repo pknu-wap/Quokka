@@ -79,8 +79,8 @@ class TableScreen extends StatelessWidget {
         border: TableBorder.all(),
         children: List.generate(4, (index) {
           return TableRow(children: [
-            TableCell(child: Center(child: Text(list[index]['text']))),
-            TableCell(child: Center(child: Text(list[index]['content']))),
+            TableCell(child: Center(child: Text(list[index]['text'], style: textStyle1,))),
+            TableCell(child: Center(child: Text(list[index]['content'], style: textStyle2,))),
            ]);
          }),
       ),
