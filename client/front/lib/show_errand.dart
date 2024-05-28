@@ -81,6 +81,8 @@ class TableScreen extends StatelessWidget {
 
     // 심부름 사항 표
     return Container(
+      width: 238,
+      height: 186,
       child: Table(
         border: TableBorder(
           // top: BorderSide(color: Colors.blue, width: 2), // 맨 윗 줄
