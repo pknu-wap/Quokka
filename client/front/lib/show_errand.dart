@@ -81,23 +81,22 @@ class TableScreen extends StatelessWidget {
 
     // 심부름 사항 표
     return Container(
-      width: 238,
-      height: 186,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
       ),
       child: Table(
-        columnWidths: {
+        columnWidths: { // 표의 각 너비 조정
           0: FixedColumnWidth(62),
           1: FixedColumnWidth(176),
         },
-        border: TableBorder(
+        border: TableBorder.all(
           borderRadius: BorderRadius.circular(10),
-          // top: BorderSide(color: Colors.blue, width: 2), // 맨 윗 줄
-          // bottom: BorderSide(color: Colors.blue, width: 2), // 맨 아랫 줄
-          // left: BorderSide(color: Colors.blue, width: 2), // 맨 앞 줄
-          // right: BorderSide(color: Colors.blue, width: 2), // 맨 뒷 줄
-          horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
+          color: Color(0xffF1F1F1),
+          // top: BorderSide(color: Color(0xffF1F1F1), width: 2), // 위쪽 테두리 색상 및 너비 설정
+          // bottom: BorderSide(color: Color(0xffF1F1F1), width: 2), // 아래쪽 테두리 색상 및 너비 설정
+          // left: BorderSide(color: Color(0xffF1F1F1), width: 2), // 왼쪽 테두리 색상 및 너비 설정
+          // right: BorderSide(color: Color(0xffF1F1F1), width: 2), // 오른쪽 테두리 색상 및 너비 설정
+          // horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
         ),
         children: List.generate(6, (index) {
           return TableRow(children: [
@@ -305,7 +304,9 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                       ],
                     )),
-                    TableScreen(
+                    Container(
+                      margin: EdgeInsets.only(top: 6.68),
+                      child: TableScreen(
                       errandNo: errandNo,
                       title: title,
                       name: name,
@@ -315,7 +316,8 @@ class ShowErrandWidget extends StatelessWidget {
                       detail: detail,
                       reward: reward,
                       isCash: isCash,
-                    ),
+                    ),),
+
                   // 금액 및 결제 텍스트
                   Container(
                       margin: EdgeInsets.only(top: 13.65),
