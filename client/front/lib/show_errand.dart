@@ -69,7 +69,7 @@ class TableScreen extends StatelessWidget {
       fontWeight: FontWeight.w300,
       fontSize: 11,
       letterSpacing: 0.001,
-      color: Color(0xff111111),
+      color: Color(0xffFFFFFF),
     );
     final TextStyle textStyle2 = TextStyle(
       fontFamily: 'SANGJUDajungdagam',
@@ -83,8 +83,16 @@ class TableScreen extends StatelessWidget {
     return Container(
       width: 238,
       height: 186,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Table(
+        columnWidths: {
+          0: FixedColumnWidth(62),
+          1: FixedColumnWidth(176),
+        },
         border: TableBorder(
+          borderRadius: BorderRadius.circular(10),
           // top: BorderSide(color: Colors.blue, width: 2), // 맨 윗 줄
           // bottom: BorderSide(color: Colors.blue, width: 2), // 맨 아랫 줄
           // left: BorderSide(color: Colors.blue, width: 2), // 맨 앞 줄
@@ -93,8 +101,16 @@ class TableScreen extends StatelessWidget {
         ),
         children: List.generate(6, (index) {
           return TableRow(children: [
-            TableCell(child: Center(child: Text(list[index]['text'], style: textStyle1,))),
-            TableCell(child: Center(child: Text(list[index]['content'], style: textStyle2,))),
+            TableCell(
+                child: Container(
+                  color: Color(0xff674333),
+                 child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
+                ),
+            TableCell(
+              child: Container(
+                  color: Color(0xffFFFFFF),
+                child: Text(list[index]['content'], style: textStyle2,)),
+            ),
            ]);
          }),
       ),
