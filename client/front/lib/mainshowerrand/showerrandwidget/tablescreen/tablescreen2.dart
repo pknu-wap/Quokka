@@ -20,11 +20,11 @@ class TableScreen2 extends StatelessWidget {
 
   late final List<Map<String, dynamic>> list = [
     {
-      'text': "장소",
+      'text': "심부름 값",
       'content': "${reward} 원",
     },
     {
-      'text': "요청 사항",
+      'text': "결제 방법",
       'content': isCashType(isCash),
     }
   ];
