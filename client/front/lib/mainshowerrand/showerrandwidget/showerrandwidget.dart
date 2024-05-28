@@ -236,40 +236,66 @@ class ShowErrandWidget extends StatelessWidget {
                 // (주) 커카글쓴이 닉네임 (서명)
                 Container(
                   margin: EdgeInsets.only(top: 17.15),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min, // 가운데 정렬
+                  child: Stack(
                     children: [
-                      // (주) 커카글쓴이 -> 글 쓴 사람 -> name
-                      Container(
-                        margin: EdgeInsets.only(left: 0),
-                        child: Text(
-                          "(주)${utf8.decode(name.runes.toList())}",
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 11,
-                            letterSpacing: 0.001,
-                            color: Color(0xff000000),
-                          ),
+                      // Center-aligned Row
+                      Align(
+                        alignment: Alignment.center, // 가운데 정렬
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min, // 최소한의 너비 가지기
+                          children: [
+                            // (주) 커카글쓴이 -> 글 쓴 사람 -> name
+                            Container(
+                              margin: EdgeInsets.only(left: 0),
+                              child: Text(
+                                "(주)${utf8.decode(name.runes.toList())}",
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 11,
+                                  letterSpacing: 0.001,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                            // 닉네임 -> 글 보기 하는 사람 -> 닉네임
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: Text(
+                                "닉네임",
+                                style: TextStyle(
+                                  fontFamily: 'MaruBuri',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                  letterSpacing: 0.01,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      // 닉네임 -> 글 보기 하는 사람 -> 닉네임
-                      Container(
-                        margin: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "닉네임",
-                          style: TextStyle(
-                            fontFamily: 'MaruBuri',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            letterSpacing: 0.01,
-                            color: Color(0xff000000),
+                      // Right-aligned (서명)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          margin: EdgeInsets.only(right: 37),
+                          child: Text(
+                            "(서명)",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 11,
+                              letterSpacing: 0.001,
+                              color: Color(0xffA4A4A4),
+                            ),
                           ),
                         ),
                       ),
                     ],
-                  )
-                ),
+                  ),
+                )
+
 
               ],
             ),
