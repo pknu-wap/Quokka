@@ -112,6 +112,11 @@ flutter:
         - asset: assets/fonts/SANGJUDajungdagam/SANGJUDajungdagam.ttf
           weight: 400
 
+    - family: MaruBuri
+      fonts:
+        - asset: assets/fonts/MaruBuri/MaruBuri-Bold.otf
+          weight: 700
+
 
   uses-material-design: true
   # The following line ensures that the Material Icons font is
