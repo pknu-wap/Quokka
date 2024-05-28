@@ -82,7 +82,13 @@ class TableScreen extends StatelessWidget {
     // 심부름 사항 표
     return Container(
       child: Table(
-        border: TableBorder.all(),
+        border: TableBorder(
+          // top: BorderSide(color: Colors.blue, width: 2), // 맨 윗 줄
+          // bottom: BorderSide(color: Colors.blue, width: 2), // 맨 아랫 줄
+          // left: BorderSide(color: Colors.blue, width: 2), // 맨 앞 줄
+          // right: BorderSide(color: Colors.blue, width: 2), // 맨 뒷 줄
+          horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
+        ),
         children: List.generate(6, (index) {
           return TableRow(children: [
             TableCell(child: Center(child: Text(list[index]['text'], style: textStyle1,))),
