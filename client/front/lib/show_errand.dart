@@ -103,13 +103,18 @@ class TableScreen extends StatelessWidget {
           return TableRow(children: [
             TableCell(
                 child: Container(
+                  height: 30,
                   color: Color(0xff674333),
                  child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
                 ),
             TableCell(
               child: Container(
+                height: 30,
+                  padding: EdgeInsets.all(9), // 왼쪽 정렬 띄우기 위함
                   color: Color(0xffFFFFFF),
-                child: Text(list[index]['content'], style: textStyle2,)),
+                child: Align(
+                  alignment: Alignment.centerLeft, // 왼쪽 정렬
+                    child: Text(list[index]['content'], style: textStyle2,))),
             ),
            ]);
          }),
