@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:front/errand_check.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen2.dart';
-import 'package:intl/intl.dart';
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
@@ -31,22 +32,35 @@ class ShowErrandWidget extends StatelessWidget {
   // 심부름 요청서 상세 페이지
   @override
   Widget build(BuildContext context) {
-    var priceFormat = NumberFormat('###,###,###,###');
     return Container(
-      child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
             width: 324, height: 576,
             decoration: BoxDecoration(
               color: Color(0xffFCFCF9),
             ),
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start, // 세로축 기준으로 왼쪽 정렬
               children:[
+                // 닫기 버튼
+                GestureDetector(
+                  onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            MainErrandCheck(errandNo: errandNo),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(left: 280, top: 8),
+                    color: Colors.transparent,
+                    child: Icon(
+                      Icons.close,
+                      color: Color(0xff8E8E8E),
+                    ),
+                  ),
+                ),
                 // 심부름 요청서 제목
                 Container(
-                  margin: EdgeInsets.only(top: 33, left: 93, right: 91),
+                  margin: EdgeInsets.only(top: 4, left: 93, right: 91),
                   child: Text(
                     "심부름 요청서",
                     style: TextStyle(
@@ -300,15 +314,8 @@ class ShowErrandWidget extends StatelessWidget {
                   margin: EdgeInsets.only(top: 5),
                   child: Image.asset("assets/images/Line1.png")
                 ),
-
-
               ],
             ),
-          ),
-
-
-        ],
-      ),
     );
   }
 }

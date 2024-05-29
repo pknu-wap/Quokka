@@ -66,7 +66,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                   children: [
                     Container(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           // 심부름 요청서 상세 부분
                           Flexible(
