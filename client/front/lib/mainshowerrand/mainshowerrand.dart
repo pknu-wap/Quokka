@@ -31,6 +31,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
   bool isCheckButtonVisible = true;
   bool isStampVisible = false;
   EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40, left: 18.5);
+  String nickName = "닉 네 임"; // 심부름 하는 사람 -> 연동 하는 부분
 
 
   @override
@@ -91,7 +92,9 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         detail: detail,
                                         reward: reward,
                                         isCash: isCash,
+                                        isCheckButtonVisible: isCheckButtonVisible,
                                         isStampVisible: isStampVisible,
+                                        nickName : nickName,
                                       )
                         ),
                       ),
@@ -110,6 +113,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                             isCheckButtonVisible = false;
                             isStampVisible = true;
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
+                            nickName = "Suhyun113";
                           });
                         },
                         style: ButtonStyle(

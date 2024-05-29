@@ -17,7 +17,9 @@ class ShowErrandWidget extends StatelessWidget {
   final String detail;
   final int reward;
   final bool isCash;
+  final bool isCheckButtonVisible;
   final bool isStampVisible;
+  final String nickName;
 
   ShowErrandWidget({
     required this.errandNo,
@@ -29,8 +31,12 @@ class ShowErrandWidget extends StatelessWidget {
     required this.detail,
     required this.reward,
     required this.isCash,
+    required this.isCheckButtonVisible,
     required this.isStampVisible,
+    required this.nickName,
   });
+
+  String realName = "김수현"; // 심부름 요청한 사람 -> 밑줄 부분에 들어갈 이름(연동 필요)
 
   // 심부름 요청서 상세 페이지
   @override
@@ -275,11 +281,12 @@ class ShowErrandWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            if(nickName != "닉 네 임")
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
                             Container(
                               margin: EdgeInsets.only(top: 17.15, left: 5),
                               child: Text(
-                                "닉 네 임",
+                                nickName,
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,
