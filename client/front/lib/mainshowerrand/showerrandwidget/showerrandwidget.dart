@@ -6,6 +6,7 @@ import 'package:front/errand_check.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen2.dart';
+import 'package:front/mainshowerrand/showerrandwidget/textfieldwidget.dart';
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
@@ -20,6 +21,7 @@ class ShowErrandWidget extends StatelessWidget {
   final bool isCheckButtonVisible;
   final bool isStampVisible;
   final String nickName;
+  final String realName;
 
   ShowErrandWidget({
     required this.errandNo,
@@ -34,9 +36,8 @@ class ShowErrandWidget extends StatelessWidget {
     required this.isCheckButtonVisible,
     required this.isStampVisible,
     required this.nickName,
+    required this.realName,
   });
-
-  String realName = "김수현"; // 심부름 요청한 사람 -> 밑줄 부분에 들어갈 이름(연동 필요)
 
   // 심부름 요청서 상세 페이지
   @override
@@ -100,30 +101,9 @@ class ShowErrandWidget extends StatelessWidget {
                             ),
                           ),
                         ),
+                        TextFieldWidget(realName: realName),
                         // 밑줄 텍스트 필드?
-                        Container(
-                          margin: EdgeInsets.only(left: 2),
-                          child: Transform.translate(
-                            offset: Offset(0, -3),
-                          child: Container(
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(
-                                color: Color(0xff111111),
-                            width: 0.5)), // 밑줄 스타일링
-                          ),
-                          child: Text(
-                            '                  ',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w300,
-                              fontSize: 11,
-                              letterSpacing: 0.00,
-                              color: Color(0xff111111),
-                             ),
-                            ),
-                           ),
-                          ),
-                        ),
+
                         //님의... 길이에 따라 줄바꿈 텍스트 생성
                         Container(
                           width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
