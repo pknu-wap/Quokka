@@ -12,6 +12,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 
 class PostWidget extends StatelessWidget {
+  final DateTime currentTime = DateTime.now();
+
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
   final double score; //평점
@@ -21,7 +23,7 @@ class PostWidget extends StatelessWidget {
   final String destination; //목적지
   final int reward; //보수
   final String status; //상태 (모집중, 진행중, 완료됨)
-  const PostWidget({
+  PostWidget({
     Key? key,
     required this.orderNo,
     required this.nickname,
@@ -33,7 +35,20 @@ class PostWidget extends StatelessWidget {
     required this.reward,
     required this.status,
   }) : super(key: key);
+  String timeDifference(DateTime currentTime, String createdDate) {
+    DateTime createdDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdDate);
+    Duration difference = currentTime.difference(createdDateTime);
 
+    if (difference.inDays > 0) {
+      return '${difference.inDays}일 전';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}시간 전';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}분 전';
+    } else {
+      return '방금 전';
+    }
+  }
   String getState() { //상태에 따라 텍스트 출력
     if(status == "RECRUITING")
       {
@@ -179,7 +194,7 @@ class PostWidget extends StatelessWidget {
                                 child: Align(alignment: Alignment.centerRight,
                                     child: Container( //시간
                                       margin: EdgeInsets.only(right: 14, top: 17.95),
-                                      child: Text("${createdDate}",
+                                      child: Text(timeDifference(currentTime,createdDate),
                                         style: TextStyle(
                                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                             fontWeight: FontWeight.w400, fontSize: 12,
