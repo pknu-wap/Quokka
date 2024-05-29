@@ -249,7 +249,7 @@ class ShowErrandWidget extends StatelessWidget {
                 ),
                 // (주) 커카글쓴이 닉네임 (서명)
                 Container(
-                  margin: EdgeInsets.only(top: 17.15),
+                  // margin: EdgeInsets.only(top: 17.15),
                   child: Stack(
                     children: [
                       // Center-aligned Row
@@ -260,7 +260,7 @@ class ShowErrandWidget extends StatelessWidget {
                           children: [
                             // (주) 커카글쓴이 -> 글 쓴 사람 -> name
                             Container(
-                              margin: EdgeInsets.only(left: 0),
+                              margin: EdgeInsets.only(top: 17.15, left: 0),
                               child: Text(
                                 "(주) ${utf8.decode(name.runes.toList())}",
                                 style: TextStyle(
@@ -274,7 +274,7 @@ class ShowErrandWidget extends StatelessWidget {
                             ),
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
                             Container(
-                              margin: EdgeInsets.only(left: 5),
+                              margin: EdgeInsets.only(top: 17.15, left: 5),
                               child: Text(
                                 "닉 네 임",
                                 style: TextStyle(
@@ -293,7 +293,7 @@ class ShowErrandWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          margin: EdgeInsets.only(right: 37),
+                          margin: EdgeInsets.only(top: 17.15, right: 37),
                           child: Text(
                             "( 서 명 )",
                             style: TextStyle(
@@ -306,14 +306,28 @@ class ShowErrandWidget extends StatelessWidget {
                           ),
                         ),
                       ),
+                        // Line1.png
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            margin: EdgeInsets.only(top: 41.15, right: 37.5),
+                            child: Image.asset("assets/images/Line1.png")
+                        ),
+                      ),
+                      // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 5.15, right: 32),
+                          child: Image.asset("assets/images/Rectangle3.png")
+                        )
+                      ),
+
+
                     ],
                   ),
                 ),
-                // Line1.png
-                Container(
-                  margin: EdgeInsets.only(top: 5),
-                  child: Image.asset("assets/images/Line1.png")
-                ),
+
               ],
             ),
     );
