@@ -70,8 +70,16 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
                                   color: Color(0xffFCFCF9),
+                                  boxShadow: [
+                                    BoxShadow( // 5px 5px 10px rgba(0, 0, 0, 0.25);
+                                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                                    offset: Offset(5, 5), // 그림자의 위치
+                                    blurRadius: 10, // 그림자의 흐림 정도
+                                    spreadRadius: 0, // 그림자의 확산 정도
+                                    ),
+                                  ],
                                 ),
-                                child:ShowErrandWidget(
+                                child: ShowErrandWidget(
                                         errandNo: errandNo,
                                         title: title,
                                         name: name,
