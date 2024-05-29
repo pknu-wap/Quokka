@@ -135,11 +135,21 @@ class _statuspageState extends State<statuspage> {
     },
     //테스트 코드
   ];
+  bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
+  void completeCheck()
+  {
+    if(contents.isNotEmpty && contents.last['contents'] == '완료했어요!')
+      isCompleted = true;
+    else
+      isCompleted = false;
+    return;
+  }
   void initState()
   {
     super.initState();
     errandNo = widget.errandNo;
+    completeCheck();
   }
   @override
   Widget build(BuildContext context) {
@@ -173,7 +183,7 @@ class _statuspageState extends State<statuspage> {
                         ),
                       ),
                       Container( height: 25,
-                        margin: EdgeInsets.only(top: 80, left: 4),
+                        margin: EdgeInsets.only(top: 80, left: 12),
                         child: Text(
                           '현황 페이지',
                           style: TextStyle(
@@ -245,35 +255,38 @@ class _statuspageState extends State<statuspage> {
                     }
                 ),
                   ),),
-          Container(
-            margin: EdgeInsets.only(top: 24.08, left: 21),
-            child: ElevatedButton(
-              onPressed: () {
-                // 버튼 클릭 시 실행될 코드
-              },
-              style: ElevatedButton.styleFrom(
-                // backgroundColor: Color(0xffB99988),
-                  backgroundColor: Color(0xff7C3D1A),// 배경색
-                fixedSize: Size(318, 45), // 너비와 높이
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
-                ),
-              ),
-              child: Container( width: 318, height: 45,
-                alignment: Alignment.center,
-                child: Text(
-                  '심부름 완료',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.01,
-                    color: Color(0xffFFFFFF),
+                Container(
+                  margin: EdgeInsets.only(top: 24.08, left: 21),
+                  child: ElevatedButton(
+                    onPressed: isCompleted
+                        ? () { }
+                        : () { },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isCompleted
+                          ? Color(0xff7C3D1A)
+                          : Color(0xff7C3D1A).withOpacity(0.5),
+                      fixedSize: Size(318, 45), // 너비와 높이
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
+                      ),
+                    ),
+                    child: Container(
+                      width: 318,
+                      height: 45,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '심부름 완료',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.01,
+                          color: Color(0xffFFFFFF),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ),
               ],
             ),
           ),
