@@ -248,11 +248,11 @@ class InProgress_Errand_Widget extends StatelessWidget {
                 builder: (context) => statuspage(errandNo: errandNo)
             ),);
         },
-        child:  Container( width: 360, height: 84.4, //심부름 1개 요청중
+        child:  Container( width: 360, height: 72.51, //심부름 1개 수행중
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 26.4, left: 19.14),
+                margin: EdgeInsets.only(left: 19.14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,10 +317,10 @@ class InProgress_Errand_Widget extends StatelessWidget {
                 builder: (context) => statuspage(errandNo: errandNo)
             ),);
         },
-        child:  Container( width: 360, height: 84.4, //심부름 1개 수행중
+        child:  Container( width: 360, height: 72.51, //심부름 1개 요청중
           child: Column(
             children: [
-              Container(margin: EdgeInsets.only(top: 26.4,left: 19.14),
+              Container(margin: EdgeInsets.only(left: 19.14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1158,80 +1158,87 @@ class _Main_post_pageState extends State<Main_post_page> {
                         showModalBottomSheet(
                           context: context,
                           builder: (context) {
-                            return  Container(
+                            return Container(
                               height: 389,
+                              decoration: BoxDecoration(
+                                color: Color(0xffF2F2F2),
+                                border: Border(
+                                  top: BorderSide(width: 0.5, color: Colors.grey),
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
                               child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                              Container(
-                              decoration: BoxDecoration(
-                              color: Color(0xffF2F2F2),
-                              border: Border(
-                                top: BorderSide(width: 0.5, color: Colors.grey),
-                              ),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                              ),
-                            ),
-                            ),
-                            Positioned(
-                            top: 13.47, left: 127.74,
-                            child: Container(
-                              width: 104.51, height: 5,
-                              decoration: BoxDecoration(
-                                color: Color(0xffAEAEAE),
-                              border: Border.all(
-                              width: 5,
-                              color: Color(0xffAEAEAE),),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0),),
-                            ),
-                           ),
-                          ),
-                                    Positioned(
-                                      top: 42.64, left: 19.64,
-                                      child: Container(
-                                        child: Text('메세지를 보낼 심부름 상대를 골라주세요', style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 16,
-                                          color: Color(0xff000000),
-                                        ),),
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    top: 13.47,
+                                    left: 127.74,
+                                    child: Container(
+                                      width: 104.51,
+                                      height: 5,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffAEAEAE),
+                                        border: Border.all(
+                                          width: 5,
+                                          color: Color(0xffAEAEAE),
+                                        ),
+                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                                       ),
                                     ),
-                                    Positioned(
-                                      top: 85.39,
-                                      child: Container(
-                                        width: 360, height: 310.14,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffFFFFFF),
-                                          border: Border(
-                                            top: BorderSide(width: 0.1),
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20.0),
-                                            topRight: Radius.circular(20.0),
-                                          ),
-                                        ),
-                                        child: errands.isEmpty
-                                            ? Center(child: Text("진행중인 심부름이 없습니다."))
-                                            : Column(
-                                          children: errands.map((errand) {
-                                            String decodedTitle = utf8.decode(errand["title"].runes.toList());
-                                            String decodedDue = utf8.decode(errand["due"].runes.toList());
-                                            return InProgress_Errand_Widget(
-                                                errandNo: errand["errandNo"],
-                                                title: decodedTitle,
-                                                due: decodedDue,
-                                                isUserOrder: errand["isUserOrder"],
-                                            );
-                                          }).toList(),
-                                        ),
-
+                                  ),
+                                  Positioned(
+                                    top: 42.64,
+                                    left: 19.64,
+                                    child: Text(
+                                      '메세지를 보낼 심부름 상대를 골라주세요',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: Color(0xff000000),
                                       ),
                                     ),
-                                  ],
-                         ),
-                        );
+                                  ),
+                                  Positioned(
+                                    top: 85.39,
+                                    child: Container(
+                                      width: 360,
+                                      height: 310.14,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFFFFFF),
+                                        border: Border(
+                                          top: BorderSide(width: 0.1),
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                        ),
+                                      ),
+                                      child: errands.isEmpty
+                                          ? Center(child: Text("진행중인 심부름이 없습니다."))
+                                          : ListView.builder(
+                                        padding: EdgeInsets.only(top: 23.98),
+                                        itemCount: errands.length,
+                                        itemBuilder: (context, index) {
+                                          String decodedTitle = utf8.decode(errands[index]["title"].runes.toList());
+                                          String decodedDue = utf8.decode(errands[index]["due"].runes.toList());
+                                          return InProgress_Errand_Widget(
+                                            errandNo: errands[index]["errandNo"],
+                                            title: decodedTitle,
+                                            due: decodedDue,
+                                            isUserOrder: errands[index]["isUserOrder"],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
                         );
                       },
