@@ -44,10 +44,6 @@ class _MainShowErrandState extends State<MainShowErrand> {
     detail = widget.errands["detail"];
     reward = widget.errands["reward"];
     isCash = widget.errands["isCash"];
-
-    print(title);
-    print(name);
-    print(createdDate);
   }
   // 메인 글 보기 화면
   @override

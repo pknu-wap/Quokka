@@ -533,7 +533,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   alignment: Alignment.centerLeft,
                                   child: GestureDetector(
                                     onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
-                                      Navigator.pop(context);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Main_post_page()
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(left: 30, bottom: 100),
@@ -693,12 +698,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   MainShowErrand(errands : errands[0]),
                             ),
                           );
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (BuildContext context) =>
-                          //         MainShowErrand(errandNo : errandNo, title: title)
-                          //   ),
-                          // );
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
