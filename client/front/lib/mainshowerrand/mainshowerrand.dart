@@ -61,11 +61,8 @@ class _MainShowErrandState extends State<MainShowErrand> {
                   crossAxisAlignment: CrossAxisAlignment.start, // 게시글 중앙 정렬
                   children: [
                     Container(
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          // 심부름 요청서 상세 부분
-                          Flexible(
+                      // 심부름 요청서 상세 부분
+                      child: Flexible(
                               child: Container(
                                 width: 324,
                                 height: 576,
@@ -87,49 +84,46 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                       )
                         ),
                       ),
+                      ),
 
-                          // 확인했어요. 버튼
-                          // Container(
-                          //   margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
-                          //   child: ElevatedButton(
-                          //     onPressed: () {
-                          //       print("확인했어요. 클릭");
-                          //       // 심부름 요청서 팝업 느낌으로 띄우기
-                          //       // Navigator.of(context).push(
-                          //       //   MaterialPageRoute(
-                          //       //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
-                          //       //   ),);
-                          //     },
-                          //     style: ButtonStyle(
-                          //       backgroundColor: MaterialStateProperty.all<Color>(
-                          //           Color(0xFF7C3D1A)),
-                          //       // 버튼의 크기 정하기
-                          //       minimumSize:
-                          //       MaterialStateProperty.all<Size>(Size(318, 46.65)),
-                          //       // 버튼의 모양 변경하기
-                          //       shape:
-                          //       MaterialStateProperty.all<RoundedRectangleBorder>(
-                          //         RoundedRectangleBorder(
-                          //           borderRadius: BorderRadius.circular(
-                          //               5), // 원하는 모양에 따라 BorderRadius 조절
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     child: Text(
-                          //       '확인했어요.',
-                          //       style: TextStyle(
-                          //         fontSize: 14,
-                          //         fontFamily: 'Pretendard',
-                          //         fontWeight: FontWeight.w600,
-                          //         color: Color(0xFFFFFFFF),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-
-                          ],
+                    // 확인했어요. 버튼
+                    Container(
+                      margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print("확인했어요. 클릭");
+                          // 심부름 요청서 팝업 느낌으로 띄우기
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
+                          //   ),);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF7C3D1A)),
+                          // 버튼의 크기 정하기
+                          minimumSize:
+                          MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                          // 버튼의 모양 변경하기
+                          shape:
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  5), // 원하는 모양에 따라 BorderRadius 조절
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          '확인했어요.',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFFFFFFF),
+                          ),
                         ),
                       ),
+                    ),
                   ],
                 )),
 
