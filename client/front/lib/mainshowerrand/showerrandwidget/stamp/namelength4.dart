@@ -2,6 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
 
 class NameLength4 extends StatelessWidget {
+  final String name1;
+  final String name2;
+  final String name3;
+  final String name4;
+
+  NameLength4({
+    required this.name1,
+    required this.name2,
+    required this.name3,
+    required this.name4,
+  });
+
   @override
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
@@ -17,7 +29,7 @@ class NameLength4 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "김",
+                      name1,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -37,7 +49,7 @@ class NameLength4 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "푸",
+                      name2,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -57,7 +69,7 @@ class NameLength4 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "른",
+                      name3,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -77,7 +89,7 @@ class NameLength4 extends StatelessWidget {
                   child: Transform.rotate(
                       angle: 9.77 * math.pi / 180,
                       child: Text(
-                        "들",
+                        name4,
                         style: TextStyle(
                           fontFamily: 'Cafe24Oneprettynight',
                           fontWeight: FontWeight.w400,

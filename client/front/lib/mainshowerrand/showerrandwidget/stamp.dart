@@ -8,6 +8,7 @@ class Stamp extends StatelessWidget {
   late String name1 = realName[0];
   late String name2 = realName[1];
   late String name3 = realName[2];
+  late String name4 = realName[3];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,12 @@ class Stamp extends StatelessWidget {
           ),
           if(realName.length == 4)
           // 심부름 하는 사람 이름 길이 4자
-          NameLength4(),
+          NameLength4(
+            name1: name1,
+            name2: name2,
+            name3: name3,
+            name4: name4,
+          ),
           if(realName.length >= 5)
           // 심부름 하는 사람 이름 길이 5자 이상
           NameLength5More(),
