@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'main_post_page.dart';
 class Status_Content{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
   String created; //메시지 생성 시간
@@ -149,6 +150,13 @@ class _statuspageRState extends State<statuspageR> {
   void initState()
   {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (overlayEntry != null) {
+        overlayEntry!.remove();
+        overlayEntry = null;
+        print("Overlay removed");
+      }
+    });
     errandNo = widget.errandNo;
     completeCheck();
   }

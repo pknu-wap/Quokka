@@ -11,9 +11,10 @@ import 'status_page_requesting.dart';
 import 'testpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
+OverlayEntry? overlayEntry;
+
 class PostWidget extends StatelessWidget {
   final DateTime currentTime = DateTime.now();
-
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
   final double score; //평점
@@ -450,7 +451,7 @@ class Main_post_page extends StatefulWidget {
 class _Main_post_pageState extends State<Main_post_page> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
-  OverlayEntry? _overlayEntry;
+
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
@@ -699,7 +700,8 @@ class _Main_post_pageState extends State<Main_post_page> {
     }
   }
   void _insertOverlay(BuildContext context) {
-    _overlayEntry = OverlayEntry(
+    if (overlayEntry != null) return;
+    overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         bottom: 0,
         left: 0,
@@ -804,7 +806,11 @@ class _Main_post_pageState extends State<Main_post_page> {
         ),
       ),
     );
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(context).insert(overlayEntry!);
+  }
+  void removeOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
   }
   ScrollController _scrollController = ScrollController();
   @override
@@ -837,7 +843,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   }
   @override
   void dispose(){
-    _overlayEntry?.remove();
+    overlayEntry?.remove();
     _scrollController.dispose();
     super.dispose();
   }
