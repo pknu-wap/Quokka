@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
 
-class Namelength3 extends StatelessWidget {
+class Namelength4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
@@ -17,7 +17,7 @@ class Namelength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "정",
+                      "김",
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -37,7 +37,7 @@ class Namelength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "다",
+                      "푸",
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -57,7 +57,7 @@ class Namelength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "은",
+                      "른",
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -69,15 +69,26 @@ class Namelength3 extends StatelessWidget {
                 ),
               )
           ),
-          // 도장 그림
+          // 심부름 하는 사람 이름 네 번째 글자
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                  margin: EdgeInsets.only(top: 28.58, right: 40.53),
-                  child: Image.asset("assets/images/stamp.png")
+                  margin: EdgeInsets.only(top: 25.15, right: 42),
+                  child: Transform.rotate(
+                      angle: 9.77 * math.pi / 180,
+                      child: Text(
+                        "들",
+                        style: TextStyle(
+                          fontFamily: 'Cafe24Oneprettynight',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          letterSpacing: 0.00,
+                          color: Color(0xffCE1111),
+                        ),
+                      )
+                  ),
               )
           ),
-
         ],
       ),
     );

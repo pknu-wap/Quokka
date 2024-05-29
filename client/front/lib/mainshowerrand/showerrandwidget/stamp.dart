@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength3.dart';
+import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength4.dart';
 
 class Stamp extends StatelessWidget {
   @override
@@ -17,16 +18,10 @@ class Stamp extends StatelessWidget {
                   child: Image.asset("assets/images/Rectangle3.png")
               )
           ),
-          // 도장 그림
-          Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                  margin: EdgeInsets.only(top: 28.58, right: 40.53),
-                  child: Image.asset("assets/images/stamp.png")
-              )
-          ),
           // 심부름 하는 사람 이름 길이 3자
-          Namelength3(),
+          // Namelength3(),
+          // 심부름 하는 사람 이름 길이 4자
+          Namelength4(),
 
 
         ],
