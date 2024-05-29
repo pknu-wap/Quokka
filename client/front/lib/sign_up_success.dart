@@ -1,11 +1,19 @@
+import 'dart:developer';
+
 import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:async';
+import 'login.dart';
 import 'main_post_page.dart';
+import 'package:http/http.dart' as http;
+
 class Signup_Success extends StatelessWidget {
-  const Signup_Success({Key? key}): super (key: key);
+  final String username;
+  final String pw;
+  const Signup_Success({Key? key, required this.username, required this.pw}): super (key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +35,14 @@ class Signup_Success extends StatelessWidget {
                     color: Color(0xff111111),
                   )),
                 ))),
-        body: Confetti(),
+        body: Confetti(username: username, pw : pw),
       ),
     );
   }}
 class Confetti extends StatefulWidget {
+  final String username;
+  final String pw;
+  const Confetti({required this.username, required this.pw});
   @override
   ConfettiState createState() => ConfettiState();
 }
@@ -45,9 +56,41 @@ class ConfettiState extends State<Confetti> {
         ConfettiController(duration: const Duration(seconds: 10));
     super.initState();
     Timer(Duration(seconds: 5), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
-      Navigator.push( //맘에 안들면 바로 수정할게요..
-          context, MaterialPageRoute(builder: (context) => Main_post_page()));
+      getTokenAndLogin();
     });
+  }
+
+  void getTokenAndLogin() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}login";
+    String param = "?username=${widget.username}&password=${widget.pw}";
+    print(url+param);
+    try {
+      var post = await http.post(Uri.parse(url + param));
+      if (post.statusCode == 200) {
+        Map<String, dynamic> headers = post.headers;
+        String? token = headers["authorization"];
+        print("token: $token");
+        await storage.write(key: 'TOKEN', value: token);
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Main_post_page()));
+      }
+      else {
+        log("response code != 200");
+        log(post.body);
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LogIn()));
+      }
+
+    } catch(e) {
+      log("exception !");
+      log(e.toString());
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LogIn()));
+    }
   }
 
   @override
