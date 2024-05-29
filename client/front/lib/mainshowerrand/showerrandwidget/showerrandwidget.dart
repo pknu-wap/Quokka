@@ -271,12 +271,11 @@ class ShowErrandWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            if(nickName != "닉 네 임")
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
                             Container(
                               margin: EdgeInsets.only(top: 17.15, left: 5),
                               child: Text(
-                                nickName,
+                                nickName != "닉 네 임" ? nickName : "닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,
