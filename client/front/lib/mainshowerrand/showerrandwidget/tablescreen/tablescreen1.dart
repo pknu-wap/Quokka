@@ -40,7 +40,7 @@ class TableScreen1 extends StatelessWidget {
     },
     {
       'text': "일정",
-      'content': "${due}까지",
+      'content': "${utf8.decode(due.runes.toList())}까지",
     },
     {
       'text': "장소",
