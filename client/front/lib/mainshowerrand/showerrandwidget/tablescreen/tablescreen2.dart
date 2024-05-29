@@ -48,22 +48,16 @@ class TableScreen2 extends StatelessWidget {
 
     // 금액 및 결제 표
     return Container(
-      decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(10),
-      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
       child: Table(
         columnWidths: { // 표의 각 너비 조정
           0: FixedColumnWidth(62),
           1: FixedColumnWidth(176),
         },
-        border: TableBorder.all(
+        border: TableBorder(
           borderRadius: BorderRadius.circular(10),
-          color: Color(0xffF1F1F1),
-          // top: BorderSide(color: Color(0xffF1F1F1), width: 2), // 위쪽 테두리 색상 및 너비 설정
-          // bottom: BorderSide(color: Color(0xffF1F1F1), width: 2), // 아래쪽 테두리 색상 및 너비 설정
-          // left: BorderSide(color: Color(0xffF1F1F1), width: 2), // 왼쪽 테두리 색상 및 너비 설정
-          // right: BorderSide(color: Color(0xffF1F1F1), width: 2), // 오른쪽 테두리 색상 및 너비 설정
-          // horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
+          horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
         ),
         children: List.generate(2, (index) {
           return TableRow(children: [
@@ -87,6 +81,7 @@ class TableScreen2 extends StatelessWidget {
             ),
           ]);
         }),
+       ),
       ),
     );
   }
