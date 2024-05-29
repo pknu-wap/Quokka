@@ -248,7 +248,7 @@ class ShowErrandWidget extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(left: 0),
                               child: Text(
-                                "(주)${utf8.decode(name.runes.toList())}",
+                                "(주) ${utf8.decode(name.runes.toList())}",
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
@@ -262,7 +262,7 @@ class ShowErrandWidget extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(left: 5),
                               child: Text(
-                                "닉네임",
+                                "닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,
@@ -281,7 +281,7 @@ class ShowErrandWidget extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsets.only(right: 37),
                           child: Text(
-                            "(서명)",
+                            "( 서 명 )",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
@@ -294,7 +294,12 @@ class ShowErrandWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                // Line1.png
+                Container(
+                  margin: EdgeInsets.only(top: 5),
+                  child: Image.asset("assets/images/Line1.png")
+                ),
 
 
               ],
