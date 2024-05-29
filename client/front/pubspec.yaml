@@ -117,6 +117,11 @@ flutter:
         - asset: assets/fonts/MaruBuri/MaruBuri-Bold.otf
           weight: 700
 
+    - family: Cafe24Oneprettynight
+      fonts:
+        - asset: assets/fonts/Cafe24Oneprettynight/Cafe24Oneprettynight.ttf
+          weight: 400
+
 
   uses-material-design: true
   # The following line ensures that the Material Icons font is

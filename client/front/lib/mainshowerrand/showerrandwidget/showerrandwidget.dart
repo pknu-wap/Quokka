@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/errand_check.dart';
+import 'package:front/mainshowerrand/showerrandwidget/stamp.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen2.dart';
 
@@ -314,15 +315,8 @@ class ShowErrandWidget extends StatelessWidget {
                             child: Image.asset("assets/images/Line1.png")
                         ),
                       ),
-                      // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 5.15, right: 32),
-                          child: Image.asset("assets/images/Rectangle3.png")
-                        )
-                      ),
-
+                      // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장
+                      Stamp(),
 
                     ],
                   ),
