@@ -31,6 +31,10 @@ class _MainShowErrandState extends State<MainShowErrand> {
   late int reward;
   late bool isCash;
 
+  // 확인했어요. 버튼 변수'
+  bool isCheckButtonVisible = true;
+
+
   @override
   void initState() {
     super.initState();
@@ -95,16 +99,17 @@ class _MainShowErrandState extends State<MainShowErrand> {
                       ),
 
                     // 확인했어요. 버튼
+                    if(isCheckButtonVisible) // 버튼이 보이면,
                     Container(
                       margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
                       child: ElevatedButton(
                         onPressed: () {
                           print("확인했어요. 클릭");
-                          // 심부름 요청서 팝업 느낌으로 띄우기
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //       builder: (context) => MainShowErrand(),/*errandNo: posts[index]["errandNo"])*/
-                          //   ),);
+                          // 확인했어요. 버튼 사라지게 만들고, 심부름 요청서 마진 조정,
+                          // 사용자 닉네임 받아와 텍스트 필드에 채워넣고, 도장 찍기
+                          setState(() {
+                            isCheckButtonVisible = false;
+                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
