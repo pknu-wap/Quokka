@@ -26,19 +26,20 @@ class Status_Content_Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 320,
-      height: 70, // 메시지 1개
+      height: 85, // 메시지 1개
       margin: EdgeInsets.only(top: 21.87),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            margin: EdgeInsets.only(top: 15.09),
             child: Column(
               children: [
                 Container(
                   width: 35.43,
                   height: 35.43,
-                  margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                  margin: EdgeInsets.only(top: 8.28, left: 17.04),
                   child: Image.asset(
                     contents == "완료했어요!"
                         ? 'assets/images/smiley Quokka.png'
@@ -46,7 +47,7 @@ class Status_Content_Widget extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 7.04, top: 5.3),
+                  margin: EdgeInsets.only(left: 21.55, top: 2.48),
                   child: Text(
                     created,
                     style: TextStyle(
@@ -65,6 +66,7 @@ class Status_Content_Widget extends StatelessWidget {
           Container(
             width: 276.69,
             height: 42.79,
+            margin: EdgeInsets.only(left: 8.08),
             alignment: Alignment.center,
             child: Stack(
               children: [
@@ -114,13 +116,31 @@ class statuspage extends StatefulWidget {
 }
 class _statuspageState extends State<statuspage> {
   late int errandNo;
-  List<Map<String, dynamic>> contents = [];
+  List<Map<String, dynamic>> contents = [
+    {
+      'contents': '심부름꾼이 출발했어요 !',
+      'created': '11:20',
+    },
+    {
+      'contents': '지금 물건을 픽업 했어요 !',
+      'created': '11:30',
+    },
+    {
+      'contents': '5분 뒤 도착해요!',
+      'created': '11:49',
+    },
+    {
+      'contents': '완료했어요!',
+      'created': '11:55',
+    },
+    //테스트 코드
+  ];
+  ScrollController _scrollController = ScrollController();
   void initState()
   {
     super.initState();
     errandNo = widget.errandNo;
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -202,7 +222,7 @@ class _statuspageState extends State<statuspage> {
                     ],
                   ),
                 ),
-                Container(width: 355, height: 471.79,
+                Flexible(child: Container(width: 355, height: 471.79,
                   margin: EdgeInsets.only(left: 3.45, top: 20.13),
                   decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
@@ -212,273 +232,19 @@ class _statuspageState extends State<statuspage> {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // children: [
-                    // Container(width: 320, height: 70, //메시지 1개
-                    //   margin: EdgeInsets.only(top: 21.87),
-                    // child: Container(
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.start,
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: [
-                    //             Container(
-                    //               child: Column(
-                    //                 children: [
-                    //                   Container( width: 35.43, height: 35.43,
-                    //                       margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                    //                       child: Image.asset('assets/images/Quokka.png')),
-                    //                   Container(
-                    //                     margin: EdgeInsets.only(left: 7.04, top: 5.3),
-                    //                     child: Text("11:20",
-                    //                       style: TextStyle(
-                    //                           fontFamily: 'Pretendard',
-                    //                           fontStyle: FontStyle.normal,
-                    //                           fontWeight: FontWeight.w400,
-                    //                           letterSpacing: 0.01,
-                    //                           fontSize: 14,
-                    //                           color: Color(0xff747474)),
-                    //                     ),
-                    //                   ),
-                    //
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             Container(
-                    //               width: 276.69,
-                    //               height: 42.79,
-                    //               alignment: Alignment.center,
-                    //              // margin: EdgeInsets.only(left: 15),
-                    //               child: Stack(
-                    //                 children: [
-                    //                   Image.asset(
-                    //                     'assets/images/연한말풍선.png',
-                    //                     width: 276.69,
-                    //                     height: 42.79,
-                    //                     fit: BoxFit.cover,
-                    //                   ),
-                    //                   Positioned.fill(
-                    //                     child: Align(
-                    //                       alignment: Alignment.center,
-                    //                       child: Text(
-                    //                         "출발했어요",
-                    //                         style: TextStyle(
-                    //                           fontFamily: 'Pretendard',
-                    //                           fontStyle: FontStyle.normal,
-                    //                           fontWeight: FontWeight.w500,
-                    //                           letterSpacing: 0.01,
-                    //                           fontSize: 15,
-                    //                           color: Color(0xff232323),
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             // 제목
-                    //
-                    //           ],
-                    //         ),
-                    //       ),
-                    // ),
-                    //   Container(width: 320, height: 70, //메시지 1개
-                    //     child: Container(
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.start,
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Container(
-                    //             child: Column(
-                    //               children: [
-                    //                 Container( width: 35.43, height: 35.43,
-                    //                     margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                    //                     child: Image.asset('assets/images/Quokka.png')),
-                    //                 Container(
-                    //                   margin: EdgeInsets.only(left: 7.04, top: 5.3),
-                    //                   child: Text("11:30",
-                    //                     style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w400,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 14,
-                    //                         color: Color(0xff747474)),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),// 제목
-                    //           Container(
-                    //             width: 276.69,
-                    //             height: 42.79,
-                    //             alignment: Alignment.center,
-                    //             // margin: EdgeInsets.only(left: 15),
-                    //             child: Stack(
-                    //               children: [
-                    //                 Image.asset(
-                    //                   'assets/images/연한말풍선.png',
-                    //                   width: 276.69,
-                    //                   height: 42.79,
-                    //                   fit: BoxFit.cover,
-                    //                 ),
-                    //                 Positioned.fill(
-                    //                   child: Align(
-                    //                     alignment: Alignment.center,
-                    //                     child: Text(
-                    //                       "지금 물건을 픽업했어요!",
-                    //                       style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w500,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 15,
-                    //                         color: Color(0xff232323),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //
-                    //
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   Container(width: 320, height: 70, //메시지 1개
-                    //     child: Container(
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.start,
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Container(
-                    //             child: Column(
-                    //               children: [
-                    //                 Container( width: 35.43, height: 35.43,
-                    //                     margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                    //                     child: Image.asset('assets/images/Quokka.png')),
-                    //                 Container(
-                    //                   margin: EdgeInsets.only(left: 7.04, top: 5.3),
-                    //                   child: Text("11:49",
-                    //                     style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w400,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 14,
-                    //                         color: Color(0xff747474)),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),// 제목
-                    //           Container(
-                    //             width: 276.69,
-                    //             height: 42.79,
-                    //             alignment: Alignment.center,
-                    //             // margin: EdgeInsets.only(left: 15),
-                    //             child: Stack(
-                    //               children: [
-                    //                 Image.asset(
-                    //                   'assets/images/연한말풍선.png',
-                    //                   width: 276.69,
-                    //                   height: 42.79,
-                    //                   fit: BoxFit.cover,
-                    //                 ),
-                    //                 Positioned.fill(
-                    //                   child: Align(
-                    //                     alignment: Alignment.center,
-                    //                     child: Text(
-                    //                       "5분 뒤 도착해요!",
-                    //                       style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w500,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 15,
-                    //                         color: Color(0xff232323),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //
-                    //
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   Container(width: 320, height: 70, //메시지 1개
-                    //     child: Container(
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.start,
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Container(
-                    //             child: Column(
-                    //               children: [
-                    //                 Container( width: 35.43, height: 35.43,
-                    //                     margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                    //                     child: Image.asset('assets/images/smiley Quokka.png')),
-                    //                 Container(
-                    //                   margin: EdgeInsets.only(left: 7.04, top: 5.3),
-                    //                   child: Text("12:04",
-                    //                     style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w400,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 14,
-                    //                         color: Color(0xff747474)),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),// 제목
-                    //           Container(
-                    //             width: 276.69,
-                    //             height: 42.79,
-                    //             alignment: Alignment.center,
-                    //             // margin: EdgeInsets.only(left: 15),
-                    //             child: Stack(
-                    //               children: [
-                    //                 Image.asset(
-                    //                   'assets/images/진한말풍선.png',
-                    //                   width: 276.69,
-                    //                   height: 42.79,
-                    //                   fit: BoxFit.cover,
-                    //                 ),
-                    //                 Positioned.fill(
-                    //                   child: Align(
-                    //                     alignment: Alignment.center,
-                    //                     child: Text(
-                    //                       "완료했어요!",
-                    //                       style: TextStyle(
-                    //                         fontFamily: 'Pretendard',
-                    //                         fontStyle: FontStyle.normal,
-                    //                         fontWeight: FontWeight.w500,
-                    //                         letterSpacing: 0.01,
-                    //                         fontSize: 15,
-                    //                         color: Color(0xffFFFFFF),
-                    //                       ),
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ), //
-                    //
-                    //
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    //     ],
-                      ),),
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                    controller: _scrollController,
+                    shrinkWrap: true,
+                    itemCount: contents.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return Status_Content_Widget(
+                        contents: contents[index]["contents"],
+                        created: contents[index]["created"],
+                      );
+                    }
+                ),
+                  ),),
           Container(
             margin: EdgeInsets.only(top: 24.08, left: 21),
             child: ElevatedButton(
