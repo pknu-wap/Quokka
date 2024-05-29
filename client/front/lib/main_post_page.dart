@@ -217,15 +217,26 @@ class PostWidget extends StatelessWidget {
 class InProgress_Errand_Widget extends StatelessWidget {
   final int errandNo; //게시글 번호
   final String title; //제목
-  final String due; //목적지
+  final String due; //일정
   final bool isUserOrder; //내가 요청자인지 심부름꾼인지 여부
-  const InProgress_Errand_Widget({
+  InProgress_Errand_Widget({
     Key? key,
     required this.errandNo,
     required this.title,
     required this.due,
     required this.isUserOrder,
   }) : super(key: key);
+  String formatDueDate(String due) {
+    // '2024-05-20 14:28:08' 형식의 문자열을 DateTime 객체로 변환합니다.
+    DateTime dateTime = DateTime.parse(due);
+
+    // 원하는 형식으로 변환합니다.
+    String formattedDate = DateFormat('M월 d일 HH:mm').format(dateTime);
+
+    String result = '일정 $formattedDate까지'; // 최종 결과 문자열
+
+    return result;
+  }
   @override
   Widget build(BuildContext context) {
     if(!isUserOrder) {
@@ -266,7 +277,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                           ), //제목
                           Container(
                               margin: EdgeInsets.only(left: 14.52),
-                              child: Text("${due}",
+                              child: Text(formatDueDate(due),
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400, fontSize: 13,
@@ -334,7 +345,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                           ), //제목
                           Container(
                               margin: EdgeInsets.only(left: 14.52),
-                              child: Text("${due}",
+                              child: Text(formatDueDate(due),
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400, fontSize: 13,
