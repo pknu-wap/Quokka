@@ -1,12 +1,8 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/main_post_page.dart';
 import 'package:front/mainshowerrand/showerrandwidget/showerrandwidget.dart';
 import 'package:front/request.dart';
-import 'package:intl/intl.dart';
-
 
 class MainShowErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -33,6 +29,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
 
   // 확인했어요. 버튼 변수'
   bool isCheckButtonVisible = true;
+  bool isStampVisible = false;
   EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40, left: 18.5);
 
 
@@ -94,6 +91,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         detail: detail,
                                         reward: reward,
                                         isCash: isCash,
+                                        isStampVisible: isStampVisible,
                                       )
                         ),
                       ),
@@ -110,6 +108,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                           // 사용자 닉네임 받아와 텍스트 필드에 채워넣고, 도장 찍기
                           setState(() {
                             isCheckButtonVisible = false;
+                            isStampVisible = true;
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
                           });
                         },

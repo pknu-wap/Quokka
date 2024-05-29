@@ -4,6 +4,8 @@ import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength4.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength5more.dart';
 
 class Stamp extends StatelessWidget {
+  String realName = "김수현";
+
   @override
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
@@ -19,10 +21,15 @@ class Stamp extends StatelessWidget {
                   child: Image.asset("assets/images/Rectangle3.png")
               )
           ),
+
+          if(realName.length == 3)
           // 심부름 하는 사람 이름 길이 3자
-          // NameLength3(),
+          NameLength3(),
+          if(realName.length == 4)
           // 심부름 하는 사람 이름 길이 4자
-          // NameLength4(),
+          NameLength4(),
+          if(realName.length >= 5)
+          // 심부름 하는 사람 이름 길이 5자 이상
           NameLength5More(),
 
 

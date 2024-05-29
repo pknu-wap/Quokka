@@ -17,6 +17,7 @@ class ShowErrandWidget extends StatelessWidget {
   final String detail;
   final int reward;
   final bool isCash;
+  final bool isStampVisible;
 
   ShowErrandWidget({
     required this.errandNo,
@@ -28,6 +29,7 @@ class ShowErrandWidget extends StatelessWidget {
     required this.detail,
     required this.reward,
     required this.isCash,
+    required this.isStampVisible,
   });
 
   // 심부름 요청서 상세 페이지
@@ -315,6 +317,7 @@ class ShowErrandWidget extends StatelessWidget {
                             child: Image.asset("assets/images/Line1.png")
                         ),
                       ),
+                      if(isStampVisible)
                       // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장
                       Stamp(),
 
