@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength3.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength4.dart';
+import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength5more.dart';
 
 class Stamp extends StatelessWidget {
   @override
@@ -19,9 +20,10 @@ class Stamp extends StatelessWidget {
               )
           ),
           // 심부름 하는 사람 이름 길이 3자
-          // Namelength3(),
+          // NameLength3(),
           // 심부름 하는 사람 이름 길이 4자
-          Namelength4(),
+          // NameLength4(),
+          NameLength5More(),
 
 
         ],

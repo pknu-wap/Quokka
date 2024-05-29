@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
 
-class Namelength4 extends StatelessWidget {
+class NameLength4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
