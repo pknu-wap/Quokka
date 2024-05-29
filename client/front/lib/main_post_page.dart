@@ -247,7 +247,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (context) => statuspageR(errandNo: errandNo)
-            ),);
+            ));
         },
         child:  Container( width: 360, height: 72.51, //심부름 1개 수행중
           child: Column(

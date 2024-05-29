@@ -154,7 +154,6 @@ class _statuspageRState extends State<statuspageR> {
       if (overlayEntry != null) {
         overlayEntry!.remove();
         overlayEntry = null;
-        print("Overlay removed");
       }
     });
     errandNo = widget.errandNo;
