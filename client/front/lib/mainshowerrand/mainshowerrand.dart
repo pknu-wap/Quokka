@@ -33,6 +33,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
 
   // 확인했어요. 버튼 변수'
   bool isCheckButtonVisible = true;
+  EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40, left: 18.5);
 
 
   @override
@@ -70,7 +71,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                               child: Container(
                                 width: 324,
                                 height: 576,
-                                margin: EdgeInsets.only(top: 40, left: 18),
+                                margin: errandConfirmedMargin, // 기존 마진 -> 확정 마진
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
                                   color: Color(0xffFCFCF9),
@@ -109,6 +110,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                           // 사용자 닉네임 받아와 텍스트 필드에 채워넣고, 도장 찍기
                           setState(() {
                             isCheckButtonVisible = false;
+                            errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
                           });
                         },
                         style: ButtonStyle(
