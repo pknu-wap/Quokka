@@ -103,15 +103,25 @@ class ShowErrandWidget extends StatelessWidget {
                         // 밑줄 텍스트 필드?
                         Container(
                           margin: EdgeInsets.only(left: 2),
+                          child: Transform.translate(
+                            offset: Offset(0, -3),
+                          child: Container(
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(
+                                color: Color(0xff111111),
+                            width: 0.5)), // 밑줄 스타일링
+                          ),
                           child: Text(
-                            "__________",
+                            '                  ',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w300,
                               fontSize: 11,
                               letterSpacing: 0.00,
                               color: Color(0xff111111),
+                             ),
                             ),
+                           ),
                           ),
                         ),
                         //님의... 길이에 따라 줄바꿈 텍스트 생성
