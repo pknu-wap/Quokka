@@ -2,6 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
 
 class NameLength3 extends StatelessWidget {
+  final String name1;
+  final String name2;
+  final String name3;
+
+  NameLength3({
+    required this.name1,
+    required this.name2,
+    required this.name3,
+});
+
   @override
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
@@ -17,7 +27,7 @@ class NameLength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "정",
+                      name1,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -37,7 +47,7 @@ class NameLength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "다",
+                      name2,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
@@ -57,7 +67,7 @@ class NameLength3 extends StatelessWidget {
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
-                      "은",
+                      name3,
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,

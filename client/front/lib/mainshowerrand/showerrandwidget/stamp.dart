@@ -5,6 +5,9 @@ import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength5more.dart
 
 class Stamp extends StatelessWidget {
   String realName = "김수현";
+  late String name1 = realName[0];
+  late String name2 = realName[1];
+  late String name3 = realName[2];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,11 @@ class Stamp extends StatelessWidget {
 
           if(realName.length == 3)
           // 심부름 하는 사람 이름 길이 3자
-          NameLength3(),
+          NameLength3(
+            name1: name1,
+            name2: name2,
+            name3: name3,
+          ),
           if(realName.length == 4)
           // 심부름 하는 사람 이름 길이 4자
           NameLength4(),
