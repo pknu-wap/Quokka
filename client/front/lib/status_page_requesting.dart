@@ -72,8 +72,8 @@ class Status_Content_Widget extends StatelessWidget {
               children: [
                 Image.asset(
                   contents == "완료했어요!"
-                      ? 'assets/images/진한말풍선.png'
-                      : 'assets/images/연한말풍선.png',
+                      ? 'assets/images/진한말풍선L.png'
+                      : 'assets/images/연한말풍선L.png',
                   width: 276.69,
                   height: 42.79,
                   fit: BoxFit.cover,
@@ -104,17 +104,17 @@ class Status_Content_Widget extends StatelessWidget {
     );
   }
 }
-class statuspage extends StatefulWidget {
+class statuspageQ extends StatefulWidget {
   final int errandNo;
-  const statuspage({
+  const statuspageQ({
     Key? key,
     required this.errandNo,
   }) : super(key: key);
 
   @override
-  State<statuspage> createState() => _statuspageState();
+  State<statuspageQ> createState() => _statuspageQState();
 }
-class _statuspageState extends State<statuspage> {
+class _statuspageQState extends State<statuspageQ> {
   late int errandNo;
   List<Map<String, dynamic>> contents = [
     {

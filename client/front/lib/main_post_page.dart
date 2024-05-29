@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
 import 'errand_check.dart';
-import 'status_page.dart';
+import 'status_page_requesting.dart';
 import 'testpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
-
 class PostWidget extends StatelessWidget {
   final DateTime currentTime = DateTime.now();
 
@@ -245,7 +245,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => statuspage(errandNo: errandNo)
+                builder: (context) => statuspageR(errandNo: errandNo)
             ),);
         },
         child:  Container( width: 360, height: 72.51, //심부름 1개 수행중
@@ -314,7 +314,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => statuspage(errandNo: errandNo)
+                builder: (context) => statuspageQ(errandNo: errandNo)
             ),);
         },
         child:  Container( width: 360, height: 72.51, //심부름 1개 요청중
@@ -450,14 +450,14 @@ class Main_post_page extends StatefulWidget {
 class _Main_post_pageState extends State<Main_post_page> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
+  OverlayEntry? _overlayEntry;
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
   bool isCheckBox = false;
   String status = "";
   String? token = "";
-  bool isVisible = false;
-  OverlayEntry? _overlayEntry; //하단바 오버레이
+  bool isVisible = false; //하단바 오버레이
   InprogressExist() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress/exist";
     token = await storage.read(key: 'TOKEN');
@@ -698,7 +698,7 @@ class _Main_post_pageState extends State<Main_post_page> {
       }
     }
   }
-  void _insertOverlay() {
+  void _insertOverlay(BuildContext context) {
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         bottom: 0,
@@ -738,7 +738,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                   onPressed: () {},
                   icon: Image.asset(
                     'assets/images/home_icon.png',
-                    color: Color(0xff545454),
+                    color: Color(0xffADADAD),
                   ),
                 ),
               ),
@@ -811,7 +811,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   void initState(){
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _insertOverlay();
+      _insertOverlay(context);
     });
     ErrandLatestInit(); //최신순 요청서 5개
     InprogressExist(); //진행중인 심부름이 있는지 확인
