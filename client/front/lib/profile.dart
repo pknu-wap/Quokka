@@ -106,32 +106,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
       var response = await http.post(Uri.parse(url),
           body: jsonEncode(u1.toJson()),
           headers: {"Content-Type": "application/json"});
-      if (response.statusCode == 200) {
-        print('200');
-        print(u1.mail);
-        print(u1.department);
-        print(u1.name);
-        print(u1.id.length);
+          if(response.statusCode == 200) {
+            print('200');
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
 
-        print(u1.pw);
-        print(u1.nickname);
+            print(u1.pw);
+            print(u1.nickname);
 
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => Signup_Success(),
-          ),
-        );
-      } else {
-        print(response.statusCode);
-        print(u1.mail);
-        print(u1.department);
-        print(u1.name);
-        print(u1.id.length);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    Signup_Success(username : u1.id, pw : u1.pw),
+              ),
+            );
+          } else{
+            print(response.statusCode);
+            print(u1.mail);
+            print(u1.department);
+            print(u1.name);
+            print(u1.id.length);
 
-        print(u1.pw);
-        print(u1.nickname);
-      }
-    } catch (e) {
+            print(u1.pw);
+            print(u1.nickname);
+          }
+    } catch(e) {
       print(e.toString());
     }
   }

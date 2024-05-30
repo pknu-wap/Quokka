@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -43,30 +45,46 @@ class _Upload_ImageState extends State<Upload_Image> {
 
 
   parsethetext() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile == null) return;
-    var bytes = File(pickedFile.path.toString()).readAsBytesSync();
-    String img64 = base64Encode(bytes);
+    try {
+      final pickedFile = await ImagePicker().pickImage(
+          source: ImageSource.gallery);
+      if (pickedFile == null) return;
+      var bytes = File(pickedFile.path.toString()).readAsBytesSync();
+      String img64 = base64Encode(bytes);
 
-    var url = 'https://api.ocr.space/parse/image';
-    var payload = {"base64Image": "data:image/png;base64,${img64.toString()}","language" :"kor"};
-    var header = {"apikey" :"K88159020988957"};
+      var url = 'https://api.ocr.space/parse/image';
+      var payload = {
+        "base64Image": "data:image/png;base64,${img64.toString()}",
+        "language": "kor"
+      };
+      var header = {"apikey": "K88159020988957"};
 
 
-    var post = await http.post(Uri.parse(url),body: payload,headers: header);
-    var result = jsonDecode(post.body); // 추출 결과를 받아서 result에 저장
-    setState(() {
-      print(result);
-      parsedtext = result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
-      extractInfoFromText();
-      //if (u1.name != '' && u1.id != '' && u1.department != '') {
+      var post = await http.post(
+          Uri.parse(url), body: payload, headers: header);
+      var result = jsonDecode(post.body); // 추출 결과를 받아서 result에 저장
+      setState(() {
+        print(result);
+        parsedtext =
+        result['ParsedResults'][0]['ParsedText']; // 추출결과를 다시 parsedtext로 저장
+        extractInfoFromText();
+        //if (u1.name != '' && u1.id != '' && u1.department != '') {
         // Navigate to the next page with the populated s1 object
+
+        //}
+      });
+    } catch(e) {
+      log("error at picked image or connect OCR api");
+      u1 = User(widget.requestMail,'','','','','');
+    }
+    finally {
+      setState(() {
         Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => Check_Image(u1: u1)
-            ),);
-       //}
-  });
+          MaterialPageRoute(
+              builder: (context) => Check_Image(u1: u1)
+          ),);
+      });
+    }
   }
   void extractInfoFromText() {
     int index = parsedtext.indexOf('남은시간');

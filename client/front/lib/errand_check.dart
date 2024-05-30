@@ -449,6 +449,140 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     }
   }
 
+  Future<void> deleteErrand() async {
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand";
+    String param = "/$errandNo";
+    print(url + param);
+
+    token = await storage.read(key: 'TOKEN');
+    var response = await http
+        .delete(Uri.parse(url + param), headers: {"Authorization": "$token"});
+
+    if (response.statusCode == 200) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => Main_post_page(),
+        ),
+      );
+    }
+    else {
+      print(response.body);
+    }
+  }
+  // void deleteDialog(context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return Dialog(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [
+  //             const Text("정말로 삭제하시겠습니까?"),
+  //             ElevatedButton(
+  //               onPressed: () {
+  //                 deleteErrand();
+  //                 Navigator.pop(context);
+  //               },
+  //               child: Text("삭제"),
+  //             ),
+  //             ElevatedButton(
+  //               onPressed: () {
+  //                 Navigator.pop(context);
+  //               },
+  //               child: Text("취소"),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  void deleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            width: 300,
+            height: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.delete,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "정말 삭제하시겠어요?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "삭제 버튼 선택 시, 심부름은\n삭제되며 복구되지 않습니다.",
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          deleteErrand();
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("삭제"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.brown,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Colors.brown),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -795,8 +929,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             margin: EdgeInsets.only(left: 17.55, right: 20.99),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pop(context);
-                                print("삭제하기 버튼");
+                                deleteDialog(context);
                               },
                               style: ButtonStyle(
                                 backgroundColor:
