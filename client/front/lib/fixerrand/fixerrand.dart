@@ -46,10 +46,10 @@ class _FixErrandState extends State<FixErrand> {
   TextEditingController requestController = TextEditingController();
 
   // 텍스트 필드 변수 선언
-  bool isTitleEnabled = false;
-  bool isDetailAddressEnabled = false;
-  bool isPriceEnabled = false;
-  bool isRequestEnabled = false;
+  bool isTitleEnabled = true;
+  bool isDetailAddressEnabled = true;
+  bool isPriceEnabled = true;
+  bool isRequestEnabled = true;
 
   // 일정 토글 버튼 변수 선언
   bool isToday = true; // 맨 처음 고정 값
@@ -223,7 +223,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 28),
+                  margin: EdgeInsets.only(top: 10),
                   child: Row(
                     children: [
                       Expanded(
@@ -959,7 +959,7 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 작성 완료 버튼 만들기
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(
                     onPressed: () {
                       // errandPostRequest();
