@@ -1,27 +1,35 @@
 package com.pknuErrand.appteam.service.member;
 
+import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberFormDto;
+import com.pknuErrand.appteam.exception.CustomException;
+import com.pknuErrand.appteam.exception.ErrorCode;
+import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class MemberService{
 
     private final MemberRepository memberRepository;
+    private final ErrandRepository errandRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public MemberService(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    @Autowired
+    public MemberService(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ErrandRepository errandRepository) {
 
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.errandRepository = errandRepository;
     }
 
+    @Transactional
     public void SignUpProcess(MemberFormDto memberFormDto) {
 
         String mail = memberFormDto.getMail();
@@ -34,15 +42,19 @@ public class MemberService{
         memberRepository.save(new Member(mail, department, name, id, bCryptPasswordEncoder.encode(pw), nickname, 100, "ROLE_ADMIN"));
     }
 
+    @Transactional
     public Member findMemberById(String id) {
 
         Member member = memberRepository.findById(id);
         return member;
     }
+
+    @Transactional
     public Member findMemberByMemberNo(long id) {
         return memberRepository.findMemberByMemberNo(id);
     }
 
+    @Transactional
     public Member getLoginMember() {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,27 +65,45 @@ public class MemberService{
         return findMemberById(username);
     }
 
+    @Transactional
     public boolean checkId(String Id) {
 
         return memberRepository.existsById(Id);
     }
 
+    @Transactional
     public boolean checkNickname(String nickname) {
 
         return memberRepository.existsByNickname(nickname);
     }
 
-    public void updateScore(String id, double score) {
+    @Transactional
+    public void updateScore(long errandNo, double score) {
 
-        Member member = memberRepository.findById(id);
-        if (member == null) {
-            throw new IllegalArgumentException("존재하지 않는 아이디");
-        }
-        double finScore = member.getScore() + calScore(score);
-        member.updateScore(finScore);
-        memberRepository.save(member);
+        Errand errand = errandRepository.findById(errandNo).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
+
+        Member updatedMember = null;
+
+        // True면 Errander(심부름 꾼)이 반환됨
+        if(isMyErrand(errand, getLoginMember().getMemberNo()))
+            updatedMember = errand.getErranderNo();
+
+        // False면 Order(심부름 시킨 사람)이 반환 됨
+        else
+            updatedMember = errand.getOrderNo();
+
+        double finScore = updatedMember.getScore() + calScore(score);
+        updatedMember.updateScore(finScore);
+        memberRepository.save(updatedMember);
     }
 
+    @Transactional
+    public Boolean isMyErrand(Errand errand, Long memberNo)  { /** Parameter : Errand 객체, Member pk (long) **/
+        // order == 심부름 시킨 사람, errander == 심부름 한 사람
+        return errand.getOrderNo().getMemberNo() == memberNo;
+    }
+
+    @Transactional
     double calScore(double score) {
         double addScore = 0;
         switch ((int)score) {

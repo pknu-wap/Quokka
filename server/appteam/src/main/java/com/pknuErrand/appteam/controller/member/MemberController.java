@@ -66,13 +66,12 @@ public class MemberController {
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "평가 완료") ,
-            @ApiResponse(responseCode = "404\nUSER_NOT_FOUND", description = "유저 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
-    @Operation(summary = "상대방 평가", description = "상대방 1~5점으로 평가")
-    @PostMapping("/score")
-    public void getMemberScore(@RequestParam("id") String id, @RequestParam("score") double score) {
+    @Operation(summary = "상대방 평가", description = "상대방 1 ~ 5점으로 평가")
+    @PutMapping("/score")
+    public void getMemberScore(@RequestParam("errandNo") long errandNo, @RequestParam("score") double score) {
 
-        memberService.updateScore(id, score);
+        memberService.updateScore(errandNo, score);
     }
 
 }
