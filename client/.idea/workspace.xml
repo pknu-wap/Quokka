@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5b21be5b-2c8c-4bd1-b7ab-c208ec551126" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/status_page_requesting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/status_page_running.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/sign_up_success.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/sign_up_success.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/lib/upload_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/upload_image.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +59,8 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.android.tools.idea.streaming.zoom.toolbar.visible&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/165/현황페이지-만들기2&quot;,
+
+    &quot;git-widget-placeholder&quot;: &quot;feature/164-회원가입-완료-후-자동-로그인-기능&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/민경윤/Desktop/논문/주뻬.jpg&quot;,

@@ -107,6 +107,22 @@ flutter:
         - asset: assets/fonts/Roboto/Roboto-Black.ttf
           weight: 900
 
+    - family: SANGJUDajungdagam
+      fonts:
+        - asset: assets/fonts/SANGJUDajungdagam/SANGJUDajungdagam.ttf
+          weight: 400
+
+    - family: MaruBuri
+      fonts:
+        - asset: assets/fonts/MaruBuri/MaruBuri-Bold.otf
+          weight: 700
+
+    - family: Cafe24Oneprettynight
+      fonts:
+        - asset: assets/fonts/Cafe24Oneprettynight/Cafe24Oneprettynight.ttf
+          weight: 400
+
+
   uses-material-design: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

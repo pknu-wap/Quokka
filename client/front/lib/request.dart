@@ -40,10 +40,20 @@ class ErrandRequest {
   final String? due;
   final String? detail;
   final int reward;
+  final String status;
   final bool isCash;
-  ErrandRequest({required this.createdDate, required this.title, required this.destination,
-    required this.latitude, required this.longitude, required this.due, required this.detail,
-    required this.reward, required this.isCash});
+  ErrandRequest({
+    required this.createdDate,
+    required this.title,
+    required this.destination,
+    required this.latitude,
+    required this.longitude,
+    required this.due,
+    required this.detail,
+    required this.reward,
+    required this.status,
+    required this.isCash
+  });
 
   Map<String, dynamic> toJson(){
     return {
@@ -69,6 +79,7 @@ class ReturnValues {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
+  late String status;
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
@@ -84,9 +95,9 @@ class _RequestState extends State<Request> {
 
   // 일정 토글 버튼 변수 선언
   bool isToday = true; // 맨 처음 고정 값
-  bool isTommorrow = false;
+  bool isTomorrow = false;
   bool isDetailVisible = true; // 예약 버튼 클릭 시 상세 시간 설정
-  late List<bool> isSelected1 = [isToday, isTommorrow];
+  late List<bool> isSelected1 = [isToday, isTomorrow];
 
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
@@ -107,13 +118,6 @@ class _RequestState extends State<Request> {
   NLatLng value = NLatLng(0, 0);
   late NaverMapController mapController; // 지도 컨트롤
 
-  // late NMarker markerIcon;
-  // @override
-  // void setCustomMapMarker() async {
-  //   final markerIcon = await NOverlayImage.fromAssetImage(
-  //   'assets/images/location.png',
-  //   );
-  // }
   Future<Position> getCurrentLocation() async {
     log("call geolocator");
     try {
@@ -147,6 +151,7 @@ class _RequestState extends State<Request> {
         due: setDue(),
         detail: requestController.text,
         reward: int.parse(priceController.text),
+        status: status,
         isCash: isSelected2[1],
     );
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
@@ -162,7 +167,7 @@ class _RequestState extends State<Request> {
         int errandNo = jsonDecode(response.body)['errandNo'];
         Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => MainErrandCheck(errandNo: errandNo)
+                builder: (context) => MainErrandCheck(errandNo: errandNo, status: status,)
             ),);
       }
       else {
@@ -308,7 +313,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 28),
+                margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: [
                     Expanded(
@@ -1036,7 +1041,7 @@ class _RequestState extends State<Request> {
               ),
               // 작성 완료 버튼 만들기
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                 child: ElevatedButton(
                   onPressed: () {
                     errandPostRequest();

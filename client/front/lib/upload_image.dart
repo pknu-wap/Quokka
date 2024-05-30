@@ -75,6 +75,7 @@ class _Upload_ImageState extends State<Upload_Image> {
       });
     } catch(e) {
       log("error at picked image or connect OCR api");
+      u1 = User(widget.requestMail,'','','','','');
     }
     finally {
       setState(() {

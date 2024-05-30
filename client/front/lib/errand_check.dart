@@ -7,6 +7,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'fixerrand/fixerrand.dart';
+import 'mainshowerrand/mainshowerrand.dart';
 import 'request.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
@@ -376,8 +378,9 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
+  final String status;
 
-  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo, required this.status}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
@@ -385,11 +388,12 @@ class MainErrandCheck extends StatefulWidget {
 
 class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
-  String status = "";
   String? token = "";
   late int errandNo;
-  late double latitude;
-  late double longitude;
+  late String status;
+
+  late double latitude = 0;
+  late double longitude = 0;
   late NLatLng myLatLng;
   late NMarker marker;
 
@@ -422,6 +426,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "status": errand.status,
         "isMyErrand": errand.isMyErrand,
       });
+
       log("status code == 200, Json Data Parsed.");
       setState(() {
         latitude = errand.latitude;
@@ -584,6 +589,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     errandReading(errandNo.toString());
+    status = widget.status;
+    log(status.toString());
   }
 
   // 메인 글 보기 화면
@@ -664,7 +671,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   alignment: Alignment.centerLeft,
                                   child: GestureDetector(
                                     onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
-                                      Navigator.pop(context);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Main_post_page()
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(left: 30, bottom: 100),
@@ -727,10 +739,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   utf8.decode(detail.runes.toList());
                               String decodedStatus =
                                   utf8.decode(status.runes.toList());
-                              return GestureDetector(
-                                // behavior: HitTestBehavior.translucent,
-                                //게시글 전체를 클릭 영역으로 만들어주는 코드
-                                child: ErrandCheckWidget(
+                              return ErrandCheckWidget(
                                   orderNo: errands[index]["orderNo"],
                                   nickname: decodedNickname,
                                   score: errands[index]["score"],
@@ -746,7 +755,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   isCash: errands[index]["isCash"],
                                   status: decodedStatus,
                                   isMyErrand: errands[index]["isMyErrand"],
-                                ),
                               );
                             }),
                       ),
@@ -793,16 +801,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 utf8.decode(detail.runes.toList());
                                 String decodedStatus =
                                 utf8.decode(status.runes.toList());
-                                return GestureDetector(
-                                  // behavior: HitTestBehavior.translucent,
-                                  //게시글 전체를 클릭영역으로 만들어주는 코드
-                                  onTap: () {
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
-                                    //   ),);
-                                  },
-                                  child: ErrandCheckWidget(
+                                return ErrandCheckWidget(
                                     orderNo: errands[index]["orderNo"],
                                     nickname: decodedNickname,
                                     score: errands[index]["score"],
@@ -818,20 +817,30 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                     isCash: errands[index]["isCash"],
                                     status: decodedStatus,
                                     isMyErrand: errands[index]["isMyErrand"],
-                                  ),
                                 );
                               }),
                         ),
                       ),
 
-                    if (errands[0]["isMyErrand"] == false)
+                    if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)
                     Container(
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
+                        onPressed: () async{
                           print("제가 할게요! 클릭");
+                          // 심부름 요청서 팝업 느낌으로 띄우기
+                          String updatedStatus =
+                              await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MainShowErrand(errands : errands[0]),
+                            ),
+                          );
+                          // 상태 업데이트
+                          setState(() {
+                            status = updatedStatus; // 상태가 업데이트가 안 돼ㅜㅜ
+                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -868,16 +877,32 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.only(left: 18),
+                              decoration: BoxDecoration(
+                                // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(161, 161, 161, 0.25),
+                                    offset: Offset(2, 3),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  print("수정하기 버튼");
+                                  print("수정하기 버튼 클릭!");
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FixErrand(errands: errands[0]),
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
                                           Color(0xffFFFFFF)),
-                                  // 버튼의 크기 정하기
                                   minimumSize: MaterialStateProperty.all<Size>(
                                       Size(151.73, 49.7)),
                                   // 버튼의 모양 변경하기
@@ -900,6 +925,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
+                                      color: Color(0xff7F7F7F),
                                     ),
                                     SizedBox(width: 6.55),
                                     // Adjust the space between icon and text as needed
@@ -919,6 +945,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 17.55, right: 20.99),
+                            decoration: BoxDecoration(
+                              // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(161, 161, 161, 0.25),
+                                  offset: Offset(2, 3),
+                                  blurRadius: 4,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: ElevatedButton(
                               onPressed: () {
                                 deleteDialog(context);
@@ -971,113 +1009,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     ),
                   ],
                 )),
-
-            // 내비게이션 바
-            Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                    width: 364,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: Color(0xffFFFFFF),
-                      border: Border.all(
-                        color: Color(0xffCFCFCF),
-                        width: 0.5,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(185, 185, 185, 0.25),
-                          offset: Offset(5, -1),
-                          blurRadius: 5,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 22,
-                            height: 22,
-                            margin: const EdgeInsets.only(
-                                left: 44, top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'assets/images/home_icon.png',
-                                color: Color(0xff545454),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 19.31,
-                            height: 23.81,
-                            margin:
-                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'assets/images/human_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 22.0,
-                            height: 22,
-                            margin:
-                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Request(),
-                                  ),
-                                );
-                              },
-                              icon: Image.asset(
-                                'assets/images/add_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 21.95,
-                            height: 24.21,
-                            margin: const EdgeInsets.only(
-                                top: 20.0, bottom: 17.32, right: 43.92),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'assets/images/history_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                        ])))
           ],
         ),
       ),
