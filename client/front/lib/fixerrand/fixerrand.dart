@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+
+import '../map.dart';
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -85,6 +89,21 @@ class _FixErrandState extends State<FixErrand> {
     status = widget.errands["status"];
     isCash = widget.errands["isCash"];
   }
+
+  // 토글 버튼(일정)
+  void toggleSelect1(int newindex) {
+    setState(() {
+      for (int index = 0; index < isSelected1.length; index++) {
+        if (index == newindex) {
+          isSelected1[index] = true;
+        } else {
+          isSelected1[index] = false;
+        }
+      }
+    });
+    //print(isSelected1);
+  }
+
 
   @override
   Widget build(BuildContext context) {
