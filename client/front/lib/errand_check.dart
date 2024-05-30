@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'fixerrand/fixerrand.dart';
 import 'mainshowerrand/mainshowerrand.dart';
 import 'request.dart';
 import 'main_post_page.dart';
@@ -878,8 +879,13 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               margin: EdgeInsets.only(left: 18),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  print("수정하기 버튼");
+                                  print("수정하기 버튼 클릭!");
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FixErrand(errands: errands[0]),
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:
