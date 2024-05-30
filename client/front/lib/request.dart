@@ -313,7 +313,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 28),
+                margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: [
                     Expanded(
@@ -1041,7 +1041,7 @@ class _RequestState extends State<Request> {
               ),
               // 작성 완료 버튼 만들기
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                 child: ElevatedButton(
                   onPressed: () {
                     errandPostRequest();
