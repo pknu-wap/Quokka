@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 
@@ -155,14 +157,19 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(memberErrandDto.getOrderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(isMyErrand(errand, memberService.getLoginMember().getMemberNo())) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
     }
 
     @Transactional
-    public ErrandDetailResponseDto acceptErrand(Long id) {
+    public Boolean isMyErrand(Errand errand, Long memberNo)  {  /** Parameter : Errand 객체, Member pk (long) **/
+        return errand.getOrderNo().getMemberNo() == memberNo;
+    }
+
+    @Transactional
+    public Map<String, String> acceptErrand(Long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         Member errander = memberService.getLoginMember();
         /** 본인 게시물이라면 예외 발생 **/
@@ -172,7 +179,11 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수락이 불가능합니다.");
         }
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
-        return findErrandDetailById(id);
+
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("nickname", errander.getName());
+        responseMap.put("name", errander.getNickname());
+        return responseMap;
     }
 
     @Transactional
