@@ -944,6 +944,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 17.55, right: 20.99),
+                            decoration: BoxDecoration(
+                              // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(161, 161, 161, 0.25),
+                                  offset: Offset(2, 3),
+                                  blurRadius: 4,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: ElevatedButton(
                               onPressed: () {
                                 deleteDialog(context);
