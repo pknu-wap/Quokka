@@ -987,7 +987,7 @@ class _FixErrandState extends State<FixErrand> {
                       ),
                     ),
                     child: Text(
-                      '작성 완료',
+                      '수정 완료',
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'Pretendard',
