@@ -55,7 +55,7 @@ class _RatingDialogState extends State<RatingDialog> {
                           fontSize: 20,
                           color: Color(0xff616161),),),
                     ),
-                    Container( margin: EdgeInsets.only(top: 16, left: 177), //원래 197인데 잘려서 줄여놓음
+                    Container( margin: EdgeInsets.only(left: 177), //원래 197인데 잘려서 줄여놓음
                       child: IconButton(
                         icon: Icon(Icons.close),
                         onPressed: () {
@@ -431,13 +431,11 @@ class _statuspageRState extends State<statuspageR> {
                     shrinkWrap: true,
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
-                      // String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
-                      // String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
+                       String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
+                       String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
                       return Status_Content_Widget(
-                        // contents: decodedcontents,
-                        // created: decodedcreated,
-                        contents: contents[index]["contents"],
-                        created: contents[index]["created"],
+                        contents: decodedcontents,
+                        created: decodedcreated,
                       );
                     }
                 ),
@@ -615,20 +613,17 @@ class _statuspageRState extends State<statuspageR> {
               Container(
                 margin: EdgeInsets.only(top: 11.25, left: 21),
                 child: ElevatedButton(
-                  onPressed: isCompleted
-                      ? () {
+                  onPressed:
+                      () {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return RatingDialog();
                       },
                     );
-                  }
-                      : () { },
+                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isCompleted
-                        ? Color(0xff7C3D1A)
-                        : Color(0xff7C3D1A).withOpacity(0.5),
+                    backgroundColor: Color(0xff7C3D1A),
                     fixedSize: Size(318, 45), // 너비와 높이
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)

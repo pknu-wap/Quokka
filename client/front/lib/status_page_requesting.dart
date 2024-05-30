@@ -16,6 +16,16 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+String extractTime(String timeData) {
+  // DateTime 객체로 변환
+  DateTime dateTime = DateTime.parse(timeData);
+
+  // 시간과 분 추출
+  String hours = dateTime.hour.toString().padLeft(2, '0');
+  String minutes = dateTime.minute.toString().padLeft(2, '0');
+
+  return '$hours:$minutes';
+}
 class RatingDialog extends StatefulWidget {
   @override
   _RatingDialogState createState() => _RatingDialogState();
@@ -23,7 +33,13 @@ class RatingDialog extends StatefulWidget {
 
 class _RatingDialogState extends State<RatingDialog> {
   int _rating = 0;
-
+  final List<String> ratingTexts = [
+    '최악이에요;;',
+    '별로에요...ㅜ',
+    '그럭저럭 괜찮아요~',
+    '좋았어요~!',
+    '최고에요!!'
+  ];
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -54,7 +70,8 @@ class _RatingDialogState extends State<RatingDialog> {
                             fontSize: 20,
                             color: Color(0xff616161),),),
                       ),
-                      Container( margin: EdgeInsets.only(top: 16, left: 177), //원래 197인데 잘려서 줄여놓음
+                      Spacer(),
+                      Container( margin: EdgeInsets.only(right: 10), //원래 197인데 잘려서 줄여놓음
                         child: IconButton(
                           icon: Icon(Icons.close),
                           onPressed: () {
@@ -104,12 +121,16 @@ class _RatingDialogState extends State<RatingDialog> {
                     );
                   }),
                 ),
-                Text('그럭저럭 괜찮아요~',
-                  style: TextStyle(fontFamily: 'Pretendard',
+                Text(
+                  ratingTexts[_rating - 1],
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
-                    color: Color(0xff1A1A1A),),),
+                    color: Color(0xff1A1A1A),
+                  ),
+                ),
                 Text('($_rating / 5) 점',
                   style: TextStyle(fontFamily: 'Pretendard',
                     fontStyle: FontStyle.normal,
@@ -188,7 +209,8 @@ class Status_Content_Widget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 21.55, top: 2.48),
                   child: Text(
-                    created,
+                    //created,
+                    extractTime(created),
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontStyle: FontStyle.normal,
@@ -266,22 +288,22 @@ class statuspageQ extends StatefulWidget {
 class _statuspageQState extends State<statuspageQ> {
   late int errandNo;
   List<Map<String, dynamic>> contents = [
-    {
-      'contents': '심부름꾼이 출발했어요 !',
-      'created': '11:20',
-    },
-    {
-      'contents': '지금 물건을 픽업 했어요 !',
-      'created': '11:30',
-    },
-    {
-      'contents': '5분 뒤 도착해요!',
-      'created': '11:49',
-    },
-    {
-      'contents': '완료했어요!',
-      'created': '11:55',
-    },
+    // {
+    //   'contents': '심부름꾼이 출발했어요 !',
+    //   'created': '11:20',
+    // },
+    // {
+    //   'contents': '지금 물건을 픽업 했어요 !',
+    //   'created': '11:30',
+    // },
+    // {
+    //   'contents': '5분 뒤 도착해요!',
+    //   'created': '11:49',
+    // },
+    // {
+    //   'contents': '완료했어요!',
+    //   'created': '11:55',
+    // },
     //테스트 코드
   ];
   bool isCompleted = false;
@@ -420,13 +442,11 @@ class _statuspageQState extends State<statuspageQ> {
                     shrinkWrap: true,
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
-                      // String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
-                      // String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
+                       String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
+                       String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
                       return Status_Content_Widget(
-                        // contents: decodedcontents,
-                        // created: decodedcreated,
-                        contents: contents[index]["contents"],
-                        created: contents[index]["created"],
+                         contents: decodedcontents,
+                         created: decodedcreated,
                       );
                     }
                 ),
