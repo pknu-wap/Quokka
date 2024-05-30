@@ -104,6 +104,19 @@ class _FixErrandState extends State<FixErrand> {
     //print(isSelected1);
   }
 
+  // 토글 버튼(결제 방법)
+  void toggleSelect2(int newindex) {
+    setState(() {
+      for (int index = 0; index < isSelected2.length; index++) {
+        if (index == newindex) {
+          isSelected2[index] = true;
+        } else {
+          isSelected2[index] = false;
+        }
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -866,7 +879,7 @@ class _FixErrandState extends State<FixErrand> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
                 child: ElevatedButton(
                   onPressed: () {
-                    errandPostRequest();
+                    // errandPostRequest();
                   },
                   style: ButtonStyle(
                     // 버튼의 배경색 변경하기
