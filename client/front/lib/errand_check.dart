@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'fixerrand/fixerrand.dart';
 import 'mainshowerrand/mainshowerrand.dart';
 import 'request.dart';
 import 'main_post_page.dart';
@@ -876,16 +877,32 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.only(left: 18),
+                              decoration: BoxDecoration(
+                                // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(161, 161, 161, 0.25),
+                                    offset: Offset(2, 3),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  print("수정하기 버튼");
+                                  print("수정하기 버튼 클릭!");
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FixErrand(errands: errands[0]),
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
                                           Color(0xffFFFFFF)),
-                                  // 버튼의 크기 정하기
                                   minimumSize: MaterialStateProperty.all<Size>(
                                       Size(151.73, 49.7)),
                                   // 버튼의 모양 변경하기
@@ -908,6 +925,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
+                                      color: Color(0xff7F7F7F),
                                     ),
                                     SizedBox(width: 6.55),
                                     // Adjust the space between icon and text as needed
@@ -927,6 +945,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 17.55, right: 20.99),
+                            decoration: BoxDecoration(
+                              // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(161, 161, 161, 0.25),
+                                  offset: Offset(2, 3),
+                                  blurRadius: 4,
+                                  spreadRadius: 0,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             child: ElevatedButton(
                               onPressed: () {
                                 deleteDialog(context);
@@ -979,120 +1009,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     ),
                   ],
                 )),
-
-            // 내비게이션 바
-            Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                    width: 364,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: Color(0xffFFFFFF),
-                      border: Border.all(
-                        color: Color(0xffCFCFCF),
-                        width: 0.5,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(185, 185, 185, 0.25),
-                          offset: Offset(5, -1),
-                          blurRadius: 5,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 22,
-                            height: 22,
-                            margin: const EdgeInsets.only(
-                                left: 44, top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Main_post_page(),
-                                  ),
-                                );
-                              },
-                              icon: Image.asset(
-                                'assets/images/home_icon.png',
-                                color: Color(0xff545454),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 19.31,
-                            height: 23.81,
-                            margin:
-                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'assets/images/human_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 22.0,
-                            height: 22,
-                            margin:
-                                const EdgeInsets.only(top: 20.0, bottom: 17.32),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Request(),
-                                  ),
-                                );
-                              },
-                              icon: Image.asset(
-                                'assets/images/add_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 21.95,
-                            height: 24.21,
-                            margin: const EdgeInsets.only(
-                                top: 20.0, bottom: 17.32, right: 43.92),
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'assets/images/history_icon.png',
-                                color: Color(0xffADADAD),
-                              ),
-                            ),
-                          ),
-                        ])))
           ],
         ),
       ),

@@ -95,9 +95,9 @@ class _RequestState extends State<Request> {
 
   // 일정 토글 버튼 변수 선언
   bool isToday = true; // 맨 처음 고정 값
-  bool isTommorrow = false;
+  bool isTomorrow = false;
   bool isDetailVisible = true; // 예약 버튼 클릭 시 상세 시간 설정
-  late List<bool> isSelected1 = [isToday, isTommorrow];
+  late List<bool> isSelected1 = [isToday, isTomorrow];
 
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
@@ -313,7 +313,7 @@ class _RequestState extends State<Request> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 28),
+                margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: [
                     Expanded(
@@ -1041,7 +1041,7 @@ class _RequestState extends State<Request> {
               ),
               // 작성 완료 버튼 만들기
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                 child: ElevatedButton(
                   onPressed: () {
                     errandPostRequest();
