@@ -925,6 +925,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
+                                      color: Color(0xff7F7F7F),
                                     ),
                                     SizedBox(width: 6.55),
                                     // Adjust the space between icon and text as needed
