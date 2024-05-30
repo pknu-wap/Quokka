@@ -211,7 +211,7 @@ class _FixErrandState extends State<FixErrand> {
                         },
                       ),
                       Text(
-                        '요청서 작성하기',
+                        '수정하기',
                         style: TextStyle(
                           fontFamily: 'Paybooc',
                           fontWeight: FontWeight.w700,
@@ -271,7 +271,7 @@ class _FixErrandState extends State<FixErrand> {
                     color: Color(0xffFFFFFF), // 텍스트 필드 배경색
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 7.5, left: 10, right: 10),
+                    padding: EdgeInsets.only(bottom: 2, left: 10, right: 10),
                     child: TextField(
                       maxLength: maxTitleLength,
                       controller: titleController,
