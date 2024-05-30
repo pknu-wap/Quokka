@@ -1,16 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'request.dart';
 import 'errand_check.dart';
-import 'status_page.dart';
+import 'status_page_requesting.dart';
+import 'testpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
+OverlayEntry? overlayEntry;
 
 class PostWidget extends StatelessWidget {
+  final DateTime currentTime = DateTime.now();
   final int orderNo; //요청자 번호
   final String nickname; //닉네임
   final double score; //평점
@@ -20,7 +24,7 @@ class PostWidget extends StatelessWidget {
   final String destination; //목적지
   final int reward; //보수
   final String status; //상태 (모집중, 진행중, 완료됨)
-  const PostWidget({
+  PostWidget({
     Key? key,
     required this.orderNo,
     required this.nickname,
@@ -32,7 +36,20 @@ class PostWidget extends StatelessWidget {
     required this.reward,
     required this.status,
   }) : super(key: key);
+  String timeDifference(DateTime currentTime, String createdDate) {
+    DateTime createdDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdDate);
+    Duration difference = currentTime.difference(createdDateTime);
 
+    if (difference.inDays > 0) {
+      return '${difference.inDays}일 전';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}시간 전';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}분 전';
+    } else {
+      return '방금 전';
+    }
+  }
   String getState() { //상태에 따라 텍스트 출력
     if(status == "RECRUITING")
       {
@@ -178,7 +195,7 @@ class PostWidget extends StatelessWidget {
                                 child: Align(alignment: Alignment.centerRight,
                                     child: Container( //시간
                                       margin: EdgeInsets.only(right: 14, top: 17.95),
-                                      child: Text("${createdDate}",
+                                      child: Text(timeDifference(currentTime,createdDate),
                                         style: TextStyle(
                                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                             fontWeight: FontWeight.w400, fontSize: 12,
@@ -201,15 +218,26 @@ class PostWidget extends StatelessWidget {
 class InProgress_Errand_Widget extends StatelessWidget {
   final int errandNo; //게시글 번호
   final String title; //제목
-  final String due; //목적지
+  final String due; //일정
   final bool isUserOrder; //내가 요청자인지 심부름꾼인지 여부
-  const InProgress_Errand_Widget({
+  InProgress_Errand_Widget({
     Key? key,
     required this.errandNo,
     required this.title,
     required this.due,
     required this.isUserOrder,
   }) : super(key: key);
+  String formatDueDate(String due) {
+    // '2024-05-20 14:28:08' 형식의 문자열을 DateTime 객체로 변환합니다.
+    DateTime dateTime = DateTime.parse(due);
+
+    // 원하는 형식으로 변환합니다.
+    String formattedDate = DateFormat('M월 d일 HH:mm').format(dateTime);
+
+    String result = '일정 $formattedDate까지'; // 최종 결과 문자열
+
+    return result;
+  }
   @override
   Widget build(BuildContext context) {
     if(!isUserOrder) {
@@ -218,14 +246,14 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => statuspage(errandNo: errandNo)
-            ),);
+                builder: (context) => statuspageR(errandNo: errandNo)
+            ));
         },
-        child:  Container( width: 360, height: 84.4, //심부름 1개 요청중
+        child:  Container( width: 360, height: 72.51, //심부름 1개 수행중
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 26.4, left: 19.14),
+                margin: EdgeInsets.only(left: 19.14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +278,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                           ), //제목
                           Container(
                               margin: EdgeInsets.only(left: 14.52),
-                              child: Text("${due}",
+                              child: Text(formatDueDate(due),
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400, fontSize: 13,
@@ -287,13 +315,13 @@ class InProgress_Errand_Widget extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => statuspage(errandNo: errandNo)
+                builder: (context) => statuspageQ(errandNo: errandNo)
             ),);
         },
-        child:  Container( width: 360, height: 84.4, //심부름 1개 수행중
+        child:  Container( width: 360, height: 72.51, //심부름 1개 요청중
           child: Column(
             children: [
-              Container(margin: EdgeInsets.only(top: 26.4,left: 19.14),
+              Container(margin: EdgeInsets.only(left: 19.14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,7 +346,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                           ), //제목
                           Container(
                               margin: EdgeInsets.only(left: 14.52),
-                              child: Text("${due}",
+                              child: Text(formatDueDate(due),
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400, fontSize: 13,
@@ -423,14 +451,14 @@ class Main_post_page extends StatefulWidget {
 class _Main_post_pageState extends State<Main_post_page> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
+
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
   bool isCheckBox = false;
   String status = "";
   String? token = "";
-  bool isVisible = false;
-  OverlayEntry? _overlayEntry; //하단바 오버레이
+  bool isVisible = false; //하단바 오버레이
   InprogressExist() async{
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress/exist";
     token = await storage.read(key: 'TOKEN');
@@ -671,8 +699,9 @@ class _Main_post_pageState extends State<Main_post_page> {
       }
     }
   }
-  void _insertOverlay() {
-    _overlayEntry = OverlayEntry(
+  void _insertOverlay(BuildContext context) {
+    if (overlayEntry != null) return;
+    overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         bottom: 0,
         left: 0,
@@ -711,7 +740,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                   onPressed: () {},
                   icon: Image.asset(
                     'assets/images/home_icon.png',
-                    color: Color(0xff545454),
+                    color: Color(0xffADADAD),
                   ),
                 ),
               ),
@@ -777,14 +806,18 @@ class _Main_post_pageState extends State<Main_post_page> {
         ),
       ),
     );
-    Overlay.of(context).insert(_overlayEntry!);
+    Overlay.of(context).insert(overlayEntry!);
+  }
+  void removeOverlay() {
+    overlayEntry?.remove();
+    overlayEntry = null;
   }
   ScrollController _scrollController = ScrollController();
   @override
   void initState(){
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _insertOverlay();
+   WidgetsBinding.instance.addPostFrameCallback((_) {
+      _insertOverlay(context);
     });
     ErrandLatestInit(); //최신순 요청서 5개
     InprogressExist(); //진행중인 심부름이 있는지 확인
@@ -810,7 +843,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   }
   @override
   void dispose(){
-    _overlayEntry?.remove();
+    overlayEntry?.remove();
     _scrollController.dispose();
     super.dispose();
   }
@@ -1131,80 +1164,87 @@ class _Main_post_pageState extends State<Main_post_page> {
                         showModalBottomSheet(
                           context: context,
                           builder: (context) {
-                            return  Container(
+                            return Container(
                               height: 389,
+                              decoration: BoxDecoration(
+                                color: Color(0xffF2F2F2),
+                                border: Border(
+                                  top: BorderSide(width: 0.5, color: Colors.grey),
+                                ),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
                               child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                              Container(
-                              decoration: BoxDecoration(
-                              color: Color(0xffF2F2F2),
-                              border: Border(
-                                top: BorderSide(width: 0.5, color: Colors.grey),
-                              ),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                              ),
-                            ),
-                            ),
-                            Positioned(
-                            top: 13.47, left: 127.74,
-                            child: Container(
-                              width: 104.51, height: 5,
-                              decoration: BoxDecoration(
-                                color: Color(0xffAEAEAE),
-                              border: Border.all(
-                              width: 5,
-                              color: Color(0xffAEAEAE),),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0),),
-                            ),
-                           ),
-                          ),
-                                    Positioned(
-                                      top: 42.64, left: 19.64,
-                                      child: Container(
-                                        child: Text('메세지를 보낼 심부름 상대를 골라주세요', style: TextStyle(
-                                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w500, fontSize: 16,
-                                          color: Color(0xff000000),
-                                        ),),
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    top: 13.47,
+                                    left: 127.74,
+                                    child: Container(
+                                      width: 104.51,
+                                      height: 5,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffAEAEAE),
+                                        border: Border.all(
+                                          width: 5,
+                                          color: Color(0xffAEAEAE),
+                                        ),
+                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                                       ),
                                     ),
-                                    Positioned(
-                                      top: 85.39,
-                                      child: Container(
-                                        width: 360, height: 310.14,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffFFFFFF),
-                                          border: Border(
-                                            top: BorderSide(width: 0.1),
-                                          ),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20.0),
-                                            topRight: Radius.circular(20.0),
-                                          ),
-                                        ),
-                                        child: errands.isEmpty
-                                            ? Center(child: Text("진행중인 심부름이 없습니다."))
-                                            : Column(
-                                          children: errands.map((errand) {
-                                            String decodedTitle = utf8.decode(errand["title"].runes.toList());
-                                            String decodedDue = utf8.decode(errand["due"].runes.toList());
-                                            return InProgress_Errand_Widget(
-                                                errandNo: errand["errandNo"],
-                                                title: decodedTitle,
-                                                due: decodedDue,
-                                                isUserOrder: errand["isUserOrder"],
-                                            );
-                                          }).toList(),
-                                        ),
-
+                                  ),
+                                  Positioned(
+                                    top: 42.64,
+                                    left: 19.64,
+                                    child: Text(
+                                      '메세지를 보낼 심부름 상대를 골라주세요',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: Color(0xff000000),
                                       ),
                                     ),
-                                  ],
-                         ),
-                        );
+                                  ),
+                                  Positioned(
+                                    top: 85.39,
+                                    child: Container(
+                                      width: 360,
+                                      height: 310.14,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFFFFFF),
+                                        border: Border(
+                                          top: BorderSide(width: 0.1),
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20.0),
+                                          topRight: Radius.circular(20.0),
+                                        ),
+                                      ),
+                                      child: errands.isEmpty
+                                          ? Center(child: Text("진행중인 심부름이 없습니다."))
+                                          : ListView.builder(
+                                        padding: EdgeInsets.only(top: 23.98),
+                                        itemCount: errands.length,
+                                        itemBuilder: (context, index) {
+                                          String decodedTitle = utf8.decode(errands[index]["title"].runes.toList());
+                                          String decodedDue = utf8.decode(errands[index]["due"].runes.toList());
+                                          return InProgress_Errand_Widget(
+                                            errandNo: errands[index]["errandNo"],
+                                            title: decodedTitle,
+                                            due: decodedDue,
+                                            isUserOrder: errands[index]["isUserOrder"],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
                         );
                       },
