@@ -97,30 +97,20 @@ class _FixErrandState extends State<FixErrand> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   print(widget.errands);
-  //   errandNo = widget.errands["errandNo"];
-  //   title = widget.errands["title"];
-  //   name = widget.errands["nickname"];
-  //   createdDate = widget.errands["createdDate"];
-  //   due = widget.errands["due"];
-  //   destination = widget.errands["destination"];
-  //   detail = widget.errands["detail"];
-  //   reward = widget.errands["reward"];
-  //   status = widget.errands["status"];
-  //   isCash = widget.errands["isCash"];
-  // }
-
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
+    titleController = TextEditingController(text: widget.errands['title']);
+    detailAddressController = TextEditingController(text: widget.errands['destination']);
+    priceController = TextEditingController(text: widget.errands['reward'].toString());
+    requestController = TextEditingController(text: widget.errands['detail']);
+
     titleController.addListener(updateTitleState);
     detailAddressController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
+
     getCurrentLocation().then((position) {
       setState(() {
         myLatLng = NLatLng(position.latitude, position.longitude);
