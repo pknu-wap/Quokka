@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'mainshowerrand/mainshowerrand.dart';
 import 'request.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
@@ -376,8 +377,9 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
+  final String status;
 
-  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo, required this.status}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
@@ -385,11 +387,12 @@ class MainErrandCheck extends StatefulWidget {
 
 class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
-  String status = "";
   String? token = "";
   late int errandNo;
-  late double latitude;
-  late double longitude;
+  late String status;
+
+  late double latitude = 0;
+  late double longitude = 0;
   late NLatLng myLatLng;
   late NMarker marker;
 
@@ -422,6 +425,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "status": errand.status,
         "isMyErrand": errand.isMyErrand,
       });
+
       log("status code == 200, Json Data Parsed.");
       setState(() {
         latitude = errand.latitude;
@@ -584,6 +588,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     errandReading(errandNo.toString());
+    status = widget.status;
+    log(status.toString());
   }
 
   // 메인 글 보기 화면
@@ -664,7 +670,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   alignment: Alignment.centerLeft,
                                   child: GestureDetector(
                                     onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
-                                      Navigator.pop(context);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Main_post_page()
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: EdgeInsets.only(left: 30, bottom: 100),
@@ -727,10 +738,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   utf8.decode(detail.runes.toList());
                               String decodedStatus =
                                   utf8.decode(status.runes.toList());
-                              return GestureDetector(
-                                // behavior: HitTestBehavior.translucent,
-                                //게시글 전체를 클릭 영역으로 만들어주는 코드
-                                child: ErrandCheckWidget(
+                              return ErrandCheckWidget(
                                   orderNo: errands[index]["orderNo"],
                                   nickname: decodedNickname,
                                   score: errands[index]["score"],
@@ -746,7 +754,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   isCash: errands[index]["isCash"],
                                   status: decodedStatus,
                                   isMyErrand: errands[index]["isMyErrand"],
-                                ),
                               );
                             }),
                       ),
@@ -793,16 +800,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 utf8.decode(detail.runes.toList());
                                 String decodedStatus =
                                 utf8.decode(status.runes.toList());
-                                return GestureDetector(
-                                  // behavior: HitTestBehavior.translucent,
-                                  //게시글 전체를 클릭영역으로 만들어주는 코드
-                                  onTap: () {
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
-                                    //   ),);
-                                  },
-                                  child: ErrandCheckWidget(
+                                return ErrandCheckWidget(
                                     orderNo: errands[index]["orderNo"],
                                     nickname: decodedNickname,
                                     score: errands[index]["score"],
@@ -818,20 +816,30 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                     isCash: errands[index]["isCash"],
                                     status: decodedStatus,
                                     isMyErrand: errands[index]["isMyErrand"],
-                                  ),
                                 );
                               }),
                         ),
                       ),
 
-                    if (errands[0]["isMyErrand"] == false)
+                    if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)
                     Container(
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
+                        onPressed: () async{
                           print("제가 할게요! 클릭");
+                          // 심부름 요청서 팝업 느낌으로 띄우기
+                          String updatedStatus =
+                              await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MainShowErrand(errands : errands[0]),
+                            ),
+                          );
+                          // 상태 업데이트
+                          setState(() {
+                            status = updatedStatus; // 상태가 업데이트가 안 돼ㅜㅜ
+                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -1009,7 +1017,14 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 padding: EdgeInsets.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Main_post_page(),
+                                  ),
+                                );
+                              },
                               icon: Image.asset(
                                 'assets/images/home_icon.png',
                                 color: Color(0xff545454),
