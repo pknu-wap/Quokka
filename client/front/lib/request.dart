@@ -95,9 +95,9 @@ class _RequestState extends State<Request> {
 
   // 일정 토글 버튼 변수 선언
   bool isToday = true; // 맨 처음 고정 값
-  bool isTommorrow = false;
+  bool isTomorrow = false;
   bool isDetailVisible = true; // 예약 버튼 클릭 시 상세 시간 설정
-  late List<bool> isSelected1 = [isToday, isTommorrow];
+  late List<bool> isSelected1 = [isToday, isTomorrow];
 
   // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
 
