@@ -684,7 +684,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         ),
                       ),
 
-                    if (errands[0]["isMyErrand"] == false)
+                    if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)
                     Container(
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
