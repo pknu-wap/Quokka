@@ -877,6 +877,18 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.only(left: 18),
+                              decoration: BoxDecoration(
+                                // 2px 3px 4px rgba(161, 161, 161, 0.25);
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(161, 161, 161, 0.25),
+                                    offset: Offset(2, 3),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               child: ElevatedButton(
                                 onPressed: () {
                                   print("수정하기 버튼 클릭!");
@@ -891,7 +903,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
                                           Color(0xffFFFFFF)),
-                                  // 버튼의 크기 정하기
                                   minimumSize: MaterialStateProperty.all<Size>(
                                       Size(151.73, 49.7)),
                                   // 버튼의 모양 변경하기
