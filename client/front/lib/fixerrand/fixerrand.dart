@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -101,10 +102,13 @@ class _FixErrandState extends State<FixErrand> {
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
     super.initState();
-    titleController = TextEditingController(text: widget.errands['title']);
-    detailAddressController = TextEditingController(text: widget.errands['destination']);
+    String decodedTitle = utf8.decode(widget.errands['title'].runes.toList());
+    String decodedDetailAddress = utf8.decode(widget.errands['destination'].runes.toList());
+    String decodedRequest = utf8.decode(widget.errands['detail'].runes.toList());
+    titleController = TextEditingController(text: decodedTitle);
+    detailAddressController = TextEditingController(text:decodedDetailAddress);
     priceController = TextEditingController(text: widget.errands['reward'].toString());
-    requestController = TextEditingController(text: widget.errands['detail']);
+    requestController = TextEditingController(text: decodedRequest);
 
     titleController.addListener(updateTitleState);
     detailAddressController.addListener(updateDestinationState);
