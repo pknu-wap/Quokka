@@ -12,7 +12,6 @@ import com.pknuErrand.appteam.service.errand.ErrandService;
 import com.pknuErrand.appteam.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Tag(name = "Errand", description = "Errand 관련 API")
@@ -91,17 +89,14 @@ public class ErrandController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "수락 성공", content = @Content(examples = {
-                    @ExampleObject(
-                            value = "{ \"name\": \"김수현\", \"nickname\": \"한상차림위샹체쯔\" }")
-            })) ,
+            @ApiResponse(responseCode = "200", description = "수락 성공", content = @Content(schema = @Schema(implementation = ErrandDetailResponseDto.class))) ,
             @ApiResponse(responseCode = "404\nERRAND_NOT_FOUND", description = "심부름 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
             @ApiResponse(responseCode = "401\nUNAUTHORIZED_ACCESS", description = "본인 게시물 수락할 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
             @ApiResponse(responseCode = "406\nRESTRICT_CONTENT_ACCESS", description = "진행중/완료 상태인 심부름 수락 불가능", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "요청서 수락하기", description = "요청서 수락요청을 통해 errand status 변경하기")
     @GetMapping("/{id}/accept")
-    public ResponseEntity<Map<String, String>> acceptErrand(@PathVariable Long id) {
+    public ResponseEntity<ErrandDetailResponseDto> acceptErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
                 .body(errandService.acceptErrand(id));
     }
