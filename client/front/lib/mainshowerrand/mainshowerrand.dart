@@ -115,8 +115,9 @@ class _MainShowErrandState extends State<MainShowErrand> {
                             isCheckButtonVisible = false;
                             isStampVisible = true;
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
-                            nickName = "Suhyun113";
-                            realName = "김수현";
+                            nickName = "Suhyun113"; // 심부름 하는 사람 닉네임  -> 연동 부분
+                            realName = "김수현"; // 심부름 하는 사람 실명 -> 연동 부분
+
                           });
                         },
                         style: ButtonStyle(
