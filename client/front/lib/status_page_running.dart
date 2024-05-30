@@ -17,6 +17,90 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+void confirmDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF), //배경색
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.check, // 확인 아이콘으로 변경
+                color: Color(0xffAD8772),
+                size: 40,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "심부름을 완료하시겠어요?",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return RatingDialog();
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                        foregroundColor: Color(0xffFFFFFF),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("확인"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Color(0xffAD8772),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Color(0xffAD8772)),
+                      ),
+                      child: Text("취소"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 class RatingDialog extends StatefulWidget {
   @override
   _RatingDialogState createState() => _RatingDialogState();
@@ -24,7 +108,14 @@ class RatingDialog extends StatefulWidget {
 
 class _RatingDialogState extends State<RatingDialog> {
   int _rating = 0;
-
+  final List<String> ratingTexts = [
+    '',
+    '최악이에요;;',
+    '별로에요...ㅜ',
+    '그럭저럭 괜찮아요~',
+    '좋았어요~!',
+    '최고에요!!'
+  ];
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -105,22 +196,27 @@ class _RatingDialogState extends State<RatingDialog> {
                   );
                 }),
               ),
-              Text('그럭저럭 괜찮아요~',
+              Text(ratingTexts[_rating],
                 style: TextStyle(fontFamily: 'Pretendard',
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                   color: Color(0xff1A1A1A),),),
-              Text('($_rating / 5) 점',
-                style: TextStyle(fontFamily: 'Pretendard',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Color(0xff1A1A1A),),),
+              if (_rating > 0)
+                Text(
+                  '($_rating / 5) 점',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    color: Color(0xff1A1A1A),
+                  ),
+                ),
               Container(
                 margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _rating == 0 ? (){} : () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
                     fixedSize: Size(318, 45), // 너비와 높이
@@ -267,22 +363,22 @@ class statuspageR extends StatefulWidget {
 class _statuspageRState extends State<statuspageR> {
   late int errandNo;
   List<Map<String, dynamic>> contents = [
-    {
-      'contents': '심부름꾼이 출발했어요 !',
-      'created': '11:20',
-    },
-    {
-      'contents': '지금 물건을 픽업 했어요 !',
-      'created': '11:30',
-    },
-    {
-      'contents': '5분 뒤 도착해요!',
-      'created': '11:49',
-    },
-    {
-      'contents': '완료했어요!',
-      'created': '11:55',
-    },
+    // {
+    //   'contents': '심부름꾼이 출발했어요 !',
+    //   'created': '11:20',
+    // },
+    // {
+    //   'contents': '지금 물건을 픽업 했어요 !',
+    //   'created': '11:30',
+    // },
+    // {
+    //   'contents': '5분 뒤 도착해요!',
+    //   'created': '11:49',
+    // },
+    // {
+    //   'contents': '완료했어요!',
+    //   'created': '11:55',
+    // },
     //테스트 코드
   ];
   bool isCompleted = false;
@@ -615,12 +711,7 @@ class _statuspageRState extends State<statuspageR> {
                 child: ElevatedButton(
                   onPressed:
                       () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return RatingDialog();
-                      },
-                    );
+                        confirmDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
