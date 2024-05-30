@@ -34,8 +34,8 @@ class _MainShowErrandState extends State<MainShowErrand> {
   bool isCheckButtonVisible = true;
   bool isStampVisible = false;
   EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40, left: 18.5);
-  String nickName = "닉 네 임"; // 심부름 하는 사람 닉네임 -> 연동 하는 부분
-  String realName = "   "; // 심부름 하는 사람 실제 이름 -> 연동 하는 부분
+  String nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
+  String realName = "   "; // 심부름 하는 사람 실제 이름
 
 
   @override

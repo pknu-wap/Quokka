@@ -320,7 +320,9 @@ class ShowErrandWidget extends StatelessWidget {
                       ),
                       if(isStampVisible)
                       // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장
-                      Stamp(),
+                      Stamp(
+                        realName: realName,
+                      ),
 
                     ],
                   ),
