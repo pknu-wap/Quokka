@@ -816,7 +816,7 @@ class _Main_post_pageState extends State<Main_post_page> {
   @override
   void initState(){
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+   WidgetsBinding.instance.addPostFrameCallback((_) {
       _insertOverlay(context);
     });
     ErrandLatestInit(); //최신순 요청서 5개
