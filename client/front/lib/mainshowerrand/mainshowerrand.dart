@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/main_post_page.dart';
@@ -9,7 +11,7 @@ class MainShowErrand extends StatefulWidget {
 
   MainShowErrand({
     Key? key,
-    required this.errands
+    required this.errands,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
   late String destination;
   late String detail;
   late int reward;
+  late String status;
   late bool isCash;
 
   // 확인했어요. 버튼 변수'
@@ -47,6 +50,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
     destination = widget.errands["destination"];
     detail = widget.errands["detail"];
     reward = widget.errands["reward"];
+    status = widget.errands["status"];
     isCash = widget.errands["isCash"];
   }
   // 메인 글 보기 화면
@@ -92,6 +96,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         destination: destination,
                                         detail: detail,
                                         reward: reward,
+                                        status: status,
                                         isCash: isCash,
                                         isCheckButtonVisible: isCheckButtonVisible,
                                         isStampVisible: isStampVisible,
@@ -117,7 +122,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
                             nickName = "Suhyun113"; // 심부름 하는 사람 닉네임  -> 연동 부분
                             realName = "김수현"; // 심부름 하는 사람 실명 -> 연동 부분
-
+                            status = "PROCEEDING"; // 심부름 상태 진행중으로 변경
                           });
                         },
                         style: ButtonStyle(

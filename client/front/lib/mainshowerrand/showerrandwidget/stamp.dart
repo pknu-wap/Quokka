@@ -4,7 +4,7 @@ import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength4.dart';
 import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength5more.dart';
 
 class Stamp extends StatelessWidget {
-  String realName = "김수현";
+  String realName = "김수현"; // 연동 시, 수정 필요
   late String name1 = realName[0];
   late String name2 = realName[1];
   late String name3 = realName[2];

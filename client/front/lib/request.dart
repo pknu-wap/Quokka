@@ -40,10 +40,20 @@ class ErrandRequest {
   final String? due;
   final String? detail;
   final int reward;
+  final String status;
   final bool isCash;
-  ErrandRequest({required this.createdDate, required this.title, required this.destination,
-    required this.latitude, required this.longitude, required this.due, required this.detail,
-    required this.reward, required this.isCash});
+  ErrandRequest({
+    required this.createdDate,
+    required this.title,
+    required this.destination,
+    required this.latitude,
+    required this.longitude,
+    required this.due,
+    required this.detail,
+    required this.reward,
+    required this.status,
+    required this.isCash
+  });
 
   Map<String, dynamic> toJson(){
     return {
@@ -69,6 +79,7 @@ class ReturnValues {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _RequestState extends State<Request> {
+  late String status;
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
@@ -140,6 +151,7 @@ class _RequestState extends State<Request> {
         due: setDue(),
         detail: requestController.text,
         reward: int.parse(priceController.text),
+        status: status,
         isCash: isSelected2[1],
     );
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
@@ -155,7 +167,7 @@ class _RequestState extends State<Request> {
         int errandNo = jsonDecode(response.body)['errandNo'];
         Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => MainErrandCheck(errandNo: errandNo)
+                builder: (context) => MainErrandCheck(errandNo: errandNo, status: status,)
             ),);
       }
       else {

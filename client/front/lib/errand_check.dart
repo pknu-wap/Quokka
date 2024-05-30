@@ -377,8 +377,9 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
+  final String status;
 
-  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo, required this.status}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
@@ -386,9 +387,9 @@ class MainErrandCheck extends StatefulWidget {
 
 class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
-  String status = "";
   String? token = "";
   late int errandNo;
+  late String status;
 
   late double latitude = 0;
   late double longitude = 0;
@@ -453,6 +454,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     errandReading(errandNo.toString());
+    status = widget.status;
+    log(status.toString());
   }
 
   // 메인 글 보기 화면
@@ -689,15 +692,20 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     Container(
                       margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async{
                           print("제가 할게요! 클릭");
                           // 심부름 요청서 팝업 느낌으로 띄우기
-                          Navigator.of(context).push(
+                          String updatedStatus =
+                              await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   MainShowErrand(errands : errands[0]),
                             ),
                           );
+                          // 상태 업데이트
+                          setState(() {
+                            status = updatedStatus; // 상태가 업데이트가 안 돼ㅜㅜ
+                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

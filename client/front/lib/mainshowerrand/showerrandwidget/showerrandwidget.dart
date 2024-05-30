@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class ShowErrandWidget extends StatelessWidget {
   final String destination;
   final String detail;
   final int reward;
+  final String status;
   final bool isCash;
   final bool isCheckButtonVisible;
   final bool isStampVisible;
@@ -32,6 +34,7 @@ class ShowErrandWidget extends StatelessWidget {
     required this.destination,
     required this.detail,
     required this.reward,
+    required this.status,
     required this.isCash,
     required this.isCheckButtonVisible,
     required this.isStampVisible,
@@ -51,13 +54,14 @@ class ShowErrandWidget extends StatelessWidget {
               children:[
                 // 닫기 버튼
                 GestureDetector(
-                  onTap: () { // 버튼 클릭 시 이전 페이지인 게시글 페이지로 이동
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            MainErrandCheck(errandNo: errandNo),
-                      ),
-                    );
+                  onTap: () { // 버튼 클릭 시 이전 페이지인 요청서 확인 페이지로 이동
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              MainErrandCheck(errandNo: errandNo, status: status),
+                        ),
+                      );
+                      log(status.toString());
                   },
                   child: Container(
                     padding: EdgeInsets.only(left: 280, top: 8),
@@ -68,6 +72,7 @@ class ShowErrandWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 // 심부름 요청서 제목
                 Container(
                   margin: EdgeInsets.only(top: 4, left: 93, right: 91),
