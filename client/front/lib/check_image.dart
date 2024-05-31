@@ -25,6 +25,8 @@ class Check_ImageState extends State<Check_Image> {
   late TextEditingController _IDController;
   late TextEditingController _NameController;
   late bool isIDValid = u1.id.length == IDLength;
+  // late bool isMajorValid;
+  // late bool isNameValid;
 
   //학번 중복 검사 API
   request(String ID) async {
@@ -301,7 +303,8 @@ class Check_ImageState extends State<Check_Image> {
                 width: 320,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: isIDValid ? Color(0xff7C3D1A) : Color(0xffBD9E8C),
+                  color: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
+                      ? Color(0xff7C3D1A) : Color(0xffBD9E8C),
                   border: Border.all(
                     width: 0.5,
                     color: Color(0xffACACAC),
@@ -310,7 +313,7 @@ class Check_ImageState extends State<Check_Image> {
                 ),
                 child: Center(
                   child: TextButton(
-                    onPressed: isIDValid
+                    onPressed: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
                         ? () {
                             //학번이 타당하면 request실행, u1데이터는 담겨있음
                             request(_IDController.text);
