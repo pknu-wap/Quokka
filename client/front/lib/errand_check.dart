@@ -378,9 +378,8 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
-  final String status;
 
-  MainErrandCheck({Key? key, required this.errandNo, required this.status}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
@@ -390,7 +389,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
   String? token = "";
   late int errandNo;
-  late String status;
 
   late double latitude = 0;
   late double longitude = 0;
@@ -589,8 +587,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     errandReading(errandNo.toString());
-    status = widget.status;
-    log(status.toString());
   }
 
   // 메인 글 보기 화면
@@ -837,10 +833,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   MainShowErrand(errands : errands[0]),
                             ),
                           );
-                          // 상태 업데이트
-                          setState(() {
-                            status = updatedStatus; // 상태가 업데이트가 안 돼ㅜㅜ
-                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

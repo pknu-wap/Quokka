@@ -1122,7 +1122,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"], status: status,)
+                                  builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
                               ),);
                           },
                           child: PostWidget(

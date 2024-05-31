@@ -58,10 +58,9 @@ class ShowErrandWidget extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              MainErrandCheck(errandNo: errandNo, status: status),
+                              MainErrandCheck(errandNo: errandNo,),
                         ),
                       );
-                      log(status.toString());
                   },
                   child: Container(
                     padding: EdgeInsets.only(left: 280, top: 8),
