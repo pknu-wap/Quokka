@@ -9,6 +9,8 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'login.dart';
 import 'main_post_page.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 final storage = FlutterSecureStorage();
 // Future<bool> _determinePermission() async {
 //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -29,7 +31,8 @@ final storage = FlutterSecureStorage();
 // }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await dotenv.load(fileName: 'assets/env/.env');
 
   await NaverMapSdk.instance.initialize(
@@ -68,6 +71,7 @@ class MyApp extends StatelessWidget {
         print(response.statusCode);
     if (response.statusCode == 200) {
       print("200 ok");
+      FlutterNativeSplash.remove();
       Navigator.of(context).push(
         //토큰이 타당하면 바로 게시글 페이지로 넘어감
           MaterialPageRoute(builder: (context) => Main_post_page()));
@@ -91,7 +95,9 @@ class MyApp extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             );
-          } else {
+          }
+          else {
+            FlutterNativeSplash.remove();
             return LogIn(); // 로그인 페이지로 이동합니다.
           }
         },
