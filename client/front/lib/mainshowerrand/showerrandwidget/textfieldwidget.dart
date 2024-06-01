@@ -23,7 +23,7 @@ class TextFieldWidget extends StatelessWidget{
                     width: 0.5)), // 밑줄 스타일링
               ),
               child: Text(
-                realName == "김수현" ? '       ${realName}       ' : '              ',  // 연동 시, "김수현" 부분 수정
+                realName != "" ? '       ${realName}       ' : '              ',  // 연동
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w300,
