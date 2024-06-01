@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'request.dart';
 import 'errand_check.dart';
@@ -459,7 +460,8 @@ class _Main_post_pageState extends State<Main_post_page> {
   String? token = "";
   bool isVisible = false; //하단바 오버레이
   InprogressExist() async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress/exist";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/in-progress/exist";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -478,7 +480,8 @@ class _Main_post_pageState extends State<Main_post_page> {
   }
   InProgressErrandInit() async{
     errands.clear();
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/in-progress";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/in-progress";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -501,8 +504,8 @@ class _Main_post_pageState extends State<Main_post_page> {
     }
   }
   ErrandLatestInit() async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -547,8 +550,8 @@ class _Main_post_pageState extends State<Main_post_page> {
     }
   }
   ErrandRewardInit() async{
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "reward?pk=-1&cursor=1000000&limit=5&status=$status";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/reward?pk=-1&cursor=1000000&limit=5&status=$status";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -600,8 +603,8 @@ class _Main_post_pageState extends State<Main_post_page> {
     print(lasterrandNo);
     print(lastCreatedDate);
     token = await storage.read(key: 'TOKEN');
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=$status";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
@@ -654,8 +657,8 @@ class _Main_post_pageState extends State<Main_post_page> {
     print(lasterrandNo);
     print(lastreward);
     token = await storage.read(key: 'TOKEN');
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/errand/"
-        "reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=$status";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
