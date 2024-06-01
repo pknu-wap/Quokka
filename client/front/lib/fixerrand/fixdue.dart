@@ -37,7 +37,33 @@ class _FixDueState extends State<FixDue>{
         }
       }
     });
+  }
+
+  void initializeToggle1() {
+    DateTime dueDate = DateTime.parse(widget.due); // 심부름 일정 시간 -> 시간이 더 나중임
+    DateTime createdDate = DateTime.parse(widget.createdDate); // 요청서 작성 시간
+    Duration difference = dueDate.difference(createdDate); // 요청서 작성 시간으로부터 차이 계산
+
+    if (difference.inDays >= 2) { // 심부름 게시일로부터 2일 이상 지났으면,
+      isSelected1 = [true, false]; // 오늘로 설정(임의)
+      _selectedHour = 0;
+      _selectedMinute = 0;
+    } else if (difference.inDays >= 1) { // 심부름 게시일로부터 1일 지났으면,
+      isSelected1 = [false, true]; // 내일로 설정
+      _selectedHour = dueDate.hour;
+      _selectedMinute = dueDate.minute;
+    } else {
+      isSelected1 = [true, false]; // 오늘로 설정
+      _selectedHour = dueDate.hour;
+      _selectedMinute = dueDate.minute;
     }
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    initializeToggle1();
+  }
 
   @override
   Widget build(BuildContext context){
