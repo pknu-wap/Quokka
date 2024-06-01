@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:front/status_page_requesting.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,11 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
   StatusContent(this.contents, this.created);
   factory StatusContent.fromJson(Map<String, dynamic> json) {
     return StatusContent(
-      json['contents'],
-      json['created'],
+      utf8.decode(json['contents'].runes.toList()),
+      utf8.decode(json['created'].runes.toList()),
     );
   }
 }
-
 
 void confirmDialog(BuildContext context) {
   showDialog(
@@ -63,6 +63,7 @@ void confirmDialog(BuildContext context) {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
+                        setComplete();
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -402,59 +403,37 @@ class statuspageR extends StatefulWidget {
 
 
 String connectNo = "";
+late StompClient stompClient;
 
-void onConnect(StompFrame frame) {
-  stompClient.subscribe(
-    destination: '/queue/$connectNo',
-    callback: (frame) {
-      StatusContent result = StatusContent.fromJson(json.decode(frame.body!));
-      print(result);
-      /**
-       *  이 부분에
-       *  result를 표시 list에 추가하는 코드
-       */
-    },
+void setComplete() {
+  stompClient.send(
+    destination: '/app/$connectNo', // 전송할 destination
+    body: json.encode({
+      "contents": "완료했어요!",
+      }), // 메시지의 내용
   );
 }
 
-final stompClient = StompClient(
-  config: StompConfig(
-    url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
-    onConnect: onConnect,
-    beforeConnect: () async {
-      print('waiting to connect...');
-      await Future.delayed(const Duration(milliseconds: 200));
-      print('connecting...');
-    },
-    onWebSocketError: (dynamic error) => print(error.toString()),
-   //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
-    //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
-  ),
-);
-
-
 class _statuspageRState extends State<statuspageR> {
 
+  void onConnect(StompClient stompClient,StompFrame frame) {
+    stompClient.subscribe(
+      destination: '/queue/$connectNo',
+      callback: (frame) {
+        setState(() {
+          contents.add(json.decode(frame.body!));
+        });
+        /**
+         *  이 부분에
+         *  result를 표시 list에 추가하는 코드
+         */
+      },
+    );
+  }
+
+
   late int errandNo;
-  List<Map<String, dynamic>> contents = [
-    // {
-    //   'contents': '심부름꾼이 출발했어요 !',
-    //   'created': '11:20',
-    // },
-    // {
-    //   'contents': '지금 물건을 픽업 했어요 !',
-    //   'created': '11:30',
-    // },
-    // {
-    //   'contents': '5분 뒤 도착해요!',
-    //   'created': '11:49',
-    // },
-    // {
-    //   'contents': '완료했어요!',
-    //   'created': '11:55',
-    // },
-    //테스트 코드
-  ];
+  List<Map<String, dynamic>> contents = [];
   bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
   void completeCheck()
@@ -489,29 +468,20 @@ class _statuspageRState extends State<statuspageR> {
       print("비정상 요청");
     }
   }
-  sendValue(String? value) async{
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}";
-    String? token = await storage.read(key: 'TOKEN');
-    var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "$token"});
-    print(url);
-    if(response.statusCode == 200) {
-      print('contents add 200');
-      List<dynamic> result = jsonDecode(response.body);
-      for (var item in result) {
-        StatusContent c1 = StatusContent.fromJson(item);
-        contents.add({
-          "contents": c1.contents,
-          "created": c1.created,
-        });
-      }
-      setState(() {});
-    }
-    else {
-      print("비정상 요청");
+
+  sendValue(String? value) {
+    if (value != null && value.isNotEmpty) {
+      print(value);
+      stompClient.send(
+        destination: '/app/$connectNo', // 전송할 destination
+        body: json.encode({
+          "contents": value,
+        }), // 메시지의 내용
+      );
     }
   }
+
+  @override
   void initState()
   {
     super.initState();
@@ -525,6 +495,21 @@ class _statuspageRState extends State<statuspageR> {
     connectNo = errandNo.toString();
     statusMessageInit();
     completeCheck();
+
+    stompClient = StompClient(
+      config: StompConfig(
+        url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
+        onConnect: (frame) => onConnect(stompClient, frame),
+        beforeConnect: () async {
+          print('waiting to connect...');
+          await Future.delayed(const Duration(milliseconds: 200));
+          print('connecting...');
+        },
+        onWebSocketError: (dynamic error) => print(error.toString()),
+        //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
+        //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
+      ),
+    );
     stompClient.activate();
   }
   @override
@@ -627,11 +612,9 @@ class _statuspageRState extends State<statuspageR> {
                     shrinkWrap: true,
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
-                       String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
-                       String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
                       return Status_Content_Widget(
-                        contents: decodedcontents,
-                        created: decodedcreated,
+                        contents: contents[index]["contents"],
+                        created: contents[index]["created"],
                       );
                     }
                 ),
