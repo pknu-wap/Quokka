@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'errand/main_post_page.dart';
+import 'main/home/main_post_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
