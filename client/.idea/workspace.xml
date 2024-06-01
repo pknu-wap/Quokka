@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b21be5b-2c8c-4bd1-b7ab-c208ec551126" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/status_page_requesting.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front/lib/status_page_running.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

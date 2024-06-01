@@ -365,6 +365,27 @@ class Status_Content_Widget extends StatelessWidget {
     );
   }
 }
+DropdownMenuItem<String> customDropdownItem(String text) {
+  return DropdownMenuItem<String>(
+    value: text,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 15,
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.01,
+            color: Color(0xff232323),
+          ),
+        ),
+        Container(child: Center(child: Container(width: 276.72, child: Divider(color: Color(0xffDCDCDC), thickness: 1)))),
+      ],
+    ),
+  );
+}
 class statuspageR extends StatefulWidget {
   final int errandNo;
   const statuspageR({
@@ -629,97 +650,13 @@ class _statuspageRState extends State<statuspageR> {
                             icon: null,
                             dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
                             items: [
-                              DropdownMenuItem(
-                                value: "출발했어요.",
-                                child: Text(
-                                  "출발했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "지금 물건을 픽업했어요.",
-                                child: Text(
-                                  "지금 물건을 픽업했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "5분 뒤 도착해요.",
-                                child: Text(
-                                  "5분 뒤 도착해요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "10분 뒤 도착해요.",
-                                child: Text(
-                                  "10분 뒤 도착해요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "건물 앞이에요.",
-                                child: Text(
-                                  "건물 앞이에요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "도착했어요.",
-                                child: Text(
-                                  "도착했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "쪽지를 확인해주세요.",
-                                child: Text(
-                                  "쪽지를 확인해주세요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
+                              customDropdownItem("출발했어요."),
+                              customDropdownItem("지금 물건을 픽업했어요."),
+                              customDropdownItem("5분 뒤 도착해요."),
+                              customDropdownItem("10분 뒤 도착해요."),
+                              customDropdownItem("건물 앞이에요."),
+                              customDropdownItem("도착했어요."),
+                              customDropdownItem("쪽지를 확인해주세요."),
                             ],
                             onChanged: (String? value) {
                               sendValue(value);
