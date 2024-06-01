@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,92 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+
+
+void confirmDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF), //배경색
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.check, // 확인 아이콘으로 변경
+                color: Color(0xffAD8772),
+                size: 40,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "심부름을 완료하시겠어요?",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return RatingDialog();
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                        foregroundColor: Color(0xffFFFFFF),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("확인"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Color(0xffAD8772),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Color(0xffAD8772)),
+                      ),
+                      child: Text("취소"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 class RatingDialog extends StatefulWidget {
   @override
   _RatingDialogState createState() => _RatingDialogState();
@@ -24,7 +111,14 @@ class RatingDialog extends StatefulWidget {
 
 class _RatingDialogState extends State<RatingDialog> {
   int _rating = 0;
-
+  final List<String> ratingTexts = [
+    '',
+    '최악이에요;;',
+    '별로에요...ㅜ',
+    '그럭저럭 괜찮아요~',
+    '좋았어요~!',
+    '최고에요!!'
+  ];
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -66,23 +160,25 @@ class _RatingDialogState extends State<RatingDialog> {
                   ],
                 ),
               ),
-              Container( width: 251, height: 16,
-                margin: EdgeInsets.only(top: 19, left: 22, right: 50),
-                child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
-                  style: TextStyle(fontFamily: 'Pretendard',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                    color: Color(0xff404040),),),
-              ),
-              Container( width: 251, height: 16,
-                margin: EdgeInsets.only(left: 22, right: 50),
-                child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
-                  style: TextStyle(fontFamily: 'Pretendard',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                    color: Color(0xff404040),),),
+                Container( width: 300, height: 16,
+                  margin: EdgeInsets.only(top: 19, left: 22, right: 40),
+                  child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
+                    style: TextStyle(fontFamily: 'Pretendard',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      color: Color(0xff404040),),),
+                ),
+              Flexible(
+                child: Container( width: 251, height: 16,
+                  margin: EdgeInsets.only(left: 22, right: 50),
+                  child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
+                    style: TextStyle(fontFamily: 'Pretendard',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      color: Color(0xff404040),),),
+                ),
               ),
               Container( margin: EdgeInsets.only(top: 18.72, left: 27, right: 31),
                   child: Container(width: 265, child: Divider(color: Color(0xffBCBCBC), thickness: 0.5))),
@@ -105,22 +201,27 @@ class _RatingDialogState extends State<RatingDialog> {
                   );
                 }),
               ),
-              Text('그럭저럭 괜찮아요~',
+              Text(ratingTexts[_rating],
                 style: TextStyle(fontFamily: 'Pretendard',
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                   color: Color(0xff1A1A1A),),),
-              Text('($_rating / 5) 점',
-                style: TextStyle(fontFamily: 'Pretendard',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Color(0xff1A1A1A),),),
+              if (_rating > 0)
+                Text(
+                  '($_rating / 5) 점',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    color: Color(0xff1A1A1A),
+                  ),
+                ),
               Container(
                 margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _rating == 0 ? (){} : () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
                     fixedSize: Size(318, 45), // 너비와 높이
@@ -151,6 +252,16 @@ class _RatingDialogState extends State<RatingDialog> {
       ),
     );
   }
+}
+String extractTime(String timeData) {
+  // DateTime 객체로 변환
+  DateTime dateTime = DateTime.parse(timeData);
+
+  // 시간과 분 추출
+  String hours = dateTime.hour.toString().padLeft(2, '0');
+  String minutes = dateTime.minute.toString().padLeft(2, '0');
+
+  return '$hours:$minutes';
 }
 class Status_Content_Widget extends StatelessWidget {
   final String contents; // 메시지
@@ -234,7 +345,7 @@ class Status_Content_Widget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 10.91, top: 5.3),
                   child: Text(
-                    created,
+                    extractTime(created),
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontStyle: FontStyle.normal,
@@ -254,6 +365,27 @@ class Status_Content_Widget extends StatelessWidget {
     );
   }
 }
+DropdownMenuItem<String> customDropdownItem(String text) {
+  return DropdownMenuItem<String>(
+    value: text,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 15,
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.01,
+            color: Color(0xff232323),
+          ),
+        ),
+        Container(child: Center(child: Container(width: 276.72, child: Divider(color: Color(0xffDCDCDC), thickness: 1)))),
+      ],
+    ),
+  );
+}
 class statuspageR extends StatefulWidget {
   final int errandNo;
   const statuspageR({
@@ -267,22 +399,22 @@ class statuspageR extends StatefulWidget {
 class _statuspageRState extends State<statuspageR> {
   late int errandNo;
   List<Map<String, dynamic>> contents = [
-    {
-      'contents': '심부름꾼이 출발했어요 !',
-      'created': '11:20',
-    },
-    {
-      'contents': '지금 물건을 픽업 했어요 !',
-      'created': '11:30',
-    },
-    {
-      'contents': '5분 뒤 도착해요!',
-      'created': '11:49',
-    },
-    {
-      'contents': '완료했어요!',
-      'created': '11:55',
-    },
+    // {
+    //   'contents': '심부름꾼이 출발했어요 !',
+    //   'created': '11:20',
+    // },
+    // {
+    //   'contents': '지금 물건을 픽업 했어요 !',
+    //   'created': '11:30',
+    // },
+    // {
+    //   'contents': '5분 뒤 도착해요!',
+    //   'created': '11:49',
+    // },
+    // {
+    //   'contents': '완료했어요!',
+    //   'created': '11:55',
+    // },
     //테스트 코드
   ];
   bool isCompleted = false;
@@ -297,7 +429,31 @@ class _statuspageRState extends State<statuspageR> {
   }
   statusMessageInit() async{
     errandNo = widget.errandNo;
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/statusMessage/$errandNo";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}statusMessage/$errandNo";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    print(url);
+    if(response.statusCode == 200) {
+      print('contents add 200');
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        StatusContent c1 = StatusContent.fromJson(item);
+        contents.add({
+          "contents": c1.contents,
+          "created": c1.created,
+        });
+      }
+      setState(() {});
+    }
+    else {
+      print("비정상 요청");
+    }
+  }
+  sendValue(String? value) async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}";
     String? token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -470,113 +626,40 @@ class _statuspageRState extends State<statuspageR> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            hint: Text(
-                              '메시지 보내기',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.01,
-                                color: Color(0xff656565),
-                              ),
+                            hint: Row(
+                              children: [
+                                Container( margin: EdgeInsets.only(left: 14.51),
+                                  child:  Image.asset(
+                                    'assets/images/paper-plane.png',
+                                    color: Color(0xffADADAD),
+                                  ),
+                                ),
+                                SizedBox(width: 4.59), // Adjust the space between icon and text
+                                Text(
+                                  '메시지 보내기',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.01,
+                                    color: Color(0xff656565),
+                                  ),
+                                ),
+                              ],
                             ),
                             icon: null,
                             dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
                             items: [
-                              DropdownMenuItem(
-                                value: "출발했어요.",
-                                child: Text(
-                                  "출발했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "지금 물건을 픽업했어요.",
-                                child: Text(
-                                  "지금 물건을 픽업했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "5분 뒤 도착해요.",
-                                child: Text(
-                                  "5분 뒤 도착해요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "10분 뒤 도착해요.",
-                                child: Text(
-                                  "10분 뒤 도착해요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "건물 앞이에요.",
-                                child: Text(
-                                  "건물 앞이에요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "도착했어요.",
-                                child: Text(
-                                  "도착했어요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "쪽지를 확인해주세요.",
-                                child: Text(
-                                  "쪽지를 확인해주세요.",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff232323),
-                                  ),
-                                ),
-                              ),
+                              customDropdownItem("출발했어요."),
+                              customDropdownItem("지금 물건을 픽업했어요."),
+                              customDropdownItem("5분 뒤 도착해요."),
+                              customDropdownItem("10분 뒤 도착해요."),
+                              customDropdownItem("건물 앞이에요."),
+                              customDropdownItem("도착했어요."),
+                              customDropdownItem("쪽지를 확인해주세요."),
                             ],
                             onChanged: (String? value) {
-                              // Do something with the selected value
+                              sendValue(value);
                             },
                             selectedItemBuilder: (BuildContext context) {
                               return [
@@ -615,12 +698,7 @@ class _statuspageRState extends State<statuspageR> {
                 child: ElevatedButton(
                   onPressed:
                       () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return RatingDialog();
-                      },
-                    );
+                        confirmDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),

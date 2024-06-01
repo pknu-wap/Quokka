@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,6 +16,90 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
       json['created'],
     );
   }
+}
+void confirmDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF), //배경색
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.check, // 확인 아이콘으로 변경
+                color: Color(0xffAD8772),
+                size: 40,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "심부름을 완료하시겠어요?",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return RatingDialog();
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                        foregroundColor: Color(0xffFFFFFF),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("확인"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Color(0xffAD8772),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Color(0xffAD8772)),
+                      ),
+                      child: Text("취소"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 String extractTime(String timeData) {
   // DateTime 객체로 변환
@@ -82,8 +167,8 @@ class _RatingDialogState extends State<RatingDialog> {
                     ],
                   ),
                 ),
-                Container( width: 251, height: 16,
-                  margin: EdgeInsets.only(top: 19, left: 22, right: 50),
+                Container( width: 300, height: 16,
+                  margin: EdgeInsets.only(top: 19, left: 22, right: 40),
                   child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
                     style: TextStyle(fontFamily: 'Pretendard',
                       fontStyle: FontStyle.normal,
@@ -91,14 +176,16 @@ class _RatingDialogState extends State<RatingDialog> {
                       fontSize: 13,
                       color: Color(0xff404040),),),
                 ),
-                Container( width: 251, height: 16,
-                  margin: EdgeInsets.only(left: 22, right: 50),
-                  child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
-                    style: TextStyle(fontFamily: 'Pretendard',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      color: Color(0xff404040),),),
+                Flexible(
+                  child: Container( width: 251, height: 16,
+                    margin: EdgeInsets.only(left: 22, right: 50),
+                    child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
+                      style: TextStyle(fontFamily: 'Pretendard',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: Color(0xff404040),),),
+                  ),
                 ),
                 Container( margin: EdgeInsets.only(top: 18.72, left: 27, right: 31),
                     child: Container(width: 265, child: Divider(color: Color(0xffBCBCBC), thickness: 0.5))),
@@ -318,7 +405,31 @@ class _statuspageQState extends State<statuspageQ> {
   }
   statusMessageInit() async{
     errandNo = widget.errandNo;
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/statusMessage/$errandNo";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}statusMessage/$errandNo";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    print(url);
+    if(response.statusCode == 200) {
+      print('contents add 200');
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        StatusContent c1 = StatusContent.fromJson(item);
+        contents.add({
+          "contents": c1.contents,
+          "created": c1.created,
+        });
+      }
+      setState(() {});
+    }
+    else {
+      print("비정상 요청");
+    }
+  }
+  receiveValue() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}";
     String? token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -456,13 +567,8 @@ class _statuspageQState extends State<statuspageQ> {
                   child: ElevatedButton(
                     onPressed: isCompleted
                         ? () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return RatingDialog();
-                        },
-                      );
-                    }
+                           confirmDialog(context);
+                        }
                         : () { },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isCompleted
