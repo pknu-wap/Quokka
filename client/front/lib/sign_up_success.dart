@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:async';
 import 'login.dart';
-import 'main/home/main_post_page.dart';
+import 'main/home/home.dart';
 import 'package:http/http.dart' as http;
 
 class Signup_Success extends StatelessWidget {
@@ -74,7 +74,7 @@ class ConfettiState extends State<Confetti> {
         await storage.write(key: 'TOKEN', value: token);
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Main_post_page()));
+            MaterialPageRoute(builder: (context) => Home()));
       }
       else {
         log("response code != 200");

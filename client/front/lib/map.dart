@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:front/main/writeerrand/request.dart';
+import 'package:front/main/writeerrand/writeerrand.dart';
 import 'package:geolocator/geolocator.dart';
 
 

@@ -5,8 +5,8 @@ import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../writeerrand/request.dart';
-import '../writeerrand/errand_check.dart';
+import '../writeerrand/writeerrand.dart';
+import '../writeerrand/checkerrand.dart';
 import '../../status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
@@ -442,12 +442,12 @@ class Error{
   }
 }
 
-class Main_post_page extends StatefulWidget {
-  const Main_post_page({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
   @override
-  _Main_post_pageState createState() => _Main_post_pageState();
+  State createState() => _HomeState();
 }
-class _Main_post_pageState extends State<Main_post_page> {
+class _HomeState extends State<Home> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
 

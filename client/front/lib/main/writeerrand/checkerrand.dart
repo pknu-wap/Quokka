@@ -9,8 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/errands/fixerrand/fixerrandwidget/fixerrand.dart';
 import 'package:intl/intl.dart';
 import '../../mainshowerrand/mainshowerrand.dart';
-import 'request.dart';
-import '../home/main_post_page.dart';
+import '../home/home.dart';
 import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage(); // 토큰 받기
@@ -473,7 +472,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     if (response.statusCode == 200) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (BuildContext context) => Main_post_page(),
+          builder: (BuildContext context) => Home(),
         ),
       );
     }
@@ -682,7 +681,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              Main_post_page()
+                                              Home()
                                         ),
                                       );
                                     },
