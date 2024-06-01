@@ -90,12 +90,7 @@ class _MiniMapState extends State<MiniMap> {
   // 네이버 미니 지도
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
+    return Container(
                 width: 318.85,
                 height: 120,
                 margin: EdgeInsets.only(left: 2, top: 6),
@@ -195,11 +190,6 @@ class _MiniMapState extends State<MiniMap> {
                     // 전달되는 제스처 무시 현상 방지 위함
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+          );
   }
 }

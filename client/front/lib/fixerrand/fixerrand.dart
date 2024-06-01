@@ -80,6 +80,9 @@ class _FixErrandState extends State<FixErrand> {
     detailAddressController.addListener(updateDestinationState);
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
+
+    latitude = widget.errands['latitude'];
+    longitude = widget.errands['longitude'];
   }
 
     @override
