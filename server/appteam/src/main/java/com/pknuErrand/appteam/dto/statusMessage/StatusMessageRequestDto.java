@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatusMessageRequestDto {
-    private Long erranderNo; // 심부름 꾼
+  //  private Long erranderNo; // 심부름 꾼
 
  //   private Long errandNo; // 심부름 번호
 

@@ -1,0 +1,6 @@
+2024-05-31 09:20:59\t200\tPOST /login?username=201913189&password=Qwerty12345! HTTP/1.1\tPostmanRuntime/7.37.3\t-\t0:0:0:0:0:0:0:1\t-
+2024-05-31 09:22:06\t200\tGET /errand/6 HTTP/1.1\tPostmanRuntime/7.37.3\t-\t0:0:0:0:0:0:0:1\t340
+2024-05-31 09:43:56\t101\tGET /ws HTTP/1.1\tMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0\t-\t0:0:0:0:0:0:0:1\t-
+2024-05-31 09:46:31\t101\tGET /ws HTTP/1.1\tMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0\t-\t0:0:0:0:0:0:0:1\t-
+2024-05-31 09:46:40\t101\tGET /ws HTTP/1.1\tMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0\t-\t0:0:0:0:0:0:0:1\t-
+2024-05-31 11:41:36\t101\tGET /ws HTTP/1.1\t-\t-\t127.0.0.1\t-

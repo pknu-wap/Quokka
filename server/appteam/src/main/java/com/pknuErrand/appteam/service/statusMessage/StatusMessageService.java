@@ -41,8 +41,9 @@ public class StatusMessageService {
         this.errandRepository = errandRepository;
     }
     public StatusMessage saveStatusMessage(StatusMessageRequestDto statusMessageRequestDto, Long errandNo) {
-        Member errander = memberService.findMemberByMemberNo(statusMessageRequestDto.getErranderNo());
         Errand errand = errandService.findErrandById(errandNo);
+        Member errander = errand.getErranderNo();
+
         StatusMessage message = StatusMessage.builder()
                 .erranderNo(errander)
                 .errandNo(errand)
