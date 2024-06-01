@@ -103,8 +103,8 @@ class _RequestState extends State<Request> {
   int _selectedMinute = 0; // 선택된 분 저장
 
   // 결제 방법 토글 버튼 변수 선언
-  bool isAccountTransfer = true;
-  bool isCash = false;
+  bool isAccountTransfer = true; // 계좌이체
+  bool isCash = false; // 현금
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
   late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
   late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
@@ -150,6 +150,7 @@ class _RequestState extends State<Request> {
         reward: int.parse(priceController.text),
         isCash: isSelected2[1],
     );
+    log(setDue());
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
     String? token = await storage.read(key: 'TOKEN');
@@ -176,14 +177,14 @@ class _RequestState extends State<Request> {
   }
   String setDue() {
     DateTime now = DateTime.now();
-    if(isSelected1[1])
-      now = now.add(Duration(days : 1));
+    if(isSelected1[1]) // 내일 선택
+      now = now.add(Duration(days : 1)); // 다음 날이므로, 1일 추가
     DateTime due = DateTime(
         now.year,
-      now.month,
-      now.day,
-      _selectedHour,
-      _selectedMinute
+        now.month,
+        now.day,
+        _selectedHour,
+        _selectedMinute
     );
     return due.toString();
   }
@@ -508,6 +509,7 @@ class _RequestState extends State<Request> {
                                 onChanged: (int? newValue) {
                                   setState(() {
                                     _selectedHour = newValue!;
+                                    log(_selectedHour.toString());
                                   });
                                 },
                                 icon: Icon(Icons.keyboard_arrow_down,
@@ -552,6 +554,7 @@ class _RequestState extends State<Request> {
                                 onChanged: (int? newValue) {
                                   setState(() {
                                     _selectedMinute = newValue!;
+                                    log(_selectedMinute.toString());
                                   });
                                 },
                                 icon: Icon(Icons.keyboard_arrow_down,

@@ -69,8 +69,8 @@ class ErrandCheckWidget extends StatelessWidget {
   }
 
   // 일정 형식
-  late DateTime dueDateTime = DateFormat('yyyy-MM-dd').parse(due); // 요청일 String을 DateTime으로 변환
-  // 날짜를 yyyy.MM.dd 형식으로 변환하는 함수
+  late DateTime dueDateTime = DateFormat('yyyy-MM-dd HH:mm').parse(due); // 요청일 String을 DateTime으로 변환
+  // 날짜를 yyyy.MM.dd  hh:mm 형식으로 변환하는 함수
   String formatDate(DateTime date) {
     return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}  ${date.hour.toString().padLeft(2,'0')}:${date.minute.toString().padLeft(2,'0')}';
   }
@@ -242,6 +242,7 @@ class ErrandCheckWidget extends StatelessWidget {
                           margin: EdgeInsets.only(left: 6),
                           child: Text(
                             "${formatDate(dueDateTime)} 까지",
+                            // "${due}까지",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
@@ -414,6 +415,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
     if (response.statusCode == 200) {
       Errand errand = Errand.fromJson(jsonDecode(response.body));
+      log("due : ${errand.due}");
       errands.add({
         "orderNo": errand.o1.orderNo,
         "nickname": errand.o1.nickname,
@@ -431,7 +433,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "status": errand.status,
         "isMyErrand": errand.isMyErrand,
       });
-
       log("status code == 200, Json Data Parsed.");
       setState(() {
         latitude = errand.latitude;
