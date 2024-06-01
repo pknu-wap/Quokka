@@ -18,6 +18,8 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+
+
 void confirmDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -251,6 +253,16 @@ class _RatingDialogState extends State<RatingDialog> {
     );
   }
 }
+String extractTime(String timeData) {
+  // DateTime 객체로 변환
+  DateTime dateTime = DateTime.parse(timeData);
+
+  // 시간과 분 추출
+  String hours = dateTime.hour.toString().padLeft(2, '0');
+  String minutes = dateTime.minute.toString().padLeft(2, '0');
+
+  return '$hours:$minutes';
+}
 class Status_Content_Widget extends StatelessWidget {
   final String contents; // 메시지
   final String created; // 메시지 생성 시간
@@ -333,7 +345,7 @@ class Status_Content_Widget extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 10.91, top: 5.3),
                   child: Text(
-                    created,
+                    extractTime(created),
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontStyle: FontStyle.normal,
@@ -398,6 +410,29 @@ class _statuspageRState extends State<statuspageR> {
     errandNo = widget.errandNo;
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}statusMessage/$errandNo";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    print(url);
+    if(response.statusCode == 200) {
+      print('contents add 200');
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        StatusContent c1 = StatusContent.fromJson(item);
+        contents.add({
+          "contents": c1.contents,
+          "created": c1.created,
+        });
+      }
+      setState(() {});
+    }
+    else {
+      print("비정상 요청");
+    }
+  }
+  sendValue(String? value) async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}";
     String? token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -570,15 +605,26 @@ class _statuspageRState extends State<statuspageR> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            hint: Text(
-                              '메시지 보내기',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.01,
-                                color: Color(0xff656565),
-                              ),
+                            hint: Row(
+                              children: [
+                                Container( margin: EdgeInsets.only(left: 14.51),
+                                  child:  Image.asset(
+                                    'assets/images/paper-plane.png',
+                                    color: Color(0xffADADAD),
+                                  ),
+                                ),
+                                SizedBox(width: 4.59), // Adjust the space between icon and text
+                                Text(
+                                  '메시지 보내기',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.01,
+                                    color: Color(0xff656565),
+                                  ),
+                                ),
+                              ],
                             ),
                             icon: null,
                             dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
@@ -676,7 +722,7 @@ class _statuspageRState extends State<statuspageR> {
                               ),
                             ],
                             onChanged: (String? value) {
-                              // Do something with the selected value
+                              sendValue(value);
                             },
                             selectedItemBuilder: (BuildContext context) {
                               return [

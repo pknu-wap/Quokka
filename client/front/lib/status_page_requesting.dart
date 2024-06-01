@@ -17,6 +17,90 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+void confirmDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF), //배경색
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.check, // 확인 아이콘으로 변경
+                color: Color(0xffAD8772),
+                size: 40,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "심부름을 완료하시겠어요?",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return RatingDialog();
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                        foregroundColor: Color(0xffFFFFFF),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("확인"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Color(0xffAD8772),
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Color(0xffAD8772)),
+                      ),
+                      child: Text("취소"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 String extractTime(String timeData) {
   // DateTime 객체로 변환
   DateTime dateTime = DateTime.parse(timeData);
@@ -343,6 +427,29 @@ class _statuspageQState extends State<statuspageQ> {
       print("비정상 요청");
     }
   }
+  receiveValue() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    print(url);
+    if(response.statusCode == 200) {
+      print('contents add 200');
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        StatusContent c1 = StatusContent.fromJson(item);
+        contents.add({
+          "contents": c1.contents,
+          "created": c1.created,
+        });
+      }
+      setState(() {});
+    }
+    else {
+      print("비정상 요청");
+    }
+  }
   void initState()
   {
     super.initState();
@@ -460,13 +567,8 @@ class _statuspageQState extends State<statuspageQ> {
                   child: ElevatedButton(
                     onPressed: isCompleted
                         ? () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return RatingDialog();
-                        },
-                      );
-                    }
+                           confirmDialog(context);
+                        }
                         : () { },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isCompleted
