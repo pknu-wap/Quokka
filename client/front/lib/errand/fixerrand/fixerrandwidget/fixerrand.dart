@@ -1,15 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:front/fixerrand/fixiscash.dart';
-import 'package:front/fixerrand/fixminimap.dart';
-import 'package:geolocator/geolocator.dart';
-
-import '../map.dart';
 import 'fixdue.dart';
+import 'fixiscash.dart';
+import 'fixminimap.dart';
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;

@@ -9,21 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'package:intl/intl.dart';
-import 'errand_check.dart';
-import 'map.dart';
+import '../../errand_check.dart';
+import '../../map.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
-
-
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-//
-// import 'package:front/main.dart';
-// import 'main_post_page.dart'; // +버튼 클릭 시
 
 //현재 화면에서 뒤로가기
 class Request extends StatefulWidget {

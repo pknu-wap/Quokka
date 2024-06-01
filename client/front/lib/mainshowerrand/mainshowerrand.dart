@@ -9,7 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/main_post_page.dart';
 import 'package:front/mainshowerrand/showerrandwidget/showerrandwidget.dart';
-import 'package:front/request.dart';
+import 'package:front/errand/errand/request.dart';
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 

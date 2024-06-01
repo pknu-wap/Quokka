@@ -5,7 +5,7 @@ import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'request.dart';
+import 'errand/errand/request.dart';
 import 'errand_check.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
