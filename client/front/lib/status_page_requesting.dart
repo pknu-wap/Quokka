@@ -14,8 +14,8 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
   StatusContent(this.contents, this.created);
   factory StatusContent.fromJson(Map<String, dynamic> json) {
     return StatusContent(
-      json['contents'],
-      json['created'],
+      utf8.decode(json['contents'].runes.toList()),
+      utf8.decode(json['created'].runes.toList()),
     );
   }
 }
@@ -591,11 +591,9 @@ class _statuspageQState extends State<statuspageQ> {
                     shrinkWrap: true,
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
-                       String decodedcontents = utf8.decode(contents[index]["contents"].runes.toList());
-                       String decodedcreated = utf8.decode(contents[index]["created"].runes.toList());
                       return Status_Content_Widget(
-                         contents: decodedcontents,
-                         created: decodedcreated,
+                        contents: contents[index]["contents"],
+                        created: contents[index]["created"],
                       );
                     }
                 ),
