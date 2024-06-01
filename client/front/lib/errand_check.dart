@@ -403,6 +403,9 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   late NLatLng myLatLng;
   late NMarker marker;
 
+  NOverlayImage destIcon = NOverlayImage.fromAssetImage(
+      "assets/images/map_dest.png");
+
   Future<void> errandReading(String id) async {
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
@@ -442,6 +445,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
           id: "도착지",
           position: myLatLng,
         );
+        marker.setIcon(destIcon);
         // DB에 저장된 위도, 경도
         log("latitude : $latitude");
         log("longitude : $longitude");
