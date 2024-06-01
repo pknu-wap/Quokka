@@ -63,9 +63,6 @@ class TableScreen2 extends StatelessWidget {
           return TableRow(children: [
             TableCell(
               child: Container(
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
-                // ),
                   height: 30,
                   color: Color(0xff674333),
                   child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
@@ -73,7 +70,7 @@ class TableScreen2 extends StatelessWidget {
             TableCell(
               child: Container(
                   height: 30,
-                  padding: EdgeInsets.all(9), // 왼쪽 정렬 띄우기 위함
+                  padding: EdgeInsets.only(left: 9, top: 4), // 왼쪽 정렬 띄우기 위함
                   color: Color(0xffFFFFFF),
                   child: Align(
                       alignment: Alignment.centerLeft, // 왼쪽 정렬
