@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength2.dart';
-import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength3.dart';
-import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength4.dart';
-import 'package:front/mainshowerrand/showerrandwidget/stamp/namelength5more.dart';
+import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/stamp/namelength/namelength2.dart';
+import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/stamp/namelength/namelength3.dart';
+import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/stamp/namelength/namelength4.dart';
+import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/stamp/namelength/namelength5more.dart';
 
 class Stamp extends StatelessWidget {
   final String realName; // 연동 시, 수정 필요

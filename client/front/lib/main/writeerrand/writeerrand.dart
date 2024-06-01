@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'checkerrand.dart';
+import '../home/checkerrand/checkerrand.dart';
 import '../../map.dart';
 import 'package:http/http.dart' as http;
 
