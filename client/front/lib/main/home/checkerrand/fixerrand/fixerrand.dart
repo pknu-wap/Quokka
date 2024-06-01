@@ -2,9 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:client/front/lib/main/home/checkerrand/fixerrand/fixerrand.dart
 import '../../../../errands/fixerrand/fixerrandwidget/fixdue.dart';
 import '../../../../errands/fixerrand/fixerrandwidget/fixiscash.dart';
 import '../../../../errands/fixerrand/fixerrandwidget/fixminimap.dart';
+=======
+import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:front/fixerrand/fixminimap.dart';
+import 'package:geolocator/geolocator.dart';
+
+import '../map.dart';
+import 'fixdue.dart';
+>>>>>>> parent of 11b7346 (Feat: 결제 방법 수정하기 페이지에 적용하는 토글 함수 구현):client/front/lib/fixerrand/fixerrand.dart
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -30,7 +39,6 @@ class _FixErrandState extends State<FixErrand> {
   late String detail;
   late int reward;
   late String status;
-  late bool isCash;
 
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
@@ -44,6 +52,11 @@ class _FixErrandState extends State<FixErrand> {
   bool isDetailAddressEnabled = true;
   bool isPriceEnabled = true;
   bool isRequestEnabled = true;
+
+  // 결제 방법 토글 버튼 변수 선언
+  bool isAccountTransfer = true;
+  late bool isCash = false;
+  late List<bool> isSelected2 = [isAccountTransfer, isCash];
 
   @override
   void initState() {
@@ -66,7 +79,6 @@ class _FixErrandState extends State<FixErrand> {
     longitude = widget.errands['longitude'];
     due = widget.errands['due'];
     createdDate = widget.errands['createdDate'];
-    isCash = widget.errands['isCash'];
   }
 
     @override
@@ -104,6 +116,19 @@ class _FixErrandState extends State<FixErrand> {
       // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
       setState(() {
         isRequestEnabled = requestController.text.isNotEmpty;
+      });
+    }
+
+    // 토글 버튼(결제 방법)
+    void toggleSelect2(int newindex) {
+      setState(() {
+        for (int index = 0; index < isSelected2.length; index++) {
+          if (index == newindex) {
+            isSelected2[index] = true;
+          } else {
+            isSelected2[index] = false;
+          }
+        }
       });
     }
 
@@ -456,8 +481,58 @@ class _FixErrandState extends State<FixErrand> {
                           ),
                         ),
                       ),
-                      // 결제 방법
-                      FixIsCash(isCash: isCash,),
+                      Container(
+                        width: 119,
+                        height: 31,
+                        // 토글 버튼 만들기
+                        margin: EdgeInsets.only(right: 86),
+                        child: ToggleButtons(
+                          color: Color(0xff2E2E2E),
+                          // 선택되지 않은 버튼 텍스트 색상
+
+                          borderColor: Colors.grey,
+                          // 토글 버튼 테두리 색상
+                          borderWidth: 0.5,
+                          borderRadius: BorderRadius.circular(5.0),
+
+                          selectedColor: Color(0xffC77749),
+                          // 선택된 버튼 텍스트 색상
+                          fillColor: Color(0xffFFFFFF),
+                          // 선택된 버튼 배경색
+                          selectedBorderColor: Color(0xffC77749),
+                          // 선택된 버튼 테두리 색상
+
+                          // renderBorder: false,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 11),
+                              child: Text(
+                                '계좌이체',
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
+                                  letterSpacing: 0.01,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14),
+                              child: Text(
+                                '현금',
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
+                                  letterSpacing: 0.01,
+                                ),
+                              ),
+                            ),
+                          ],
+                          isSelected: isSelected2,
+                          onPressed: toggleSelect2,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -542,7 +617,7 @@ class _FixErrandState extends State<FixErrand> {
                     ),
                   ),
                 ),
-                // 수정 완료 버튼 만들기
+                // 작성 완료 버튼 만들기
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(
