@@ -17,10 +17,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 
 //현재 화면에서 뒤로가기
-class Request extends StatefulWidget {
-  const Request({super.key});
+class Errand extends StatefulWidget {
+  Errand({super.key});
   @override
-  _RequestState createState() => _RequestState();
+  _ErrandState createState() => _ErrandState();
 }
 class ErrandRequest {
   final String? createdDate;
@@ -67,7 +67,7 @@ class ReturnValues {
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
-class _RequestState extends State<Request> {
+class _ErrandState extends State<Errand> {
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();

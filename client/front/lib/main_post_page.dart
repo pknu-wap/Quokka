@@ -773,7 +773,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => Request(),
+                        builder: (BuildContext context) => Errand(),
                       ),
                     );
                   },
