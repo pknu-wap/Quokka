@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../errands/fixerrand/fixerrandwidget/fixdue.dart';
-import '../../../../errands/fixerrand/fixerrandwidget/fixiscash.dart';
-import '../../../../errands/fixerrand/fixerrandwidget/fixminimap.dart';
+import 'fixerrandwidget/fixdue.dart';
+import 'fixerrandwidget/fixiscash.dart';
+import 'fixerrandwidget/fixminimap.dart';
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;

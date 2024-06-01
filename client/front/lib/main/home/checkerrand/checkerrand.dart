@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:front/main/home/checkerrand/fixerrand/fixerrand.dart';
+import 'package:front/errands/fixerrand/fixerrand.dart';
 import 'package:intl/intl.dart';
 import 'showerrand/mainshowerrand.dart';
 import '../home.dart';
