@@ -68,6 +68,13 @@ class ErrandCheckWidget extends StatelessWidget {
     }
   }
 
+  // 일정 형식
+  late DateTime dueDateTime = DateFormat('yyyy-MM-dd').parse(due); // 요청일 String을 DateTime으로 변환
+  // 날짜를 yyyy.MM.dd 형식으로 변환하는 함수
+  String formatDate(DateTime date) {
+    return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}  ${date.hour.toString().padLeft(2,'0')}:${date.minute.toString().padLeft(2,'0')}';
+  }
+
   // 글보기 상세 페이지
   @override
   Widget build(BuildContext context) {
@@ -234,7 +241,7 @@ class ErrandCheckWidget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 6),
                           child: Text(
-                            "${due} 까지",
+                            "${formatDate(dueDateTime)} 까지",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
