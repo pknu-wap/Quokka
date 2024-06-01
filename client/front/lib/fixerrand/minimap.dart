@@ -34,27 +34,27 @@ class _MiniMapState extends State<MiniMap> {
   NOverlayImage destIcon = NOverlayImage.fromAssetImage(
       "assets/images/map_dest.png");
 
-  // 내 위치 받기
-  // Future<Position> getCurrentLocation() async {
-  //   log("call geolocator");
-  //   try {
-  //     LocationPermission permission;
-  //     permission = await Geolocator.checkPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       permission = await Geolocator.requestPermission();
-  //       if (permission == LocationPermission.deniedForever) {
-  //         return Future.error('Location Not Available');
-  //       }
-  //     }
-  //     Position position = await Geolocator.getCurrentPosition(
-  //         desiredAccuracy: LocationAccuracy.high);
-  //     log("get position at geolocator");
-  //     return position;
-  //   } catch (e) {
-  //     log("exception: " + e.toString());
-  //     return Future.error("faild Geolocator");
-  //   }
-  // }
+//  내 위치 받기
+  Future<Position> getCurrentLocation() async {
+    log("call geolocator");
+    try {
+      LocationPermission permission;
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.deniedForever) {
+          return Future.error('Location Not Available');
+        }
+      }
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      log("get position at geolocator");
+      return position;
+    } catch (e) {
+      log("exception: " + e.toString());
+      return Future.error("faild Geolocator");
+    }
+  }
 
   @override
   void initState() {
@@ -67,25 +67,17 @@ class _MiniMapState extends State<MiniMap> {
     latitude = widget.latitude;
     longitude = widget.longitude;
 
-    myLatLng = NLatLng(latitude, longitude);
-    value = myLatLng;
-    marker = NMarker(
-      id: "test",
-      position: myLatLng,
-    );
-    marker.setIcon(destIcon);
-
-    // getCurrentLocation().then((position) {
-    //   setState(() {
-    //     myLatLng = NLatLng(position.latitude, position.longitude);
-    //     value = myLatLng;
-    //     marker = NMarker(
-    //       id: "test",
-    //       position: myLatLng,
-    //     );
-    //     marker.setIcon(destIcon);
-    //   });
-    // });
+    getCurrentLocation().then((position) {
+      setState(() {
+        myLatLng = NLatLng(position.latitude, position.longitude);
+        value = myLatLng;
+        marker = NMarker(
+          id: "test",
+          position: myLatLng,
+        );
+        marker.setIcon(destIcon);
+      });
+    });
   }
   // 네이버 미니 지도
   @override
