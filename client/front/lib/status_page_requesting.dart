@@ -366,35 +366,6 @@ class Status_Content_Widget extends StatelessWidget {
 }
 String connectNo = "";
 
-void onConnect(StompFrame frame) {
-  stompClient.subscribe(
-    destination: '/queue/$connectNo',
-    callback: (frame) {
-      StatusContent result = StatusContent.fromJson(json.decode(frame.body!));
-      print(result);
-      /**
-       *  이 부분에
-       *  result를 표시 list에 추가하는 코드
-       */
-    },
-  );
-}
-
-final stompClient = StompClient(
-  config: StompConfig(
-    url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
-    onConnect: onConnect,
-    beforeConnect: () async {
-      print('waiting to connect...');
-      await Future.delayed(const Duration(milliseconds: 200));
-      print('connecting...');
-    },
-    onWebSocketError: (dynamic error) => print(error.toString()),
-    //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
-    //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
-  ),
-);
-
 class statuspageQ extends StatefulWidget {
   final int errandNo;
   const statuspageQ({
@@ -406,6 +377,23 @@ class statuspageQ extends StatefulWidget {
   State<statuspageQ> createState() => _statuspageQState();
 }
 class _statuspageQState extends State<statuspageQ> {
+
+  late StompClient stompClient;
+  void onConnect(StompClient stompClient,StompFrame frame) {
+    stompClient.subscribe(
+      destination: '/queue/$connectNo',
+      callback: (frame) {
+        setState(() {
+          contents.add(json.decode(frame.body!));
+        });
+        /**
+         *  이 부분에
+         *  result를 표시 list에 추가하는 코드
+         */
+      },
+    );
+  }
+
   late int errandNo;
   List<Map<String, dynamic>> contents = [
     // {
@@ -489,7 +477,22 @@ class _statuspageQState extends State<statuspageQ> {
     connectNo = errandNo.toString();
     statusMessageInit();
     completeCheck();
-    stompClient.connected;
+
+    stompClient = StompClient(
+      config: StompConfig(
+        url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
+        onConnect: (frame) => onConnect(stompClient, frame),
+        beforeConnect: () async {
+          print('waiting to connect...');
+          await Future.delayed(const Duration(milliseconds: 200));
+          print('connecting...');
+        },
+        onWebSocketError: (dynamic error) => print(error.toString()),
+        //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
+        //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
+      ),
+    );
+    stompClient.activate();
   }
   @override
   Widget build(BuildContext context) {
