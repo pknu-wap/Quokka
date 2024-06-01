@@ -7,10 +7,10 @@ import 'package:geolocator/geolocator.dart';
 
 import '../map.dart';
 
-class MiniMap extends StatefulWidget{
+class FixMiniMap extends StatefulWidget{
   final double latitude; // 위도
   final double longitude; // 경도
-  MiniMap({
+  FixMiniMap({
     Key? key,
     required this.latitude,
     required this.longitude,
@@ -20,7 +20,7 @@ class MiniMap extends StatefulWidget{
   State createState() => _MiniMapState();
 }
 
-class _MiniMapState extends State<MiniMap> {
+class _MiniMapState extends State<FixMiniMap> {
   late double latitude;
   late double longitude;
 
@@ -67,17 +67,25 @@ class _MiniMapState extends State<MiniMap> {
     latitude = widget.latitude;
     longitude = widget.longitude;
 
-    getCurrentLocation().then((position) {
-      setState(() {
-        myLatLng = NLatLng(position.latitude, position.longitude);
-        value = myLatLng;
-        marker = NMarker(
-          id: "test",
-          position: myLatLng,
-        );
-        marker.setIcon(destIcon);
-      });
-    });
+    myLatLng = NLatLng(latitude, longitude);
+    value = myLatLng;
+    marker = NMarker(
+      id: "test",
+      position: myLatLng,
+    );
+    marker.setIcon(destIcon);
+
+    // getCurrentLocation().then((position) {
+    //   setState(() {
+    //     myLatLng = NLatLng(position.latitude, position.longitude);
+    //     value = myLatLng;
+    //     marker = NMarker(
+    //       id: "test",
+    //       position: myLatLng,
+    //     );
+    //     marker.setIcon(destIcon);
+    //   });
+    // });
   }
   // 네이버 미니 지도
   @override
