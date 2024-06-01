@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'main_post_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:stomp_dart_client/stomp_dart_client.dart';
+
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
@@ -396,7 +399,42 @@ class statuspageR extends StatefulWidget {
   @override
   State<statuspageR> createState() => _statuspageRState();
 }
+
+
+String connectNo = "";
+
+void onConnect(StompFrame frame) {
+  stompClient.subscribe(
+    destination: '/queue/$connectNo',
+    callback: (frame) {
+      StatusContent result = StatusContent.fromJson(json.decode(frame.body!));
+      print(result);
+      /**
+       *  이 부분에
+       *  result를 표시 list에 추가하는 코드
+       */
+    },
+  );
+}
+
+final stompClient = StompClient(
+  config: StompConfig(
+    url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
+    onConnect: onConnect,
+    beforeConnect: () async {
+      print('waiting to connect...');
+      await Future.delayed(const Duration(milliseconds: 200));
+      print('connecting...');
+    },
+    onWebSocketError: (dynamic error) => print(error.toString()),
+   //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
+    //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
+  ),
+);
+
+
 class _statuspageRState extends State<statuspageR> {
+
   late int errandNo;
   List<Map<String, dynamic>> contents = [
     // {
@@ -428,7 +466,7 @@ class _statuspageRState extends State<statuspageR> {
     return;
   }
   statusMessageInit() async{
-    errandNo = widget.errandNo;
+   //errandNo = widget.errandNo;
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}statusMessage/$errandNo";
     String? token = await storage.read(key: 'TOKEN');
@@ -484,8 +522,10 @@ class _statuspageRState extends State<statuspageR> {
       }
     });
     errandNo = widget.errandNo;
+    connectNo = errandNo.toString();
     statusMessageInit();
     completeCheck();
+    stompClient.activate();
   }
   @override
   Widget build(BuildContext context) {
