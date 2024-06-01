@@ -5,9 +5,9 @@ import 'package:front/status_page_running.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'errand/errand/request.dart';
+import 'request.dart';
 import 'errand_check.dart';
-import 'status_page_requesting.dart';
+import '../status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 OverlayEntry? overlayEntry;
@@ -773,7 +773,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => Errand(),
+                        builder: (BuildContext context) => WriteErrand(),
                       ),
                     );
                   },

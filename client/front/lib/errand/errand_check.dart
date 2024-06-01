@@ -7,9 +7,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
-import 'errand/fixerrand/fixerrandwidget/fixerrand.dart';
-import 'mainshowerrand/mainshowerrand.dart';
-import 'errand/errand/request.dart';
+import 'fixerrand/fixerrandwidget/fixerrand.dart';
+import '../mainshowerrand/mainshowerrand.dart';
+import 'request.dart';
 import 'main_post_page.dart';
 import 'package:http/http.dart' as http;
 

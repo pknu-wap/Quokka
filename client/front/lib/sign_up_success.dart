@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:async';
 import 'login.dart';
-import 'main_post_page.dart';
+import 'errand/main_post_page.dart';
 import 'package:http/http.dart' as http;
 
 class Signup_Success extends StatelessWidget {

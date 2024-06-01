@@ -9,18 +9,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
-import '../../errand_check.dart';
-import '../../map.dart';
+import 'errand_check.dart';
+import '../map.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
 
 //현재 화면에서 뒤로가기
-class Errand extends StatefulWidget {
-  Errand({super.key});
+class WriteErrand extends StatefulWidget {
+  WriteErrand({super.key});
   @override
-  _ErrandState createState() => _ErrandState();
+  _WriteErrandState createState() => _WriteErrandState();
 }
 class ErrandRequest {
   final String? createdDate;
@@ -67,7 +67,7 @@ class ReturnValues {
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
-class _ErrandState extends State<Errand> {
+class _WriteErrandState extends State<WriteErrand> {
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
