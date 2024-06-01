@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -393,7 +394,8 @@ class _statuspageRState extends State<statuspageR> {
   }
   statusMessageInit() async{
     errandNo = widget.errandNo;
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/statusMessage/$errandNo";
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}statusMessage/$errandNo";
     String? token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
