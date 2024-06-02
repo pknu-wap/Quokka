@@ -479,14 +479,16 @@ class _statuspageQState extends State<statuspageQ> {
     stompClient.activate();
   }
   void scrollToBottom() {
-    final maxScrollExtent = _scrollController.position.maxScrollExtent; //스크롤을 맨 아래로 내리기
-    final offset = 50; // 더 아래로 스크롤하고 싶은 거리
+    if (contents.length > 5) {
+      final maxScrollExtent = _scrollController.position.maxScrollExtent;
+      final offset = 50; // 더 아래로 스크롤하고 싶은 거리
 
-    _scrollController.animateTo(
-      maxScrollExtent + offset,
-      duration: Duration(seconds: 1),
-      curve: Curves.easeOut,
-    );
+      _scrollController.animateTo(
+        maxScrollExtent + offset,
+        duration: Duration(seconds: 1),
+        curve: Curves.easeOut,
+      );
+    }
   }
   @override
   Widget build(BuildContext context) {
