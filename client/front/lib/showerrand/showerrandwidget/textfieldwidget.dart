@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 class TextFieldWidget extends StatelessWidget{
@@ -23,7 +25,7 @@ class TextFieldWidget extends StatelessWidget{
                     width: 0.5)), // 밑줄 스타일링
               ),
               child: Text(
-                realName != "" ? '       ${realName}       ' : '              ',  // 연동
+                realName != "" ? '       ${utf8.decode(realName.runes.toList())}       ' : '              ',  // 연동
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w300,
