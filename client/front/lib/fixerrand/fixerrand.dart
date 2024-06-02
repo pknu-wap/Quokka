@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,19 +30,20 @@ class FixErrand extends StatefulWidget {
 class _FixErrandState extends State<FixErrand> {
   late ErrandRequest errand;
 
-  void errandPostRequest() async {
+  void errandUpdateRequest() async {
     errand = ErrandRequest(
         createdDate: widget.errands['createdDate'],
         title: titleController.text,
         destination: detailAddressController.text,
-        latitude: ??,
-        longitude: ??,
+        latitude: latitude,
+        longitude: longitude,
         due: setDue(),
         detail: requestController.text,
         reward: int.parse(priceController.text),
         isCash: isSelected2[1],
     );
-    log(setDue());
+    print("print errands");
+    print(errand);
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
     String param = "/${errandNo}";
@@ -63,7 +65,7 @@ class _FixErrandState extends State<FixErrand> {
         print(jsonDecode(response.body));
       }
     } catch(e) {
-      log(e.toString());
+      print(e.toString());
     }
   }
   String setDue() {
@@ -79,6 +81,48 @@ class _FixErrandState extends State<FixErrand> {
     );
     return due.toString();
   }
+  setDayAtChildWidget(List<bool> list) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        isSelected1 = list;
+      });
+    });
+  }
+  setHourAtChildWidget(int hour) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _selectedHour = hour;
+      });
+    });
+  }
+  setMinuteAtChildWidget(int minute) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _selectedMinute = minute;
+      });
+    });
+  }
+  setIsCashAtChildWidget(List<bool> list) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        isSelected2 = list;
+      });
+    });
+  }
+  setLatLongAtChildWidget(double lat, double long) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        latitude = lat;
+        longitude = long;
+      });
+    });
+  }
+
+  late List<bool> isSelected1 = [true, false]; // 일정 오늘/내일
+  late int _selectedHour; // 선택된 시간 저장
+  late int _selectedMinute; // 선택된 분 저장
+
+  late List<bool> isSelected2 = [true, false]; // 현금/계좌이체
 
   late int errandNo;
   late String title;
@@ -319,7 +363,10 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 일정
-                FixDue(due: due),
+                FixDue(due: due,
+                  setDayParentState: setDayAtChildWidget,
+                  setHourParentState: setHourAtChildWidget,
+                    setMinuteParentState: setMinuteAtChildWidget),
                 // 도착지 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 18),
@@ -357,7 +404,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 네이버 미니 지도
-                FixMiniMap(latitude: latitude, longitude: longitude),
+                FixMiniMap(latitude: latitude, longitude: longitude, setLatLongParentStatue: setLatLongAtChildWidget,),
                 // 상세 주소 텍스트 필드
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
@@ -521,7 +568,7 @@ class _FixErrandState extends State<FixErrand> {
                         ),
                       ),
                       // 결제 방법
-                      FixIsCash(isCash: isCash,),
+                      FixIsCash(isCash: isCash, setIsCashParentState: setIsCashAtChildWidget,),
                     ],
                   ),
                 ),
@@ -611,7 +658,7 @@ class _FixErrandState extends State<FixErrand> {
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(
                     onPressed: () {
-                      // errandPostRequest();
+                      errandUpdateRequest();
                     },
                     style: ButtonStyle(
                       // 버튼의 배경색 변경하기

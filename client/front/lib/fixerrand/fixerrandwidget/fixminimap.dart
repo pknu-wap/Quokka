@@ -10,10 +10,12 @@ import '../../../map.dart';
 class FixMiniMap extends StatefulWidget{
   final double latitude; // 위도
   final double longitude; // 경도
+  final setLatLongParentStatue;
   FixMiniMap({
     Key? key,
     required this.latitude,
     required this.longitude,
+    required this.setLatLongParentStatue
   }) : super(key: key);
 
   @override
@@ -158,6 +160,7 @@ class _MiniMapState extends State<FixMiniMap> {
                         marker.setPosition(value);
                         marker.setIsVisible(
                             true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
+                        widget.setLatLongParentStatue(value.latitude, value.longitude);
                       });
                       mapController.updateCamera(
                         NCameraUpdate.scrollAndZoomTo(

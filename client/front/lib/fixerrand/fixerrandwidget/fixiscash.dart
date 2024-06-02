@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class FixIsCash extends StatefulWidget{
   final bool isCash;
+  final setIsCashParentState;
   FixIsCash({
     Key? key,
     required this.isCash,
+    required this.setIsCashParentState
   }) : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class _FixIsCashState extends State<FixIsCash>{
           isSelected2[index] = false;
         }
       }
+      widget.setIsCashParentState(isSelected2);
     });
   }
 
