@@ -47,9 +47,7 @@ class ShowErrandWidget extends StatelessWidget {
   // 심부름 요청서 상세 페이지
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-        duration: Duration(milliseconds: 500),
-            margin: margin,
+    return Container(
             width: 324, height: 576,
             decoration: BoxDecoration(
               color: Color(0xffFCFCF9),

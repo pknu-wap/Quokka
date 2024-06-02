@@ -141,7 +141,8 @@ class _MainShowErrandState extends State<MainShowErrand> {
                     Container(
                       // 심부름 요청서 상세 부분
                       child: Flexible(
-                              child: Container(
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
                                 width: 324,
                                 height: 576,
                                 margin: errandConfirmedMargin, // 기존 마진 -> 확정 마진
@@ -176,7 +177,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                       )
                         ),
                       ),
-                      ),
+                    ),
 
                     // 확인했어요. 버튼
                     if(isCheckButtonVisible) // 버튼이 보이면,

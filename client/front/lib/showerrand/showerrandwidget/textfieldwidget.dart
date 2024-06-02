@@ -11,7 +11,8 @@ class TextFieldWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 1000),
     child: Column(
     children:[
         Container(
