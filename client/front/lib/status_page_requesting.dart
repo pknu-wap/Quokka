@@ -386,6 +386,7 @@ class _statuspageQState extends State<statuspageQ> {
         setState(() {
           contents.add(json.decode(frame.body!));
           scrollToBottom();
+          completeCheck();
         });
         /**
          *  이 부분에
@@ -396,8 +397,7 @@ class _statuspageQState extends State<statuspageQ> {
   }
 
   late int errandNo;
-  List<Map<String, dynamic>> contents = [
-  ];
+  List<Map<String, dynamic>> contents = [];
   bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
   void completeCheck()
@@ -409,7 +409,7 @@ class _statuspageQState extends State<statuspageQ> {
     setState(() {});
     return;
   }
-  statusMessageInit() async{
+  Future<void> statusMessageInit() async{
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}statusMessage/$errandNo";
     String? token = await storage.read(key: 'TOKEN');
@@ -461,8 +461,9 @@ class _statuspageQState extends State<statuspageQ> {
     super.initState();
     errandNo = widget.errandNo;
     connectNo = errandNo.toString();
-    statusMessageInit();
-    completeCheck();
+    statusMessageInit().then((_) {
+      completeCheck();
+    });
 
     stompClient = StompClient(
       config: StompConfig(
