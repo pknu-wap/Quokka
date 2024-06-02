@@ -406,6 +406,7 @@ class _statuspageQState extends State<statuspageQ> {
       isCompleted = true;
     else
       isCompleted = false;
+    setState(() {});
     return;
   }
   statusMessageInit() async{
@@ -448,6 +449,7 @@ class _statuspageQState extends State<statuspageQ> {
           "created": c1.created,
         });
       }
+      completeCheck();
       setState(() {});
     }
     else {
