@@ -6,10 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:front/errands/fixerrand/fixerrand.dart';
 import 'package:intl/intl.dart';
-import 'showerrand/mainshowerrand.dart';
-import '../home.dart';
+import 'fixerrand/fixerrand.dart';
+import '../../home.dart';
 import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage(); // 토큰 받기
@@ -837,13 +836,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         onPressed: () async{
                           print("제가 할게요! 클릭");
                           // 심부름 요청서 팝업 느낌으로 띄우기
-                          String updatedStatus =
-                              await Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  MainShowErrand(errands : errands[0]),
-                            ),
-                          );
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(

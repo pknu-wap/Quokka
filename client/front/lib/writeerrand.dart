@@ -9,11 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
-import '../home/checkerrand/checkerrand.dart';
-import '../../map.dart';
+import '../map.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'checkerrand.dart';
 final storage = FlutterSecureStorage();
 
 //현재 화면에서 뒤로가기

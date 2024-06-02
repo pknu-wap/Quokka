@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'login.dart';
-import 'main/home/home.dart';
+import 'home.dart';
 final storage = FlutterSecureStorage();
 // Future<bool> _determinePermission() async {
 //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();

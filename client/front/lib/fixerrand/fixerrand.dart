@@ -255,7 +255,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 일정
-                FixDue(due: due, createdDate: createdDate),
+                FixDue(due: due),
                 // 도착지 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 18),

@@ -1,13 +1,12 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front/main/home/checkerrand/checkerrand.dart';
-import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/stamp/stamp.dart';
-import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
-import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
-import 'package:front/main/home/checkerrand/showerrand/showerrandwidget/textfieldwidget.dart';
+import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
+import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
+import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
+import 'package:front/showerrand/showerrandwidget/textfieldwidget.dart';
+import '../../../checkerrand.dart';
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
