@@ -122,7 +122,6 @@ class _MainShowErrandState extends State<MainShowErrand> {
     isCash = widget.errands["isCash"];
     nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
     realName = "   "; // 심부름 하는 사람 실제 이름
-
   }
   // 메인 글 보기 화면
   @override
@@ -173,6 +172,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         isStampVisible: isStampVisible,
                                         nickName : nickName,
                                         realName : realName,
+                                        margin : errandConfirmedMargin,
                                       )
                         ),
                       ),

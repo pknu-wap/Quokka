@@ -24,6 +24,8 @@ class ShowErrandWidget extends StatelessWidget {
   final String nickName;
   final String realName;
 
+  final EdgeInsets margin;
+
   ShowErrandWidget({
     required this.errandNo,
     required this.title,
@@ -39,12 +41,15 @@ class ShowErrandWidget extends StatelessWidget {
     required this.isStampVisible,
     required this.nickName,
     required this.realName,
+    required this.margin,
   });
 
   // 심부름 요청서 상세 페이지
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+            margin: margin,
             width: 324, height: 576,
             decoration: BoxDecoration(
               color: Color(0xffFCFCF9),
