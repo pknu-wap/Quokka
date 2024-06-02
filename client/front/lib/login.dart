@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'sign_up.dart';
-import 'main_post_page.dart';
+import 'home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -51,7 +51,7 @@ class _LogInState extends State<LogIn> {
         Navigator.push(
             //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
             context,
-            MaterialPageRoute(builder: (context) => Main_post_page()));
+            MaterialPageRoute(builder: (context) => Home()));
       } else
         {
           setState(() {

@@ -6,11 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:front/showerrand/mainshowerrand.dart';
 import 'package:intl/intl.dart';
 import 'fixerrand/fixerrand.dart';
-import 'mainshowerrand/mainshowerrand.dart';
-import 'request.dart';
-import 'main_post_page.dart';
+import '../../home.dart';
 import 'package:http/http.dart' as http;
 
 final storage = FlutterSecureStorage(); // 토큰 받기
@@ -66,6 +65,13 @@ class ErrandCheckWidget extends StatelessWidget {
     } else {
       return '방금 전';
     }
+  }
+
+  // 일정 형식
+  late DateTime dueDateTime = DateFormat('yyyy-MM-dd HH:mm').parse(due); // 요청일 String을 DateTime으로 변환
+  // 날짜를 yyyy.MM.dd  hh:mm 형식으로 변환하는 함수
+  String formatDate(DateTime date) {
+    return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}  ${date.hour.toString().padLeft(2,'0')}:${date.minute.toString().padLeft(2,'0')}';
   }
 
   // 글보기 상세 페이지
@@ -234,7 +240,8 @@ class ErrandCheckWidget extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 6),
                           child: Text(
-                            "${due} 까지",
+                            "${formatDate(dueDateTime)} 까지",
+                            // "${due}까지",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
@@ -378,9 +385,8 @@ class Error {
 
 class MainErrandCheck extends StatefulWidget {
   final int errandNo;
-  final String status;
 
-  MainErrandCheck({Key? key, required this.errandNo, required this.status}) : super(key: key);
+  MainErrandCheck({Key? key, required this.errandNo}) : super(key: key);
 
   @override
   State createState() => _MainErrandCheckState();
@@ -390,12 +396,14 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   List<Map<String, dynamic>> errands = [];
   String? token = "";
   late int errandNo;
-  late String status;
 
   late double latitude = 0;
   late double longitude = 0;
   late NLatLng myLatLng;
   late NMarker marker;
+
+  NOverlayImage destIcon = NOverlayImage.fromAssetImage(
+      "assets/images/map_dest.png");
 
   Future<void> errandReading(String id) async {
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
@@ -409,6 +417,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
 
     if (response.statusCode == 200) {
       Errand errand = Errand.fromJson(jsonDecode(response.body));
+      log("due : ${errand.due}");
       errands.add({
         "orderNo": errand.o1.orderNo,
         "nickname": errand.o1.nickname,
@@ -426,7 +435,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         "status": errand.status,
         "isMyErrand": errand.isMyErrand,
       });
-
       log("status code == 200, Json Data Parsed.");
       setState(() {
         latitude = errand.latitude;
@@ -436,6 +444,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
           id: "도착지",
           position: myLatLng,
         );
+        marker.setIcon(destIcon);
         // DB에 저장된 위도, 경도
         log("latitude : $latitude");
         log("longitude : $longitude");
@@ -463,7 +472,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     if (response.statusCode == 200) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (BuildContext context) => Main_post_page(),
+          builder: (BuildContext context) => Home(),
         ),
       );
     }
@@ -589,8 +598,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     super.initState();
     errandNo = widget.errandNo;
     errandReading(errandNo.toString());
-    status = widget.status;
-    log(status.toString());
   }
 
   // 메인 글 보기 화면
@@ -674,7 +681,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              Main_post_page()
+                                              Home()
                                         ),
                                       );
                                     },
@@ -831,16 +838,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           print("제가 할게요! 클릭");
                           // 심부름 요청서 팝업 느낌으로 띄우기
                           String updatedStatus =
-                              await Navigator.of(context).push(
+                          await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   MainShowErrand(errands : errands[0]),
                             ),
                           );
-                          // 상태 업데이트
-                          setState(() {
-                            status = updatedStatus; // 상태가 업데이트가 안 돼ㅜㅜ
-                          });
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
