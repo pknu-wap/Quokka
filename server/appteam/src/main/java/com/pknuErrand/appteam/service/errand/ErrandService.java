@@ -181,8 +181,8 @@ public class ErrandService {
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
 
         Map<String, String> responseMap = new HashMap<>();
-        responseMap.put("nickname", errander.getName());
-        responseMap.put("name", errander.getNickname());
+        responseMap.put("name", errander.getName());
+        responseMap.put("nickname", errander.getNickname());
         return responseMap;
     }
 
