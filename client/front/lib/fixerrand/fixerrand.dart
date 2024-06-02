@@ -1,10 +1,18 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../checkerrand.dart';
+import '../writeerrand.dart';
 import 'fixerrandwidget/fixdue.dart';
 import 'fixerrandwidget/fixiscash.dart';
 import 'fixerrandwidget/fixminimap.dart';
+import 'package:http/http.dart' as http;
+final storage = FlutterSecureStorage();
+
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -19,6 +27,59 @@ class FixErrand extends StatefulWidget {
 }
 
 class _FixErrandState extends State<FixErrand> {
+  late ErrandRequest errand;
+
+  void errandPostRequest() async {
+    errand = ErrandRequest(
+        createdDate: widget.errands['createdDate'],
+        title: titleController.text,
+        destination: detailAddressController.text,
+        latitude: ??,
+        longitude: ??,
+        due: setDue(),
+        detail: requestController.text,
+        reward: int.parse(priceController.text),
+        isCash: isSelected2[1],
+    );
+    log(setDue());
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand";
+    String param = "/${errandNo}";
+    String? token = await storage.read(key: 'TOKEN');
+    try {
+      var response = await http.put(Uri.parse(url+param),
+          body: jsonEncode(errand.toJson()),
+          headers: {"Authorization": "$token",
+            "Content-Type": "application/json"
+          });
+      if (response.statusCode == 200) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => MainErrandCheck(errandNo: errandNo,)
+          ),);
+      }
+      else {
+        print("ERROR : ");
+        print(jsonDecode(response.body));
+      }
+    } catch(e) {
+      log(e.toString());
+    }
+  }
+  String setDue() {
+    DateTime now = DateTime.now();
+    if(isSelected1[1]) // 내일 선택
+      now = now.add(Duration(days : 1)); // 다음 날이므로, 1일 추가
+    DateTime due = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        _selectedHour,
+        _selectedMinute
+    );
+    return due.toString();
+  }
+
   late int errandNo;
   late String title;
   late String name;
@@ -67,6 +128,9 @@ class _FixErrandState extends State<FixErrand> {
     due = widget.errands['due'];
     createdDate = widget.errands['createdDate'];
     isCash = widget.errands['isCash'];
+
+    errandNo = widget.errands['errandNo'];
+
   }
 
     @override
