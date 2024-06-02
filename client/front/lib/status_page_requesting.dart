@@ -65,17 +65,15 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
           child: Container(
             padding: EdgeInsets.all(20),
-            width: 300,
-            height: 203,
             decoration: BoxDecoration(
-              color: Color(0xffFFFFFF), //배경색
+              color: Color(0xffFFFFFF),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // 다이얼로그의 크기를 콘텐츠에 맞게 조정
               children: [
                 Icon(
-                  Icons.check, // 확인 아이콘으로 변경
+                  Icons.check,
                   color: Color(0xffAD8772),
                   size: 40,
                 ),
@@ -90,24 +88,27 @@ class _RatingDialogState extends State<RatingDialog> {
                 ),
                 SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Home()));
+                              MaterialPageRoute(
+                                  builder: (context) => Home()));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                          backgroundColor: Color(0xffAD8772),
                           foregroundColor: Color(0xffFFFFFF),
                           padding: EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text("평가를 하지 않고 나가기"),
+                        child: Text(
+                          "평가를 하지 않고 나가기",
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                     SizedBox(width: 10),
@@ -124,7 +125,10 @@ class _RatingDialogState extends State<RatingDialog> {
                           ),
                           side: BorderSide(color: Color(0xffAD8772)),
                         ),
-                        child: Text("취소"),
+                        child: Text(
+                          "취소",
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ],
