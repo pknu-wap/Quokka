@@ -30,7 +30,7 @@ void confirmDialog(BuildContext context) {
         child: Container(
           padding: EdgeInsets.all(20),
           width: 300,
-          height: 200,
+          height: 203,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF), //배경색
             borderRadius: BorderRadius.circular(20),
@@ -52,7 +52,17 @@ void confirmDialog(BuildContext context) {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
+              Text(
+                "꼭 심부름이 완료되었을 때 눌러야 해요.",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xffB08B76),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -121,6 +131,7 @@ class RatingDialog extends StatefulWidget {
 class _RatingDialogState extends State<RatingDialog> {
   int _rating = 0;
   final List<String> ratingTexts = [
+    '',
     '최악이에요;;',
     '별로에요...ㅜ',
     '그럭저럭 괜찮아요~',
@@ -130,88 +141,94 @@ class _RatingDialogState extends State<RatingDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-          shape: RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Container(width: 323, height: 343,
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF),
+            border: Border.all(color: Color(0xffB6B6B6), width: 1,),
             borderRadius: BorderRadius.circular(10.0),
           ),
-    child: FittedBox(
-          fit: BoxFit.contain,
-          child: Container(width: 323, height: 343,
-             decoration: BoxDecoration(
-             color: Color(0xffFFFFFF),
-             border: Border.all(color: Color(0xffB6B6B6), width: 1,),
-               borderRadius: BorderRadius.circular(10.0),
-           ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container( margin: EdgeInsets.only(top: 19, left: 22),
-                        child: Text(
-                          '평가하기',
-                          style: TextStyle(fontFamily: 'Pretendard',
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: Color(0xff616161),),),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container( margin: EdgeInsets.only(top: 19, left: 22),
+                      child: Text(
+                        '평가하기',
+                        style: TextStyle(fontFamily: 'Pretendard',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Color(0xff616161),),),
+                    ),
+                    Container( margin: EdgeInsets.only(left: 177), //원래 197인데 잘려서 줄여놓음
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                       ),
-                      Spacer(),
-                      Container( margin: EdgeInsets.only(right: 10), //원래 197인데 잘려서 줄여놓음
-                        child: IconButton(
-                          icon: Icon(Icons.close),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container( width: 300, height: 16,
-                  margin: EdgeInsets.only(top: 19, left: 22, right: 40),
-                  child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
+              ),
+              Container( width: 300, height: 16,
+                margin: EdgeInsets.only(top: 19, left: 22, right: 40),
+                child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
+                  style: TextStyle(fontFamily: 'Pretendard',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    color: Color(0xff404040),),),
+              ),
+              Flexible(
+                child: Container( width: 251, height: 16,
+                  margin: EdgeInsets.only(left: 22, right: 50),
+                  child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
                     style: TextStyle(fontFamily: 'Pretendard',
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
                       color: Color(0xff404040),),),
                 ),
-                Flexible(
-                  child: Container( width: 251, height: 16,
-                    margin: EdgeInsets.only(left: 22, right: 50),
-                    child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
-                      style: TextStyle(fontFamily: 'Pretendard',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: Color(0xff404040),),),
-                  ),
-                ),
-                Container( margin: EdgeInsets.only(top: 18.72, left: 27, right: 31),
-                    child: Container(width: 265, child: Divider(color: Color(0xffBCBCBC), thickness: 0.5))),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(5, (index) {
-                    return IconButton(
-                      icon: Image.asset(
-                        index < _rating
-                            ? 'assets/images/quokka_pointO.png'
-                            : 'assets/images/quokka_pointX.png',
-                        width: 39.57,
-                        height: 39.99,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _rating = index + 1;
-                        });
-                      },
-                    );
-                  }),
-                ),
+              ),
+              Container( margin: EdgeInsets.only(top: 18.72, left: 27, right: 31),
+                  child: Container(width: 265, child: Divider(color: Color(0xffBCBCBC), thickness: 0.5))),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(5, (index) {
+                  return IconButton(
+                    icon: Image.asset(
+                      index < _rating
+                          ? 'assets/images/quokka_pointO.png'
+                          : 'assets/images/quokka_pointX.png',
+                      width: 39.57,
+                      height: 39.99,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _rating = index + 1;
+                      });
+                    },
+                  );
+                }),
+              ),
+              Text(ratingTexts[_rating],
+                style: TextStyle(fontFamily: 'Pretendard',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                  color: Color(0xff1A1A1A),),),
+              if (_rating > 0)
                 Text(
-                  ratingTexts[_rating - 1],
+                  '($_rating / 5) 점',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontStyle: FontStyle.normal,
@@ -220,45 +237,39 @@ class _RatingDialogState extends State<RatingDialog> {
                     color: Color(0xff1A1A1A),
                   ),
                 ),
-                Text('($_rating / 5) 점',
-                  style: TextStyle(fontFamily: 'Pretendard',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    color: Color(0xff1A1A1A),),),
-                Container(
-                  margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff7C3D1A),
-                      fixedSize: Size(318, 45), // 너비와 높이
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
-                      ),
+              Container(
+                margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
+                child: ElevatedButton(
+                  onPressed: _rating == 0 ? (){} : () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff7C3D1A),
+                    fixedSize: Size(318, 45), // 너비와 높이
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
                     ),
-                    child: Container(
-                      width: 300,
-                      height: 45,
-                      alignment: Alignment.center,
-                      child: Text(
-                        '평가 완료했어요',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.01,
-                          color: Color(0xffFFFFFF),
-                        ),
+                  ),
+                  child: Container(
+                    width: 300,
+                    height: 45,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '평가 완료했어요',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.01,
+                        color: Color(0xffFFFFFF),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-         ),
-        );
+        ),
+      ),
+    );
   }
 }
 class Status_Content_Widget extends StatelessWidget {

@@ -56,7 +56,17 @@ void confirmDialog(BuildContext context) {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
+              Text(
+                "꼭 심부름이 완료되었을 때 눌러야 해요.",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xffB08B76),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
