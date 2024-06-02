@@ -71,19 +71,10 @@ class _FixDueState extends State<FixDue>{
         isSelected1 = [true, false]; // 오늘
         _selectedHour = dueDate.hour;
         _selectedMinute = dueDate.minute;
-        dueDate = dueDate = DateTime(
-            currentDate.year, currentDate.month, currentDate.day,
-            currentDate.hour, currentDate.minute);
-      } else if (dayDifference == -1) { // 3. 내일로 심부름 지정 -> 시간이 안 지났어
-        if (currentDate.day == dueDate.day - 1) { // -> 당일(오늘) 수정 -> 내일
+      } else if (dayDifference == -1) { // 3. 내일로 심부름 지정 -> 시간이 안 지났어 -> 당일(오늘) 수정 -> 내일
           isSelected1 = [false, true]; // 내일
           _selectedHour = dueDate.hour;
           _selectedMinute = dueDate.minute;
-        } else { // -> 내일 수정 -> 오늘
-          isSelected1 = [true, false]; // 오늘
-          _selectedHour = dueDate.hour;
-          _selectedMinute = dueDate.minute;
-        }
       }
     }
   }
