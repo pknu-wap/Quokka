@@ -422,6 +422,7 @@ class _statuspageRState extends State<statuspageR> {
       callback: (frame) {
         setState(() {
           contents.add(json.decode(frame.body!));
+          scrollToBottom();
         });
         /**
          *  이 부분에
@@ -480,7 +481,16 @@ class _statuspageRState extends State<statuspageR> {
       );
     }
   }
+  void scrollToBottom() {
+    final maxScrollExtent = _scrollController.position.maxScrollExtent; //스크롤을 맨 아래로 내리기
+    final offset = 50; // 더 아래로 스크롤하고 싶은 거리
 
+    _scrollController.animateTo(
+      maxScrollExtent + offset,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeOut,
+    );
+  }
   @override
   void initState()
   {
@@ -610,6 +620,7 @@ class _statuspageRState extends State<statuspageR> {
                     padding: EdgeInsets.only(top: 0.1, bottom: 45),
                     controller: _scrollController,
                     shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
                       return Status_Content_Widget(

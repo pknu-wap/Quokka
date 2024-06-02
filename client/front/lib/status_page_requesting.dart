@@ -385,6 +385,7 @@ class _statuspageQState extends State<statuspageQ> {
       callback: (frame) {
         setState(() {
           contents.add(json.decode(frame.body!));
+          scrollToBottom();
         });
         /**
          *  이 부분에
@@ -396,23 +397,6 @@ class _statuspageQState extends State<statuspageQ> {
 
   late int errandNo;
   List<Map<String, dynamic>> contents = [
-    // {
-    //   'contents': '심부름꾼이 출발했어요 !',
-    //   'created': '11:20',
-    // },
-    // {
-    //   'contents': '지금 물건을 픽업 했어요 !',
-    //   'created': '11:30',
-    // },
-    // {
-    //   'contents': '5분 뒤 도착해요!',
-    //   'created': '11:49',
-    // },
-    // {
-    //   'contents': '완료했어요!',
-    //   'created': '11:55',
-    // },
-    //테스트 코드
   ];
   bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
@@ -493,6 +477,16 @@ class _statuspageQState extends State<statuspageQ> {
       ),
     );
     stompClient.activate();
+  }
+  void scrollToBottom() {
+    final maxScrollExtent = _scrollController.position.maxScrollExtent; //스크롤을 맨 아래로 내리기
+    final offset = 50; // 더 아래로 스크롤하고 싶은 거리
+
+    _scrollController.animateTo(
+      maxScrollExtent + offset,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeOut,
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -589,6 +583,7 @@ class _statuspageQState extends State<statuspageQ> {
                     padding: EdgeInsets.only(top: 0.1, bottom: 45),
                     controller: _scrollController,
                     shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
                       return Status_Content_Widget(
