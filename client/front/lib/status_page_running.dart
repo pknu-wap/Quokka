@@ -27,6 +27,105 @@ class RatingDialog extends StatefulWidget {
 }
 
 class _RatingDialogState extends State<RatingDialog> {
+  scoreOther(_rating) async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}score";
+    int connectNoInt = int.parse(connectNo);
+    double score = _rating.toDouble();
+    String param = "?errandNo=$connectNoInt&score=$score";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.put(Uri.parse(url + param),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()));
+    }
+    else {
+      print(response.body);
+    }
+  }
+  void scoreConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            width: 300,
+            height: 203,
+            decoration: BoxDecoration(
+              color: Color(0xffFFFFFF), //배경색
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.check, // 확인 아이콘으로 변경
+                  color: Color(0xffAD8772),
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "나가면 더 이상 평가할 수 없어요!",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                          foregroundColor: Color(0xffFFFFFF),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("평가를 하지 않고 나가기"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Color(0xffAD8772),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Color(0xffAD8772)),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   int _rating = 0;
   final List<String> ratingTexts = [
     '',
@@ -70,22 +169,22 @@ class _RatingDialogState extends State<RatingDialog> {
                       child: IconButton(
                         icon: Icon(Icons.close),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          scoreConfirmDialog(context);
                         },
                       ),
                     ),
                   ],
                 ),
               ),
-                Container( width: 300, height: 16,
-                  margin: EdgeInsets.only(top: 19, left: 22, right: 40),
-                  child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
-                    style: TextStyle(fontFamily: 'Pretendard',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      color: Color(0xff404040),),),
-                ),
+              Container( width: 300, height: 16,
+                margin: EdgeInsets.only(top: 19, left: 22, right: 40),
+                child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
+                  style: TextStyle(fontFamily: 'Pretendard',
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    color: Color(0xff404040),),),
+              ),
               Flexible(
                 child: Container( width: 251, height: 16,
                   margin: EdgeInsets.only(left: 22, right: 50),
@@ -138,7 +237,10 @@ class _RatingDialogState extends State<RatingDialog> {
               Container(
                 margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
                 child: ElevatedButton(
-                  onPressed: _rating == 0 ? (){} : () {},
+                  onPressed: _rating == 0 ? (){}
+                      : () {
+                    scoreOther(_rating);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
                     fixedSize: Size(318, 45), // 너비와 높이

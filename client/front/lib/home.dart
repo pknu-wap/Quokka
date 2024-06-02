@@ -979,6 +979,7 @@ class _HomeState extends State<Home> {
                           posts.clear();
                           ErrandLatestInit();
                           InprogressExist();
+                          InProgressErrandInit();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
@@ -1008,6 +1009,7 @@ class _HomeState extends State<Home> {
                           posts.clear();
                           ErrandRewardInit();
                           InprogressExist();
+                          InProgressErrandInit();
                           scrollToTop();
                         },
                         child: Container(width: 70, height: 32,
