@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front/fixerrand/fixerrand.dart';
 
 class FixDue extends StatefulWidget{
   final String due; // 일정으로 정한 시간
+  final setDayParentState;
+  final setHourParentState;
+  final setMinuteParentState;
   FixDue({
     Key? key,
     required this.due,
+    required this.setDayParentState, required this.setHourParentState, required this.setMinuteParentState
   }) : super(key: key);
 
   @override
@@ -34,8 +39,12 @@ class _FixDueState extends State<FixDue>{
           isSelected1[index] = false;
         }
       }
+      widget.setDayParentState(isSelected1);
     });
   }
+  /*
+  ParentState parent = context.findAncestorStateOfType<ParentState>();
+   */
 
   void initializeToggle1() {
     DateTime dueDate = DateTime.parse(widget.due); // 심부름 일정 시간 -> 시간이 더 나중임
@@ -77,6 +86,9 @@ class _FixDueState extends State<FixDue>{
           _selectedMinute = dueDate.minute;
       }
     }
+    widget.setDayParentState(isSelected1);
+    widget.setHourParentState(_selectedHour);
+    widget.setMinuteParentState(_selectedMinute);
   }
 
 
@@ -170,6 +182,7 @@ class _FixDueState extends State<FixDue>{
                       onChanged: (int? newValue) {
                         setState(() {
                           _selectedHour = newValue!;
+                          widget.setHourParentState(_selectedHour);
                         });
                       },
                       icon: Icon(Icons.keyboard_arrow_down,
@@ -214,6 +227,7 @@ class _FixDueState extends State<FixDue>{
                       onChanged: (int? newValue) {
                         setState(() {
                           _selectedMinute = newValue!;
+                          widget.setMinuteParentState(_selectedMinute);
                         });
                       },
                       icon: Icon(Icons.keyboard_arrow_down,

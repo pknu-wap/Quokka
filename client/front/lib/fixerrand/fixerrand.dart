@@ -1,10 +1,19 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../checkerrand.dart';
+import '../writeerrand.dart';
 import 'fixerrandwidget/fixdue.dart';
 import 'fixerrandwidget/fixiscash.dart';
 import 'fixerrandwidget/fixminimap.dart';
+import 'package:http/http.dart' as http;
+final storage = FlutterSecureStorage();
+
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -19,6 +28,102 @@ class FixErrand extends StatefulWidget {
 }
 
 class _FixErrandState extends State<FixErrand> {
+  late ErrandRequest errand;
+
+  void errandUpdateRequest() async {
+    errand = ErrandRequest(
+        createdDate: widget.errands['createdDate'],
+        title: titleController.text,
+        destination: detailAddressController.text,
+        latitude: latitude,
+        longitude: longitude,
+        due: setDue(),
+        detail: requestController.text,
+        reward: int.parse(priceController.text),
+        isCash: isSelected2[1],
+    );
+    print("print errands");
+    print(errand);
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand";
+    String param = "/${errandNo}";
+    String? token = await storage.read(key: 'TOKEN');
+    try {
+      var response = await http.put(Uri.parse(url+param),
+          body: jsonEncode(errand.toJson()),
+          headers: {"Authorization": "$token",
+            "Content-Type": "application/json"
+          });
+      if (response.statusCode == 200) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => MainErrandCheck(errandNo: errandNo,)
+          ),);
+      }
+      else {
+        print("ERROR : ");
+        print(jsonDecode(response.body));
+      }
+    } catch(e) {
+      print(e.toString());
+    }
+  }
+  String setDue() {
+    DateTime now = DateTime.now();
+    if(isSelected1[1]) // 내일 선택
+      now = now.add(Duration(days : 1)); // 다음 날이므로, 1일 추가
+    DateTime due = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        _selectedHour,
+        _selectedMinute
+    );
+    return due.toString();
+  }
+  setDayAtChildWidget(List<bool> list) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        isSelected1 = list;
+      });
+    });
+  }
+  setHourAtChildWidget(int hour) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _selectedHour = hour;
+      });
+    });
+  }
+  setMinuteAtChildWidget(int minute) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _selectedMinute = minute;
+      });
+    });
+  }
+  setIsCashAtChildWidget(List<bool> list) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        isSelected2 = list;
+      });
+    });
+  }
+  setLatLongAtChildWidget(double lat, double long) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        latitude = lat;
+        longitude = long;
+      });
+    });
+  }
+
+  late List<bool> isSelected1 = [true, false]; // 일정 오늘/내일
+  late int _selectedHour; // 선택된 시간 저장
+  late int _selectedMinute; // 선택된 분 저장
+
+  late List<bool> isSelected2 = [true, false]; // 현금/계좌이체
+
   late int errandNo;
   late String title;
   late String name;
@@ -67,6 +172,9 @@ class _FixErrandState extends State<FixErrand> {
     due = widget.errands['due'];
     createdDate = widget.errands['createdDate'];
     isCash = widget.errands['isCash'];
+
+    errandNo = widget.errands['errandNo'];
+
   }
 
     @override
@@ -255,7 +363,10 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 일정
-                FixDue(due: due),
+                FixDue(due: due,
+                  setDayParentState: setDayAtChildWidget,
+                  setHourParentState: setHourAtChildWidget,
+                    setMinuteParentState: setMinuteAtChildWidget),
                 // 도착지 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 18),
@@ -293,7 +404,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 네이버 미니 지도
-                FixMiniMap(latitude: latitude, longitude: longitude),
+                FixMiniMap(latitude: latitude, longitude: longitude, setLatLongParentStatue: setLatLongAtChildWidget,),
                 // 상세 주소 텍스트 필드
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
@@ -457,7 +568,7 @@ class _FixErrandState extends State<FixErrand> {
                         ),
                       ),
                       // 결제 방법
-                      FixIsCash(isCash: isCash,),
+                      FixIsCash(isCash: isCash, setIsCashParentState: setIsCashAtChildWidget,),
                     ],
                   ),
                 ),
@@ -547,7 +658,7 @@ class _FixErrandState extends State<FixErrand> {
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(
                     onPressed: () {
-                      // errandPostRequest();
+                      errandUpdateRequest();
                     },
                     style: ButtonStyle(
                       // 버튼의 배경색 변경하기
