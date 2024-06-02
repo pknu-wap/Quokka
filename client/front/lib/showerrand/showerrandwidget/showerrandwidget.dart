@@ -85,45 +85,7 @@ class ShowErrandWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // 심부름 요청서 설명
-                Container(
-                    margin: EdgeInsets.only(top: 13.01),
-                    child: Row(
-                      children: [
-                        //사랑하는
-                        Container(
-                          margin: EdgeInsets.only(left: 48),
-                          child: Text(
-                            "사랑하는",
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w300,
-                              fontSize: 11,
-                              letterSpacing: 0.00,
-                              color: Color(0xff111111),
-                            ),
-                          ),
-                        ),
-                        TextFieldWidget(realName: realName),
-                        // 밑줄 텍스트 필드?
-
-                        //님의... 길이에 따라 줄바꿈 텍스트 생성
-                        // Container(
-                        //   width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
-                        //   margin: EdgeInsets.only(left: 2.82),
-                        //   child: Text(
-                        //     "님의 탁월함과 열정에 감사하며",
-                        //     style: TextStyle(
-                        //       fontFamily: 'Pretendard',
-                        //       fontWeight: FontWeight.w300,
-                        //       fontSize: 11,
-                        //       letterSpacing: 0.00,
-                        //       color: Color(0xff111111),
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    )),
+                // 심부름 요청서 멘트
                 Container(
                     width: 217,
                     child: Row(
@@ -137,14 +99,23 @@ class ShowErrandWidget extends StatelessWidget {
                               textAlign: TextAlign.center, // 텍스트 가운데 정렬
                               text: TextSpan(
                                   text:
-                                  "님의 탁월함과 열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                                  "사랑하는 ",
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w300,
                                     fontSize: 11,
                                     letterSpacing: 0.00,
                                     color: Color(0xff111111),
-                                  )),
+                                  ),
+                              children: [
+                                WidgetSpan(
+                                    child: TextFieldWidget(realName: realName)
+                                ),
+                                TextSpan(
+                                  text: " 님의 탁월함과 열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                                ),
+                              ],
+                              ),
                             )
                         ),
                       ],
