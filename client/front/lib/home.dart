@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/status_page_running.dart';
+import 'package:front/writeerrand.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
-import 'request.dart';
-import 'errand_check.dart';
+import 'checkerrand.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
@@ -443,12 +443,12 @@ class Error{
   }
 }
 
-class Main_post_page extends StatefulWidget {
-  const Main_post_page({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
   @override
-  _Main_post_pageState createState() => _Main_post_pageState();
+  State createState() => _HomeState();
 }
-class _Main_post_pageState extends State<Main_post_page> {
+class _HomeState extends State<Home> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
 
@@ -776,7 +776,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => Request(),
+                        builder: (BuildContext context) => WriteErrand(),
                       ),
                     );
                   },
@@ -1125,7 +1125,7 @@ class _Main_post_pageState extends State<Main_post_page> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"], status: status,)
+                                  builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
                               ),);
                           },
                           child: PostWidget(

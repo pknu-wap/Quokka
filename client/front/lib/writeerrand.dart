@@ -9,27 +9,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'package:intl/intl.dart';
-import 'errand_check.dart';
-import 'map.dart';
+import '../map.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'checkerrand.dart';
 final storage = FlutterSecureStorage();
 
-
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-//
-// import 'package:front/main.dart';
-// import 'main_post_page.dart'; // +버튼 클릭 시
-
 //현재 화면에서 뒤로가기
-class Request extends StatefulWidget {
-  const Request({super.key});
+class WriteErrand extends StatefulWidget {
+  WriteErrand({super.key});
   @override
-  _RequestState createState() => _RequestState();
+  _WriteErrandState createState() => _WriteErrandState();
 }
 class ErrandRequest {
   final String? createdDate;
@@ -40,7 +32,6 @@ class ErrandRequest {
   final String? due;
   final String? detail;
   final int reward;
-  final String status;
   final bool isCash;
   ErrandRequest({
     required this.createdDate,
@@ -51,7 +42,6 @@ class ErrandRequest {
     required this.due,
     required this.detail,
     required this.reward,
-    required this.status,
     required this.isCash
   });
 
@@ -78,8 +68,7 @@ class ReturnValues {
 }
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
-class _RequestState extends State<Request> {
-  late String status;
+class _WriteErrandState extends State<WriteErrand> {
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
@@ -106,8 +95,8 @@ class _RequestState extends State<Request> {
   int _selectedMinute = 0; // 선택된 분 저장
 
   // 결제 방법 토글 버튼 변수 선언
-  bool isAccountTransfer = true;
-  bool isCash = false;
+  bool isAccountTransfer = true; // 계좌이체
+  bool isCash = false; // 현금
   late List<bool> isSelected2 = [isAccountTransfer, isCash];
   late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
   late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
@@ -151,9 +140,9 @@ class _RequestState extends State<Request> {
         due: setDue(),
         detail: requestController.text,
         reward: int.parse(priceController.text),
-        status: status,
         isCash: isSelected2[1],
     );
+    log(setDue());
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
     String? token = await storage.read(key: 'TOKEN');
@@ -167,7 +156,7 @@ class _RequestState extends State<Request> {
         int errandNo = jsonDecode(response.body)['errandNo'];
         Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (context) => MainErrandCheck(errandNo: errandNo, status: status,)
+                builder: (context) => MainErrandCheck(errandNo: errandNo,)
             ),);
       }
       else {
@@ -180,14 +169,14 @@ class _RequestState extends State<Request> {
   }
   String setDue() {
     DateTime now = DateTime.now();
-    if(isSelected1[1])
-      now = now.add(Duration(days : 1));
+    if(isSelected1[1]) // 내일 선택
+      now = now.add(Duration(days : 1)); // 다음 날이므로, 1일 추가
     DateTime due = DateTime(
         now.year,
-      now.month,
-      now.day,
-      _selectedHour,
-      _selectedMinute
+        now.month,
+        now.day,
+        _selectedHour,
+        _selectedMinute
     );
     return due.toString();
   }
@@ -512,6 +501,7 @@ class _RequestState extends State<Request> {
                                 onChanged: (int? newValue) {
                                   setState(() {
                                     _selectedHour = newValue!;
+                                    log(_selectedHour.toString());
                                   });
                                 },
                                 icon: Icon(Icons.keyboard_arrow_down,
@@ -556,6 +546,7 @@ class _RequestState extends State<Request> {
                                 onChanged: (int? newValue) {
                                   setState(() {
                                     _selectedMinute = newValue!;
+                                    log(_selectedMinute.toString());
                                   });
                                 },
                                 icon: Icon(Icons.keyboard_arrow_down,

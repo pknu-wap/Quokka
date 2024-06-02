@@ -8,9 +8,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'login.dart';
-import 'main_post_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
+import 'home.dart';
 final storage = FlutterSecureStorage();
 // Future<bool> _determinePermission() async {
 //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -74,7 +73,7 @@ class MyApp extends StatelessWidget {
       FlutterNativeSplash.remove();
       Navigator.of(context).push(
         //토큰이 타당하면 바로 게시글 페이지로 넘어감
-          MaterialPageRoute(builder: (context) => Main_post_page()));
+          MaterialPageRoute(builder: (context) => Home()));
     }
   }
 

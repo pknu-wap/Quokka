@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:geolocator/geolocator.dart';
-
-import '../map.dart';
+import 'fixerrandwidget/fixdue.dart';
+import 'fixerrandwidget/fixiscash.dart';
+import 'fixerrandwidget/fixminimap.dart';
 
 class FixErrand extends StatefulWidget {
   final Map<String, dynamic> errands;
@@ -20,13 +18,6 @@ class FixErrand extends StatefulWidget {
   State createState() => _FixErrandState();
 }
 
-class ReturnValues {
-  final NLatLng value;
-  final double zoom;
-
-  ReturnValues({required this.value, required this.zoom});
-}
-
 class _FixErrandState extends State<FixErrand> {
   late int errandNo;
   late String title;
@@ -34,9 +25,12 @@ class _FixErrandState extends State<FixErrand> {
   late String createdDate;
   late String due;
   late String destination;
+  late double latitude;
+  late double longitude;
   late String detail;
   late int reward;
   late String status;
+  late bool isCash;
 
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
@@ -50,53 +44,6 @@ class _FixErrandState extends State<FixErrand> {
   bool isDetailAddressEnabled = true;
   bool isPriceEnabled = true;
   bool isRequestEnabled = true;
-
-  // 일정 토글 버튼 변수 선언
-  bool isToday = true; // 맨 처음 고정 값
-  bool isTomorrow = false;
-  bool isDetailVisible = true; // 예약 버튼 클릭 시 상세 시간 설정
-  late List<bool> isSelected1 = [isToday, isTomorrow];
-
-  // 위 두 변수를 닮을 리스트 -> 토글 버튼 위젯의 토글 선택 여부 담당
-
-  // 일정 상세 시간 변수 선언
-  int _selectedHour = 0; // 선택된 시간 저장
-  int _selectedMinute = 0; // 선택된 분 저장
-
-  // 결제 방법 토글 버튼 변수 선언
-  bool isAccountTransfer = true;
-  late bool isCash = false;
-  late List<bool> isSelected2 = [isAccountTransfer, isCash];
-  late NLatLng myLatLng; // 사용자의 위치 -> 위도 경도
-  late NMarker marker; // 사용자의 위치를 받아온 초기 마커 위치
-
-  NOverlayImage destIcon = NOverlayImage.fromAssetImage(
-      "assets/images/map_dest.png");
-  double zoom = 14.5;
-
-  NLatLng value = NLatLng(0, 0);
-  late NaverMapController mapController; // 지도 컨트롤
-
-  Future<Position> getCurrentLocation() async {
-    log("call geolocator");
-    try {
-      LocationPermission permission;
-      permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.deniedForever) {
-          return Future.error('Location Not Available');
-        }
-      }
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      log("get position at geolocator");
-      return position;
-    } catch (e) {
-      log("exception: " + e.toString());
-      return Future.error("faild Geolocator");
-    }
-  }
 
   @override
   void initState() {
@@ -115,17 +62,11 @@ class _FixErrandState extends State<FixErrand> {
     priceController.addListener(updatePriceState);
     requestController.addListener(updateRequestState);
 
-    getCurrentLocation().then((position) {
-      setState(() {
-        myLatLng = NLatLng(position.latitude, position.longitude);
-        value = myLatLng;
-        marker = NMarker(
-          id: "test",
-          position: myLatLng,
-        );
-        marker.setIcon(destIcon);
-      });
-    });
+    latitude = widget.errands['latitude'];
+    longitude = widget.errands['longitude'];
+    due = widget.errands['due'];
+    createdDate = widget.errands['createdDate'];
+    isCash = widget.errands['isCash'];
   }
 
     @override
@@ -163,33 +104,6 @@ class _FixErrandState extends State<FixErrand> {
       // 비밀번호 확인 입력란의 텍스트 변경 감지하여 확인 버튼의 활성화 상태 업데이트
       setState(() {
         isRequestEnabled = requestController.text.isNotEmpty;
-      });
-    }
-
-    // 토글 버튼(일정)
-    void toggleSelect1(int newindex) {
-      setState(() {
-        for (int index = 0; index < isSelected1.length; index++) {
-          if (index == newindex) {
-            isSelected1[index] = true;
-          } else {
-            isSelected1[index] = false;
-          }
-        }
-      });
-      //print(isSelected1);
-    }
-
-    // 토글 버튼(결제 방법)
-    void toggleSelect2(int newindex) {
-      setState(() {
-        for (int index = 0; index < isSelected2.length; index++) {
-          if (index == newindex) {
-            isSelected2[index] = true;
-          } else {
-            isSelected2[index] = false;
-          }
-        }
       });
     }
 
@@ -340,187 +254,8 @@ class _FixErrandState extends State<FixErrand> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 6, left: 22),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          width: 106,
-                          height: 31,
-                          // 토글 버튼 만들기
-                          margin: EdgeInsets.only(left: 0),
-                          child: ToggleButtons(
-                            color: Color(0xff2E2E2E),
-                            // 선택되지 않은 버튼 텍스트 색상
-                            // 선택되지 않은 버튼 배경색
-                            borderColor: Colors.grey,
-                            // 토글 버튼 테두리 색상
-                            borderWidth: 0.5,
-                            borderRadius: BorderRadius.circular(5.0),
-
-                            selectedColor: Color(0xffC77749),
-                            // 선택된 버튼 텍스트 색상
-                            fillColor: Color(0xffFFFFFF),
-                            // 선택된 버튼 배경색
-                            selectedBorderColor: Color(0xffC77749),
-                            // 선택된 버튼 테두리 색상
-
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  '오늘',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 13,
-                                    letterSpacing: 0.01,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  '내일',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 13,
-                                    letterSpacing: 0.01,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            isSelected: isSelected1,
-                            onPressed: toggleSelect1,
-                          ),
-                        ),
-                      ),
-                      if (isDetailVisible)
-                      // 시간 상세 설정 카테고리
-                        Container(
-                          margin: EdgeInsets.only(right: 69),
-                          width: 146,
-                          height: 31,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color(0xffC77749), // 박스 테두리 색상
-                              width: 0.5, // 테두리 굵기
-                            ),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(5.0)),
-                            color: Color(0xffFFFFFF), // 박스 배경 색상
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: DropdownButton<int>(
-                                  underline: Container(),
-                                  // dropdownButton 밑줄 제거
-                                  value: _selectedHour,
-                                  onChanged: (int? newValue) {
-                                    setState(() {
-                                      _selectedHour = newValue!;
-                                    });
-                                  },
-                                  icon: Icon(Icons.keyboard_arrow_down,
-                                      size: 17, color: Color(0xff808080)),
-                                  items: List.generate(24, (index) {
-                                    // 0~23시
-                                    return DropdownMenuItem<int>(
-                                      value: index,
-                                      child: Text(
-                                        '$index',
-                                        style: TextStyle(
-                                          fontFamily: 'Pretendard',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12,
-                                          letterSpacing: 0.01,
-                                          color: Color(0xffC77749),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(right: 5),
-                                child: Text(
-                                  '시',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff4F4F4F),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: DropdownButton<int>(
-                                  underline: Container(),
-                                  // dropdownButton 밑줄 제거
-                                  value: _selectedMinute,
-                                  onChanged: (int? newValue) {
-                                    setState(() {
-                                      _selectedMinute = newValue!;
-                                    });
-                                  },
-                                  icon: Icon(Icons.keyboard_arrow_down,
-                                      size: 17, color: Color(0xff808080)),
-                                  items: List.generate(60, (index) {
-                                    // 0~59분
-                                    return DropdownMenuItem<int>(
-                                      value: index,
-                                      child: Text(
-                                        '$index',
-                                        style: TextStyle(
-                                          fontFamily: 'Pretendard',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12,
-                                          letterSpacing: 0.01,
-                                          color: Color(0xffC77749),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(right: 2),
-                                child: Text(
-                                  '분',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xff4F4F4F),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 4),
-                                child: Text(
-                                  '까지',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    letterSpacing: 0.01,
-                                    color: Color(0xffC77749),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                    ],
-                  ),
-                ),
+                // 일정
+                FixDue(due: due),
                 // 도착지 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 18),
@@ -558,107 +293,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 // 네이버 미니 지도
-                Container(
-                  width: 318.85,
-                  height: 120,
-                  margin: EdgeInsets.only(left: 2, top: 6),
-                  decoration: BoxDecoration(
-                    border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xffFFFFFF),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: NaverMap(
-                      options: NaverMapViewOptions(
-                        scrollGesturesEnable: false,
-                        // 스크롤 비활성화
-                        zoomGesturesEnable: false,
-                        // 줌 비활성화
-
-                        // locationButtonEnable: true, // 내 위치 버튼 활성화
-                        logoClickEnable: false,
-                        // 네이버 로고 클릭 비활성화
-
-                        mapType: NMapType.basic,
-                        // 지도 유형 : 기본 지도(기본 값)
-                        activeLayerGroups: [ // 표시할 정보
-                          NLayerGroup.building, // 건물 레이어
-                          NLayerGroup.transit, // 대중교통 레이어
-                        ],
-                        initialCameraPosition: NCameraPosition(
-                            target: myLatLng, // 내 위치
-                            // 위도, 경도
-                            // 부경대 대연캠퍼스
-                            // 위도 latitude : 35.134384930841364
-                            // 경도 longitude : 129.10592409493796
-                            zoom: zoom, // 지도의 초기 줌 레벨
-                            bearing: 0, // 지도의 회전 각도(0 : 북쪽이 위)
-                            tilt: 0 // 지도의 기울기 각도(0 : 평면으로 보임)
-                        ),
-                      ),
-
-                      onMapReady: (controller) {
-                        log("request.dart로 이동!");
-                        log(value.toString());
-                        controller.addOverlay(marker); // 마커를 지도 위에 올리기
-                        mapController = controller;
-                        print("네이버 맵 로딩됨!");
-                      },
-
-                      onMapTapped: (point, latLng) async {
-                        // 지도가 터치될 때마다 마커의 위치를 업데이트
-                        print("marker 이동!");
-                        final returnValue = await Navigator.push(
-                          //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-                          context,
-                          MaterialPageRoute(builder: (context) =>
-                              NaverMapTest(value: value, zoom: zoom)),
-                        );
-                        // log(point.toString());
-                        // log(latLng.toString());
-
-                        setState(() {
-                          value = returnValue.value;
-                          zoom = returnValue.zoom;
-                          marker.setPosition(value);
-                          marker.setIsVisible(
-                              true); // 새로운 값이 들어오면 마커 다시 보이도록 설정
-                        });
-                        mapController.updateCamera(
-                          NCameraUpdate.scrollAndZoomTo(
-                            target: NLatLng(value.latitude, value.longitude),
-                            zoom: zoom,
-                          ),
-                        );
-                      },
-
-                      onSymbolTapped: (symbol) {
-                        setState(() {
-                          marker.setPosition(value); // marker 위치 이동
-                          marker.setIsVisible(true);
-                        });
-                        final cameraPosition = NCameraPosition(
-                            target: NLatLng(value.latitude, value.longitude),
-                            zoom: zoom
-                        );
-                        final cameraUpdate = NCameraUpdate.fromCameraPosition(
-                            cameraPosition);
-                        cameraUpdate.setAnimation(
-                            animation: NCameraAnimation.fly,
-                            duration: Duration(seconds: 2)
-                        );
-                        mapController.updateCamera(cameraUpdate);
-                        log("지도의 심볼 클릭 -> 미니 지도에 표시");
-                      },
-                      forceGesture: true,
-                      // SingleChildScrollView 안에서 사용하므로, NaverMap에
-                      // 전달되는 제스처 무시 현상 방지 위함
-                    ),
-                  ),
-                ),
+                FixMiniMap(latitude: latitude, longitude: longitude),
                 // 상세 주소 텍스트 필드
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
@@ -821,58 +456,8 @@ class _FixErrandState extends State<FixErrand> {
                           ),
                         ),
                       ),
-                      Container(
-                        width: 119,
-                        height: 31,
-                        // 토글 버튼 만들기
-                        margin: EdgeInsets.only(right: 86),
-                        child: ToggleButtons(
-                          color: Color(0xff2E2E2E),
-                          // 선택되지 않은 버튼 텍스트 색상
-
-                          borderColor: Colors.grey,
-                          // 토글 버튼 테두리 색상
-                          borderWidth: 0.5,
-                          borderRadius: BorderRadius.circular(5.0),
-
-                          selectedColor: Color(0xffC77749),
-                          // 선택된 버튼 텍스트 색상
-                          fillColor: Color(0xffFFFFFF),
-                          // 선택된 버튼 배경색
-                          selectedBorderColor: Color(0xffC77749),
-                          // 선택된 버튼 테두리 색상
-
-                          // renderBorder: false,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 11),
-                              child: Text(
-                                '계좌이체',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 13,
-                                  letterSpacing: 0.01,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 14),
-                              child: Text(
-                                '현금',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 13,
-                                  letterSpacing: 0.01,
-                                ),
-                              ),
-                            ),
-                          ],
-                          isSelected: isSelected2,
-                          onPressed: toggleSelect2,
-                        ),
-                      ),
+                      // 결제 방법
+                      FixIsCash(isCash: isCash,),
                     ],
                   ),
                 ),
@@ -957,7 +542,7 @@ class _FixErrandState extends State<FixErrand> {
                     ),
                   ),
                 ),
-                // 작성 완료 버튼 만들기
+                // 수정 완료 버튼 만들기
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(

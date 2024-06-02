@@ -1,13 +1,12 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front/errand_check.dart';
-import 'package:front/mainshowerrand/showerrandwidget/stamp.dart';
-import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen1.dart';
-import 'package:front/mainshowerrand/showerrandwidget/tablescreen/tablescreen2.dart';
-import 'package:front/mainshowerrand/showerrandwidget/textfieldwidget.dart';
+import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
+import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
+import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
+import 'package:front/showerrand/showerrandwidget/textfieldwidget.dart';
+import '../../../checkerrand.dart';
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
@@ -58,10 +57,9 @@ class ShowErrandWidget extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              MainErrandCheck(errandNo: errandNo, status: status),
+                              MainErrandCheck(errandNo: errandNo,),
                         ),
                       );
-                      log(status.toString());
                   },
                   child: Container(
                     padding: EdgeInsets.only(left: 280, top: 8),
