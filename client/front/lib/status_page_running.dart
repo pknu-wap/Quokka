@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:front/status_page_requesting.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,102 +20,6 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
       utf8.decode(json['created'].runes.toList()),
     );
   }
-}
-
-void confirmDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Container(
-          padding: EdgeInsets.all(20),
-          width: 300,
-          height: 200,
-          decoration: BoxDecoration(
-            color: Color(0xffFFFFFF), //배경색
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.check, // 확인 아이콘으로 변경
-                color: Color(0xffAD8772),
-                size: 40,
-              ),
-              SizedBox(height: 10),
-              Text(
-                "심부름을 완료하시겠어요?",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 5),
-              Text(
-                "꼭 심부름이 완료되었을 때 눌러야 해요.",
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB08B76),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setComplete();
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return RatingDialog();
-                          },
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xffAD8772), // 갈색으로 설정
-                        foregroundColor: Color(0xffFFFFFF),
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text("확인"),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Color(0xffAD8772),
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        side: BorderSide(color: Color(0xffAD8772)),
-                      ),
-                      child: Text("취소"),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }
 class RatingDialog extends StatefulWidget {
   @override
@@ -490,6 +393,115 @@ class _statuspageRState extends State<statuspageR> {
         }), // 메시지의 내용
       );
     }
+  }
+  errander_complete() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}$connectNo/complete/errander";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return RatingDialog();
+        },
+      );
+    }
+    else {
+      print("Errander가 완료처리하지 않았음");
+      print("사용자가 errander가 아님");
+    }
+  }
+  void confirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            width: 300,
+            height: 203,
+            decoration: BoxDecoration(
+              color: Color(0xffFFFFFF), //배경색
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.check, // 확인 아이콘으로 변경
+                  color: Color(0xffAD8772),
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "심부름을 완료하시겠어요?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "꼭 심부름이 완료되었을 때 눌러야 해요.",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffB08B76),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setComplete();
+                          errander_complete();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+                          foregroundColor: Color(0xffFFFFFF),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("확인"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Color(0xffAD8772),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Color(0xffAD8772)),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
   void scrollToBottom() {
     if (contents.length > 5) {
