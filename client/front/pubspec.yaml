@@ -44,6 +44,7 @@ dependencies:
   flutter_secure_storage: ^9.1.1
   flutter_native_splash: ^2.4.0
   stomp_dart_client: ^2.0.0
+  animated_text_kit: ^4.2.2
 
 
 
