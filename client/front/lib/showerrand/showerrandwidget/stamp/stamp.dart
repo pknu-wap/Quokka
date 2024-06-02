@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 import 'namelength/namelength2.dart';
@@ -15,6 +17,7 @@ class Stamp extends StatelessWidget {
   Stamp({
    required this.realName,
 });
+
 
   @override
   Widget build(BuildContext context) {

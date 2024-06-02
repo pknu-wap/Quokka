@@ -108,20 +108,20 @@ class ShowErrandWidget extends StatelessWidget {
                         // 밑줄 텍스트 필드?
 
                         //님의... 길이에 따라 줄바꿈 텍스트 생성
-                        Container(
-                          width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
-                          margin: EdgeInsets.only(left: 2.82),
-                          child: Text(
-                            "님의 탁월함과 열정에 감사하며",
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w300,
-                              fontSize: 11,
-                              letterSpacing: 0.00,
-                              color: Color(0xff111111),
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   width: 150, // 텍스트 가로 너비 제한해주기(가로 너비보다 길어지면 자동 줄바꿈)
+                        //   margin: EdgeInsets.only(left: 2.82),
+                        //   child: Text(
+                        //     "님의 탁월함과 열정에 감사하며",
+                        //     style: TextStyle(
+                        //       fontFamily: 'Pretendard',
+                        //       fontWeight: FontWeight.w300,
+                        //       fontSize: 11,
+                        //       letterSpacing: 0.00,
+                        //       color: Color(0xff111111),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     )),
                 Container(
@@ -137,7 +137,7 @@ class ShowErrandWidget extends StatelessWidget {
                               textAlign: TextAlign.center, // 텍스트 가운데 정렬
                               text: TextSpan(
                                   text:
-                                  "아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                                  "님의 탁월함과 열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w300,
@@ -278,7 +278,7 @@ class ShowErrandWidget extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(top: 17.15, left: 5),
                               child: Text(
-                                nickName != "닉 네 임" ? nickName : "닉 네 임",
+                                nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,
@@ -319,7 +319,7 @@ class ShowErrandWidget extends StatelessWidget {
                       if(isStampVisible)
                       // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장
                       Stamp(
-                        realName: realName,
+                        realName: utf8.decode(realName.runes.toList()),
                       ),
 
                     ],
