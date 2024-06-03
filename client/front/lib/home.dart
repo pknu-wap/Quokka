@@ -458,7 +458,7 @@ class _HomeState extends State<Home> {
   bool isCheckBox = false;
   String status = "";
   String? token = "";
-  bool isVisible = false; //하단바 오버레이
+  bool isVisible = false; //쿼카 아이콘 옆 빨간점
   InprogressExist() async{
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}errand/in-progress/exist";
@@ -505,7 +505,7 @@ class _HomeState extends State<Home> {
   }
   ErrandLatestInit() async{
     String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand/latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=5&status=$status";
+    String url = "${base_url}errand/latest?pk=-1&cursor=3000-01-01 00:00:00.000000&limit=12&status=$status";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -551,7 +551,7 @@ class _HomeState extends State<Home> {
   }
   ErrandRewardInit() async{
     String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand/reward?pk=-1&cursor=1000000&limit=5&status=$status";
+    String url = "${base_url}errand/reward?pk=-1&cursor=1000000&limit=12&status=$status";
     token = await storage.read(key: 'TOKEN');
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
@@ -604,7 +604,7 @@ class _HomeState extends State<Home> {
     print(lastCreatedDate);
     token = await storage.read(key: 'TOKEN');
     String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand/latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=5&status=$status";
+    String url = "${base_url}errand/latest?pk=$lasterrandNo&cursor=$lastCreatedDate&limit=12&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
@@ -658,7 +658,7 @@ class _HomeState extends State<Home> {
     print(lastreward);
     token = await storage.read(key: 'TOKEN');
     String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}errand/reward?pk=$lasterrandNo&cursor=$lastreward&limit=5&status=$status";
+    String url = "${base_url}errand/reward?pk=$lasterrandNo&cursor=$lastreward&limit=12&status=$status";
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
@@ -821,7 +821,7 @@ class _HomeState extends State<Home> {
    WidgetsBinding.instance.addPostFrameCallback((_) {
       _insertOverlay(context);
     });
-    ErrandLatestInit(); //최신순 요청서 5개
+    ErrandLatestInit(); //최신순 요청서 12개
     InprogressExist(); //진행중인 심부름이 있는지 확인
     InProgressErrandInit(); //진행중인 심부름 목록 불러오기
     _scrollController.addListener((){
@@ -831,11 +831,11 @@ class _HomeState extends State<Home> {
         setState(() {
           if(button1state)
            {
-              ErrandLatestAdd(); //최신순 요청서 5개
+              ErrandLatestAdd(); //최신순 요청서 12개
            }
            else if(button2state)
            {
-               ErrandRewardAdd(); //금액순 요청서 5개
+               ErrandRewardAdd(); //금액순 요청서 12개
            }
           InprogressExist(); //진행중인 심부름이 있는지 확인
           InProgressErrandInit(); //진행중인 심부름 목록 불러오기
@@ -1086,6 +1086,9 @@ class _HomeState extends State<Home> {
                                 ErrandLatestInit();
                               else if(button2state)
                                 ErrandRewardInit();
+                                InprogressExist();
+                                InProgressErrandInit();
+                                scrollToTop();
                             });
                           },
                         ),
