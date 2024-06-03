@@ -144,8 +144,8 @@ class ShowErrandWidget extends StatelessWidget {
                           ),
                         ),
                         Container(
-                            child: TextFieldWidget(realName: realName)
-                            ),
+                            child: true? TextFieldWidget(realName: realName) : null ,
+                        ),
                         Container(
                           child: Text(
                             " 님의 탁월함과 ",
@@ -327,15 +327,31 @@ class ShowErrandWidget extends StatelessWidget {
                             AnimatedContainer(
                               duration: Duration(milliseconds: 200),
                               margin: EdgeInsets.only(top: 17.15, left: 5),
-                              child: nickName != "닉 네 임" ?
-                                AnimatedTextKit(
-                                  animatedTexts: [
-                                    TyperAnimatedText(utf8.decode(nickName.runes.toList()),
-                                      speed: Duration(milliseconds: 200),
-                                    ),
-                                  ],
-                                  totalRepeatCount: 1,
-                               ) :
+                              child: nickName != "닉 네 임" ? FutureBuilder(
+                                future: Future.delayed(Duration(milliseconds: 1250)),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.done) {
+                                    return AnimatedTextKit(
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                          utf8.decode(nickName.runes.toList()),
+                                          speed: Duration(milliseconds: 200),
+                                          textStyle: TextStyle(
+                                            fontFamily: 'SangSangShin',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 15,
+                                            letterSpacing: 0.01,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ],
+                                      totalRepeatCount: 1,
+                                    );
+                                  } else {
+                                    return SizedBox.shrink();
+                                  }
+                                },
+                              ):
                                   Text("닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
