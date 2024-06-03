@@ -79,6 +79,7 @@ class _Upload_ImageState extends State<Upload_Image> {
     }
     finally {
       setState(() {
+        u1.mail = widget.requestMail;
         Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) => Check_Image(u1: u1)

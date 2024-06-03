@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/status_page_running.dart';
 import 'package:front/writeerrand.dart';
@@ -8,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'checkerrand.dart';
+import 'login.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
@@ -906,175 +908,50 @@ class _HomeState extends State<Home> {
         }
     });
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Color(0xffF6F6F6),
-            ),
+  Future<bool?> _showExitDialog() {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(17),
+            width: 300,
+            height: 180,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container( width: 57.0, height: 25.0,
-                          margin: const EdgeInsets.only(left: 27, top: 33.0),
-                          child: const Text(
-                            '게시글',
-                            style: TextStyle(
-                              fontFamily: 'paybooc',
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.01,
-                              color: Color(0xff111111),
-                            ),),),
-                        SizedBox(width: 194),
-                        Container(width: 23.0, height: 21.91,
-                          margin : const EdgeInsets.only(top: 35.0,right: 14),
-                          child: IconButton(
-                            style: IconButton.styleFrom(
-                              minimumSize: Size.zero,
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            onPressed:
-                                () {},
-                            icon: Image.asset('assets/images/search_icon.png',
-                            ),
-                          ),
-                        ),
-                        Container(width: 23.0, height: 21.91,
-                          margin : const EdgeInsets.only(top: 34.0,right: 21.31),
-                          child: IconButton(
-                            style: IconButton.styleFrom(
-                              minimumSize: Size.zero,
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            onPressed: () {
-                            },
-                            icon: Image.asset('assets/images/alarm_icon.png',
-                              color: Color(0xffB4B5BE),
-                            ),
-                          ),)
-                      ],
-                    )
+                Icon(
+                  Icons.exit_to_app,
+                  color: Colors.brown,
+                  size: 40,
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      GestureDetector( //버튼1
-                        onTap: () {
-                          button1state = true;
-                          button2state = false;
-                          button3state = false;
-                          change_Button_State();
-                          posts.clear();
-                          ErrandLatestInit();
-                          InprogressExist();
-                          InProgressErrandInit();
-                          scrollToTop();
-                        },
-                        child: Container(width: 70, height: 32,
-                          margin: const EdgeInsets.only(left: 27, top: 19.0),
-                          child: Stack(
-                            children: [
-                              Positioned(left: 0, top: 0,
-                                child: Container(width: 70, height: 32,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFFBFBFB),
-                                    border: Border.all(color: button1_border_color, width: 1,),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),),), // Text
-                              Positioned(left: 16.72, top: 7.72,
-                                child: Text('최신순', style: TextStyle(
-                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500, fontSize: 14,
-                                  letterSpacing: 0.001, color: button1_text_color,
-                                ),),),
-                            ],),),),
-                      GestureDetector( //버튼2
-                        onTap: () {
-                          button1state = false;
-                          button2state = true;
-                          button3state = false;
-                          change_Button_State();
-                          posts.clear();
-                          ErrandRewardInit();
-                          InprogressExist();
-                          InProgressErrandInit();
-                          scrollToTop();
-                        },
-                        child: Container(width: 70, height: 32,
-                          margin: const EdgeInsets.only(left: 11, top: 19.0),
-                          child: Stack(
-                            children: [
-                              Positioned(left: 0, top: 0,
-                                child: Container(width: 70, height: 32,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFFBFBFB),
-                                    border: Border.all(color: button2_border_color, width: 1,),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),),), // Text
-                              Positioned(left: 16.72, top: 7.72,
-                                child: Text('금액순', style: TextStyle(
-                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500, fontSize: 14,
-                                  letterSpacing: 0.001, color: button2_text_color,
-                                ),),),
-                            ],),),),
-                      GestureDetector( //버튼3
-                        onTap: () {
-                          button1state = false;
-                          button2state = false;
-                          button3state = true;
-                          change_Button_State();
-                          scrollToTop();
-                        },
-                        child: Container(width: 70, height: 32,
-                          margin: const EdgeInsets.only(left: 11, top: 19.0),
-                          child: Stack(
-                            children: [
-                              Positioned(left: 0, top: 0,
-                                child: Container(width: 70, height: 32,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFFBFBFB),
-                                    border: Border.all(color: button3_border_color, width: 1,),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),),), // Text
-                              Positioned(left: 16.72, top: 7.72,
-                                child: Text('거리순', style: TextStyle(
-                                  fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500, fontSize: 14,
-                                  letterSpacing: 0.001, color: button3_text_color,
-                                ),),),
-                            ],),),)
-                    ],
+                SizedBox(height: 10),
+                Text(
+                  "정말 커카를 종료하시겠어요?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Container( width: 20, height: 20,
-                        margin: EdgeInsets.only(left: 27, top: 16.36),
-                        child: Checkbox(
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          visualDensity: const VisualDensity(
-                            horizontal: VisualDensity.minimumDensity,
-                            vertical: VisualDensity.minimumDensity,
-                          ),
-                          side: MaterialStateBorderSide.resolveWith(
-                                (states) => BorderSide(width: 1.0, color: Color(0xffC5C5C5)),
-                          ),
+                SizedBox(height: 11),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 10),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
+                              borderRadius: BorderRadius.circular(10)),
                           activeColor: Color(0xffA97651),
                           value: isCheckBox,
                           onChanged: (value) {
@@ -1092,185 +969,541 @@ class _HomeState extends State<Home> {
                             });
                           },
                         ),
+                        child: Text("종료"),
                       ),
-                      Container( height: 17,
-                        margin: EdgeInsets.only(left: 2.28, top: 14.86),
-                        child: Text('모집 중 모아보기', style: TextStyle(
-                          fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500, fontSize: 14,
-                          letterSpacing: 0.001, color: checkbox_text_color,
-                        ),),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height:16.36),
-                Flexible(
-                  child: Container( width: 322, height: 581, //게시글 큰틀
-                    margin: EdgeInsets.only(left: 19),
-                    decoration: BoxDecoration(
-                      color: Color(0xffFFFFFF),
                     ),
-                    child: ListView.builder(
-                        padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                      controller: _scrollController,
-                      shrinkWrap: true,
-                      itemCount: posts.length,
-                      itemBuilder: (BuildContext context, int index){
-                        String nickname = posts[index]["nickname"];
-                        String title = posts[index]['title'];
-                        String destination = posts[index]['destination'];
-                        String createdDate = posts[index]["createdDate"];
-                        String decodedNickname = utf8.decode(nickname.runes.toList());
-                        String decodedTitle = utf8.decode(title.runes.toList());
-                        String decodedDestination = utf8.decode(destination.runes.toList());
-                        String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
-                        return GestureDetector(
-                          behavior: HitTestBehavior.translucent, //게시글 전체를 클릭영역으로 만들어주는 코드
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => MainErrandCheck(errandNo: posts[index]["errandNo"])
-                              ),);
-                          },
-                          child: PostWidget(
-                            orderNo: posts[index]["orderNo"],
-                            nickname: decodedNickname,
-                            score: posts[index]["score"],
-                            errandNo: posts[index]["errandNo"],
-                            createdDate: decodedCreatedDate,
-                            title: decodedTitle,
-                            destination: decodedDestination,
-                            reward: posts[index]["reward"],
-                            status: posts[index]["status"],
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.brown,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        );
-                        }
+                          side: BorderSide(color: Colors.brown),
+                        ),
+                        child: Text("취소"),
                       ),
-                  ),
+                    ),
+                  ],
                 ),
-
               ],
             ),
           ),
-          Positioned(
-            bottom: 88.5, right: 26.27,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 56, height: 56,
-                    margin : const EdgeInsets.only(),
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              height: 389,
-                              decoration: BoxDecoration(
-                                color: Color(0xffF2F2F2),
-                                border: Border(
-                                  top: BorderSide(width: 0.5, color: Colors.grey),
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Positioned(
-                                    top: 13.47,
-                                    left: 127.74,
-                                    child: Container(
-                                      width: 104.51,
-                                      height: 5,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffAEAEAE),
-                                        border: Border.all(
-                                          width: 5,
-                                          color: Color(0xffAEAEAE),
-                                        ),
-                                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 42.64,
-                                    left: 19.64,
-                                    child: Text(
-                                      '메세지를 보낼 심부름 상대를 골라주세요',
-                                      style: TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        color: Color(0xff000000),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 85.39,
-                                    child: Container(
-                                      width: 360,
-                                      height: 310.14,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFFFFFF),
-                                        border: Border(
-                                          top: BorderSide(width: 0.1),
-                                        ),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20.0),
-                                          topRight: Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      child: errands.isEmpty
-                                          ? Center(child: Text("진행중인 심부름이 없습니다."))
-                                          : ListView.builder(
-                                        padding: EdgeInsets.only(top: 23.98),
-                                        itemCount: errands.length,
-                                        itemBuilder: (context, index) {
-                                          String decodedTitle = utf8.decode(errands[index]["title"].runes.toList());
-                                          String decodedDue = utf8.decode(errands[index]["due"].runes.toList());
-                                          return InProgress_Errand_Widget(
-                                            errandNo: errands[index]["errandNo"],
-                                            title: decodedTitle,
-                                            due: decodedDue,
-                                            isUserOrder: errands[index]["isUserOrder"],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      icon: Image.asset('assets/images/Quokka.png', width: 56, height: 56, fit: BoxFit.cover),
-                    ),),
-              Container(
-                width: 12, height: 12,
-                margin : const EdgeInsets.only(bottom: 42.86),
-                  child: Visibility(
-                    visible: isVisible,
-                    child: Image.asset('assets/images/red_dot_alarm.png', width: 12, height: 12, fit: BoxFit.cover),
-                  ),
-              ),
-                ]
-            ),
-          ),
-        ],)
-        ),
+        );
+      },
     );
   }
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(17),
+            width: 300,
+            height: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.logout,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "로그아웃 하시겠습니까?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 11),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                          await storage.delete(key: 'TOKEN');
+                          },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("로그아웃"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.brown,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Colors.brown),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
+        final bool shouldPop = await _showExitDialog() ?? false;
+        if (context.mounted && shouldPop) {
+            SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+          body: Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Color(0xffF6F6F6),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(width: 57.0, height: 25.0,
+                            margin: const EdgeInsets.only(left: 27, top: 33.0),
+                            child: const Text(
+                              '게시글',
+                              style: TextStyle(
+                                fontFamily: 'paybooc',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.01,
+                                color: Color(0xff111111),
+                              ),),),
+                         // SizedBox(width: 194),
+                          SizedBox(width: 157),
+                          Container(width: 23.0, height: 21.91,
+                            margin: const EdgeInsets.only(top: 29.0, right: 14),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed:
+                                  () {
+                                _showLogoutDialog();
+                                  },
+                              icon: Icon(
+                                Icons.logout,
+                                color: Color(0xffB4B5BE),
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                           Container(width: 23.0, height: 21.91,
+                            margin: const EdgeInsets.only(top: 35.0, right: 14),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed:
+                                  () {},
+                              icon: Image.asset('assets/images/search_icon.png',
+                              ),
+                            ),
+                          ),
+                          Container(width: 23.0, height: 21.91,
+                            margin: const EdgeInsets.only(
+                                top: 34.0, right: 21.31),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {},
+                              icon: Image.asset('assets/images/alarm_icon.png',
+                                color: Color(0xffB4B5BE),
+                              ),
+                            ),)
+                        ],
+                      )
+                  ),
+                  Container(
+                    child: Row(
+                      children: [
+                        GestureDetector( //버튼1
+                          onTap: () {
+                            button1state = true;
+                            button2state = false;
+                            button3state = false;
+                            change_Button_State();
+                            posts.clear();
+                            ErrandLatestInit();
+                            InprogressExist();
+                            InProgressErrandInit();
+                            scrollToTop();
+                          },
+                          child: Container(width: 70, height: 32,
+                            margin: const EdgeInsets.only(left: 27, top: 19.0),
+                            child: Stack(
+                              children: [
+                                Positioned(left: 0, top: 0,
+                                  child: Container(width: 70, height: 32,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFBFBFB),
+                                      border: Border.all(
+                                        color: button1_border_color, width: 1,),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),),), // Text
+                                Positioned(left: 16.72, top: 7.72,
+                                  child: Text('최신순', style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    letterSpacing: 0.001,
+                                    color: button1_text_color,
+                                  ),),),
+                              ],),),),
+                        GestureDetector( //버튼2
+                          onTap: () {
+                            button1state = false;
+                            button2state = true;
+                            button3state = false;
+                            change_Button_State();
+                            posts.clear();
+                            ErrandRewardInit();
+                            InprogressExist();
+                            InProgressErrandInit();
+                            scrollToTop();
+                          },
+                          child: Container(width: 70, height: 32,
+                            margin: const EdgeInsets.only(left: 11, top: 19.0),
+                            child: Stack(
+                              children: [
+                                Positioned(left: 0, top: 0,
+                                  child: Container(width: 70, height: 32,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFBFBFB),
+                                      border: Border.all(
+                                        color: button2_border_color, width: 1,),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),),), // Text
+                                Positioned(left: 16.72, top: 7.72,
+                                  child: Text('금액순', style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    letterSpacing: 0.001,
+                                    color: button2_text_color,
+                                  ),),),
+                              ],),),),
+                        GestureDetector( //버튼3
+                          onTap: () {
+                            button1state = false;
+                            button2state = false;
+                            button3state = true;
+                            change_Button_State();
+                            scrollToTop();
+                          },
+                          child: Container(width: 70, height: 32,
+                            margin: const EdgeInsets.only(left: 11, top: 19.0),
+                            child: Stack(
+                              children: [
+                                Positioned(left: 0, top: 0,
+                                  child: Container(width: 70, height: 32,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFFBFBFB),
+                                      border: Border.all(
+                                        color: button3_border_color, width: 1,),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),),), // Text
+                                Positioned(left: 16.72, top: 7.72,
+                                  child: Text('거리순', style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    letterSpacing: 0.001,
+                                    color: button3_text_color,
+                                  ),),),
+                              ],),),)
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(width: 20, height: 20,
+                          margin: EdgeInsets.only(left: 27, top: 16.36),
+                          child: Checkbox(
+                            materialTapTargetSize: MaterialTapTargetSize
+                                .shrinkWrap,
+                            visualDensity: const VisualDensity(
+                              horizontal: VisualDensity.minimumDensity,
+                              vertical: VisualDensity.minimumDensity,
+                            ),
+                            side: MaterialStateBorderSide.resolveWith(
+                                  (states) =>
+                                  BorderSide(
+                                      width: 1.0, color: Color(0xffC5C5C5)),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            activeColor: Color(0xffA97651),
+                            value: isCheckBox,
+                            onChanged: (value) {
+                              setState(() {
+                                isCheckBox = value!;
+                                change_checkbox_state();
+                                posts.clear();
+                                if (button1state)
+                                  ErrandLatestInit();
+                                else if (button2state)
+                                  ErrandRewardInit();
+                              });
+                            },
+                          ),
+                        ),
+                        Container(height: 17,
+                          margin: EdgeInsets.only(left: 2.28, top: 14.86),
+                          child: Text('모집 중 모아보기', style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            letterSpacing: 0.001,
+                            color: checkbox_text_color,
+                          ),),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.36),
+                  Flexible(
+                    child: Container(width: 322,
+                      height: 581,
+                      //게시글 큰틀
+                      margin: EdgeInsets.only(left: 19),
+                      decoration: BoxDecoration(
+                        color: Color(0xffFFFFFF),
+                      ),
+                      child: ListView.builder(
+                          padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                          controller: _scrollController,
+                          shrinkWrap: true,
+                          itemCount: posts.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            String nickname = posts[index]["nickname"];
+                            String title = posts[index]['title'];
+                            String destination = posts[index]['destination'];
+                            String createdDate = posts[index]["createdDate"];
+                            String decodedNickname = utf8.decode(
+                                nickname.runes.toList());
+                            String decodedTitle = utf8.decode(
+                                title.runes.toList());
+                            String decodedDestination = utf8.decode(
+                                destination.runes.toList());
+                            String decodedCreatedDate = utf8.decode(
+                                createdDate.runes.toList());
+                            return GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              //게시글 전체를 클릭영역으로 만들어주는 코드
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MainErrandCheck(
+                                              errandNo: posts[index]["errandNo"])
+                                  ),);
+                              },
+                              child: PostWidget(
+                                orderNo: posts[index]["orderNo"],
+                                nickname: decodedNickname,
+                                score: posts[index]["score"],
+                                errandNo: posts[index]["errandNo"],
+                                createdDate: decodedCreatedDate,
+                                title: decodedTitle,
+                                destination: decodedDestination,
+                                reward: posts[index]["reward"],
+                                status: posts[index]["status"],
+                              ),
+                            );
+                          }
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 88.5, right: 26.27,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 56, height: 56,
+                      margin: const EdgeInsets.only(),
+                      child: IconButton(
+                        style: IconButton.styleFrom(
+                          minimumSize: Size.zero,
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                height: 389,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffF2F2F2),
+                                  border: Border(
+                                    top: BorderSide(
+                                        width: 0.5, color: Colors.grey),
+                                  ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.0),
+                                    topRight: Radius.circular(20.0),
+                                  ),
+                                ),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Positioned(
+                                      top: 13.47,
+                                      left: 127.74,
+                                      child: Container(
+                                        width: 104.51,
+                                        height: 5,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffAEAEAE),
+                                          border: Border.all(
+                                            width: 5,
+                                            color: Color(0xffAEAEAE),
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 42.64,
+                                      left: 19.64,
+                                      child: Text(
+                                        '메세지를 보낼 심부름 상대를 골라주세요',
+                                        style: TextStyle(
+                                          fontFamily: 'Pretendard',
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          color: Color(0xff000000),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 85.39,
+                                      child: Container(
+                                        width: 360,
+                                        height: 310.14,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffFFFFFF),
+                                          border: Border(
+                                            top: BorderSide(width: 0.1),
+                                          ),
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20.0),
+                                            topRight: Radius.circular(20.0),
+                                          ),
+                                        ),
+                                        child: errands.isEmpty
+                                            ? Center(
+                                            child: Text("진행중인 심부름이 없습니다."))
+                                            : ListView.builder(
+                                          padding: EdgeInsets.only(top: 23.98),
+                                          itemCount: errands.length,
+                                          itemBuilder: (context, index) {
+                                            String decodedTitle = utf8.decode(
+                                                errands[index]["title"].runes
+                                                    .toList());
+                                            String decodedDue = utf8.decode(
+                                                errands[index]["due"].runes
+                                                    .toList());
+                                            return InProgress_Errand_Widget(
+                                              errandNo: errands[index]["errandNo"],
+                                              title: decodedTitle,
+                                              due: decodedDue,
+                                              isUserOrder: errands[index]["isUserOrder"],
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        icon: Image.asset('assets/images/Quokka.png', width: 56,
+                            height: 56,
+                            fit: BoxFit.cover),
+                      ),),
+                    Container(
+                      width: 12, height: 12,
+                      margin: const EdgeInsets.only(bottom: 42.86),
+                      child: Visibility(
+                        visible: isVisible,
+                        child: Image.asset(
+                            'assets/images/red_dot_alarm.png', width: 12,
+                            height: 12,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+          ],)
+      )
+    );
+  }
+}
 

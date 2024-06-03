@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:front/showerrand/showerrandwidget/showerrandwidget.dart';
@@ -121,7 +122,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
     status = widget.errands["status"];
     isCash = widget.errands["isCash"];
     nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
-    realName = "   "; // 심부름 하는 사람 실제 이름
+    realName = ""; // 심부름 하는 사람 실제 이름
   }
   // 메인 글 보기 화면
   @override
@@ -174,7 +175,12 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         nickName : nickName,
                                         realName : realName,
                                         margin : errandConfirmedMargin,
-                                      )
+                                      ),
+                                onEnd: () { // 애니메이션 끝나면 발생
+                                  setState(() {
+
+                                  });
+                                }
                         ),
                       ),
                     ),
@@ -193,7 +199,6 @@ class _MainShowErrandState extends State<MainShowErrand> {
                             isStampVisible = true;
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
                             getErrandName(errandNo);// 심부름 하는 사람 닉네임  -> 연동 부분, 심부름 하는 사람 실명 -> 연동 부분
-                            status = "PROCEEDING"; // 심부름 상태 진행중으로 변경
                           });
                         },
                         style: ButtonStyle(
