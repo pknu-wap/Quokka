@@ -17,9 +17,14 @@ class Signup_Success extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
+      },
+      child: Scaffold(
         appBar: AppBar(
             centerTitle: true,
             elevation: 0.0,
@@ -55,9 +60,7 @@ class ConfettiState extends State<Confetti> {
     _controllerCenter =
         ConfettiController(duration: const Duration(seconds: 10));
     super.initState();
-    Timer(Duration(seconds: 5), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
-      getTokenAndLogin();
-    });
+
   }
 
   void getTokenAndLogin() async{
@@ -118,7 +121,13 @@ class ConfettiState extends State<Confetti> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return PopScope(
+    canPop: false,
+    onPopInvoked: (bool didPop) async {
+      if (didPop) {
+        return;
+      }
+    },
       child: Stack(
         children: <Widget>[
           Container(
@@ -171,6 +180,9 @@ class ConfettiState extends State<Confetti> {
               child: TextButton(
                 onPressed: () {
                   _controllerCenter.play();
+                  Timer(Duration(seconds: 4), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
+                    getTokenAndLogin();
+                  });
                 },
                 child: Text('환영합니다!\n가입이 완료되었습니다',
                   textAlign: TextAlign.center, style: TextStyle(

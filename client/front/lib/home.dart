@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'checkerrand.dart';
+import 'login.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final storage = FlutterSecureStorage();
@@ -982,6 +983,82 @@ class _HomeState extends State<Home> {
       },
     );
   }
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(17),
+            width: 300,
+            height: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.logout,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "로그아웃 하시겠습니까?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 11),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                          await storage.delete(key: 'TOKEN');
+                          },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("로그아웃"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.brown,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Colors.brown),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1020,8 +1097,28 @@ class _HomeState extends State<Home> {
                                 letterSpacing: 0.01,
                                 color: Color(0xff111111),
                               ),),),
-                          SizedBox(width: 194),
+                         // SizedBox(width: 194),
+                          SizedBox(width: 157),
                           Container(width: 23.0, height: 21.91,
+                            margin: const EdgeInsets.only(top: 29.0, right: 14),
+                            child: IconButton(
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed:
+                                  () {
+                                _showLogoutDialog();
+                                  },
+                              icon: Icon(
+                                Icons.logout,
+                                color: Color(0xffB4B5BE),
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                           Container(width: 23.0, height: 21.91,
                             margin: const EdgeInsets.only(top: 35.0, right: 14),
                             child: IconButton(
                               style: IconButton.styleFrom(

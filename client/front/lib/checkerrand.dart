@@ -603,9 +603,14 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   // 메인 글 보기 화면
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
+      },
+      child: Scaffold(
         body: Stack(
           children: [
             Container(
