@@ -107,7 +107,7 @@ class _FixDueState extends State<FixDue>{
             Expanded(
               child: Container(
                 width: 106,
-                height: 31,
+                height: 38,
                 // 토글 버튼 만들기
                 margin: EdgeInsets.only(left: 0),
                 child: ToggleButtons(
@@ -159,12 +159,12 @@ class _FixDueState extends State<FixDue>{
             ),
             // 시간 상세 설정 카테고리
             Container(
-              margin: EdgeInsets.only(right: 69),
-              width: 146,
-              height: 31,
+              margin: EdgeInsets.only(right: 51),
+              width: 165.28,
+              height: 38,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color(0xffC77749), // 박스 테두리 색상
+                  color: Color(0xffA9A9A9), // 박스 테두리 색상
                   width: 0.5, // 테두리 굵기
                 ),
                 borderRadius: BorderRadius.all(
@@ -264,7 +264,7 @@ class _FixDueState extends State<FixDue>{
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 4),
+                    margin: EdgeInsets.only(left: 8),
                     child: Text(
                       '까지',
                       style: TextStyle(
