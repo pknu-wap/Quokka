@@ -53,7 +53,7 @@ class _FixIsCashState extends State<FixIsCash>{
   Widget build(BuildContext context){
     return Container(
         width: 119,
-        height: 38,
+        height: 31,
         // 토글 버튼 만들기
         margin: EdgeInsets.only(right: 86),
         child: ToggleButtons(

@@ -245,7 +245,7 @@ class _FixErrandState extends State<FixErrand> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 34),
+                  margin: EdgeInsets.only(top: 10),
                   child: Row(
                     children: [
                       Expanded(
@@ -255,7 +255,7 @@ class _FixErrandState extends State<FixErrand> {
                             '제목',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                               fontSize: 14,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
@@ -408,8 +408,8 @@ class _FixErrandState extends State<FixErrand> {
                 // 상세 주소 텍스트 필드
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
-                  width: 320,
-                  height: 38,
+                  width: 318,
+                  height: 31,
                   decoration: BoxDecoration(
                     border:
                     Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
@@ -418,7 +418,7 @@ class _FixErrandState extends State<FixErrand> {
                     color: Color(0xffFFFFFF),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
+                    padding: EdgeInsets.only(top: 9.75, left: 8, right: 8),
                     child: TextField(
                       controller: detailAddressController,
                       style: TextStyle(
@@ -518,8 +518,8 @@ class _FixErrandState extends State<FixErrand> {
                             clipBehavior: Clip.none,
                             children: <Widget>[
                               Container(
-                                width: 107,
-                                height: 38,
+                                width: 104,
+                                height: 31,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Color(0xff2D2D2D),
@@ -531,7 +531,7 @@ class _FixErrandState extends State<FixErrand> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 4, left: 27, right: 7.5),
+                                      top: 1, left: 27, right: 7.5),
                                   child: TextField(
                                     controller: priceController,
                                     style: TextStyle(
@@ -552,7 +552,7 @@ class _FixErrandState extends State<FixErrand> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 12.36, top: 1),
+                                    padding: EdgeInsets.only(left: 9, top: 6),
                                     color: Colors.transparent,
                                     child: Image.asset(
                                       'assets/images/₩.png',
@@ -575,7 +575,7 @@ class _FixErrandState extends State<FixErrand> {
 
                 // 요청사항 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 18),
                   child: Row(
                     children: [
                       Expanded(
@@ -613,7 +613,7 @@ class _FixErrandState extends State<FixErrand> {
                 Container(
                   margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
                   width: 318,
-                  height: 66.56,
+                  height: 67.4,
                   decoration: BoxDecoration(
                     border:
                     Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
@@ -655,8 +655,7 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 수정 완료 버튼 만들기
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.27),
-                  height: 43,
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
                   child: ElevatedButton(
                     onPressed: () {
                       errandUpdateRequest();
