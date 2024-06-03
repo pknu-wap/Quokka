@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'namelength/namelength2.dart';
 import 'namelength/namelength3.dart';
@@ -23,11 +24,20 @@ class Stamp extends StatelessWidget {
   Widget build(BuildContext context) {
     // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
     return FutureBuilder(
-      future: Future.delayed(Duration(milliseconds: 3800)),
+      future: Future.delayed(Duration(milliseconds: 3700)), // 3.8초 지연 후 Future완료
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return AnimatedContainer(
+          return TweenAnimationBuilder(
+              tween: Tween<double>(begin: 1.2, end:1.0), // 애니메이션의 시작과 끝 값
+            // -> 1.2배에서 1.0배로 크기 변환
+              duration: Duration(milliseconds: 700), // 애니메이션 지속 시간
+              curve: Curves.easeInOut, // 애니메이션의 가속 및 감속 곡선 설정
+          builder: (context, double scale, child) {
+                return Transform.scale(
+                  scale: scale, // 현재 애니메이션의 스케일 값 적용
+                  child: AnimatedContainer(
             duration: Duration(milliseconds: 350), // 지속 시간
+            curve: Curves.fastOutSlowIn, // 애니메이션의 곡선
             child: Stack(
               children: [
                 // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
@@ -65,13 +75,13 @@ class Stamp extends StatelessWidget {
                 // 심부름 하는 사람 이름 길이 1자 또는 5자 이상
                   NameLength5More(),
 
-
               ],
-            ),
-            curve: Curves.fastOutSlowIn, // 애니메이션의 커브 설정 효과
+            )),
+            );
+          },
           );
         } else {
-          return SizedBox.shrink();
+          return SizedBox.shrink(); // Future 완료되지 않았을 때 빈 위젯 반환
         }
       },
     );
