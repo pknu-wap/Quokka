@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
@@ -89,7 +91,7 @@ class ShowErrandWidget extends StatelessWidget {
                   ),
                 ),
                 // 심부름 요청서 멘트
-                Container(
+                /*Container(
                     width: 217,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +124,65 @@ class ShowErrandWidget extends StatelessWidget {
                             )
                         ),
                       ],
-                    )),
+                    )),*/
+
+                Container(
+                    width: 217,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            child: Text(
+                              "사랑하는 ",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w300,
+                                fontSize: 11,
+                                letterSpacing: 0.00,
+                                color: Color(0xff111111),
+                              ),
+                          ),
+                        ),
+                        Container(
+                            child: true? TextFieldWidget(realName: realName) : null ,
+                        ),
+                        Container(
+                          child: Text(
+                            " 님의 탁월함과 ",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              letterSpacing: 0.00,
+                              color: Color(0xff111111),
+                            ),
+                          ),
+                        ),
+                      ],
+                      ),
+                      ),
+
+              Container(
+                width: 252,
+                  child : Flexible(
+                  child: RichText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
+                    textAlign: TextAlign.center, // 텍스트 가운데 정렬
+                        text: TextSpan(
+                          text: "열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w300,
+                            fontSize: 11,
+                            letterSpacing: 0.00,
+                            color: Color(0xff111111),
+                          ),
+                        ),
+                    ),
+                  ),
+              ),
+
                 // -아래- 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 11, left: 144, right: 151),
@@ -249,10 +309,50 @@ class ShowErrandWidget extends StatelessWidget {
                               ),
                             ),
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
-                            Container(
+                            // AnimatedContainer(
+                            //   duration: Duration(milliseconds: 200),
+                            //   margin: EdgeInsets.only(top: 17.15, left: 5),
+                            //   child: Text(
+                            //     nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
+                            //     style: TextStyle(
+                            //       fontFamily: 'MaruBuri',
+                            //       fontWeight: FontWeight.w700,
+                            //       fontSize: 12,
+                            //       letterSpacing: 0.01,
+                            //       color: Color(0xff000000),
+                            //     ),
+                            //   ),
+                            // ),
+
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 200),
                               margin: EdgeInsets.only(top: 17.15, left: 5),
-                              child: Text(
-                                nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
+                              child: nickName != "닉 네 임" ? FutureBuilder(
+                                future: Future.delayed(Duration(milliseconds: 1250)),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.done) {
+                                    return AnimatedTextKit(
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                          utf8.decode(nickName.runes.toList()),
+                                          speed: Duration(milliseconds: 200),
+                                          textStyle: TextStyle(
+                                            fontFamily: 'SangSangShin',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 15,
+                                            letterSpacing: 0.01,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ],
+                                      totalRepeatCount: 1,
+                                    );
+                                  } else {
+                                    return SizedBox.shrink();
+                                  }
+                                },
+                              ):
+                                  Text("닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,

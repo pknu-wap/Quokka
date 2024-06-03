@@ -127,6 +127,11 @@ flutter:
         - asset: assets/fonts/Cafe24Oneprettynight/Cafe24Oneprettynight.ttf
           weight: 400
 
+    - family: SangSangShin
+      fonts:
+        - asset: assets/fonts/SangSangShin/SangSangShin.otf
+          weight: 400
+
 
   uses-material-design: true
   # The following line ensures that the Material Icons font is
