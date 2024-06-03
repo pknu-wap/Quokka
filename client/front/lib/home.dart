@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/status_page_running.dart';
 import 'package:front/writeerrand.dart';
@@ -906,6 +907,81 @@ class _HomeState extends State<Home> {
         }
     });
   }
+  Future<bool?> _showExitDialog() {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(17),
+            width: 300,
+            height: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.exit_to_app,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "정말 커카를 종료하시겠어요?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 11),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("종료"),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.brown,
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          side: BorderSide(color: Colors.brown),
+                        ),
+                        child: Text("취소"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -914,6 +990,10 @@ class _HomeState extends State<Home> {
       onPopInvoked: (bool didPop) async {
         if (didPop) {
           return;
+        }
+        final bool shouldPop = await _showExitDialog() ?? false;
+        if (context.mounted && shouldPop) {
+            SystemNavigator.pop();
         }
       },
       child: Scaffold(
