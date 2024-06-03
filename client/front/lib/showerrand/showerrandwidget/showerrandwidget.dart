@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
@@ -90,7 +91,7 @@ class ShowErrandWidget extends StatelessWidget {
                   ),
                 ),
                 // 심부름 요청서 멘트
-                Container(
+                /*Container(
                     width: 217,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +124,64 @@ class ShowErrandWidget extends StatelessWidget {
                             )
                         ),
                       ],
-                    )),
+                    )),*/
+
+                Container(
+                    width: 217,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            child: Text(
+                              "사랑하는 ",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w300,
+                                fontSize: 11,
+                                letterSpacing: 0.00,
+                                color: Color(0xff111111),
+                              ),
+                          ),
+                        ),
+                        Container(
+                            child: TextFieldWidget(realName: realName)
+                            ),
+                        Container(
+                          child: Text(
+                            " 님의 탁월함과 ",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              letterSpacing: 0.00,
+                              color: Color(0xff111111),
+                            ),
+                          ),
+                        ),
+                      ],
+                      ),
+                      ),
+
+              Container(
+                width: 252,
+                  child : Flexible(
+                  child: RichText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
+                    textAlign: TextAlign.center, // 텍스트 가운데 정렬
+                        text: TextSpan(
+                          text: "열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w300,
+                            fontSize: 11,
+                            letterSpacing: 0.00,
+                            color: Color(0xff111111),
+                          ),
+                        ),
+                    ),
+                  ),
+              ),
 
                 // -아래- 텍스트
                 Container(
@@ -267,14 +325,16 @@ class ShowErrandWidget extends StatelessWidget {
                             // ),
 
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
+                              duration: Duration(milliseconds: 200),
                               margin: EdgeInsets.only(top: 17.15, left: 5),
                               child: nickName != "닉 네 임" ?
                                 AnimatedTextKit(
                                   animatedTexts: [
                                     TyperAnimatedText(utf8.decode(nickName.runes.toList()),
-                                    speed: Duration(milliseconds: 200),)
+                                      speed: Duration(milliseconds: 200),
+                                    ),
                                   ],
+                                  totalRepeatCount: 1,
                                ) :
                                   Text("닉 네 임",
                                 style: TextStyle(
