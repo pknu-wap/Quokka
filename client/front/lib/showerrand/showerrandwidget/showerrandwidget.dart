@@ -385,7 +385,7 @@ class ShowErrandWidget extends StatelessWidget {
                               ? EdgeInsets.only(top: 14, left: 150)
                                   : EdgeInsets.only(top: 17, left: 150),
                               child: nickName != "닉 네 임" ? FutureBuilder(
-                                future: Future.delayed(Duration(milliseconds: 1300)),
+                                future: Future.delayed(Duration(milliseconds: 1800)),
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState == ConnectionState.done) {
                                     return AnimatedTextKit(
