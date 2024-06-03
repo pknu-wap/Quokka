@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Color passwordCheckBorderColor = Color(0xFFACACAC);
 
   final int minNicknameLength = 2; // 닉네임 최소 길이 설정
-  final int maxNicknameLength = 12; // 닉네임 최대 길이 설정
+  final int maxNicknameLength = 8; // 닉네임 최대 길이 설정
   final int minPasswordLength = 8; // 비밀번호 최소 길이 설정
   final int maxPasswordLength = 20; // 비밀번호 최대 길이 설정
   final int minPasswordCheckLength = 8; // 비밀번호 확인 최소 길이 설정
