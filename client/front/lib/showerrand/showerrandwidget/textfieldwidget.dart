@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -14,6 +15,7 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Stack(
+        alignment: Alignment.center,
         children: [
           Align(
             alignment: Alignment.center,
@@ -31,15 +33,20 @@ class TextFieldWidget extends StatelessWidget {
               ),
             ),
           ),
-
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           Align(
             alignment: Alignment.center,
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            margin: EdgeInsets.only(top: 3, left: 2),
-            child: realName != "" ?
-            AnimatedTextKit(
-              animatedTexts: [
+            duration: Duration(milliseconds: 350),
+            margin: EdgeInsets.only(top: 3, left: 2,),
+            child: realName != "" ? FutureBuilder(
+              future: Future.delayed(Duration(milliseconds:700)),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return AnimatedTextKit(
+            animatedTexts: [
               TypewriterAnimatedText(
                 utf8.decode(realName.runes.toList()),
                 speed: Duration(milliseconds: 200),
@@ -52,8 +59,12 @@ class TextFieldWidget extends StatelessWidget {
                 ),
               ),
             ],
-              totalRepeatCount: 1,
-            ) :
+            totalRepeatCount: 1,
+          );
+        } else {
+          return SizedBox.shrink();
+        }
+      }):
             Text(
               '',
               style: TextStyle(
@@ -67,6 +78,8 @@ class TextFieldWidget extends StatelessWidget {
             // ),
           ),
           ),
+      ]
+    )
         ],
       ),
     );
