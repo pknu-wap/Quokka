@@ -380,12 +380,12 @@ class ShowErrandWidget extends StatelessWidget {
                           children: [
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 200),
+                              duration: Duration(milliseconds: 350),
                               margin: nickName != "닉 네 임"
                               ? EdgeInsets.only(top: 14, left: 150)
                                   : EdgeInsets.only(top: 17, left: 150),
                               child: nickName != "닉 네 임" ? FutureBuilder(
-                                future: Future.delayed(Duration(milliseconds: 1250)),
+                                future: Future.delayed(Duration(milliseconds: 1300)),
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState == ConnectionState.done) {
                                     return AnimatedTextKit(
