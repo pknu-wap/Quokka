@@ -952,22 +952,7 @@ class _HomeState extends State<Home> {
                           padding: EdgeInsets.symmetric(vertical: 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          activeColor: Color(0xffA97651),
-                          value: isCheckBox,
-                          onChanged: (value) {
-                            setState(() {
-                              isCheckBox = value!;
-                              change_checkbox_state();
-                              posts.clear();
-                              if(button1state)
-                                ErrandLatestInit();
-                              else if(button2state)
-                                ErrandRewardInit();
-                                InprogressExist();
-                                InProgressErrandInit();
-                                scrollToTop();
-                            });
-                          },
+
                         ),
                         child: Text("종료"),
                       ),
