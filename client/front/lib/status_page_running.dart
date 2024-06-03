@@ -291,102 +291,113 @@ String extractTime(String timeData) {
 class Status_Content_Widget extends StatelessWidget {
   final String contents; // 메시지
   final String created; // 메시지 생성 시간
+  final controller;
+  final animation;
 
   const Status_Content_Widget({
     Key? key,
+    required this.controller,
+    required this.animation,
     required this.contents,
     required this.created,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 320,
-      height: 70, // 메시지 1개
-      margin: EdgeInsets.only(top: 21.87),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 247.18,
-            height: 42.79,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 3,
-                  offset: Offset(-1, 1),
-                ),
-              ],
-            ),
-            margin: EdgeInsets.only(left: 15),
-            alignment: Alignment.center,
-            child: Stack(
+    return AnimatedBuilder(animation: animation,
+        builder:(context, child)
+    {
+      return Opacity(opacity: animation.value,
+          child: Container(
+            width: 320,
+            height: 70, // 메시지 1개
+            margin: EdgeInsets.only(top: 21.87),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  contents == "완료했어요!"
-                      ? 'assets/images/진한말풍선R.png'
-                      : 'assets/images/연한말풍선R.png',
+                Container(
                   width: 247.18,
                   height: 42.79,
-                  fit: BoxFit.cover,
-                ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      contents,
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.01,
-                        fontSize: 15,
-                        color: contents == "완료했어요!"
-                            ? Color(0xffFFFFFF)
-                            : Color(0xff232323),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: Offset(-1, 1),
                       ),
-                    ),
+                    ],
+                  ),
+                  margin: EdgeInsets.only(left: 15),
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        contents == "완료했어요!"
+                            ? 'assets/images/진한말풍선R.png'
+                            : 'assets/images/연한말풍선R.png',
+                        width: 247.18,
+                        height: 42.79,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            contents,
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.01,
+                              fontSize: 15,
+                              color: contents == "완료했어요!"
+                                  ? Color(0xffFFFFFF)
+                                  : Color(0xff232323),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            child: Column(
-              children: [
                 Container(
-                  width: 35.43,
-                  height: 35.43,
-                  margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                  child: Image.asset(
-                    contents == "완료했어요!"
-                        ? 'assets/images/smiley Quokka.png'
-                        : 'assets/images/Quokka.png',
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 35.43,
+                        height: 35.43,
+                        margin: EdgeInsets.only(top: 8.28, left: 7.04),
+                        child: Image.asset(
+                          contents == "완료했어요!"
+                              ? 'assets/images/smiley Quokka.png'
+                              : 'assets/images/Quokka.png',
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10.91, top: 5.3),
+                        child: Text(
+                          extractTime(created),
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.01,
+                            fontSize: 14,
+                            color: Color(0xff747474),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 10.91, top: 5.3),
-                  child: Text(
-                    extractTime(created),
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.01,
-                      fontSize: 14,
-                      color: Color(0xff747474),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
 
-        ],
-      ),
+              ],
+            ),
+          ),
+      );
+    }
     );
   }
 }
@@ -435,7 +446,7 @@ void setComplete() {
   );
 }
 
-class _statuspageRState extends State<statuspageR> {
+class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin{
 
   void onConnect(StompClient stompClient,StompFrame frame) {
     stompClient.subscribe(
@@ -443,6 +454,7 @@ class _statuspageRState extends State<statuspageR> {
       callback: (frame) {
         setState(() {
           contents.add(json.decode(frame.body!));
+          addItemAnimation();
           scrollToBottom();
         });
         /**
@@ -452,10 +464,27 @@ class _statuspageRState extends State<statuspageR> {
       },
     );
   }
+  void addItemAnimation() {
+    final controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+    final animation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(controller);
+
+    controllers.add(controller);
+    animations.add(animation);
+
+    controller.forward();
+  }
 
 
   late int errandNo;
   List<Map<String, dynamic>> contents = [];
+  List<AnimationController> controllers = [];
+  List<Animation<double>> animations = [];
   bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
   void completeCheck()
@@ -479,6 +508,7 @@ class _statuspageRState extends State<statuspageR> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         StatusContent c1 = StatusContent.fromJson(item);
+        addItemAnimation();
         contents.add({
           "contents": c1.contents,
           "created": c1.created,
@@ -756,6 +786,8 @@ class _statuspageRState extends State<statuspageR> {
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
                       return Status_Content_Widget(
+                        controller: controllers[index],
+                        animation: animations[index],
                         contents: contents[index]["contents"],
                         created: contents[index]["created"],
                       );

@@ -291,103 +291,114 @@ class _RatingDialogState extends State<RatingDialog> {
 class Status_Content_Widget extends StatelessWidget {
   final String contents; // 메시지
   final String created; // 메시지 생성 시간
+  final controller;
+  final animation;
 
   const Status_Content_Widget({
     Key? key,
+    required this.controller,
+    required this.animation,
     required this.contents,
     required this.created,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 320,
-      height: 85, // 메시지 1개
-      margin: EdgeInsets.only(top: 21.87),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 15.09),
-            child: Column(
-              children: [
-                Container(
-                  width: 35.43,
-                  height: 35.43,
-                  margin: EdgeInsets.only(top: 8.28, left: 17.04),
-                  child: Image.asset(
-                    contents == "완료했어요!"
-                        ? 'assets/images/smiley Quokka.png'
-                        : 'assets/images/Quokka.png',
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 21.55, top: 2.48),
-                  child: Text(
-                    //created,
-                    extractTime(created),
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.01,
-                      fontSize: 14,
-                      color: Color(0xff747474),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 276.69,
-            height: 42.79,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 3,
-                  offset: Offset(2, 1),
-                ),
-              ],
-            ),
-            margin: EdgeInsets.only(left: 8.08),
-            alignment: Alignment.center,
-            child: Stack(
-              children: [
-                Image.asset(
-                  contents == "완료했어요!"
-                      ? 'assets/images/진한말풍선L.png'
-                      : 'assets/images/연한말풍선L.png',
-                  width: 276.69,
-                  height: 42.79,
-                  fit: BoxFit.cover,
-                ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      contents,
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.01,
-                        fontSize: 15,
-                        color: contents == "완료했어요!"
-                            ? Color(0xffFFFFFF)
-                            : Color(0xff232323),
+    return AnimatedBuilder(animation: animation,
+        builder:(context, child)
+    {
+      return Opacity(opacity: animation.value,
+        child: Container(
+          width: 320,
+          height: 85, // 메시지 1개
+          margin: EdgeInsets.only(top: 21.87),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 15.09),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 35.43,
+                      height: 35.43,
+                      margin: EdgeInsets.only(top: 8.28, left: 17.04),
+                      child: Image.asset(
+                        contents == "완료했어요!"
+                            ? 'assets/images/smiley Quokka.png'
+                            : 'assets/images/Quokka.png',
                       ),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(left: 21.55, top: 2.48),
+                      child: Text(
+                        //created,
+                        extractTime(created),
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.01,
+                          fontSize: 14,
+                          color: Color(0xff747474),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Container(
+                width: 276.69,
+                height: 42.79,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: Offset(2, 1),
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.only(left: 8.08),
+                alignment: Alignment.center,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      contents == "완료했어요!"
+                          ? 'assets/images/진한말풍선L.png'
+                          : 'assets/images/연한말풍선L.png',
+                      width: 276.69,
+                      height: 42.79,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          contents,
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.01,
+                            fontSize: 15,
+                            color: contents == "완료했어요!"
+                                ? Color(0xffFFFFFF)
+                                : Color(0xff232323),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      );
+    }
     );
   }
 }
@@ -403,7 +414,7 @@ class statuspageQ extends StatefulWidget {
   @override
   State<statuspageQ> createState() => _statuspageQState();
 }
-class _statuspageQState extends State<statuspageQ> {
+class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin{
 
   late StompClient stompClient;
   void onConnect(StompClient stompClient,StompFrame frame) {
@@ -412,6 +423,7 @@ class _statuspageQState extends State<statuspageQ> {
       callback: (frame) {
         setState(() {
           contents.add(json.decode(frame.body!));
+          addItemAnimation();
           scrollToBottom();
           completeCheck();
         });
@@ -423,8 +435,26 @@ class _statuspageQState extends State<statuspageQ> {
     );
   }
 
+  void addItemAnimation() {
+    final controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+    final animation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(controller);
+
+    controllers.add(controller);
+    animations.add(animation);
+
+    controller.forward();
+  }
+
   late int errandNo;
   List<Map<String, dynamic>> contents = [];
+  List<AnimationController> controllers = [];
+  List<Animation<double>> animations = [];
   bool isCompleted = false;
   ScrollController _scrollController = ScrollController();
   void completeCheck()
@@ -448,6 +478,7 @@ class _statuspageQState extends State<statuspageQ> {
       List<dynamic> result = jsonDecode(response.body);
       for (var item in result) {
         StatusContent c1 = StatusContent.fromJson(item);
+        addItemAnimation();
         contents.add({
           "contents": c1.contents,
           "created": c1.created,
@@ -807,6 +838,8 @@ class _statuspageQState extends State<statuspageQ> {
                     itemCount: contents.length,
                     itemBuilder: (BuildContext context, int index){
                       return Status_Content_Widget(
+                        controller: controllers[index],
+                        animation: animations[index],
                         contents: contents[index]["contents"],
                         created: contents[index]["created"],
                       );
