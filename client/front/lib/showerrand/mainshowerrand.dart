@@ -174,7 +174,12 @@ class _MainShowErrandState extends State<MainShowErrand> {
                                         nickName : nickName,
                                         realName : realName,
                                         margin : errandConfirmedMargin,
-                                      )
+                                      ),
+                                onEnd: () { // 애니메이션 끝나면 발생
+                                  setState(() {
+
+                                  });
+                                }
                         ),
                       ),
                     ),
@@ -193,7 +198,6 @@ class _MainShowErrandState extends State<MainShowErrand> {
                             isStampVisible = true;
                             errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
                             getErrandName(errandNo);// 심부름 하는 사람 닉네임  -> 연동 부분, 심부름 하는 사람 실명 -> 연동 부분
-                            status = "PROCEEDING"; // 심부름 상태 진행중으로 변경
                           });
                         },
                         style: ButtonStyle(

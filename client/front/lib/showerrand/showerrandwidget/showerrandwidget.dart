@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
@@ -123,6 +124,31 @@ class ShowErrandWidget extends StatelessWidget {
                         ),
                       ],
                     )),
+
+                // Container(
+                //     child: SizedBox(
+                //       width: 250.0,
+                //       child: DefaultTextStyle(
+                //         style: const TextStyle(
+                //           fontSize: 30.0,
+                //           fontFamily: 'Agne',
+                //           color: Colors.red,
+                //         ),
+                //         child: AnimatedTextKit(
+                //           animatedTexts: [
+                //             TypewriterAnimatedText('Discipline is the best tool',
+                //             speed: Duration(milliseconds: 200)),
+                //             TypewriterAnimatedText('Design first, then code'),
+                //             TypewriterAnimatedText('Do not patch bugs out, rewrite them'),
+                //             TypewriterAnimatedText('Do not test bugs out, design them out'),
+                //           ],
+                //           onTap: () {
+                //             print("Tap Event");
+                //           },
+                //         ),
+                //       ),
+                //     ),
+                // ),
                 // -아래- 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 11, left: 144, right: 151),
