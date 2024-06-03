@@ -41,23 +41,6 @@ void main() async {
     },
   );
 
-  // final markerIcon = await NOverlayImage.fromAssetImage(
-  //   'assets/images/location.png',
-  // );
-
-  // Future<Position> _getPosition() async{
-  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-  //   // setState(() {
-  //   //   latitude = position.latitude.toString();
-  //   //   longitude = position.longitude.toString();
-  //   // });
-  //   return position;
-  // }
-  //
-  // _getPosition().then((position) {
-  //   print("Template position check ${position.latitude}, ${position.longitude}");
-  // }).onError((error, stackTrace) => null);
-
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -69,7 +52,7 @@ class MyApp extends StatelessWidget {
         headers: {"Authorization": "$token"});
         print(response.statusCode);
     if (response.statusCode == 200) {
-      print("200 ok");
+      print("200 ok at main.dart");
       FlutterNativeSplash.remove();
       Navigator.of(context).push(
         //토큰이 타당하면 바로 게시글 페이지로 넘어감
@@ -77,6 +60,9 @@ class MyApp extends StatelessWidget {
     }
   }
 
+  Future<void> _checkToken() async {
+    await Future.delayed(Duration(seconds: 2));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +71,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Main',
       home: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 3)),
+        future: _checkToken(),
         builder: (context, snapshot) {
-          Check_Token(context);
           if (snapshot.connectionState == ConnectionState.waiting) {
+            Check_Token(context);
             return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),

@@ -468,7 +468,7 @@ class _HomeState extends State<Home> {
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
-     print("exist");
+     print("inprogress exist");
       setState(() {
         isVisible = true;
       });
@@ -497,7 +497,7 @@ class _HomeState extends State<Home> {
           "due": e1.due,
           "isUserOrder": e1.isUserOrder,
         });
-        print('200');
+        print('inprogress errand init 200');
       }
       setState(() {});
     }
@@ -526,7 +526,7 @@ class _HomeState extends State<Home> {
           "reward": p1.reward,
           "status": p1.status,
         });
-        print('200');
+        print('errand latest init 200');
       }
       setState(() {});
     }
