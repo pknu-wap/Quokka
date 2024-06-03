@@ -125,30 +125,6 @@ class ShowErrandWidget extends StatelessWidget {
                       ],
                     )),
 
-                // Container(
-                //     child: SizedBox(
-                //       width: 250.0,
-                //       child: DefaultTextStyle(
-                //         style: const TextStyle(
-                //           fontSize: 30.0,
-                //           fontFamily: 'Agne',
-                //           color: Colors.red,
-                //         ),
-                //         child: AnimatedTextKit(
-                //           animatedTexts: [
-                //             TypewriterAnimatedText('Discipline is the best tool',
-                //             speed: Duration(milliseconds: 200)),
-                //             TypewriterAnimatedText('Design first, then code'),
-                //             TypewriterAnimatedText('Do not patch bugs out, rewrite them'),
-                //             TypewriterAnimatedText('Do not test bugs out, design them out'),
-                //           ],
-                //           onTap: () {
-                //             print("Tap Event");
-                //           },
-                //         ),
-                //       ),
-                //     ),
-                // ),
                 // -아래- 텍스트
                 Container(
                   margin: EdgeInsets.only(top: 11, left: 144, right: 151),
@@ -275,10 +251,32 @@ class ShowErrandWidget extends StatelessWidget {
                               ),
                             ),
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
-                            Container(
+                            // AnimatedContainer(
+                            //   duration: Duration(milliseconds: 200),
+                            //   margin: EdgeInsets.only(top: 17.15, left: 5),
+                            //   child: Text(
+                            //     nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
+                            //     style: TextStyle(
+                            //       fontFamily: 'MaruBuri',
+                            //       fontWeight: FontWeight.w700,
+                            //       fontSize: 12,
+                            //       letterSpacing: 0.01,
+                            //       color: Color(0xff000000),
+                            //     ),
+                            //   ),
+                            // ),
+
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
                               margin: EdgeInsets.only(top: 17.15, left: 5),
-                              child: Text(
-                                nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
+                              child: nickName != "닉 네 임" ?
+                                AnimatedTextKit(
+                                  animatedTexts: [
+                                    TyperAnimatedText(utf8.decode(nickName.runes.toList()),
+                                    speed: Duration(milliseconds: 200),)
+                                  ],
+                               ) :
+                                  Text("닉 네 임",
                                 style: TextStyle(
                                   fontFamily: 'MaruBuri',
                                   fontWeight: FontWeight.w700,
