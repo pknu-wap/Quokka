@@ -609,6 +609,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         if (didPop) {
           return;
         }
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    Home()
+            )
+        );
       },
       child: Scaffold(
         body: Stack(
