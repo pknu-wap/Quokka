@@ -283,50 +283,105 @@ class ShowErrandWidget extends StatelessWidget {
                     ],
                   ),
                 ),
+                // // (주) 커카글쓴이 닉네임 (서명)
+                // Container(
+                //   // margin: EdgeInsets.only(top: 17.15),
+                //   child: Stack(
+                //     children: [
+                //       // Center-aligned Row
+                //       Align(
+                //         alignment: Alignment.center, // 가운데 정렬
+                //         child: Row(
+                //           mainAxisSize: MainAxisSize.min, // 최소한의 너비 가지기
+                //           children: [
+                //             // (주) 커카글쓴이 -> 글 쓴 사람 -> name
+                //             Container(
+                //               margin: EdgeInsets.only(top: 17.15, left: 0),
+                //               child: Text(
+                //                 "(주) ${utf8.decode(name.runes.toList())}",
+                //                 style: TextStyle(
+                //                   fontFamily: 'Pretendard',
+                //                   fontWeight: FontWeight.w400,
+                //                   fontSize: 11,
+                //                   letterSpacing: 0.001,
+                //                   color: Color(0xff000000),
+                //                 ),
+                //               ),
+                //             ),
+                //             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
+                //             AnimatedContainer(
+                //               duration: Duration(milliseconds: 200),
+                //               margin: EdgeInsets.only(top: 17.15, left: 5),
+                //               child: nickName != "닉 네 임" ? FutureBuilder(
+                //                 future: Future.delayed(Duration(milliseconds: 1250)),
+                //                 builder: (context, snapshot) {
+                //                   if (snapshot.connectionState == ConnectionState.done) {
+                //                     return AnimatedTextKit(
+                //                       animatedTexts: [
+                //                         TyperAnimatedText(
+                //                           utf8.decode(nickName.runes.toList()),
+                //                           speed: Duration(milliseconds: 200),
+                //                           textStyle: TextStyle(
+                //                             fontFamily: 'SangSangShin',
+                //                             fontWeight: FontWeight.w400,
+                //                             fontSize: 15,
+                //                             letterSpacing: 0.01,
+                //                             color: Color(0xff000000),
+                //                           ),
+                //                         ),
+                //                       ],
+                //                       totalRepeatCount: 1,
+                //                     );
+                //                   } else {
+                //                     return SizedBox.shrink();
+                //                   }
+                //                 },
+                //               ):
+                //                   Text("닉 네 임",
+                //                 style: TextStyle(
+                //                   fontFamily: 'MaruBuri',
+                //                   fontWeight: FontWeight.w700,
+                //                   fontSize: 12,
+                //                   letterSpacing: 0.01,
+                //                   color: Color(0xff000000),
+                //                 ),
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
                 // (주) 커카글쓴이 닉네임 (서명)
                 Container(
                   // margin: EdgeInsets.only(top: 17.15),
                   child: Stack(
                     children: [
-                      // Center-aligned Row
+                      // (주) 커카글쓴이 -> 글 쓴 사람 -> name
                       Align(
-                        alignment: Alignment.center, // 가운데 정렬
+                        alignment: Alignment.centerLeft, // 왼쪽 정렬
+                        child: Container(
+                          margin: EdgeInsets.only(top: 17.15, left: 39.5),
+                          child: Text(
+                            "(주) ${utf8.decode(name.runes.toList())}",
+                            style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 11,
+                              letterSpacing: 0.001,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+                        ),
+                          ),
+
+                        Align(
+                          alignment: Alignment.centerLeft, // 가운데 정렬
                         child: Row(
                           mainAxisSize: MainAxisSize.min, // 최소한의 너비 가지기
                           children: [
-                            // (주) 커카글쓴이 -> 글 쓴 사람 -> name
-                            Container(
-                              margin: EdgeInsets.only(top: 17.15, left: 0),
-                              child: Text(
-                                "(주) ${utf8.decode(name.runes.toList())}",
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11,
-                                  letterSpacing: 0.001,
-                                  color: Color(0xff000000),
-                                ),
-                              ),
-                            ),
                             // 닉네임 -> 글 보기 하는 사람 -> 닉네임
-                            // AnimatedContainer(
-                            //   duration: Duration(milliseconds: 200),
-                            //   margin: EdgeInsets.only(top: 17.15, left: 5),
-                            //   child: Text(
-                            //     nickName != "닉 네 임" ? utf8.decode(nickName.runes.toList()) : "닉 네 임",
-                            //     style: TextStyle(
-                            //       fontFamily: 'MaruBuri',
-                            //       fontWeight: FontWeight.w700,
-                            //       fontSize: 12,
-                            //       letterSpacing: 0.01,
-                            //       color: Color(0xff000000),
-                            //     ),
-                            //   ),
-                            // ),
-
                             AnimatedContainer(
                               duration: Duration(milliseconds: 200),
-                              margin: EdgeInsets.only(top: 17.15, left: 5),
+                              margin: EdgeInsets.only(top: 14, left: 150),
                               child: nickName != "닉 네 임" ? FutureBuilder(
                                 future: Future.delayed(Duration(milliseconds: 1250)),
                                 builder: (context, snapshot) {
@@ -365,6 +420,9 @@ class ShowErrandWidget extends StatelessWidget {
                           ],
                         ),
                       ),
+
+
+
                       // Right-aligned (서명)
                       Align(
                         alignment: Alignment.centerRight,
