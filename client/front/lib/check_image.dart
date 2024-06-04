@@ -175,7 +175,7 @@ class Check_ImageState extends State<Check_Image> {
                       color: Color(0xFFACACAC),
                       width: 0.5 // 테두리 굵기
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
@@ -198,6 +198,7 @@ class Check_ImageState extends State<Check_Image> {
                 ),
                 ),
 
+              // 학번 텍스트
               Container(
                   margin: EdgeInsets.only(left: 22.0, top: 28.0),
                   child: Text('학번',
@@ -219,7 +220,7 @@ class Check_ImageState extends State<Check_Image> {
                       color: Color(0xffACACAC),
                       width: 0.5 // 테두리 굵기
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
@@ -244,6 +245,7 @@ class Check_ImageState extends State<Check_Image> {
                 )
               ),
 
+              // 이름 텍스트
               Container(
                   margin: EdgeInsets.only(left: 22.0, top: 28.0),
                   child: Text('이름',
@@ -264,7 +266,7 @@ class Check_ImageState extends State<Check_Image> {
                       color: Color(0xffACACAC),
                       width: 0.5 // 테두리 굵기
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
@@ -287,7 +289,7 @@ class Check_ImageState extends State<Check_Image> {
               ),
               //설명
               Container(
-                  margin: EdgeInsets.only(left: 21.0, top: 33.0),
+                  margin: EdgeInsets.only(left: 20.9, top: 29.0),
                   child: Text('해당 정보가 일치하다면 확인 버튼을 눌러주세요.',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -299,17 +301,17 @@ class Check_ImageState extends State<Check_Image> {
 
               //확인 버튼
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                 width: 320,
-                height: 40,
+                height: 43,
                 decoration: BoxDecoration(
                   color: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
                       ? Color(0xff7C3D1A) : Color(0xffBD9E8C),
-                  border: Border.all(
-                    width: 0.5,
-                    color: Color(0xffACACAC),
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
+                  // border: Border.all(
+                  //   width: 0.5,
+                  //   color: Color(0xffACACAC),
+                  // ),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 child: Center(
                   child: TextButton(
@@ -322,7 +324,7 @@ class Check_ImageState extends State<Check_Image> {
                     child: Text(
                       '확인',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 15,
                         fontFamily: 'Pretendard',
                         letterSpacing: 0.01,
                         color: Color(0xffFFFFFF),
@@ -332,7 +334,7 @@ class Check_ImageState extends State<Check_Image> {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(left: 20.0, top: 12.0),
+                  margin: EdgeInsets.only(left: 20.0, top: 9.0),
                   child: Text('* 해당 정보가 일치하지 않으면 알맞게 바꿔주세요.',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
