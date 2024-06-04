@@ -269,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  String errorMessage = ''; // 오류 메시지를 저장할 변수
+  // String errorMessage = ''; // 오류 메시지를 저장할 변수
 
   // 실제로 전송된 인증번호와 사용자가 입력한 인증번호가 같은지 확인
   void checkVerificationCode(int statusCode) {
@@ -552,21 +552,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 22.0, top: 21.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          errorMessage,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xE33939),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(left: 22.0, top: 21.0),
+                    //   child: Align(
+                    //     alignment: Alignment.centerLeft,
+                    //     child: Text(
+                    //       errorMessage,
+                    //       style: TextStyle(
+                    //         fontSize: 12,
+                    //         fontFamily: 'Pretendard',
+                    //         fontWeight: FontWeight.w400,
+                    //         color: Color(0xffE33939),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
