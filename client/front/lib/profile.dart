@@ -298,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (isPasswordCheckAvailable) {
         passwordCheckText = "";
         passwordCheckFilledColor = Color(0xFFF0F0F0);
-        passwordCheckFontColor = Color(0xFF969696);
+        passwordCheckFontColor = Color(0xFF404040);
         passwordCheckBorderColor = Color(0xFFACACAC);
         Password = passwordCheckController.text;
         u1 =
@@ -309,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // 바로 오류 메시지 띄우기
         passwordCheckTextColor = Color(0xFFE33939);
         passwordCheckFilledColor = Color(0xFFFFDDDD);
-        passwordCheckFontColor = Color(0xFFE33939);
+        passwordCheckFontColor = Color(0xFFE02828);
         passwordCheckBorderColor = Color(0xFFFA4343);
         // 각 조건에 따른 오류 메시지 출력
       }
@@ -547,9 +547,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
 
+                      Stack(
+                          children: [
                       // 비밀번호 텍스트 필드
                       Container(
-                        margin: EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 8, left: 20.79),
                         width: 320,
                         height: 38,
                         decoration: BoxDecoration(
@@ -562,7 +564,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: passwordFilledColor,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 2, left: 14, right: 14),
+                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          child: Align(
+                           alignment: Alignment.centerLeft,
                           child: TextField(
                             maxLength: maxPasswordLength,
                             // 최대 길이 설정
@@ -581,28 +585,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: passwordFontColor,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
+                                fontSize: 13,
                                 letterSpacing: 0.01,),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                                 counterText: '',
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isPasswordButtonVisible =
-                                    !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
-                                  });
-                                },
-                                icon: isPasswordButtonVisible
-                                    ? Image.asset('assets/images/open eye.png')
-                                    : Image.asset(
-                                    'assets/images/close eye.png'), // 이미지 아이콘 설정
-                              )
                             ),
                             keyboardType: TextInputType.text,
                             enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
                                 nicknameText == "중복 확인이 완료되었습니다.",
                           ),
                         ),
+                       ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                      child: Container(
+                       margin: EdgeInsets.only(top: 3, right: 25),
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isPasswordButtonVisible =
+                                !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                              });
+                            },
+                            icon: isPasswordButtonVisible
+                                ? Image.asset(
+                              'assets/images/open eye.png',
+                            )
+                                : Image.asset(
+                                'assets/images/close eye.png'), // 이미지 아이콘 설정
+                          )
+                      ),
+                      ),
+                      ],
                       ),
 
 
@@ -635,85 +651,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 비밀번호 확인 텍스트 필드
+                      Stack(
+                      children: [
                       Container(
-                        margin: EdgeInsets.only(top: 9),
+                        margin: EdgeInsets.only(left: 20, top: 9),
                         width: 320,
                         height: 38,
-                        // 가로 패딩 추가
-                        child: TextField(
-                          maxLength: maxPasswordCheckLength,
-                          // 최대 길이 설정
-                          onChanged: (text) {
-                            CheckPassword();
-
-                            if (text.length < minPasswordCheckLength) {
-                              print('최소 $minPasswordCheckLength자 이상 입력해주세요.');
-                            } else if (text.length > maxPasswordCheckLength) {
-                              print('최대 $maxPasswordCheckLength자만 입력할 수 있습니다.');
-                            }
-                          },
-                          controller: passwordCheckController,
-                          obscureText: !isPasswordCheckButtonVisible,
-                          // 비밀번호 확인 가리기/보이기 설정
-
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(fontSize: 10),
-                            filled: true,
-                            fillColor: passwordCheckFilledColor,
-                            labelStyle: TextStyle(
-                                color: passwordCheckFontColor,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400),
-                            contentPadding: EdgeInsets.only(left: 11.58),
-                            // 텍스트를 수직으로 가운데 정렬
-                            // 밑줄 없애기
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: passwordCheckBorderColor,
-                                  width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isPasswordCheckButtonVisible =
-                                      !isPasswordCheckButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
-                                });
-                              },
-                              icon: isPasswordCheckButtonVisible
-                                  ? Image.asset('assets/images/open eye.png')
-                                  : Image.asset(
-                                      'assets/images/close eye.png'), // 이미지 아이콘 설정
-                            ),
-                            counterText:
-                                '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                        decoration: BoxDecoration(
+                          border:
+                          Border.all(
+                              color: passwordCheckBorderColor,
+                              width: 0.5  // 테두리 굵기
                           ),
-                          keyboardType: TextInputType.text,
-                          enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
-                              nicknameText == "중복 확인이 완료되었습니다.",
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          color: passwordCheckFilledColor,
                         ),
-                      ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          child: TextField(
+                            maxLength: maxPasswordCheckLength,
+                            // 최대 길이 설정
+                            onChanged: (text) {
+                              CheckPassword();
+
+                              if (text.length < minPasswordCheckLength) {
+                                print('최소 $minPasswordCheckLength자 이상 입력해주세요.');
+                              } else if (text.length > maxPasswordCheckLength) {
+                                print('최대 $maxPasswordCheckLength자만 입력할 수 있습니다.');
+                              }
+                            },
+                            controller: passwordCheckController,
+                            obscureText: !isPasswordCheckButtonVisible,
+                            style: TextStyle(
+                              color: passwordCheckFontColor,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 13,
+                              letterSpacing: 0.01,
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              counterText: '',
+                            ),
+                            keyboardType: TextInputType.text,
+                            enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
+                                nicknameText == "중복 확인이 완료되었습니다.",
+                          ),
+                        ),
+                      ),
+
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                              margin: EdgeInsets.only(top: 4, right: 25),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isPasswordButtonVisible =
+                                    !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                  });
+                                },
+                                icon: isPasswordButtonVisible
+                                    ? Image.asset(
+                                  'assets/images/open eye.png',
+                                )
+                                    : Image.asset(
+                                    'assets/images/close eye.png'), // 이미지 아이콘 설정
+                              )
+                          ),
+                        ),
+                      ],
+                      ),
 
                       Container(
                         margin: EdgeInsets.only(left: 24, top: 7),
