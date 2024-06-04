@@ -499,14 +499,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (_isRunning)
                           Positioned(
                             top: 20,
-                            right: 10,
+                            right: 15,
                             child: Text(
                               '${_formatTime(_seconds)}',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFFFD4848)
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff7C3D1A)
                               ),
                             ),
                          ),
