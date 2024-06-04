@@ -384,7 +384,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFFE5E5E5),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 3, left: 14, right: 14),
+                        padding: EdgeInsets.only(bottom: 2, left: 14, right: 14),
                         child: TextField(
                           controller: emailController,
                           style: TextStyle(
@@ -455,57 +455,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
 
+
+
                     Stack(
                       alignment: Alignment.center,
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 9.0),
                           width: 320,
-                          height: 38, // 텍스트 필드의 높이 설정
-                          child: TextField(
-                            controller: verificationCodeController,
-                            decoration: InputDecoration(
-                              hintText: "해당 메일로 전송된 인증 번호를 입력하세요",
-                              hintStyle: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFFE5E5E5),
-                              labelStyle: TextStyle(
+                          height: 38,
+                          decoration: BoxDecoration(
+                            border:
+                            Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            color: Color(0xFFE5E5E5),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 2, left: 14, right: 14),
+                            child: TextField(
+                              controller: verificationCodeController,
+                              style: TextStyle(
                                   color: Color(0xFF404040),
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400),
-                              contentPadding: EdgeInsets.only(left: 11, right: 11),
-                              // 텍스트를 수직으로 가운데 정렬
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                    color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                              decoration: InputDecoration(
+                                hintText: "해당 메일로 전송된 인증 번호를 입력하세요",
+                                hintStyle: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff9E9E9E)
                                 ),
-                              ),                              // 밑줄 없애기
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                    color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                ),
+                                border: InputBorder.none,
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                    color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                ),
-                              ),
+                              keyboardType: TextInputType.number,
+                              enabled: isVerificationCodeEnabled, // 인증 번호 텍스트 필드 활성화 여부 결정
                             ),
-                            keyboardType: TextInputType.number,
-                            // obscureText: true, // 인증 번호 안보이도록 하는 것
-                            enabled: isVerificationCodeEnabled, // 인증 번호 텍스트 필드 활성화 여부 결정
                           ),
-                        ), // 인증 번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 인증 번호 숨기기)
+                        ),
+                        // 인증 번호 텍스트 입력 구현(누르면 글자 사라짐 + 입력 시 인증 번호 숨기기)
 
                         if (_isRunning)
                           Positioned(
