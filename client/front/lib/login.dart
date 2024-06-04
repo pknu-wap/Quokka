@@ -72,18 +72,21 @@ class _LogInState extends State<LogIn> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // 커카 이미지
               Container(
-                margin: EdgeInsets.only(top: 122), // 커카 이미지에 대한 마진 설정
+                margin: EdgeInsets.only(top: 103), // 커카 이미지에 대한 마진 설정
+                width: 75,
+                height: 105,
                 child: Center(
                   child: Image(
-                    image: AssetImage('assets/images/quokka2.png'),
-                    width: 170.0,
+                    image: AssetImage('assets/images/quokka2.png'),ㄴ
                   ),
                 ),
               ),
+              // 학번 텍스트 필드
               Container(
                 // 길이 제한 필요
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 43.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 38.0),
                 // 학번 텍스트 필드에 대한 마진 설정
                 width: 320,
                 height: 50,
