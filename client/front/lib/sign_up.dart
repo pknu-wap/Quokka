@@ -371,7 +371,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-
+                    // 이메일 주소 텍스트 필드
                     Container(
                       margin: EdgeInsets.only(top: 11.0),
                       width: 320,
@@ -404,79 +404,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-
-
-
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 11.0),
-                    //   width: 320,
-                    //   height: 38,
-                    //   child: TextField(
-                    //     controller: emailController,
-                    //     decoration: InputDecoration(
-                    //       hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
-                    //       hintStyle: TextStyle(
-                    //           fontSize: 13,
-                    //           fontFamily: 'Pretendard',
-                    //           fontWeight: FontWeight.w400),
-                    //       filled: true,
-                    //       fillColor: Color(0xFFE5E5E5),
-                    //       labelStyle: TextStyle(
-                    //           color: Color(0xFF404040),
-                    //           fontFamily: 'Pretendard',
-                    //           fontWeight: FontWeight.w400),
-                    //       contentPadding: EdgeInsets.only(left: 14, right: 14),
-                    //       // 텍스트를 수직으로 가운데 정렬
-                    //       border: InputBorder.none,
-                    //       // 밑줄 없애기
-                    //       focusedBorder: OutlineInputBorder(
-                    //         borderRadius:
-                    //             BorderRadius.all(Radius.circular(10.0)),
-                    //         borderSide: BorderSide(
-                    //             color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                    //             ),
-                    //       ),
-                    //       enabledBorder: OutlineInputBorder(
-                    //         borderRadius:
-                    //             BorderRadius.all(Radius.circular(10.0)),
-                    //         borderSide: BorderSide(
-                    //             color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                    //             ),
-                    //       ),
-                    //     ),
-                    //     keyboardType: TextInputType.emailAddress,
-                    //   ),
-                    // ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
-
+                    // 이메일 인증 번호 받기 버튼
                     Container(
                       margin: EdgeInsets.only(top: 19),
                       child: ElevatedButton(
                         onPressed: isEmailButtonEnabled
                             ? () {
                           emailRequest(emailController.text);
-                                // 버튼이 클릭되었을 때 수행할 작업을 여기에 추가합니다.
-                                // startTimer();
-                                print('Email Button Clicked!');
-                              }
-                            : null,
+                          print('Email Button Clicked!');
+                        } : null,
                         style: ButtonStyle(
                           // 버튼의 배경색 변경하기
                           backgroundColor: isEmailButtonEnabled
                               ? MaterialStateProperty.all<Color>(Color(0xFF7C3D1A))
                               : MaterialStateProperty.all<Color>(Color(0xFFBD9E8C)),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size(320, 40)),
+                              MaterialStateProperty.all<Size>(Size(320, 43)),
                           // 버튼의 모양 변경하기
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10), // 원하는 모양에 따라 BorderRadius 조절
+                              borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
                             ),
                           ),
                         ),
                         child: Text(
                           '이메일 인증 번호 받기',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 15,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
