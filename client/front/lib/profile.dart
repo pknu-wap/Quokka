@@ -730,8 +730,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                       ),
 
+                      // 비밀번호 확인 경고
                       Container(
-                        margin: EdgeInsets.only(left: 24, top: 7),
+                        margin: EdgeInsets.only(left: 23.79, top: 5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -741,15 +742,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 12,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 완료 버튼
                       Container(
                           margin: EdgeInsets.only(top: 12),
                           width: 320,
-                          height: 40,
+                          height: 43,
                           child: ElevatedButton(
                             onPressed: passwordCheckText == ""
                                 ? () {
@@ -781,14 +784,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      10), // 원하는 모양에 따라 BorderRadius 조절
+                                      5), // 원하는 모양에 따라 BorderRadius 조절
                                 ),
                               ),
                             ),
                             child: Text(
                               '완료',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xFFFFFFFF),

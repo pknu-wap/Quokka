@@ -552,6 +552,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 fontFamily: 'Paybooc',
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
+                letterSpacing: 0.01
               ),
             ),
           ),
@@ -575,6 +576,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
+                            letterSpacing: 0.01,
                           ),
                         ),
                       ),
@@ -598,14 +600,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: TextStyle(
                               color: Color(0xFF404040),
                               fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 0.01),
                           decoration: InputDecoration(
                             hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
                             hintStyle: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xff9E9E9E)),
+                                color: Color(0xff9E9E9E),
+                                letterSpacing: 0.01,),
                             border: InputBorder.none,
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -642,6 +646,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
+                            letterSpacing: 0.01,
                           ),
                         ),
                       ),
@@ -658,6 +663,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF373737),
+                            letterSpacing: 0.01,
                           ),
                         ),
                       ),
@@ -687,14 +693,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               style: TextStyle(
                                   color: Color(0xFF404040),
                                   fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 0.01,),
                               decoration: InputDecoration(
                                 hintText: "해당 메일로 전송된 인증 번호를 입력하세요",
                                 hintStyle: TextStyle(
                                     fontSize: 13,
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xff9E9E9E)
+                                    color: Color(0xff9E9E9E),
+                                    letterSpacing: 0.01,
                                 ),
                                 border: InputBorder.none,
                               ),
@@ -715,7 +723,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 13,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                color: Color(0xff7C3D1A)
+                                color: Color(0xff7C3D1A),
+                                letterSpacing: -0.1,
                               ),
                             ),
                          ),
@@ -757,6 +766,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
+                            letterSpacing: 0.01,
                           ),
                         ),
                       ),
