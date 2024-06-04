@@ -376,42 +376,77 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       margin: EdgeInsets.only(top: 11.0),
                       width: 320,
                       height: 38,
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
-                          hintStyle: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400),
-                          filled: true,
-                          fillColor: Color(0xFFE5E5E5),
-                          labelStyle: TextStyle(
+                      decoration: BoxDecoration(
+                        border:
+                        Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xFFE5E5E5),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 3, left: 14, right: 14),
+                        child: TextField(
+                          controller: emailController,
+                          style: TextStyle(
                               color: Color(0xFF404040),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400),
-                          contentPadding: EdgeInsets.only(left: 14, right: 14),
-                          // 텍스트를 수직으로 가운데 정렬
-                          border: InputBorder.none,
-                          // 밑줄 없애기
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(
-                                color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                ),
+                          decoration: InputDecoration(
+                            hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
+                            hintStyle: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff9E9E9E)),
+                            border: InputBorder.none,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(
-                                color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                ),
-                          ),
+                          keyboardType: TextInputType.emailAddress,
                         ),
-                        keyboardType: TextInputType.emailAddress,
                       ),
-                    ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                    ),
+
+
+
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 11.0),
+                    //   width: 320,
+                    //   height: 38,
+                    //   child: TextField(
+                    //     controller: emailController,
+                    //     decoration: InputDecoration(
+                    //       hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
+                    //       hintStyle: TextStyle(
+                    //           fontSize: 13,
+                    //           fontFamily: 'Pretendard',
+                    //           fontWeight: FontWeight.w400),
+                    //       filled: true,
+                    //       fillColor: Color(0xFFE5E5E5),
+                    //       labelStyle: TextStyle(
+                    //           color: Color(0xFF404040),
+                    //           fontFamily: 'Pretendard',
+                    //           fontWeight: FontWeight.w400),
+                    //       contentPadding: EdgeInsets.only(left: 14, right: 14),
+                    //       // 텍스트를 수직으로 가운데 정렬
+                    //       border: InputBorder.none,
+                    //       // 밑줄 없애기
+                    //       focusedBorder: OutlineInputBorder(
+                    //         borderRadius:
+                    //             BorderRadius.all(Radius.circular(10.0)),
+                    //         borderSide: BorderSide(
+                    //             color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                    //             ),
+                    //       ),
+                    //       enabledBorder: OutlineInputBorder(
+                    //         borderRadius:
+                    //             BorderRadius.all(Radius.circular(10.0)),
+                    //         borderSide: BorderSide(
+                    //             color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
+                    //             ),
+                    //       ),
+                    //     ),
+                    //     keyboardType: TextInputType.emailAddress,
+                    //   ),
+                    // ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
 
                     Container(
                       margin: EdgeInsets.only(top: 19),
