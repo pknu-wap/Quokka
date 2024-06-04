@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
@@ -823,7 +823,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           ),
                         ),
                         child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
+                          child: DropdownButton2<String>(
                             hint: Row(
                               children: [
                                 Container( margin: EdgeInsets.only(left: 14.51),
@@ -845,8 +845,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                                 ),
                               ],
                             ),
-                            icon: null,
-                            dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
+                            // icon: null,
+                            // dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
                             items: [
                               customDropdownItem("출발했어요."),
                               customDropdownItem("지금 물건을 픽업했어요."),
@@ -859,6 +859,9 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                             onChanged: (String? value) {
                               sendValue(value);
                             },
+                            dropdownStyleData: DropdownStyleData(
+                              offset: Offset(0, 350),
+                            ),
                             selectedItemBuilder: (BuildContext context) {
                               return [
                                 "출발했어요.",
@@ -884,6 +887,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                                 );
                               }).toList();
                             },
+
+
                           ),
                         ),
                       ),
