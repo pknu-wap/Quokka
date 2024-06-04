@@ -40,7 +40,7 @@ class TextFieldWidget extends StatelessWidget {
             alignment: Alignment.center,
           child: AnimatedContainer(
             duration: Duration(milliseconds: 350),
-            margin: EdgeInsets.only(top: 3, left: 2,),
+            margin: EdgeInsets.only(top: 0, left: 2,),
             child: realName != "" ? FutureBuilder(
               future: Future.delayed(Duration(milliseconds:700)),
             builder: (context, snapshot) {
@@ -60,11 +60,11 @@ class TextFieldWidget extends StatelessWidget {
               ),
             ],
             totalRepeatCount: 1,
-          );
-        } else {
-          return SizedBox.shrink();
-        }
-      }):
+            );
+            } else {
+            return SizedBox.shrink();
+            }
+          }):
             Text(
               '',
               style: TextStyle(
