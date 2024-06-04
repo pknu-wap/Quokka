@@ -79,51 +79,47 @@ class _LogInState extends State<LogIn> {
                 height: 105,
                 child: Center(
                   child: Image(
-                    image: AssetImage('assets/images/quokka2.png'),ㄴ
+                    image: AssetImage('assets/images/quokka2.png'),
                   ),
                 ),
               ),
               // 학번 텍스트 필드
               Container(
-                // 길이 제한 필요
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 38.0),
-                // 학번 텍스트 필드에 대한 마진 설정
                 width: 320,
                 height: 50,
-                child: TextField(
-                  maxLength: maxStudentIdLength,
-                  // 최대 길이 설정
-                  controller: _UsernameController,
-                  onChanged: (text) {
-                    if (text.length > maxStudentIdLength) {
-                      print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: '학번',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      color: Color(0xFF404040),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  color: Color(0xFFE5E5E5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 17, right: 17),
+                  child: TextField(
+                    maxLength: maxStudentIdLength,
+                    // 최대 길이 설정
+                    controller: _UsernameController,
+                    onChanged: (text) {
+                      if (text.length > maxStudentIdLength) {
+                        print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
+                      }
+                    },
+                    style: TextStyle(
+                        color: Color(0xFF404040),
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400),
+                    decoration: InputDecoration(
+                      hintText: '학번',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Color(0xFF404040),
+                      ),
+                      border: InputBorder.none,
+                      counterText: '',
                     ),
-                    contentPadding: EdgeInsets.only(left: 17, right: 17),
-                    // 텍스트를 수직으로 가운데 정렬
-                    filled: true,
-                    fillColor: Color(0xFFE5E5E5),
-                    labelStyle: TextStyle(color: Color(0xFFE5E5E5)),
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    counterText: '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                    keyboardType: TextInputType.number,
                   ),
-                  keyboardType: TextInputType.number,
                 ),
               ),
 
