@@ -182,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool isValidNickname(String nickname) {
     // 공백 및 특수문자 제외
-    final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,12}$');
+    final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,8}$');
     return nicknameRegex.hasMatch(nickname);
   }
 
@@ -344,6 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fontFamily: 'Paybooc',
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
+                letterSpacing: 0.01,
               ),
             ),
           ),
@@ -351,24 +352,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Column(
         children: [
-          Form(
-            child: Theme(
-              data: ThemeData(
-                primaryColor: Colors.grey, //텍스트 박스 만들기
-                inputDecorationTheme: InputDecorationTheme(
-                  labelStyle: TextStyle(color: Colors.black, fontSize: 5.0),
-                ),
-              ),
               // 텍스트 박스 속 글자 색 블랙
-              child: Container(
+              Container(
                 // padding: EdgeInsets.all(40.0),
                 // 키보드가 올라와서 만약 스크린 영역을 차지하는 경우 스크롤이 되도록
                 // SingleChildScrollView으로 감싸 줌
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      // 닉네임 텍스트
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 30.0),
+                        margin: EdgeInsets.only(top: 30.0, left: 22),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -378,22 +372,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 닉네임 설명
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 4.26),
+                        margin: EdgeInsets.only(left: 22.5, top: 4.26),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "공백 및 특수문자를 제외한 2~12자로 입력해 주세요.",
+                            "공백 및 특수문자를 제외한 2~8자로 입력해 주세요.",
                             style: TextStyle(
                               color: Color(0xFF9E9E9E),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               fontSize: 11,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
@@ -401,18 +398,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Container(
                         margin: EdgeInsets.only(top: 9.74),
-                        // 전체 마진
-                        width: 320,
-                        // 245 + 8.98 + 66.02
-                        height: 38,
-                        // 텍스트 필드의 높이 설정
-
                         child: Row(
                           children: [
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 9.98),
-                                // 닉네임 텍스트 필드와 중복확인 버튼 사이의 간격
+                            // 닉네임 텍스트 필드
+                            Container(
+                              margin: EdgeInsets.only(left: 20),
+                              width: 245,
+                              height: 38,
+                              decoration: BoxDecoration(
+                                border:
+                                Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                                ),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                color: Color(0xFFF0F0F0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 6, left: 10, right: 10),
                                 child: TextField(
                                   maxLength: maxNicknameLength,
                                   // 최대 길이 설정
@@ -429,59 +430,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     }
                                   },
                                   controller: nicknameController,
-                                  //추가함
+                                  style: TextStyle(
+                                      color: Color(0xFF404040),
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 13,
+                                    letterSpacing: 0.01,
+                                  ),
                                   decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Color(0xFFF0F0F0),
-                                    labelStyle: TextStyle(
-                                        color: Color(0xFF404040),
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w400),
-                                    contentPadding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    // 텍스트를 수직으로 가운데 정렬
                                     border: InputBorder.none,
-                                    // 밑줄 없애기
-                                    /*         suffixStyle: TextStyle(fontSize: 16),*/
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xFFACACAC),
-                                          width: 0.5 // 테두리 굵기
-                                          ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xFFACACAC),
-                                          width: 0.5 // 테두리 굵기
-                                          ),
-                                    ),
-                                    counterText:
-                                        '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                                    counterText: '',
                                   ),
                                   keyboardType: TextInputType.emailAddress,
                                 ),
-                              ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                              ),
                             ),
+
+                            // 중복확인 버튼
                             Container(
+                              margin: EdgeInsets.only(left: 9.98),
                               width: 66.02,
+                              height: 38,
                               // height: 38,
                               child: ElevatedButton(
                                 onPressed: isNicknameButtonClickable
                                     ? () {
                                         // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
                                         // checkNicknameDuplicate();
-                                        duplicateRequest(
-                                            nicknameController.text);
-                                      }
-                                    : null,
+                                        duplicateRequest(nicknameController.text);
+                                      } : null,
                                 style: ButtonStyle(
                                   padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry>(
-                                      EdgeInsets.all(10.01)),
+                                          EdgeInsetsGeometry>(EdgeInsets.all(10.01)),
 
                                   backgroundColor:
                                       isNicknameButtonClickable // 텍스트 지우면 다시 비활성화 되도록 만들기
@@ -497,7 +477,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
                                 ),
@@ -508,6 +488,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xFFFFFFFF),
+                                    letterSpacing: 0.01,
                                   ),
                                 ),
                               ),
@@ -518,7 +499,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 닉네임 오류 메시지
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 6.5),
+                        margin: EdgeInsets.only(left: 22.5, top: 4.5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -527,7 +508,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 12,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                color: nicknameTextColor),
+                                color: nicknameTextColor,
+                                letterSpacing: 0.01),
                           ),
                         ),
                       ),
@@ -819,8 +801,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            ),
-          ),
         ],
       ),
     );
