@@ -43,6 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // _SignUpScreenState() : _timer = Timer(Duration(seconds: 0), () {});
 
+  // 이메일 경고
   void emailDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -124,6 +125,173 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );
   }
+ // 인증 번호 경고
+  void passwordDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+          ),
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Container(
+              // padding: EdgeInsets.all(20),
+              width: 323,
+              height: 214,
+              decoration: BoxDecoration(
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 16.04),
+                    child: Image.asset(
+                      'assets/images/alert.png',
+                      width: 76.83,
+                      height: 76.83,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 4.08),
+                    child: Text(
+                      "인증 번호가 일치하지 않아요!",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.00,
+                        color: Color(0xff1A1A1A),
+                      ),
+                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 17.77),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(281.1, 47.25)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // 원하는 모양에 따라 BorderRadius 조절
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        "확인",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          letterSpacing: 0.00,
+                          color: Color(0xffFFFFFF),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // 만료된 인증 번호 경고
+  void expiredPasswordDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+          ),
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Container(
+              // padding: EdgeInsets.all(20),
+              width: 323,
+              height: 214,
+              decoration: BoxDecoration(
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 16.04),
+                    child: Image.asset(
+                      'assets/images/alert.png',
+                      width: 76.83,
+                      height: 76.83,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 4.08),
+                    child: Text(
+                      "만료된 인증 번호에요!",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.00,
+                        color: Color(0xff1A1A1A),
+                      ),
+                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 17.77),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(281.1, 47.25)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // 원하는 모양에 따라 BorderRadius 조절
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        "확인",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          letterSpacing: 0.00,
+                          color: Color(0xffFFFFFF),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
 
 
 
@@ -195,22 +363,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("인증번호가 틀립니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        passwordDialog(context);
       }
       else if (response.statusCode == 404) {
         print(error.httpStatus+'\n');
@@ -221,7 +374,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              content: Text("해당 메일주소를 찾을 수 없습니다."), //먼가 이상함 -> 필요한가?
+              content: Text("해당 메일주소를 찾을 수 없습니다."),
               actions: <Widget>[
                 TextButton(
                   child: Text("확인"),
@@ -238,22 +391,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("만료된 인증번호입니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        expiredPasswordDialog(context);
       }
       else {
         print(error.httpStatus+'\n');
