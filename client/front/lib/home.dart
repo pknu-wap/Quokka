@@ -1443,7 +1443,7 @@ class _HomeState extends State<Home> {
                                             ? Center(
                                             child: Text("진행중인 심부름이 없습니다."))
                                             : ListView.builder(
-                                          padding: EdgeInsets.only(top: 23.98),
+                                          padding: EdgeInsets.only(top: 23.98, bottom: 50),
                                           itemCount: errands.length,
                                           itemBuilder: (context, index) {
                                             String decodedTitle = utf8.decode(
