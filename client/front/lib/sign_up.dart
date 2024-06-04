@@ -440,7 +440,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(left: 22.0, top: 21.0),
+                      margin: EdgeInsets.only(left: 22.0, top: 18),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
