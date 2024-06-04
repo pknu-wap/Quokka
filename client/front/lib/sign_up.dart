@@ -460,6 +460,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Stack(
                       alignment: Alignment.center,
                       children: [
+                        // 인증 번호 텍스트 필드
                         Container(
                           margin: EdgeInsets.only(top: 9.0),
                           width: 320,
@@ -514,7 +515,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(top: 21),
+                      margin: EdgeInsets.only(top: 19),
                       child: ElevatedButton(
                         onPressed: isVerifyButtonEnabled
                             ? () {
@@ -531,20 +532,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               : MaterialStateProperty.all<Color>(
                                   Color(0xFFBD9E8C)),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size(320, 40)),
+                              MaterialStateProperty.all<Size>(Size(320, 43)),
                           // 버튼의 모양 변경하기
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  10), // 원하는 모양에 따라 BorderRadius 조절
+                                  5), // 원하는 모양에 따라 BorderRadius 조절
                             ),
                           ),
                         ),
                         child: Text(
                           '확인',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 15,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
