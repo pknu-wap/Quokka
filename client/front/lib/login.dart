@@ -183,7 +183,6 @@ class _LogInState extends State<LogIn> {
                     //     MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
-                    // 버튼의 배경색 변경하기
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                     // 버튼의 크기 정하기
