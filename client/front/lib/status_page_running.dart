@@ -657,12 +657,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
   void initState()
   {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (overlayEntry != null) {
-        overlayEntry!.remove();
-        overlayEntry = null;
-      }
-    });
     errandNo = widget.errandNo;
     connectNo = errandNo.toString();
     statusMessageInit();
@@ -765,7 +759,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                   ],
                 ),
               ),
-              Flexible(child: Container(width: 320, height: 503,
+              Flexible(child: Container(width: 320, height: 422,
                 margin: EdgeInsets.only(left: 20, top: 21.21),
                 decoration: BoxDecoration(
                   color: Color(0xffFFFFFF),
