@@ -173,10 +173,11 @@ class _Upload_ImageState extends State<Upload_Image> {
                     Positioned(
                       left: 0, right: 0, top: 0, bottom: 0,
                       child: IconButton(
-                        icon: const Icon(
-                          Icons.add,
-                          size: 100,
-                          color: Color(0xff8D8D8D),
+                        icon: Image.asset(
+                          'assets/images/upload_image_button.png',
+                          width: 100,
+                          height: 100,
+                          // color: Color(0xff8D8D8D),
                         ),
                         onPressed: () {
                           // 이 버튼을 누르면 갤러리가 열리고 이미지를 가져오도록 설정
