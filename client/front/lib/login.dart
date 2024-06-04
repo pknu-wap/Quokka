@@ -167,7 +167,7 @@ class _LogInState extends State<LogIn> {
 
               // 다른 위젯들과 함께 Column에 로그인 버튼을 추가합니다.
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
@@ -185,17 +185,17 @@ class _LogInState extends State<LogIn> {
                     // 버튼의 모양 변경하기
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10), // 원하는 모양에 따라 BorderRadius 조절
+                        borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
                       ),
                     ),
                   ),
                   child: Text(
                     '로그인',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
+                      letterSpacing: 0.001,
                       color: Color(0xFFFFFFFF),
                     ),
                   ),
@@ -270,7 +270,7 @@ class _LogInState extends State<LogIn> {
               // ),
               // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
               Container(
-                margin: EdgeInsets.only(left: 0, right: 0, top: 24), // 왜 안돼
+                margin: EdgeInsets.only(left: 0, right: 0, top: 24),
                 // width: 52,
                 // height: 16,
                 child: TextButton(
@@ -290,6 +290,7 @@ class _LogInState extends State<LogIn> {
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w700, //semi-bold가 없으므로, bold으로 대체
                       fontSize: 14,
+                      letterSpacing: 0.001,
                     ),
                   ),
                 ),
