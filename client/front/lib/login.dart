@@ -76,7 +76,7 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(top: 122), // 커카 이미지에 대한 마진 설정
                 child: Center(
                   child: Image(
-                    image: AssetImage('assets/images/커카.png'),
+                    image: AssetImage('assets/images/quokka2.png'),
                     width: 170.0,
                   ),
                 ),
