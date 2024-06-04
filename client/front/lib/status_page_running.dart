@@ -820,7 +820,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           child: DropdownButton2<String>(
                             hint: Row(
                               children: [
-                                Container( margin: EdgeInsets.only(left: 14.51),
+                                Container( 
                                   child:  Image.asset(
                                     'assets/images/paper-plane.png',
                                     color: Color(0xffADADAD),
@@ -839,8 +839,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                                 ),
                               ],
                             ),
-                            // icon: null,
-                            // dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
                             items: [
                               customDropdownItem("출발했어요."),
                               customDropdownItem("지금 물건을 픽업했어요."),
@@ -855,6 +853,9 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                             },
                             dropdownStyleData: DropdownStyleData(
                               offset: Offset(0, 350),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              )
                             ),
                             selectedItemBuilder: (BuildContext context) {
                               return [
