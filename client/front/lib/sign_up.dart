@@ -213,41 +213,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Upload_Image(requestMail: requestMail)));
     } else if(statusCode == 400){
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            // title: Text("인증 번호"),
-            content: Text("인증 번호가 일치하지 않습니다."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("확인"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+      signUpDialog(context, "인증 번호가 일치하지 않아요!");
     }
     else if(statusCode == 408) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text("만료된 인증번호입니다."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("확인"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+      signUpDialog(context, "만료된 인증 번호 에요!");
     }
   }
 
