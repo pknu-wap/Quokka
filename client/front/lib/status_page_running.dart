@@ -56,7 +56,7 @@ class _RatingDialogState extends State<RatingDialog> {
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
-              width: 300, height: 245,
+              width: 323, height: 275.75,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF),
@@ -551,90 +551,220 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
       print("사용자가 errander가 아님");
     }
   }
+
+
+  // Dialog(
+  // shape: RoundedRectangleBorder(
+  // borderRadius: BorderRadius.circular(20),
+  // ),
+  // child: Container(
+  // padding: EdgeInsets.all(20),
+  // width: 300,
+  // height: 203,
+  // decoration: BoxDecoration(
+  // color: Color(0xffFFFFFF), //배경색
+  // borderRadius: BorderRadius.circular(20),
+  // ),
+  // child: Column(
+  // mainAxisAlignment: MainAxisAlignment.center,
+  // children: [
+  // Icon(
+  // Icons.check, // 확인 아이콘으로 변경
+  // color: Color(0xffAD8772),
+  // size: 40,
+  // ),
+  // SizedBox(height: 10),
+  // Text(
+  // "심부름을 완료하시겠어요?",
+  // style: TextStyle(
+  // fontSize: 18,
+  // fontWeight: FontWeight.bold,
+  // ),
+  // textAlign: TextAlign.center,
+  // ),
+  // SizedBox(height: 5),
+  // Text(
+  // "꼭 심부름이 완료되었을 때 눌러야 해요.",
+  // style: TextStyle(
+  // fontSize: 12,
+  // fontWeight: FontWeight.bold,
+  // color: Color(0xffB08B76),
+  // ),
+  // textAlign: TextAlign.center,
+  // ),
+  // SizedBox(height: 15),
+  // Row(
+  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  // children: [
+  // Expanded(
+  // child: ElevatedButton(
+  // onPressed: () {
+  // setComplete();
+  // errander_complete();
+  // },
+  // style: ElevatedButton.styleFrom(
+  // backgroundColor: Color(0xffAD8772), // 갈색으로 설정
+  // foregroundColor: Color(0xffFFFFFF),
+  // padding: EdgeInsets.symmetric(vertical: 12),
+  // shape: RoundedRectangleBorder(
+  // borderRadius: BorderRadius.circular(10),
+  // ),
+  // ),
+  // child: Text("확인"),
+  // ),
+  // ),
+  // SizedBox(width: 10),
+  // Expanded(
+  // child: TextButton(
+  // onPressed: () {
+  // Navigator.pop(context);
+  // },
+  // style: TextButton.styleFrom(
+  // foregroundColor: Color(0xffAD8772),
+  // padding: EdgeInsets.symmetric(vertical: 12),
+  // shape: RoundedRectangleBorder(
+  // borderRadius: BorderRadius.circular(10),
+  // ),
+  // side: BorderSide(color: Color(0xffAD8772)),
+  // ),
+  // child: Text("취소"),
+  // ),
+  // ),
+  // ],
+  // ),
+  // ],
+  // ),
+  // ),
+  // );
+
   void confirmDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
           ),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            width: 300,
-            height: 203,
-            decoration: BoxDecoration(
-              color: Color(0xffFFFFFF), //배경색
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.check, // 확인 아이콘으로 변경
-                  color: Color(0xffAD8772),
-                  size: 40,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "심부름을 완료하시겠어요?",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Container(
+              width: 323,
+              height: 268.29,
+              decoration: BoxDecoration(
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 35.87),
+                    child: Image.asset(
+                      'assets/images/check.png',
+                      width: 39.08,
+                      height: 28.95,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "꼭 심부름이 완료되었을 때 눌러야 해요.",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xffB08B76),
+                  Container(
+                    margin: EdgeInsets.only(top: 36.55),
+                    child: Text(
+                      "심부름을 완료하시겠어요?",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.04,
+                        color: Color(0xff1A1A1A),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setComplete();
-                          errander_complete();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xffAD8772), // 갈색으로 설정
-                          foregroundColor: Color(0xffFFFFFF),
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.78),
+                    child: Text(
+                      "꼭 심부름이 완료되었을 때 눌러주세요.",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        color: Color(0xff9B7D68),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 39.61),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xFFFFFFFF)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(
+                                      color: Color(0xff999999), // 테두리 색상
+                                      width: 1 // 테두리 두께
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "취소",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xff3E3E3E),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         ),
-                        child: Text("확인"),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Color(0xffAD8772),
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                        Container(
+                          margin: EdgeInsets.only(right: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff7C3D1A)),
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "네, 완료하기",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xffFFFFFF),
+                              ),
+                            ),
+                            onPressed: () {
+                              setComplete();
+                              errander_complete();
+                            },
                           ),
-                          side: BorderSide(color: Color(0xffAD8772)),
                         ),
-                        child: Text("취소"),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
