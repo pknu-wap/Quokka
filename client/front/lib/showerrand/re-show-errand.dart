@@ -486,8 +486,7 @@ class ReShowErrand extends StatefulWidget {
 }
 
 class _ReShowErrandState extends State<ReShowErrand> {
-  late String errandNoString;
-  late int errandNoInt;
+  late String errandNo;
   late String title;
   late String name;
   late String createdDate;
@@ -516,7 +515,6 @@ class _ReShowErrandState extends State<ReShowErrand> {
       Errand errand = Errand.fromJson(jsonDecode(response.body));
         title = errand.title;
         name = errand.o1.nickname;
-        errandNoInt = errand.errandNo;
         createdDate = errand.createdDate;
         due = errand.due;
         destination = errand.destination;
@@ -537,10 +535,10 @@ class _ReShowErrandState extends State<ReShowErrand> {
       print(error.message);
     }
   }
-  Future<void> getErrandName(int id) async {
+  Future<void> getErrandInfo(int id) async {
     String baseUrl = dotenv.env['BASE_URL'] ?? '';
     String url = "${baseUrl}errand";
-    String param = "/$id/accept";
+    String param = "/errander/$id";
     print(url + param);
 
     token = await storage.read(key: 'TOKEN');
@@ -569,12 +567,11 @@ class _ReShowErrandState extends State<ReShowErrand> {
   @override
   void initState() {
     super.initState();
-    errandNoString = widget.errandNo;
+    errandNo = widget.errandNo;
     nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
     realName = ""; // 심부름 하는 사람 실제 이름
-    errandReading(errandNoString).then((_) {
-      getErrandName(errandNoInt);
-    });
+    errandReading(errandNo);
+    getErrandInfo(int.parse(errandNo));
   }
   // 메인 글 보기 화면
   @override
@@ -618,7 +615,7 @@ class _ReShowErrandState extends State<ReShowErrand> {
                               ],
                             ),
                             child: reShowErrandWidget(
-                              errandNo: errandNoInt,
+                              errandNo: int.parse(errandNo),
                               title: title,
                               name: name,
                               createdDate: createdDate,
@@ -634,11 +631,6 @@ class _ReShowErrandState extends State<ReShowErrand> {
                               realName : realName,
                               margin : EdgeInsets.only(top: 75, left: 18.5),
                             ),
-                            onEnd: () { // 애니메이션 끝나면 발생
-                              setState(() {
-
-                              });
-                            }
                         ),
                       ),
                     ),
