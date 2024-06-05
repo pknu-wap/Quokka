@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand.getDto;
+package com.pknuErrand.appteam.dto.errand;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

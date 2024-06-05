@@ -1,10 +1,6 @@
 package com.pknuErrand.appteam.controller;
 
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.exception.ExceptionResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;

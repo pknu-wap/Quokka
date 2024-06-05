@@ -2,12 +2,10 @@ package com.pknuErrand.appteam.controller.statusMessage;
 
 
 import com.pknuErrand.appteam.domain.statusMessage.StatusMessage;
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageRequestDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageResponseDto;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
-import com.pknuErrand.appteam.service.errand.ErrandService;
 import com.pknuErrand.appteam.service.statusMessage.StatusMessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

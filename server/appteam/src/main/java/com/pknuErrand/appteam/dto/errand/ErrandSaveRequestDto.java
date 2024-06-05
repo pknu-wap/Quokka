@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand.saveDto;
+package com.pknuErrand.appteam.dto.errand;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;

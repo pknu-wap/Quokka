@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand.getDto;
+package com.pknuErrand.appteam.dto.errand;
 
 import com.pknuErrand.appteam.Enum.Status;
 import lombok.AllArgsConstructor;
@@ -6,9 +6,11 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ErrandPaginationRequestVo {
+public class ErrandDistancePaginationRequestVo {
     private Long pk;
-    private String cursor;
+    private double latitude;
+    private double longitude;
     private int limit;
     private Status status;
 }
+

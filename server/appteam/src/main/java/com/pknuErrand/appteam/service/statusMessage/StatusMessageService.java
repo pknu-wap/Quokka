@@ -5,7 +5,7 @@ import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandCompletionStatus;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.domain.statusMessage.StatusMessage;
-import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageRequestDto;
 import com.pknuErrand.appteam.dto.statusMessage.StatusMessageResponseDto;
 import com.pknuErrand.appteam.exception.CustomException;

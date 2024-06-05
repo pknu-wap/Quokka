@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand.defaultDto;
+package com.pknuErrand.appteam.dto.errand;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.Enum.Status;
