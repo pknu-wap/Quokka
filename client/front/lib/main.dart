@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
   }
 
   Future<void> _checkToken() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
   }
 
   @override
@@ -113,11 +113,10 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // margin: EdgeInsets.only(top: 22.0),
-        margin: EdgeInsets.only(top: 122), // 커카 이미지에 대한 마진 설정
+        margin: EdgeInsets.only(top: 321, left: 131), // 커카 이미지에 대한 마진 설정
         child: Center(
           child: Image(
-            image: AssetImage('assets/images/image 6.png'),
+            image: AssetImage('assets/images/loding_quokka_sort.png'),
             width: 170.0,
           ),
         ),
