@@ -908,157 +908,344 @@ class _HomeState extends State<Home> {
         }
     });
   }
+
+  // 종료 버튼
   Future<bool?> _showExitDialog() {
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
           ),
-          child: Container(
-            padding: EdgeInsets.all(17),
-            width: 300,
-            height: 180,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.exit_to_app,
-                  color: Colors.brown,
-                  size: 40,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "정말 커카를 종료하시겠어요?",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Container(
+              width: 323,
+              height: 214,
+              decoration: BoxDecoration(
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 35.87),
+                    child:  Icon(
+                      Icons.exit_to_app,
+                      color: Color(0xffA98474),
+                      size: 60,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 11),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.brown, // 갈색으로 설정
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-
-                        ),
-                        child: Text("종료"),
+                  Container(
+                    margin: EdgeInsets.only(top: 36.55),
+                    child: Text(
+                      "정말 커카를 종료하시겠어요?",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.04,
+                        color: Color(0xff1A1A1A),
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, false);
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.brown,
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 10.78),
+                  //   child: Text(
+                  //     "꼭 심부름이 완료되었을 때 눌러주세요.",
+                  //     style: TextStyle(
+                  //       fontFamily: 'Pretendard',
+                  //       fontWeight: FontWeight.w500,
+                  //       fontSize: 15,
+                  //       color: Color(0xff9B7D68),
+                  //     ),
+                  //     textAlign: TextAlign.center,
+                  //   ),
+                  // ),
+                  Container(
+                    margin: EdgeInsets.only(top: 39.61),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "종료",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xffFFFFFF),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context, true);
+                            },
                           ),
-                          side: BorderSide(color: Colors.brown),
                         ),
-                        child: Text("취소"),
-                      ),
+                        Container(
+                          margin: EdgeInsets.only(right: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xffFFFFFF)),
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(
+                                      color: Color(0xff999999), // 테두리 색상
+                                      width: 1 // 테두리 두께
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "취소",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xff3E3E3E),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
   }
-  void _showLogoutDialog() {
-    showDialog(
+
+  // 로그아웃 버튼
+  Future<bool?> _showLogoutDialog() {
+    return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
           ),
-          child: Container(
-            padding: EdgeInsets.all(17),
-            width: 300,
-            height: 180,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.logout,
-                  color: Colors.brown,
-                  size: 40,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "로그아웃 하시겠습니까?",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Container(
+              width: 323,
+              height: 214,
+              decoration: BoxDecoration(
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 18),
+                    child:  Icon(
+                      Icons.logout,
+                      color: Color(0xffA98474),
+                      size: 60,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 11),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
-                          await storage.delete(key: 'TOKEN');
-                          },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.brown, // 갈색으로 설정
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  Container(
+                    margin: EdgeInsets.only(top: 18),
+                    child: Text(
+                      "로그아웃 하시겠어요?",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.04,
+                        color: Color(0xff1A1A1A),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 17.77),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "로그아웃",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xffFFFFFF),
+                              ),
+                            ),
+                            onPressed: () async {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                              await storage.delete(key: 'TOKEN');
+                            },
                           ),
                         ),
-                        child: Text("로그아웃"),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.brown,
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                        Container(
+                          margin: EdgeInsets.only(right: 16),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xffFFFFFF)),
+                              minimumSize: MaterialStateProperty.all<Size>(
+                                  Size(134.18, 45)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(
+                                      color: Color(0xff999999), // 테두리 색상
+                                      width: 1 // 테두리 두께
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "취소",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                letterSpacing: 0.00,
+                                color: Color(0xff3E3E3E),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
-                          side: BorderSide(color: Colors.brown),
                         ),
-                        child: Text("취소"),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
   }
+
+
+
+
+  // void _showLogoutDialog() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(20),
+  //         ),
+  //         child: Container(
+  //           padding: EdgeInsets.all(17),
+  //           width: 300,
+  //           height: 180,
+  //           child: Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Icon(
+  //                 Icons.logout,
+  //                 color: Colors.brown,
+  //                 size: 40,
+  //               ),
+  //               SizedBox(height: 10),
+  //               Text(
+  //                 "로그아웃 하시겠습니까?",
+  //                 style: TextStyle(
+  //                   fontSize: 18,
+  //                   fontWeight: FontWeight.bold,
+  //                 ),
+  //                 textAlign: TextAlign.center,
+  //               ),
+  //               SizedBox(height: 11),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                 children: [
+  //                   Expanded(
+  //                     child: ElevatedButton(
+  //                       onPressed: () async {
+  //                         Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+  //                         await storage.delete(key: 'TOKEN');
+  //                         },
+  //                       style: ElevatedButton.styleFrom(
+  //                         backgroundColor: Colors.brown, // 갈색으로 설정
+  //                         foregroundColor: Colors.white,
+  //                         padding: EdgeInsets.symmetric(vertical: 10),
+  //                         shape: RoundedRectangleBorder(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                         ),
+  //                       ),
+  //                       child: Text("로그아웃"),
+  //                     ),
+  //                   ),
+  //                   SizedBox(width: 10),
+  //                   Expanded(
+  //                     child: TextButton(
+  //                       onPressed: () {
+  //                         Navigator.pop(context);
+  //                       },
+  //                       style: TextButton.styleFrom(
+  //                         foregroundColor: Colors.brown,
+  //                         padding: EdgeInsets.symmetric(vertical: 10),
+  //                         shape: RoundedRectangleBorder(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                         ),
+  //                         side: BorderSide(color: Colors.brown),
+  //                       ),
+  //                       child: Text("취소"),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
