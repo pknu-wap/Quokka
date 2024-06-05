@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'sign_up.dart';
@@ -66,7 +67,15 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+      if (didPop) {
+        return;
+      }
+      SystemNavigator.pop();
+    },
+    child : Scaffold(
       body: Container(
         // margin: EdgeInsets.only(top: 22.0),
         child: SingleChildScrollView(
@@ -300,6 +309,7 @@ class _LogInState extends State<LogIn> {
           ),
         ),
       ),
+    ),
     );
   }
 }
