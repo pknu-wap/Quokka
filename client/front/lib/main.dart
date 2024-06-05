@@ -67,7 +67,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       title: 'Main',
       home: FutureBuilder(
@@ -76,8 +75,19 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             Check_Token(context);
             return Scaffold(
+              backgroundColor: Color(0xffFFFFFF),
               body: Center(
                 child: CircularProgressIndicator(),
+                // child: Column(
+                //   children: [
+                //     CircularProgressIndicator(),
+                //     Image(
+                //     image: AssetImage('assets/images/loding_quokka_sort.png'),
+                //       width: 96.43,
+                //       height: 124.24,
+                //     ),
+                //   ],
+                // ),
               ),
             );
           }
