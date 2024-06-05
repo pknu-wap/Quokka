@@ -46,6 +46,7 @@ dependencies:
   stomp_dart_client: ^2.0.0
   animated_text_kit: ^4.2.2
   dropdown_button2: ^2.3.9
+  flutter_launcher_icons: ^0.13.1
 
 
 
