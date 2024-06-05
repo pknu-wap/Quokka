@@ -77,17 +77,17 @@ class MyApp extends StatelessWidget {
             return Scaffold(
               backgroundColor: Color(0xffFFFFFF),
               body: Center(
-                child: CircularProgressIndicator(),
-                // child: Column(
-                //   children: [
-                //     CircularProgressIndicator(),
-                //     Image(
-                //     image: AssetImage('assets/images/loding_quokka_sort.png'),
-                //       width: 96.43,
-                //       height: 124.24,
-                //     ),
-                //   ],
-                // ),
+                // child: CircularProgressIndicator(),
+                child: Column(
+                  children: [
+                    CircularProgressIndicator(),
+                    // Image(
+                    // image: AssetImage('assets/images/loding_quokka_sort.png'),
+                    //   width: 96.43,
+                    //   height: 124.24,
+                    // ),
+                  ],
+                ),
               ),
             );
           }
@@ -101,16 +101,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Main extends StatefulWidget {
-  @override
-  State<Main> createState() => _MainState();
-}
+// class Main extends StatefulWidget {
+//   @override
+//   State<Main> createState() => _MainState();
+// }
 
-class _MainState extends State<Main> {
-  void getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);
-  }
+// class _MainState extends State<Main> {
+//   void getLocation() async {
+//     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+//     print(position);
+//   }
 
 
   // @override
@@ -119,18 +119,18 @@ class _MainState extends State<Main> {
   //   getGeoData();
   // }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: 321, left: 131), // 커카 이미지에 대한 마진 설정
-        child: Center(
-          child: Image(
-            image: AssetImage('assets/images/loding_quokka_sort.png'),
-            width: 170.0,
-          ),
-        ),
-      ),
-    );
-  }
-}
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: Container(
+  //       margin: EdgeInsets.only(top: 321, left: 131), // 커카 이미지에 대한 마진 설정
+  //       child: Center(
+  //         child: Image(
+  //           image: AssetImage('assets/images/loding_quokka_sort.png'),
+  //           width: 170.0,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+// }
