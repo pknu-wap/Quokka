@@ -931,7 +931,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 35.87),
+                    margin: EdgeInsets.only(top: 18),
                     child:  Icon(
                       Icons.exit_to_app,
                       color: Color(0xffA98474),
@@ -939,7 +939,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 36.55),
+                    margin: EdgeInsets.only(top: 18),
                     child: Text(
                       "정말 커카를 종료하시겠어요?",
                       style: TextStyle(
@@ -952,21 +952,8 @@ class _HomeState extends State<Home> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 10.78),
-                  //   child: Text(
-                  //     "꼭 심부름이 완료되었을 때 눌러주세요.",
-                  //     style: TextStyle(
-                  //       fontFamily: 'Pretendard',
-                  //       fontWeight: FontWeight.w500,
-                  //       fontSize: 15,
-                  //       color: Color(0xff9B7D68),
-                  //     ),
-                  //     textAlign: TextAlign.center,
-                  //   ),
-                  // ),
                   Container(
-                    margin: EdgeInsets.only(top: 39.61),
+                    margin: EdgeInsets.only(top: 17.77),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
