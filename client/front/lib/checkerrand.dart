@@ -8,6 +8,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/showerrand/mainshowerrand.dart';
 import 'package:intl/intl.dart';
+import 'custom_dialog.dart';
 import 'fixerrand/fixerrand.dart';
 import '../../home.dart';
 import 'package:http/http.dart' as http;
@@ -480,6 +481,90 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
       print(response.body);
     }
   }
+
+  void deleteDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 300,
+          height: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.delete,
+                color: Colors.brown,
+                size: 40,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "정말 삭제하시겠어요?",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10),
+              Text(
+                "삭제 버튼 선택 시, 심부름은\n삭제되며 복구되지 않아요!",
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        deleteErrand();
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown, // 갈색으로 설정
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("삭제"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.brown,
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Colors.brown),
+                      ),
+                      child: Text("취소"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
   // void deleteDialog(context) {
   //   showDialog(
   //     context: context,
@@ -508,6 +593,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
   //     },
   //   );
   // }
+  // 수정하기 버튼
   void pressedFix(BuildContext context) {
     if(errands[0]['status'] == "RECRUITING") {
       Navigator.of(context).push(
@@ -518,9 +604,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
       );
     }
     else {
-      fixErrorDialog(context);
+      // 수정하기 버튼 클릭
+      warningDialog(context, "수락된 요청은 수정할 수 없어요!");
     }
   }
+
+  // 삭제하기 버튼
   void pressedDelete(BuildContext context) {
     if(errands[0]['status'] == "RECRUITING") {
       deleteDialog(context);
@@ -611,170 +700,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     );
   }
 
-  void fixErrorDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
-          ),
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
-              decoration: BoxDecoration(
-                color: Color(0xffFFFFFF), //배경색
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
-                      width: 76.83,
-                      height: 76.83,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 4.08),
-                    child: Text(
-                      "수락된 요청은 수정할 수 없어요!",
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        letterSpacing: 0.00,
-                        color: Color(0xff1A1A1A),
-                      ),
-                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 17.77),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
-                        minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                5), // 원하는 모양에 따라 BorderRadius 조절
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        "확인",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          letterSpacing: 0.00,
-                          color: Color(0xffFFFFFF),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void deleteDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            width: 300,
-            height: 300,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.delete,
-                  color: Colors.brown,
-                  size: 40,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "정말 삭제하시겠어요?",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "삭제 버튼 선택 시, 심부름은\n삭제되며 복구되지 않습니다.",
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          deleteErrand();
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.brown, // 갈색으로 설정
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text("삭제"),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.brown,
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          side: BorderSide(color: Colors.brown),
-                        ),
-                        child: Text("취소"),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 
 
   @override

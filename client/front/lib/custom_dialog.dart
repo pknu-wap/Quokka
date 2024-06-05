@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialog extends StatelessWidget{
+class WarningDialog extends StatelessWidget{
   final String alertMessage;
-  CustomDialog({required this.alertMessage});
+  WarningDialog({required this.alertMessage});
 
   // sign_up.dart
   @override
@@ -89,7 +89,100 @@ class CustomDialog extends StatelessWidget{
     showDialog(
       context: context,
       builder: (context) {
-        return CustomDialog(alertMessage: alertMessage);
+        return WarningDialog(alertMessage: alertMessage);
       },
     );
   }
+
+//
+// class DeleteDialog extends StatelessWidget{
+//   final String deleteMessage;
+//   DeleteDialog({required this.deleteMessage});
+//   @override
+//   Widget build(BuildContext context) {
+//     return  Dialog(
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(20),
+//         ),
+//         child: Container(
+//           padding: EdgeInsets.all(20),
+//           width: 300,
+//           height: 300,
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Icon(
+//                 Icons.delete,
+//                 color: Colors.brown,
+//                 size: 40,
+//               ),
+//               SizedBox(height: 10),
+//               Text(
+//                 "정말 삭제하시겠어요?",
+//                 style: TextStyle(
+//                   fontSize: 18,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(height: 10),
+//               Text(
+//                 "삭제 버튼 선택 시, 심부름은\n삭제되며 복구되지 않아요!",
+//                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(height: 20),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                 children: [
+//                   Expanded(
+//                     child: ElevatedButton(
+//                       onPressed: () {
+//                         deleteErrand();
+//                         Navigator.pop(context);
+//                       },
+//                       style: ElevatedButton.styleFrom(
+//                         backgroundColor: Colors.brown, // 갈색으로 설정
+//                         foregroundColor: Colors.white,
+//                         padding: EdgeInsets.symmetric(vertical: 12),
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(10),
+//                         ),
+//                       ),
+//                       child: Text("삭제"),
+//                     ),
+//                   ),
+//                   SizedBox(width: 10),
+//                   Expanded(
+//                     child: TextButton(
+//                       onPressed: () {
+//                         Navigator.pop(context);
+//                       },
+//                       style: TextButton.styleFrom(
+//                         foregroundColor: Colors.brown,
+//                         padding: EdgeInsets.symmetric(vertical: 12),
+//                         shape: RoundedRectangleBorder(
+//                           borderRadius: BorderRadius.circular(10),
+//                         ),
+//                         side: BorderSide(color: Colors.brown),
+//                       ),
+//                       child: Text("취소"),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       );
+//   }
+// }
+//
+// void deleteDialog(BuildContext context, String deleteMessage) {
+//   showDialog(
+//     context: context,
+//     builder: (context) {
+//       return DeleteDialog(deleteMessage: deleteMessage,);
+//     },
+//   );
+// }
