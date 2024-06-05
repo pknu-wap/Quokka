@@ -3,11 +3,9 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
-import com.pknuErrand.appteam.domain.errand.ErrandCompletionStatus;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
-import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
@@ -234,5 +232,16 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errandRepository.delete(errand);
+    }
+
+    @Transactional
+    public Map<String, ?> getErranderInfo(Long errandNo) {
+        Errand errand = errandRepository.findById(errandNo).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
+        if(errand.getStatus() == RECRUITING)
+            throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "모집중인 심부름의 심부름꾼 정보를 조회할 수 없습니다.");
+        Map<String, String> infoMap = new HashMap<>();
+        infoMap.put("name", errand.getErranderNo().getName());
+        infoMap.put("nickname", errand.getErranderNo().getNickname());
+        return infoMap;
     }
 }

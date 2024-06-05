@@ -139,5 +139,17 @@ public class ErrandController {
                 .body(errandListResponseDto);
     }
 
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(examples = {
+                    @ExampleObject(
+                            value = "{ \"name\": \"김수현\", \"nickname\": \"한상차림위샹체쯔\" }")
+            })),
+            @ApiResponse(responseCode = "404\nERRAND_NOT_FOUND", description = "심부름 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))),
+            @ApiResponse(responseCode = "406\nRESTRICT_CONTENT_ACCESS", description = "모집중인 심부름의 심부름꾼 조회 불가", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))),
+    })
+    @GetMapping("/errander/{errandNo}")
+    public ResponseEntity<Map<String, ?>> getErranderInfo(@PathVariable Long errandNo) {
+        return ResponseEntity.ok()
+                .body(errandService.getErranderInfo(errandNo));
+    }
 }
