@@ -5,7 +5,7 @@ class WarningDialog extends StatelessWidget{
   final String alertMessage;
   WarningDialog({required this.alertMessage});
 
-  // sign_up.dart
+  // 경고
   @override
   Widget build(BuildContext context) {
     return Dialog(
