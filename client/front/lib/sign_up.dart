@@ -209,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   // 만료된 인증 번호 경고
-  void expiredPasswordDialog(BuildContext context) {
+  void expiredPasswordDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (context) {
@@ -391,7 +391,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        expiredPasswordDialog(context);
+        expiredPasswordDialog(context, "추가하고싶은 오류 메세지");
       }
       else {
         print(error.httpStatus+'\n');
