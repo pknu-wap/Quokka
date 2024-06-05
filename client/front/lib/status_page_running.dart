@@ -637,6 +637,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
   // ),
   // );
 
+  // 심부름 완료
   void confirmDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -666,7 +667,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 36.55),
+                    margin: EdgeInsets.only(top: 36),
                     child: Text(
                       "심부름을 완료하시겠어요?",
                       style: TextStyle(
@@ -680,7 +681,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10.78),
+                    margin: EdgeInsets.only(top: 6),
                     child: Text(
                       "꼭 심부름이 완료되었을 때 눌러주세요.",
                       style: TextStyle(
