@@ -3,11 +3,7 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
-import com.pknuErrand.appteam.dto.errand.ErrandDistancePaginationRequestVo;
-import com.pknuErrand.appteam.dto.errand.ErrandListResponseDto;
-import com.pknuErrand.appteam.dto.errand.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.dto.errand.ErrandPaginationRequestVo;
-import com.pknuErrand.appteam.dto.errand.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.dto.errand.*;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import com.pknuErrand.appteam.exception.CustomException;
@@ -103,36 +99,18 @@ public class ErrandService {
         return getFilteredErrandList(errandList);
     }
 
-    @Transactional(readOnly = true)
-    public List<ErrandListResponseDto> findPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
-        checkLimitAndThrowException(pageInfo.getLimit());
-        boolean isFirstRequest = false;
-        Errand cursorErrand = null;
-        if(pageInfo.getPk() < 0)
-            isFirstRequest = true;
-        else
-            cursorErrand = findErrandById(pageInfo.getPk());
-        List<Errand> errandList = null;
-        if(pageInfo.getStatus() == null)
-            errandList = errandRepository.findErrandByDistance(pageInfo.getLatitude(),pageInfo.getLongitude());
-        else
-            errandList = errandRepository.findErrandByStatusAndDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getStatus().toString());
-        List<Errand> errandLimitList = new ArrayList<>();
-        Iterator<Errand> it = errandList.iterator();
-        boolean flag = isFirstRequest;
-        int cnt = 0;
-        while(it.hasNext() && cnt <= pageInfo.getLimit()) {
-            Errand errand = it.next();
-            if(flag) {
-                cnt++;
-                errandLimitList.add(errand);
-            }
-            else if(errand.equals(cursorErrand))
-                flag = true;
-        }
-        return getFilteredErrandList(errandLimitList);
-    }
 
+    @Transactional(readOnly = true)
+    public List<ErrandDistanceListResponseDto> findPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
+        checkLimitAndThrowException(pageInfo.getLimit());
+        List<ErrandDistanceListResponseDto> errandList = null;
+        if(pageInfo.getStatus() == null)
+            errandList = errandRepository.findErrandByDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor());
+        else
+            errandList = errandRepository.findErrandByStatusAndDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor(), pageInfo.getStatus());
+
+        return errandList;
+    }
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> getFilteredErrandList(List<Errand> errandList) {
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();

@@ -91,7 +91,7 @@ public class ErrandController {
     })
     @Operation(summary = "거리순으로 페이지네이션 불러오기")
     @GetMapping("/distance")
-    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
+    public ResponseEntity<List<ErrandDistanceListResponseDto>> getPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
         return ResponseEntity.ok()
                 .body(errandService.findPaginationErrandByDistance(pageInfo));
     }

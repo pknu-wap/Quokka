@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ErrandDistancePaginationRequestVo {
-    private Long pk;
+    private double cursor;
     private double latitude;
     private double longitude;
     private int limit;
