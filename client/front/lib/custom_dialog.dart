@@ -85,7 +85,7 @@ class CustomDialog extends StatelessWidget{
     }
   }
 
-  void signUpDialog(BuildContext context, String alertMessage) {
+  void warningDialog(BuildContext context, String alertMessage) {
     showDialog(
       context: context,
       builder: (context) {

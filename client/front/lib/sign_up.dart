@@ -66,19 +66,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if(error.code == "DUPLICATE_DATA")
       {
         // 이메일 중복 경고
-        signUpDialog(context, "이미 사용 중인 이메일 이에요!");
+        warningDialog(context, "이미 사용 중인 이메일 이에요!");
       }
       else if(error.code == "INVALID_FORMAT")
         {
           // 이메일 주소 형식 경고
-          signUpDialog(context, "이메일 주소 형식이 맞지 않아요!");
+          warningDialog(context, "이메일 주소 형식이 맞지 않아요!");
         }
       else
         {
           print(error.httpStatus+'\n');
           print(error.message+'\n');
           print(error.code+'\n');
-          signUpDialog(context, "서버에 문제가 있어요!");
+          warningDialog(context, "서버에 문제가 있어요!");
         }
     }
   }
@@ -101,27 +101,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.message+'\n');
         print(error.code+'\n');
         // 인증 번호 틀림
-        signUpDialog(context, "인증 번호가 일치 하지 않아요!");
+        warningDialog(context, "인증 번호가 일치 하지 않아요!");
       }
       else if (response.statusCode == 404) {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
         // 이메일 주소 찾을 수 없음
-        signUpDialog(context, "해당 메일 주소를 찾을 수 없어요!");
+        warningDialog(context, "해당 메일 주소를 찾을 수 없어요!");
       }
       else if (response.statusCode == 408) {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
         // 인증 번호 시간 초과
-        signUpDialog(context, "만료된 인증 번호 에요!");
+        warningDialog(context, "만료된 인증 번호 에요!");
       }
       else {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        signUpDialog(context, "서버에 문제가 있어요!");
+        warningDialog(context, "서버에 문제가 있어요!");
       }
     }
   }
@@ -213,10 +213,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Upload_Image(requestMail: requestMail)));
     } else if(statusCode == 400){
-      signUpDialog(context, "인증 번호가 일치하지 않아요!");
+      warningDialog(context, "인증 번호가 일치하지 않아요!");
     }
     else if(statusCode == 408) {
-      signUpDialog(context, "만료된 인증 번호 에요!");
+      warningDialog(context, "만료된 인증 번호 에요!");
     }
   }
 
