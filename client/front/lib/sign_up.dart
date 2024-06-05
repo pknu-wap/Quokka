@@ -1,6 +1,7 @@
 import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'custom_dialog.dart';
 import 'upload_image.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -43,258 +44,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // _SignUpScreenState() : _timer = Timer(Duration(seconds: 0), () {});
 
-  // 이메일 경고
-  void emailDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
-          ),
-          child: FittedBox(
-            fit: BoxFit.contain,
-          child: Container(
-            // padding: EdgeInsets.all(20),
-            width: 323,
-            height: 214,
-            decoration: BoxDecoration(
-              color: Color(0xffFFFFFF), //배경색
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 16.04),
-                child: Image.asset(
-                  'assets/images/alert.png',
-                  width: 76.83,
-                  height: 76.83,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 4.08),
-                  child: Text(
-                    "이미 사용중인 이메일이에요!",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                      letterSpacing: 0.00,
-                      color: Color(0xff1A1A1A),
-                    ),
-                    textAlign: TextAlign.center, // 텍스트 중앙 정렬
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 17.77),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
-                      minimumSize: MaterialStateProperty.all<Size>(
-                          Size(281.1, 47.25)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              5), // 원하는 모양에 따라 BorderRadius 조절
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "확인",
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        letterSpacing: 0.00,
-                        color: Color(0xffFFFFFF),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ),
-        );
-      },
-    );
-  }
- // 인증 번호 경고
-  void passwordDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
-          ),
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
-              decoration: BoxDecoration(
-                color: Color(0xffFFFFFF), //배경색
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
-                      width: 76.83,
-                      height: 76.83,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 4.08),
-                    child: Text(
-                      "인증 번호가 일치하지 않아요!",
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        letterSpacing: 0.00,
-                        color: Color(0xff1A1A1A),
-                      ),
-                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 17.77),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
-                        minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                5), // 원하는 모양에 따라 BorderRadius 조절
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        "확인",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          letterSpacing: 0.00,
-                          color: Color(0xffFFFFFF),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  // 만료된 인증 번호 경고
-  void expiredPasswordDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
-          ),
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
-              decoration: BoxDecoration(
-                color: Color(0xffFFFFFF), //배경색
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
-                      width: 76.83,
-                      height: 76.83,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 4.08),
-                    child: Text(
-                      "만료된 인증 번호에요!",
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        letterSpacing: 0.00,
-                        color: Color(0xff1A1A1A),
-                      ),
-                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 17.77),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
-                        minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                5), // 원하는 모양에 따라 BorderRadius 조절
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        "확인",
-                        style: TextStyle(
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          letterSpacing: 0.00,
-                          color: Color(0xffFFFFFF),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-
-
-
-
   // 이메일 확인 API 연동
   emailRequest(String mail) async {
     print(mail);
@@ -316,32 +65,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Error error = Error.fromJson(json);
       if(error.code == "DUPLICATE_DATA")
       {
-        emailDialog(context);
+        // 이메일 중복 경고
+        signUpDialog(context, "이미 사용 중인 이메일 이에요!");
       }
       else if(error.code == "INVALID_FORMAT")
         {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                content: Text("메일 주소 형식이 잘못됐습니다."),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text("확인"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+          // 이메일 주소 형식 경고
+          signUpDialog(context, "이메일 주소 형식이 맞지 않아요!");
         }
       else
         {
           print(error.httpStatus+'\n');
           print(error.message+'\n');
           print(error.code+'\n');
+          signUpDialog(context, "서버에 문제가 있어요!");
         }
     }
   }
@@ -363,40 +100,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        passwordDialog(context);
+        // 인증 번호 틀림
+        signUpDialog(context, "인증 번호가 일치 하지 않아요!");
       }
       else if (response.statusCode == 404) {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("해당 메일주소를 찾을 수 없습니다."),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("확인"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        // 이메일 주소 찾을 수 없음
+        signUpDialog(context, "해당 메일 주소를 찾을 수 없어요!");
       }
       else if (response.statusCode == 408) {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
-        expiredPasswordDialog(context, "추가하고싶은 오류 메세지");
+        // 인증 번호 시간 초과
+        signUpDialog(context, "만료된 인증 번호 에요!");
       }
       else {
         print(error.httpStatus+'\n');
         print(error.message+'\n');
         print(error.code+'\n');
+        signUpDialog(context, "서버에 문제가 있어요!");
       }
     }
   }
