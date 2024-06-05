@@ -529,7 +529,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
             child: Column(
         children: <Widget>[
           Container(
-          margin: EdgeInsets.only(top: 16.04),
+          margin: EdgeInsets.only(top: 24),
                 child: Icon(
                   Icons.delete,
                   color: Color(0xffA98474),
@@ -537,7 +537,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                 ),
           ),
                 Container(
-                  margin: EdgeInsets.only(top: 18),
+                  margin: EdgeInsets.only(top: 12),
                 child: Text(
                   "정말 삭제하시겠어요?",
                   style: TextStyle(
@@ -545,6 +545,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.00,
+                    color: Color(0xff1A1A1A),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -568,7 +569,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 18),
+                      margin: EdgeInsets.only(left: 16),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
@@ -599,7 +600,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 18),
+                      margin: EdgeInsets.only(right: 16),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
