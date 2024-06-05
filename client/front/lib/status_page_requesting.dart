@@ -9,6 +9,7 @@ import 'package:stomp_dart_client/stomp_dart_client.dart';
 
 
 import 'home.dart';
+import 'showerrand/re-show-errand.dart';
 
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
@@ -867,7 +868,11 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                             padding: EdgeInsets.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
+                          },
                           icon: Image.asset(
                             'assets/images/errand.png',
                             color: Color(0xffB4B5BE),
