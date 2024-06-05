@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
@@ -657,12 +657,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
   void initState()
   {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (overlayEntry != null) {
-        overlayEntry!.remove();
-        overlayEntry = null;
-      }
-    });
     errandNo = widget.errandNo;
     connectNo = errandNo.toString();
     statusMessageInit();
@@ -765,7 +759,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                   ],
                 ),
               ),
-              Flexible(child: Container(width: 320, height: 503,
+              Flexible(child: Container(width: 320, height: 422,
                 margin: EdgeInsets.only(left: 20, top: 21.21),
                 decoration: BoxDecoration(
                   color: Color(0xffFFFFFF),
@@ -823,10 +817,10 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           ),
                         ),
                         child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
+                          child: DropdownButton2<String>(
                             hint: Row(
                               children: [
-                                Container( margin: EdgeInsets.only(left: 14.51),
+                                Container( 
                                   child:  Image.asset(
                                     'assets/images/paper-plane.png',
                                     color: Color(0xffADADAD),
@@ -845,8 +839,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                                 ),
                               ],
                             ),
-                            icon: null,
-                            dropdownColor: Color(0xffFFFFFF), // 드롭다운 배경색
                             items: [
                               customDropdownItem("출발했어요."),
                               customDropdownItem("지금 물건을 픽업했어요."),
@@ -859,6 +851,12 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                             onChanged: (String? value) {
                               sendValue(value);
                             },
+                            dropdownStyleData: DropdownStyleData(
+                              offset: Offset(0, 350),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              )
+                            ),
                             selectedItemBuilder: (BuildContext context) {
                               return [
                                 "출발했어요.",
@@ -884,6 +882,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                                 );
                               }).toList();
                             },
+
+
                           ),
                         ),
                       ),
