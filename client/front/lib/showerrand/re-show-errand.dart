@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'showerrandwidget/stamp/stamp.dart';
+import 'showerrandwidget/stamp/namelength/namelength2.dart';
+import 'showerrandwidget/stamp/namelength/namelength3.dart';
+import 'showerrandwidget/stamp/namelength/namelength4.dart';
+import 'showerrandwidget/stamp/namelength/namelength5more.dart';
 import 'showerrandwidget/tablescreen/tablescreen1.dart';
 import 'showerrandwidget/tablescreen/tablescreen2.dart';
-import 'showerrandwidget/textfieldwidget.dart';
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 
@@ -123,7 +124,50 @@ class Error {
       json['message'],
     );
   }
-}class reShowErrandWidget extends StatelessWidget {
+}
+class Stamp extends StatelessWidget {
+  final String realName;
+  late String name1 = realName[0];
+  late String name2 = realName[1];
+  late String name3 = realName[2];
+  late String name4 = realName[3];
+
+  Stamp({
+    required this.realName,
+  });
+  @override
+  Widget build(BuildContext context) {
+    // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
+    return Stack(
+      children: [
+        // 심부름 하는 사람(현재 로그인 한 사람) 실명 도장 틀
+        Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+                margin: EdgeInsets.only(top: 5.15, right: 32),
+                child: Image.asset("assets/images/Rectangle3.png"))),
+        if (realName.length == 2) // 심부름 하는 사람 이름 길이 2자
+          NameLength2(name1: name1, name2: name2),
+        if (realName.length == 3) // 심부름 하는 사람 이름 길이 3자
+          NameLength3(
+            name1: name1,
+            name2: name2,
+            name3: name3,
+          ),
+        if (realName.length == 4) // 심부름 하는 사람 이름 길이 4자
+          NameLength4(
+            name1: name1,
+            name2: name2,
+            name3: name3,
+            name4: name4,
+          ),
+        if (realName.length == 1 || realName.length >= 5) // 심부름 하는 사람 이름 길이 1자 또는 5자 이상
+          NameLength5More(),
+      ],
+    );
+  }
+}
+class reShowErrandWidget extends StatelessWidget {
   final int errandNo;
   final String title;
   final String name;
@@ -162,6 +206,8 @@ class Error {
   // 심부름 요청서 상세 페이지
   @override
   Widget build(BuildContext context) {
+    String decodedrealname = utf8.decode(realName.runes.toList());
+    String decodednickname = utf8.decode(nickName.runes.toList());
     return Container(
       width: 324, height: 576,
       decoration: BoxDecoration(
@@ -217,7 +263,50 @@ class Error {
                   ),
                 ),
                 Container(
-                  child: true? TextFieldWidget(realName: realName) : null ,
+                  child: Container(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            margin: EdgeInsets.only(top: 4, left: 2),
+                            child: Text(
+                              "____________",
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w300,
+                                fontSize: 11,
+                                letterSpacing: 0.00,
+                                color: Color(0xff111111),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 0, left: 2,),
+                                  child: Text(
+                                    decodedrealname,
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 11,
+                                      letterSpacing: 0.00,
+                                      color: Color(0xff111111),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 Container(
                   child: Text(
@@ -381,41 +470,9 @@ class Error {
 
                 Align(
                   alignment: Alignment.centerLeft, // 가운데 정렬
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min, // 최소한의 너비 가지기
-                    children: [
-                      // 닉네임 -> 글 보기 하는 사람 -> 닉네임
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 350),
-                        margin: nickName != "닉 네 임"
-                            ? EdgeInsets.only(top: 14, left: 150)
-                            : EdgeInsets.only(top: 17, left: 150),
-                        child: nickName != "닉 네 임" ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 1800)),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done) {
-                              return AnimatedTextKit(
-                                animatedTexts: [
-                                  TyperAnimatedText(
-                                    utf8.decode(nickName.runes.toList()),
-                                    speed: Duration(milliseconds: 200),
-                                    textStyle: TextStyle(
-                                      fontFamily: 'SangSangShin',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 15,
-                                      letterSpacing: 0.01,
-                                      color: Color(0xff000000),
-                                    ),
-                                  ),
-                                ],
-                                totalRepeatCount: 1,
-                              );
-                            } else {
-                              return SizedBox.shrink();
-                            }
-                          },
-                        ):
-                        Text("닉 네 임",
+                  child: Container(
+                        margin: EdgeInsets.only(top: 17, left: 130),
+                        child: Text(decodednickname,
                           style: TextStyle(
                             fontFamily: 'MaruBuri',
                             fontWeight: FontWeight.w700,
@@ -424,8 +481,6 @@ class Error {
                             color: Color(0xff000000),
                           ),
                         ),
-                      ),
-                    ],
                   ),
                 ),
 
