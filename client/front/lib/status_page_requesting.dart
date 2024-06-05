@@ -209,7 +209,13 @@ class _RatingDialogState extends State<RatingDialog> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+      if (didPop) {
+        return;
+      }
+    },child :Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -341,6 +347,7 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
         ),
       ),
+    )
     );
   }
 }
@@ -578,6 +585,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
     if(response.statusCode == 200) {
       showDialog(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext context) {
           return RatingDialog();
         },

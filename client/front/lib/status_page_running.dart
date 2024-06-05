@@ -143,7 +143,14 @@ class _RatingDialogState extends State<RatingDialog> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+      if (didPop) {
+        return;
+      }
+    },
+      child: Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -275,6 +282,7 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
         ),
       ),
+      )
     );
   }
 }
@@ -539,6 +547,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
+      stompClient.deactivate();
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -661,7 +670,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
     connectNo = errandNo.toString();
     statusMessageInit();
     completeCheck();
-
     stompClient = StompClient(
       config: StompConfig(
         url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
