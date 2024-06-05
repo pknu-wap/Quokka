@@ -525,21 +525,21 @@ class _WriteErrandState extends State<WriteErrand> {
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(right: 121),
-                        child: Text(
-                          '예약은 최대 ?시간 이후까지 가능해요.',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            letterSpacing: 0.01,
-                            color: Color(0xff111111),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(right: 121),
+                    //   child: Text(
+                    //     '예약은 최대 ?시간 이후까지 가능해요.',
+                    //     style: TextStyle(
+                    //       fontFamily: 'Pretendard',
+                    //       fontWeight: FontWeight.w500,
+                    //       fontSize: 12,
+                    //       letterSpacing: 0.01,
+                    //       color: Color(0xff111111),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 6, left: 22),

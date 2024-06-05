@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String passwordText = ""; // 비밀번호 오류 메시지
   Color passwordTextColor = Color(0xFF404040); // 비밀번호 오류 메시지 색깔 설정
   Color passwordFilledColor = Color(0xFFF0F0F0); // 텍스트 필드 색깔
-  Color passwordFontColor = Color(0xFFF0F0F0); // 텍스트 필드 속 텍스트 색깔
+  Color passwordFontColor = Color(0xFF969696); // 텍스트 필드 속 텍스트 색깔
   Color passwordBorderColor = Color(0xFFACACAC); //테두리 색깔
 
   String passwordCheckText = "";
@@ -182,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool isValidNickname(String nickname) {
     // 공백 및 특수문자 제외
-    final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,12}$');
+    final RegExp nicknameRegex = RegExp(r'^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,8}$');
     return nicknameRegex.hasMatch(nickname);
   }
 
@@ -230,8 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool isValidPassword(String password) {
     // 영문 대문자, 소문자, 숫자, 특수문자 이외의 문자는 입력 불가능
-    final RegExp passwordRegex =
-        RegExp(r'^[A-Za-z\d`$@!%*#?~^<>,.;:/()&+=]{8,20}$');
+    final RegExp passwordRegex = RegExp(r'^[A-Za-z\d`$@!%*#?~^<>,.;:/()&+=]{8,20}$');
     // final RegExp passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[`$@!%*#?~^<>,.;:/()&+=])[A-Za-z\d`$@!%*#?~^<>,.;:/()&+=]{8,20}$');
     return passwordRegex.hasMatch(password);
   }
@@ -239,8 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void checkPasswordAvailable() {
     String enteredPassword = passwordController.text;
     bool isPasswordAvailable = isValidPassword(enteredPassword);
-    bool isPassword1Available =
-        isValidPassword1(enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
+    bool isPassword1Available = isValidPassword1(enteredPassword); // 사용자가 입력한 비밀번호를 유효성 검사하기
     bool isPassword2Available = isValidPassword2(enteredPassword);
     bool isPassword3Available = isValidPassword3(enteredPassword);
     bool isPassword4Available = isValidPassword4(enteredPassword);
@@ -276,7 +274,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         } else {
           passwordText = "";
           passwordFilledColor = Color(0xFFF0F0F0);
-          passwordFontColor = Color(0xFF969696);
+          passwordFontColor = Color(0xFF404040);
           passwordBorderColor = Color(0xFFACACAC);
         }
       } else {
@@ -300,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (isPasswordCheckAvailable) {
         passwordCheckText = "";
         passwordCheckFilledColor = Color(0xFFF0F0F0);
-        passwordCheckFontColor = Color(0xFF969696);
+        passwordCheckFontColor = Color(0xFF404040);
         passwordCheckBorderColor = Color(0xFFACACAC);
         Password = passwordCheckController.text;
         u1 =
@@ -311,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // 바로 오류 메시지 띄우기
         passwordCheckTextColor = Color(0xFFE33939);
         passwordCheckFilledColor = Color(0xFFFFDDDD);
-        passwordCheckFontColor = Color(0xFFE33939);
+        passwordCheckFontColor = Color(0xFFE02828);
         passwordCheckBorderColor = Color(0xFFFA4343);
         // 각 조건에 따른 오류 메시지 출력
       }
@@ -344,6 +342,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 fontFamily: 'Paybooc',
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
+                letterSpacing: 0.01,
               ),
             ),
           ),
@@ -351,24 +350,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Column(
         children: [
-          Form(
-            child: Theme(
-              data: ThemeData(
-                primaryColor: Colors.grey, //텍스트 박스 만들기
-                inputDecorationTheme: InputDecorationTheme(
-                  labelStyle: TextStyle(color: Colors.black, fontSize: 5.0),
-                ),
-              ),
               // 텍스트 박스 속 글자 색 블랙
-              child: Container(
+              Container(
                 // padding: EdgeInsets.all(40.0),
                 // 키보드가 올라와서 만약 스크린 영역을 차지하는 경우 스크롤이 되도록
                 // SingleChildScrollView으로 감싸 줌
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      // 닉네임 텍스트
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 30.0),
+                        margin: EdgeInsets.only(top: 30.0, left: 22),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -378,22 +370,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 닉네임 설명
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 4.26),
+                        margin: EdgeInsets.only(left: 22.5, top: 4.26),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "공백 및 특수문자를 제외한 2~12자로 입력해 주세요.",
+                            "공백 및 특수문자를 제외한 2~8자로 입력해 주세요.",
                             style: TextStyle(
                               color: Color(0xFF9E9E9E),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               fontSize: 11,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
@@ -401,18 +396,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       Container(
                         margin: EdgeInsets.only(top: 9.74),
-                        // 전체 마진
-                        width: 320,
-                        // 245 + 8.98 + 66.02
-                        height: 38,
-                        // 텍스트 필드의 높이 설정
-
                         child: Row(
                           children: [
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 9.98),
-                                // 닉네임 텍스트 필드와 중복확인 버튼 사이의 간격
+                            // 닉네임 텍스트 필드
+                            Container(
+                              margin: EdgeInsets.only(left: 20),
+                              width: 245,
+                              height: 38,
+                              decoration: BoxDecoration(
+                                border:
+                                Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                                ),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                color: Color(0xFFF0F0F0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 6, left: 10, right: 10),
                                 child: TextField(
                                   maxLength: maxNicknameLength,
                                   // 최대 길이 설정
@@ -429,59 +428,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     }
                                   },
                                   controller: nicknameController,
-                                  //추가함
+                                  style: TextStyle(
+                                      color: Color(0xFF404040),
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 13,
+                                    letterSpacing: 0.01,
+                                  ),
                                   decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Color(0xFFF0F0F0),
-                                    labelStyle: TextStyle(
-                                        color: Color(0xFF404040),
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w400),
-                                    contentPadding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    // 텍스트를 수직으로 가운데 정렬
                                     border: InputBorder.none,
-                                    // 밑줄 없애기
-                                    /*         suffixStyle: TextStyle(fontSize: 16),*/
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xFFACACAC),
-                                          width: 0.5 // 테두리 굵기
-                                          ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xFFACACAC),
-                                          width: 0.5 // 테두리 굵기
-                                          ),
-                                    ),
-                                    counterText:
-                                        '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                                    counterText: '',
                                   ),
                                   keyboardType: TextInputType.emailAddress,
                                 ),
-                              ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                              ),
                             ),
+
+                            // 중복확인 버튼
                             Container(
+                              margin: EdgeInsets.only(left: 9.98),
                               width: 66.02,
+                              height: 38,
                               // height: 38,
                               child: ElevatedButton(
                                 onPressed: isNicknameButtonClickable
                                     ? () {
                                         // 버튼이 클릭되었을 때 수행할 작업을 추가합니다.
                                         // checkNicknameDuplicate();
-                                        duplicateRequest(
-                                            nicknameController.text);
-                                      }
-                                    : null,
+                                        duplicateRequest(nicknameController.text);
+                                      } : null,
                                 style: ButtonStyle(
                                   padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry>(
-                                      EdgeInsets.all(10.01)),
+                                          EdgeInsetsGeometry>(EdgeInsets.all(10.01)),
 
                                   backgroundColor:
                                       isNicknameButtonClickable // 텍스트 지우면 다시 비활성화 되도록 만들기
@@ -497,7 +475,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
                                 ),
@@ -508,6 +486,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xFFFFFFFF),
+                                    letterSpacing: 0.01,
                                   ),
                                 ),
                               ),
@@ -518,7 +497,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 닉네임 오류 메시지
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 6.5),
+                        margin: EdgeInsets.only(left: 22.5, top: 4.5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -527,13 +506,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 12,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                color: nicknameTextColor),
+                                color: nicknameTextColor,
+                                letterSpacing: 0.01),
                           ),
                         ),
                       ),
-                      // 텍스트 위치를 어떻게 앞으로 당기지?
+                      // 비밀번호 텍스트
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 10.5),
+                        margin: EdgeInsets.only(left: 22, top: 14),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -543,11 +523,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 비밀번호 설명
                       Container(
                         margin: EdgeInsets.only(left: 22, top: 4),
                         child: Align(
@@ -565,88 +547,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
 
+                      Stack(
+                          children: [
+                      // 비밀번호 텍스트 필드
                       Container(
-                        margin: EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 8, left: 20.79),
                         width: 320,
                         height: 38,
-                        // 텍스트 필드의 높이 설정
-                        /*child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 0),*/
-                        // 가로 패딩 추가
-                        child: TextField(
-                          maxLength: maxPasswordLength,
-                          // 최대 길이 설정
-                          onChanged: (text) {
-                            checkPasswordAvailable(); //체크해서 비밀번호 텍스트 필드 아래에 메시지 출력
+                        decoration: BoxDecoration(
+                          border:
+                          Border.all(
+                              color: passwordBorderColor,
+                              width: 0.5  // 테두리 굵기
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          color: passwordFilledColor,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          child: Align(
+                           alignment: Alignment.centerLeft,
+                          child: TextField(
+                            maxLength: maxPasswordLength,
+                            // 최대 길이 설정
+                            onChanged: (text) {
+                              checkPasswordAvailable(); //체크해서 비밀번호 텍스트 필드 아래에 메시지 출력
 
-                            if (text.length < minPasswordLength) {
-                              print('최소 $minPasswordLength자 이상 입력해주세요.');
-                            } else if (text.length > maxPasswordLength) {
-                              print('최대 $maxPasswordLength자만 입력할 수 있습니다.');
-                            }
-                          },
-                          controller: passwordController,
-                          obscureText: !isPasswordButtonVisible,
-                          // 비밀번호 가리기/보이기 설정
-                          decoration: InputDecoration(
-                            errorText: null,
-                            // 초기에 오류 메시지 표시x
-                            hintStyle: TextStyle(fontSize: 10),
-                            filled: true,
-                            fillColor: passwordFilledColor,
-                            labelStyle: TextStyle(
+                              if (text.length < minPasswordLength) {
+                                print('최소 $minPasswordLength자 이상 입력해주세요.');
+                              } else if (text.length > maxPasswordLength) {
+                                print('최대 $maxPasswordLength자만 입력할 수 있습니다.');
+                              }
+                            },
+                            controller: passwordController,
+                            obscureText: !isPasswordButtonVisible,
+                            style: TextStyle(
                                 color: passwordFontColor,
                                 fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400),
-                            contentPadding: EdgeInsets.only(left: 11.58),
-                            // 텍스트를 수직으로 가운데 정렬
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                                letterSpacing: 0.01,),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                                counterText: '',
                             ),
-                            // 밑줄 없애기
-                            // 밑줄 없애기
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: passwordBorderColor,
-                                  width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isPasswordButtonVisible =
-                                      !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
-                                });
-                              },
-                              icon: isPasswordButtonVisible
-                                  ? Image.asset('assets/images/open eye.png')
-                                  : Image.asset(
-                                      'assets/images/close eye.png'), // 이미지 아이콘 설정
-                            ),
-                            counterText:
-                                '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                            keyboardType: TextInputType.text,
+                            enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
+                                nicknameText == "중복 확인이 완료되었습니다.",
                           ),
-                          keyboardType: TextInputType.text,
-                          enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
-                              nicknameText == "중복 확인이 완료되었습니다.",
                         ),
+                       ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                      child: Container(
+                       margin: EdgeInsets.only(top: 3, right: 25),
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isPasswordButtonVisible =
+                                !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                              });
+                            },
+                            icon: isPasswordButtonVisible
+                                ? Image.asset(
+                              'assets/images/open eye.png',
+                            )
+                                : Image.asset(
+                                'assets/images/close eye.png'), // 이미지 아이콘 설정
+                          )
+                      ),
+                      ),
+                      ],
                       ),
 
+
+                      // 비밀번호 오류 메시지
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 7),
+                        margin: EdgeInsets.only(left: 22.79, top: 4),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -655,10 +633,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 12,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                color: passwordTextColor),
+                                color: passwordTextColor,
+                                letterSpacing: 0.01),
                           ),
                         ),
                       ),
+
+                      // 비밀번호 확인 텍스트
                       Container(
                         margin: EdgeInsets.only(left: 24, top: 4),
                         child: Align(
@@ -670,88 +651,88 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 비밀번호 확인 텍스트 필드
+                      Stack(
+                      children: [
                       Container(
-                        margin: EdgeInsets.only(top: 9),
+                        margin: EdgeInsets.only(left: 20, top: 9),
                         width: 320,
                         height: 38,
-                        // 가로 패딩 추가
-                        child: TextField(
-                          maxLength: maxPasswordCheckLength,
-                          // 최대 길이 설정
-                          onChanged: (text) {
-                            CheckPassword();
-
-                            if (text.length < minPasswordCheckLength) {
-                              print('최소 $minPasswordCheckLength자 이상 입력해주세요.');
-                            } else if (text.length > maxPasswordCheckLength) {
-                              print('최대 $maxPasswordCheckLength자만 입력할 수 있습니다.');
-                            }
-                          },
-                          controller: passwordCheckController,
-                          obscureText: !isPasswordCheckButtonVisible,
-                          // 비밀번호 확인 가리기/보이기 설정
-
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(fontSize: 10),
-                            filled: true,
-                            fillColor: passwordCheckFilledColor,
-                            labelStyle: TextStyle(
-                                color: passwordCheckFontColor,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w400),
-                            contentPadding: EdgeInsets.only(left: 11.58),
-                            // 텍스트를 수직으로 가운데 정렬
-                            // 밑줄 없애기
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: passwordCheckBorderColor,
-                                  width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  color: Color(0xFFACACAC), width: 0.5 // 테두리 굵기
-                                  ),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isPasswordCheckButtonVisible =
-                                      !isPasswordCheckButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
-                                });
-                              },
-                              icon: isPasswordCheckButtonVisible
-                                  ? Image.asset('assets/images/open eye.png')
-                                  : Image.asset(
-                                      'assets/images/close eye.png'), // 이미지 아이콘 설정
-                            ),
-                            counterText:
-                                '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                        decoration: BoxDecoration(
+                          border:
+                          Border.all(
+                              color: passwordCheckBorderColor,
+                              width: 0.5  // 테두리 굵기
                           ),
-                          keyboardType: TextInputType.text,
-                          enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
-                              nicknameText == "중복 확인이 완료되었습니다.",
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          color: passwordCheckFilledColor,
                         ),
-                      ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          child: TextField(
+                            maxLength: maxPasswordCheckLength,
+                            // 최대 길이 설정
+                            onChanged: (text) {
+                              CheckPassword();
 
+                              if (text.length < minPasswordCheckLength) {
+                                print('최소 $minPasswordCheckLength자 이상 입력해주세요.');
+                              } else if (text.length > maxPasswordCheckLength) {
+                                print('최대 $maxPasswordCheckLength자만 입력할 수 있습니다.');
+                              }
+                            },
+                            controller: passwordCheckController,
+                            obscureText: !isPasswordCheckButtonVisible,
+                            style: TextStyle(
+                              color: passwordCheckFontColor,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 13,
+                              letterSpacing: 0.01,
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              counterText: '',
+                            ),
+                            keyboardType: TextInputType.text,
+                            enabled: nicknameText == "사용이 가능한 닉네임이에요." ||
+                                nicknameText == "중복 확인이 완료되었습니다.",
+                          ),
+                        ),
+                      ),
+
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                              margin: EdgeInsets.only(top: 4, right: 25),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isPasswordButtonVisible =
+                                    !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                  });
+                                },
+                                icon: isPasswordButtonVisible
+                                    ? Image.asset(
+                                  'assets/images/open eye.png',
+                                )
+                                    : Image.asset(
+                                    'assets/images/close eye.png'), // 이미지 아이콘 설정
+                              )
+                          ),
+                        ),
+                      ],
+                      ),
+
+                      // 비밀번호 확인 경고
                       Container(
-                        margin: EdgeInsets.only(left: 24, top: 7),
+                        margin: EdgeInsets.only(left: 23.79, top: 5),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -761,15 +742,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               fontSize: 12,
+                              letterSpacing: 0.01,
                             ),
                           ),
                         ),
                       ),
 
+                      // 완료 버튼
                       Container(
                           margin: EdgeInsets.only(top: 12),
                           width: 320,
-                          height: 40,
+                          height: 43,
                           child: ElevatedButton(
                             onPressed: passwordCheckText == ""
                                 ? () {
@@ -801,14 +784,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      10), // 원하는 모양에 따라 BorderRadius 조절
+                                      5), // 원하는 모양에 따라 BorderRadius 조절
                                 ),
                               ),
                             ),
                             child: Text(
                               '완료',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xFFFFFFFF),
@@ -819,8 +802,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-            ),
-          ),
         ],
       ),
     );

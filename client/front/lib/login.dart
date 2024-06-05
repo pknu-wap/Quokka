@@ -72,107 +72,102 @@ class _LogInState extends State<LogIn> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // 커카 이미지
               Container(
-                margin: EdgeInsets.only(top: 122), // 커카 이미지에 대한 마진 설정
+                margin: EdgeInsets.only(top: 103), // 커카 이미지에 대한 마진 설정
+                width: 75,
+                height: 105,
                 child: Center(
                   child: Image(
-                    image: AssetImage('assets/images/커카.png'),
-                    width: 170.0,
+                    image: AssetImage('assets/images/quokka2.png'),
                   ),
                 ),
               ),
+              // 학번 텍스트 필드
               Container(
-                // 길이 제한 필요
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 43.0),
-                // 학번 텍스트 필드에 대한 마진 설정
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 38.0),
                 width: 320,
                 height: 50,
-                child: TextField(
-                  maxLength: maxStudentIdLength,
-                  // 최대 길이 설정
-                  controller: _UsernameController,
-                  onChanged: (text) {
-                    if (text.length > maxStudentIdLength) {
-                      print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: '학번',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      color: Color(0xFF404040),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  color: Color(0xFFE5E5E5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 17, right: 17),
+                  child: TextField(
+                    maxLength: maxStudentIdLength,
+                    // 최대 길이 설정
+                    controller: _UsernameController,
+                    onChanged: (text) {
+                      if (text.length > maxStudentIdLength) {
+                        print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
+                      }
+                    },
+                    style: TextStyle(
+                        color: Color(0xFF404040),
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400),
+                    decoration: InputDecoration(
+                      hintText: '학번',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Color(0xFF404040),
+                      ),
+                      border: InputBorder.none,
+                      counterText: '',
                     ),
-                    contentPadding: EdgeInsets.only(left: 17, right: 17),
-                    // 텍스트를 수직으로 가운데 정렬
-                    filled: true,
-                    fillColor: Color(0xFFE5E5E5),
-                    labelStyle: TextStyle(color: Color(0xFFE5E5E5)),
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    counterText: '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                    keyboardType: TextInputType.number,
                   ),
-                  keyboardType: TextInputType.number,
                 ),
               ),
 
+              // 비밀번호 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                // 비밀번호 텍스트 필드에 대한 마진 설정
                 width: 320,
                 height: 50,
-                child: TextField(
-                  maxLength: maxPasswordLength,
-                  controller: _PasswordController,
-                  // 비밀번호 텍스트 필드의 최대 길이 설정
-                  onChanged: (text) {
-                    if (text.length < minPasswordLength) {
-                      print('최소 $minPasswordLength자 이상 입력해주세요.');
-                    } else if (text.length > maxPasswordLength) {
-                      print('최대 $maxPasswordLength자만 입력할 수 있습니다.');
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: '비밀번호',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      color: Color(0xFF404040),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  color: Color(0xFFE5E5E5),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 17, right: 17),
+                  child: TextField(
+                    maxLength: maxPasswordLength,
+                    controller: _PasswordController,
+                    // 비밀번호 텍스트 필드의 최대 길이 설정
+                    onChanged: (text) {
+                      if (text.length < minPasswordLength) {
+                        print('최소 $minPasswordLength자 이상 입력해주세요.');
+                      } else if (text.length > maxPasswordLength) {
+                        print('최대 $maxPasswordLength자만 입력할 수 있습니다.');
+                      }
+                    },
+                    style: TextStyle(
+                        color: Color(0xFF404040),
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400),
+                    decoration: InputDecoration(
+                      hintText: '비밀번호',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Color(0xFF404040),
+                      ),
+                      border: InputBorder.none,
+                      counterText: '',
                     ),
-                    contentPadding: EdgeInsets.only(left: 17, right: 17),
-                    // 텍스트를 수직으로 가운데 정렬
-
-                    filled: true,
-                    fillColor: Color(0xFFE5E5E5),
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none,
-                    ),
-                    counterText: '', // 입력 길이 표시를 없애는 부분 -> 이 코드 없으면 0/9라는 숫자 생김
+                    keyboardType: TextInputType.number,
                   ),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
                 ),
               ),
 
               // 다른 위젯들과 함께 Column에 로그인 버튼을 추가합니다.
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 21.0, top: 15.0),
+                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
                 child: ElevatedButton(
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
@@ -183,7 +178,6 @@ class _LogInState extends State<LogIn> {
                     //     MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
                   style: ButtonStyle(
-                    // 버튼의 배경색 변경하기
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                     // 버튼의 크기 정하기
@@ -191,17 +185,17 @@ class _LogInState extends State<LogIn> {
                     // 버튼의 모양 변경하기
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            10), // 원하는 모양에 따라 BorderRadius 조절
+                        borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
                       ),
                     ),
                   ),
                   child: Text(
                     '로그인',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
+                      letterSpacing: 0.001,
                       color: Color(0xFFFFFFFF),
                     ),
                   ),
@@ -276,7 +270,7 @@ class _LogInState extends State<LogIn> {
               // ),
               // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
               Container(
-                margin: EdgeInsets.only(left: 0, right: 0, top: 24), // 왜 안돼
+                margin: EdgeInsets.only(left: 0, right: 0, top: 24),
                 // width: 52,
                 // height: 16,
                 child: TextButton(
@@ -296,6 +290,7 @@ class _LogInState extends State<LogIn> {
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w700, //semi-bold가 없으므로, bold으로 대체
                       fontSize: 14,
+                      letterSpacing: 0.001,
                     ),
                   ),
                 ),

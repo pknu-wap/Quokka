@@ -159,7 +159,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     letterSpacing: 0.01,
                     color: Color(0xff373737),
                   ),
@@ -173,10 +173,11 @@ class _Upload_ImageState extends State<Upload_Image> {
                     Positioned(
                       left: 0, right: 0, top: 0, bottom: 0,
                       child: IconButton(
-                        icon: const Icon(
-                          Icons.add,
-                          size: 100,
-                          color: Color(0xff8D8D8D),
+                        icon: Image.asset(
+                          'assets/images/upload_image_button.png',
+                          width: 80,
+                          height: 80,
+                          // color: Color(0xff8D8D8D),
                         ),
                         onPressed: () {
                           // 이 버튼을 누르면 갤러리가 열리고 이미지를 가져오도록 설정
@@ -207,7 +208,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
                                 letterSpacing: 0.01,
                                 color: Color(0xff373737),
                               ),
@@ -217,6 +218,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                             '파일 형식  jpg / png',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
                               fontSize: 12,
                               letterSpacing: 0.01,
                               color: Color(0xff373737),
@@ -228,7 +230,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                     Container(
                       width: 139.58,
                       height: 256.44,
-                      margin: const EdgeInsets.only(left: 22.0, top: 18.0),
+                      margin: const EdgeInsets.only(left: 22.0, top: 17.0),
                       child: Image.asset('assets/images/upload_image_sample.png'),
                     ),
 
