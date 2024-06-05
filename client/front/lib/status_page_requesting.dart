@@ -48,13 +48,68 @@ class _RatingDialogState extends State<RatingDialog> {
     var response = await http.put(Uri.parse(url + param),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Home()));
+      scoreCompleteDialog(context);
     }
     else {
       print(response.body);
     }
+  }
+  void scoreCompleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            width: 300,
+            height: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.delete,
+                  color: Colors.brown,
+                  size: 40,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "평가해주셔서 감사합니다!",
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown, // 갈색으로 설정
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("메인으로 이동하기"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
   void scoreConfirmDialog(BuildContext context) {
     showDialog(
@@ -703,6 +758,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
       },
     );
   }
+
   void initState()
   {
     super.initState();
