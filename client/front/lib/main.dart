@@ -10,6 +10,8 @@ import 'package:geolocator/geolocator.dart';
 import 'login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'home.dart';
+import 'package:gif/gif.dart';
+
 final storage = FlutterSecureStorage();
 // Future<bool> _determinePermission() async {
 //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -30,8 +32,7 @@ final storage = FlutterSecureStorage();
 // }
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FlutterNativeSplash.remove();
   await dotenv.load(fileName: 'assets/env/.env');
 
   await NaverMapSdk.instance.initialize(
@@ -43,8 +44,21 @@ void main() async {
 
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
-  Check_Token(BuildContext context) async {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+
+class _MyAppState extends State<MyApp> {
+  late Future<bool> _tokenCheckFuture;
+  @override
+  void initState() {
+    super.initState();
+    _tokenCheckFuture = Check_Token();
+  }
+
+  Future<bool> Check_Token() async {
     String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/token/isValid";
     String? token = await storage.read(key: 'TOKEN');
     print(token);
@@ -53,16 +67,14 @@ class MyApp extends StatelessWidget {
         print(response.statusCode);
     if (response.statusCode == 200) {
       print("200 ok at main.dart");
-      FlutterNativeSplash.remove();
-      Navigator.of(context).push(
-        //토큰이 타당하면 바로 게시글 페이지로 넘어감
-          MaterialPageRoute(builder: (context) => Home()));
+      return true;
+      // Navigator.of(context).push(
+      //   //토큰이 타당하면 바로 게시글 페이지로 넘어감
+      //     MaterialPageRoute(builder: (context) => Home()));
     }
+    return false;
   }
 
-  Future<void> _checkToken() async {
-    await Future.delayed(Duration(seconds: 3));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,21 +82,90 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Main',
       home: FutureBuilder(
-        future: _checkToken(),
+        future:  _tokenCheckFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            Check_Token(context);
             return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          }
-          else {
+          } else if (snapshot.hasError) {
+            return Scaffold(
+              body: Center(
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            );
+          } else {
             FlutterNativeSplash.remove();
-            return LogIn(); // 로그인 페이지로 이동합니다.
+            bool isValid = snapshot.data ?? false;
+            return AppLoad(isValid: isValid ,);
+            // return LogIn(); // 로그인 페이지로 이동합니다.
           }
         },
+      ),
+    );
+  }
+}
+class AppLoad extends StatefulWidget {
+  final bool isValid;
+  AppLoad({Key? key, required this.isValid}) : super(key: key);
+
+  @override
+  _AppLoadState createState() => _AppLoadState();
+}
+
+class _AppLoadState extends State<AppLoad> with SingleTickerProviderStateMixin {
+  late final GifController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = GifController(vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startAppLoadAnimation(widget.isValid);
+    });
+  }
+
+  void _startAppLoadAnimation(bool isValid) async {
+    await Future.delayed(Duration(seconds: 4));
+    if (mounted) {
+      if (isValid) {
+        print("valid : true");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      }
+      else {
+        print("valid : false");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => LogIn()),
+        );
+      }
+    }
+  }
+  @override
+  void dispose() {
+    controller.dispose(); // 컨트롤러 해제
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: Gif(
+            image: AssetImage('assets/images/loading_app_gif.gif'),
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            controller: controller,
+            duration: Duration(seconds: 3),
+            autostart: Autostart.once,
+          ),
+        ),
       ),
     );
   }
