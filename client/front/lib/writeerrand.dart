@@ -525,7 +525,8 @@ class _WriteErrandState extends State<WriteErrand> {
                           ),
                         ),
                       ),
-                    ),
+                    ],
+                  ),
                     // Container(
                     //   margin: EdgeInsets.only(right: 121),
                     //   child: Text(
@@ -539,8 +540,7 @@ class _WriteErrandState extends State<WriteErrand> {
                     //     ),
                     //   ),
                     // ),
-                  ],
-                ),
+                  ),
                 Container(
                   margin: EdgeInsets.only(top: 6, left: 22),
                   child: Row(
