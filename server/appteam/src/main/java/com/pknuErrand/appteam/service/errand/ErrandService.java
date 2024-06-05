@@ -3,6 +3,7 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandDistancePaginationRequestVo;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
@@ -18,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 
@@ -103,6 +101,36 @@ public class ErrandService {
             errandList = errandRepository.findErrandByStatusAndReward(pageInfo.getPk(), Integer.parseInt(pageInfo.getCursor()), pageInfo.getLimit(), pageInfo.getStatus().toString());
 
         return getFilteredErrandList(errandList);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ErrandListResponseDto> findPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
+        checkLimitAndThrowException(pageInfo.getLimit());
+        boolean isFirstRequest = false;
+        Errand cursorErrand = null;
+        if(pageInfo.getPk() < 0)
+            isFirstRequest = true;
+        else
+            cursorErrand = findErrandById(pageInfo.getPk());
+        List<Errand> errandList = null;
+        if(pageInfo.getStatus() == null)
+            errandList = errandRepository.findErrandByDistance(pageInfo.getLatitude(),pageInfo.getLongitude());
+        else
+            errandList = errandRepository.findErrandByStatusAndDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getStatus().toString());
+        List<Errand> errandLimitList = new ArrayList<>();
+        Iterator<Errand> it = errandList.iterator();
+        boolean flag = isFirstRequest;
+        int cnt = 0;
+        while(it.hasNext() && cnt <= pageInfo.getLimit()) {
+            Errand errand = it.next();
+            if(flag) {
+                cnt++;
+                errandLimitList.add(errand);
+            }
+            else if(errand.equals(cursorErrand))
+                flag = true;
+        }
+        return getFilteredErrandList(errandLimitList);
     }
 
     @Transactional(readOnly = true)

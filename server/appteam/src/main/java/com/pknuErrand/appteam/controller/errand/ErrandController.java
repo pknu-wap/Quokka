@@ -1,10 +1,7 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
-import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
-import com.pknuErrand.appteam.dto.errand.getDto.InProgressErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.*;
 import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
@@ -87,6 +84,18 @@ public class ErrandController {
     public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrandByReward(ErrandPaginationRequestVo pageInfo) {
         return ResponseEntity.ok()
                 .body(errandService.findPaginationErrandByReward(pageInfo));
+    }
+
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))),
+            @ApiResponse(responseCode = "400\nINVALID_VALUE", description = "limit 값이 잘못되었음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
+    })
+    @Operation(summary = "거리순으로 페이지네이션 불러오기")
+    @GetMapping("/distance")
+    public ResponseEntity<List<ErrandListResponseDto>> getPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
+        return ResponseEntity.ok()
+                .body(errandService.findPaginationErrandByDistance(pageInfo));
     }
 
     @ApiResponses(value = {

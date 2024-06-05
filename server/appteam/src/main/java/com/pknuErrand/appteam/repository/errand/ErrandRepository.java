@@ -40,4 +40,22 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
             "WHERE ((errander_no_member_no =:memberNo) OR (order_no_member_no =:memberNo)) AND (status = 'IN_PROGRESS')", nativeQuery = true)
     List<Errand> findInProgressErrand(@Param("memberNo") Long memberNo);
 
+
+    @Query(value = "SELECT * " +
+            "FROM errand " +
+            "ORDER BY " +
+            "(6371 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(latitude)) " +
+            "* COS(RADIANS(longitude) - RADIANS(:longitude)) " +
+            "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(latitude))))", nativeQuery = true)
+    List<Errand> findErrandByDistance(@Param("latitude") double latitude, @Param("longitude") double longitude);
+
+    @Query(value = "SELECT * " +
+            "FROM errand " +
+            "WHERE status= :status " +
+            "ORDER BY " +
+            "(6371 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(latitude)) " +
+            "* COS(RADIANS(longitude) - RADIANS(:longitude)) " +
+            "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(latitude))))", nativeQuery = true)
+    List<Errand> findErrandByStatusAndDistance(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("status") String status);
 }
+
