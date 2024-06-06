@@ -203,7 +203,7 @@ class _RatingDialogState extends State<RatingDialog> {
               ),
               Flexible(
                 child: Container(
-                  margin: EdgeInsets.only(left: 22, right: 50),
+                  margin: EdgeInsets.only(left: 0, right: 50),
                   child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
                     style: TextStyle(fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w400,
@@ -238,25 +238,35 @@ class _RatingDialogState extends State<RatingDialog> {
                   );
                 }),
               ),
-              Text(ratingTexts[_rating],
+              Container(
+                margin: EdgeInsets.only(top: 15),
+              child: Text(ratingTexts[_rating],
                 style: TextStyle(fontFamily: 'Pretendard',
-                  fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
-                  color: Color(0xff1A1A1A),),),
-              if (_rating > 0)
-                Text(
+                  letterSpacing: 0.00,
+                  color: Color(0xff1A1A1A),),),),
+              Visibility(
+              visible: _rating > 0,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Container(
+                  margin: EdgeInsets.only(top: 5),
+                  child: Text(
                   '($_rating / 5) 점',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     fontSize: 15,
+                    letterSpacing: 0.00,
                     color: Color(0xff1A1A1A),
                   ),
                 ),
+              ),
+              ),
               Container(
-                margin: EdgeInsets.only(top: 28.5, left: 11.5, right: 11.5),
+                margin: EdgeInsets.only(top: 18, left: 11.5, right: 11.5),
                 child: ElevatedButton(
                   onPressed: _rating == 0 ? (){}
                       : () {
