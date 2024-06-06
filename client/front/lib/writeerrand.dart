@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import '../map.dart';
 import 'package:http/http.dart' as http;
@@ -58,8 +59,8 @@ void _insertOverlay(BuildContext context) {
                       context,
                       MaterialPageRoute(builder: (context) => Home()));
                 },
-                icon: Image.asset(
-                  'assets/images/home_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/home_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
@@ -75,8 +76,8 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {},
-                icon: Image.asset(
-                  'assets/images/human_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/profile_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
@@ -98,8 +99,8 @@ void _insertOverlay(BuildContext context) {
                     ),
                   );
                 },
-                icon: Image.asset(
-                  'assets/images/add_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/write_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
@@ -115,8 +116,8 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {},
-                icon: Image.asset(
-                  'assets/images/history_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/history_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),

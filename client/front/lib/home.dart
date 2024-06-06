@@ -884,8 +884,8 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(builder: (context) => Home()));
                   },
-                  icon: Image.asset(
-                    'assets/images/home_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/home_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -901,8 +901,8 @@ class _HomeState extends State<Home> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {},
-                  icon: Image.asset(
-                    'assets/images/human_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/profile_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -924,8 +924,8 @@ class _HomeState extends State<Home> {
                       ),
                     );
                   },
-                  icon: Image.asset(
-                    'assets/images/add_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/write_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -941,8 +941,8 @@ class _HomeState extends State<Home> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {},
-                  icon: Image.asset(
-                    'assets/images/history_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/history_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -1802,7 +1802,7 @@ class _HomeState extends State<Home> {
                             },
                           );
                         },
-                        icon: Image.asset('assets/images/Quokka.png', width: 56,
+                        icon: SvgPicture.asset('assets/images/quokka.svg',width: 56,
                             height: 56,
                             fit: BoxFit.cover),
                       ),),
@@ -1811,9 +1811,9 @@ class _HomeState extends State<Home> {
                       margin: const EdgeInsets.only(bottom: 42.86),
                       child: Visibility(
                         visible: isVisible,
-                        child: Image.asset(
-                            'assets/images/red_dot_alarm.png', width: 12,
-                            height: 12,
+                        child: SvgPicture.asset(
+                            'assets/images/red_dot_alarm.svg', width: 10,
+                            height: 10,
                             fit: BoxFit.cover),
                       ),
                     ),

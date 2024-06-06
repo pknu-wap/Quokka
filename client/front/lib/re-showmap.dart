@@ -55,6 +55,7 @@ void _insertOverlay(BuildContext context) {
                 },
                 icon: SvgPicture.asset(
                   'assets/images/home_icon.svg',
+                  color: Color(0xffADADAD),
                 ),
               ),
             ),
@@ -69,8 +70,8 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {},
-                icon: Image.asset(
-                  'assets/images/human_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/profile_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
@@ -92,8 +93,8 @@ void _insertOverlay(BuildContext context) {
                     ),
                   );
                 },
-                icon: Image.asset(
-                  'assets/images/add_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/write_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
@@ -109,8 +110,8 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {},
-                icon: Image.asset(
-                  'assets/images/history_icon.png',
+                icon: SvgPicture.asset(
+                  'assets/images/history_icon.svg',
                   color: Color(0xffADADAD),
                 ),
               ),
