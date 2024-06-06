@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/MainImage.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/alarm_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/history_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/home_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/profile_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/search_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/smile_quokka.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/write_icon.svg" afterDir="false" />
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 로그인 페이지, 현황 페이지 메시지 커카 이미지 png -&gt; svg 변경">
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/requesting_errand.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/running_errand.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/re-showmap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/re-showmap.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +76,15 @@
       <option name="presentableId" value="Default" />
       <updated>1712238639037</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fix: 로그인 페이지, 현황 페이지 메시지 커카 이미지 png -&gt; svg 변경">
+      <option name="closed" value="true" />
+      <created>1717679865380</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717679865380</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -105,5 +97,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix: 로그인 페이지, 현황 페이지 메시지 커카 이미지 png -&gt; svg 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 로그인 페이지, 현황 페이지 메시지 커카 이미지 png -&gt; svg 변경" />
   </component>
 </project>
