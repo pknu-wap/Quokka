@@ -8,6 +8,121 @@ import 'home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'writeerrand.dart';
+void _insertOverlay(BuildContext context) {
+  if (overlayEntry != null) return;
+  overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        width: 364,
+        height: 64,
+        decoration: BoxDecoration(
+          color: Color(0xffFFFFFF),
+          border: Border.all(
+            color: Color(0xffCFCFCF),
+            width: 0.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(185, 185, 185, 0.25),
+              offset: Offset(5, -1),
+              blurRadius: 5,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 22,
+              height: 22,
+              margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+              child: IconButton(
+                style: IconButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {
+                  _insertOverlay(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()));
+                },
+                icon: Image.asset(
+                  'assets/images/home_icon.png',
+                  color: Color(0xffADADAD),
+                ),
+              ),
+            ),
+            Container(
+              width: 19.31,
+              height: 23.81,
+              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              child: IconButton(
+                style: IconButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {},
+                icon: Image.asset(
+                  'assets/images/human_icon.png',
+                  color: Color(0xffADADAD),
+                ),
+              ),
+            ),
+            Container(
+              width: 22.0,
+              height: 22,
+              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              child: IconButton(
+                style: IconButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => WriteErrand(),
+                    ),
+                  );
+                },
+                icon: Image.asset(
+                  'assets/images/add_icon.png',
+                  color: Color(0xffADADAD),
+                ),
+              ),
+            ),
+            Container(
+              width: 21.95,
+              height: 24.21,
+              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+              child: IconButton(
+                style: IconButton.styleFrom(
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {},
+                icon: Image.asset(
+                  'assets/images/history_icon.png',
+                  color: Color(0xffADADAD),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+  Overlay.of(context).insert(overlayEntry!);
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,6 +164,7 @@ class _LogInState extends State<LogIn> {
         setState(() {
           isVisible = false;
         });
+        _insertOverlay(context);
         Navigator.push(
             //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
             context,
@@ -63,6 +179,15 @@ class _LogInState extends State<LogIn> {
     } catch(e) {
       print(e.toString());
     }
+  }
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (overlayEntry != null) {
+        overlayEntry!.remove();
+        overlayEntry = null;
+      }
+    });
   }
 
   @override
