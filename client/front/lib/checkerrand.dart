@@ -52,6 +52,8 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
+  late int titleLength = title.length;
+
   //상태에 따라 텍스트 출력
   String getState() {
     if(status == "RECRUITING")
