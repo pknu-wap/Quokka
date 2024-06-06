@@ -246,8 +246,8 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // 제목 1줄 && 내가 작성한 심부름
-                if (titleLength <= 18 && isMyErrand == true)
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 심부름 값
                 Container(
                   margin: EdgeInsets.only(top: 5.36, left: 13.4),
@@ -262,8 +262,8 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // 제목 1줄 && 내가 작성한 심부름 x
-                if (titleLength <= 18 && isMyErrand == false)
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
                 // 심부름 값
                   Container(
                     margin: EdgeInsets.only(top: 11.52, left: 13.4),
@@ -278,22 +278,6 @@ class ErrandCheckWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                // 제목 2줄
-                if (titleLength > 18)
-                // 심부름 값
-                Container(
-                  margin: EdgeInsets.only(top: 11.52, left: 13.4),
-                  child: Text(
-                    "\u20A9 ${priceFormat.format(reward)} 원",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      letterSpacing: 0.001,
-                      color: Color(0xff7C3D1A),
-                    ),
-                  ),
-                ),
                 // 상세 주소
                 Container(
                     margin: EdgeInsets.only(top: 22.06),
