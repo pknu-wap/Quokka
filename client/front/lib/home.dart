@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/status_page_running.dart';
 import 'package:front/writeerrand.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,6 +25,7 @@ class PostWidget extends StatelessWidget {
   final double score; //평점
   final int errandNo; //게시글 번호
   final String createdDate; //생성시간
+  final double distance; //목적지 거리
   final String title; //제목
   final String destination; //목적지
   final int reward; //보수
@@ -33,6 +37,7 @@ class PostWidget extends StatelessWidget {
     required this.score,
     required this.errandNo,
     required this.createdDate,
+    required this.distance,
     required this.title,
     required this.destination,
     required this.reward,
@@ -50,6 +55,14 @@ class PostWidget extends StatelessWidget {
       return '${difference.inMinutes}분 전';
     } else {
       return '방금 전';
+    }
+  }
+  String distanceFunction(double distance) {
+    if (distance < 1) {
+      return '${(distance * 1000).toStringAsFixed(0)} m';
+    }
+    else {
+      return '${distance.toStringAsFixed(1)} km';
     }
   }
   String getState() { //상태에 따라 텍스트 출력
@@ -197,7 +210,7 @@ class PostWidget extends StatelessWidget {
                                 child: Align(alignment: Alignment.centerRight,
                                     child: Container( //시간
                                       margin: EdgeInsets.only(right: 14, top: 17.95),
-                                      child: Text(timeDifference(currentTime,createdDate),
+                                      child: Text(distance == -1.0 ? timeDifference(currentTime, createdDate) : distanceFunction(distance),
                                         style: TextStyle(
                                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                             fontWeight: FontWeight.w400, fontSize: 12,
@@ -397,17 +410,19 @@ class Post{//게시글에 담긴 정보들
   order o1;
   int errandNo; //게시글 번호
   String createdDate; //생성된 날짜
+  double? distance; //도착지 거리
   String title; //게시글 제목
   String destination; //위치
   int reward; //보수
   String status; //상태 (모집중 or 진행중 or 완료됨)
-  Post(this.o1, this.errandNo, this.createdDate, this.title,
-      this.destination, this.reward, this.status);
+  Post(this.o1, this.errandNo, this.createdDate, this.distance,
+      this.title, this.destination, this.reward, this.status);
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
       order.fromJson(json['order']),
       json['errandNo'],
       json['createdDate'],
+      json['distance'],
       json['title'],
       json['destination'],
       json['reward'],
@@ -453,7 +468,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Map<String, dynamic>> posts = [];
   List<Map<String, dynamic>> errands = [];
-
+  late double latitude;
+  late double longitude;
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   bool button3state = false;
@@ -461,6 +477,27 @@ class _HomeState extends State<Home> {
   String status = "";
   String? token = "";
   bool isVisible = false; //쿼카 아이콘 옆 빨간점
+  Future<Position> getCurrentLocation() async {
+    log("call geolocator");
+    try {
+      LocationPermission permission;
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.deniedForever) {
+          return Future.error('Location Not Available');
+        }
+      }
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      log("get position at geolocator");
+      return position;
+
+    } catch(e) {
+      log("exception: " + e.toString());
+      return Future.error("faild Geolocator");
+    }
+  }
   InprogressExist() async{
     String base_url = dotenv.env['BASE_URL'] ?? '';
     String url = "${base_url}errand/in-progress/exist";
@@ -521,6 +558,7 @@ class _HomeState extends State<Home> {
           "score": p1.o1.score,
           "errandNo": p1.errandNo,
           "createdDate": p1.createdDate,
+          "distance": -1.0,
           "title": p1.title,
           "destination": p1.destination,
           "reward": p1.reward,
@@ -567,12 +605,60 @@ class _HomeState extends State<Home> {
           "score": p1.o1.score,
           "errandNo": p1.errandNo,
           "createdDate": p1.createdDate,
+          "distance": -1.0,
           "title": p1.title,
           "destination": p1.destination,
           "reward": p1.reward,
           "status": p1.status,
         });
         print('200');
+      }
+      setState(() {});
+    }
+    else{
+      print("error");
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else if(error.code == "INVALID_VALUE")
+      {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else
+      {
+        print(error.code);
+        print(error.httpStatus);
+        print(error.message);
+      }
+    }
+  }
+  ErrandDistanceInit() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}errand/distance?cursor=-1&latitude=$latitude&longitude=$longitude&limit=12&status=$status";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        Post p1 = Post.fromJson(item);
+        posts.add({
+          "orderNo": p1.o1.orderNo,
+          "nickname": p1.o1.nickname,
+          "score": p1.o1.score,
+          "errandNo": p1.errandNo,
+          "distance": p1.distance,
+          "createdDate": p1.createdDate,
+          "title": p1.title,
+          "destination": p1.destination,
+          "reward": p1.reward,
+          "status": p1.status,
+        });
+        print('errand latest init 200');
       }
       setState(() {});
     }
@@ -619,6 +705,7 @@ class _HomeState extends State<Home> {
           "score": p1.o1.score,
           "errandNo": p1.errandNo,
           "createdDate": p1.createdDate,
+          "distance": -1.0,
           "title": p1.title,
           "destination": p1.destination,
           "reward": p1.reward,
@@ -673,12 +760,62 @@ class _HomeState extends State<Home> {
           "score": p1.o1.score,
           "errandNo": p1.errandNo,
           "createdDate": p1.createdDate,
+          "distance": -1.0,
           "title": p1.title,
           "destination": p1.destination,
           "reward": p1.reward,
           "status": p1.status,
         });
         print('200');
+      }
+      setState(() {});
+    }
+    else{
+      print("error");
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else if(error.code == "INVALID_VALUE")
+      {
+        print(error.httpStatus);
+        print(error.message);
+      }
+      else
+      {
+        print(error.code);
+        print(error.httpStatus);
+        print(error.message);
+      }
+    }
+  }
+  ErrandDistanceAdd() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    Map<String, dynamic> lastPost = posts.last;
+    String lastdistance = lastPost['distance'];
+    String url = "${base_url}errand/distance?cursor=$lastdistance&latitude=$latitude&longitude=$longitude&limit=12&status=$status";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        Post p1 = Post.fromJson(item);
+        posts.add({
+          "orderNo": p1.o1.orderNo,
+          "nickname": p1.o1.nickname,
+          "score": p1.o1.score,
+          "errandNo": p1.errandNo,
+          "distance": p1.distance,
+          "createdDate": p1.createdDate,
+          "title": p1.title,
+          "destination": p1.destination,
+          "reward": p1.reward,
+          "status": p1.status,
+        });
+        print('errand latest init 200');
       }
       setState(() {});
     }
@@ -826,6 +963,12 @@ class _HomeState extends State<Home> {
     super.initState();
    WidgetsBinding.instance.addPostFrameCallback((_) {
       _insertOverlay(context);
+      getCurrentLocation().then((position) {
+        setState(() {
+          latitude = position.latitude;
+          longitude = position.longitude;
+        });
+      });
     });
     ErrandLatestInit(); //최신순 요청서 12개
     InprogressExist(); //진행중인 심부름이 있는지 확인
@@ -842,6 +985,10 @@ class _HomeState extends State<Home> {
            else if(button2state)
            {
                ErrandRewardAdd(); //금액순 요청서 12개
+           }
+           else if(button3state)
+           {
+             ErrandDistanceAdd();
            }
           InprogressExist(); //진행중인 심부름이 있는지 확인
           InProgressErrandInit(); //진행중인 심부름 목록 불러오기
@@ -1230,6 +1377,10 @@ class _HomeState extends State<Home> {
                             button2state = false;
                             button3state = true;
                             change_Button_State();
+                            posts.clear();
+                            ErrandDistanceInit();
+                            InprogressExist();
+                            InProgressErrandInit();
                             scrollToTop();
                           },
                           child: Container(width: 70, height: 32,
@@ -1287,6 +1438,8 @@ class _HomeState extends State<Home> {
                                   ErrandLatestInit();
                                 else if (button2state)
                                   ErrandRewardInit();
+                                else if(button3state)
+                                  ErrandDistanceInit();
                               });
                             },
                           ),
@@ -1349,6 +1502,7 @@ class _HomeState extends State<Home> {
                                 score: posts[index]["score"],
                                 errandNo: posts[index]["errandNo"],
                                 createdDate: decodedCreatedDate,
+                                distance: posts[index]["distance"],
                                 title: decodedTitle,
                                 destination: decodedDestination,
                                 reward: posts[index]["reward"],
