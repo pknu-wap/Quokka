@@ -157,7 +157,7 @@ class PostWidget extends StatelessWidget {
                             ),
                             Container( //평점
                               margin: EdgeInsets.only(top: 16),
-                              child: Text(" ${score}점", style: TextStyle(
+                              child: Text(" ${score.toInt()}점", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w300, fontSize: 12,
                                 letterSpacing: 0.01, color: Color(0xff7E7E7E),
