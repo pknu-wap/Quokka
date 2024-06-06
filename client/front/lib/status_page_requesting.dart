@@ -111,85 +111,117 @@ class _RatingDialogState extends State<RatingDialog> {
       },
     );
   }
+  // 평가 나가기
   void scoreConfirmDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
         return  Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
           ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
-              width: 300, height: 245,
-              padding: EdgeInsets.all(20),
+              // padding: EdgeInsets.all(20),
+              width: 323,
+              height: 275.75,
               decoration: BoxDecoration(
-                color: Color(0xffFFFFFF),
-                borderRadius: BorderRadius.circular(20),
+                color: Color(0xffFFFFFF), //배경색
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
-                mainAxisSize: MainAxisSize.min, // 다이얼로그의 크기를 콘텐츠에 맞게 조정
-                children: [
-                  Icon(
-                    Icons.warning,
-                    color: Color(0xffAD8772),
-                    size: 40,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "지금 나가면 평가할 수 없어요!",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
+                children: <Widget>[
                   Container(
-                    width: 300, height: 45,
+                    margin: EdgeInsets.only(top: 16.04),
+                    child: Image.asset(
+                      'assets/images/alert.png',
+                      width: 76.83,
+                      height: 76.83,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 4.08),
+                    child: Text(
+                      "지금 나가면 평가할 수 없어요!",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.00,
+                        color: Color(0xff1A1A1A),
+                      ),
+                      textAlign: TextAlign.center, // 텍스트 중앙 정렬
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 17.77),
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(281.1, 47.25)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                5), // 원하는 모양에 따라 BorderRadius 조절
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        "평가하러 가기",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          letterSpacing: 0.00,
+                          color: Color(0xffFFFFFF),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 17.77),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color(0xFFFFFFFF)), // 0xFF로 시작하는 16진수 색상 코드 사용,
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(281.1, 47.25)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: BorderSide(
+                                color: Color(0xff999999), // 테두리 색상
+                                width: 1 // 테두리 두께
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        "나가기",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          letterSpacing: 0.00,
+                          color: Color(0xff3E3E3E),
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Home()));
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xffAD8772),
-                        foregroundColor: Color(0xffFFFFFF),
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        "평가를 하지 않고 나가기",
-                        textAlign: TextAlign.center,
-                      ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    width: 300, height: 45,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Color(0xffAD8772),
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        side: BorderSide(color: Color(0xffAD8772)),
-                      ),
-                      child: Text(
-                        "취소",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
             ),
@@ -198,6 +230,95 @@ class _RatingDialogState extends State<RatingDialog> {
       },
     );
   }
+
+  // void scoreConfirmDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return  Dialog(
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(20),
+  //         ),
+  //         child: FittedBox(
+  //           fit: BoxFit.contain,
+  //           child: Container(
+  //             width: 300, height: 245,
+  //             padding: EdgeInsets.all(20),
+  //             decoration: BoxDecoration(
+  //               color: Color(0xffFFFFFF),
+  //               borderRadius: BorderRadius.circular(20),
+  //             ),
+  //             child: Column(
+  //               mainAxisSize: MainAxisSize.min, // 다이얼로그의 크기를 콘텐츠에 맞게 조정
+  //               children: [
+  //                 Icon(
+  //                   Icons.warning,
+  //                   color: Color(0xffAD8772),
+  //                   size: 40,
+  //                 ),
+  //                 SizedBox(height: 10),
+  //                 Text(
+  //                   "지금 나가면 평가할 수 없어요!",
+  //                   style: TextStyle(
+  //                     fontSize: 18,
+  //                     fontWeight: FontWeight.bold,
+  //                   ),
+  //                   textAlign: TextAlign.center,
+  //                 ),
+  //                 SizedBox(height: 20),
+  //                 Container(
+  //                   width: 300, height: 45,
+  //                   child: ElevatedButton(
+  //                     onPressed: () {
+  //                       Navigator.push(
+  //                           context,
+  //                           MaterialPageRoute(
+  //                               builder: (context) => Home()));
+  //                     },
+  //                     style: ElevatedButton.styleFrom(
+  //                       backgroundColor: Color(0xffAD8772),
+  //                       foregroundColor: Color(0xffFFFFFF),
+  //                       padding: EdgeInsets.symmetric(vertical: 12),
+  //                       shape: RoundedRectangleBorder(
+  //                         borderRadius: BorderRadius.circular(10),
+  //                       ),
+  //                     ),
+  //                     child: Text(
+  //                       "평가를 하지 않고 나가기",
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Container(
+  //                   margin: EdgeInsets.only(top: 10),
+  //                   width: 300, height: 45,
+  //                   child: TextButton(
+  //                     onPressed: () {
+  //                       Navigator.pop(context);
+  //                     },
+  //                     style: TextButton.styleFrom(
+  //                       foregroundColor: Color(0xffAD8772),
+  //                       padding: EdgeInsets.symmetric(vertical: 12),
+  //                       shape: RoundedRectangleBorder(
+  //                         borderRadius: BorderRadius.circular(10),
+  //                       ),
+  //                       side: BorderSide(color: Color(0xffAD8772)),
+  //                     ),
+  //                     child: Text(
+  //                       "취소",
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
   int _rating = 0;
   final List<String> ratingTexts = [
     '',
@@ -366,6 +487,8 @@ class _RatingDialogState extends State<RatingDialog> {
     );
   }
 }
+
+
 
 class Status_Content_Widget extends StatelessWidget {
   final String contents; // 메시지
