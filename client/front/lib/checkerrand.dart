@@ -411,8 +411,15 @@ class ErrandCheckWidget extends StatelessWidget {
                   width: 298,
                   color: Color(0xffDBDBDB),
                 ),
-
-
+                // 제목 1줄 && 내가 작성한 심부름 x
+                if (titleLength <= 18 && isMyErrand == false)
+                // 실선
+                  Container(
+                    margin: EdgeInsets.only(top: 24.68, left: 12.01, right: 9.99),
+                    height: 1.0,
+                    width: 298,
+                    color: Color(0xffDBDBDB),
+                  ),
                 // 요청 사항
                 Container(
                   margin: EdgeInsets.only(top: 15.61, left: 20.66, right: 19.34),
