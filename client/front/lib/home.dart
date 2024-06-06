@@ -144,7 +144,8 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container( width: 322, height: 100, //게시글 1개
+          Container( width: calculateWidth(322, screenWidth),
+            height: calculateHeight(100, screenHeight), //게시글 1개
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
@@ -208,7 +209,8 @@ class PostWidget extends StatelessWidget {
                                   top: calculateHeight(8.95, screenHeight))
                               ,
                               padding: EdgeInsets.only(left: 2, right: 2),
-                              width: 44.36, height: 18.1,
+                              width: calculateWidth(44.36, screenWidth),
+                              height: calculateHeight(18.1, screenHeight),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                 color: decide_box_color(status),
@@ -1460,7 +1462,7 @@ class _HomeState extends State<Home> {
                                 color: Color(0xff111111),
                               ),),),
                          // SizedBox(width: 194),
-                          SizedBox(width: 157),
+                          SizedBox(width: calculateWidth(157, screenWidth)),
                           Container(width: 23.0, height: 21.91,
                             margin: EdgeInsets.only(top: calculateHeight(29, screenHeight), right: calculateWidth(14, screenWidth)),
                             child: IconButton(
@@ -1688,8 +1690,8 @@ class _HomeState extends State<Home> {
                   ),
                   SizedBox(height: calculateHeight(16.36, screenHeight)),
                   Flexible(
-                    child: Container(width: 322,
-                      height: 581,
+                    child: Container(width: calculateWidth(322, screenWidth),
+                      height: calculateHeight(581, screenHeight),
                       //게시글 큰틀
                       margin: EdgeInsets.only(left: calculateWidth(19, screenWidth)),
                       decoration: BoxDecoration(
