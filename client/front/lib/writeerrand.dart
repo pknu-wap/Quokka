@@ -180,6 +180,7 @@ class ReturnValues {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _WriteErrandState extends State<WriteErrand> {
+  bool _isLoading = true;
   final int maxTitleLength = 20; // 제목 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
@@ -316,6 +317,7 @@ class _WriteErrandState extends State<WriteErrand> {
           position: myLatLng,
         );
         marker.setIcon(destIcon);
+        _isLoading = false;
       });
     });
     // destinationValue = widget.value;
@@ -401,7 +403,7 @@ class _WriteErrandState extends State<WriteErrand> {
       }
       Navigator.of(context).pop();
     },
-      child: Scaffold(
+      child: _isLoading ? Center(child: CircularProgressIndicator()) : Scaffold(
         body: Container(
           child: SingleChildScrollView(
             child: Column(
