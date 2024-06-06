@@ -822,13 +822,17 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     );
   }
 
-
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     errandNo = widget.errandNo;
-    errandReading(errandNo.toString());
+    errandReading(errandNo.toString()).then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   // 메인 글 보기 화면
@@ -848,7 +852,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         );
       },
       child: Scaffold(
-        body: Stack(
+        body: _isLoading ? Center(child: CircularProgressIndicator()) :
+        Stack(
           children: [
             Container(
                 decoration: BoxDecoration(
