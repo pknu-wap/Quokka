@@ -247,8 +247,11 @@ class reShowErrandWidget extends StatelessWidget {
 
           Container(
             width: 217,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: Text(
@@ -322,29 +325,24 @@ class reShowErrandWidget extends StatelessWidget {
                 ),
               ],
             ),
+      Container(
+        width: 252,
+        child : Text(
+          "열정에 감사하며 아래와 같이 심부름을 요청합니다.\n"
+              "심부름 사항을 확인 후 완료 버튼을 통해 심부름을\n"
+              "확정해주시면 감사하겠습니다.",
+          style: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w300,
+            fontSize: 11,
+            letterSpacing: 0.00,
+            color: Color(0xff111111),
           ),
-
-          Container(
-            width: 252,
-            child : Flexible(
-              child: RichText(
-                overflow: TextOverflow.ellipsis,
-                maxLines: 4,
-                textAlign: TextAlign.center, // 텍스트 가운데 정렬
-                text: TextSpan(
-                  text: "열정에 감사하며 아래와 같이 심부름을 요청합니다. 심부름 사항을 확인 후 완료 버튼을 통해 심부름을 확정해주시면 감사하겠습니다.",
-                  style: TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 11,
-                    letterSpacing: 0.00,
-                    color: Color(0xff111111),
-                  ),
-                ),
-              ),
-            ),
+        ),
+      ),
+            ],
           ),
-
+          ),
           // -아래- 텍스트
           Container(
             margin: EdgeInsets.only(top: 11, left: 144, right: 151),
@@ -471,15 +469,15 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, // 가운데 정렬
                   child: Container(
-                        margin: EdgeInsets.only(top: 17, left: 130),
+                        margin: EdgeInsets.only(top: 17, left: 150),
                         child: Text(decodednickname,
                           style: TextStyle(
-                            fontFamily: 'MaruBuri',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            letterSpacing: 0.01,
-                            color: Color(0xff000000),
-                          ),
+                          fontFamily: 'SangSangShin',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          letterSpacing: 0.01,
+                          color: Color(0xff000000),
+                        ),
                         ),
                   ),
                 ),
@@ -617,7 +615,8 @@ class _ReShowErrandState extends State<ReShowErrand> {
     }
   }
 
-  // 확인했어요. 버튼 변수'
+  bool _isLoading1 = true;
+  bool _isLoading2 = true;
 
   @override
   void initState() {
@@ -625,8 +624,16 @@ class _ReShowErrandState extends State<ReShowErrand> {
     errandNo = widget.errandNo;
     nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
     realName = ""; // 심부름 하는 사람 실제 이름
-    errandReading(errandNo);
-    getErrandInfo(int.parse(errandNo));
+    errandReading(errandNo).then((value) {
+      setState(() {
+        _isLoading1 = false;
+      });
+    });;
+    getErrandInfo(int.parse(errandNo)).then((value) {
+      setState(() {
+        _isLoading2 = false;
+      });
+    });;
   }
   // 메인 글 보기 화면
   @override
@@ -639,7 +646,9 @@ class _ReShowErrandState extends State<ReShowErrand> {
         }
         Navigator.of(context).pop();
       },
-      child: Scaffold(
+      child: (_isLoading1 || _isLoading2)
+          ? Center(child: CircularProgressIndicator())
+          : Scaffold(
         body: Stack(
           children: [
             Container(

@@ -6,10 +6,14 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'calculatemargin.dart';
 import 'home.dart';
 import 'writeerrand.dart';
 final storage = FlutterSecureStorage();
 void _insertOverlay(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+
   if (overlayEntry != null) return;
   overlayEntry = OverlayEntry(
     builder: (context) => Positioned(
@@ -17,7 +21,7 @@ void _insertOverlay(BuildContext context) {
       left: 0,
       right: 0,
       child: Container(
-        width: 364,
+        width: 360,
         height: 64,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
@@ -40,7 +44,7 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22,
               height: 22,
-              margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(left: calculateWidth(44, screenWidth), top: calculateHeight(20, screenHeight), bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -48,7 +52,6 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {
-                  _insertOverlay(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Home()));
@@ -62,7 +65,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 19.31,
               height: 23.81,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -79,7 +83,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22.0,
               height: 22,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -102,7 +107,10 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 21.95,
               height: 24.21,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight),
+                  right: calculateWidth(43.92, screenWidth)
+              ),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -252,6 +260,7 @@ class _ReShowMapState extends State<ReShowMap> {
       print(error.message);
     }
   }
+  bool _isLoading = true;
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
@@ -265,7 +274,11 @@ class _ReShowMapState extends State<ReShowMap> {
     });
     // 이후 권한 설정 관련 코드 추가 예정 -> 한 번 권한 허용 받으면 이후 권한 받을 필요 없음.
     // getGeoData();
-    readingNLatLng(errandNo);
+    readingNLatLng(errandNo).then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override
@@ -284,7 +297,7 @@ class _ReShowMapState extends State<ReShowMap> {
       }
       Navigator.of(context).pop();
     },
-      child: Scaffold(
+      child: _isLoading ? Center(child: CircularProgressIndicator()) : Scaffold(
         body: Container(
           child: SingleChildScrollView(
             child: Column(

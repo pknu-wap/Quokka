@@ -12,10 +12,14 @@ import 'package:geolocator/geolocator.dart';
 import '../map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'calculatemargin.dart';
 import 'checkerrand.dart';
 import 'home.dart';
 final storage = FlutterSecureStorage();
 void _insertOverlay(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+
   if (overlayEntry != null) return;
   overlayEntry = OverlayEntry(
     builder: (context) => Positioned(
@@ -23,7 +27,7 @@ void _insertOverlay(BuildContext context) {
       left: 0,
       right: 0,
       child: Container(
-        width: 364,
+        width: 360,
         height: 64,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
@@ -46,7 +50,7 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22,
               height: 22,
-              margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(left: calculateWidth(44, screenWidth), top: calculateHeight(20, screenHeight), bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -54,7 +58,6 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {
-                  _insertOverlay(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Home()));
@@ -68,7 +71,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 19.31,
               height: 23.81,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -85,7 +89,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22.0,
               height: 22,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -108,7 +113,10 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 21.95,
               height: 24.21,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight),
+                  right: calculateWidth(43.92, screenWidth)
+              ),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -181,7 +189,11 @@ class ReturnValues {
 
 // 텍스트 필드에 입력하지 않았을 때, 버튼 비활성화 만들기
 class _WriteErrandState extends State<WriteErrand> {
+  bool _isLoading = true;
   final int maxTitleLength = 20; // 제목 최대 길이 설정
+  final int maxDetailAddressLength = 15; // 상세 주소 최대 길이 설정
+  final int maxPriceLength = 5; // 심부름 값 최대 길이 설정
+  final int maxRequestLength = 60; // 요청 사항 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
@@ -317,6 +329,7 @@ class _WriteErrandState extends State<WriteErrand> {
           position: myLatLng,
         );
         marker.setIcon(destIcon);
+        _isLoading = false;
       });
     });
     // destinationValue = widget.value;
@@ -402,7 +415,7 @@ class _WriteErrandState extends State<WriteErrand> {
       }
       Navigator.of(context).pop();
     },
-      child: Scaffold(
+      child: _isLoading ? Center(child: CircularProgressIndicator()) : Scaffold(
         body: Container(
           child: SingleChildScrollView(
             child: Column(
@@ -875,6 +888,7 @@ class _WriteErrandState extends State<WriteErrand> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
                     child: TextField(
+                      maxLength: maxDetailAddressLength,
                       controller: detailAddressController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -893,6 +907,7 @@ class _WriteErrandState extends State<WriteErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       keyboardType: TextInputType.text,
                     ),
@@ -988,6 +1003,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                   padding: EdgeInsets.only(
                                       bottom: 4, left: 27, right: 7.5),
                                   child: TextField(
+                                    maxLength: maxPriceLength,
                                     controller: priceController,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
@@ -998,6 +1014,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                     ),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
+                                      counterText: '',
                                     ),
                                     keyboardType: TextInputType.number,
                                   ),
@@ -1130,6 +1147,7 @@ class _WriteErrandState extends State<WriteErrand> {
                     padding: EdgeInsets.only(top: 2, left: 10, right: 10),
                     // hintText Padding이 이상해서 임의로 설정
                     child: TextField(
+                      maxLength: maxRequestLength,
                       controller: requestController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -1149,6 +1167,7 @@ class _WriteErrandState extends State<WriteErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       maxLines: null,
                       // 입력 텍스트가 필요한 만큼 자동으로 늘어남

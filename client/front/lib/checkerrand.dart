@@ -53,6 +53,81 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
+  late int titleLength = title.length;
+
+  //상태에 따라 텍스트 출력
+  String getState() {
+    if(status == "RECRUITING")
+    {
+      return "모집중";
+    }
+    else if(status == "IN_PROGRESS")
+      return "진행중";
+    else if(status == "DONE")
+      return "완료됨";
+    else
+    {
+      return "";
+    }
+  }
+  // 상태 박스 색상
+  Color decideBoxColor(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+    else if(state == "IN_PROGRESS")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else if(state == "DONE")
+    {
+      stateColor = Color(0xffCCB9AB);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Color(0xffCCB9AB);
+      return stateColor;
+    }
+  }
+  // 상태 박스 텍스트 색상
+  Color decideTextColor(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else if(state == "IN_PROGRESS" || state == "DONE")
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+  }
+  // 상태에 따라 테두리 변경
+  Color decideBorder(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Colors.transparent;
+      return stateColor;
+    }
+  }
+
   // 현재 시간과 게시글 작성 시간의 차 계산
   String timeDifference(DateTime currentTime, String createdDate) {
     DateTime createdDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdDate);
@@ -85,19 +160,18 @@ class ErrandCheckWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 320, height: 305.85,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if(isMyErrand == false) // 내가 쓴 게시글이 아니면 닉네임, 평점 생성
                 //닉네임, 평점
                 Container(
-                    margin: EdgeInsets.only(top: 13.01),
+                    margin: EdgeInsets.only(top: 16.4),
                     child: Row(
                   children: [
                     //닉네임
                     Container(
-                      margin: EdgeInsets.only(left: 13.4),
+                      margin: EdgeInsets.only(left: 13.59),
                       child: Text(
                         "${nickname}",
                         style: TextStyle(
@@ -124,7 +198,7 @@ class ErrandCheckWidget extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 2.82),
                       child: Text(
-                        " ${score}점",
+                        " ${score.toInt()}점",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
@@ -134,11 +208,36 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // 현황
+                    Expanded(
+                        child: Align(alignment: Alignment.centerRight,
+                        child: Container(
+                      margin: EdgeInsets.only(right: 19.92),
+                      width: 44.36, height: 18.1,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: decideBoxColor(status),
+                        border: Border.all(color: decideBorder(status),width: 1),
+                      ),
+                      child: Center( //상태
+                        child: Text(getState(), style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 11,
+                            letterSpacing: 0.01,
+                            color: decideTextColor(status),
+                        ),),
+                      ),
+                    ),
+                    )
+                    )
                   ],
                 )),
+                // 내가 작성한 심부름
+                if(isMyErrand == true)
                 //게시글 제목
                 Container(
-                  margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
                     style: TextStyle(
@@ -150,9 +249,27 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                //게시글 제목
+                  Container(
+                    margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                    child: Text(
+                      "${title}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
+                    ),
+                  ),
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 심부름 값
                 Container(
-                  margin: EdgeInsets.only(top: 11.52, left: 13.4),
+                  margin: EdgeInsets.only(top: 3, left: 13.4),
                   child: Text(
                     "\u20A9 ${priceFormat.format(reward)} 원",
                     style: TextStyle(
@@ -164,9 +281,25 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                // 심부름 값
+                  Container(
+                    margin: EdgeInsets.only(top: 6, left: 13.4),
+                    child: Text(
+                      "\u20A9 ${priceFormat.format(reward)} 원",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        letterSpacing: 0.001,
+                        color: Color(0xff7C3D1A),
+                      ),
+                    ),
+                  ),
                 // 상세 주소
                 Container(
-                    margin: EdgeInsets.only(top: 22.06),
+                    margin: EdgeInsets.only(top: 18),
                     child: Row(
                       children: [
                         // 마커 이미지
@@ -272,27 +405,38 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ],
                     )),
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 실선
                 Container(
-                  margin: EdgeInsets.only(top: 24.68, left: 12.01, right: 9.99),
+                  margin: EdgeInsets.only(top: 16.49, left: 12.01, right: 9.99),
                   height: 1.0,
                   width: 298,
                   color: Color(0xffDBDBDB),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                // 실선
+                  Container(
+                    margin: EdgeInsets.only(top: 12, left: 12.01, right: 9.99),
+                    height: 1.0,
+                    width: 298,
+                    color: Color(0xffDBDBDB),
+                  ),
                 // 요청 사항
-                Container(
-                  margin: EdgeInsets.only(top: 15.61, left: 20.66, right: 19.34),
-                  child:  Text(
-                    "${detail}",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      letterSpacing: 0.001,
-                      color: Color(0xff111111),
+                  Container(
+                    margin: EdgeInsets.only(top: 12, left: 20.66, right: 19.34),
+                    child:  Text(
+                      "${detail}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -727,13 +871,17 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
     );
   }
 
-
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     errandNo = widget.errandNo;
-    errandReading(errandNo.toString());
+    errandReading(errandNo.toString()).then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   // 메인 글 보기 화면
@@ -753,7 +901,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
         );
       },
       child: Scaffold(
-        body: Stack(
+        body: _isLoading ? Center(child: CircularProgressIndicator()) :
+        Stack(
           children: [
             Container(
                 decoration: BoxDecoration(
@@ -864,56 +1013,45 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
                         ),
-                        child: ListView.builder(
-                            padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                            shrinkWrap: true,
-                            itemCount: errands.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              String nickname = errands[index]["nickname"];
-                              String createdDate =
-                                  errands[index]["createdDate"];
-                              String title = errands[index]['title'];
-                              String destination =
-                                  errands[index]['destination'];
-                              String due = errands[index]['due'];
-                              String detail = errands[index]['detail'];
-                              String status = errands[index]['status'];
+                            child: Column(
+                              children: errands.map((errand) {
+                                String nickname = errand["nickname"];
+                                String createdDate = errand["createdDate"];
+                                String title = errand['title'];
+                                String destination = errand['destination'];
+                                String due = errand['due'];
+                                String detail = errand['detail'];
+                                String status = errand['status'];
 
-                              String decodedNickname =
-                                  utf8.decode(nickname.runes.toList());
-                              String decodedCreatedDate =
-                                  utf8.decode(createdDate.runes.toList());
-                              String decodedTitle =
-                                  utf8.decode(title.runes.toList());
-                              String decodedDestination =
-                                  utf8.decode(destination.runes.toList());
-                              String decodedDue =
-                                  utf8.decode(due.runes.toList());
-                              String decodedDetail =
-                                  utf8.decode(detail.runes.toList());
-                              String decodedStatus =
-                                  utf8.decode(status.runes.toList());
-                              return ErrandCheckWidget(
-                                  orderNo: errands[index]["orderNo"],
+                                String decodedNickname = utf8.decode(nickname.runes.toList());
+                                String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
+                                String decodedTitle = utf8.decode(title.runes.toList());
+                                String decodedDestination = utf8.decode(destination.runes.toList());
+                                String decodedDue = utf8.decode(due.runes.toList());
+                                String decodedDetail = utf8.decode(detail.runes.toList());
+                                String decodedStatus = utf8.decode(status.runes.toList());
+
+                                return ErrandCheckWidget(
+                                  orderNo: errand["orderNo"],
                                   nickname: decodedNickname,
-                                  score: errands[index]["score"],
-                                  errandNo: errands[index]["errandNo"],
+                                  score: errand["score"],
+                                  errandNo: errand["errandNo"],
                                   createdDate: decodedCreatedDate,
                                   title: decodedTitle,
                                   destination: decodedDestination,
-                                  latitude: errands[index]["latitude"],
-                                  longitude: errands[index]["longitude"],
+                                  latitude: errand["latitude"],
+                                  longitude: errand["longitude"],
                                   due: decodedDue,
                                   detail: decodedDetail,
-                                  reward: errands[index]["reward"],
-                                  isCash: errands[index]["isCash"],
+                                  reward: errand["reward"],
+                                  isCash: errand["isCash"],
                                   status: decodedStatus,
-                                  isMyErrand: errands[index]["isMyErrand"],
-                              );
-                            }),
+                                  isMyErrand: errand["isMyErrand"],
+                                );
+                              }).toList(),
+                            ),
+                          ),
                       ),
-                    ),
-
                     // 글 보기 올린 사람
                     if (errands[0]["isMyErrand"] == true)
                       Flexible(
@@ -926,55 +1064,45 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             borderRadius: BorderRadius.circular(5),
                             color: Color(0xffFFFFFF),
                           ),
-                          child: ListView.builder(
-                              padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                              shrinkWrap: true,
-                              itemCount: errands.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String nickname = errands[index]["nickname"];
-                                String createdDate =
-                                errands[index]["createdDate"];
-                                String title = errands[index]['title'];
-                                String destination =
-                                errands[index]['destination'];
-                                String due = errands[index]['due'];
-                                String detail = errands[index]['detail'];
-                                String status = errands[index]['status'];
+                            child: Column(
+                              children: errands.map((errand) {
+                                String nickname = errand["nickname"];
+                                String createdDate = errand["createdDate"];
+                                String title = errand['title'];
+                                String destination = errand['destination'];
+                                String due = errand['due'];
+                                String detail = errand['detail'];
+                                String status = errand['status'];
 
-                                String decodedNickname =
-                                utf8.decode(nickname.runes.toList());
-                                String decodedCreatedDate =
-                                utf8.decode(createdDate.runes.toList());
-                                String decodedTitle =
-                                utf8.decode(title.runes.toList());
-                                String decodedDestination =
-                                utf8.decode(destination.runes.toList());
-                                String decodedDue =
-                                utf8.decode(due.runes.toList());
-                                String decodedDetail =
-                                utf8.decode(detail.runes.toList());
-                                String decodedStatus =
-                                utf8.decode(status.runes.toList());
+                                String decodedNickname = utf8.decode(nickname.runes.toList());
+                                String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
+                                String decodedTitle = utf8.decode(title.runes.toList());
+                                String decodedDestination = utf8.decode(destination.runes.toList());
+                                String decodedDue = utf8.decode(due.runes.toList());
+                                String decodedDetail = utf8.decode(detail.runes.toList());
+                                String decodedStatus = utf8.decode(status.runes.toList());
+
                                 return ErrandCheckWidget(
-                                    orderNo: errands[index]["orderNo"],
-                                    nickname: decodedNickname,
-                                    score: errands[index]["score"],
-                                    errandNo: errands[index]["errandNo"],
-                                    createdDate: decodedCreatedDate,
-                                    title: decodedTitle,
-                                    destination: decodedDestination,
-                                    latitude: errands[index]["latitude"],
-                                    longitude: errands[index]["longitude"],
-                                    due: decodedDue,
-                                    detail: decodedDetail,
-                                    reward: errands[index]["reward"],
-                                    isCash: errands[index]["isCash"],
-                                    status: decodedStatus,
-                                    isMyErrand: errands[index]["isMyErrand"],
+                                  orderNo: errand["orderNo"],
+                                  nickname: decodedNickname,
+                                  score: errand["score"],
+                                  errandNo: errand["errandNo"],
+                                  createdDate: decodedCreatedDate,
+                                  title: decodedTitle,
+                                  destination: decodedDestination,
+                                  latitude: errand["latitude"],
+                                  longitude: errand["longitude"],
+                                  due: decodedDue,
+                                  detail: decodedDetail,
+                                  reward: errand["reward"],
+                                  isCash: errand["isCash"],
+                                  status: decodedStatus,
+                                  isMyErrand: errand["isMyErrand"],
                                 );
-                              }),
+                              }).toList(),
+                            ),
+                            ),
                         ),
-                      ),
 
                     if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)

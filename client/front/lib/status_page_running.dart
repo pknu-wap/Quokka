@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'custom_dialog.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
@@ -566,21 +567,25 @@ class Status_Content_Widget extends StatelessWidget {
 DropdownMenuItem<String> customDropdownItem(String text) {
   return DropdownMenuItem<String>(
     value: text,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 15,
-            fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.01,
-            color: Color(0xff232323),
-          ),
+    child: Container(
+      width: 276.72,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Color(0xffDCDCDC), width: 1),
         ),
-        Container(child: Center(child: Container(width: 276.72, child: Divider(color: Color(0xffDCDCDC), thickness: 1)))),
-      ],
+      ),
+      padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 10.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'Pretendard',
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.01,
+          color: Color(0xff232323),
+        ),
+      ),
     ),
   );
 }
@@ -1065,7 +1070,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                               customDropdownItem("쪽지를 확인해주세요."),
                             ],
                             onChanged: (String? value) {
-                              sendValue(value);
+                              (contents.isNotEmpty &&
+                                  contents.last['contents'] == "완료했어요!") ? warningDialog(context, "이미 완료된 심부름이예요!") : sendValue(value);
                             },
                             dropdownStyleData: DropdownStyleData(
                               offset: Offset(0, 350),
@@ -1112,6 +1118,9 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                 child: ElevatedButton(
                   onPressed:
                       () {
+                        (contents.isNotEmpty &&
+                        contents.last['contents'] == "완료했어요!") ?
+                        warningDialog(context, "이미 완료된 심부름이예요!") :
                         confirmDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
