@@ -251,6 +251,7 @@ class _ReShowMapState extends State<ReShowMap> {
       print(error.message);
     }
   }
+  bool _isLoading = true;
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
@@ -264,7 +265,11 @@ class _ReShowMapState extends State<ReShowMap> {
     });
     // 이후 권한 설정 관련 코드 추가 예정 -> 한 번 권한 허용 받으면 이후 권한 받을 필요 없음.
     // getGeoData();
-    readingNLatLng(errandNo);
+    readingNLatLng(errandNo).then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override
@@ -283,7 +288,7 @@ class _ReShowMapState extends State<ReShowMap> {
       }
       Navigator.of(context).pop();
     },
-      child: Scaffold(
+      child: _isLoading ? Center(child: CircularProgressIndicator()) : Scaffold(
         body: Container(
           child: SingleChildScrollView(
             child: Column(

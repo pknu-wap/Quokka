@@ -617,7 +617,8 @@ class _ReShowErrandState extends State<ReShowErrand> {
     }
   }
 
-  // 확인했어요. 버튼 변수'
+  bool _isLoading1 = true;
+  bool _isLoading2 = true;
 
   @override
   void initState() {
@@ -625,8 +626,16 @@ class _ReShowErrandState extends State<ReShowErrand> {
     errandNo = widget.errandNo;
     nickName = "닉 네 임"; // 심부름 하는 사람 닉네임
     realName = ""; // 심부름 하는 사람 실제 이름
-    errandReading(errandNo);
-    getErrandInfo(int.parse(errandNo));
+    errandReading(errandNo).then((value) {
+      setState(() {
+        _isLoading1 = false;
+      });
+    });;
+    getErrandInfo(int.parse(errandNo)).then((value) {
+      setState(() {
+        _isLoading2 = false;
+      });
+    });;
   }
   // 메인 글 보기 화면
   @override
@@ -639,7 +648,9 @@ class _ReShowErrandState extends State<ReShowErrand> {
         }
         Navigator.of(context).pop();
       },
-      child: Scaffold(
+      child: (_isLoading1 || _isLoading2)
+          ? Center(child: CircularProgressIndicator())
+          : Scaffold(
         body: Stack(
           children: [
             Container(
