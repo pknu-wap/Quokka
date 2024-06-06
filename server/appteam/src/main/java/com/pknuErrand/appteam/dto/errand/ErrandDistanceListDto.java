@@ -1,15 +1,18 @@
 package com.pknuErrand.appteam.dto.errand;
 
 import com.pknuErrand.appteam.Enum.Status;
-import com.pknuErrand.appteam.dto.member.MemberErrandDto;
-import lombok.*;
+import com.pknuErrand.appteam.domain.member.Member;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ErrandDistanceListResponseDto {
-    private MemberErrandDto order; // 심부름 시킨사람
+public class ErrandDistanceListDto {
+    private Member orderNo; // 심부름 시킨사람
 
     private long errandNo;
 

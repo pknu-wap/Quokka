@@ -87,7 +87,7 @@ public class ErrandController {
 
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))),
+            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandDistanceListResponseDto.class))),
             @ApiResponse(responseCode = "400\nINVALID_VALUE", description = "limit 값이 잘못되었음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "거리순으로 페이지네이션 불러오기")

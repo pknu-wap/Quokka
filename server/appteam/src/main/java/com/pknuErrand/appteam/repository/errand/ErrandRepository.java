@@ -2,7 +2,7 @@ package com.pknuErrand.appteam.repository.errand;
 import com.pknuErrand.appteam.Enum.Status;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.member.Member;
-import com.pknuErrand.appteam.dto.errand.ErrandDistanceListResponseDto;
+import com.pknuErrand.appteam.dto.errand.ErrandDistanceListDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -44,8 +44,8 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
     List<Errand> findInProgressErrand(@Param("memberNo") Long memberNo);
 
 
-    @Query("SELECT new com.pknuErrand.appteam.dto.errand.ErrandDistanceListResponseDto(" +
-            "e.errandNo, e.createdDate, e.title, e.destination, e.reward, e.status, " +
+    @Query("SELECT new com.pknuErrand.appteam.dto.errand.ErrandDistanceListDto(" +
+            "e.orderNo, e.errandNo, e.createdDate, e.title, e.destination, e.reward, e.status, " +
             "(6371 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(e.latitude)) " +
             "* COS(RADIANS(e.longitude) - RADIANS(:longitude)) " +
             "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(e.latitude)))) as distance) " +
@@ -55,11 +55,11 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
             "* COS(RADIANS(e.longitude) - RADIANS(:longitude)) " +
             "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(e.latitude)))) > :cursor " +
             "ORDER BY distance")
-    List<ErrandDistanceListResponseDto> findErrandByDistance(@Param("latitude") double latitude, @Param("longitude") double longitude, @Param("cursor") double cursor);
+    List<ErrandDistanceListDto> findErrandByDistance(@Param("latitude") double latitude, @Param("longitude") double longitude, @Param("cursor") double cursor);
 
 
-    @Query("SELECT new com.pknuErrand.appteam.dto.errand.ErrandDistanceListResponseDto(" +
-            "e.errandNo, e.createdDate, e.title, e.destination, e.reward, e.status, " +
+    @Query("SELECT new com.pknuErrand.appteam.dto.errand.ErrandDistanceListDto(" +
+            "e.orderNo, e.errandNo, e.createdDate, e.title, e.destination, e.reward, e.status, " +
             "(6371 * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(e.latitude)) " +
             "* COS(RADIANS(e.longitude) - RADIANS(:longitude)) " +
             "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(e.latitude)))) as distance) " +
@@ -70,6 +70,6 @@ public interface ErrandRepository extends JpaRepository<Errand, Long> {
             "* COS(RADIANS(e.longitude) - RADIANS(:longitude)) " +
             "+ SIN(RADIANS(:latitude)) * SIN(RADIANS(e.latitude)))) > :cursor " +
             "ORDER BY distance")
-    List<ErrandDistanceListResponseDto> findErrandByStatusAndDistance(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("cursor") double cursor, @Param("status") Status status);
+    List<ErrandDistanceListDto> findErrandByStatusAndDistance(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("cursor") double cursor, @Param("status") Status status);
 }
 

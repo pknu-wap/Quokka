@@ -103,13 +103,28 @@ public class ErrandService {
     @Transactional(readOnly = true)
     public List<ErrandDistanceListResponseDto> findPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
         checkLimitAndThrowException(pageInfo.getLimit());
-        List<ErrandDistanceListResponseDto> errandList = null;
+        List<ErrandDistanceListDto> errandList = null;
         if(pageInfo.getStatus() == null)
             errandList = errandRepository.findErrandByDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor());
         else
             errandList = errandRepository.findErrandByStatusAndDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor(), pageInfo.getStatus());
 
-        return errandList;
+        List<ErrandDistanceListResponseDto> filteredList = new ArrayList<>();
+        for(ErrandDistanceListDto errand : errandList) {
+            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
+            ErrandDistanceListResponseDto errandDistanceListResponseDto = ErrandDistanceListResponseDto.builder()
+                    .order(memberErrandDto)
+                    .errandNo(errand.getErrandNo())
+                    .createdDate(errand.getCreatedDate())
+                    .title(errand.getTitle())
+                    .destination(errand.getDestination())
+                    .reward(errand.getReward())
+                    .status(errand.getStatus())
+                    .distance(errand.getDistance())
+                    .build();
+            filteredList.add(errandDistanceListResponseDto);
+        }
+        return filteredList;
     }
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> getFilteredErrandList(List<Errand> errandList) {
