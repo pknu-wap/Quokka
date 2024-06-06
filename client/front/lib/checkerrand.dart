@@ -52,6 +52,79 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
+  //상태에 따라 텍스트 출력
+  String getState() {
+    if(status == "RECRUITING")
+    {
+      return "모집중";
+    }
+    else if(status == "IN_PROGRESS")
+      return "진행중";
+    else if(status == "DONE")
+      return "완료됨";
+    else
+    {
+      return "";
+    }
+  }
+  // 상태 박스 색상
+  Color decideBoxColor(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+    else if(state == "IN_PROGRESS")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else if(state == "DONE")
+    {
+      stateColor = Color(0xffCCB9AB);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Color(0xffCCB9AB);
+      return stateColor;
+    }
+  }
+  // 상태 박스 텍스트 색상
+  Color decideTextColor(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else if(state == "IN_PROGRESS" || state == "DONE")
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Color(0xffFFFFFF);
+      return stateColor;
+    }
+  }
+  // 상태에 따라 테두리 변경
+  Color decideBorder(String state){
+    Color stateColor;
+    if(state == "RECRUITING")
+    {
+      stateColor = Color(0xffAA7651);
+      return stateColor;
+    }
+    else
+    {
+      stateColor = Colors.transparent;
+      return stateColor;
+    }
+  }
+
   // 현재 시간과 게시글 작성 시간의 차 계산
   String timeDifference(DateTime currentTime, String createdDate) {
     DateTime createdDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdDate);
@@ -123,7 +196,7 @@ class ErrandCheckWidget extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 2.82),
                       child: Text(
-                        " ${score}점",
+                        " ${score.toInt()}점",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
@@ -133,6 +206,29 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // 현황
+                    Expanded(
+                        child: Align(alignment: Alignment.centerRight,
+                        child: Container(
+                      margin: EdgeInsets.only(right: 19.92),
+                      width: 44.36, height: 18.1,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: decideBoxColor(status),
+                        border: Border.all(color: decideBorder(status),width: 1),
+                      ),
+                      child: Center( //상태
+                        child: Text(getState(), style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 11,
+                            letterSpacing: 0.01,
+                            color: decideTextColor(status),
+                        ),),
+                      ),
+                    ),
+                    )
+                    )
                   ],
                 )),
                 //게시글 제목
