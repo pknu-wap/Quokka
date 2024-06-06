@@ -170,7 +170,7 @@ class _LogInState extends State<LogIn> {
                       border: InputBorder.none,
                       counterText: '',
                     ),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                   ),
                 ),
               ),
