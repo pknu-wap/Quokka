@@ -471,15 +471,15 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, // 가운데 정렬
                   child: Container(
-                        margin: EdgeInsets.only(top: 17, left: 130),
+                        margin: EdgeInsets.only(top: 17, left: 150),
                         child: Text(decodednickname,
                           style: TextStyle(
-                            fontFamily: 'MaruBuri',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            letterSpacing: 0.01,
-                            color: Color(0xff000000),
-                          ),
+                          fontFamily: 'SangSangShin',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          letterSpacing: 0.01,
+                          color: Color(0xff000000),
+                        ),
                         ),
                   ),
                 ),
