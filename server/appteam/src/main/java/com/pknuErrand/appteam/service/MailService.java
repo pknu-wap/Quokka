@@ -1,9 +1,9 @@
-package com.pknuErrand.appteam.service.mail;
+package com.pknuErrand.appteam.service;
 
-import com.pknuErrand.appteam.domain.mail.VerificationCode;
+import com.pknuErrand.appteam.domain.Mail.VerificationCode;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
-import com.pknuErrand.appteam.repository.mail.MailMemoryRepository;
+import com.pknuErrand.appteam.repository.MailMemoryRepository;
 import com.pknuErrand.appteam.repository.member.MemberRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

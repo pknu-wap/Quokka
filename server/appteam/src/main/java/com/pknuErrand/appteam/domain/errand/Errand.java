@@ -39,7 +39,7 @@ public class Errand {
     private double longitude;
 
     @Column
-    private String due; // 몇시까지?
+    private Timestamp due; // 몇시까지?
 
     @Column
     private String detail;
@@ -58,17 +58,13 @@ public class Errand {
     @JoinColumn
     private Member erranderNo; // 심부름꾼
 
-    @OneToOne
-    @JoinColumn
-    private ErrandCompletionStatus errandCompletionStatus;
-
     public void changeErrandStatusAndSetErrander(Status status, Member errander) {
         this.status = status;
         erranderNo = errander;
     }
 
     public void updateErrand(String createdDate, String title, String destination,
-                             double latitude, double longitude, String due, String detail,
+                             double latitude, double longitude, Timestamp due, String detail,
                              int reward, Boolean isCash) {
         this.createdDate = createdDate;
         this.title = title;
@@ -81,7 +77,7 @@ public class Errand {
         this.isCash = isCash;
     }
     public Errand(Member orderNo, String createdDate, String title, String destination,
-                  double latitude, double longitude, String due, String detail,
+                  double latitude, double longitude, Timestamp due, String detail,
                   int reward, Boolean isCash, Status status, Member erranderNo) {
         this.orderNo = orderNo;
         this.createdDate = createdDate;
@@ -95,6 +91,5 @@ public class Errand {
         this.isCash = isCash;
         this.status = status;
         this.erranderNo = erranderNo;
-        this.errandCompletionStatus = new ErrandCompletionStatus(this);
     }
 }

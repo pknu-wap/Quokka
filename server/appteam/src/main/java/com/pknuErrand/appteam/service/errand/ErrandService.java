@@ -3,19 +3,22 @@ package com.pknuErrand.appteam.service.errand;
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.domain.errand.ErrandBuilder;
 import com.pknuErrand.appteam.Enum.Status;
-import com.pknuErrand.appteam.dto.errand.*;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
 import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.member.MemberErrandDto;
 import com.pknuErrand.appteam.exception.CustomException;
 import com.pknuErrand.appteam.exception.ErrorCode;
-import com.pknuErrand.appteam.repository.errand.ErrandCompletionStatusRepository;
 import com.pknuErrand.appteam.repository.errand.ErrandRepository;
 import com.pknuErrand.appteam.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 
@@ -23,13 +26,11 @@ import static com.pknuErrand.appteam.Enum.Status.RECRUITING;
 public class ErrandService {
 
     private final ErrandRepository errandRepository;
-    private final ErrandCompletionStatusRepository errandCompletionStatusRepository;
     private final MemberService memberService;
 
     @Autowired
-    ErrandService(ErrandRepository errandRepository, MemberService memberService, ErrandCompletionStatusRepository errandCompletionStatusRepository) {
+    ErrandService(ErrandRepository errandRepository, MemberService memberService) {
         this.errandRepository = errandRepository;
-        this.errandCompletionStatusRepository = errandCompletionStatusRepository;
         this.memberService = memberService;
     }
 
@@ -48,13 +49,12 @@ public class ErrandService {
                 .due(errandSaveRequestDto.getDue())
                 .detail(errandSaveRequestDto.getDetail())
                 .reward(errandSaveRequestDto.getReward())
-                .isCash(errandSaveRequestDto.getIsCash())
+                .isCash(errandSaveRequestDto.isCash())
                 .status(RECRUITING)
                 .erranderNo(null)
                 .build();
-        errandCompletionStatusRepository.save(saveErrand.getErrandCompletionStatus());
         errandRepository.save(saveErrand);
-        return findErrandDetailById(saveErrand.getErrandNo());
+        return findErrandById(saveErrand.getErrandNo());
     }
 
     @Transactional(readOnly = true)
@@ -99,24 +99,12 @@ public class ErrandService {
         return getFilteredErrandList(errandList);
     }
 
-
-    @Transactional(readOnly = true)
-    public List<ErrandDistanceListResponseDto> findPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
-        checkLimitAndThrowException(pageInfo.getLimit());
-        List<ErrandDistanceListResponseDto> errandList = null;
-        if(pageInfo.getStatus() == null)
-            errandList = errandRepository.findErrandByDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor());
-        else
-            errandList = errandRepository.findErrandByStatusAndDistance(pageInfo.getLatitude(),pageInfo.getLongitude(), pageInfo.getCursor(), pageInfo.getStatus());
-
-        return errandList;
-    }
     @Transactional(readOnly = true)
     public List<ErrandListResponseDto> getFilteredErrandList(List<Errand> errandList) {
         List<ErrandListResponseDto> errandListResponseDtoList = new ArrayList<>();
 
         for(Errand errand : errandList) {
-            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
+            MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getErranderNo());
 
             ErrandListResponseDto errandListResponseDto = ErrandListResponseDto.builder()
                     .order(memberErrandDto)
@@ -138,13 +126,9 @@ public class ErrandService {
         List<Errand> errandList = errandRepository.findAll();
         return getFilteredErrandList(errandList);
     }
-    @Transactional(readOnly = true)
-    public Errand findErrandById(long id) {
-        return errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
-    }
 
     @Transactional(readOnly = true)
-    public ErrandDetailResponseDto findErrandDetailById(long id) {
+    public ErrandDetailResponseDto findErrandById(long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         MemberErrandDto memberErrandDto = buildMemberErrandDto(errand.getOrderNo());
 
@@ -161,19 +145,14 @@ public class ErrandService {
                 .reward(errand.getReward())
                 .isCash(errand.getIsCash())
                 .status(errand.getStatus())
-                .isMyErrand(isMyErrand(errand, memberService.getLoginMember().getMemberNo())) /**  인가된 사용자 정보와 비교  **/
+                .isMyErrand(memberErrandDto.getErranderNo() == memberService.getLoginMember().getMemberNo()) /**  인가된 사용자 정보와 비교  **/
                 .build();
 
         return errandDetailResponseDto;
     }
 
     @Transactional
-    public Boolean isMyErrand(Errand errand, Long memberNo)  {  /** Parameter : Errand 객체, Member pk (long) **/
-        return errand.getOrderNo().getMemberNo() == memberNo;
-    }
-
-    @Transactional
-    public Map<String, String> acceptErrand(Long id) {
+    public ErrandDetailResponseDto acceptErrand(Long id) {
         Errand errand = errandRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
         Member errander = memberService.getLoginMember();
         /** 본인 게시물이라면 예외 발생 **/
@@ -183,11 +162,7 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수락이 불가능합니다.");
         }
         changeErrandStatusAndSetErrander(errand, Status.IN_PROGRESS, errander);
-
-        Map<String, String> responseMap = new HashMap<>();
-        responseMap.put("name", errander.getName());
-        responseMap.put("nickname", errander.getNickname());
-        return responseMap;
+        return findErrandById(id);
     }
 
     @Transactional
@@ -222,9 +197,9 @@ public class ErrandService {
                 errandSaveRequestDto.getDue(),
                 errandSaveRequestDto.getDetail(),
                 errandSaveRequestDto.getReward(),
-                errandSaveRequestDto.getIsCash());
+                errandSaveRequestDto.isCash());
 
-        return findErrandDetailById(id);
+        return findErrandById(id);
     }
 
     @Transactional
@@ -238,16 +213,5 @@ public class ErrandService {
             throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "진행중이거나 완료된 심부름은 수정이 불가능합니다.");
         }
         errandRepository.delete(errand);
-    }
-
-    @Transactional
-    public Map<String, ?> getErranderInfo(Long errandNo) {
-        Errand errand = errandRepository.findById(errandNo).orElseThrow(() -> new CustomException(ErrorCode.ERRAND_NOT_FOUND));
-        if(errand.getStatus() == RECRUITING)
-            throw new CustomException(ErrorCode.RESTRICT_CONTENT_ACCESS, "모집중인 심부름의 심부름꾼 정보를 조회할 수 없습니다.");
-        Map<String, String> infoMap = new HashMap<>();
-        infoMap.put("name", errand.getErranderNo().getName());
-        infoMap.put("nickname", errand.getErranderNo().getNickname());
-        return infoMap;
     }
 }

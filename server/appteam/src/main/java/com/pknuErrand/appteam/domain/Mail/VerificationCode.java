@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.domain.mail;
+package com.pknuErrand.appteam.domain.Mail;
 
 import lombok.Getter;
 

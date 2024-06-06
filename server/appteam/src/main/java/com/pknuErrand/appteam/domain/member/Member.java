@@ -40,7 +40,4 @@ public class Member {
     @NonNull
     private String role; // Security 사용을 위한 역할
 
-    public void updateScore(double score) {
-        this.score = score;
-    }
 }

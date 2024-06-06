@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand;
+package com.pknuErrand.appteam.dto.errand.saveDto;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -34,8 +34,8 @@ public class ErrandSaveRequestDto { // to Entity
     @NotNull(message = "longitude를 입력하세요.")
     private double longitude;
 
-    @NotBlank(message = "마감시간을 입력하세요.")
-    private String due; // 몇시까지?
+    @NotNull(message = "마감시간을 입력하세요.")
+    private Timestamp due; // 몇시까지?
 
     @NotBlank(message = "상세내용을 입력하세요.")
     private String detail;
@@ -44,7 +44,7 @@ public class ErrandSaveRequestDto { // to Entity
     private int reward;
 
     @NotNull(message = "현금인지 아닌지 입력하세요.")
-    private Boolean isCash;
+    private boolean isCash;
 
     // private Status status;
 

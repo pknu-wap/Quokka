@@ -1,6 +1,6 @@
-package com.pknuErrand.appteam.repository.mail;
+package com.pknuErrand.appteam.repository;
 
-import com.pknuErrand.appteam.domain.mail.VerificationCode;
+import com.pknuErrand.appteam.domain.Mail.VerificationCode;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 

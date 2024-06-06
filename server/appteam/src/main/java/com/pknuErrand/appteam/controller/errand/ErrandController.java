@@ -1,13 +1,16 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
-import com.pknuErrand.appteam.dto.errand.*;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandListResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandPaginationRequestVo;
+import com.pknuErrand.appteam.dto.errand.saveDto.ErrandSaveRequestDto;
+import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
 import com.pknuErrand.appteam.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Tag(name = "Errand", description = "Errand 관련 API")
@@ -56,7 +58,7 @@ public class ErrandController {
     @GetMapping("/{id}")
     public ResponseEntity<ErrandDetailResponseDto> getOneErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
-                .body(errandService.findErrandDetailById(id));
+                .body(errandService.findErrandById(id));
     }
 
 
@@ -85,30 +87,15 @@ public class ErrandController {
 
     }
 
-
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))),
-            @ApiResponse(responseCode = "400\nINVALID_VALUE", description = "limit 값이 잘못되었음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
-    })
-    @Operation(summary = "거리순으로 페이지네이션 불러오기")
-    @GetMapping("/distance")
-    public ResponseEntity<List<ErrandDistanceListResponseDto>> getPaginationErrandByDistance(ErrandDistancePaginationRequestVo pageInfo) {
-        return ResponseEntity.ok()
-                .body(errandService.findPaginationErrandByDistance(pageInfo));
-    }
-
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "수락 성공", content = @Content(examples = {
-                    @ExampleObject(
-                            value = "{ \"name\": \"김수현\", \"nickname\": \"한상차림위샹체쯔\" }")
-            })) ,
+            @ApiResponse(responseCode = "200", description = "수락 성공", content = @Content(schema = @Schema(implementation = ErrandDetailResponseDto.class))) ,
             @ApiResponse(responseCode = "404\nERRAND_NOT_FOUND", description = "심부름 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
             @ApiResponse(responseCode = "401\nUNAUTHORIZED_ACCESS", description = "본인 게시물 수락할 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
             @ApiResponse(responseCode = "406\nRESTRICT_CONTENT_ACCESS", description = "진행중/완료 상태인 심부름 수락 불가능", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "요청서 수락하기", description = "요청서 수락요청을 통해 errand status 변경하기")
     @GetMapping("/{id}/accept")
-    public ResponseEntity<Map<String, String>> acceptErrand(@PathVariable Long id) {
+    public ResponseEntity<ErrandDetailResponseDto> acceptErrand(@PathVariable Long id) {
         return ResponseEntity.ok()
                 .body(errandService.acceptErrand(id));
     }
@@ -134,11 +121,18 @@ public class ErrandController {
     })
     @Operation(summary = "요청서 삭제하기", description = "요청서 삭제")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteErrand(@PathVariable Long id) {
+    public void deleteErrand(@PathVariable Long id) {
         errandService.deleteErrand(id);
-        return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/loginTest")
+    public void 로그인테스트() {
+        Member member = memberService.getLoginMember();
+        log.info("member id = {}", member.getId());
+        log.info("member name = {}", member.getName());
+        if(member == null)
+            log.warn("member is null");
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ErrandListResponseDto>> getAllErrand() {
@@ -147,17 +141,5 @@ public class ErrandController {
                 .body(errandListResponseDto);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(examples = {
-                    @ExampleObject(
-                            value = "{ \"name\": \"김수현\", \"nickname\": \"한상차림위샹체쯔\" }")
-            })),
-            @ApiResponse(responseCode = "404\nERRAND_NOT_FOUND", description = "심부름 찾을 수 없음", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))),
-            @ApiResponse(responseCode = "406\nRESTRICT_CONTENT_ACCESS", description = "모집중인 심부름의 심부름꾼 조회 불가", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))),
-    })
-    @GetMapping("/errander/{errandNo}")
-    public ResponseEntity<Map<String, ?>> getErranderInfo(@PathVariable Long errandNo) {
-        return ResponseEntity.ok()
-                .body(errandService.getErranderInfo(errandNo));
-    }
+
 }

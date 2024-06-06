@@ -1,7 +1,8 @@
-package com.pknuErrand.appteam.controller.mail;
+package com.pknuErrand.appteam.controller;
 
+import com.pknuErrand.appteam.dto.errand.getDto.ErrandDetailResponseDto;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
-import com.pknuErrand.appteam.service.mail.MailService;
+import com.pknuErrand.appteam.service.MailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -53,8 +54,6 @@ public class MailController {
                 .body("인증번호 인증 완료.");
     }
 
-
-    @Operation(summary = "인증번호 저장 메모리 스토리지 내 유효시간이 지난 데이터 clear" )
     @GetMapping("/mail/memoryStorageClear")
     public String clearExpiredEntryInMemoryStorage() {
         mailService.clearExpiredEntryInMemoryStorage();

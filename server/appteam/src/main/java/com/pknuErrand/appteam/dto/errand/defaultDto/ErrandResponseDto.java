@@ -1,4 +1,4 @@
-package com.pknuErrand.appteam.dto.errand;
+package com.pknuErrand.appteam.dto.errand.defaultDto;
 
 import com.pknuErrand.appteam.domain.errand.Errand;
 import com.pknuErrand.appteam.Enum.Status;
@@ -26,7 +26,7 @@ public class ErrandResponseDto { // from Entity
 
     private double longitude; // 경도
 
-    private String due; // 몇시까지?
+    private Timestamp due; // 몇시까지?
 
     private String detail; // 상세 내용
 

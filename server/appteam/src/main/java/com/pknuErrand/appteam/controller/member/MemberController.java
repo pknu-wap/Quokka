@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Member", description = "Member 관련 API")
 @Controller
 @ResponseBody
+@RequestMapping("/join")
 public class MemberController {
 
     private final MemberService memberService;
@@ -34,7 +35,7 @@ public class MemberController {
             @ApiResponse(responseCode = "415\nINVALID_FORMAT", description = "회원 가입 실패", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "회원 가입", description = "회원 가입 기능")
-    @PostMapping("/join")
+    @PostMapping
     public void SignUpProcess(@Valid @RequestBody MemberFormDto memberFormDto) {
 
         memberService.SignUpProcess(memberFormDto);
@@ -45,7 +46,7 @@ public class MemberController {
             @ApiResponse(responseCode = "400\nDUPLICATE_DATA", description = "중복된 학번입니다.", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "학번 중복 확인", description = "회원 가입 시 학번 중복 확인")
-    @GetMapping("/join/{id}/idExists")
+    @GetMapping("/{id}/idExists")
     public void CheckId(@PathVariable(value = "id") String id) {
 
         if(memberService.checkId(id))
@@ -57,21 +58,10 @@ public class MemberController {
             @ApiResponse(responseCode = "400\nDUPLICATE_DATA", description = "중복된 닉네임입니다.", content = @Content(schema = @Schema(implementation = ExceptionResponseDto.class))) ,
     })
     @Operation(summary = "닉네임 중복 확인", description = "회원 가입 시 닉네임 중복 확인")
-    @GetMapping("/join/{nickname}/nicknameExists")
+    @GetMapping("/{nickname}/nicknameExists")
     public void CheckNickname(@PathVariable(value = "nickname") String nickname) {
         
         if(memberService.checkNickname(nickname))
             throw new CustomException(ErrorCode.DUPLICATE_DATA, "중복된 닉네임입니다.");
     }
-
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "평가 완료") ,
-    })
-    @Operation(summary = "상대방 평가", description = "상대방 1 ~ 5점으로 평가")
-    @PutMapping("/score")
-    public void getMemberScore(@RequestParam("errandNo") long errandNo, @RequestParam("score") double score) {
-
-        memberService.updateScore(errandNo, score);
-    }
-
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberErrandDto {
 
-    private long orderNo;
+    private long erranderNo;
 
     private String nickname;
 
