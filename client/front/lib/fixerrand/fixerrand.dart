@@ -247,7 +247,7 @@ class _FixErrandState extends State<FixErrand> {
   late String status;
   late bool isCash;
 
-  final int maxTitleLength = 40; // 제목 최대 길이 설정
+  final int maxTitleLength = 20; // 제목 최대 길이 설정
   final int maxDetailAddressLength = 15; // 상세 주소 최대 길이 설정
   final int maxPriceLength = 5; // 심부름 값 최대 길이 설정
   final int maxRequestLength = 60; // 요청 사항 최대 길이 설정
