@@ -9,6 +9,9 @@ import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+
+import 're-showmap.dart';
+import 'showerrand/re-showerrand.dart';
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
@@ -274,11 +277,11 @@ class _RatingDialogState extends State<RatingDialog> {
     return PopScope(
         canPop: false,
         onPopInvoked: (bool didPop) async {
-          if (didPop) {
-            return;
-          }
-        },
-    child : Dialog(
+      if (didPop) {
+        return;
+      }
+    },
+      child: Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         side: BorderSide(color: Color(0xffB6B6B6), width: 1),
@@ -697,6 +700,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
     var response = await http.get(Uri.parse(url),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
+      stompClient.deactivate();
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -865,7 +869,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
     connectNo = errandNo.toString();
     statusMessageInit();
     completeCheck();
-
     stompClient = StompClient(
       config: StompConfig(
         url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
@@ -936,7 +939,11 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ReShowMap(errandNo: connectNo)));
+                        },
                         icon: Image.asset(
                           'assets/images/map.png',
                           color: Color(0xffB4B5BE),
@@ -953,7 +960,11 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
+                        },
                         icon: Image.asset(
                           'assets/images/errand.png',
                           color: Color(0xffB4B5BE),

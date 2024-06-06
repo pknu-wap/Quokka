@@ -9,6 +9,8 @@ import 'package:stomp_dart_client/stomp_dart_client.dart';
 
 
 import 'home.dart';
+import 're-showmap.dart';
+import 'showerrand/re-showerrand.dart';
 
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
@@ -267,94 +269,6 @@ class _RatingDialogState extends State<RatingDialog> {
       },
     );
   }
-
-  // void scoreConfirmDialog(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return  Dialog(
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(20),
-  //         ),
-  //         child: FittedBox(
-  //           fit: BoxFit.contain,
-  //           child: Container(
-  //             width: 300, height: 245,
-  //             padding: EdgeInsets.all(20),
-  //             decoration: BoxDecoration(
-  //               color: Color(0xffFFFFFF),
-  //               borderRadius: BorderRadius.circular(20),
-  //             ),
-  //             child: Column(
-  //               mainAxisSize: MainAxisSize.min, // 다이얼로그의 크기를 콘텐츠에 맞게 조정
-  //               children: [
-  //                 Icon(
-  //                   Icons.warning,
-  //                   color: Color(0xffAD8772),
-  //                   size: 40,
-  //                 ),
-  //                 SizedBox(height: 10),
-  //                 Text(
-  //                   "지금 나가면 평가할 수 없어요!",
-  //                   style: TextStyle(
-  //                     fontSize: 18,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                   textAlign: TextAlign.center,
-  //                 ),
-  //                 SizedBox(height: 20),
-  //                 Container(
-  //                   width: 300, height: 45,
-  //                   child: ElevatedButton(
-  //                     onPressed: () {
-  //                       Navigator.push(
-  //                           context,
-  //                           MaterialPageRoute(
-  //                               builder: (context) => Home()));
-  //                     },
-  //                     style: ElevatedButton.styleFrom(
-  //                       backgroundColor: Color(0xffAD8772),
-  //                       foregroundColor: Color(0xffFFFFFF),
-  //                       padding: EdgeInsets.symmetric(vertical: 12),
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(10),
-  //                       ),
-  //                     ),
-  //                     child: Text(
-  //                       "평가를 하지 않고 나가기",
-  //                       textAlign: TextAlign.center,
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Container(
-  //                   margin: EdgeInsets.only(top: 10),
-  //                   width: 300, height: 45,
-  //                   child: TextButton(
-  //                     onPressed: () {
-  //                       Navigator.pop(context);
-  //                     },
-  //                     style: TextButton.styleFrom(
-  //                       foregroundColor: Color(0xffAD8772),
-  //                       padding: EdgeInsets.symmetric(vertical: 12),
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(10),
-  //                       ),
-  //                       side: BorderSide(color: Color(0xffAD8772)),
-  //                     ),
-  //                     child: Text(
-  //                       "취소",
-  //                       textAlign: TextAlign.center,
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   int _rating = 0;
   final List<String> ratingTexts = [
@@ -769,6 +683,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
     if(response.statusCode == 200) {
       showDialog(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext context) {
           return RatingDialog();
         },
@@ -1087,7 +1002,11 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                             padding: EdgeInsets.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ReShowMap(errandNo: connectNo)));
+                          },
                           icon: Image.asset(
                             'assets/images/map.png',
                             color: Color(0xffB4B5BE),
@@ -1104,7 +1023,11 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                             padding: EdgeInsets.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
+                          },
                           icon: Image.asset(
                             'assets/images/errand.png',
                             color: Color(0xffB4B5BE),
