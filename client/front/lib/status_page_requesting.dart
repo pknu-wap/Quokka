@@ -77,15 +77,15 @@ class _RatingDialogState extends State<RatingDialog> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
-                      width: 76.83,
-                      height: 76.83,
+                    margin: EdgeInsets.only(top: 30),
+                    child: Icon(
+                      Icons.sentiment_satisfied_alt,
+                      size: 40,
+                      color: Color(0xffA98474),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 4.08),
+                    margin: EdgeInsets.only(top: 12),
                     child: Text(
                       "평가해주셔서 감사합니다!",
                       style: TextStyle(
@@ -99,7 +99,7 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 30),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
