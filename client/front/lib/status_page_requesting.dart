@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -486,10 +487,10 @@ class Status_Content_Widget extends StatelessWidget {
                       width: 35.43,
                       height: 35.43,
                       margin: EdgeInsets.only(top: 8.28, left: 17.04),
-                      child: Image.asset(
+                      child: SvgPicture.asset(
                         contents == "완료했어요!"
-                            ? 'assets/images/smiley Quokka.png'
-                            : 'assets/images/Quokka.png',
+                            ? 'assets/images/smile_quokka.svg'
+                            : 'assets/images/quokka.svg',
                       ),
                     ),
                     Container(
@@ -527,10 +528,10 @@ class Status_Content_Widget extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Stack(
                   children: [
-                    Image.asset(
+                    SvgPicture.asset(
                       contents == "완료했어요!"
-                          ? 'assets/images/진한말풍선L.png'
-                          : 'assets/images/연한말풍선L.png',
+                          ? 'assets/images/dark_speech_bubble_L.svg'
+                          : 'assets/images/light_speech_bubble_L.svg',
                       width: 276.69,
                       height: 42.79,
                       fit: BoxFit.cover,

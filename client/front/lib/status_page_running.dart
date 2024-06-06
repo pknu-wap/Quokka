@@ -495,10 +495,10 @@ class Status_Content_Widget extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      Image.asset(
+                      SvgPicture.asset(
                         contents == "완료했어요!"
-                            ? 'assets/images/진한말풍선R.png'
-                            : 'assets/images/연한말풍선R.png',
+                            ? 'assets/images/dark_speech_bubble_R.svg'
+                            : 'assets/images/light_speech_bubble_R.svg',
                         width: 247.18,
                         height: 42.79,
                         fit: BoxFit.cover,
@@ -531,10 +531,10 @@ class Status_Content_Widget extends StatelessWidget {
                         width: 35.43,
                         height: 35.43,
                         margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                        child: Image.asset(
+                        child: SvgPicture.asset(
                           contents == "완료했어요!"
-                              ? 'assets/images/smiley Quokka.png'
-                              : 'assets/images/Quokka.png',
+                              ? 'assets/images/smile_quokka.svg'
+                              : 'assets/images/quokka.svg',
                         ),
                       ),
                       Container(
