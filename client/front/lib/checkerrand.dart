@@ -157,7 +157,6 @@ class ErrandCheckWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 320, height: 305.85,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -959,56 +958,48 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
                         ),
-                        child: ListView.builder(
+                            child: Padding(
                             padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                            shrinkWrap: true,
-                            itemCount: errands.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              String nickname = errands[index]["nickname"];
-                              String createdDate =
-                                  errands[index]["createdDate"];
-                              String title = errands[index]['title'];
-                              String destination =
-                                  errands[index]['destination'];
-                              String due = errands[index]['due'];
-                              String detail = errands[index]['detail'];
-                              String status = errands[index]['status'];
+                            child: Column(
+                              children: errands.map((errand) {
+                                String nickname = errand["nickname"];
+                                String createdDate = errand["createdDate"];
+                                String title = errand['title'];
+                                String destination = errand['destination'];
+                                String due = errand['due'];
+                                String detail = errand['detail'];
+                                String status = errand['status'];
 
-                              String decodedNickname =
-                                  utf8.decode(nickname.runes.toList());
-                              String decodedCreatedDate =
-                                  utf8.decode(createdDate.runes.toList());
-                              String decodedTitle =
-                                  utf8.decode(title.runes.toList());
-                              String decodedDestination =
-                                  utf8.decode(destination.runes.toList());
-                              String decodedDue =
-                                  utf8.decode(due.runes.toList());
-                              String decodedDetail =
-                                  utf8.decode(detail.runes.toList());
-                              String decodedStatus =
-                                  utf8.decode(status.runes.toList());
-                              return ErrandCheckWidget(
-                                  orderNo: errands[index]["orderNo"],
+                                String decodedNickname = utf8.decode(nickname.runes.toList());
+                                String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
+                                String decodedTitle = utf8.decode(title.runes.toList());
+                                String decodedDestination = utf8.decode(destination.runes.toList());
+                                String decodedDue = utf8.decode(due.runes.toList());
+                                String decodedDetail = utf8.decode(detail.runes.toList());
+                                String decodedStatus = utf8.decode(status.runes.toList());
+
+                                return ErrandCheckWidget(
+                                  orderNo: errand["orderNo"],
                                   nickname: decodedNickname,
-                                  score: errands[index]["score"],
-                                  errandNo: errands[index]["errandNo"],
+                                  score: errand["score"],
+                                  errandNo: errand["errandNo"],
                                   createdDate: decodedCreatedDate,
                                   title: decodedTitle,
                                   destination: decodedDestination,
-                                  latitude: errands[index]["latitude"],
-                                  longitude: errands[index]["longitude"],
+                                  latitude: errand["latitude"],
+                                  longitude: errand["longitude"],
                                   due: decodedDue,
                                   detail: decodedDetail,
-                                  reward: errands[index]["reward"],
-                                  isCash: errands[index]["isCash"],
+                                  reward: errand["reward"],
+                                  isCash: errand["isCash"],
                                   status: decodedStatus,
-                                  isMyErrand: errands[index]["isMyErrand"],
-                              );
-                            }),
+                                  isMyErrand: errand["isMyErrand"],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                         ),
                       ),
-                    ),
-
                     // 글 보기 올린 사람
                     if (errands[0]["isMyErrand"] == true)
                       Flexible(
@@ -1021,53 +1012,46 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             borderRadius: BorderRadius.circular(5),
                             color: Color(0xffFFFFFF),
                           ),
-                          child: ListView.builder(
+                              child: Padding(
                               padding: EdgeInsets.only(top: 0.1, bottom: 45),
-                              shrinkWrap: true,
-                              itemCount: errands.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String nickname = errands[index]["nickname"];
-                                String createdDate =
-                                errands[index]["createdDate"];
-                                String title = errands[index]['title'];
-                                String destination =
-                                errands[index]['destination'];
-                                String due = errands[index]['due'];
-                                String detail = errands[index]['detail'];
-                                String status = errands[index]['status'];
+                            child: Column(
+                              children: errands.map((errand) {
+                                String nickname = errand["nickname"];
+                                String createdDate = errand["createdDate"];
+                                String title = errand['title'];
+                                String destination = errand['destination'];
+                                String due = errand['due'];
+                                String detail = errand['detail'];
+                                String status = errand['status'];
 
-                                String decodedNickname =
-                                utf8.decode(nickname.runes.toList());
-                                String decodedCreatedDate =
-                                utf8.decode(createdDate.runes.toList());
-                                String decodedTitle =
-                                utf8.decode(title.runes.toList());
-                                String decodedDestination =
-                                utf8.decode(destination.runes.toList());
-                                String decodedDue =
-                                utf8.decode(due.runes.toList());
-                                String decodedDetail =
-                                utf8.decode(detail.runes.toList());
-                                String decodedStatus =
-                                utf8.decode(status.runes.toList());
+                                String decodedNickname = utf8.decode(nickname.runes.toList());
+                                String decodedCreatedDate = utf8.decode(createdDate.runes.toList());
+                                String decodedTitle = utf8.decode(title.runes.toList());
+                                String decodedDestination = utf8.decode(destination.runes.toList());
+                                String decodedDue = utf8.decode(due.runes.toList());
+                                String decodedDetail = utf8.decode(detail.runes.toList());
+                                String decodedStatus = utf8.decode(status.runes.toList());
+
                                 return ErrandCheckWidget(
-                                    orderNo: errands[index]["orderNo"],
-                                    nickname: decodedNickname,
-                                    score: errands[index]["score"],
-                                    errandNo: errands[index]["errandNo"],
-                                    createdDate: decodedCreatedDate,
-                                    title: decodedTitle,
-                                    destination: decodedDestination,
-                                    latitude: errands[index]["latitude"],
-                                    longitude: errands[index]["longitude"],
-                                    due: decodedDue,
-                                    detail: decodedDetail,
-                                    reward: errands[index]["reward"],
-                                    isCash: errands[index]["isCash"],
-                                    status: decodedStatus,
-                                    isMyErrand: errands[index]["isMyErrand"],
+                                  orderNo: errand["orderNo"],
+                                  nickname: decodedNickname,
+                                  score: errand["score"],
+                                  errandNo: errand["errandNo"],
+                                  createdDate: decodedCreatedDate,
+                                  title: decodedTitle,
+                                  destination: decodedDestination,
+                                  latitude: errand["latitude"],
+                                  longitude: errand["longitude"],
+                                  due: decodedDue,
+                                  detail: decodedDetail,
+                                  reward: errand["reward"],
+                                  isCash: errand["isCash"],
+                                  status: decodedStatus,
+                                  isMyErrand: errand["isMyErrand"],
                                 );
-                              }),
+                              }).toList(),
+                            ),
+                            ),
                         ),
                       ),
 
