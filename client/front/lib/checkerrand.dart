@@ -52,6 +52,8 @@ class ErrandCheckWidget extends StatelessWidget {
     required this.isMyErrand,
   }) : super(key: key);
 
+  late int titleLength = title.length;
+
   //상태에 따라 텍스트 출력
   String getState() {
     if(status == "RECRUITING")
@@ -163,12 +165,12 @@ class ErrandCheckWidget extends StatelessWidget {
                 if(isMyErrand == false) // 내가 쓴 게시글이 아니면 닉네임, 평점 생성
                 //닉네임, 평점
                 Container(
-                    margin: EdgeInsets.only(top: 13.01),
+                    margin: EdgeInsets.only(top: 16.4),
                     child: Row(
                   children: [
                     //닉네임
                     Container(
-                      margin: EdgeInsets.only(left: 13.4),
+                      margin: EdgeInsets.only(left: 13.59),
                       child: Text(
                         "${nickname}",
                         style: TextStyle(
@@ -230,9 +232,11 @@ class ErrandCheckWidget extends StatelessWidget {
                     )
                   ],
                 )),
+                // 내가 작성한 심부름
+                if(isMyErrand == true)
                 //게시글 제목
                 Container(
-                  margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
                     style: TextStyle(
@@ -244,9 +248,27 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                //게시글 제목
+                  Container(
+                    margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                    child: Text(
+                      "${title}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
+                    ),
+                  ),
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 심부름 값
                 Container(
-                  margin: EdgeInsets.only(top: 11.52, left: 13.4),
+                  margin: EdgeInsets.only(top: 3, left: 13.4),
                   child: Text(
                     "\u20A9 ${priceFormat.format(reward)} 원",
                     style: TextStyle(
@@ -258,9 +280,25 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                // 심부름 값
+                  Container(
+                    margin: EdgeInsets.only(top: 6, left: 13.4),
+                    child: Text(
+                      "\u20A9 ${priceFormat.format(reward)} 원",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        letterSpacing: 0.001,
+                        color: Color(0xff7C3D1A),
+                      ),
+                    ),
+                  ),
                 // 상세 주소
                 Container(
-                    margin: EdgeInsets.only(top: 22.06),
+                    margin: EdgeInsets.only(top: 18),
                     child: Row(
                       children: [
                         // 마커 이미지
@@ -366,27 +404,38 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ],
                     )),
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 실선
                 Container(
-                  margin: EdgeInsets.only(top: 24.68, left: 12.01, right: 9.99),
+                  margin: EdgeInsets.only(top: 16.49, left: 12.01, right: 9.99),
                   height: 1.0,
                   width: 298,
                   color: Color(0xffDBDBDB),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                // 실선
+                  Container(
+                    margin: EdgeInsets.only(top: 12, left: 12.01, right: 9.99),
+                    height: 1.0,
+                    width: 298,
+                    color: Color(0xffDBDBDB),
+                  ),
                 // 요청 사항
-                Container(
-                  margin: EdgeInsets.only(top: 15.61, left: 20.66, right: 19.34),
-                  child:  Text(
-                    "${detail}",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      letterSpacing: 0.001,
-                      color: Color(0xff111111),
+                  Container(
+                    margin: EdgeInsets.only(top: 12, left: 20.66, right: 19.34),
+                    child:  Text(
+                      "${detail}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -963,8 +1012,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
                         ),
-                            child: Padding(
-                            padding: EdgeInsets.only(top: 0.1, bottom: 45),
                             child: Column(
                               children: errands.map((errand) {
                                 String nickname = errand["nickname"];
@@ -1003,7 +1050,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               }).toList(),
                             ),
                           ),
-                         ),
                       ),
                     // 글 보기 올린 사람
                     if (errands[0]["isMyErrand"] == true)
@@ -1017,8 +1063,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             borderRadius: BorderRadius.circular(5),
                             color: Color(0xffFFFFFF),
                           ),
-                              child: Padding(
-                              padding: EdgeInsets.only(top: 0.1, bottom: 45),
                             child: Column(
                               children: errands.map((errand) {
                                 String nickname = errand["nickname"];
@@ -1058,7 +1102,6 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             ),
                             ),
                         ),
-                      ),
 
                     if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)
