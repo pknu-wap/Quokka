@@ -146,6 +146,7 @@ class _LogInState extends State<LogIn> {
                   child: TextField(
                     maxLength: maxPasswordLength,
                     controller: _PasswordController,
+                    obscureText: true,
                     // 비밀번호 텍스트 필드의 최대 길이 설정
                     onChanged: (text) {
                       if (text.length < minPasswordLength) {
