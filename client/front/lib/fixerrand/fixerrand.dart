@@ -248,6 +248,9 @@ class _FixErrandState extends State<FixErrand> {
   late bool isCash;
 
   final int maxTitleLength = 20; // 제목 최대 길이 설정
+  final int maxDetailAddressLength = 15; // 상세 주소 최대 길이 설정
+  final int maxPriceLength = 5; // 심부름 값 최대 길이 설정
+  final int maxRequestLength = 60; // 요청 사항 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
@@ -532,6 +535,7 @@ class _FixErrandState extends State<FixErrand> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
                     child: TextField(
+                      maxLength: maxDetailAddressLength,
                       controller: detailAddressController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -550,6 +554,7 @@ class _FixErrandState extends State<FixErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       keyboardType: TextInputType.text,
                     ),
@@ -645,6 +650,7 @@ class _FixErrandState extends State<FixErrand> {
                                   padding: EdgeInsets.only(
                                       bottom: 4, left: 27, right: 7.5),
                                   child: TextField(
+                                    maxLength: maxPriceLength,
                                     controller: priceController,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
@@ -655,6 +661,7 @@ class _FixErrandState extends State<FixErrand> {
                                     ),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
+                                      counterText: '',
                                     ),
                                     keyboardType: TextInputType.number,
                                   ),
@@ -737,6 +744,7 @@ class _FixErrandState extends State<FixErrand> {
                     padding: EdgeInsets.only(top: 2, left: 10, right: 10),
                     // hintText Padding이 이상해서 임의로 설정
                     child: TextField(
+                      maxLength: maxRequestLength,
                       controller: requestController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -756,6 +764,7 @@ class _FixErrandState extends State<FixErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       maxLines: null,
                       // 입력 텍스트가 필요한 만큼 자동으로 늘어남
