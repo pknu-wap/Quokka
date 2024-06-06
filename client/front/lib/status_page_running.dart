@@ -21,6 +21,8 @@ class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정�
     );
   }
 }
+
+//
 class RatingDialog extends StatefulWidget {
   @override
   _RatingDialogState createState() => _RatingDialogState();
@@ -37,14 +39,13 @@ class _RatingDialogState extends State<RatingDialog> {
     var response = await http.put(Uri.parse(url + param),
         headers: {"Authorization": "$token"});
     if(response.statusCode == 200) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     }
     else {
       print(response.body);
     }
   }
+  // 점수 경고 팝업
   void scoreConfirmDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -132,6 +133,8 @@ class _RatingDialogState extends State<RatingDialog> {
       },
     );
   }
+
+  // 평가하기 팝업
   int _rating = 0;
   final List<String> ratingTexts = [
     '',
@@ -145,35 +148,41 @@ class _RatingDialogState extends State<RatingDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        side: BorderSide(color: Color(0xffB6B6B6), width: 1),
       ),
       child: FittedBox(
         fit: BoxFit.contain,
-        child: Container(width: 323, height: 343,
+        child: Container(
+          width: 323,
+          height: 343,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF),
-            border: Border.all(color: Color(0xffB6B6B6), width: 1,),
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container( margin: EdgeInsets.only(top: 19, left: 22),
                       child: Text(
                         '평가하기',
                         style: TextStyle(fontFamily: 'Pretendard',
-                          fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
+                          letterSpacing: 0.00,
                           color: Color(0xff616161),),),
                     ),
-                    Container( margin: EdgeInsets.only(left: 177), //원래 197인데 잘려서 줄여놓음
+                    Container(
+                      margin: EdgeInsets.only(left: 177), //원래 197인데 잘려서 줄여놓음
                       child: IconButton(
-                        icon: Icon(Icons.close),
+                        icon: Icon(
+                            Icons.close,
+                        color: Color(0xff8D8D8D),
+                        size: 35,),
                         onPressed: () {
                           scoreConfirmDialog(context);
                         },
@@ -182,28 +191,34 @@ class _RatingDialogState extends State<RatingDialog> {
                   ],
                 ),
               ),
-              Container( width: 300, height: 16,
-                margin: EdgeInsets.only(top: 19, left: 22, right: 40),
-                child:  Text('더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
+              Container(
+                margin: EdgeInsets.only(top: 19, left: 22, right: 50),
+                child:  Text(
+                  '더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
                   style: TextStyle(fontFamily: 'Pretendard',
-                    fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w400,
                     fontSize: 13,
+                    letterSpacing: 0.00,
                     color: Color(0xff404040),),),
               ),
               Flexible(
-                child: Container( width: 251, height: 16,
+                child: Container(
                   margin: EdgeInsets.only(left: 22, right: 50),
                   child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
                     style: TextStyle(fontFamily: 'Pretendard',
-                      fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
+                      letterSpacing: 0.00,
                       color: Color(0xff404040),),),
                 ),
               ),
-              Container( margin: EdgeInsets.only(top: 18.72, left: 27, right: 31),
-                  child: Container(width: 265, child: Divider(color: Color(0xffBCBCBC), thickness: 0.5))),
+              Container(
+                  margin: EdgeInsets.only(top: 18.71, left: 27, right: 31),
+                  child: Container(
+                      width: 265,
+                      child: Divider(
+                          color: Color(0xffBCBCBC),
+                          thickness: 0.5))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(5, (index) {
@@ -551,91 +566,6 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
       print("사용자가 errander가 아님");
     }
   }
-
-
-  // Dialog(
-  // shape: RoundedRectangleBorder(
-  // borderRadius: BorderRadius.circular(20),
-  // ),
-  // child: Container(
-  // padding: EdgeInsets.all(20),
-  // width: 300,
-  // height: 203,
-  // decoration: BoxDecoration(
-  // color: Color(0xffFFFFFF), //배경색
-  // borderRadius: BorderRadius.circular(20),
-  // ),
-  // child: Column(
-  // mainAxisAlignment: MainAxisAlignment.center,
-  // children: [
-  // Icon(
-  // Icons.check, // 확인 아이콘으로 변경
-  // color: Color(0xffAD8772),
-  // size: 40,
-  // ),
-  // SizedBox(height: 10),
-  // Text(
-  // "심부름을 완료하시겠어요?",
-  // style: TextStyle(
-  // fontSize: 18,
-  // fontWeight: FontWeight.bold,
-  // ),
-  // textAlign: TextAlign.center,
-  // ),
-  // SizedBox(height: 5),
-  // Text(
-  // "꼭 심부름이 완료되었을 때 눌러야 해요.",
-  // style: TextStyle(
-  // fontSize: 12,
-  // fontWeight: FontWeight.bold,
-  // color: Color(0xffB08B76),
-  // ),
-  // textAlign: TextAlign.center,
-  // ),
-  // SizedBox(height: 15),
-  // Row(
-  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  // children: [
-  // Expanded(
-  // child: ElevatedButton(
-  // onPressed: () {
-  // setComplete();
-  // errander_complete();
-  // },
-  // style: ElevatedButton.styleFrom(
-  // backgroundColor: Color(0xffAD8772), // 갈색으로 설정
-  // foregroundColor: Color(0xffFFFFFF),
-  // padding: EdgeInsets.symmetric(vertical: 12),
-  // shape: RoundedRectangleBorder(
-  // borderRadius: BorderRadius.circular(10),
-  // ),
-  // ),
-  // child: Text("확인"),
-  // ),
-  // ),
-  // SizedBox(width: 10),
-  // Expanded(
-  // child: TextButton(
-  // onPressed: () {
-  // Navigator.pop(context);
-  // },
-  // style: TextButton.styleFrom(
-  // foregroundColor: Color(0xffAD8772),
-  // padding: EdgeInsets.symmetric(vertical: 12),
-  // shape: RoundedRectangleBorder(
-  // borderRadius: BorderRadius.circular(10),
-  // ),
-  // side: BorderSide(color: Color(0xffAD8772)),
-  // ),
-  // child: Text("취소"),
-  // ),
-  // ),
-  // ],
-  // ),
-  // ],
-  // ),
-  // ),
-  // );
 
   // 심부름 완료
   void confirmDialog(BuildContext context) {
