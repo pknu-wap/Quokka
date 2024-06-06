@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -169,12 +170,12 @@ class _Upload_ImageState extends State<Upload_Image> {
                 margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Stack(
                   children: <Widget>[
-                    Image.asset('assets/images/Rectangle 1.png', width: 320, height: 202, fit: BoxFit.cover),
+                    SvgPicture.asset('assets/images/upload_image_box.svg', width: 320, height: 202, fit: BoxFit.cover),
                     Positioned(
                       left: 0, right: 0, top: 0, bottom: 0,
                       child: IconButton(
-                        icon: Image.asset(
-                          'assets/images/upload_image_button.png',
+                        icon: SvgPicture.asset(
+                          'assets/images/upload_image_button.svg',
                           width: 80,
                           height: 80,
                           // color: Color(0xff8D8D8D),
@@ -231,7 +232,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                       width: 139.58,
                       height: 256.44,
                       margin: const EdgeInsets.only(left: 22.0, top: 17.0),
-                      child: Image.asset('assets/images/upload_image_sample.png'),
+                      child: SvgPicture.asset('assets/images/upload_image_sample.svg'),
                     ),
 
                   ],

@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 메인 페이지 심부름 목록 확인 팝업 수행중, 요청 중 커카 이미지 png -&gt; svg 변경">
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/quokka.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/red_dot_alarm.svg" afterDir="false" />
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경">
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/closed_eye.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/open_eye.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/upload_image_box.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/upload_image_button.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/upload_image_sample.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/re-showmap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/re-showmap.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/upload_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/upload_image.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717683663914</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경">
+      <option name="closed" value="true" />
+      <created>1717693697236</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717693697237</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,6 +122,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix: 로그인 페이지, 현황 페이지 메시지 커카 이미지 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 메인 페이지 심부름 목록 확인 팝업 수행중, 요청 중 커카 이미지 png -&gt; svg 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: 메인 페이지 심부름 목록 확인 팝업 수행중, 요청 중 커카 이미지 png -&gt; svg 변경" />
+    <MESSAGE value="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경" />
   </component>
 </project>
