@@ -182,6 +182,9 @@ class ReturnValues {
 class _WriteErrandState extends State<WriteErrand> {
   bool _isLoading = true;
   final int maxTitleLength = 20; // 제목 최대 길이 설정
+  final int maxDetailAddressLength = 15; // 상세 주소 최대 길이 설정
+  final int maxPriceLength = 5; // 심부름 값 최대 길이 설정
+  final int maxRequestLength = 60; // 요청 사항 최대 길이 설정
 
   TextEditingController titleController = TextEditingController();
   TextEditingController detailAddressController = TextEditingController();
