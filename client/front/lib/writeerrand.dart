@@ -518,7 +518,7 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 2),
+                        margin: EdgeInsets.only(right: 301.92),
                         child: Text(
                           '*',
                           style: TextStyle(

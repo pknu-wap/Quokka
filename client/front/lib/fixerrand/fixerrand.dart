@@ -459,7 +459,7 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 2),
+                        margin: EdgeInsets.only(right: 301.92),
                         child: Text(
                           '*',
                           style: TextStyle(
@@ -468,19 +468,6 @@ class _FixErrandState extends State<FixErrand> {
                             fontSize: 14,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 121),
-                        child: Text(
-                          '예약은 최대 ?시간 이후까지 가능해요.',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            letterSpacing: 0.01,
-                            color: Color(0xff111111),
                           ),
                         ),
                       ),
