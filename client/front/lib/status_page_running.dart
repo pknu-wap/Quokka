@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'custom_dialog.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
@@ -1064,7 +1065,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                               customDropdownItem("쪽지를 확인해주세요."),
                             ],
                             onChanged: (String? value) {
-                              sendValue(value);
+                              (contents.last['contents'] == "완료했어요!") ? warningDialog(context, "이미 완료된 심부름이예요!") : sendValue(value);
                             },
                             dropdownStyleData: DropdownStyleData(
                               offset: Offset(0, 350),
@@ -1111,6 +1112,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                 child: ElevatedButton(
                   onPressed:
                       () {
+                        (contents.last['contents'] == "완료했어요!") ?
+                        warningDialog(context, "이미 완료된 심부름이예요!") :
                         confirmDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
