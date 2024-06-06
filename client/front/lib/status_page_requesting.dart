@@ -59,7 +59,14 @@ class _RatingDialogState extends State<RatingDialog> {
     showDialog(
       context: context,
       builder: (context) {
-        return Dialog(
+        return PopScope(
+            canPop: false,
+            onPopInvoked: (bool didPop) async {
+          if (didPop) {
+            return;
+          }
+        },
+        child : Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             side: BorderSide(color: Color(0xffB6B6B6), width: 1),
@@ -135,6 +142,7 @@ class _RatingDialogState extends State<RatingDialog> {
               ),
             ),
           ),
+        )
         );
       },
     );
@@ -359,7 +367,14 @@ class _RatingDialogState extends State<RatingDialog> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+          if (didPop) {
+            return;
+          }
+        },
+    child:  Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         side: BorderSide(color: Color(0xffB6B6B6), width: 1),
@@ -513,6 +528,7 @@ class _RatingDialogState extends State<RatingDialog> {
           ),
         ),
       ),
+    )
     );
   }
 }
