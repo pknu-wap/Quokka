@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'home.dart';
@@ -52,9 +53,8 @@ void _insertOverlay(BuildContext context) {
                       context,
                       MaterialPageRoute(builder: (context) => Home()));
                 },
-                icon: Image.asset(
-                  'assets/images/home_icon.png',
-                  color: Color(0xffADADAD),
+                icon: SvgPicture.asset(
+                  'assets/images/home_icon.svg',
                 ),
               ),
             ),

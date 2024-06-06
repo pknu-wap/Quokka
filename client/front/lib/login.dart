@@ -7,6 +7,7 @@ import 'sign_up.dart';
 import 'home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -84,11 +85,11 @@ class _LogInState extends State<LogIn> {
               // 커카 이미지
               Container(
                 margin: EdgeInsets.only(top: 103), // 커카 이미지에 대한 마진 설정
-                width: 75,
+                width: 76,
                 height: 105,
                 child: Center(
-                  child: Image(
-                    image: AssetImage('assets/images/quokka2.png'),
+                  child: SvgPicture.asset(
+                  'assets/images/MainImage.svg',
                   ),
                 ),
               ),

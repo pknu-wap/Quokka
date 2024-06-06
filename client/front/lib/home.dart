@@ -15,6 +15,7 @@ import 'checkerrand.dart';
 import 'login.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 final storage = FlutterSecureStorage();
 OverlayEntry? overlayEntry;
 
@@ -1453,7 +1454,8 @@ class _HomeState extends State<Home> {
                               ),
                               onPressed:
                                   () {},
-                              icon: Image.asset('assets/images/search_icon.png',
+                              icon: SvgPicture.asset('assets/images/search_icon.svg',
+                                color: Color(0xffB4B5BE),
                               ),
                             ),
                           ),
@@ -1467,7 +1469,7 @@ class _HomeState extends State<Home> {
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
                               onPressed: () {},
-                              icon: Image.asset('assets/images/alarm_icon.png',
+                              icon: SvgPicture.asset('assets/images/alarm_icon.svg',
                                 color: Color(0xffB4B5BE),
                               ),
                             ),)

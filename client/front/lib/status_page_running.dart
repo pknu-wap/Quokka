@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -80,10 +81,10 @@ class _RatingDialogState extends State<RatingDialog> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 30),
-                    child: Icon(
-                      Icons.sentiment_satisfied_alt,
-                      size: 40,
-                      color: Color(0xffA98474),
+                    child:  SvgPicture.asset(
+                      'assets/images/smile_quokka.svg',
+                      width: 70,
+                      height: 70,
                     ),
                   ),
                   Container(
@@ -101,7 +102,7 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: 10),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
