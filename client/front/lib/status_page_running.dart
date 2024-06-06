@@ -567,6 +567,7 @@ DropdownMenuItem<String> customDropdownItem(String text) {
   return DropdownMenuItem<String>(
     value: text,
     child: Container(
+      width: 276.72,
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Color(0xffDCDCDC), width: 1),
