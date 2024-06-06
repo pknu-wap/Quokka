@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:front/writeerrand.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -303,8 +304,8 @@ class _NaverMapTestState extends State<NaverMapTest> {
                                   child: Container(
                                     padding: EdgeInsets.only(left: 268, top: 3),
                                     color: Colors.transparent,
-                                    child: Image.asset(
-                                      'assets/images/close_circle.png',
+                                    child: SvgPicture.asset(
+                                      'assets/images/close_circle.svg',
                                       width: 20.43,
                                       height: 20.43,
                                     ),

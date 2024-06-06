@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_svg/svg.dart';
 import 'dart:async';
 import 'login.dart';
 import 'home.dart';
@@ -147,7 +148,7 @@ class ConfettiState extends State<Confetti> {
             top: 387,
             child: Transform.rotate(
               angle: 4.73 * (3.141592653589793 / 180), //회전
-              child: Image.asset('assets/images/Subtract.png', //폭죽 본체 이미지
+              child: SvgPicture.asset('assets/images/party_popper.svg', //폭죽 본체 이미지
                 width: 67.5,
                 height: 95.43,
               ),

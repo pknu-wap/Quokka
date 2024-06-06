@@ -4,18 +4,23 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경">
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/alert.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/arrow_back.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/errand.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/map.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/paper-plane.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/quokka_point_O.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/quokka_point_X.svg" afterDir="false" />
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경">
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/bin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/close_circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/firework.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/map_dest.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/party_popper.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/pencil.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/score_icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/₩.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/custom_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/custom_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up_success.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/sign_up_success.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717697191462</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경">
+      <option name="closed" value="true" />
+      <created>1717698978459</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717698978459</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,6 +157,7 @@
     <MESSAGE value="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 회원가입 학생증 이미지, 눈 아이콘 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경" />
+    <MESSAGE value="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경" />
   </component>
 </project>

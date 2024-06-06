@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WarningDialog extends StatelessWidget{
   final String alertMessage;
@@ -27,8 +28,8 @@ class WarningDialog extends StatelessWidget{
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
+                    child: SvgPicture.asset(
+                      'assets/images/alert.svg',
                       width: 76.83,
                       height: 76.83,
                     ),

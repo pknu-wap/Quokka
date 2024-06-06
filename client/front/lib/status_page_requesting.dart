@@ -176,8 +176,8 @@ class _RatingDialogState extends State<RatingDialog> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
+                    child: SvgPicture.asset(
+                      'assets/images/alert.svg',
                       width: 76.83,
                       height: 76.83,
                     ),
@@ -367,10 +367,10 @@ class _RatingDialogState extends State<RatingDialog> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(5, (index) {
                   return IconButton(
-                    icon: Image.asset(
+                    icon: SvgPicture.asset(
                       index < _rating
-                          ? 'assets/images/quokka_pointO.png'
-                          : 'assets/images/quokka_pointX.png',
+                          ? 'assets/images/quokka_point_O.svg'
+                          : 'assets/images/quokka_point_X.svg',
                       width: 39.57,
                       height: 39.99,
                     ),
@@ -1009,8 +1009,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                                 context,
                                 MaterialPageRoute(builder: (context) => ReShowMap(errandNo: connectNo)));
                           },
-                          icon: Image.asset(
-                            'assets/images/map.png',
+                          icon: SvgPicture.asset(
+                            'assets/images/map.svg',
                             color: Color(0xffB4B5BE),
                           ),
                         ),
@@ -1030,8 +1030,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                                 context,
                                 MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
                           },
-                          icon: Image.asset(
-                            'assets/images/errand.png',
+                          icon: SvgPicture.asset(
+                            'assets/images/errand.svg',
                             color: Color(0xffB4B5BE),
                           ),
                         ),

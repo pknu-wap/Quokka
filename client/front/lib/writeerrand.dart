@@ -1009,8 +1009,8 @@ class _WriteErrandState extends State<WriteErrand> {
                                   child: Container(
                                     padding: EdgeInsets.only(left: 12.36, top: 1),
                                     color: Colors.transparent,
-                                    child: Image.asset(
-                                      'assets/images/₩.png',
+                                    child: SvgPicture.asset(
+                                      'assets/images/₩.svg',
                                       color: Color(0xff7C7C7C),
                                       width: 11,
                                       height: 14,
