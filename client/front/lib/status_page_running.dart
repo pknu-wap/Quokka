@@ -566,21 +566,24 @@ class Status_Content_Widget extends StatelessWidget {
 DropdownMenuItem<String> customDropdownItem(String text) {
   return DropdownMenuItem<String>(
     value: text,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 15,
-            fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.01,
-            color: Color(0xff232323),
-          ),
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Color(0xffDCDCDC), width: 1),
         ),
-        Container(child: Center(child: Container(width: 276.72, child: Divider(color: Color(0xffDCDCDC), thickness: 1)))),
-      ],
+      ),
+      padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 10.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'Pretendard',
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.01,
+          color: Color(0xff232323),
+        ),
+      ),
     ),
   );
 }
