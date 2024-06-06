@@ -931,15 +931,15 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 30),
                     child:  Icon(
                       Icons.exit_to_app,
                       color: Color(0xffA98474),
-                      size: 60,
+                      size: 40,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 12),
                     child: Text(
                       "정말 커카를 종료하시겠어요?",
                       style: TextStyle(
@@ -953,7 +953,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -1053,15 +1053,15 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 30),
                     child:  Icon(
                       Icons.logout,
                       color: Color(0xffA98474),
-                      size: 60,
+                      size: 40,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 12),
                     child: Text(
                       "로그아웃 하시겠어요?",
                       style: TextStyle(
@@ -1075,7 +1075,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
