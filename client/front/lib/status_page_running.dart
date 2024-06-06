@@ -1069,6 +1069,9 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                               customDropdownItem("쪽지를 확인해주세요."),
                             ],
                             onChanged: (String? value) {
+                              if(contents.isEmpty)
+                                sendValue(value);
+                              else
                               (contents.last['contents'] == "완료했어요!") ? warningDialog(context, "이미 완료된 심부름이예요!") : sendValue(value);
                             },
                             dropdownStyleData: DropdownStyleData(
@@ -1116,6 +1119,9 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                 child: ElevatedButton(
                   onPressed:
                       () {
+                        if(contents.isEmpty)
+                          confirmDialog(context);
+                        else
                         (contents.last['contents'] == "완료했어요!") ?
                         warningDialog(context, "이미 완료된 심부름이예요!") :
                         confirmDialog(context);
