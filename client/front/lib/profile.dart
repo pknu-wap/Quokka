@@ -714,11 +714,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    isPasswordButtonVisible =
-                                    !isPasswordButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
+                                    isPasswordCheckButtonVisible =
+                                    !isPasswordCheckButtonVisible; // 상태를 반전시켜서 눈모양 버튼을 클릭할 때마다 비밀번호 보이기/가리기 토글
                                   });
                                 },
-                                icon: isPasswordButtonVisible
+                                icon: isPasswordCheckButtonVisible
                                     ? Image.asset(
                                   'assets/images/open eye.png',
                                 )
