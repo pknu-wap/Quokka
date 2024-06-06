@@ -9,6 +9,9 @@ import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+
+import 're-showmap.dart';
+import 'showerrand/re-showerrand.dart';
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
   String contents; //메시지
@@ -740,7 +743,11 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ReShowMap(errandNo: connectNo)));
+                        },
                         icon: Image.asset(
                           'assets/images/map.png',
                           color: Color(0xffB4B5BE),
@@ -757,7 +764,11 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
+                        },
                         icon: Image.asset(
                           'assets/images/errand.png',
                           color: Color(0xffB4B5BE),
