@@ -123,7 +123,7 @@ class ErrandCheckWidget extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 2.82),
                       child: Text(
-                        " ${score}점",
+                        " ${score.toInt()}점",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
