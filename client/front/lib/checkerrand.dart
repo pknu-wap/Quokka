@@ -533,7 +533,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                 child: Icon(
                   Icons.delete,
                   color: Color(0xffA98474),
-                  size: 70,
+                  size: 60,
                 ),
           ),
                 Container(
@@ -564,7 +564,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                 ),
         ),
                 Container(
-                  margin: EdgeInsets.only(top: 17),
+                  margin: EdgeInsets.only(top: 18),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
