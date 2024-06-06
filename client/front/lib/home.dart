@@ -15,6 +15,7 @@ import 'checkerrand.dart';
 import 'login.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'calculatemargin.dart';
 final storage = FlutterSecureStorage();
 OverlayEntry? overlayEntry;
 
@@ -135,6 +136,9 @@ class PostWidget extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     var priceFormat = NumberFormat('###,###,###,###');
     return Container(
       child: Column(
@@ -148,7 +152,10 @@ class PostWidget extends StatelessWidget {
                         child: Row( //닉네임, 평점
                           children: [
                             Container( //닉네임
-                              margin: EdgeInsets.only(left: 15, top: 16),
+                              margin: EdgeInsets.only(
+                                  left: calculateWidth(15, screenWidth),
+                                  top: calculateHeight(16, screenHeight)
+                              ),
                               child: Text("${nickname}", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w300, fontSize: 12,
@@ -156,7 +163,7 @@ class PostWidget extends StatelessWidget {
                               ),),
                             ),
                             Container( //평점
-                              margin: EdgeInsets.only(top: 16),
+                              margin: EdgeInsets.only(top: calculateHeight(16, screenHeight)),
                               child: Text(" ${score.toInt()}점", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w300, fontSize: 12,
@@ -167,7 +174,10 @@ class PostWidget extends StatelessWidget {
                         )
                     ),
                     Container( //게시글 제목
-                      margin: EdgeInsets.only(top: 8,left: 15,),
+                      margin: EdgeInsets.only(
+                        top: calculateHeight(8, screenHeight),
+                        left: calculateWidth(15, screenWidth),
+                      ),
                       child: Text("${title}", style: TextStyle(
                         fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w600, fontSize: 16,
@@ -177,20 +187,26 @@ class PostWidget extends StatelessWidget {
                     Container(
                         child: Row( //위치, 가격
                           children: [
-                            Container( margin: EdgeInsets.only(left: 15, top: 10),
+                            Container( margin: EdgeInsets.only(
+                                left: calculateWidth(15, screenWidth),
+                                top: calculateHeight(10, screenHeight)
+                            ),
                               child: Text("${destination}   ", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 13,
                                 letterSpacing: 0.01, color: Color(0xff000000),
                               ),),),
-                            Container( margin: EdgeInsets.only(top: 10),
+                            Container( margin: EdgeInsets.only(top: calculateHeight(10, screenHeight)),
                               child: Text("\u20A9${priceFormat.format(reward)}", style: TextStyle(
                                 fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500, fontSize: 13,
                                 letterSpacing: 0.01, color: Color(0xffEC5147),
                               ),),),
                             Container(
-                              margin: EdgeInsets.only(left: 11.0, top: 8.95),
+                              margin: EdgeInsets.only(
+                                  left: calculateWidth(11, screenWidth),
+                                  top: calculateHeight(8.95, screenHeight))
+                              ,
                               padding: EdgeInsets.only(left: 2, right: 2),
                               width: 44.36, height: 18.1,
                               decoration: BoxDecoration(
@@ -209,7 +225,10 @@ class PostWidget extends StatelessWidget {
                             Expanded(
                                 child: Align(alignment: Alignment.centerRight,
                                     child: Container( //시간
-                                      margin: EdgeInsets.only(right: 14, top: 17.95),
+                                      margin: EdgeInsets.only(
+                                          right: calculateWidth(14, screenWidth),
+                                          top: calculateHeight(17.95, screenHeight)
+                                      ),
                                       child: Text(distance == -1.0 ? timeDifference(currentTime, createdDate) : distanceFunction(distance),
                                         style: TextStyle(
                                             fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -255,6 +274,8 @@ class InProgress_Errand_Widget extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     if(!isUserOrder) {
       return GestureDetector(
         behavior: HitTestBehavior.translucent, //게시글 전체를 클릭영역으로 만들어주는 코드
@@ -268,7 +289,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(left: 19.14),
+                margin: EdgeInsets.only(left: calculateWidth(19.14, screenWidth)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,7 +304,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 14.52),
+                            margin: EdgeInsets.only(left: calculateWidth(14.52, screenWidth)),
                             child: Text("${title}",
                               style: TextStyle(
                                   fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -292,7 +313,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                             ),
                           ), //제목
                           Container(
-                              margin: EdgeInsets.only(left: 14.52),
+                              margin: EdgeInsets.only(left: calculateWidth(14.52, screenWidth)),
                               child: Text(formatDueDate(due),
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -305,7 +326,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                     Expanded(
                         child: Align(alignment: Alignment.topRight,
                           child: Container(
-                              margin: EdgeInsets.only(right: 20.77),
+                              margin: EdgeInsets.only(right: calculateWidth(20.77, screenWidth)),
                               child: Text("수행 중",
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -336,7 +357,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
         child:  Container( width: 360, height: 72.51, //심부름 1개 요청중
           child: Column(
             children: [
-              Container(margin: EdgeInsets.only(left: 19.14),
+              Container(margin: EdgeInsets.only(left: calculateWidth(19.14, screenWidth)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -351,7 +372,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 14.52),
+                            margin: EdgeInsets.only(left: calculateWidth(14.52, screenWidth)),
                             child: Text("${title}",
                               style: TextStyle(
                                   fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -373,7 +394,7 @@ class InProgress_Errand_Widget extends StatelessWidget {
                     Expanded(
                         child: Align(alignment: Alignment.topRight,
                           child: Container(
-                              margin: EdgeInsets.only(right: 20.77),
+                              margin: EdgeInsets.only(right: calculateWidth(20.77, screenWidth)),
                               child: Text("요청 중",
                                 style: TextStyle(
                                     fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
@@ -841,6 +862,9 @@ class _HomeState extends State<Home> {
     }
   }
   void _insertOverlay(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     if (overlayEntry != null) return;
     overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
@@ -871,7 +895,7 @@ class _HomeState extends State<Home> {
               Container(
                 width: 22,
                 height: 22,
-                margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+                margin: EdgeInsets.only(left: calculateWidth(44, screenWidth), top: calculateHeight(20, screenHeight), bottom: calculateHeight(17.32, screenHeight)),
                 child: IconButton(
                   style: IconButton.styleFrom(
                     minimumSize: Size.zero,
@@ -892,7 +916,8 @@ class _HomeState extends State<Home> {
               Container(
                 width: 19.31,
                 height: 23.81,
-                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                    bottom: calculateHeight(17.32, screenHeight)),
                 child: IconButton(
                   style: IconButton.styleFrom(
                     minimumSize: Size.zero,
@@ -909,7 +934,8 @@ class _HomeState extends State<Home> {
               Container(
                 width: 22.0,
                 height: 22,
-                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+                margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                    bottom: calculateHeight(17.32, screenHeight)),
                 child: IconButton(
                   style: IconButton.styleFrom(
                     minimumSize: Size.zero,
@@ -932,7 +958,10 @@ class _HomeState extends State<Home> {
               Container(
                 width: 21.95,
                 height: 24.21,
-                margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+                margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                    bottom: calculateHeight(17.32, screenHeight),
+                  right: calculateWidth(43.92, screenWidth)
+                ),
                 child: IconButton(
                   style: IconButton.styleFrom(
                     minimumSize: Size.zero,
@@ -1065,6 +1094,8 @@ class _HomeState extends State<Home> {
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
+        double screenWidth = MediaQuery.of(context).size.width;
+        double screenHeight = MediaQuery.of(context).size.height;
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -1082,7 +1113,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: calculateHeight(30, screenHeight)),
                     child:  Icon(
                       Icons.exit_to_app,
                       color: Color(0xffA98474),
@@ -1090,7 +1121,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 12),
+                    margin: EdgeInsets.only(top: calculateHeight(12, screenHeight)),
                     child: Text(
                       "정말 커카를 종료하시겠어요?",
                       style: TextStyle(
@@ -1104,12 +1135,12 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: calculateHeight(30, screenHeight)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 16),
+                          margin: EdgeInsets.only(left: calculateWidth(16, screenWidth)),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -1138,7 +1169,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(right: 16),
+                          margin: EdgeInsets.only(right: calculateWidth(16, screenWidth)),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -1187,6 +1218,8 @@ class _HomeState extends State<Home> {
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
+        double screenWidth = MediaQuery.of(context).size.width;
+        double screenHeight = MediaQuery.of(context).size.height;
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -1204,7 +1237,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: calculateHeight(30, screenHeight)),
                     child:  Icon(
                       Icons.logout,
                       color: Color(0xffA98474),
@@ -1212,7 +1245,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 12),
+                    margin: EdgeInsets.only(top: calculateHeight(12, screenHeight)),
                     child: Text(
                       "로그아웃 하시겠어요?",
                       style: TextStyle(
@@ -1226,12 +1259,12 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: calculateHeight(30, screenHeight)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 16),
+                          margin: EdgeInsets.only(left: calculateWidth(16, screenWidth)),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -1261,7 +1294,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(right: 16),
+                          margin: EdgeInsets.only(right: calculateWidth(16, screenWidth)),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -1387,6 +1420,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return PopScope(
       canPop: false,
       onPopInvoked: (bool didPop) async {
@@ -1412,7 +1447,9 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(width: 57.0, height: 25.0,
-                            margin: const EdgeInsets.only(left: 27, top: 33.0),
+                            margin: EdgeInsets.only(
+                                left: calculateWidth(27, screenWidth),
+                                top: calculateHeight(33, screenHeight)),
                             child: const Text(
                               '게시글',
                               style: TextStyle(
@@ -1425,7 +1462,7 @@ class _HomeState extends State<Home> {
                          // SizedBox(width: 194),
                           SizedBox(width: 157),
                           Container(width: 23.0, height: 21.91,
-                            margin: const EdgeInsets.only(top: 29.0, right: 14),
+                            margin: EdgeInsets.only(top: calculateHeight(29, screenHeight), right: calculateWidth(14, screenWidth)),
                             child: IconButton(
                               style: IconButton.styleFrom(
                                 minimumSize: Size.zero,
@@ -1444,7 +1481,8 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                            Container(width: 23.0, height: 21.91,
-                            margin: const EdgeInsets.only(top: 35.0, right: 14),
+                            margin: EdgeInsets.only(top: calculateHeight(35, screenHeight),
+                                right: calculateWidth(14, screenWidth)),
                             child: IconButton(
                               style: IconButton.styleFrom(
                                 minimumSize: Size.zero,
@@ -1458,8 +1496,8 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           Container(width: 23.0, height: 21.91,
-                            margin: const EdgeInsets.only(
-                                top: 34.0, right: 21.31),
+                            margin: EdgeInsets.only(
+                                top: calculateHeight(34, screenHeight), right: calculateWidth(21.31, screenWidth)),
                             child: IconButton(
                               style: IconButton.styleFrom(
                                 minimumSize: Size.zero,
@@ -1490,7 +1528,7 @@ class _HomeState extends State<Home> {
                             scrollToTop();
                           },
                           child: Container(width: 70, height: 32,
-                            margin: const EdgeInsets.only(left: 27, top: 19.0),
+                            margin: EdgeInsets.only(left: calculateWidth(27, screenWidth), top: calculateHeight(19, screenHeight)),
                             child: Stack(
                               children: [
                                 Positioned(left: 0, top: 0,
@@ -1501,7 +1539,7 @@ class _HomeState extends State<Home> {
                                         color: button1_border_color, width: 1,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
-                                Positioned(left: 16.72, top: 7.72,
+                                Positioned(left: calculateWidth(16.72, screenWidth), top: calculateHeight(7.72, screenHeight),
                                   child: Text('최신순', style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontStyle: FontStyle.normal,
@@ -1524,7 +1562,10 @@ class _HomeState extends State<Home> {
                             scrollToTop();
                           },
                           child: Container(width: 70, height: 32,
-                            margin: const EdgeInsets.only(left: 11, top: 19.0),
+                            margin: EdgeInsets.only(
+                                left: calculateWidth(11, screenWidth),
+                                top: calculateHeight(19, screenHeight)
+                            ),
                             child: Stack(
                               children: [
                                 Positioned(left: 0, top: 0,
@@ -1535,7 +1576,9 @@ class _HomeState extends State<Home> {
                                         color: button2_border_color, width: 1,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
-                                Positioned(left: 16.72, top: 7.72,
+                                Positioned(
+                                  left: calculateWidth(16.72, screenWidth),
+                                  top: calculateHeight(7.72, screenHeight),
                                   child: Text('금액순', style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontStyle: FontStyle.normal,
@@ -1558,7 +1601,10 @@ class _HomeState extends State<Home> {
                             scrollToTop();
                           },
                           child: Container(width: 70, height: 32,
-                            margin: const EdgeInsets.only(left: 11, top: 19.0),
+                            margin: EdgeInsets.only(
+                                left: calculateWidth(11, screenWidth),
+                                top: calculateHeight(19, screenHeight)
+                            ),
                             child: Stack(
                               children: [
                                 Positioned(left: 0, top: 0,
@@ -1569,7 +1615,9 @@ class _HomeState extends State<Home> {
                                         color: button3_border_color, width: 1,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
-                                Positioned(left: 16.72, top: 7.72,
+                                Positioned(
+                                   left: calculateWidth(16.72, screenWidth),
+                                   top: calculateHeight(7.72, screenHeight),
                                   child: Text('거리순', style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontStyle: FontStyle.normal,
@@ -1586,7 +1634,10 @@ class _HomeState extends State<Home> {
                     child: Row(
                       children: [
                         Container(width: 20, height: 20,
-                          margin: EdgeInsets.only(left: 27, top: 16.36),
+                          margin: EdgeInsets.only(
+                              left: calculateWidth(27, screenWidth),
+                              top: calculateHeight(16.36, screenHeight)
+                          ),
                           child: Checkbox(
                             materialTapTargetSize: MaterialTapTargetSize
                                 .shrinkWrap,
@@ -1619,7 +1670,10 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Container(height: 17,
-                          margin: EdgeInsets.only(left: 2.28, top: 14.86),
+                          margin: EdgeInsets.only(
+                              left: calculateWidth(2.28, screenWidth),
+                              top: calculateHeight(14.86, screenHeight)
+                          ),
                           child: Text('모집 중 모아보기', style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontStyle: FontStyle.normal,
@@ -1632,17 +1686,20 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16.36),
+                  SizedBox(height: calculateHeight(16.36, screenHeight)),
                   Flexible(
                     child: Container(width: 322,
                       height: 581,
                       //게시글 큰틀
-                      margin: EdgeInsets.only(left: 19),
+                      margin: EdgeInsets.only(left: calculateWidth(19, screenWidth)),
                       decoration: BoxDecoration(
                         color: Color(0xffFFFFFF),
                       ),
                       child: ListView.builder(
-                          padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                          padding: EdgeInsets.only(
+                              top: calculateWidth(0.1, screenWidth),
+                              bottom: calculateHeight(45, screenHeight)
+                          ),
                           controller: _scrollController,
                           shrinkWrap: true,
                           itemCount: posts.length,
@@ -1687,18 +1744,17 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
             Positioned(
-              bottom: 84, right: 7,
+              bottom: calculateHeight(84, screenHeight),
+              right: calculateWidth(7, screenWidth),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       width: 55, height: 55,
-                      margin: const EdgeInsets.only(),
                       child: IconButton(
                         style: IconButton.styleFrom(
                           minimumSize: Size.zero,
@@ -1726,8 +1782,8 @@ class _HomeState extends State<Home> {
                                   alignment: Alignment.center,
                                   children: [
                                     Positioned(
-                                      top: 13.47,
-                                      left: 127.74,
+                                      top: calculateWidth(13.47, screenWidth),
+                                      left: calculateHeight(127.74, screenHeight),
                                       child: Container(
                                         width: 104.51,
                                         height: 5,
@@ -1743,8 +1799,8 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     Positioned(
-                                      top: 42.64,
-                                      left: 19.64,
+                                      top: calculateWidth(42.64, screenWidth),
+                                      left: calculateHeight(19.64, screenHeight),
                                       child: Text(
                                         '메세지를 보낼 심부름 상대를 골라주세요',
                                         style: TextStyle(
@@ -1757,7 +1813,7 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     Positioned(
-                                      top: 85.39,
+                                      top: calculateWidth(85.39, screenWidth),
                                       child: Container(
                                         width: 360,
                                         height: 310.14,
@@ -1775,7 +1831,10 @@ class _HomeState extends State<Home> {
                                             ? Center(
                                             child: Text("진행중인 심부름이 없습니다."))
                                             : ListView.builder(
-                                          padding: EdgeInsets.only(top: 23.98, bottom: 50),
+                                          padding: EdgeInsets.only(
+                                              top: calculateHeight(23.98, screenHeight),
+                                              bottom: calculateHeight(50, screenHeight)
+                                          ),
                                           itemCount: errands.length,
                                           itemBuilder: (context, index) {
                                             String decodedTitle = utf8.decode(
@@ -1806,7 +1865,7 @@ class _HomeState extends State<Home> {
                       ),),
                     Container(
                       width: 12, height: 12,
-                      margin: const EdgeInsets.only(bottom: 42.86),
+                      margin: EdgeInsets.only(bottom: calculateHeight(42.86, screenHeight)),
                       child: Visibility(
                         visible: isVisible,
                         child: Image.asset(

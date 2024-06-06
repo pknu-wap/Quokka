@@ -11,10 +11,14 @@ import 'package:geolocator/geolocator.dart';
 import '../map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'calculatemargin.dart';
 import 'checkerrand.dart';
 import 'home.dart';
 final storage = FlutterSecureStorage();
 void _insertOverlay(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+
   if (overlayEntry != null) return;
   overlayEntry = OverlayEntry(
     builder: (context) => Positioned(
@@ -45,7 +49,7 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22,
               height: 22,
-              margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(left: calculateWidth(44, screenWidth), top: calculateHeight(20, screenHeight), bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -53,7 +57,6 @@ void _insertOverlay(BuildContext context) {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 onPressed: () {
-                  _insertOverlay(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Home()));
@@ -67,7 +70,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 19.31,
               height: 23.81,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -84,7 +88,8 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 22.0,
               height: 22,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight)),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -107,7 +112,10 @@ void _insertOverlay(BuildContext context) {
             Container(
               width: 21.95,
               height: 24.21,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+              margin: EdgeInsets.only(top: calculateHeight(20, screenHeight),
+                  bottom: calculateHeight(17.32, screenHeight),
+                  right: calculateWidth(43.92, screenWidth)
+              ),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
