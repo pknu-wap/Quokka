@@ -1692,7 +1692,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             Positioned(
-              bottom: 84, right: 26,
+              bottom: 84, right: 7,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
