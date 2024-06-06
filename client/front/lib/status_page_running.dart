@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,10 +82,10 @@ class _RatingDialogState extends State<RatingDialog> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 30),
-                    child: Icon(
-                      Icons.sentiment_satisfied_alt,
-                      size: 40,
-                      color: Color(0xffA98474),
+                    child:  SvgPicture.asset(
+                      'assets/images/smile_quokka.svg',
+                      width: 70,
+                      height: 70,
                     ),
                   ),
                   Container(
@@ -102,7 +103,7 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: 10),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
@@ -167,8 +168,8 @@ class _RatingDialogState extends State<RatingDialog> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
+                    child: SvgPicture.asset(
+                      'assets/images/alert.svg',
                       width: 76.83,
                       height: 76.83,
                     ),
@@ -359,10 +360,10 @@ class _RatingDialogState extends State<RatingDialog> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(5, (index) {
                   return IconButton(
-                    icon: Image.asset(
+                    icon: SvgPicture.asset(
                       index < _rating
-                          ? 'assets/images/quokka_pointO.png'
-                          : 'assets/images/quokka_pointX.png',
+                          ? 'assets/images/quokka_point_O.svg'
+                          : 'assets/images/quokka_point_X.svg',
                       width: 39.57,
                       height: 39.99,
                     ),
@@ -495,10 +496,10 @@ class Status_Content_Widget extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      Image.asset(
+                      SvgPicture.asset(
                         contents == "완료했어요!"
-                            ? 'assets/images/진한말풍선R.png'
-                            : 'assets/images/연한말풍선R.png',
+                            ? 'assets/images/dark_speech_bubble_R.svg'
+                            : 'assets/images/light_speech_bubble_R.svg',
                         width: 247.18,
                         height: 42.79,
                         fit: BoxFit.cover,
@@ -531,10 +532,10 @@ class Status_Content_Widget extends StatelessWidget {
                         width: 35.43,
                         height: 35.43,
                         margin: EdgeInsets.only(top: 8.28, left: 7.04),
-                        child: Image.asset(
+                        child: SvgPicture.asset(
                           contents == "완료했어요!"
-                              ? 'assets/images/smiley Quokka.png'
-                              : 'assets/images/Quokka.png',
+                              ? 'assets/images/smile_quokka.svg'
+                              : 'assets/images/quokka.svg',
                         ),
                       ),
                       Container(
@@ -742,8 +743,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 35.87),
-                    child: Image.asset(
-                      'assets/images/check.png',
+                    child: SvgPicture.asset(
+                      'assets/images/check.svg',
                       width: 39.08,
                       height: 28.95,
                     ),
@@ -915,8 +916,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: Image.asset(
-                          'assets/images/arrow back.png',
+                        icon: SvgPicture.asset(
+                          'assets/images/arrow_back.svg',
                           color: Color(0xff6B6B6B),
                         ),
                       ),
@@ -949,8 +950,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                               context,
                               MaterialPageRoute(builder: (context) => ReShowMap(errandNo: connectNo)));
                         },
-                        icon: Image.asset(
-                          'assets/images/map.png',
+                        icon: SvgPicture.asset(
+                          'assets/images/map.svg',
                           color: Color(0xffB4B5BE),
                         ),
                       ),
@@ -970,8 +971,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                               context,
                               MaterialPageRoute(builder: (context) => ReShowErrand(errandNo: connectNo)));
                         },
-                        icon: Image.asset(
-                          'assets/images/errand.png',
+                        icon: SvgPicture.asset(
+                          'assets/images/errand.svg',
                           color: Color(0xffB4B5BE),
                         ),
                       ),
@@ -1041,8 +1042,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                             hint: Row(
                               children: [
                                 Container( 
-                                  child:  Image.asset(
-                                    'assets/images/paper-plane.png',
+                                  child:  SvgPicture.asset(
+                                    'assets/images/paper-plane.svg',
                                     color: Color(0xffADADAD),
                                   ),
                                 ),

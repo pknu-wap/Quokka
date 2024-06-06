@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:front/upload_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -610,11 +611,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               });
                             },
                             icon: isPasswordButtonVisible
-                                ? Image.asset(
-                              'assets/images/open eye.png',
+                                ? SvgPicture.asset(
+                              'assets/images/open_eye.svg',
                             )
-                                : Image.asset(
-                                'assets/images/close eye.png'), // 이미지 아이콘 설정
+                                : SvgPicture.asset(
+                                'assets/images/closed_eye.svg'), // 이미지 아이콘 설정
                           )
                       ),
                       ),
@@ -719,11 +720,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   });
                                 },
                                 icon: isPasswordCheckButtonVisible
-                                    ? Image.asset(
-                                  'assets/images/open eye.png',
+                                    ? SvgPicture.asset(
+                                  'assets/images/open_eye.svg',
                                 )
-                                    : Image.asset(
-                                    'assets/images/close eye.png'), // 이미지 아이콘 설정
+                                    : SvgPicture.asset(
+                                    'assets/images/closed_eye.svg'), // 이미지 아이콘 설정
                               )
                           ),
                         ),

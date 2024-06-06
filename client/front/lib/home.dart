@@ -15,6 +15,7 @@ import 'checkerrand.dart';
 import 'login.dart';
 import 'status_page_requesting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 import 'calculatemargin.dart';
 final storage = FlutterSecureStorage();
 OverlayEntry? overlayEntry;
@@ -297,8 +298,8 @@ class InProgress_Errand_Widget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
                     Container( width: 32, height: 31,
-                      child: Image.asset(
-                          'assets/images/running errand.png', width: 32, height: 31, fit: BoxFit.cover
+                      child: SvgPicture.asset(
+                          'assets/images/running_errand.svg', width: 32, height: 31, fit: BoxFit.cover
                       ),
                     ), //이미지
                     Container(
@@ -365,8 +366,8 @@ class InProgress_Errand_Widget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
                     Container( width: 32, height: 31,
-                      child: Image.asset(
-                          'assets/images/requesting errand.png', width: 32, height: 31, fit: BoxFit.cover
+                      child: SvgPicture.asset(
+                          'assets/images/requesting_errand.svg', width: 32, height: 31, fit: BoxFit.cover
                       ),
                     ), //이미지
                     Container(
@@ -909,8 +910,8 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(builder: (context) => Home()));
                   },
-                  icon: Image.asset(
-                    'assets/images/home_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/home_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -927,8 +928,8 @@ class _HomeState extends State<Home> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {},
-                  icon: Image.asset(
-                    'assets/images/human_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/profile_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -951,8 +952,8 @@ class _HomeState extends State<Home> {
                       ),
                     );
                   },
-                  icon: Image.asset(
-                    'assets/images/add_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/write_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -971,8 +972,8 @@ class _HomeState extends State<Home> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {},
-                  icon: Image.asset(
-                    'assets/images/history_icon.png',
+                  icon: SvgPicture.asset(
+                    'assets/images/history_icon.svg',
                     color: Color(0xffADADAD),
                   ),
                 ),
@@ -1493,7 +1494,8 @@ class _HomeState extends State<Home> {
                               ),
                               onPressed:
                                   () {},
-                              icon: Image.asset('assets/images/search_icon.png',
+                              icon: SvgPicture.asset('assets/images/search_icon.svg',
+                                color: Color(0xffB4B5BE),
                               ),
                             ),
                           ),
@@ -1507,7 +1509,7 @@ class _HomeState extends State<Home> {
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               ),
                               onPressed: () {},
-                              icon: Image.asset('assets/images/alarm_icon.png',
+                              icon: SvgPicture.asset('assets/images/alarm_icon.svg',
                                 color: Color(0xffB4B5BE),
                               ),
                             ),)
@@ -1861,8 +1863,8 @@ class _HomeState extends State<Home> {
                             },
                           );
                         },
-                        icon: Image.asset('assets/images/Quokka.png', width: 55,
-                            height: 55,
+                        icon: SvgPicture.asset('assets/images/quokka.svg',width: 56,
+                            height: 56,
                             fit: BoxFit.cover),
                       ),),
                     Container(
@@ -1870,9 +1872,9 @@ class _HomeState extends State<Home> {
                       margin: EdgeInsets.only(bottom: calculateHeight(42.86, screenHeight)),
                       child: Visibility(
                         visible: isVisible,
-                        child: Image.asset(
-                            'assets/images/red_dot_alarm.png', width: 12,
-                            height: 12,
+                        child: SvgPicture.asset(
+                            'assets/images/red_dot_alarm.svg', width: 10,
+                            height: 10,
                             fit: BoxFit.cover),
                       ),
                     ),

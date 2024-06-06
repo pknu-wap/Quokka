@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:front/showerrand/mainshowerrand.dart';
 import 'package:intl/intl.dart';
 import 'custom_dialog.dart';
@@ -185,8 +186,8 @@ class ErrandCheckWidget extends StatelessWidget {
                     // 평점 커카 이미지
                     Container(
                       margin: EdgeInsets.only(left: 9.1),
-                      child: Image.asset(
-                        'assets/images/score_icon.png',
+                      child: SvgPicture.asset(
+                        'assets/images/score_icon.svg',
                         // Replace with your image asset path
                         width: 11.77, // Adjust the size as needed
                         height: 11.77, // Adjust the size as needed
@@ -811,8 +812,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 16.04),
-                    child: Image.asset(
-                      'assets/images/alert.png',
+                    child: SvgPicture.asset(
+                      'assets/images/alert.svg',
                       width: 76.83,
                       height: 76.83,
                     ),
@@ -1192,8 +1193,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min, // 중앙 정렬
                                   children: [
-                                    Image.asset(
-                                      'assets/images/Pencil_2_.png',
+                                    SvgPicture.asset(
+                                      'assets/images/pencil.svg',
                                       // Replace with your image asset path
                                       width: 19.12,
                                       height: 19.12,
@@ -1255,8 +1256,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Image.asset(
-                                    'assets/images/Trash_can_2_.png',
+                                  SvgPicture.asset(
+                                    'assets/images/bin.svg',
                                     // Replace with your image asset path
                                     width: 17.35, // Adjust the size as needed
                                     height: 21.11, // Adjust the size as needed
