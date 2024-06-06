@@ -165,12 +165,12 @@ class ErrandCheckWidget extends StatelessWidget {
                 if(isMyErrand == false) // 내가 쓴 게시글이 아니면 닉네임, 평점 생성
                 //닉네임, 평점
                 Container(
-                    margin: EdgeInsets.only(top: 13.01),
+                    margin: EdgeInsets.only(top: 16.4),
                     child: Row(
                   children: [
                     //닉네임
                     Container(
-                      margin: EdgeInsets.only(left: 13.4),
+                      margin: EdgeInsets.only(left: 13.59),
                       child: Text(
                         "${nickname}",
                         style: TextStyle(
@@ -232,9 +232,11 @@ class ErrandCheckWidget extends StatelessWidget {
                     )
                   ],
                 )),
+                // 내가 작성한 심부름
+                if(isMyErrand == true)
                 //게시글 제목
                 Container(
-                  margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 18.6),
                   child: Text(
                     "${title}",
                     style: TextStyle(
@@ -246,11 +248,27 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
+                //게시글 제목
+                  Container(
+                    margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                    child: Text(
+                      "${title}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
+                    ),
+                  ),
                 // 내가 작성한 심부름
                 if (isMyErrand == true)
                 // 심부름 값
                 Container(
-                  margin: EdgeInsets.only(top: 5.36, left: 13.4),
+                  margin: EdgeInsets.only(top: 3, left: 13.4),
                   child: Text(
                     "\u20A9 ${priceFormat.format(reward)} 원",
                     style: TextStyle(
@@ -266,7 +284,7 @@ class ErrandCheckWidget extends StatelessWidget {
                 if (isMyErrand == false)
                 // 심부름 값
                   Container(
-                    margin: EdgeInsets.only(top: 11.52, left: 13.4),
+                    margin: EdgeInsets.only(top: 6, left: 13.4),
                     child: Text(
                       "\u20A9 ${priceFormat.format(reward)} 원",
                       style: TextStyle(
@@ -280,7 +298,7 @@ class ErrandCheckWidget extends StatelessWidget {
                   ),
                 // 상세 주소
                 Container(
-                    margin: EdgeInsets.only(top: 22.06),
+                    margin: EdgeInsets.only(top: 18),
                     child: Row(
                       children: [
                         // 마커 이미지
@@ -386,8 +404,8 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                       ],
                     )),
-                // 제목 길이 1줄 && 내가 작성한 심부름
-                if (titleLength <= 18 && isMyErrand == true)
+                // 내가 작성한 심부름
+                if (isMyErrand == true)
                 // 실선
                 Container(
                   margin: EdgeInsets.only(top: 16.49, left: 12.01, right: 9.99),
@@ -395,29 +413,29 @@ class ErrandCheckWidget extends StatelessWidget {
                   width: 298,
                   color: Color(0xffDBDBDB),
                 ),
-                // 제목 1줄 && 내가 작성한 심부름 x
-                if (titleLength <= 18 && isMyErrand == false)
+                // 내가 작성한 심부름 x
+                if (isMyErrand == false)
                 // 실선
                   Container(
-                    margin: EdgeInsets.only(top: 24.68, left: 12.01, right: 9.99),
+                    margin: EdgeInsets.only(top: 12, left: 12.01, right: 9.99),
                     height: 1.0,
                     width: 298,
                     color: Color(0xffDBDBDB),
                   ),
                 // 요청 사항
-                Container(
-                  margin: EdgeInsets.only(top: 15.61, left: 20.66, right: 19.34),
-                  child:  Text(
-                    "${detail}",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      letterSpacing: 0.001,
-                      color: Color(0xff111111),
+                  Container(
+                    margin: EdgeInsets.only(top: 12, left: 20.66, right: 19.34),
+                    child:  Text(
+                      "${detail}",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        letterSpacing: 0.001,
+                        color: Color(0xff111111),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
