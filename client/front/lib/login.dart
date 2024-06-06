@@ -17,7 +17,7 @@ void _insertOverlay(BuildContext context) {
       left: 0,
       right: 0,
       child: Container(
-        width: 364,
+        width: 360,
         height: 64,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),

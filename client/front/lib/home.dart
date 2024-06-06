@@ -848,7 +848,7 @@ class _HomeState extends State<Home> {
         left: 0,
         right: 0,
         child: Container(
-          width: 364,
+          width: 360,
           height: 64,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF),
@@ -1692,12 +1692,12 @@ class _HomeState extends State<Home> {
               ),
             ),
             Positioned(
-              bottom: 88.5, right: 26.27,
+              bottom: 84, right: 26,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      width: 56, height: 56,
+                      width: 55, height: 55,
                       margin: const EdgeInsets.only(),
                       child: IconButton(
                         style: IconButton.styleFrom(
@@ -1800,8 +1800,8 @@ class _HomeState extends State<Home> {
                             },
                           );
                         },
-                        icon: Image.asset('assets/images/Quokka.png', width: 56,
-                            height: 56,
+                        icon: Image.asset('assets/images/Quokka.png', width: 55,
+                            height: 55,
                             fit: BoxFit.cover),
                       ),),
                     Container(
