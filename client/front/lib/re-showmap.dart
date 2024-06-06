@@ -46,7 +46,12 @@ void _insertOverlay(BuildContext context) {
                   padding: EdgeInsets.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _insertOverlay(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()));
+                },
                 icon: Image.asset(
                   'assets/images/home_icon.png',
                   color: Color(0xffADADAD),
