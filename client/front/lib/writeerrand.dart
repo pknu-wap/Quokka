@@ -879,6 +879,7 @@ class _WriteErrandState extends State<WriteErrand> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
                     child: TextField(
+                      maxLength: maxDetailAddressLength,
                       controller: detailAddressController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -897,6 +898,7 @@ class _WriteErrandState extends State<WriteErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       keyboardType: TextInputType.text,
                     ),
@@ -992,6 +994,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                   padding: EdgeInsets.only(
                                       bottom: 4, left: 27, right: 7.5),
                                   child: TextField(
+                                    maxLength: maxPriceLength,
                                     controller: priceController,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
@@ -1002,6 +1005,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                     ),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
+                                      counterText: '',
                                     ),
                                     keyboardType: TextInputType.number,
                                   ),
@@ -1134,6 +1138,7 @@ class _WriteErrandState extends State<WriteErrand> {
                     padding: EdgeInsets.only(top: 2, left: 10, right: 10),
                     // hintText Padding이 이상해서 임의로 설정
                     child: TextField(
+                      maxLength: maxRequestLength,
                       controller: requestController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
@@ -1153,6 +1158,7 @@ class _WriteErrandState extends State<WriteErrand> {
                           color: Color(0xff878787),
                         ),
                         border: InputBorder.none,
+                        counterText: '',
                       ),
                       maxLines: null,
                       // 입력 텍스트가 필요한 만큼 자동으로 늘어남
