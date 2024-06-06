@@ -719,8 +719,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 35.87),
-                    child: Image.asset(
-                      'assets/images/check.png',
+                    child: SvgPicture.asset(
+                      'assets/images/check.svg',
                       width: 39.08,
                       height: 28.95,
                     ),
@@ -975,8 +975,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          icon: Image.asset(
-                            'assets/images/arrow back.png',
+                          icon: SvgPicture.asset(
+                            'assets/images/arrow_back.svg',
                             color: Color(0xff6B6B6B),
                           ),
                         ),

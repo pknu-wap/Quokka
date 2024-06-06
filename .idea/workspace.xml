@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 회원가입 학생증 이미지, 눈 아이콘 png -&gt; svg 변경">
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/dark_speech_bubble_L.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/dark_speech_bubble_R.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/light_speech_bubble_L.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/light_speech_bubble_R.svg" afterDir="false" />
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경">
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/alert.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/arrow_back.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/errand.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/map.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/paper-plane.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/quokka_point_O.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/quokka_point_X.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
@@ -41,22 +45,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "ScreenshotViewer.SavePath": "C:/Users/ls090/Desktop",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "feature/219-feat-svg이미지-추가",
-    "io.flutter.reload.alreadyRun": "true",
-    "last_opened_file_path": "C:/2024-1_App1/client/front/assets/images",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/Users/ls090/Desktop&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/219-feat-svg이미지-추가&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/2024-1_App1/client/front/assets/images&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\2024-1_App1\client\front\assets\images" />
@@ -112,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717695563974</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경">
+      <option name="closed" value="true" />
+      <created>1717697191462</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717697191462</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,6 +143,7 @@
     <MESSAGE value="Fix: 메인 페이지 심부름 목록 확인 팝업 수행중, 요청 중 커카 이미지 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 메인 페이지 심부름 목록 확인 커카 이미지 버튼, 하단바 아이콘 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 회원가입 학생증 이미지, 눈 아이콘 png -&gt; svg 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: 회원가입 학생증 이미지, 눈 아이콘 png -&gt; svg 변경" />
+    <MESSAGE value="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경" />
   </component>
 </project>
