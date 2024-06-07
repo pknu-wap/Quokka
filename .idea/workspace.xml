@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: home의 게시글 height 103으로 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/home.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717739420608</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fix: running_errand, requesting_errand 크기 수정">
+      <option name="closed" value="true" />
+      <created>1717740751593</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1717740751593</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,6 +202,7 @@
     <MESSAGE value="Fix: png -&gt; svg 중간 merge" />
     <MESSAGE value="Fix: 메인 화면 우측 하단 팝업 이미지, running, requesting errand 이미지 안나오는거 수정, 남은 png -&gt; svg 수정 완료" />
     <MESSAGE value="Fix: home의 게시글 height 103으로 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: home의 게시글 height 103으로 수정" />
+    <MESSAGE value="Fix: running_errand, requesting_errand 크기 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: running_errand, requesting_errand 크기 수정" />
   </component>
 </project>
