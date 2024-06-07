@@ -211,9 +211,9 @@ class _LogInState extends State<LogIn> {
             children: [
               // 커카 이미지
               Container(
-                margin: EdgeInsets.only(top: 103), // 커카 이미지에 대한 마진 설정
-                width: 76,
-                height: 105,
+                margin: EdgeInsets.only(top: 103.h), // 커카 이미지에 대한 마진 설정
+                width: 76.w,
+                height: 105.h,
                 child: Center(
                   child: SvgPicture.asset(
                   'assets/images/MainImage.svg',
@@ -222,15 +222,15 @@ class _LogInState extends State<LogIn> {
               ),
               // 학번 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 38.0),
-                width: 320,
-                height: 50,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 38.0.h),
+                width: 320.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xFFE5E5E5),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17, right: 17),
+                  padding: EdgeInsets.only(left: 17.w, right: 17.w),
                   child: TextField(
                     maxLength: maxStudentIdLength,
                     // 최대 길이 설정
@@ -249,7 +249,7 @@ class _LogInState extends State<LogIn> {
                       hintStyle: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Color(0xFF404040),
                       ),
                       border: InputBorder.none,
@@ -262,15 +262,15 @@ class _LogInState extends State<LogIn> {
 
               // 비밀번호 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                width: 320,
-                height: 50,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
+                width: 320.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xFFE5E5E5),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 17, right: 17),
+                  padding: EdgeInsets.only(left: 17.w, right: 17.w),
                   child: TextField(
                     maxLength: maxPasswordLength,
                     controller: _PasswordController,
@@ -292,7 +292,7 @@ class _LogInState extends State<LogIn> {
                       hintStyle: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Color(0xFF404040),
                       ),
                       border: InputBorder.none,
@@ -305,7 +305,7 @@ class _LogInState extends State<LogIn> {
 
               // 다른 위젯들과 함께 Column에 로그인 버튼을 추가합니다.
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 15.0.h),
                 child: ElevatedButton(
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
@@ -319,7 +319,7 @@ class _LogInState extends State<LogIn> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                     // 버튼의 크기 정하기
-                    minimumSize: MaterialStateProperty.all<Size>(Size(319, 50)),
+                    minimumSize: MaterialStateProperty.all<Size>(Size(319.w, 50.h)),
                     // 버튼의 모양 변경하기
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -330,7 +330,7 @@ class _LogInState extends State<LogIn> {
                   child: Text(
                     '로그인',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.001,
@@ -345,7 +345,7 @@ class _LogInState extends State<LogIn> {
                   mainAxisAlignment: MainAxisAlignment.center, //이거 end로 이동
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 17.0),
+                      margin: EdgeInsets.only(top: 17.0.h),
                       //비밀번호 찾기 생기면 margin 11로
                       // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
                       child: Visibility(
@@ -353,7 +353,7 @@ class _LogInState extends State<LogIn> {
                         child: Text(
                           "잘못된 학번 또는 비밀번호입니다.",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w400,
                             color: Color(0xFFEC5147),
@@ -408,7 +408,7 @@ class _LogInState extends State<LogIn> {
               // ),
               // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
               Container(
-                margin: EdgeInsets.only(left: 0, right: 0, top: 24),
+                margin: EdgeInsets.only(left: 0.w, right: 0.w, top: 24.h),
                 // width: 52,
                 // height: 16,
                 child: TextButton(
@@ -419,7 +419,7 @@ class _LogInState extends State<LogIn> {
                   },
                   style: ButtonStyle(
                     minimumSize:
-                        MaterialStateProperty.all(Size(100, 29)), // 버튼 크기
+                        MaterialStateProperty.all(Size(100.w, 29.h)), // 버튼 크기
                   ),
                   child: Text(
                     "회원가입",
@@ -427,7 +427,7 @@ class _LogInState extends State<LogIn> {
                       color: Color(0xFF3E3E3E),
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w700, //semi-bold가 없으므로, bold으로 대체
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       letterSpacing: 0.001,
                     ),
                   ),
