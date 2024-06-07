@@ -14,23 +14,25 @@ import 'fixerrandwidget/fixdue.dart';
 import 'fixerrandwidget/fixiscash.dart';
 import 'fixerrandwidget/fixminimap.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 final storage = FlutterSecureStorage();
 
 void _insertOverlay(BuildContext context) {
   if (overlayEntry != null) return;
   overlayEntry = OverlayEntry(
     builder: (context) => Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
+      bottom: 0.h,
+      left: 0.w,
+      right: 0.w,
       child: Container(
-        width: 364,
-        height: 64,
+        width: 364.w,
+        height: 64.h,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
           border: Border.all(
             color: Color(0xffCFCFCF),
-            width: 0.5,
+            width: 0.5.w,
           ),
           boxShadow: [
             BoxShadow(
@@ -45,9 +47,9 @@ void _insertOverlay(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              width: 22,
-              height: 22,
-              margin: const EdgeInsets.only(left: 44, top: 20.0, bottom: 17.32),
+              width: 22.w,
+              height: 22.h,
+              margin: EdgeInsets.only(left: 44.w, top: 20.0.h, bottom: 17.32.h),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -62,9 +64,9 @@ void _insertOverlay(BuildContext context) {
               ),
             ),
             Container(
-              width: 19.31,
-              height: 23.81,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              width: 19.31.w,
+              height: 23.81.h,
+              margin: EdgeInsets.only(top: 20.0.h, bottom: 17.32.h),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -79,9 +81,9 @@ void _insertOverlay(BuildContext context) {
               ),
             ),
             Container(
-              width: 22.0,
-              height: 22,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32),
+              width: 22.0.w,
+              height: 22.h,
+              margin: EdgeInsets.only(top: 20.0.h, bottom: 17.32.h),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -102,9 +104,9 @@ void _insertOverlay(BuildContext context) {
               ),
             ),
             Container(
-              width: 21.95,
-              height: 24.21,
-              margin: const EdgeInsets.only(top: 20.0, bottom: 17.32, right: 43.92),
+              width: 21.95.w,
+              height: 24.21.h,
+              margin: EdgeInsets.only(top: 20.0.h, bottom: 17.32.h, right: 43.92.w),
               child: IconButton(
                 style: IconButton.styleFrom(
                   minimumSize: Size.zero,
@@ -352,7 +354,7 @@ class _FixErrandState extends State<FixErrand> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 19.0, top: 34.0),
+                  padding: EdgeInsets.only(left: 19.0.w, top: 34.0.h),
                   child: Row(
                     children: [
                       IconButton(
@@ -367,25 +369,25 @@ class _FixErrandState extends State<FixErrand> {
                           fontFamily: 'Paybooc',
                           fontWeight: FontWeight.w700,
                           color: Color(0xff111111),
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 34),
+                  margin: EdgeInsets.only(top: 34.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '제목',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w600,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -393,13 +395,13 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 300),
+                        margin: EdgeInsets.only(right: 300.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -410,26 +412,26 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 //제목 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                  width: 318,
-                  height: 31,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
+                  width: 318.w,
+                  height: 31.h,
                   decoration: BoxDecoration(
                     border: Border.all(
                         color: Color(0xff2D2D2D), // 테두리 색상
-                        width: 0.5 // 테두리 굵기
+                        width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     color: Color(0xffFFFFFF), // 텍스트 필드 배경색
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 2, left: 10, right: 10),
+                    padding: EdgeInsets.only(bottom: 2.h, left: 10.w, right: 10.w),
                     child: TextField(
                       maxLength: maxTitleLength,
                       controller: titleController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff252525),
                       ),
@@ -444,18 +446,18 @@ class _FixErrandState extends State<FixErrand> {
 
                 // 일정 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '일정',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -463,13 +465,13 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 301.92),
+                        margin: EdgeInsets.only(right: 301.92.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -485,18 +487,18 @@ class _FixErrandState extends State<FixErrand> {
                     setMinuteParentState: setMinuteAtChildWidget),
                 // 도착지 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 18),
+                  margin: EdgeInsets.only(top: 18.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '도착지',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -504,13 +506,13 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 289),
+                        margin: EdgeInsets.only(right: 289.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -523,25 +525,25 @@ class _FixErrandState extends State<FixErrand> {
                 FixMiniMap(latitude: latitude, longitude: longitude, setLatLongParentStatue: setLatLongAtChildWidget,),
                 // 상세 주소 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
-                  width: 320,
-                  height: 38,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 7.0.h),
+                  width: 320.w,
+                  height: 38.h,
                   decoration: BoxDecoration(
                     border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                    Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Color(0xffFFFFFF),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
+                    padding: EdgeInsets.only(top: 4.75.h, left: 12.6.w, right: 8.w),
                     child: TextField(
                       maxLength: maxDetailAddressLength,
                       controller: detailAddressController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ),
@@ -550,7 +552,7 @@ class _FixErrandState extends State<FixErrand> {
                         hintStyle: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff878787),
                         ),
@@ -564,18 +566,18 @@ class _FixErrandState extends State<FixErrand> {
 
                 // 심부름 값 텍스트, 결제 방법 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 18),
+                  margin: EdgeInsets.only(top: 18.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '심부름 값',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -583,39 +585,39 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 70),
+                        margin: EdgeInsets.only(right: 70.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 2),
+                        margin: EdgeInsets.only(right: 2.w),
                         child: Text(
                           '결제 방법',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xff111111),
                           ),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 142),
+                        margin: EdgeInsets.only(right: 142.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -626,7 +628,7 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
                 Container(
-                  margin: EdgeInsets.only(top: 6, left: 20.0),
+                  margin: EdgeInsets.only(top: 6.h, left: 20.0.w),
                   child: Row(
                     children: [
                       Expanded(
@@ -636,12 +638,12 @@ class _FixErrandState extends State<FixErrand> {
                             clipBehavior: Clip.none,
                             children: <Widget>[
                               Container(
-                                width: 107,
-                                height: 38,
+                                width: 107.w,
+                                height: 38.h,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Color(0xff2D2D2D),
-                                      width: 0.5 // 테두리 굵기
+                                      width: 0.5.w // 테두리 굵기
                                   ),
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(5.0)),
@@ -649,14 +651,14 @@ class _FixErrandState extends State<FixErrand> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 4, left: 27, right: 7.5),
+                                      bottom: 4.h, left: 27.w, right: 7.5.w),
                                   child: TextField(
                                     maxLength: maxPriceLength,
                                     controller: priceController,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 13,
+                                      fontSize: 13.sp,
                                       letterSpacing: 0.01,
                                       color: Color(0xff373737),
                                     ),
@@ -672,13 +674,13 @@ class _FixErrandState extends State<FixErrand> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 12.36, top: 1),
+                                    padding: EdgeInsets.only(left: 12.36.w, top: 1.h),
                                     color: Colors.transparent,
                                     child: SvgPicture.asset(
                                       'assets/images/₩.svg',
                                       color: Color(0xff7C7C7C),
-                                      width: 11,
-                                      height: 14,
+                                      width: 11.w,
+                                      height: 14.h,
                                     ),
                                   ),
                                 ),
@@ -695,18 +697,18 @@ class _FixErrandState extends State<FixErrand> {
 
                 // 요청사항 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '요청사항',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -714,13 +716,13 @@ class _FixErrandState extends State<FixErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 275),
+                        margin: EdgeInsets.only(right: 275.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -731,18 +733,18 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 요청사항 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                  width: 318,
-                  height: 66.56,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
+                  width: 318.w,
+                  height: 66.56.h,
                   decoration: BoxDecoration(
                     border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                    Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     color: Color(0xffFFFFFF),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 2, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 2.h, left: 10.w, right: 10.w),
                     // hintText Padding이 이상해서 임의로 설정
                     child: TextField(
                       maxLength: maxRequestLength,
@@ -750,7 +752,7 @@ class _FixErrandState extends State<FixErrand> {
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff111111),
                       ),
@@ -760,7 +762,7 @@ class _FixErrandState extends State<FixErrand> {
                         hintStyle: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff878787),
                         ),
@@ -777,8 +779,8 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 수정 완료 버튼 만들기
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.27),
-                  height: 43,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 20.27.h),
+                  height: 43.h,
                   child: ElevatedButton(
                     onPressed: () {
                       errandUpdateRequest();
@@ -800,7 +802,7 @@ class _FixErrandState extends State<FixErrand> {
                           }),
                       // 버튼의 크기 정하기
                       minimumSize: MaterialStateProperty.all<Size>(
-                          Size(318, 41)),
+                          Size(318.w, 41.h)),
                       // 버튼의 모양 변경하기
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -812,7 +814,7 @@ class _FixErrandState extends State<FixErrand> {
                     child: Text(
                       '수정 완료',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFFFFFFF),
