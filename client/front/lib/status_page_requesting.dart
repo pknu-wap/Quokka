@@ -515,14 +515,15 @@ class Status_Content_Widget extends StatelessWidget {
                 width: 276.69.w,
                 height: 42.79.h,
                 decoration: BoxDecoration(
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withOpacity(0.3),
-                  //     spreadRadius: 1,
-                  //     blurRadius: 3,
-                  //     offset: Offset(2.w, 1.h),
-                  //   ),
-                  // ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xff000000).withOpacity(0.25.r),
+                      offset: Offset(3.w, 5.h),
+                      blurRadius: 12.w,
+                      spreadRadius: 0.r,
+                    ),
+                  ],
+
                 ),
                 margin: EdgeInsets.only(left: 8.08.w),
                 alignment: Alignment.center,
