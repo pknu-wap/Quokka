@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'home.dart';
 import 're-showmap.dart';
@@ -73,14 +73,14 @@ class _RatingDialogState extends State<RatingDialog> {
         child : Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1.w),
           ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
               // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
+              width: 323.w,
+              height: 214.h,
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF), //배경색
                 borderRadius: BorderRadius.circular(10),
@@ -88,21 +88,21 @@ class _RatingDialogState extends State<RatingDialog> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: 30.h),
                     child: SvgPicture.asset(
                       'assets/images/smile_quokka.svg',
-                      width: 70,
-                      height: 70,
+                      width: 70.w,
+                      height: 70.h,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 12),
+                    margin: EdgeInsets.only(top: 12.h),
                     child: Text(
                       "평가해주셔서 감사합니다!",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.00,
                         color: Color(0xff1A1A1A),
                       ),
@@ -110,13 +110,13 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: 10.h),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                         minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
+                            Size(281.1.w, 47.25.h)),
                         shape: MaterialStateProperty.all<
                             RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -130,7 +130,7 @@ class _RatingDialogState extends State<RatingDialog> {
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xffFFFFFF),
                         ),
@@ -160,14 +160,14 @@ class _RatingDialogState extends State<RatingDialog> {
         return  Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1.w),
           ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
               // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 275.75,
+              width: 323.w,
+              height: 275.75.h,
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF), //배경색
                 borderRadius: BorderRadius.circular(10),
@@ -175,21 +175,21 @@ class _RatingDialogState extends State<RatingDialog> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 16.04),
+                    margin: EdgeInsets.only(top: 16.04.h),
                     child: SvgPicture.asset(
                       'assets/images/alert.svg',
-                      width: 76.83,
-                      height: 76.83,
+                      width: 76.83.w,
+                      height: 76.83.h,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 4.08),
+                    margin: EdgeInsets.only(top: 4.08.h),
                     child: Text(
                       "지금 나가면 평가할 수 없어요!",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.00,
                         color: Color(0xff1A1A1A),
                       ),
@@ -197,13 +197,13 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 17.77.h),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                         minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
+                            Size(281.1.w, 47.25.h)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -216,7 +216,7 @@ class _RatingDialogState extends State<RatingDialog> {
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xffFFFFFF),
                         ),
@@ -227,19 +227,19 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 17.77.h),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFFFFFFFF)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                         minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
+                            Size(281.1.w, 47.25.h)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                             side: BorderSide(
                                 color: Color(0xff999999), // 테두리 색상
-                                width: 1 // 테두리 두께
+                                width: 1.w // 테두리 두께
                             ),
                           ),
                         ),
@@ -249,7 +249,7 @@ class _RatingDialogState extends State<RatingDialog> {
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xff3E3E3E),
                         ),
@@ -293,13 +293,13 @@ class _RatingDialogState extends State<RatingDialog> {
     child:  Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+        side: BorderSide(color: Color(0xffB6B6B6), width: 1.w),
       ),
       child: FittedBox(
         fit: BoxFit.contain,
         child: Container(
-          width: 323,
-          height: 343,
+          width: 323.w,
+          height: 343.h,
           decoration: BoxDecoration(
             color: Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(10),
@@ -311,22 +311,22 @@ class _RatingDialogState extends State<RatingDialog> {
                 child: Row(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container( margin: EdgeInsets.only(top: 19, left: 22),
+                    Container( margin: EdgeInsets.only(top: 19.w, left: 22.h),
                       child: Text(
                         '평가하기',
                         style: TextStyle(fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           letterSpacing: 0.00,
                           color: Color(0xff616161),),),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 177), //원래 197인데 잘려서 줄여놓음
+                      margin: EdgeInsets.only(left: 177.w), //원래 197인데 잘려서 줄여놓음
                       child: IconButton(
                         icon: Icon(
                           Icons.close,
                           color: Color(0xff8D8D8D),
-                          size: 35,),
+                          size: 35.sp,),
                         onPressed: () {
                           scoreConfirmDialog(context);
                         },
@@ -336,30 +336,30 @@ class _RatingDialogState extends State<RatingDialog> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 19, left: 22, right: 50),
+                margin: EdgeInsets.only(top: 19.h, left: 22.w, right: 50.w),
                 child:  Text(
                   '더 나은 거래를 위해 오늘의 거래를 평가해주세요!',
                   style: TextStyle(fontFamily: 'Pretendard',
                     fontWeight: FontWeight.w400,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     letterSpacing: 0.00,
                     color: Color(0xff404040),),),
               ),
               Flexible(
                 child: Container(
-                  margin: EdgeInsets.only(left: 0, right: 50),
+                  margin: EdgeInsets.only(left: 0.w, right: 50.h),
                   child:  Text('상대방 평가 후 나의 평가를 확인할 수 있어요.',
                     style: TextStyle(fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w400,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       letterSpacing: 0.00,
                       color: Color(0xff404040),),),
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(top: 18.71, left: 27, right: 31),
+                  margin: EdgeInsets.only(top: 18.71.h, left: 27.w, right: 31.w),
                   child: Container(
-                      width: 265,
+                      width: 265.w,
                       child: Divider(
                           color: Color(0xffBCBCBC),
                           thickness: 0.5))),
@@ -383,11 +383,11 @@ class _RatingDialogState extends State<RatingDialog> {
                 }),
               ),
               Container(
-                margin: EdgeInsets.only(top: 15),
+                margin: EdgeInsets.only(top: 15.h),
                 child: Text(ratingTexts[_rating],
                   style: TextStyle(fontFamily: 'Pretendard',
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     letterSpacing: 0.00,
                     color: Color(0xff1A1A1A),),),),
               Visibility(
@@ -396,13 +396,13 @@ class _RatingDialogState extends State<RatingDialog> {
                 maintainAnimation: true,
                 maintainState: true,
                 child: Container(
-                  margin: EdgeInsets.only(top: 5),
+                  margin: EdgeInsets.only(top: 5.h),
                   child: Text(
                     '($_rating / 5) 점',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       letterSpacing: 0.00,
                       color: Color(0xff1A1A1A),
                     ),
@@ -410,7 +410,7 @@ class _RatingDialogState extends State<RatingDialog> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 18, left: 11.5, right: 11.5),
+                margin: EdgeInsets.only(top: 18.h, left: 11.5.w, right: 11.5.w),
                 child: ElevatedButton(
                   onPressed: _rating == 0 ? (){}
                       : () {
@@ -418,19 +418,19 @@ class _RatingDialogState extends State<RatingDialog> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
-                    fixedSize: Size(318, 45), // 너비와 높이
+                    fixedSize: Size(318.w, 45.h), // 너비와 높이
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
                     ),
                   ),
                   child: Container(
-                    width: 300,
-                    height: 45,
+                    width: 300.w,
+                    height: 45.h,
                     alignment: Alignment.center,
                     child: Text(
                       '평가 완료했어요',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0.01,
@@ -472,21 +472,21 @@ class Status_Content_Widget extends StatelessWidget {
     {
       return Opacity(opacity: animation.value,
         child: Container(
-          width: 320,
-          height: 85, // 메시지 1개
-          margin: EdgeInsets.only(top: 21.87),
+          width: 320.w,
+          height: 85.h, // 메시지 1개
+          margin: EdgeInsets.only(top: 21.87.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 15.09),
+                margin: EdgeInsets.only(top: 15.09.h),
                 child: Column(
                   children: [
                     Container(
-                      width: 35.43,
-                      height: 35.43,
-                      margin: EdgeInsets.only(top: 8.28, left: 17.04),
+                      width: 35.43.w,
+                      height: 35.43.h,
+                      margin: EdgeInsets.only(top: 8.28.h, left: 17.04.w),
                       child: SvgPicture.asset(
                         contents == "완료했어요!"
                             ? 'assets/images/status_smile_quokka.svg'
@@ -494,7 +494,7 @@ class Status_Content_Widget extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 21.55, top: 2.48),
+                      margin: EdgeInsets.only(left: 21.55.w, top: 2.48.h),
                       child: Text(
                         //created,
                         extractTime(created),
@@ -503,7 +503,7 @@ class Status_Content_Widget extends StatelessWidget {
                           fontStyle: FontStyle.normal,
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.01,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: Color(0xff747474),
                         ),
                       ),
@@ -512,8 +512,8 @@ class Status_Content_Widget extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 276.69,
-                height: 42.79,
+                width: 276.69.w,
+                height: 42.79.h,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -524,7 +524,7 @@ class Status_Content_Widget extends StatelessWidget {
                     ),
                   ],
                 ),
-                margin: EdgeInsets.only(left: 8.08),
+                margin: EdgeInsets.only(left: 8.08.w),
                 alignment: Alignment.center,
                 child: Stack(
                   children: [
@@ -532,8 +532,8 @@ class Status_Content_Widget extends StatelessWidget {
                       contents == "완료했어요!"
                           ? 'assets/images/dark_speech_bubble_L.svg'
                           : 'assets/images/light_speech_bubble_L.svg',
-                      width: 276.69,
-                      height: 42.79,
+                      width: 276.69.w,
+                      height: 42.79.h,
                       fit: BoxFit.cover,
                     ),
                     Positioned.fill(
@@ -546,7 +546,7 @@ class Status_Content_Widget extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.01,
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             color: contents == "완료했어요!"
                                 ? Color(0xffFFFFFF)
                                 : Color(0xff232323),
@@ -704,13 +704,13 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1.w),
           ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
-              width: 323,
-              height: 268.29,
+              width: 323.w,
+              height: 268.29.h,
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF), //배경색
                 borderRadius: BorderRadius.circular(10),
@@ -718,7 +718,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 35.87),
+                    margin: EdgeInsets.only(top: 35.87.h),
                     child: SvgPicture.asset(
                       'assets/images/check.svg',
                       width: 39.08,
@@ -726,12 +726,12 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 36),
+                    margin: EdgeInsets.only(top: 36.h),
                     child: Text(
                       "심부름을 완료하시겠어요?",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0.04,
                         color: Color(0xff1A1A1A),
@@ -740,37 +740,37 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 6),
+                    margin: EdgeInsets.only(top: 6.h),
                     child: Text(
                       "꼭 심부름이 완료되었을 때 눌러주세요.",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w500,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Color(0xff9B7D68),
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 39.61),
+                    margin: EdgeInsets.only(top: 39.61.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 16),
+                          margin: EdgeInsets.only(left: 16.w),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color(0xFFFFFFFF)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                               minimumSize: MaterialStateProperty.all<Size>(
-                                  Size(134.18, 45)),
+                                  Size(134.18.w, 45.h)),
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                   side: BorderSide(
                                       color: Color(0xff999999), // 테두리 색상
-                                      width: 1 // 테두리 두께
+                                      width: 1.w // 테두리 두께
                                   ),
                                 ),
                               ),
@@ -780,7 +780,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 letterSpacing: 0.00,
                                 color: Color(0xff3E3E3E),
                               ),
@@ -791,13 +791,13 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(right: 16),
+                          margin: EdgeInsets.only(right: 16.w),
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color(0xff7C3D1A)),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                  Size(134.18, 45)),
+                                  Size(134.18.w, 45.h)),
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
@@ -809,7 +809,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w500,
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 letterSpacing: 0.00,
                                 color: Color(0xffFFFFFF),
                               ),
@@ -841,8 +841,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
           ),
           child: Container(
             padding: EdgeInsets.all(20),
-            width: 300,
-            height: 203,
+            width: 300.w,
+            height: 203.h,
             decoration: BoxDecoration(
               color: Color(0xffFFFFFF), //배경색
               borderRadius: BorderRadius.circular(20),
@@ -853,18 +853,18 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                 Icon(
                   Icons.check, // 확인 아이콘으로 변경
                   color: Color(0xffAD8772),
-                  size: 40,
+                  size: 40.sp,
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 Text(
                   "나가면 더 이상 평가할 수 없어요!",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -878,7 +878,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xffAD8772), // 갈색으로 설정
                           foregroundColor: Color(0xffFFFFFF),
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -886,7 +886,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         child: Text("평가를 하지 않고 나가기"),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: 10.w),
                     Expanded(
                       child: TextButton(
                         onPressed: () {
@@ -894,7 +894,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: Color(0xffAD8772),
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -965,7 +965,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 86, left: 26),
+                        margin: EdgeInsets.only(top: 86.h, left: 26.w),
                         child: IconButton(
                           style: IconButton.styleFrom(
                             minimumSize: Size.zero,
@@ -982,11 +982,11 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         ),
                       ),
                       Container( height: 25,
-                        margin: EdgeInsets.only(top: 80, left: 12),
+                        margin: EdgeInsets.only(top: 80.h, left: 12.w),
                         child: Text(
                           '현황 페이지',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontFamily: 'paybooc',
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.01,
@@ -995,9 +995,9 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         ),
                       ),
                       Container(
-                        width: 19.02,
-                        height: 26.15,
-                        margin: EdgeInsets.only(top: 73.65, left: 139.98),
+                        width: 19.02.w,
+                        height: 26.15.h,
+                        margin: EdgeInsets.only(top: 73.65.h, left: 139.98.w),
                         child: IconButton(
                           style: IconButton.styleFrom(
                             minimumSize: Size.zero,
@@ -1016,9 +1016,9 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                         ),
                       ),
                       Container(
-                        width: 20,
-                        height: 25.81,
-                        margin: EdgeInsets.only(top: 74, left: 13),
+                        width: 20.w,
+                        height: 25.81.h,
+                        margin: EdgeInsets.only(top: 74.h, left: 13.w),
                         child: IconButton(
                           style: IconButton.styleFrom(
                             minimumSize: Size.zero,
@@ -1039,18 +1039,18 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                     ],
                   ),
                 ),
-                Flexible(child: Container(width: 355, height: 471.79,
-                  margin: EdgeInsets.only(left: 3.45, top: 20.13),
+                Flexible(child: Container(width: 355.w, height: 471.79.h,
+                  margin: EdgeInsets.only(left: 3.45.w, top: 20.13.h),
                   decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
                     //color: Colors.blue,
                     border: Border(
-                      top: BorderSide(color: Colors.transparent, width: 1,),
+                      top: BorderSide(color: Colors.transparent, width: 1.w,),
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListView.builder(
-                    padding: EdgeInsets.only(top: 0.1, bottom: 45),
+                    padding: EdgeInsets.only(top: 0.1.h, bottom: 45.w),
                     controller: _scrollController,
                     shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
@@ -1066,7 +1066,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                 ),
                   ),),
                 Container(
-                  margin: EdgeInsets.only(top: 24.08, left: 21),
+                  margin: EdgeInsets.only(top: 24.08.h, left: 21.w),
                   child: ElevatedButton(
                     onPressed: isCompleted
                         ? () {
@@ -1077,19 +1077,19 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                       backgroundColor: isCompleted
                           ? Color(0xff7C3D1A)
                           : Color(0xff7C3D1A).withOpacity(0.5),
-                      fixedSize: Size(318, 45), // 너비와 높이
+                      fixedSize: Size(318.w, 45.h), // 너비와 높이
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
                       ),
                     ),
                     child: Container(
-                      width: 318,
-                      height: 45,
+                      width: 318.w,
+                      height: 45.h,
                       alignment: Alignment.center,
                       child: Text(
                         '심부름 완료',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.01,
