@@ -291,9 +291,9 @@ class InProgress_Errand_Widget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
-                    Container( width: 32.w, height: 31.h,
+                    Container( width: 30.w, height: 31.h,
                       child: SvgPicture.asset(
-                          'assets/images/running_errand.svg', width: 32.w, height: 31.h, fit: BoxFit.cover
+                          'assets/images/running_errand.svg', width: 30.w, height: 31.h, fit: BoxFit.cover
                       ),
                     ), //이미지
                     Container(
@@ -359,9 +359,9 @@ class InProgress_Errand_Widget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
-                    Container( width: 32.w, height: 31.h,
+                    Container( width: 30.w, height: 31.h,
                       child: SvgPicture.asset(
-                          'assets/images/requesting_errand.svg', width: 32.w, height: 31.h, fit: BoxFit.cover
+                          'assets/images/requesting_errand.svg', width: 30.w, height: 31.h, fit: BoxFit.cover
                       ),
                     ), //이미지
                     Container(
