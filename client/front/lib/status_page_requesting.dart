@@ -494,7 +494,7 @@ class Status_Content_Widget extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 21.55.w, top: 2.48.h),
+                      margin: EdgeInsets.only(left: 21.55.w, top: 2.2.h),
                       child: Text(
                         //created,
                         extractTime(created),
@@ -515,14 +515,14 @@ class Status_Content_Widget extends StatelessWidget {
                 width: 276.69.w,
                 height: 42.79.h,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: Offset(2, 1),
-                    ),
-                  ],
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black.withOpacity(0.3),
+                  //     spreadRadius: 1,
+                  //     blurRadius: 3,
+                  //     offset: Offset(2.w, 1.h),
+                  //   ),
+                  // ],
                 ),
                 margin: EdgeInsets.only(left: 8.08.w),
                 alignment: Alignment.center,
@@ -721,8 +721,8 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                     margin: EdgeInsets.only(top: 35.87.h),
                     child: SvgPicture.asset(
                       'assets/images/check.svg',
-                      width: 39.08,
-                      height: 28.95,
+                      width: 39.08.w,
+                      height: 28.95.h,
                     ),
                   ),
                   Container(
@@ -981,7 +981,7 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                           ),
                         ),
                       ),
-                      Container( height: 25,
+                      Container( height: 25.h,
                         margin: EdgeInsets.only(top: 80.h, left: 12.w),
                         child: Text(
                           '현황 페이지',

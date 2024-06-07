@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 800),
+      designSize: Size(360, 760),
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp(

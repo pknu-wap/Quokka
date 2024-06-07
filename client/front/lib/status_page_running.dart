@@ -486,9 +486,9 @@ class Status_Content_Widget extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: Offset(-1, 1),
+                        spreadRadius: 1.r,
+                        blurRadius: 1.r,
+                        offset: Offset(0.w, 1.h),
                       ),
                     ],
                   ),
@@ -539,7 +539,7 @@ class Status_Content_Widget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 10.91.w, top: 5.3.h),
+                        margin: EdgeInsets.only(left: 10.91.w, top: 3.84.h),
                         child: Text(
                           extractTime(created),
                           style: TextStyle(
@@ -858,7 +858,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
   void scrollToBottom() {
     if (contents.length > 5) {
       final maxScrollExtent = _scrollController.position.maxScrollExtent;
-      final offset = 50; // 더 아래로 스크롤하고 싶은 거리
+      final offset = 50.h; // 더 아래로 스크롤하고 싶은 거리
 
       _scrollController.animateTo(
         maxScrollExtent + offset,
@@ -1125,7 +1125,7 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff7C3D1A),
-                    fixedSize: Size(318, 45), // 너비와 높이
+                    fixedSize: Size(318.w, 45.h), // 너비와 높이
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
                     ),
