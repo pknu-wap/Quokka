@@ -409,7 +409,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         if (_isRunning)
                           Positioned(
-                            top: 20.h,
+                            top: 19.h,
                             right: 15.w,
                             child: Text(
                               '${_formatTime(_seconds)}',
