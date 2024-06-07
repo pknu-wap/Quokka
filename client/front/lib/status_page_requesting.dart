@@ -371,8 +371,8 @@ class _RatingDialogState extends State<RatingDialog> {
                       index < _rating
                           ? 'assets/images/quokka_point_O.svg'
                           : 'assets/images/quokka_point_X.svg',
-                      width: 39.57,
-                      height: 39.99,
+                      width: 39.57.w,
+                      height: 39.99.h,
                     ),
                     onPressed: () {
                       setState(() {

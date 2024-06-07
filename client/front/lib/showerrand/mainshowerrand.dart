@@ -160,7 +160,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                               child: AnimatedContainer(
                                 duration: Duration(milliseconds: 500),
                                 width: 324.w,
-                                height: 595.h,
+                                height: 576.h,
                                 margin: errandConfirmedMargin, // 기존 마진 -> 확정 마진
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
@@ -203,7 +203,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                     // 확인했어요. 버튼
                     if(isCheckButtonVisible) // 버튼이 보이면,
                     Container(
-                      margin: EdgeInsets.only(left: 20.5.w, right: 21.5.w, top: 25.h),
+                      margin: EdgeInsets.only(left: 20.5.w, right: 21.5.w, top: 11.h),
                       child: ElevatedButton(
                         onPressed: () {
                           print("확인했어요. 클릭");
