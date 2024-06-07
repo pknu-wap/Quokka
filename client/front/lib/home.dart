@@ -1863,7 +1863,7 @@ class _HomeState extends State<Home> {
                             },
                           );
                         },
-                        icon: SvgPicture.asset('assets/images/quokka.svg',width: 56,
+                        icon: SvgPicture.asset('assets/images/errand_popup_quokka.svg',width: 56,
                             height: 56,
                             fit: BoxFit.cover),
                       ),),
