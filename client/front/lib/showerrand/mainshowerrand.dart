@@ -159,8 +159,8 @@ class _MainShowErrandState extends State<MainShowErrand> {
                       child: Flexible(
                               child: AnimatedContainer(
                                 duration: Duration(milliseconds: 500),
-                                width: 324,
-                                height: 576,
+                                width: 324.w,
+                                height: 576.h,
                                 margin: errandConfirmedMargin, // 기존 마진 -> 확정 마진
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
