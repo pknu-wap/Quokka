@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -124,23 +124,23 @@ class _Upload_ImageState extends State<Upload_Image> {
           centerTitle: true,
           elevation: 0.0,
           leading: Padding(
-            padding: const EdgeInsets.only(top: 26.0),
+            padding: EdgeInsets.only(top: 26.0.h),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
           ),
           title: Padding(
-            padding: const EdgeInsets.only(top: 26.0),
+            padding: EdgeInsets.only(top: 26.0.h),
             child: SizedBox(
               height: 25.0,
-              child: const Text(
+              child: Text(
                 '본인인증',
                 style: TextStyle(
                   fontFamily: 'paybooc',
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0.01,
                   color: Color(0xff111111),
@@ -154,12 +154,12 @@ class _Upload_ImageState extends State<Upload_Image> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 22.0, top: 30.0),
-                child: const Text(
+                margin: EdgeInsets.only(left: 22.0.w, top: 30.0.h),
+                child: Text(
                   '모바일 학생증 인증',
                   style: TextStyle(
                     fontFamily: 'Pretendard',
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 0.01,
                     color: Color(0xff373737),
@@ -167,17 +167,17 @@ class _Upload_ImageState extends State<Upload_Image> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 10.0.h),
                 child: Stack(
                   children: <Widget>[
-                    SvgPicture.asset('assets/images/upload_image_box.svg', width: 320, height: 202, fit: BoxFit.cover),
+                    SvgPicture.asset('assets/images/upload_image_box.svg', width: 320.w, height: 202.h, fit: BoxFit.cover),
                     Positioned(
-                      left: 0, right: 0, top: 0, bottom: 0,
+                      left: 0.w, right: 0.w, top: 0.h, bottom: 0.h,
                       child: IconButton(
                         icon: SvgPicture.asset(
                           'assets/images/upload_image_button.svg',
-                          width: 80,
-                          height: 80,
+                          width: 80.w,
+                          height: 80.h,
                           // color: Color(0xff8D8D8D),
                         ),
                         onPressed: () {
@@ -199,28 +199,28 @@ class _Upload_ImageState extends State<Upload_Image> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(left: 22.0, top: 36.0),
+                      margin: EdgeInsets.only(left: 22.0.w, top: 36.0.h),
                       child: Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(right: 9.0),
-                            child: const Text(
+                            margin: EdgeInsets.only(right: 9.0.w),
+                            child: Text(
                               '업로드 파일 예시',
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.01,
                                 color: Color(0xff373737),
                               ),
                             ),
                           ),
-                          const Text(
+                          Text(
                             '파일 형식  jpg / png',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff373737),
                             ),
@@ -229,9 +229,9 @@ class _Upload_ImageState extends State<Upload_Image> {
                       ),
                     ),
                     Container(
-                      width: 139.58,
-                      height: 256.44,
-                      margin: const EdgeInsets.only(left: 22.0, top: 17.0),
+                      width: 139.58.w,
+                      height: 256.44.h,
+                      margin: EdgeInsets.only(left: 22.0.w, top: 17.0.h),
                       child: SvgPicture.asset('assets/images/upload_image_sample.svg'),
                     ),
 
