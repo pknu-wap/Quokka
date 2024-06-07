@@ -534,8 +534,8 @@ class Status_Content_Widget extends StatelessWidget {
                         margin: EdgeInsets.only(top: 8.28, left: 7.04),
                         child: SvgPicture.asset(
                           contents == "완료했어요!"
-                              ? 'assets/images/smile_quokka.svg'
-                              : 'assets/images/quokka.svg',
+                              ? 'assets/images/status_smile_quokka.svg'
+                              : 'assets/images/status_quokka.svg',
                         ),
                       ),
                       Container(

@@ -305,8 +305,8 @@ class ErrandCheckWidget extends StatelessWidget {
                         // 마커 이미지
                         Container(
                           margin: EdgeInsets.only(left: 18.97),
-                          child: Image.asset(
-                            'assets/images/marker_small.png',
+                          child: SvgPicture.asset(
+                            'assets/images/marker_small.svg',
                             // Replace with your image asset path
                             width: 12.2, // Adjust the size as needed
                             height: 16.77, // Adjust the size as needed
@@ -351,10 +351,10 @@ class ErrandCheckWidget extends StatelessWidget {
                         // 시계 이미지
                         Container(
                           margin: EdgeInsets.only(left: 18.53),
-                          child: Image.asset(
-                            'assets/images/clock.png',
-                            width: 15.08, // Adjust the size as needed
-                            height: 15.08, // Adjust the size as needed
+                          child: SvgPicture.asset(
+                            'assets/images/clock.svg',
+                            width: 14, // Adjust the size as needed
+                            height: 14, // Adjust the size as needed
                           ),
                         ),
                         // 일정 텍스트

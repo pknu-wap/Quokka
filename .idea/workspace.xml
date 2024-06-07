@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 쓰레기통, 연필, 점수, 닫기, 금액 원 표시 아이콘, 폭죽 png -&gt; svg 변경">
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: png -&gt; svg 중간 merge">
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/clock.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/errand_popup_quokka.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/marker_small.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/status_quokka.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/assets/images/status_smile_quokka.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/assets/images/quokka.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/assets/images/quokka.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,22 +59,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/Users/ls090/Desktop&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/219-feat-svg이미지-추가&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/2024-1_App1/client/front/assets/images&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "ScreenshotViewer.SavePath": "C:/Users/ls090/Desktop",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "228-feat-svg-파일-수정-추가",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "C:/Users/ls090/Desktop",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\2024-1_App1\client\front\assets\images" />
@@ -144,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717700981997</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix: png -&gt; svg 중간 merge">
+      <option name="closed" value="true" />
+      <created>1717703185331</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717703185331</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +184,7 @@
     <MESSAGE value="Fix: 현황 페이지 커카, 웃는 커카 이미지, 진한, 연한 말풍선 L, R png -&gt; svg 변경" />
     <MESSAGE value="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 쓰레기통, 연필, 점수, 닫기, 금액 원 표시 아이콘, 폭죽 png -&gt; svg 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: 쓰레기통, 연필, 점수, 닫기, 금액 원 표시 아이콘, 폭죽 png -&gt; svg 변경" />
+    <MESSAGE value="Fix: png -&gt; svg 중간 merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: png -&gt; svg 중간 merge" />
   </component>
 </project>
