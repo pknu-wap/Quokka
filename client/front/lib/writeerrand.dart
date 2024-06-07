@@ -15,6 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'checkerrand.dart';
 import 'home.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 final storage = FlutterSecureStorage();
 void _insertOverlay(BuildContext context) {
 
@@ -415,7 +416,7 @@ class _WriteErrandState extends State<WriteErrand> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 19.0, top: 34.0),
+                  padding: EdgeInsets.only(left: 19.0.w, top: 34.0.h),
                   child: Row(
                     children: [
                       IconButton(
@@ -430,25 +431,25 @@ class _WriteErrandState extends State<WriteErrand> {
                           fontFamily: 'Paybooc',
                           fontWeight: FontWeight.w700,
                           color: Color(0xff111111),
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 34),
+                  margin: EdgeInsets.only(top: 34.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '제목',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w600,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -456,13 +457,13 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 300),
+                        margin: EdgeInsets.only(right: 300.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -473,26 +474,26 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 //제목 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                  width: 318,
-                  height: 31,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
+                  width: 318.w,
+                  height: 31.h,
                   decoration: BoxDecoration(
                     border: Border.all(
                         color: Color(0xff2D2D2D), // 테두리 색상
-                        width: 0.5 // 테두리 굵기
+                        width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     color: Color(0xffFFFFFF), // 텍스트 필드 배경색
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 7.5, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 7.5.h, left: 10.w, right: 10.w),
                     child: TextField(
                       maxLength: maxTitleLength,
                       controller: titleController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff252525),
                       ),
@@ -507,18 +508,18 @@ class _WriteErrandState extends State<WriteErrand> {
 
                 // 일정 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '일정',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -526,13 +527,13 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 301.92),
+                        margin: EdgeInsets.only(right: 301.92.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -555,22 +556,22 @@ class _WriteErrandState extends State<WriteErrand> {
                     // ),
                   ),
                 Container(
-                  margin: EdgeInsets.only(top: 6, left: 22),
+                  margin: EdgeInsets.only(top: 6.h, left: 22.w),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          width: 106,
-                          height: 38,
+                          width: 106.w,
+                          height: 38.h,
                           // 토글 버튼 만들기
-                          margin: EdgeInsets.only(left: 0),
+                          margin: EdgeInsets.only(left: 0.w),
                           child: ToggleButtons(
                             color: Color(0xff2E2E2E),
                             // 선택되지 않은 버튼 텍스트 색상
                             // 선택되지 않은 버튼 배경색
                             borderColor: Colors.grey,
                             // 토글 버튼 테두리 색상
-                            borderWidth: 0.5,
+                            borderWidth: 0.5.w,
                             borderRadius: BorderRadius.circular(5.0),
 
                             selectedColor: Color(0xffC77749),
@@ -582,25 +583,25 @@ class _WriteErrandState extends State<WriteErrand> {
 
                             children: <Widget>[
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: Text(
                                   '오늘',
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 13,
+                                    fontSize: 13.sp,
                                     letterSpacing: 0.01,
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 15.w),
                                 child: Text(
                                   '내일',
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 13,
+                                    fontSize: 13.sp,
                                     letterSpacing: 0.01,
                                   ),
                                 ),
@@ -614,13 +615,13 @@ class _WriteErrandState extends State<WriteErrand> {
                       if (isDetailVisible)
                       // 시간 상세 설정 카테고리
                         Container(
-                          margin: EdgeInsets.only(right: 51),
-                          width: 165.28,
-                          height: 38,
+                          margin: EdgeInsets.only(right: 51.w),
+                          width: 165.28.w,
+                          height: 38.h,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color(0xffA9A9A9), // 박스 테두리 색상
-                              width: 0.5, // 테두리 굵기
+                              width: 0.5.w, // 테두리 굵기
                             ),
                             borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             color: Color(0xffFFFFFF), // 박스 배경 색상
@@ -628,7 +629,7 @@ class _WriteErrandState extends State<WriteErrand> {
                           child: Row(
                             children: [
                               Container(
-                                margin: EdgeInsets.only(left: 10),
+                                margin: EdgeInsets.only(left: 10.w),
                                 child: DropdownButton<int>(
                                   underline: Container(),
                                   // dropdownButton 밑줄 제거
@@ -640,7 +641,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                     });
                                   },
                                   icon: Icon(Icons.keyboard_arrow_down,
-                                      size: 17, color: Color(0xff808080)),
+                                      size: 17.sp, color: Color(0xff808080)),
                                   items: List.generate(24, (index) {
                                     // 0~23시
                                     return DropdownMenuItem<int>(
@@ -650,7 +651,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                         style: TextStyle(
                                           fontFamily: 'Pretendard',
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 12,
+                                          fontSize: 12.sp,
                                           letterSpacing: 0.01,
                                           color: Color(0xffC77749),
                                         ),
@@ -660,20 +661,20 @@ class _WriteErrandState extends State<WriteErrand> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(right: 5),
+                                margin: EdgeInsets.only(right: 5.w),
                                 child: Text(
                                   '시',
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     letterSpacing: 0.01,
                                     color: Color(0xff4F4F4F),
                                   ),
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(left: 10),
+                                margin: EdgeInsets.only(left: 10.w),
                                 child: DropdownButton<int>(
                                   underline: Container(),
                                   // dropdownButton 밑줄 제거
@@ -685,7 +686,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                     });
                                   },
                                   icon: Icon(Icons.keyboard_arrow_down,
-                                      size: 17, color: Color(0xff808080)),
+                                      size: 17.sp, color: Color(0xff808080)),
                                   items: List.generate(60, (index) {
                                     // 0~59분
                                     return DropdownMenuItem<int>(
@@ -695,7 +696,7 @@ class _WriteErrandState extends State<WriteErrand> {
                                         style: TextStyle(
                                           fontFamily: 'Pretendard',
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 12,
+                                          fontSize: 12.sp,
                                           letterSpacing: 0.01,
                                           color: Color(0xffC77749),
                                         ),
@@ -705,26 +706,26 @@ class _WriteErrandState extends State<WriteErrand> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(right: 2),
+                                margin: EdgeInsets.only(right: 2.w),
                                 child: Text(
                                   '분',
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     letterSpacing: 0.01,
                                     color: Color(0xff4F4F4F),
                                   ),
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(left: 8),
+                                margin: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   '까지',
                                   style: TextStyle(
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     letterSpacing: 0.01,
                                     color: Color(0xffC77749),
                                   ),
@@ -738,18 +739,18 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 도착지 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '도착지',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -757,13 +758,13 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 289),
+                        margin: EdgeInsets.only(right: 289.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -774,12 +775,12 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 네이버 미니 지도
                 Container(
-                  width: 318.85,
-                  height: 120,
-                  margin: EdgeInsets.only(left: 2, top: 6),
+                  width: 318.85.w,
+                  height: 120.h,
+                  margin: EdgeInsets.only(left: 2.w, top: 6.h),
                   decoration: BoxDecoration(
                     border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                    Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Color(0xffFFFFFF),
@@ -869,25 +870,25 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 상세 주소 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 7.0),
-                  width: 320,
-                  height: 38,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 7.0.h),
+                  width: 320.w,
+                  height: 38.h,
                   decoration: BoxDecoration(
                     border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                    Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Color(0xffFFFFFF),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 4.75, left: 12.6, right: 8),
+                    padding: EdgeInsets.only(top: 4.75.h, left: 12.6.w, right: 8.w),
                     child: TextField(
                       maxLength: maxDetailAddressLength,
                       controller: detailAddressController,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ),
@@ -896,7 +897,7 @@ class _WriteErrandState extends State<WriteErrand> {
                         hintStyle: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff878787),
                         ),
@@ -910,18 +911,18 @@ class _WriteErrandState extends State<WriteErrand> {
 
                 // 심부름 값 텍스트, 결제 방법 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 18),
+                  margin: EdgeInsets.only(top: 18.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '심부름 값',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -929,39 +930,39 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 70),
+                        margin: EdgeInsets.only(right: 70.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 2),
+                        margin: EdgeInsets.only(right: 2.w),
                         child: Text(
                           '결제 방법',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xff111111),
                           ),
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 142),
+                        margin: EdgeInsets.only(right: 142.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -972,7 +973,7 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 심부름 값 텍스트 필드, 결제 방법 토글 버튼
                 Container(
-                  margin: EdgeInsets.only(top: 6, left: 20.0),
+                  margin: EdgeInsets.only(top: 6.h, left: 20.0.w),
                   child: Row(
                     children: [
                       Expanded(
@@ -982,12 +983,12 @@ class _WriteErrandState extends State<WriteErrand> {
                             clipBehavior: Clip.none,
                             children: <Widget>[
                               Container(
-                                width: 107,
-                                height: 38,
+                                width: 107.w,
+                                height: 38.h,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Color(0xff2D2D2D),
-                                      width: 0.5 // 테두리 굵기
+                                      width: 0.5.w // 테두리 굵기
                                   ),
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(5.0)),
@@ -995,14 +996,14 @@ class _WriteErrandState extends State<WriteErrand> {
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      bottom: 4, left: 27, right: 7.5),
+                                      bottom: 4.h, left: 27.w, right: 7.5.w),
                                   child: TextField(
                                     maxLength: maxPriceLength,
                                     controller: priceController,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 13,
+                                      fontSize: 13.sp,
                                       letterSpacing: 0.01,
                                       color: Color(0xff373737),
                                     ),
@@ -1018,13 +1019,13 @@ class _WriteErrandState extends State<WriteErrand> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 12.36, top: 1),
+                                    padding: EdgeInsets.only(left: 12.36.w, top: 1.h),
                                     color: Colors.transparent,
                                     child: SvgPicture.asset(
                                       'assets/images/₩.svg',
                                       color: Color(0xff7C7C7C),
-                                      width: 11,
-                                      height: 14,
+                                      width: 11.w,
+                                      height: 14.h,
                                     ),
                                   ),
                                 ),
@@ -1034,17 +1035,17 @@ class _WriteErrandState extends State<WriteErrand> {
                         ),
                       ),
                       Container(
-                        width: 119,
-                        height: 38,
+                        width: 119.w,
+                        height: 38.h,
                         // 토글 버튼 만들기
-                        margin: EdgeInsets.only(right: 86),
+                        margin: EdgeInsets.only(right: 86.w),
                         child: ToggleButtons(
                           color: Color(0xff2E2E2E),
                           // 선택되지 않은 버튼 텍스트 색상
 
                           borderColor: Colors.grey,
                           // 토글 버튼 테두리 색상
-                          borderWidth: 0.5,
+                          borderWidth: 0.5.w,
                           borderRadius: BorderRadius.circular(5.0),
 
                           selectedColor: Color(0xffC77749),
@@ -1057,25 +1058,25 @@ class _WriteErrandState extends State<WriteErrand> {
                           // renderBorder: false,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 11),
+                              padding: EdgeInsets.symmetric(horizontal: 11.w),
                               child: Text(
                                 '계좌이체',
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 13,
+                                  fontSize: 13.sp,
                                   letterSpacing: 0.01,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 14),
+                              padding: EdgeInsets.symmetric(horizontal: 14.sp),
                               child: Text(
                                 '현금',
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 13,
+                                  fontSize: 13.sp,
                                   letterSpacing: 0.01,
                                 ),
                               ),
@@ -1091,18 +1092,18 @@ class _WriteErrandState extends State<WriteErrand> {
 
                 // 요청사항 텍스트
                 Container(
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: EdgeInsets.only(left: 24.w),
                           child: Text(
                             '요청사항',
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                               color: Color(0xff111111),
                             ),
@@ -1110,13 +1111,13 @@ class _WriteErrandState extends State<WriteErrand> {
                         ), // 이메일 텍스트 입력 구현(누르면 글자 사라짐)
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 275),
+                        margin: EdgeInsets.only(right: 275.w),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                             color: Color(0xffF05252),
                           ),
@@ -1127,18 +1128,18 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 요청사항 텍스트 필드
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 6.0),
-                  width: 318,
-                  height: 66.56,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
+                  width: 318.w,
+                  height: 66.56.h,
                   decoration: BoxDecoration(
                     border:
-                    Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                    Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     color: Color(0xffFFFFFF),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(top: 2, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 2.h, left: 10.w, right: 10.w),
                     // hintText Padding이 이상해서 임의로 설정
                     child: TextField(
                       maxLength: maxRequestLength,
@@ -1146,7 +1147,7 @@ class _WriteErrandState extends State<WriteErrand> {
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff111111),
                       ),
@@ -1156,7 +1157,7 @@ class _WriteErrandState extends State<WriteErrand> {
                         hintStyle: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff878787),
                         ),
@@ -1173,8 +1174,8 @@ class _WriteErrandState extends State<WriteErrand> {
                 ),
                 // 작성 완료 버튼 만들기
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.27),
-                  height: 43,
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 20.27.h),
+                  height: 43.h,
                   child: ElevatedButton(
                     onPressed: () {
                       errandPostRequest();
@@ -1207,7 +1208,7 @@ class _WriteErrandState extends State<WriteErrand> {
                     child: Text(
                       '작성 완료',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFFFFFFF),
