@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/writeerrand.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 
 
@@ -140,7 +141,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 19.0, top: 34.0),
+                padding: EdgeInsets.only(left: 19.0.w, top: 34.0.h),
                 child: Row(
                   children: [
                     IconButton(
@@ -155,7 +156,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                         fontFamily: 'Paybooc',
                         fontWeight: FontWeight.w700,
                         color: Color(0xff111111),
-                        fontSize: 20,
+                        fontSize: 20.sp,
                       ),
                     ),
                   ],
@@ -163,14 +164,14 @@ class _NaverMapTestState extends State<NaverMapTest> {
               ),
               // 네이버 지도
               Container(
-                margin: EdgeInsets.only(left: 0, top: 25.55),
+                margin: EdgeInsets.only(left: 0.w, top: 25.55.h),
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: <Widget>[
                     Container(
-                      width: 318.85,
-                      height: 508.67,
-                      margin: EdgeInsets.only(left: 0),
+                      width: 318.85.w,
+                      height: 508.67.h,
+                      margin: EdgeInsets.only(left: 0.w),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: NaverMap(
@@ -243,17 +244,17 @@ class _NaverMapTestState extends State<NaverMapTest> {
                     ),
                     // 도착지 찾기 텍스트 필드
                     Container(
-                      margin: EdgeInsets.only(top: 18.82),
+                      margin: EdgeInsets.only(top: 18.82.h),
                       child: Stack(
                         clipBehavior: Clip.none,
                         children: <Widget>[
                           Container(
-                            width: 283.97,
-                            height: 40,
-                            margin: EdgeInsets.only(left: 16.86),
+                            width: 283.97.w,
+                            height: 40.h,
+                            margin: EdgeInsets.only(left: 16.86.w),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Color(0xffD3D3D3), width: 1 // 테두리 굵기
+                                  color: Color(0xffD3D3D3), width: 1.w // 테두리 굵기
                                   ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -261,13 +262,13 @@ class _NaverMapTestState extends State<NaverMapTest> {
                             ),
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  bottom: 6, left: 15.65, right: 37.65),
+                                  bottom: 6.h, left: 15.65.w, right: 37.65.w),
                               child: TextField(
                                 controller: destinationController,
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 13,
+                                  fontSize: 13.sp,
                                   letterSpacing: 0.01,
                                   color: Color(0xff373737),
                                 ),
@@ -302,12 +303,12 @@ class _NaverMapTestState extends State<NaverMapTest> {
                                   _clearTextFieldAndMarker();
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 268, top: 3),
+                                    padding: EdgeInsets.only(left: 268.w, top: 3.h),
                                     color: Colors.transparent,
                                     child: SvgPicture.asset(
                                       'assets/images/close_circle.svg',
-                                      width: 20.43,
-                                      height: 20.43,
+                                      width: 20.43.w,
+                                      height: 20.43.h,
                                     ),
                                   ),
                               ),
@@ -321,7 +322,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
               ),
               // 도착지로 설정할게요 버튼
               Container(
-                margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
+                margin: EdgeInsets.only(left: 23.0.w, right: 19.0.w, top: 38.63.h),
                 child: ElevatedButton(
                   onPressed: marker.isVisible
                       ? () {
@@ -344,7 +345,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                           }
                         }),
                     // 버튼의 크기 정하기
-                    minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                    minimumSize: MaterialStateProperty.all<Size>(Size(318.w, 41.h)),
                     // 버튼의 모양 변경하기
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -356,7 +357,7 @@ class _NaverMapTestState extends State<NaverMapTest> {
                   child: Text(
                     '도착지로 설정할게요',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
                       color: Color(0xFFFFFFFF),
