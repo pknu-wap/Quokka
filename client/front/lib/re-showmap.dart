@@ -297,7 +297,7 @@ class _ReShowMapState extends State<ReShowMap> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 19.0, top: 34.0),
+                  padding: EdgeInsets.only(left: 19.0.w, top: 34.0.h),
                   child: Row(
                     children: [
                       IconButton(
@@ -312,7 +312,7 @@ class _ReShowMapState extends State<ReShowMap> {
                           fontFamily: 'Paybooc',
                           fontWeight: FontWeight.w700,
                           color: Color(0xff111111),
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ],
@@ -320,13 +320,13 @@ class _ReShowMapState extends State<ReShowMap> {
                 ),
                 // 네이버 지도
                 Container(
-                  margin: EdgeInsets.only(left: 0, top: 25.55),
+                  margin: EdgeInsets.only(left: 0.w, top: 25.55.h),
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: <Widget>[
                       Container(
-                        width: 318.85,
-                        height: 508.67,
+                        width: 318.85.w,
+                        height: 508.67.h,
                         margin: EdgeInsets.only(left: 0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
@@ -368,7 +368,7 @@ class _ReShowMapState extends State<ReShowMap> {
                 ),
                 // 도착지로 설정할게요 버튼
                 Container(
-                  margin: EdgeInsets.only(left: 23.0, right: 19.0, top: 38.63),
+                  margin: EdgeInsets.only(left: 23.w, right: 19.0.w, top: 38.63.h),
                   child: ElevatedButton(
                     onPressed: marker.isVisible
                         ? () {
@@ -387,7 +387,7 @@ class _ReShowMapState extends State<ReShowMap> {
                             }
                           }),
                       // 버튼의 크기 정하기
-                      minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
+                      minimumSize: MaterialStateProperty.all<Size>(Size(318.w, 41.h)),
                       // 버튼의 모양 변경하기
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -399,7 +399,7 @@ class _ReShowMapState extends State<ReShowMap> {
                     child: Text(
                       '도착지를 확인했어요',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFFFFFFF),
