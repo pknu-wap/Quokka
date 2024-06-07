@@ -48,6 +48,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   flutter_launcher_icons: ^0.13.1
   gif: ^2.3.0
+  flutter_screenutil: ^5.9.3
 
 
 
