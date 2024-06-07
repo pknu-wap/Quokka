@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class Stamp extends StatelessWidget {
                         Align(
                             alignment: Alignment.centerRight,
                             child: Container(
-                                margin: EdgeInsets.only(top: 5.15, right: 32),
+                                margin: EdgeInsets.only(top: 5.15.h, right: 32.w),
                                 child: Image.asset(
                                     "assets/images/Rectangle3.png"))),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math' as math;
 
 class NameLength4 extends StatelessWidget {
@@ -25,7 +26,7 @@ class NameLength4 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(top: 6.52, right: 55),
+                margin: EdgeInsets.only(top: 6.52.h, right: 55.w),
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
@@ -33,7 +34,7 @@ class NameLength4 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.00,
                         color: Color(0xffCE1111),
                       ),
@@ -45,7 +46,7 @@ class NameLength4 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(top: 9.3, right: 38),
+                margin: EdgeInsets.only(top: 9.3.h, right: 38.w),
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
@@ -53,7 +54,7 @@ class NameLength4 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.00,
                         color: Color(0xffCE1111),
                       ),
@@ -65,7 +66,7 @@ class NameLength4 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(top: 22.9, right: 58),
+                margin: EdgeInsets.only(top: 22.9.h, right: 58.w),
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
@@ -73,7 +74,7 @@ class NameLength4 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.00,
                         color: Color(0xffCE1111),
                       ),
@@ -85,7 +86,7 @@ class NameLength4 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                  margin: EdgeInsets.only(top: 25.15, right: 42),
+                  margin: EdgeInsets.only(top: 25.15.h, right: 42.w),
                   child: Transform.rotate(
                       angle: 9.77 * math.pi / 180,
                       child: Text(
@@ -93,7 +94,7 @@ class NameLength4 extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: 'Cafe24Oneprettynight',
                           fontWeight: FontWeight.w400,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xffCE1111),
                         ),

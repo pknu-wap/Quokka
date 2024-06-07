@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -14,8 +14,6 @@ import 'fixerrandwidget/fixdue.dart';
 import 'fixerrandwidget/fixiscash.dart';
 import 'fixerrandwidget/fixminimap.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 final storage = FlutterSecureStorage();
 
 void _insertOverlay(BuildContext context) {
@@ -37,7 +35,7 @@ void _insertOverlay(BuildContext context) {
           boxShadow: [
             BoxShadow(
               color: Color.fromRGBO(185, 185, 185, 0.25),
-              offset: Offset(5, -1),
+              offset: Offset(5.w, -1.h),
               blurRadius: 5,
               spreadRadius: 1,
             ),
@@ -779,7 +777,7 @@ class _FixErrandState extends State<FixErrand> {
                 ),
                 // 수정 완료 버튼 만들기
                 Container(
-                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 20.27.h),
+                  margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 20.27.sp),
                   height: 43.h,
                   child: ElevatedButton(
                     onPressed: () {

@@ -4,9 +4,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixminimap.dart 마진 수정">
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength2.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength3.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength4.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength5more.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/namelength/namelength5more.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/stamp.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/stamp/stamp.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/tablescreen/tablescreen1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/tablescreen/tablescreen1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/tablescreen/tablescreen2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/showerrandwidget/tablescreen/tablescreen2.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/upload_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/upload_image.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/writeerrand.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +69,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop-FE&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging develop-FE&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ls090/Desktop&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
@@ -257,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717743946789</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fix: fixerrand.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717744537394</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1717744537394</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,6 +309,7 @@
     <MESSAGE value="Fix: fixdue.dart 마진 수정" />
     <MESSAGE value="Fix: fixiscash.dart 마진 수정" />
     <MESSAGE value="Fix: fixminimap.dart 마진 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: fixminimap.dart 마진 수정" />
+    <MESSAGE value="Fix: fixerrand.dart 마진 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: fixerrand.dart 마진 수정" />
   </component>
 </project>
