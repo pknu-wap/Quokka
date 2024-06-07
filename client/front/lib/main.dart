@@ -11,6 +11,7 @@ import 'login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'home.dart';
 import 'package:gif/gif.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final storage = FlutterSecureStorage();
 // Future<bool> _determinePermission() async {
@@ -78,32 +79,37 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Main',
-      home: FutureBuilder(
-        future:  _tokenCheckFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Scaffold(
-              body: Center(
-                child: Text('Error: ${snapshot.error}'),
-              ),
-            );
-          } else {
-            FlutterNativeSplash.remove();
-            bool isValid = snapshot.data ?? false;
-            return AppLoad(isValid: isValid ,);
-            // return LogIn(); // 로그인 페이지로 이동합니다.
-          }
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: Size(360, 800),
+      minTextAdapt: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Main',
+          home: FutureBuilder(
+            future: _tokenCheckFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Scaffold(
+                  body: Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  ),
+                );
+              } else {
+                FlutterNativeSplash.remove();
+                bool isValid = snapshot.data ?? false;
+                return AppLoad(isValid: isValid);
+              }
+            },
+          ),
+        );
+      }
     );
   }
 }
