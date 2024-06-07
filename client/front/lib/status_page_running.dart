@@ -485,10 +485,10 @@ class Status_Content_Widget extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        spreadRadius: 1.r,
-                        blurRadius: 1.r,
-                        offset: Offset(0.w, 1.h),
+                        color: Color(0xff000000).withOpacity(0.25.r),
+                        offset: Offset(0.w, 5.h),
+                        blurRadius: 12.w,
+                        spreadRadius: 0.r,
                       ),
                     ],
                   ),
