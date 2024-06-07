@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: png -&gt; svg 중간 merge">
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/clock.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/errand_popup_quokka.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/marker_small.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/status_quokka.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/assets/images/status_smile_quokka.svg" afterDir="false" />
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: 메인 화면 우측 하단 팝업 이미지, running, requesting errand 이미지 안나오는거 수정, 남은 png -&gt; svg 수정 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/assets/images/quokka.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/assets/images/quokka.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_requesting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status_page_running.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +59,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "228-feat-svg-파일-수정-추가",
+    "git-widget-placeholder": "develop-FE",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Users/ls090/Desktop",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
@@ -162,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717703185331</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix: 메인 화면 우측 하단 팝업 이미지, running, requesting errand 이미지 안나오는거 수정, 남은 png -&gt; svg 수정 완료">
+      <option name="closed" value="true" />
+      <created>1717738147496</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717738147496</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +184,7 @@
     <MESSAGE value="Fix: 경고 이미지 팝업, 뒤로 가기, 체크 이미지 팝업, 현황 페이지의 심부름 요청서 아이콘, 현황 페이지의 위치 아이콘, 메세지 보내기 옆 종이 비행기, 평가 하기의 쿼카 이미지들 png -&gt; svg 변경" />
     <MESSAGE value="Fix: 쓰레기통, 연필, 점수, 닫기, 금액 원 표시 아이콘, 폭죽 png -&gt; svg 변경" />
     <MESSAGE value="Fix: png -&gt; svg 중간 merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: png -&gt; svg 중간 merge" />
+    <MESSAGE value="Fix: 메인 화면 우측 하단 팝업 이미지, running, requesting errand 이미지 안나오는거 수정, 남은 png -&gt; svg 수정 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: 메인 화면 우측 하단 팝업 이미지, running, requesting errand 이미지 안나오는거 수정, 남은 png -&gt; svg 수정 완료" />
   </component>
 </project>

@@ -142,7 +142,7 @@ class PostWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container( width: 322.w,
-            height: 100.h, //게시글 1개
+            height: 103.h, //게시글 1개
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
