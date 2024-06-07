@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front/fixerrand/fixerrand.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FixDue extends StatefulWidget{
   final String due; // 일정으로 정한 시간
@@ -101,22 +102,22 @@ class _FixDueState extends State<FixDue>{
     @override
     Widget build(BuildContext context) {
       return Container(
-        margin: EdgeInsets.only(top: 6, left: 22),
+        margin: EdgeInsets.only(top: 6.h, left: 22.w),
         child: Row(
           children: [
             Expanded(
               child: Container(
-                width: 106,
-                height: 38,
+                width: 106.w,
+                height: 38.h,
                 // 토글 버튼 만들기
-                margin: EdgeInsets.only(left: 0),
+                margin: EdgeInsets.only(left: 0.w),
                 child: ToggleButtons(
                   color: Color(0xff2E2E2E),
                   // 선택되지 않은 버튼 텍스트 색상
                   // 선택되지 않은 버튼 배경색
                   borderColor: Colors.grey,
                   // 토글 버튼 테두리 색상
-                  borderWidth: 0.5,
+                  borderWidth: 0.5.w,
                   borderRadius: BorderRadius.circular(5.0),
 
                   selectedColor: Color(0xffC77749),
@@ -128,25 +129,25 @@ class _FixDueState extends State<FixDue>{
 
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: Text(
                         '오늘',
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           letterSpacing: 0.01,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: Text(
                         '내일',
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           letterSpacing: 0.01,
                         ),
                       ),
@@ -159,13 +160,13 @@ class _FixDueState extends State<FixDue>{
             ),
             // 시간 상세 설정 카테고리
             Container(
-              margin: EdgeInsets.only(right: 51),
-              width: 165.28,
-              height: 38,
+              margin: EdgeInsets.only(right: 51.w),
+              width: 165.28.w,
+              height: 38.h,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Color(0xffA9A9A9), // 박스 테두리 색상
-                  width: 0.5, // 테두리 굵기
+                  width: 0.5.w, // 테두리 굵기
                 ),
                 borderRadius: BorderRadius.all(
                     Radius.circular(5.0)),
@@ -174,7 +175,7 @@ class _FixDueState extends State<FixDue>{
               child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: EdgeInsets.only(left: 10.w),
                     child: DropdownButton<int>(
                       underline: Container(),
                       // dropdownButton 밑줄 제거
@@ -186,7 +187,7 @@ class _FixDueState extends State<FixDue>{
                         });
                       },
                       icon: Icon(Icons.keyboard_arrow_down,
-                          size: 17, color: Color(0xff808080)),
+                          size: 17.sp, color: Color(0xff808080)),
                       items: List.generate(24, (index) {
                         // 0~23시
                         return DropdownMenuItem<int>(
@@ -196,7 +197,7 @@ class _FixDueState extends State<FixDue>{
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.01,
                               color: Color(0xffC77749),
                             ),
@@ -206,20 +207,20 @@ class _FixDueState extends State<FixDue>{
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: 5),
+                    margin: EdgeInsets.only(right: 5.w),
                     child: Text(
                       '시',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff4F4F4F),
                       ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: EdgeInsets.only(left: 10.w),
                     child: DropdownButton<int>(
                       underline: Container(),
                       // dropdownButton 밑줄 제거
@@ -231,7 +232,7 @@ class _FixDueState extends State<FixDue>{
                         });
                       },
                       icon: Icon(Icons.keyboard_arrow_down,
-                          size: 17, color: Color(0xff808080)),
+                          size: 17.sp, color: Color(0xff808080)),
                       items: List.generate(60, (index) {
                         // 0~59분
                         return DropdownMenuItem<int>(
@@ -241,7 +242,7 @@ class _FixDueState extends State<FixDue>{
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.01,
                               color: Color(0xffC77749),
                             ),
@@ -251,26 +252,26 @@ class _FixDueState extends State<FixDue>{
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: 2),
+                    margin: EdgeInsets.only(right: 2.w),
                     child: Text(
                       '분',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff4F4F4F),
                       ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 8),
+                    margin: EdgeInsets.only(left: 8.w),
                     child: Text(
                       '까지',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xffC77749),
                       ),

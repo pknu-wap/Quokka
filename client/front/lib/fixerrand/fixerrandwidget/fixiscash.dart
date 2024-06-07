@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FixIsCash extends StatefulWidget{
   final bool isCash;
@@ -52,17 +53,17 @@ class _FixIsCashState extends State<FixIsCash>{
   @override
   Widget build(BuildContext context){
     return Container(
-        width: 119,
-        height: 38,
+        width: 119.w,
+        height: 38.h,
         // 토글 버튼 만들기
-        margin: EdgeInsets.only(right: 86),
+        margin: EdgeInsets.only(right: 86.w),
         child: ToggleButtons(
           color: Color(0xff2E2E2E),
           // 선택되지 않은 버튼 텍스트 색상
 
           borderColor: Colors.grey,
           // 토글 버튼 테두리 색상
-          borderWidth: 0.5,
+          borderWidth: 0.5.w,
           borderRadius: BorderRadius.circular(5.0),
 
           selectedColor: Color(0xffC77749),
@@ -81,7 +82,7 @@ class _FixIsCashState extends State<FixIsCash>{
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w400,
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   letterSpacing: 0.01,
                 ),
               ),
@@ -93,7 +94,7 @@ class _FixIsCashState extends State<FixIsCash>{
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w400,
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   letterSpacing: 0.01,
                 ),
               ),

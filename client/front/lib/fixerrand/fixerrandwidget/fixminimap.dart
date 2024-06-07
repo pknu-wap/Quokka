@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../map.dart';
 
@@ -93,12 +94,12 @@ class _MiniMapState extends State<FixMiniMap> {
   @override
   Widget build(BuildContext context) {
     return Container(
-                width: 318.85,
-                height: 120,
-                margin: EdgeInsets.only(left: 2, top: 6),
+                width: 318.85.w,
+                height: 120.h,
+                margin: EdgeInsets.only(left: 2.w, top: 6.h),
                 decoration: BoxDecoration(
                   border:
-                  Border.all(color: Color(0xff2D2D2D), width: 0.5 // 테두리 굵기
+                  Border.all(color: Color(0xff2D2D2D), width: 0.5.w // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   color: Color(0xffFFFFFF),

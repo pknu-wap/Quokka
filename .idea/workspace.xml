@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: custom_dialog.dart 마진 수정">
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixiscash.dart 마진 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/checkerrand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrandwidget/fixminimap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/fixerrand/fixerrandwidget/fixminimap.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +193,63 @@
       <option name="project" value="LOCAL" />
       <updated>1717741350621</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Fix: checkerrand.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717742286102</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1717742286102</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fix: check_image.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717742745626</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1717742745626</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fix: mainshowerrand.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717743092101</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1717743092101</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Fix: re-showerrand.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717743435097</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1717743435097</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fix: mainshowerrand.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717743517947</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1717743517947</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fix: fixdue.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717743764387</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717743764387</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Fix: fixiscash.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717743850415</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1717743850415</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,6 +276,12 @@
     <MESSAGE value="Fix: home의 게시글 height 103으로 수정" />
     <MESSAGE value="Fix: running_errand, requesting_errand 크기 수정" />
     <MESSAGE value="Fix: custom_dialog.dart 마진 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: custom_dialog.dart 마진 수정" />
+    <MESSAGE value="Fix: checkerrand.dart 마진 수정" />
+    <MESSAGE value="Fix: check_image.dart 마진 수정" />
+    <MESSAGE value="Fix: re-showerrand.dart 마진 수정" />
+    <MESSAGE value="Fix: mainshowerrand.dart 마진 수정" />
+    <MESSAGE value="Fix: fixdue.dart 마진 수정" />
+    <MESSAGE value="Fix: fixiscash.dart 마진 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: fixiscash.dart 마진 수정" />
   </component>
 </project>
