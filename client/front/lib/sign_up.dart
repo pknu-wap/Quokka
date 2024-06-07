@@ -5,7 +5,7 @@ import 'custom_dialog.dart';
 import 'upload_image.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 //현재 화면에서 뒤로가기
 class SignUpScreen extends StatefulWidget {
   @override
@@ -227,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         centerTitle: true,
         elevation: 0.0,
         leading: Padding(
-          padding: EdgeInsets.only(top: 26.0),
+          padding: EdgeInsets.only(top: 26.0.h),
           child: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -236,16 +236,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         title: Padding(
-          padding: EdgeInsets.only(top: 26.0),
+          padding: EdgeInsets.only(top: 26.0.h),
           child: SizedBox(
-            height: 25.0,
+            height: 25.0.h,
             child: Text(
               '회원가입',
               style: TextStyle(
                 color: Color(0xFF111111),
                 fontFamily: 'Paybooc',
                 fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontSize: 20.sp,
                 letterSpacing: 0.01
               ),
             ),
@@ -260,7 +260,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 22, top: 33.0),
+                      margin: EdgeInsets.only(left: 22.w, top: 33.0.h),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -269,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: Color(0xFF373737),
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             letterSpacing: 0.01,
                           ),
                         ),
@@ -277,18 +277,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     // 이메일 주소 텍스트 필드
                     Container(
-                      margin: EdgeInsets.only(top: 11.0),
-                      width: 320,
-                      height: 38,
+                      margin: EdgeInsets.only(top: 11.0.h),
+                      width: 320.w,
+                      height: 38.h,
                       decoration: BoxDecoration(
                         border:
-                        Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                        Border.all(color: Color(0xFFACACAC), width: 0.5.w  // 테두리 굵기
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Color(0xFFE5E5E5),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 2, left: 14, right: 14),
+                        padding: EdgeInsets.only(bottom: 2.h, left: 14.w, right: 14.w),
                         child: TextField(
                           controller: emailController,
                           style: TextStyle(
@@ -299,7 +299,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: InputDecoration(
                             hintText: '이메일 주소를 입력하세요 ex) pukyong.ac.kr',
                             hintStyle: TextStyle(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff9E9E9E),
@@ -312,7 +312,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     // 이메일 인증 번호 받기 버튼
                     Container(
-                      margin: EdgeInsets.only(top: 19),
+                      margin: EdgeInsets.only(top: 19.h),
                       child: ElevatedButton(
                         onPressed: isEmailButtonEnabled
                             ? () {
@@ -325,7 +325,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ? MaterialStateProperty.all<Color>(Color(0xFF7C3D1A))
                               : MaterialStateProperty.all<Color>(Color(0xFFBD9E8C)),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size(320, 43)),
+                              MaterialStateProperty.all<Size>(Size(320.w, 43.h)),
                           // 버튼의 모양 변경하기
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -336,7 +336,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           '이메일 인증 번호 받기',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
@@ -347,13 +347,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(left: 22.0, top: 18),
+                      margin: EdgeInsets.only(left: 22.0.w, top: 18.h),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "인증 번호",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF373737),
@@ -370,18 +370,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         // 인증 번호 텍스트 필드
                         Container(
-                          margin: EdgeInsets.only(top: 9.0),
-                          width: 320,
-                          height: 38,
+                          margin: EdgeInsets.only(top: 9.0.h),
+                          width: 320.w,
+                          height: 38.h,
                           decoration: BoxDecoration(
                             border:
-                            Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                            Border.all(color: Color(0xFFACACAC), width: 0.5.w  // 테두리 굵기
                             ),
                             borderRadius: BorderRadius.all(Radius.circular(5.0)),
                             color: Color(0xFFE5E5E5),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: 2, left: 14, right: 14),
+                            padding: EdgeInsets.only(bottom: 2.h, left: 14.w, right: 14.w),
                             child: TextField(
                               controller: verificationCodeController,
                               style: TextStyle(
@@ -392,7 +392,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               decoration: InputDecoration(
                                 hintText: "해당 메일로 전송된 인증 번호를 입력하세요",
                                 hintStyle: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 13.sp,
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff9E9E9E),
@@ -409,12 +409,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         if (_isRunning)
                           Positioned(
-                            top: 20,
-                            right: 15,
+                            top: 20.h,
+                            right: 15.w,
                             child: Text(
                               '${_formatTime(_seconds)}',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff7C3D1A),
@@ -426,7 +426,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(top: 19),
+                      margin: EdgeInsets.only(top: 19.h),
                       child: ElevatedButton(
                         onPressed: isVerifyButtonEnabled
                             ? () {
@@ -443,7 +443,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               : MaterialStateProperty.all<Color>(
                                   Color(0xFFBD9E8C)),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size(320, 43)),
+                              MaterialStateProperty.all<Size>(Size(320.w, 43.h)),
                           // 버튼의 모양 변경하기
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -456,7 +456,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           '확인',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
