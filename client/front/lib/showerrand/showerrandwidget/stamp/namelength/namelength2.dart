@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class NameLength2 extends StatelessWidget {
   final String name1;
   final String name2;
@@ -21,7 +21,7 @@ class NameLength2 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(top: 7, right: 55),
+                margin: EdgeInsets.only(top: 7.h, right: 55.w),
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
@@ -29,7 +29,7 @@ class NameLength2 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.00,
                         color: Color(0xffCE1111),
                       ),
@@ -41,7 +41,7 @@ class NameLength2 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(top: 22, right: 59),
+                margin: EdgeInsets.only(top: 22.h, right: 59.w),
                 child: Transform.rotate(
                     angle: 9.77 * math.pi / 180,
                     child: Text(
@@ -49,7 +49,7 @@ class NameLength2 extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Cafe24Oneprettynight',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.00,
                         color: Color(0xffCE1111),
                       ),
@@ -61,7 +61,7 @@ class NameLength2 extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: Container(
-                  margin: EdgeInsets.only(top: 25, right: 40.53),
+                  margin: EdgeInsets.only(top: 25.h, right: 40.53.w),
                   child: Image.asset("assets/images/stamp.png")
               )
           ),
