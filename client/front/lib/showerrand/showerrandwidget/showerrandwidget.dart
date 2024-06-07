@@ -51,7 +51,7 @@ class ShowErrandWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-            width: 324, height: 576,
+            width: 324.h, height: 576.h,
             decoration: BoxDecoration(
               color: Color(0xffFCFCF9),
             ),
@@ -68,7 +68,7 @@ class ShowErrandWidget extends StatelessWidget {
                       );
                   },
                   child: Container(
-                    padding: EdgeInsets.only(left: 280, top: 8),
+                    padding: EdgeInsets.only(left: 280.w, top: 8.h),
                     color: Colors.transparent,
                     child: Icon(
                       Icons.close,
@@ -201,7 +201,7 @@ class ShowErrandWidget extends StatelessWidget {
                 Container(
                   width: 287.w,
                   height: 328.85.h,
-                  margin: EdgeInsets.only(top: 14),
+                  margin: EdgeInsets.only(top: 14.h),
                   alignment: Alignment.center, // 중앙 정렬
                   decoration: BoxDecoration(
                     color: Color(0xffF1F1F1),
