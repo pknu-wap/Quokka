@@ -10,6 +10,7 @@ import 'dart:async';
 import 'login.dart';
 import 'home.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Signup_Success extends StatelessWidget {
   final String username;
@@ -29,13 +30,13 @@ class Signup_Success extends StatelessWidget {
         appBar: AppBar(
             centerTitle: true,
             elevation: 0.0,
-            title: Padding(padding: EdgeInsets.only(top: 26.0),
+            title: Padding(padding: EdgeInsets.only(top: 26.0.h),
                 child: SizedBox(
-                  height: 25.0,
+                  height: 25.0.h,
                   child:
                   Text('가입완료', style: TextStyle(
                     fontFamily: 'paybooc',
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.01,
                     color: Color(0xff111111),
@@ -104,8 +105,8 @@ class ConfettiState extends State<Confetti> {
   }
 
   Path drawHeart(Size size) {
-    double width = size.width;
-    double height = size.height;
+    double width = size.width.w;
+    double height = size.height.h;
 
     Path path = Path();
 
@@ -132,9 +133,9 @@ class ConfettiState extends State<Confetti> {
       child: Stack(
         children: <Widget>[
           Container(
-            width: 269.64,
-            height: 396.95,
-            margin: EdgeInsets.only(left: 10.0, top: 79.0),
+            width: 269.64.w,
+            height: 396.95.h,
+            margin: EdgeInsets.only(left: 10.0.w, top: 79.0.h),
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -144,13 +145,13 @@ class ConfettiState extends State<Confetti> {
           ),
           // 회전된 이미지
           Positioned(
-            left: 58.86,
-            top: 387,
+            left: 58.86.w,
+            top: 387.h,
             child: Transform.rotate(
               angle: 4.73 * (3.141592653589793 / 180), //회전
               child: SvgPicture.asset('assets/images/party_popper.svg', //폭죽 본체 이미지
-                width: 67.5,
-                height: 95.43,
+                width: 67.5.w,
+                height: 95.43.h,
               ),
             ),
           ),
@@ -173,11 +174,11 @@ class ConfettiState extends State<Confetti> {
           ),
           // 텍스트 버튼
           Positioned(
-            left: 90.49,
-            top: 239.88,
+            left: 90.49.w,
+            top: 239.88.h,
             child: Container(
-              width: 200.0,
-              height: 70.0,
+              width: 200.0.w,
+              height: 70.0.h,
               child: TextButton(
                 onPressed: () {
                   _controllerCenter.play();
@@ -187,7 +188,7 @@ class ConfettiState extends State<Confetti> {
                 },
                 child: Text('환영합니다!\n가입이 완료되었습니다',
                   textAlign: TextAlign.center, style: TextStyle(
-                    fontFamily: 'Pretendard', fontSize: 18,
+                    fontFamily: 'Pretendard', fontSize: 18.sp,
                     fontWeight: FontWeight.w600, letterSpacing: 0.01,
                     color: Color(0xff000000),
                   ),),
