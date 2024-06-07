@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
@@ -57,14 +57,14 @@ class TableScreen1 extends StatelessWidget {
     final TextStyle textStyle1 = TextStyle(
       fontFamily: 'Pretendard',
       fontWeight: FontWeight.w300,
-      fontSize: 11,
+      fontSize: 11.sp,
       letterSpacing: 0.001,
       color: Color(0xffFFFFFF),
     );
     final TextStyle textStyle2 = TextStyle(
       fontFamily: 'SANGJUDajungdagam',
       fontWeight: FontWeight.w300,
-      fontSize: 12,
+      fontSize: 12.sp,
       letterSpacing: 0.00,
       color: Color(0xff111111),
     );
@@ -75,25 +75,25 @@ class TableScreen1 extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       child: Table(
         columnWidths: { // 표의 각 너비 조정
-          0: FixedColumnWidth(62),
-          1: FixedColumnWidth(176),
+          0: FixedColumnWidth(62.w),
+          1: FixedColumnWidth(176.w),
         },
         border: TableBorder(
           borderRadius: BorderRadius.circular(10),
-          horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1), // 안 쪽 가로 줄
+          horizontalInside: BorderSide(color: Color(0xffF1F1F1), width: 1.w), // 안 쪽 가로 줄
         ),
         children: List.generate(6, (index) {
           return TableRow(children: [
             TableCell(
               child: Container(
-                  height: 30,
+                  height: 30.h,
                   color: Color(0xff674333),
                   child: Center(child: Text(list[index]['text'], style: textStyle1,))), // 가운데 정렬
             ),
             TableCell(
               child: Container(
-                  height: 30,
-                  padding: EdgeInsets.only(left: 9, top: 4), // 왼쪽 정렬 띄우기 위함
+                  height: 30.h,
+                  padding: EdgeInsets.only(left: 9.w, top: 4.h), // 왼쪽 정렬 띄우기 위함
                   color: Color(0xffFFFFFF),
                   child: Align(
                       alignment: Alignment.centerLeft, // 왼쪽 정렬
