@@ -8,6 +8,7 @@ import 'package:front/upload_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_success.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {
@@ -324,7 +325,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         elevation: 0.0,
         leading: Padding(
-          padding: EdgeInsets.only(top: 26.0),
+          padding: EdgeInsets.only(top: 26.0.h),
           child: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -333,16 +334,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         title: Padding(
-          padding: EdgeInsets.only(top: 26.0),
+          padding: EdgeInsets.only(top: 26.0.h),
           child: SizedBox(
-            height: 25.0,
+            height: 25.0.h,
             child: Text(
               '회원정보',
               style: TextStyle(
                 color: Color(0xFF111111),
                 fontFamily: 'Paybooc',
                 fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontSize: 20.sp,
                 letterSpacing: 0.01,
               ),
             ),
@@ -361,7 +362,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       // 닉네임 텍스트
                       Container(
-                        margin: EdgeInsets.only(top: 30.0, left: 22),
+                        margin: EdgeInsets.only(top: 30.0.h, left: 22.w),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -370,7 +371,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xFF373737),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                             ),
                           ),
@@ -379,7 +380,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 닉네임 설명
                       Container(
-                        margin: EdgeInsets.only(left: 22.5, top: 4.26),
+                        margin: EdgeInsets.only(left: 22.5.w, top: 4.26.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -388,7 +389,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xFF9E9E9E),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 11,
+                              fontSize: 11.sp,
                               letterSpacing: 0.01,
                             ),
                           ),
@@ -396,23 +397,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
 
                       Container(
-                        margin: EdgeInsets.only(top: 9.74),
+                        margin: EdgeInsets.only(top: 9.74.h),
                         child: Row(
                           children: [
                             // 닉네임 텍스트 필드
                             Container(
-                              margin: EdgeInsets.only(left: 20),
-                              width: 245,
-                              height: 38,
+                              margin: EdgeInsets.only(left: 20.w),
+                              width: 245.w,
+                              height: 38.h,
                               decoration: BoxDecoration(
                                 border:
-                                Border.all(color: Color(0xFFACACAC), width: 0.5  // 테두리 굵기
+                                Border.all(color: Color(0xFFACACAC), width: 0.5.w  // 테두리 굵기
                                 ),
                                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                 color: Color(0xFFF0F0F0),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 6, left: 10, right: 10),
+                                padding: EdgeInsets.only(bottom: 6.h, left: 10.w, right: 10.w),
                                 child: TextField(
                                   maxLength: maxNicknameLength,
                                   // 최대 길이 설정
@@ -433,7 +434,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       color: Color(0xFF404040),
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 13,
+                                      fontSize: 13.sp,
                                     letterSpacing: 0.01,
                                   ),
                                   decoration: InputDecoration(
@@ -447,9 +448,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             // 중복확인 버튼
                             Container(
-                              margin: EdgeInsets.only(left: 9.98),
-                              width: 66.02,
-                              height: 38,
+                              margin: EdgeInsets.only(left: 9.98.w),
+                              width: 66.02.w,
+                              height: 38.h,
                               // height: 38,
                               child: ElevatedButton(
                                 onPressed: isNicknameButtonClickable
@@ -471,7 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                   // 버튼의 크기 설정
                                   minimumSize: MaterialStateProperty.all<Size>(
-                                      Size(66.02, 38)),
+                                      Size(66.02.w, 38.h)),
                                   // 버튼의 모양 변경
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
@@ -483,7 +484,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: Text(
                                   '중복확인',
                                   style: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 13.sp,
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xFFFFFFFF),
@@ -498,13 +499,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 닉네임 오류 메시지
                       Container(
-                        margin: EdgeInsets.only(left: 22.5, top: 4.5),
+                        margin: EdgeInsets.only(left: 22.5.w, top: 4.5.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             nicknameText,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
                                 color: nicknameTextColor,
@@ -514,7 +515,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       // 비밀번호 텍스트
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 14),
+                        margin: EdgeInsets.only(left: 22.w, top: 14.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -523,7 +524,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xFF373737),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                             ),
                           ),
@@ -532,7 +533,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 비밀번호 설명
                       Container(
-                        margin: EdgeInsets.only(left: 22, top: 4),
+                        margin: EdgeInsets.only(left: 22.w, top: 4.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -542,7 +543,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
                               letterSpacing: 0.01,
-                              fontSize: 11,
+                              fontSize: 11.sp,
                             ),
                           ),
                         ),
@@ -552,20 +553,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                       // 비밀번호 텍스트 필드
                       Container(
-                        margin: EdgeInsets.only(top: 8, left: 20.79),
-                        width: 320,
-                        height: 38,
+                        margin: EdgeInsets.only(top: 8.h, left: 20.79.w),
+                        width: 320.w,
+                        height: 38.h,
                         decoration: BoxDecoration(
                           border:
                           Border.all(
                               color: passwordBorderColor,
-                              width: 0.5  // 테두리 굵기
+                              width: 0.5.w  // 테두리 굵기
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           color: passwordFilledColor,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          padding: EdgeInsets.only(bottom: 6.h, left: 14.w),
                           child: Align(
                            alignment: Alignment.centerLeft,
                           child: TextField(
@@ -586,7 +587,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: passwordFontColor,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 letterSpacing: 0.01,),
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -602,7 +603,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Align(
                         alignment: Alignment.centerRight,
                       child: Container(
-                       margin: EdgeInsets.only(top: 3, right: 25),
+                       margin: EdgeInsets.only(top: 3.h, right: 25.w),
                           child: IconButton(
                             onPressed: () {
                               setState(() {
@@ -625,13 +626,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 비밀번호 오류 메시지
                       Container(
-                        margin: EdgeInsets.only(left: 22.79, top: 4),
+                        margin: EdgeInsets.only(left: 22.79.w, top: 4.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             passwordText,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
                                 color: passwordTextColor,
@@ -642,7 +643,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 비밀번호 확인 텍스트
                       Container(
-                        margin: EdgeInsets.only(left: 24, top: 4),
+                        margin: EdgeInsets.only(left: 24.w, top: 4.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -651,7 +652,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xFF373737),
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               letterSpacing: 0.01,
                             ),
                           ),
@@ -662,20 +663,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Stack(
                       children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20, top: 9),
-                        width: 320,
-                        height: 38,
+                        margin: EdgeInsets.only(left: 20.w, top: 9.h),
+                        width: 320.w,
+                        height: 38.h,
                         decoration: BoxDecoration(
                           border:
                           Border.all(
                               color: passwordCheckBorderColor,
-                              width: 0.5  // 테두리 굵기
+                              width: 0.5.w  // 테두리 굵기
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           color: passwordCheckFilledColor,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 6, left: 14),
+                          padding: EdgeInsets.only(bottom: 6.h, left: 14.w),
                           child: TextField(
                             maxLength: maxPasswordCheckLength,
                             // 최대 길이 설정
@@ -694,7 +695,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: passwordCheckFontColor,
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               letterSpacing: 0.01,
                             ),
                             decoration: InputDecoration(
@@ -711,7 +712,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Container(
-                              margin: EdgeInsets.only(top: 4, right: 25),
+                              margin: EdgeInsets.only(top: 4.h, right: 25.w),
                               child: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -733,7 +734,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 비밀번호 확인 경고
                       Container(
-                        margin: EdgeInsets.only(left: 23.79, top: 5),
+                        margin: EdgeInsets.only(left: 23.79.w, top: 5.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -742,7 +743,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: passwordCheckTextColor,
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.01,
                             ),
                           ),
@@ -751,9 +752,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // 완료 버튼
                       Container(
-                          margin: EdgeInsets.only(top: 12),
-                          width: 320,
-                          height: 43,
+                          margin: EdgeInsets.only(top: 12.h),
+                          width: 320.w,
+                          height: 43.h,
                           child: ElevatedButton(
                             onPressed: passwordCheckText == ""
                                 ? () {
@@ -779,7 +780,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   : MaterialStateProperty.all<Color>(
                                       Color(0xFFBD9E8C)),
                               minimumSize: MaterialStateProperty.all<Size>(
-                                  Size(320, 40)),
+                                  Size(320.w, 40.h)),
                               // 버튼의 모양 변경하기
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
@@ -792,7 +793,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Text(
                               '완료',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xFFFFFFFF),
