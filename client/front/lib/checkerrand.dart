@@ -13,6 +13,7 @@ import 'custom_dialog.dart';
 import 'fixerrand/fixerrand.dart';
 import '../../home.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 
@@ -166,18 +167,18 @@ class ErrandCheckWidget extends StatelessWidget {
                 if(isMyErrand == false) // 내가 쓴 게시글이 아니면 닉네임, 평점 생성
                 //닉네임, 평점
                 Container(
-                    margin: EdgeInsets.only(top: 16.4),
+                    margin: EdgeInsets.only(top: 16.4.h),
                     child: Row(
                   children: [
                     //닉네임
                     Container(
-                      margin: EdgeInsets.only(left: 13.59),
+                      margin: EdgeInsets.only(left: 13.59.w),
                       child: Text(
                         "${nickname}",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           letterSpacing: 0.001,
                           color: Color(0xff575757),
                         ),
@@ -185,24 +186,24 @@ class ErrandCheckWidget extends StatelessWidget {
                     ),
                     // 평점 커카 이미지
                     Container(
-                      margin: EdgeInsets.only(left: 9.1),
+                      margin: EdgeInsets.only(left: 9.1.w),
                       child: SvgPicture.asset(
                         'assets/images/score_icon.svg',
                         // Replace with your image asset path
-                        width: 11.77, // Adjust the size as needed
-                        height: 11.77, // Adjust the size as needed
+                        width: 11.77.w, // Adjust the size as needed
+                        height: 11.77.h, // Adjust the size as needed
                         color: Color(0xffCFB6A5),
                       ),
                     ),
                     //평점
                     Container(
-                      margin: EdgeInsets.only(left: 2.82),
+                      margin: EdgeInsets.only(left: 2.82.w),
                       child: Text(
                         " ${score.toInt()}점",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w300,
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           letterSpacing: -0.03,
                           color: Color(0xffCFB6A5),
                         ),
@@ -212,8 +213,8 @@ class ErrandCheckWidget extends StatelessWidget {
                     Expanded(
                         child: Align(alignment: Alignment.centerRight,
                         child: Container(
-                      margin: EdgeInsets.only(right: 19.92),
-                      width: 44.36, height: 18.1,
+                      margin: EdgeInsets.only(right: 19.92.w),
+                      width: 44.36.w, height: 18.1.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: decideBoxColor(status),
@@ -223,7 +224,7 @@ class ErrandCheckWidget extends StatelessWidget {
                         child: Text(getState(), style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 11,
+                            fontSize: 11.sp,
                             letterSpacing: 0.01,
                             color: decideTextColor(status),
                         ),),
@@ -237,13 +238,13 @@ class ErrandCheckWidget extends StatelessWidget {
                 if(isMyErrand == true)
                 //게시글 제목
                 Container(
-                  margin: EdgeInsets.only(top: 18.77, left: 13.4, right: 18.6),
+                  margin: EdgeInsets.only(top: 18.77.h, left: 13.4.w, right: 18.6.w),
                   child: Text(
                     "${title}",
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       letterSpacing: 0.001,
                       color: Color(0xff111111),
                     ),
@@ -253,13 +254,13 @@ class ErrandCheckWidget extends StatelessWidget {
                 if (isMyErrand == false)
                 //게시글 제목
                   Container(
-                    margin: EdgeInsets.only(top: 10.59, left: 13.4, right: 18.6),
+                    margin: EdgeInsets.only(top: 10.59.h, left: 13.4.w, right: 18.6.w),
                     child: Text(
                       "${title}",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.001,
                         color: Color(0xff111111),
                       ),
@@ -269,13 +270,13 @@ class ErrandCheckWidget extends StatelessWidget {
                 if (isMyErrand == true)
                 // 심부름 값
                 Container(
-                  margin: EdgeInsets.only(top: 3, left: 13.4),
+                  margin: EdgeInsets.only(top: 3.h, left: 13.4.w),
                   child: Text(
                     "\u20A9 ${priceFormat.format(reward)} 원",
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w700,
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       letterSpacing: 0.001,
                       color: Color(0xff7C3D1A),
                     ),
@@ -285,13 +286,13 @@ class ErrandCheckWidget extends StatelessWidget {
                 if (isMyErrand == false)
                 // 심부름 값
                   Container(
-                    margin: EdgeInsets.only(top: 6, left: 13.4),
+                    margin: EdgeInsets.only(top: 6.h, left: 13.4.w),
                     child: Text(
                       "\u20A9 ${priceFormat.format(reward)} 원",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w700,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.001,
                         color: Color(0xff7C3D1A),
                       ),
@@ -299,28 +300,28 @@ class ErrandCheckWidget extends StatelessWidget {
                   ),
                 // 상세 주소
                 Container(
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 18.h),
                     child: Row(
                       children: [
                         // 마커 이미지
                         Container(
-                          margin: EdgeInsets.only(left: 18.97),
+                          margin: EdgeInsets.only(left: 18.97.w),
                           child: SvgPicture.asset(
                             'assets/images/marker_small.svg',
                             // Replace with your image asset path
-                            width: 12.2, // Adjust the size as needed
-                            height: 16.77, // Adjust the size as needed
+                            width: 12.2.w, // Adjust the size as needed
+                            height: 16.77.h, // Adjust the size as needed
                           ),
                         ),
                         // 상세 주소 텍스트
                         Container(
-                          margin: EdgeInsets.only(left: 7.67),
+                          margin: EdgeInsets.only(left: 7.67.w),
                           child: Text(
                             "상세 주소",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.001,
                               color: Color(0xffBC9F9F),
                             ),
@@ -328,14 +329,14 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                         // 상세 주소 정보
                         Container(
-                          margin: EdgeInsets.only(left: 7),
+                          margin: EdgeInsets.only(left: 7.w),
                           child: Text(
                             "${destination}",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w500,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               letterSpacing: 0.001,
                               color: Color(0xff505050),
                             ),
@@ -345,27 +346,27 @@ class ErrandCheckWidget extends StatelessWidget {
                     )),
 
                 Container(
-                    margin: EdgeInsets.only(top: 8.28),
+                    margin: EdgeInsets.only(top: 8.28.h),
                     child: Row(
                       children: [
                         // 시계 이미지
                         Container(
-                          margin: EdgeInsets.only(left: 18.53),
+                          margin: EdgeInsets.only(left: 18.53.w),
                           child: SvgPicture.asset(
                             'assets/images/clock.svg',
-                            width: 14, // Adjust the size as needed
-                            height: 14, // Adjust the size as needed
+                            width: 14.w, // Adjust the size as needed
+                            height: 14.h, // Adjust the size as needed
                           ),
                         ),
                         // 일정 텍스트
                         Container(
-                          margin: EdgeInsets.only(left: 6.23),
+                          margin: EdgeInsets.only(left: 6.23.w),
                           child: Text(
                             "일정",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w400,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               letterSpacing: 0.001,
                               color: Color(0xffBC9F9F),
                             ),
@@ -373,14 +374,14 @@ class ErrandCheckWidget extends StatelessWidget {
                         ),
                         // 일정
                         Container(
-                          margin: EdgeInsets.only(left: 6),
+                          margin: EdgeInsets.only(left: 6.w),
                           child: Text(
                             "${formatDate(dueDateTime)} 까지",
                             // "${due}까지",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w500,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               letterSpacing: 0.001,
                               color: Color(0xff505050),
                             ),
@@ -390,13 +391,13 @@ class ErrandCheckWidget extends StatelessWidget {
                           child: Align(alignment: Alignment.centerRight,
                           child: Container(
                           //게시글 올린 시간으로부터 현재까지 지난 시간
-                          margin: EdgeInsets.only(right: 18.6),
+                          margin: EdgeInsets.only(right: 18.6.w),
                           child: Text(
                             timeDifference(currentTime, createdDate),
                             style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w400,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 letterSpacing: 0.001,
                                 color: Color(0xff434343)),
                           ),
@@ -409,29 +410,29 @@ class ErrandCheckWidget extends StatelessWidget {
                 if (isMyErrand == true)
                 // 실선
                 Container(
-                  margin: EdgeInsets.only(top: 16.49, left: 12.01, right: 9.99),
-                  height: 1.0,
-                  width: 298,
+                  margin: EdgeInsets.only(top: 16.49.h, left: 12.01.w, right: 9.99.w),
+                  height: 1.0.h,
+                  width: 298.w,
                   color: Color(0xffDBDBDB),
                 ),
                 // 내가 작성한 심부름 x
                 if (isMyErrand == false)
                 // 실선
                   Container(
-                    margin: EdgeInsets.only(top: 12, left: 12.01, right: 9.99),
-                    height: 1.0,
-                    width: 298,
+                    margin: EdgeInsets.only(top: 12.h, left: 12.01.w, right: 9.99.w),
+                    height: 1.0.h,
+                    width: 298.w,
                     color: Color(0xffDBDBDB),
                   ),
                 // 요청 사항
                   Container(
-                    margin: EdgeInsets.only(top: 12, left: 20.66, right: 19.34),
+                    margin: EdgeInsets.only(top: 12.h, left: 20.66.w, right: 19.34.w),
                     child:  Text(
                       "${detail}",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         letterSpacing: 0.001,
                         color: Color(0xff111111),
                       ),
@@ -665,8 +666,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
           child: FittedBox(
           fit: BoxFit.contain,
           child: Container(
-            width: 323,
-            height: 268.29,
+            width: 323.w,
+            height: 268.29.h,
             decoration: BoxDecoration(
             color: Color(0xffFFFFFF), //배경색
             borderRadius: BorderRadius.circular(10),
@@ -674,20 +675,20 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
             child: Column(
         children: <Widget>[
           Container(
-          margin: EdgeInsets.only(top: 24),
+          margin: EdgeInsets.only(top: 24.h),
                 child: Icon(
                   Icons.delete,
                   color: Color(0xffA98474),
-                  size: 60,
+                  size: 60.sp,
                 ),
           ),
                 Container(
-                  margin: EdgeInsets.only(top: 12),
+                  margin: EdgeInsets.only(top: 12.h),
                 child: Text(
                   "정말 삭제하시겠어요?",
                   style: TextStyle(
                     fontFamily: 'Pretendard',
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.04,
                     color: Color(0xff1A1A1A),
@@ -696,31 +697,31 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                 ),
         ),
                Container(
-                 margin: EdgeInsets.only(top: 10),
+                 margin: EdgeInsets.only(top: 10.h),
                 child: Text(
                   "삭제 버튼 선택 시, 심부름은\n삭제되며 복구되지 않아요!",
                   style: TextStyle(
                     fontFamily: 'Pretendard',
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: Color(0xff9B7D68),
                   ),
                   textAlign: TextAlign.center,
                 ),
         ),
                 Container(
-                  margin: EdgeInsets.only(top: 18),
+                  margin: EdgeInsets.only(top: 18.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 16),
+                      margin: EdgeInsets.only(left: 16.w),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                           minimumSize: MaterialStateProperty.all<Size>(
-                              Size(134.18, 45)),
+                              Size(134.18.w, 45.h)),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
@@ -733,7 +734,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             letterSpacing: 0.00,
                             color: Color(0xffFFFFFF),
                           ),
@@ -745,13 +746,13 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 16),
+                      margin: EdgeInsets.only(right: 16.w),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Color(0xffFFFFFF)),
                           minimumSize: MaterialStateProperty.all<Size>(
-                              Size(134.18, 45)),
+                              Size(134.18.w, 45.h)),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -767,7 +768,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w500,
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             letterSpacing: 0.00,
                             color: Color(0xff3E3E3E),
                           ),
@@ -802,8 +803,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
             fit: BoxFit.contain,
             child: Container(
               // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
+              width: 323.w,
+              height: 214.h,
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF), //배경색
                 borderRadius: BorderRadius.circular(10),
@@ -811,21 +812,21 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 16.04),
+                    margin: EdgeInsets.only(top: 16.04.h),
                     child: SvgPicture.asset(
                       'assets/images/alert.svg',
-                      width: 76.83,
-                      height: 76.83,
+                      width: 76.83.w,
+                      height: 76.83.h,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 4.08),
+                    margin: EdgeInsets.only(top: 4.08.h),
                     child: Text(
                       "수락된 요청은 삭제할 수 없어요!",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.00,
                         color: Color(0xff1A1A1A),
                       ),
@@ -833,13 +834,13 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 17.77.h),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                         minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
+                            Size(281.1.w, 47.25.h)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -852,7 +853,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xffFFFFFF),
                         ),
@@ -921,9 +922,9 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                width: 320,
-                                height: 212,
-                                margin: EdgeInsets.only(left: 19, top: 50),
+                                width: 320.w,
+                                height: 212.h,
+                                margin: EdgeInsets.only(left: 19.w, top: 50.h),
                                       decoration: BoxDecoration(
                                         border:
                                             Border.all(color: Color(0xffC6C6C6), width: 1),
@@ -982,7 +983,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       );
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 30, bottom: 100),
+                                      padding: EdgeInsets.only(left: 30.w, bottom: 100.h),
                                       color: Colors.transparent,
                                       child: Icon(
                                         Icons.arrow_back_ios,
@@ -1005,10 +1006,10 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     if (errands[0]["isMyErrand"] == false)
                     Flexible(
                       child: Container(
-                        width: 320,
-                        height: 305.85,
+                        width: 320.w,
+                        height: 305.85.h,
                         //게시글 큰틀
-                        margin: EdgeInsets.only(left: 18, top: 15.51),
+                        margin: EdgeInsets.only(left: 18.w, top: 15.51.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Color(0xffFFFFFF),
@@ -1056,10 +1057,10 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     if (errands[0]["isMyErrand"] == true)
                       Flexible(
                         child: Container(
-                          width: 320,
-                          height: 274.98,
+                          width: 320.w,
+                          height: 274.98.h,
                           //게시글 큰틀
-                          margin: EdgeInsets.only(left: 19.01, top: 18.73),
+                          margin: EdgeInsets.only(left: 19.01.w, top: 18.73.h),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Color(0xffFFFFFF),
@@ -1107,7 +1108,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     if (errands[0]["isMyErrand"] == false && errands[0]["status"] == "RECRUITING")
                     // 제가 할게요! 버튼(글 보기 하는 사람)
                     Container(
-                      margin: EdgeInsets.only(left: 21, right: 21, top: 13.32),
+                      margin: EdgeInsets.only(left: 21.w, right: 21.w, top: 13.32.h),
                       child: ElevatedButton(
                         onPressed: () async{
                           print("제가 할게요! 클릭");
@@ -1125,7 +1126,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                               Color(0xFF7C3D1A)),
                           // 버튼의 크기 정하기
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                              MaterialStateProperty.all<Size>(Size(318.w, 46.65.h)),
                           // 버튼의 모양 변경하기
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -1138,7 +1139,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                         child: Text(
                           '제가 할게요!',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
@@ -1149,12 +1150,12 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                     if (errands[0]["isMyErrand"] == true)
                     // 수정하기, 삭제하기 버튼(글 보기 올린 사람)
                     Container(
-                      margin: EdgeInsets.only(top: 13.38),
+                      margin: EdgeInsets.only(top: 13.38.h),
                       child: Row(
                         children: [
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(left: 18),
+                              margin: EdgeInsets.only(left: 18.w),
                               decoration: BoxDecoration(
                                 // 2px 3px 4px rgba(161, 161, 161, 0.25);
                                 boxShadow: [
@@ -1177,7 +1178,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       MaterialStateProperty.all<Color>(
                                           Color(0xffFFFFFF)),
                                   minimumSize: MaterialStateProperty.all<Size>(
-                                      Size(151.73, 49.7)),
+                                      Size(151.73.w, 49.7.h)),
                                   // 버튼의 모양 변경하기
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
@@ -1196,16 +1197,16 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                     SvgPicture.asset(
                                       'assets/images/pencil.svg',
                                       // Replace with your image asset path
-                                      width: 19.12,
-                                      height: 19.12,
+                                      width: 19.12.w,
+                                      height: 19.12.h,
                                       color: Color(0xff7F7F7F),
                                     ),
-                                    SizedBox(width: 6.55),
+                                    SizedBox(width: 6.55.w),
                                     // Adjust the space between icon and text as needed
                                     Text(
                                       '수정하기',
                                       style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 15.sp,
                                         fontFamily: 'Pretendard',
                                         fontWeight: FontWeight.w600,
                                         color: Color(0xFF545454),
@@ -1217,7 +1218,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 17.55, right: 20.99),
+                            margin: EdgeInsets.only(left: 17.55.w, right: 20.99.w),
                             decoration: BoxDecoration(
                               // 2px 3px 4px rgba(161, 161, 161, 0.25);
                               boxShadow: [
@@ -1240,7 +1241,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                         Color(0xffFFFFFF)),
                                 // 버튼의 크기 정하기
                                 minimumSize: MaterialStateProperty.all<Size>(
-                                    Size(151.73, 49.7)),
+                                    Size(151.73.w, 49.7.h)),
                                 // 버튼의 모양 변경하기
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
@@ -1249,7 +1250,7 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                       // 원하는 모양에 따라 BorderRadius 조절
                                       side: BorderSide(
                                         color: Color(0xffFF6767),
-                                        width: 1,
+                                        width: 1.w,
                                       )),
                                 ),
                               ),
@@ -1259,15 +1260,15 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                                   SvgPicture.asset(
                                     'assets/images/bin.svg',
                                     // Replace with your image asset path
-                                    width: 17.35, // Adjust the size as needed
-                                    height: 21.11, // Adjust the size as needed
+                                    width: 17.35.w, // Adjust the size as needed
+                                    height: 21.11.h, // Adjust the size as needed
                                   ),
-                                  SizedBox(width: 8.3),
+                                  SizedBox(width: 8.3.w),
                                   // Adjust the space between icon and text as needed
                                   Text(
                                     '삭제하기',
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 15.sp,
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xFFFF0000),
