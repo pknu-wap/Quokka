@@ -6,6 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'upload_image.dart';
 import 'profile.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Check_Image extends StatefulWidget {
   final User u1;
 
@@ -130,7 +132,7 @@ class Check_ImageState extends State<Check_Image> {
               centerTitle: true,
               elevation: 0.0,
               leading: Padding(
-                padding: EdgeInsets.only(top: 26.0),
+                padding: EdgeInsets.only(top: 26.0.h),
                 child: IconButton(
                   icon: Icon(Icons.arrow_back_ios),
                   onPressed: () {
@@ -139,14 +141,14 @@ class Check_ImageState extends State<Check_Image> {
                 ),
               ),
               title: Padding(
-                  padding: EdgeInsets.only(top: 26.0),
+                  padding: EdgeInsets.only(top: 26.0.h),
                   child: SizedBox(
-                    height: 25.0,
+                    height: 25.0.h,
                     child: Text('회원가입',
                         style: TextStyle(
                           fontFamily: 'paybooc',
                           fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff111111),
                         )),
@@ -156,42 +158,42 @@ class Check_ImageState extends State<Check_Image> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  margin: EdgeInsets.only(left: 24.0, top: 30.0),
+                  margin: EdgeInsets.only(left: 24.0.w, top: 30.0.h),
                   child: Text('학부 / 학과',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w700,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ))),
               // 학부/학과 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                width: 320,
-                height: 38,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),
+                width: 320.w,
+                height: 38.h,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: Color(0xFFACACAC),
-                      width: 0.5 // 테두리 굵기
+                      width: 0.5.w // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
+                  padding: EdgeInsets.only(top: 11.h, bottom: 11.h, left: 14.w, right: 14.w),
                   child: TextField(
                     controller: _MajorController,
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w400,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       letterSpacing: 0.01,
                       color: Color(0xff404040),
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(bottom: 13),
+                      contentPadding: EdgeInsets.only(bottom: 13.h),
                     ),
                     keyboardType: TextInputType.text,
                   ),
@@ -200,43 +202,43 @@ class Check_ImageState extends State<Check_Image> {
 
               // 학번 텍스트
               Container(
-                  margin: EdgeInsets.only(left: 22.0, top: 28.0),
+                  margin: EdgeInsets.only(left: 22.0.w, top: 28.0.h),
                   child: Text('학번',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w700,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ))),
 
               // 학번 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                width: 320,
-                height: 38,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),
+                width: 320.w,
+                height: 38.h,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: Color(0xffACACAC),
-                      width: 0.5 // 테두리 굵기
+                      width: 0.5.w // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
+                  padding: EdgeInsets.only(top: 11.h, bottom: 11.h, left: 14.w, right: 14.w),
                   child: TextField(
                     maxLength: IDLength,
                     controller: _IDController,
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w400,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       letterSpacing: 0.01,
                       color: Color(0xff404040),
                     ),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 13),
+                      contentPadding: EdgeInsets.only(bottom: 13.h),
                       border: InputBorder.none,
                       counterText: '',
                     ),
@@ -247,40 +249,40 @@ class Check_ImageState extends State<Check_Image> {
 
               // 이름 텍스트
               Container(
-                  margin: EdgeInsets.only(left: 22.0, top: 28.0),
+                  margin: EdgeInsets.only(left: 22.0.w, top: 28.0.h),
                   child: Text('이름',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w700,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff373737),
                       ))),
               // 이름 텍스트 필드
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 9.0),
-                width: 320,
-                height: 38,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),
+                width: 320.w,
+                height: 38.h,
                 decoration: BoxDecoration(
                   border: Border.all(
                       color: Color(0xffACACAC),
-                      width: 0.5 // 테두리 굵기
+                      width: 0.5.w // 테두리 굵기
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xffF0F0F0),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.only(top: 11, bottom: 11,left: 14, right: 14),
+                    padding: EdgeInsets.only(top: 11.h, bottom: 11.h,left: 14.w, right: 14.w),
                     child: TextField(
                       controller: _NameController,
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontFamily: 'Pretendard',
                         letterSpacing: 0.01,
                         color: Color(0xff404040),
                       ),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: 13),
+                        contentPadding: EdgeInsets.only(bottom: 13.h),
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.text,
@@ -289,21 +291,21 @@ class Check_ImageState extends State<Check_Image> {
               ),
               //설명
               Container(
-                  margin: EdgeInsets.only(left: 20.9, top: 29.0),
+                  margin: EdgeInsets.only(left: 20.9.w, top: 29.0.h),
                   child: Text('해당 정보가 일치하다면 확인 버튼을 눌러주세요.',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w500,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         letterSpacing: 0.01,
                         color: Color(0xff343434),
                       ))),
 
               //확인 버튼
               Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
-                width: 320,
-                height: 43,
+                margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 15.0.h),
+                width: 320.w,
+                height: 43.h,
                 decoration: BoxDecoration(
                   color: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
                       ? Color(0xff7C3D1A) : Color(0xffBD9E8C),
@@ -324,7 +326,7 @@ class Check_ImageState extends State<Check_Image> {
                     child: Text(
                       '확인',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontFamily: 'Pretendard',
                         letterSpacing: 0.01,
                         color: Color(0xffFFFFFF),
@@ -334,12 +336,12 @@ class Check_ImageState extends State<Check_Image> {
                 ),
               ),
               Container(
-                  margin: EdgeInsets.only(left: 20.0, top: 9.0),
+                  margin: EdgeInsets.only(left: 20.0.w, top: 9.0.h),
                   child: Text('* 해당 정보가 일치하지 않으면 알맞게 바꿔주세요.',
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         letterSpacing: 0.01,
                         color: Color(0xffFF4B4B),
                       ))),
