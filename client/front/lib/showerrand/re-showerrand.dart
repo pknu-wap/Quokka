@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'showerrandwidget/stamp/namelength/namelength2.dart';
 import 'showerrandwidget/stamp/namelength/namelength3.dart';
@@ -144,7 +145,7 @@ class Stamp extends StatelessWidget {
         Align(
             alignment: Alignment.centerRight,
             child: Container(
-                margin: EdgeInsets.only(top: 5.15, right: 32),
+                margin: EdgeInsets.only(top: 5.15.h, right: 32.w),
                 child: Image.asset("assets/images/Rectangle3.png"))),
         if (realName.length == 2) // 심부름 하는 사람 이름 길이 2자
           NameLength2(name1: name1, name2: name2),
@@ -209,7 +210,7 @@ class reShowErrandWidget extends StatelessWidget {
     String decodedrealname = utf8.decode(realName.runes.toList());
     String decodednickname = utf8.decode(nickName.runes.toList());
     return Container(
-      width: 324, height: 576,
+      width: 324.w, height: 576.h,
       decoration: BoxDecoration(
         color: Color(0xffFCFCF9),
       ),
@@ -221,7 +222,7 @@ class reShowErrandWidget extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Container(
-              padding: EdgeInsets.only(left: 280, top: 8),
+              padding: EdgeInsets.only(left: 280.w, top: 8.h),
               color: Colors.transparent,
               child: Icon(
                 Icons.close,
@@ -232,13 +233,13 @@ class reShowErrandWidget extends StatelessWidget {
 
           // 심부름 요청서 제목
           Container(
-            margin: EdgeInsets.only(top: 4, left: 93, right: 91),
+            margin: EdgeInsets.only(top: 4.h, left: 93.w, right: 91.w),
             child: Text(
               "심부름 요청서",
               style: TextStyle(
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.w700,
-                fontSize: 24,
+                fontSize: 24.sp,
                 letterSpacing: 0.00,
                 color: Color(0xff000000),
               ),
@@ -246,7 +247,7 @@ class reShowErrandWidget extends StatelessWidget {
           ),
 
           Container(
-            width: 217,
+            width: 217.w,
     child: Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -259,7 +260,7 @@ class reShowErrandWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w300,
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       letterSpacing: 0.00,
                       color: Color(0xff111111),
                     ),
@@ -273,13 +274,13 @@ class reShowErrandWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.center,
                           child: Container(
-                            margin: EdgeInsets.only(top: 4, left: 2),
+                            margin: EdgeInsets.only(top: 4.h, left: 2.w),
                             child: Text(
                               "____________",
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w300,
-                                fontSize: 11,
+                                fontSize: 11.sp,
                                 letterSpacing: 0.00,
                                 color: Color(0xff111111),
                               ),
@@ -292,13 +293,13 @@ class reShowErrandWidget extends StatelessWidget {
                               Align(
                                 alignment: Alignment.center,
                                 child: Container(
-                                  margin: EdgeInsets.only(top: 0, left: 2,),
+                                  margin: EdgeInsets.only(top: 0.h, left: 2.w,),
                                   child: Text(
                                     decodedrealname,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 11,
+                                      fontSize: 11.sp,
                                       letterSpacing: 0.00,
                                       color: Color(0xff111111),
                                     ),
@@ -317,7 +318,7 @@ class reShowErrandWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w300,
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       letterSpacing: 0.00,
                       color: Color(0xff111111),
                     ),
@@ -326,7 +327,7 @@ class reShowErrandWidget extends StatelessWidget {
               ],
             ),
       Container(
-        width: 252,
+        width: 252.w,
         child : Text(
           "열정에 감사하며 아래와 같이 심부름을 요청합니다.\n"
               "심부름 사항을 확인 후 완료 버튼을 통해 심부름을\n"
@@ -334,7 +335,7 @@ class reShowErrandWidget extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'Pretendard',
             fontWeight: FontWeight.w300,
-            fontSize: 11,
+            fontSize: 11.sp,
             letterSpacing: 0.00,
             color: Color(0xff111111),
           ),
@@ -345,13 +346,13 @@ class reShowErrandWidget extends StatelessWidget {
           ),
           // -아래- 텍스트
           Container(
-            margin: EdgeInsets.only(top: 11, left: 144, right: 151),
+            margin: EdgeInsets.only(top: 11.h, left: 144.w, right: 151.w),
             child: Text(
               "-아래-",
               style: TextStyle(
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.w400,
-                fontSize: 11,
+                fontSize: 11.sp,
                 letterSpacing: 0.00,
                 color: Color(0xff000000),
               ),
@@ -360,9 +361,9 @@ class reShowErrandWidget extends StatelessWidget {
 
           // 심부름 사항, 금액 및 결제
           Container(
-            width: 287,
-            height: 328.85,
-            margin: EdgeInsets.only(top: 14),
+            width: 287.w,
+            height: 328.85.h,
+            margin: EdgeInsets.only(top: 14.h),
             alignment: Alignment.center, // 중앙 정렬
             decoration: BoxDecoration(
               color: Color(0xffF1F1F1),
@@ -372,23 +373,23 @@ class reShowErrandWidget extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                    margin: EdgeInsets.only(top: 13.65),
+                    margin: EdgeInsets.only(top: 13.65.h),
                     child: Row(
                       children: [
                         // 심부름 사항 네모 이미지
                         Container(
-                            margin: EdgeInsets.only(left: 23.5),
+                            margin: EdgeInsets.only(left: 23.5.w),
                             child: Image.asset("assets/images/small_rectangle.png")
                         ),
                         //심부름 사항 텍스트
                         Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: EdgeInsets.only(left: 5.w),
                           child: Text(
                             "심부름 사항",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w600,
-                              fontSize: 11,
+                              fontSize: 11.sp,
                               letterSpacing: 0.001,
                               color: Color(0xff000000),
                             ),
@@ -397,7 +398,7 @@ class reShowErrandWidget extends StatelessWidget {
                       ],
                     )),
                 Container(
-                  margin: EdgeInsets.only(top: 6.68),
+                  margin: EdgeInsets.only(top: 6.68.h),
                   child: TableScreen1(
                     title: title,
                     name: name,
@@ -409,23 +410,23 @@ class reShowErrandWidget extends StatelessWidget {
 
                 // 금액 및 결제 텍스트
                 Container(
-                    margin: EdgeInsets.only(top: 7.68),
+                    margin: EdgeInsets.only(top: 7.68.h),
                     child: Row(
                       children: [
                         // 금액 및 결제 네모 이미지
                         Container(
-                            margin: EdgeInsets.only(left: 23.5),
+                            margin: EdgeInsets.only(left: 23.5.w),
                             child: Image.asset("assets/images/small_rectangle.png")
                         ),
                         //금액 및 결제 텍스트
                         Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: EdgeInsets.only(left: 5.w),
                           child: Text(
                             "금액 및 결제",
                             style: TextStyle(
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w600,
-                              fontSize: 11,
+                              fontSize: 11.sp,
                               letterSpacing: 0.001,
                               color: Color(0xff000000),
                             ),
@@ -435,7 +436,7 @@ class reShowErrandWidget extends StatelessWidget {
                     )),
                 // 금액 및 결제 표
                 Container(
-                  margin: EdgeInsets.only(top: 6),
+                  margin: EdgeInsets.only(top: 6.h),
                   child: TableScreen2(
                     reward: reward,
                     isCash: isCash,
@@ -452,13 +453,13 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, // 왼쪽 정렬
                   child: Container(
-                    margin: EdgeInsets.only(top: 17.15, left: 39.5),
+                    margin: EdgeInsets.only(top: 17.15.h, left: 39.5.w),
                     child: Text(
                       "(주) ${utf8.decode(name.runes.toList())}",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 11,
+                        fontSize: 11.sp,
                         letterSpacing: 0.001,
                         color: Color(0xff000000),
                       ),
@@ -469,12 +470,12 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft, // 가운데 정렬
                   child: Container(
-                        margin: EdgeInsets.only(top: 17, left: 150),
+                        margin: EdgeInsets.only(top: 17.h, left: 150.w),
                         child: Text(decodednickname,
                           style: TextStyle(
                           fontFamily: 'SangSangShin',
                           fontWeight: FontWeight.w400,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.01,
                           color: Color(0xff000000),
                         ),
@@ -488,13 +489,13 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(
-                    margin: EdgeInsets.only(top: 17.15, right: 37),
+                    margin: EdgeInsets.only(top: 17.15.h, right: 37.w),
                     child: Text(
                       "( 서 명 )",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
-                        fontSize: 11,
+                        fontSize: 11.sp,
                         letterSpacing: 0.001,
                         color: Color(0xffA4A4A4),
                       ),
@@ -505,7 +506,7 @@ class reShowErrandWidget extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(
-                      margin: EdgeInsets.only(top: 41.15, right: 37.5),
+                      margin: EdgeInsets.only(top: 41.15.h, right: 37.5.w),
                       child: Image.asset("assets/images/Line1.png")
                   ),
                 ),
@@ -663,9 +664,9 @@ class _ReShowErrandState extends State<ReShowErrand> {
                       child: Flexible(
                         child: AnimatedContainer(
                             duration: Duration(milliseconds: 500),
-                            width: 324,
-                            height: 576,
-                            margin: EdgeInsets.only(top: 75, left: 18.5), // 기존 마진 -> 확정 마진
+                            width: 324.w,
+                            height: 576.h,
+                            margin: EdgeInsets.only(top: 75.h, left: 18.5.w), // 기존 마진 -> 확정 마진
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
                               color: Color(0xffFCFCF9),
@@ -693,7 +694,7 @@ class _ReShowErrandState extends State<ReShowErrand> {
                               isStampVisible: true,
                               nickName : nickName,
                               realName : realName,
-                              margin : EdgeInsets.only(top: 75, left: 18.5),
+                              margin : EdgeInsets.only(top: 75.h, left: 18.5.w),
                             ),
                         ),
                       ),
