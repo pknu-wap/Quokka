@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: checkerrand.dart 마진 수정">
+    <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: check_image.dart 마진 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/check_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/check_image.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/showerrand/mainshowerrand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/showerrand/mainshowerrand.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717742286102</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fix: check_image.dart 마진 수정">
+      <option name="closed" value="true" />
+      <created>1717742745626</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1717742745626</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,6 +237,7 @@
     <MESSAGE value="Fix: running_errand, requesting_errand 크기 수정" />
     <MESSAGE value="Fix: custom_dialog.dart 마진 수정" />
     <MESSAGE value="Fix: checkerrand.dart 마진 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: checkerrand.dart 마진 수정" />
+    <MESSAGE value="Fix: check_image.dart 마진 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: check_image.dart 마진 수정" />
   </component>
 </project>

@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../checkerrand.dart';
 import '../home.dart';
@@ -107,7 +108,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
   // 확인했어요. 버튼 변수'
   bool isCheckButtonVisible = true;
   bool isStampVisible = false;
-  EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40, left: 18.5);
+  EdgeInsets errandConfirmedMargin = EdgeInsets.only(top: 40.h, left: 18.5.w);
 
 
   @override
@@ -202,7 +203,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                     // 확인했어요. 버튼
                     if(isCheckButtonVisible) // 버튼이 보이면,
                     Container(
-                      margin: EdgeInsets.only(left: 20.5, right: 21.5, top: 11),
+                      margin: EdgeInsets.only(left: 20.5.w, right: 21.5.w, top: 11.h),
                       child: ElevatedButton(
                         onPressed: () {
                           print("확인했어요. 클릭");
@@ -211,7 +212,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                           setState(() {
                             isCheckButtonVisible = false;
                             isStampVisible = true;
-                            errandConfirmedMargin = EdgeInsets.only(top: 75, left: 18.5); // 심부름 요청서 마진 변경
+                            errandConfirmedMargin = EdgeInsets.only(top: 75.h, left: 18.5.w); // 심부름 요청서 마진 변경
                             getErrandName(errandNo);// 심부름 하는 사람 닉네임  -> 연동 부분, 심부름 하는 사람 실명 -> 연동 부분
                           });
                         },
@@ -220,7 +221,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                               Color(0xFF7C3D1A)),
                           // 버튼의 크기 정하기
                           minimumSize:
-                          MaterialStateProperty.all<Size>(Size(318, 46.65)),
+                          MaterialStateProperty.all<Size>(Size(318.w, 46.65.h)),
                           // 버튼의 모양 변경하기
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -233,7 +234,7 @@ class _MainShowErrandState extends State<MainShowErrand> {
                         child: Text(
                           '확인했어요.',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w600,
                             color: Color(0xFFFFFFFF),
