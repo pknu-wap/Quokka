@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String realName;
@@ -20,13 +21,13 @@ class TextFieldWidget extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Container(
-              margin: EdgeInsets.only(top: 4, left: 2),
+              margin: EdgeInsets.only(top: 4.h, left: 2.w),
               child: Text(
                 "____________",
                 style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w300,
-                  fontSize: 11,
+                  fontSize: 11.sp,
                   letterSpacing: 0.00,
                   color: Color(0xff111111),
                 ),
@@ -40,7 +41,7 @@ class TextFieldWidget extends StatelessWidget {
             alignment: Alignment.center,
           child: AnimatedContainer(
             duration: Duration(milliseconds: 350),
-            margin: EdgeInsets.only(top: 0, left: 2,),
+            margin: EdgeInsets.only(top: 0.h, left: 2.w,),
             child: realName != "" ? FutureBuilder(
               future: Future.delayed(Duration(milliseconds:700)),
             builder: (context, snapshot) {
@@ -53,7 +54,7 @@ class TextFieldWidget extends StatelessWidget {
                 textStyle: TextStyle(
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w300,
-                  fontSize: 11,
+                  fontSize: 11.sp,
                   letterSpacing: 0.00,
                   color: Color(0xff111111),
                 ),
@@ -70,7 +71,7 @@ class TextFieldWidget extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Pretendard',
                 fontWeight: FontWeight.w300,
-                fontSize: 11,
+                fontSize: 11.sp,
                 letterSpacing: 0.00,
                 color: Color(0xff111111),
               ),
