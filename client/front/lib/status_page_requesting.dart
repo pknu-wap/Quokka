@@ -110,7 +110,7 @@ class _RatingDialogState extends State<RatingDialog> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: 10),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(

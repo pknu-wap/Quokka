@@ -82,7 +82,7 @@ class _RatingDialogState extends State<RatingDialog> {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 30),
-                    child:  SvgPicture.asset(
+                    child: SvgPicture.asset(
                       'assets/images/smile_quokka.svg',
                       width: 70,
                       height: 70,
