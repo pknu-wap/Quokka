@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WarningDialog extends StatelessWidget{
   final String alertMessage;
@@ -12,14 +13,14 @@ class WarningDialog extends StatelessWidget{
     return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            side: BorderSide(color: Color(0xffB6B6B6), width: 1),
+            side: BorderSide(color: Color(0xffB6B6B6), width: 1.w),
           ),
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
               // padding: EdgeInsets.all(20),
-              width: 323,
-              height: 214,
+              width: 323.w,
+              height: 214.h,
               decoration: BoxDecoration(
                 color: Color(0xffFFFFFF), //배경색
                 borderRadius: BorderRadius.circular(10),
@@ -27,21 +28,21 @@ class WarningDialog extends StatelessWidget{
               child: Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: 16.04),
+                    margin: EdgeInsets.only(top: 16.04.h),
                     child: SvgPicture.asset(
                       'assets/images/alert.svg',
-                      width: 76.83,
-                      height: 76.83,
+                      width: 76.83.w,
+                      height: 76.83.h,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 4.08),
+                    margin: EdgeInsets.only(top: 4.08.h),
                     child: Text(
                       alertMessage,
                       style: TextStyle(
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         letterSpacing: 0.00,
                         color: Color(0xff1A1A1A),
                       ),
@@ -49,13 +50,13 @@ class WarningDialog extends StatelessWidget{
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 17.77),
+                    margin: EdgeInsets.only(top: 17.77.h),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
                         minimumSize: MaterialStateProperty.all<Size>(
-                            Size(281.1, 47.25)),
+                            Size(281.1.w, 47.25.h)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -68,7 +69,7 @@ class WarningDialog extends StatelessWidget{
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           letterSpacing: 0.00,
                           color: Color(0xffFFFFFF),
                         ),
