@@ -9,7 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/main/errand_list/check_errand/show_errand/show_errand.dart';
 import 'package:intl/intl.dart';
-import '../../../custom_dialog.dart';
+import '../../../widgets/dialog/custom_dialog.dart';
 import 'fix_errand/fix_errand.dart';
 import '../errand_list.dart';
 import 'package:http/http.dart' as http;

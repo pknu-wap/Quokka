@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import '../check_errand.dart';
-import '../../../../write_errand.dart';
+import '../../../write_errand/write_errand.dart';
 import '../../errand_list.dart';
 import 'fix_errand_widget/fixdue.dart';
 import 'fix_errand_widget/fixiscash.dart';

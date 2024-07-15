@@ -10,11 +10,11 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
-import '../find_destination.dart';
+import 'find_destination.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'main/errand_list/check_errand/check_errand.dart';
-import 'main/errand_list/errand_list.dart';
+import '../errand_list/check_errand/check_errand.dart';
+import '../errand_list/errand_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 final storage = FlutterSecureStorage();
 void _insertOverlay(BuildContext context) {
