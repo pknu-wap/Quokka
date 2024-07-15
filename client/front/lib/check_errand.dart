@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/showerrand/show_errand.dart';
 import 'package:intl/intl.dart';
 import 'custom_dialog.dart';
-import 'fixerrand/fixerrand.dart';
+import 'fixerrand/fix_errand.dart';
 import '../../errand_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -8,12 +8,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'showerrandwidget/stamp/namelength/name_length2.dart';
-import 'showerrandwidget/stamp/namelength/name_length3.dart';
-import 'showerrandwidget/stamp/namelength/name_length4.dart';
-import 'showerrandwidget/stamp/namelength/name_length5more.dart';
-import 'showerrandwidget/tablescreen/tablescreen1.dart';
-import 'showerrandwidget/tablescreen/tablescreen2.dart';
+import 'show_errand_widget/stamp/namelength/name_length2.dart';
+import 'show_errand_widget/stamp/namelength/name_length3.dart';
+import 'show_errand_widget/stamp/namelength/name_length4.dart';
+import 'show_errand_widget/stamp/namelength/name_length5more.dart';
+import 'show_errand_widget/table/table1.dart';
+import 'show_errand_widget/table/table2.dart';
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 

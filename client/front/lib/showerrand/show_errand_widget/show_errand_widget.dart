@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
-import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
-import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
-import 'package:front/showerrand/showerrandwidget/textfield_widget.dart';
+import 'package:front/showerrand/show_errand_widget/stamp/stamp.dart';
+import 'package:front/showerrand/show_errand_widget/table/table1.dart';
+import 'package:front/showerrand/show_errand_widget/table/table2.dart';
+import 'package:front/showerrand/show_errand_widget/textfield_widget.dart';
 import '../../../check_errand.dart';
 
 class ShowErrandWidget extends StatelessWidget {

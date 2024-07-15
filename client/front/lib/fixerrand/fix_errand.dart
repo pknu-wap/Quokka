@@ -8,11 +8,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import '../check_errand.dart';
-import '../writeerrand.dart';
+import '../write_errand.dart';
 import '../errand_list.dart';
-import 'fixerrandwidget/fixdue.dart';
-import 'fixerrandwidget/fixiscash.dart';
-import 'fixerrandwidget/fixminimap.dart';
+import 'fix_errand_widget/fixdue.dart';
+import 'fix_errand_widget/fixiscash.dart';
+import 'fix_errand_widget/fixminimap.dart';
 import 'package:http/http.dart' as http;
 final storage = FlutterSecureStorage();
 
