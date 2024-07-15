@@ -6,7 +6,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../find_destination.dart';
+import '../../../../../../find_destination.dart';
 
 class FixMiniMap extends StatefulWidget{
   final double latitude; // 위도

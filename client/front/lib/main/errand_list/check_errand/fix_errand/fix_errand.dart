@@ -10,9 +10,9 @@ import 'package:flutter_svg/svg.dart';
 import '../check_errand.dart';
 import '../../../../write_errand.dart';
 import '../../errand_list.dart';
-import '../../../../fixerrand/fix_errand_widget/fixdue.dart';
-import '../../../../fixerrand/fix_errand_widget/fixiscash.dart';
-import '../../../../fixerrand/fix_errand_widget/fixminimap.dart';
+import 'fix_errand_widget/fixdue.dart';
+import 'fix_errand_widget/fixiscash.dart';
+import 'fix_errand_widget/fixminimap.dart';
 import 'package:http/http.dart' as http;
 final storage = FlutterSecureStorage();
 
