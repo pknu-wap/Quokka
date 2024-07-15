@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:front/upload_image.dart';
+import 'package:front/user_verify.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_success.dart';
