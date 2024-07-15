@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
-import '../main/errand_list/check_errand/check_errand.dart';
-import '../write_errand.dart';
-import '../main/errand_list/errand_list.dart';
-import 'fix_errand_widget/fixdue.dart';
-import 'fix_errand_widget/fixiscash.dart';
-import 'fix_errand_widget/fixminimap.dart';
+import '../check_errand.dart';
+import '../../../../write_errand.dart';
+import '../../errand_list.dart';
+import '../../../../fixerrand/fix_errand_widget/fixdue.dart';
+import '../../../../fixerrand/fix_errand_widget/fixiscash.dart';
+import '../../../../fixerrand/fix_errand_widget/fixminimap.dart';
 import 'package:http/http.dart' as http;
 final storage = FlutterSecureStorage();
 

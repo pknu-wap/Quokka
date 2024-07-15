@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'namelength/name_length2.dart';
-import 'namelength/name_length3.dart';
-import 'namelength/name_length4.dart';
-import 'namelength/name_length5more.dart';
+import 'name_length/name_length2.dart';
+import 'name_length/name_length3.dart';
+import 'name_length/name_length4.dart';
+import 'name_length/name_length5more.dart';
 
 class Stamp extends StatelessWidget {
   final String realName;
