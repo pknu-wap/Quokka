@@ -10,9 +10,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'errand_list.dart';
+import 'main/errand_list/errand_list.dart';
 import 'map.dart';
-import 'showerrand/re-show_errand.dart';
+import 'show_errand/re-show_errand.dart';
 
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들

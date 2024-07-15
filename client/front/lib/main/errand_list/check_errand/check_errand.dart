@@ -7,11 +7,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:front/showerrand/show_errand.dart';
+import 'package:front/show_errand/show_errand.dart';
 import 'package:intl/intl.dart';
-import 'custom_dialog.dart';
-import 'fixerrand/fix_errand.dart';
-import '../../errand_list.dart';
+import '../../../custom_dialog.dart';
+import '../../../fixerrand/fix_errand.dart';
+import '../errand_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
