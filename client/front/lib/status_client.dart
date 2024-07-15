@@ -11,7 +11,7 @@ import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'errand_list.dart';
-import 're-showmap.dart';
+import 'map.dart';
 import 'showerrand/re-showerrand.dart';
 
 final storage = FlutterSecureStorage();
