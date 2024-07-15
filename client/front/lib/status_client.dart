@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'errand_list.dart';
 import 'map.dart';
-import 'showerrand/re-showerrand.dart';
+import 'showerrand/re-show_errand.dart';
 
 final storage = FlutterSecureStorage();
 class StatusContent{//진행중인 심부름이 간략하게 담고 있는 정보들
