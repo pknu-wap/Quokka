@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:front/showerrand/showerrandwidget/showerrandwidget.dart';
+import 'package:front/showerrand/showerrandwidget/show_errand_widget.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
@@ -10,8 +10,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../checkerrand.dart';
-import '../home.dart';
+import '../check_errand.dart';
+import '../errand_list.dart';
 
 final storage = FlutterSecureStorage(); // 토큰 받기
 

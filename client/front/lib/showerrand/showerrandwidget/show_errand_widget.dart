@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:front/showerrand/showerrandwidget/stamp/stamp.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen1.dart';
 import 'package:front/showerrand/showerrandwidget/tablescreen/tablescreen2.dart';
-import 'package:front/showerrand/showerrandwidget/textfieldwidget.dart';
-import '../../../checkerrand.dart';
+import 'package:front/showerrand/showerrandwidget/textfield_widget.dart';
+import '../../../check_errand.dart';
 
 class ShowErrandWidget extends StatelessWidget {
   final int errandNo;
