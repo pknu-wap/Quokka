@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'check_image.dart';
+import 'user_check.dart';
 import 'dart:convert';
 class Upload_Image extends StatefulWidget {
   final String requestMail;
