@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'user_verify.dart';
-import 'profile.dart';
+import 'user_info.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Check_Image extends StatefulWidget {
