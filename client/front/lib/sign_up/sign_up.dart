@@ -1,7 +1,7 @@
 import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'custom_dialog.dart';
+import '../custom_dialog.dart';
 import 'user_verify.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
