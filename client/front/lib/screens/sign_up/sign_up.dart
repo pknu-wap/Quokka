@@ -1,6 +1,8 @@
 import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import '../../widgets/dialog/custom_dialog.dart';
 import 'user_verify.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
@@ -125,6 +127,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         warningDialog(context, "서버에 문제가 있어요!");
       }
     }
+  }
+
+  Color decideButtonColor(bool isEmailButtonEnabled) {
+    if (isEmailButtonEnabled)
+      {
+        return Color(0xFF7C3D1A);
+      }
+    else
+      {
+        return Color(0xFFBD9E8C);
+      }
   }
 
 
@@ -311,30 +324,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           emailRequest(emailController.text);
                           print('Email Button Clicked!');
                         } : null,
-                        style: ButtonStyle(
-                          // 버튼의 배경색 변경하기
-                          backgroundColor: isEmailButtonEnabled
-                              ? MaterialStateProperty.all<Color>(Color(0xFF7C3D1A))
-                              : MaterialStateProperty.all<Color>(Color(0xFFBD9E8C)),
-                          minimumSize:
-                              MaterialStateProperty.all<Size>(Size(320.w, 43.h)),
-                          // 버튼의 모양 변경하기
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          '이메일 인증 번호 받기',
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFFFFFFF),
-                            letterSpacing: 0.01,
-                          ),
-                        ),
+                        style: brownButton(decideButtonColor(isEmailButtonEnabled)),
+                        child: buttonText("이메일 인증 번호 받기"),
                       ),
                     ),
 
