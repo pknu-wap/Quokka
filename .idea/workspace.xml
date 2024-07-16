@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
-      <change beforePath="$PROJECT_DIR$/client/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up_complete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_check.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/re-show_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/re-show_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_runner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_runner.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_slide.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_slide.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/test/widget_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
