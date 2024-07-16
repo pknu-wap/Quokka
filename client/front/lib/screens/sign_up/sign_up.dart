@@ -6,6 +6,7 @@ import 'user_verify.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'widgets/text/sign_up_title.dart';
 //현재 화면에서 뒤로가기
 class SignUpScreen extends StatefulWidget {
   @override
@@ -263,16 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       margin: EdgeInsets.only(left: 22.w, top: 33.0.h),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "이메일 주소",
-                          style: TextStyle(
-                            color: Color(0xFF373737),
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14.sp,
-                            letterSpacing: 0.01,
-                          ),
-                        ),
+                        child: title("이메일주소"),
                       ),
                     ),
                     // 이메일 주소 텍스트 필드
@@ -350,20 +342,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       margin: EdgeInsets.only(left: 22.0.w, top: 18.h),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "인증 번호",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF373737),
-                            letterSpacing: 0.01,
-                          ),
-                        ),
+                        child: title("인증번호"),
                       ),
                     ),
-
-
 
                     Stack(
                       alignment: Alignment.center,
