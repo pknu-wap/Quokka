@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:front/main/errand_list/check_errand/show_errand/show_errand_widget/show_errand_widget.dart';
+import 'package:front/screens/main/errand_list/check_errand/show_errand/show_errand_widget/show_errand_widget.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';

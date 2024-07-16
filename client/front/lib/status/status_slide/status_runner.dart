@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../widgets/dialog/custom_dialog.dart';
-import '../../main/errand_list/errand_list.dart';
+import '../../screens/main/errand_list/errand_list.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front/main/errand_list/check_errand/fix_errand/fix_errand.dart';
+import 'package:front/screens/main/errand_list/check_errand/fix_errand/fix_errand.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FixDue extends StatefulWidget{
