@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
 import 'package:http/http.dart' as http;
 import 'user_verify.dart';
 import 'user_info.dart';
@@ -144,7 +145,7 @@ class Check_ImageState extends State<Check_Image> {
                   padding: EdgeInsets.only(top: 26.0.h),
                   child: SizedBox(
                     height: 25.0.h,
-                    child: Text('회원가입',
+                    child: Text('본인인증',
                         style: TextStyle(
                           fontFamily: 'paybooc',
                           fontWeight: FontWeight.w700,
@@ -159,14 +160,8 @@ class Check_ImageState extends State<Check_Image> {
             children: [
               Container(
                   margin: EdgeInsets.only(left: 24.0.w, top: 30.0.h),
-                  child: Text('학부 / 학과',
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
-                        letterSpacing: 0.01,
-                        color: Color(0xff373737),
-                      ))),
+                  child: title('학부 / 학과'),
+              ),
               // 학부/학과 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),
@@ -203,15 +198,8 @@ class Check_ImageState extends State<Check_Image> {
               // 학번 텍스트
               Container(
                   margin: EdgeInsets.only(left: 22.0.w, top: 28.0.h),
-                  child: Text('학번',
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
-                        letterSpacing: 0.01,
-                        color: Color(0xff373737),
-                      ))),
-
+                  child: title("학번")
+              ),
               // 학번 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),
@@ -250,14 +238,8 @@ class Check_ImageState extends State<Check_Image> {
               // 이름 텍스트
               Container(
                   margin: EdgeInsets.only(left: 22.0.w, top: 28.0.h),
-                  child: Text('이름',
-                      style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.sp,
-                        letterSpacing: 0.01,
-                        color: Color(0xff373737),
-                      ))),
+                  child: title("이름")
+              ),
               // 이름 텍스트 필드
               Container(
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 9.0.h),

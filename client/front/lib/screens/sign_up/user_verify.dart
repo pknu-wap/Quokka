@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -155,16 +156,7 @@ class _Upload_ImageState extends State<Upload_Image> {
             children: [
               Container(
                 margin: EdgeInsets.only(left: 22.0.w, top: 30.0.h),
-                child: Text(
-                  '모바일 학생증 인증',
-                  style: TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.01,
-                    color: Color(0xff373737),
-                  ),
-                ),
+                child: title('모바일 학생증 인증'),
               ),
               Container(
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 10.0.h),
@@ -204,16 +196,7 @@ class _Upload_ImageState extends State<Upload_Image> {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 9.0.w),
-                            child: Text(
-                              '업로드 파일 예시',
-                              style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.01,
-                                color: Color(0xff373737),
-                              ),
-                            ),
+                            child: title('업로드 파일 예시'),
                           ),
                           Text(
                             '파일 형식  jpg / png',
