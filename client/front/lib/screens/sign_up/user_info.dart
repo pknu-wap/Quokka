@@ -6,6 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/sign_up/user_verify.dart';
 import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
+import 'package:front/utils/button_utill.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_complete.dart';
@@ -728,33 +731,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     }
                                   }
                                 : null,
-                            style: ButtonStyle(
-                              // 버튼의 배경색 변경하기
-                              backgroundColor: passwordCheckText == ""
-                                  ? MaterialStateProperty.all<Color>(
-                                      Color(0xFF7C3D1A))
-                                  : MaterialStateProperty.all<Color>(
-                                      Color(0xFFBD9E8C)),
-                              minimumSize: MaterialStateProperty.all<Size>(
-                                  Size(320.w, 40.h)),
-                              // 버튼의 모양 변경하기
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      5), // 원하는 모양에 따라 BorderRadius 조절
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              '완료',
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFFFFFFFF),
-                              ),
-                            ),
+
+                            style: brownButton320(decideButtonColor(passwordCheckText == "")),
+                            child: buttonText("확인"),
                           )),
                     ],
                   ),
