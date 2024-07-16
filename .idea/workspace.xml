@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/find_destination.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/find_destination.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/write_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/write_errand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/widgets/bar/navigation_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/widgets/bar/navigation_bar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +78,9 @@
     "git-widget-placeholder": "feature/233-Refactoring&&Modularization",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Users/ls090/Desktop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "show.migrate.to.gradle.popup": "false"
   }

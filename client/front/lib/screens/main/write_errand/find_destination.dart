@@ -23,33 +23,6 @@ class NaverMapTest extends StatefulWidget {
 
 class _NaverMapTestState extends State<NaverMapTest> {
 
-
-  // void getLocation() async {
-  //   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  //   log("내 위치");
-  //   log(position.toString());
-  // }
-
-
-  // String? latitude;
-  // String? longitude;
-  //
-  // getGeoData() async {
-  //   LocationPermission permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       return Future.error('permissions are denied');
-  //     }
-  //   }
-  //   Position position await Geolocator.getCurrentPosition();
-  //   setState(() {
-  //     latitude.position.latitude.toString();
-  //     longitude.position.longitude.toString();
-  //   });
-  // }
-
-
   TextEditingController destinationController = TextEditingController();
   bool isDestinationEnabled = false;
   // bool isMarkerVisible = true; // 마커가 보이는 경우
@@ -70,26 +43,6 @@ class _NaverMapTestState extends State<NaverMapTest> {
       marker.setIsVisible(false);
     });
   }
-  // Future<Position> getCurrentLocation() async {
-  //   Position position = await Geolocator.getCurrentPosition(
-  //       desiredAccuracy: LocationAccuracy.high);
-  //
-  //   return position;
-  // }
-  // Future<void> initLocation() async {
-  //   Position position = await getCurrentLocation();
-  //
-  //   log(position.latitude.toString());
-  //   log(position.longitude.toString());
-  //   setState(() {
-  //     myLatLng = NLatLng(position.latitude, position.longitude);
-  //     marker = NMarker(
-  //       id: "test",
-  //       position: myLatLng,
-  //     );
-  //   });
-  //   returnValue = widget.value;
-  // }
   @override
   void initState() {
     // 위젯의 초기 상태 설정 = 상태 변화 감지
