@@ -9,7 +9,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'find_destination.dart';
 import 'package:http/http.dart' as http;
@@ -1066,40 +1069,11 @@ class _WriteErrandState extends State<WriteErrand> {
                     onPressed: () {
                       errandPostRequest();
                     },
-                    style: ButtonStyle(
-                      // 버튼의 배경색 변경하기
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
-                            if (isTitleEnabled &&
-                                isDetailAddressEnabled &&
-                                isPriceEnabled &&
-                                isRequestEnabled) {
-                              return Color(
-                                  0xFF7C3D1A); // 활성화된 배경색(모든 텍스트 필드 비어있지 않은 경우)
-                            } else {
-                              return Color(
-                                  0xFFBD9E8C); // 비활성화 배경색(하나의 텍스트 필드라도 비어있는 경우)
-                            }
-                          }),
-                      // 버튼의 크기 정하기
-                      minimumSize: MaterialStateProperty.all<Size>(Size(318, 41)),
-                      // 버튼의 모양 변경하기
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              5), // 원하는 모양에 따라 BorderRadius 조절
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      '작성 완료',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFFFFFFF),
-                      ),
-                    ),
+                    style: brownButton318(decideButtonColor(isTitleEnabled &&
+                        isDetailAddressEnabled &&
+                        isPriceEnabled &&
+                        isRequestEnabled)),
+                    child: buttonText("작성 완료"),
                   ),
                 ),
               ],
