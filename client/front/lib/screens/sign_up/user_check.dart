@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
+import 'package:front/utils/button_utill.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
 import 'user_verify.dart';
 import 'user_info.dart';
@@ -286,35 +289,15 @@ class Check_ImageState extends State<Check_Image> {
               //확인 버튼
               Container(
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 15.0.h),
-                width: 320.w,
-                height: 43.h,
-                decoration: BoxDecoration(
-                  color: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
-                      ? Color(0xff7C3D1A) : Color(0xffBD9E8C),
-                  // border: Border.all(
-                  //   width: 0.5,
-                  //   color: Color(0xffACACAC),
-                  // ),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Center(
-                  child: TextButton(
-                    onPressed: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
-                        ? () {
-                            //학번이 타당하면 request실행, u1데이터는 담겨있음
-                            request(_IDController.text);
-                          }
-                        : null,
-                    child: Text(
-                      '확인',
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontFamily: 'Pretendard',
-                        letterSpacing: 0.01,
-                        color: Color(0xffFFFFFF),
-                      ),
-                    ),
-                  ),
+                child: ElevatedButton(
+                  onPressed: (isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty)
+                      ? () {
+                    //학번이 타당하면 request실행, u1데이터는 담겨있음
+                    request(_IDController.text);
+                  }
+                      : null,
+                  style: brownButton320(decideButtonColor((isIDValid) && (_MajorController.text.isNotEmpty) && (_NameController.text.isNotEmpty))),
+                  child: buttonText("확인"),
                 ),
               ),
               Container(

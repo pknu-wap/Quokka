@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
-      <change afterPath="$PROJECT_DIR$/client/front/lib/widgets/text/sign_up_title.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/front/lib/utils/button_utill.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
     "git-widget-placeholder": "feature/233-Refactoring&&Modularization",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Users/ls090/Desktop",
-    "project.structure.last.edited": "Problems",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
@@ -84,11 +85,11 @@
       <recent name="C:\2024-1_App1\client\front\assets\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\wap\client\front\lib\screens\sign_up\widgets" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\screens" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\check_errand\fix_errand\fix_errand_widget" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\check_errand\fix_errand" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\fix_errand" />
-      <recent name="C:\Users\user\Desktop\wap\client\front\lib" />
     </key>
   </component>
   <component name="RunManager">
