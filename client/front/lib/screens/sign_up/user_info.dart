@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/sign_up/user_verify.dart';
+import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_complete.dart';
@@ -365,16 +366,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(top: 30.0.h, left: 22.w),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "닉네임",
-                            style: TextStyle(
-                              color: Color(0xFF373737),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14.sp,
-                              letterSpacing: 0.01,
-                            ),
-                          ),
+                          child: title("닉네임"),
                         ),
                       ),
 
@@ -383,16 +375,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(left: 22.5.w, top: 4.26.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "공백 및 특수문자를 제외한 2~8자로 입력해 주세요.",
-                            style: TextStyle(
-                              color: Color(0xFF9E9E9E),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 11.sp,
-                              letterSpacing: 0.01,
-                            ),
-                          ),
+                          child: subTitle("공백 및 특수문자를 제외한 2~8자로 입력해 주세요.")
                         ),
                       ),
 
@@ -518,16 +501,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(left: 22.w, top: 14.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "비밀번호",
-                            style: TextStyle(
-                              color: Color(0xFF373737),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14.sp,
-                              letterSpacing: 0.01,
-                            ),
-                          ),
+                          child: title("비밀번호"),
                         ),
                       ),
 
@@ -536,16 +510,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(left: 22.w, top: 4.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            '영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.',
-                            style: TextStyle(
-                              color: Color(0xFF9E9E9E),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 0.01,
-                              fontSize: 11.sp,
-                            ),
-                          ),
+                          child: subTitle("영문 대문자, 소문자, 숫자, 특수문자를 포함하여 8~20자로 입력해주세요.")
                         ),
                       ),
 
@@ -646,16 +611,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(left: 24.w, top: 4.h),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "비밀번호 확인",
-                            style: TextStyle(
-                              color: Color(0xFF373737),
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14.sp,
-                              letterSpacing: 0.01,
-                            ),
-                          ),
+                          child: title("비밀번호 확인"),
                         ),
                       ),
 

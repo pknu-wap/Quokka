@@ -14,3 +14,17 @@ Text title(String text)
     ),
   );
 }
+
+Text subTitle(String text)
+{
+  return Text(
+    text,
+    style: TextStyle(
+      color: Color(0xFF9E9E9E),
+      fontFamily: 'Pretendard',
+      fontWeight: FontWeight.w400,
+      fontSize: 11.sp,
+      letterSpacing: 0.01,
+    ),
+  );
+}

@@ -6,7 +6,7 @@ import 'user_verify.dart'; // 파일 호출
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'widgets/text/sign_up_title.dart';
+import 'widgets/text/sign_up_text.dart';
 //현재 화면에서 뒤로가기
 class SignUpScreen extends StatefulWidget {
   @override
