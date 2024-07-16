@@ -8,6 +8,8 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/main/errand_list/check_errand/show_errand/show_errand.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:intl/intl.dart';
 import '../../../../widgets/dialog/custom_dialog.dart';
 import 'fix_errand/fix_errand.dart';
@@ -1121,30 +1123,8 @@ class _MainErrandCheckState extends State<MainErrandCheck> {
                             ),
                           );
                         },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF7C3D1A)),
-                          // 버튼의 크기 정하기
-                          minimumSize:
-                              MaterialStateProperty.all<Size>(Size(318.w, 46.65.h)),
-                          // 버튼의 모양 변경하기
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  5), // 원하는 모양에 따라 BorderRadius 조절
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          '제가 할게요!',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFFFFFFF),
-                          ),
-                        ),
+                        style: brownButton318(Color(0xFF7C3D1A)),
+                        child: buttonText("제가 할게요!"),
                       ),
                     ),
                     if (errands[0]["isMyErrand"] == true)

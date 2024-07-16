@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../screens/main/errand_list/errand_list.dart';
@@ -259,36 +262,8 @@ class _ReShowMapState extends State<ReShowMap> {
                       Navigator.pop(context);
                     }
                         : null,
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
-                            if (marker.isVisible) {
-                              return Color(
-                                  0xFF7C3D1A); // 활성화된 배경색(모든 텍스트 필드 비어있지 않은 경우)
-                            } else {
-                              return Color(
-                                  0xFFBD9E8C); // 비활성화 배경색(하나의 텍스트 필드라도 비어있는 경우)
-                            }
-                          }),
-                      // 버튼의 크기 정하기
-                      minimumSize: MaterialStateProperty.all<Size>(Size(318.w, 41.h)),
-                      // 버튼의 모양 변경하기
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              5), // 원하는 모양에 따라 BorderRadius 조절
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      '도착지를 확인했어요',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFFFFFFF),
-                      ),
-                    ),
+                    style: brownButton318(decideButtonColor(marker.isVisible)),
+                    child: buttonText("도착지를 확인했어요"),
                   ),
                 ),
               ],

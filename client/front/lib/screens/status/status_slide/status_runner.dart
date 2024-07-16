@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -1123,28 +1125,8 @@ class _statuspageRState extends State<statuspageR> with TickerProviderStateMixin
                         warningDialog(context, "이미 완료된 심부름이예요!") :
                         confirmDialog(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff7C3D1A),
-                    fixedSize: Size(318.w, 45.h), // 너비와 높이
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
-                    ),
-                  ),
-                  child: Container(
-                    width: 318.w,
-                    height: 45.h,
-                    alignment: Alignment.center,
-                    child: Text(
-                      '심부름 완료',
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.01,
-                        color: Color(0xffFFFFFF),
-                      ),
-                    ),
-                  ),
+                    style: brownButton318(Color(0xFF7C3D1A)),
+                    child: buttonText("심부름완료"),
                 ),
               ),
             ],

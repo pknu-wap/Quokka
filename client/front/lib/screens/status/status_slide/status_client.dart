@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:front/utils/button_utill.dart';
+import 'package:front/widgets/button/brown_button.dart';
+import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -1073,30 +1076,9 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
                            confirmDialog(context);
                         }
                         : () { },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isCompleted
-                          ? Color(0xff7C3D1A)
-                          : Color(0xff7C3D1A).withOpacity(0.5),
-                      fixedSize: Size(318.w, 45.h), // 너비와 높이
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5), // 테두리 둥글기 설정 (0은 둥글지 않음)
-                      ),
-                    ),
-                    child: Container(
-                      width: 318.w,
-                      height: 45.h,
-                      alignment: Alignment.center,
-                      child: Text(
-                        '심부름 완료',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.01,
-                          color: Color(0xffFFFFFF),
-                        ),
-                      ),
-                    ),
+
+                    style: brownButton318(decideButtonColor(isCompleted)),
+                    child: buttonText("심부름 완료"),
                   ),
                 ),
               ],
