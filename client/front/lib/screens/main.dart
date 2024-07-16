@@ -9,7 +9,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'screens/main/errand_list/errand_list.dart';
+import 'main/errand_list/errand_list.dart';
 import 'package:gif/gif.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

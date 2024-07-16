@@ -5,35 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/alarm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/alarm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/check_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/check_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/fix_errand/fix_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixdue.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixdue.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixiscash.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixiscash.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixminimap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/fix_errand/fix_errand_widget/fixminimap.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/show_errand_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/show_errand_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length2.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length3.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length4.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length5more.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/name_length/name_length5more.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/stamp.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/stamp/stamp.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/table/table1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/table/table1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/table/table2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/table/table2.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/check_errand/show_errand/show_errand_widget/textfield_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/check_errand/show_errand/show_errand_widget/textfield_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/errand_list/errand_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/my_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/my_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/write_errand/find_destination.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/find_destination.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/main/write_errand/write_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/write_errand/write_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up_complete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status/status_icons/map.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/re-show_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status/status_icons/re-show_errand.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_runner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_runner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/sign_up_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up_complete.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_check.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/sign_up/user_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/map.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_icons/re-show_errand.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_icons/re-show_errand.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_runner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_runner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/status/status_slide/status_slide.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/status/status_slide/status_slide.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/test/widget_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +101,7 @@
   </component>
   <component name="RunManager">
     <configuration name="main_act" type="FlutterRunConfigurationType" factoryName="Flutter">
-      <option name="filePath" value="$PROJECT_DIR$/client/front/lib/main.dart" />
+      <option name="filePath" value="$PROJECT_DIR$/client/front/lib/screens/main.dart" />
       <method v="2" />
     </configuration>
   </component>
