@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:front/screens/sign_up/user_verify.dart';
 import 'package:front/screens/sign_up/widgets/text/sign_up_text.dart';
 import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/button/brown_button.dart';
@@ -13,6 +12,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sign_up_complete.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'utils/class/user.dart';
 
 //현재 화면에서 뒤로가기
 class ProfileScreen extends StatefulWidget {

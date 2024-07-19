@@ -8,9 +8,10 @@ import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/button/brown_button.dart';
 import 'package:front/widgets/text/button_text.dart';
 import 'package:http/http.dart' as http;
-import 'user_verify.dart';
 import 'user_info.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'utils/class/user.dart';
 
 class Check_Image extends StatefulWidget {
   final User u1;

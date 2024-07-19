@@ -217,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (statusCode == 200) {
       // 다음 화면으로 이동하면서 email주소를 넘김
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Upload_Image(requestMail: requestMail)));
+          context, MaterialPageRoute(builder: (context) => UploadImage(requestMail: requestMail)));
     } else if(statusCode == 400){
       warningDialog(context, "인증 번호가 일치하지 않아요!");
     }
