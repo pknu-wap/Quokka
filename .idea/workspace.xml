@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/utils/class/user.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/utils/func/extract_info_from_text.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/services/sign_up/extract_text_from_img.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_check.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
