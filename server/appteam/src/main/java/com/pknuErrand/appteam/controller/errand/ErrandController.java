@@ -1,6 +1,7 @@
 package com.pknuErrand.appteam.controller.errand;
 
 
+import com.pknuErrand.appteam.domain.member.Member;
 import com.pknuErrand.appteam.dto.errand.*;
 import com.pknuErrand.appteam.exception.ExceptionResponseDto;
 import com.pknuErrand.appteam.service.errand.ErrandService;
@@ -159,5 +160,13 @@ public class ErrandController {
     public ResponseEntity<Map<String, ?>> getErranderInfo(@PathVariable Long errandNo) {
         return ResponseEntity.ok()
                 .body(errandService.getErranderInfo(errandNo));
+    }
+
+    /** **/
+    @GetMapping("/myPostedErrand")
+    public ResponseEntity<List<ErrandListResponseDto>> getMemberPostedErrands() {
+        Member member = memberService.getLoginMember();
+        return ResponseEntity.ok()
+                .body(errandService.getErrandListByOrderNo(member));
     }
 }
