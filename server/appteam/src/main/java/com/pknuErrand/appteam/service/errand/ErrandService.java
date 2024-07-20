@@ -265,4 +265,18 @@ public class ErrandService {
         infoMap.put("nickname", errand.getErranderNo().getNickname());
         return infoMap;
     }
+    /** **/
+    @Transactional
+    public List<ErrandListResponseDto> getErrandListByOrderNo(Member member) {
+        List<ErrandListResponseDto> errandList = null;
+        errandList = getFilteredErrandList(errandRepository.findErrandByOrderNo(member));
+        return errandList;
+    }
+
+    @Transactional
+        public List<ErrandListResponseDto> getErrandListByErranderNo(Member member) {
+        List<ErrandListResponseDto> errandList = null;
+        errandList = getFilteredErrandList(errandRepository.findErrandByErranderNo(member));
+        return errandList;
+    }
 }

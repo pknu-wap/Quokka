@@ -11,6 +11,8 @@ import org.springframework.security.core.parameters.P;
 import java.util.List;
 
 public interface ErrandRepository extends JpaRepository<Errand, Long> {
+    List<Errand> findErrandByOrderNo(Member orderNo);
+    List<Errand> findErrandByErranderNo(Member erranderNo);
 
     @Query(value = "SELECT * " +
             "FROM errand " +
