@@ -163,10 +163,17 @@ public class ErrandController {
     }
 
     /** **/
-    @GetMapping("/myPostedErrand")
-    public ResponseEntity<List<ErrandListResponseDto>> getMemberPostedErrands() {
+    @GetMapping("/myErrand/order")
+    public ResponseEntity<List<ErrandListResponseDto>> getMemberOrderErrands() {
         Member member = memberService.getLoginMember();
         return ResponseEntity.ok()
                 .body(errandService.getErrandListByOrderNo(member));
+    }
+
+    @GetMapping("/myErrand/errander")
+    public ResponseEntity<List<ErrandListResponseDto>> getMemberErranderErrands() {
+        Member member = memberService.getLoginMember();
+        return ResponseEntity.ok()
+                .body(errandService.getErrandListByErranderNo(member));
     }
 }
