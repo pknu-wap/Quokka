@@ -116,7 +116,7 @@ class _LogInState extends State<LogIn> {
                 decoration: loginBoxDecoration(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 17.w, right: 17.w),
-                  child: loginTextField(maxStudentIdLength, _UsernameController, "학번"),
+                  child: loginTextField(maxStudentIdLength, _UsernameController, false, "학번"),
                 ),
               ),
 
@@ -125,41 +125,10 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 6.0.h),
                 width: 320.w,
                 height: 50.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  color: Color(0xFFE5E5E5),
-                ),
+                decoration: loginBoxDecoration(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 17.w, right: 17.w),
-                  child: TextField(
-                    maxLength: maxPasswordLength,
-                    controller: _PasswordController,
-                    obscureText: true,
-                    // 비밀번호 텍스트 필드의 최대 길이 설정
-                    onChanged: (text) {
-                      if (text.length < minPasswordLength) {
-                        print('최소 $minPasswordLength자 이상 입력해주세요.');
-                      } else if (text.length > maxPasswordLength) {
-                        print('최대 $maxPasswordLength자만 입력할 수 있습니다.');
-                      }
-                    },
-                    style: TextStyle(
-                        color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
-                    decoration: InputDecoration(
-                      hintText: '비밀번호',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15.sp,
-                        color: Color(0xFF404040),
-                      ),
-                      border: InputBorder.none,
-                      counterText: '',
-                    ),
-                    keyboardType: TextInputType.text,
-                  ),
+                  child: loginTextField(maxPasswordLength, _PasswordController, true, "비밀번호"),
                 ),
               ),
 

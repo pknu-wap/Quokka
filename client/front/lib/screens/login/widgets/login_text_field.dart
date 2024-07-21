@@ -10,11 +10,11 @@ BoxDecoration loginBoxDecoration()
   );
 }
 
-TextField loginTextField(int loginMaxLength, TextEditingController loginController, String loginHintText){
+TextField loginTextField(int loginMaxLength, TextEditingController loginController, bool loginObscureText, String loginHintText){
   return TextField(
-    maxLength: loginMaxLength,
-    // 최대 길이 설정
+    maxLength: loginMaxLength, // 최대 길이 설정
     controller: loginController,
+    obscureText: loginObscureText,
     style: TextStyle(
         color: Color(0xFF404040),
         fontFamily: 'Pretendard',
