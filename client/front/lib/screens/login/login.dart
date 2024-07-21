@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -114,32 +116,7 @@ class _LogInState extends State<LogIn> {
                 decoration: loginBoxDecoration(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 17.w, right: 17.w),
-                  child: TextField(
-                    maxLength: maxStudentIdLength,
-                    // 최대 길이 설정
-                    controller: _UsernameController,
-                    onChanged: (text) {
-                      if (text.length > maxStudentIdLength) {
-                        print('최대 $maxStudentIdLength자만 입력할 수 있습니다.');
-                      }
-                    },
-                    style: TextStyle(
-                        color: Color(0xFF404040),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400),
-                    decoration: InputDecoration(
-                      hintText: '학번',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15.sp,
-                        color: Color(0xFF404040),
-                      ),
-                      border: InputBorder.none,
-                      counterText: '',
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
+                  child: loginTextField(maxStudentIdLength, _UsernameController)
                 ),
               ),
 
