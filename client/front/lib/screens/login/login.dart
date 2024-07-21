@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/screens/login/widgets/login_text_field.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
 import '/screens/sign_up/sign_up.dart';
 import '../main/errand_list/errand_list.dart';
@@ -110,10 +111,7 @@ class _LogInState extends State<LogIn> {
                 margin: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 38.0.h),
                 width: 320.w,
                 height: 50.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  color: Color(0xFFE5E5E5),
-                ),
+                decoration: loginBoxDecoration(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 17.w, right: 17.w),
                   child: TextField(
