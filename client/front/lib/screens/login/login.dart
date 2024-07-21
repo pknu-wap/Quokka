@@ -150,19 +150,9 @@ class _LogInState extends State<LogIn> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 17.0.h),
-                      //비밀번호 찾기 생기면 margin 11로
-                      // margin: EdgeInsets.only(right: 11.0, top: 17.0), // 기존 마진
                       child: Visibility(
                         visible: isVisible,
-                        child: Text(
-                          "잘못된 학번 또는 비밀번호입니다.",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFFEC5147),
-                          ),
-                        ),
+                        child: Text("잘못된 학번 또는 비밀번호입니다.",),
                       ),
                     ),
                     //       GestureDetector(
@@ -189,27 +179,6 @@ class _LogInState extends State<LogIn> {
                   ],
                 ),
               ),
-
-              // GestureDetector(
-              //   onTap: () {
-              //     // 클릭 시 수행할 작업을 여기에 추가하세요
-              //     print("회원가입 버튼이 클릭되었습니다.");
-              //   },
-              //   child: Container(
-              //     margin: EdgeInsets.only(left: 155, right: 153, top: 24),
-              //     width: 66,
-              //     height: 14,
-              //     child: Text(
-              //       "회원가입",
-              //       style: TextStyle(
-              //         color: Color(0xFF3E3E3E),
-              //         fontFamily: 'Roboto',
-              //         fontWeight: FontWeight.w700,  //semi-bold가 없으므로, bold으로 대체
-              //         fontSize: 14,
-              //       ),
-              //     ),
-              //   ),
-              // ),
               // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
               Container(
                 margin: EdgeInsets.only(left: 0.w, right: 0.w, top: 24.h),
