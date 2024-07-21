@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/screens/login/widgets/login_button.dart';
+import 'package:front/screens/login/widgets/login_button_text.dart';
 import 'package:front/screens/login/widgets/login_text_field.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
 import '/screens/sign_up/sign_up.dart';
@@ -182,31 +184,16 @@ class _LogInState extends State<LogIn> {
               // 비밀번호 찾기 버튼 구현(누르면 찾기 화면으로 이동)
               Container(
                 margin: EdgeInsets.only(left: 0.w, right: 0.w, top: 24.h),
-                // width: 52,
-                // height: 16,
                 child: TextButton(
                   onPressed: () {
                     // 누르면 다음 페이지로 이동
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignUpScreen()));
                   },
-                  style: ButtonStyle(
-                    minimumSize:
-                        MaterialStateProperty.all(Size(100.w, 29.h)), // 버튼 크기
-                  ),
-                  child: Text(
-                    "회원가입",
-                    style: TextStyle(
-                      color: Color(0xFF3E3E3E),
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700, //semi-bold가 없으므로, bold으로 대체
-                      fontSize: 14.sp,
-                      letterSpacing: 0.001,
-                    ),
-                  ),
+                  style: loginSignUpButton(),
+                  child: loginSignUpText("회원가입"),
                 ),
               ),
-              // 회원가입 버튼 구현(누르면 다음 페이지로 이동)
             ],
           ),
         ),

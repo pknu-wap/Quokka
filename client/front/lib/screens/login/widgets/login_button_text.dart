@@ -14,3 +14,16 @@ Text loginButtonText(String text)
     ),
   );
 }
+
+Text loginSignUpText(String text){
+  return Text(
+    text,
+    style: TextStyle(
+      color: Color(0xFF3E3E3E),
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w700, //semi-bold가 없으므로, bold으로 대체
+      fontSize: 14.sp,
+      letterSpacing: 0.001,
+    ),
+  );
+}
