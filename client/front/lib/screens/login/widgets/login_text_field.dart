@@ -10,7 +10,7 @@ BoxDecoration loginBoxDecoration()
   );
 }
 
-TextField loginTextField(int loginMaxLength, TextEditingController loginController){
+TextField loginTextField(int loginMaxLength, TextEditingController loginController, String loginHintText){
   return TextField(
     maxLength: loginMaxLength,
     // 최대 길이 설정
@@ -20,7 +20,7 @@ TextField loginTextField(int loginMaxLength, TextEditingController loginControll
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w400),
     decoration: InputDecoration(
-      hintText: '학번',
+      hintText: loginHintText,
       hintStyle: TextStyle(
         fontFamily: 'Pretendard',
         fontWeight: FontWeight.w400,

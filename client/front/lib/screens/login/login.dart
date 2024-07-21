@@ -116,7 +116,7 @@ class _LogInState extends State<LogIn> {
                 decoration: loginBoxDecoration(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 17.w, right: 17.w),
-                  child: loginTextField(maxStudentIdLength, _UsernameController)
+                  child: loginTextField(maxStudentIdLength, _UsernameController, "학번"),
                 ),
               ),
 
