@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'login.dart';
+import 'login/login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'main/errand_list/errand_list.dart';
 import 'package:gif/gif.dart';

@@ -12,7 +12,7 @@ import 'dart:convert';
 import '../../status/status_slide/status_client.dart';
 import '../../status/status_slide/status_runner.dart';
 import 'check_errand/check_errand.dart';
-import '../../login.dart';
+import '../../login/login.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
