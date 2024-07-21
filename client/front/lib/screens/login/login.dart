@@ -138,34 +138,9 @@ class _LogInState extends State<LogIn> {
                 child: ElevatedButton(
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
-
-                    // Navigator.push(
-                    //   //로그인 버튼 누르면 게시글 페이지로 이동하게 설정
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => Main_post_page()));
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xFF7C3D1A)), // 0xFF로 시작하는 16진수 색상 코드 사용,
-                    // 버튼의 크기 정하기
-                    minimumSize: MaterialStateProperty.all<Size>(Size(319.w, 50.h)),
-                    // 버튼의 모양 변경하기
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5), // 원하는 모양에 따라 BorderRadius 조절
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    '로그인',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.001,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ),
+                  style: ButtonStyle(),
+                  child: Text("로그인"),
                 ),
               ),
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
