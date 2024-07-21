@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/screens/login/widgets/login_alert_text.dart';
 import 'package:front/screens/login/widgets/login_button.dart';
 import 'package:front/screens/login/widgets/login_button_text.dart';
 import 'package:front/screens/login/widgets/login_text_field.dart';
@@ -141,8 +140,8 @@ class _LogInState extends State<LogIn> {
                   onPressed: () {
                     request(_UsernameController.text, _PasswordController.text);
                   },
-                  style: ButtonStyle(),
-                  child: Text("로그인"),
+                  style: loginButton(),
+                  child: loginButtonText("로그인"),
                 ),
               ),
               // 로그인 버튼 구현(로그인 글자 + 버튼 누르면 메인화면으로 이동)
@@ -154,7 +153,7 @@ class _LogInState extends State<LogIn> {
                       margin: EdgeInsets.only(top: 17.0.h),
                       child: Visibility(
                         visible: isVisible,
-                        child: Text("잘못된 학번 또는 비밀번호입니다.",),
+                        child: loginAlertText("잘못된 학번 또는 비밀번호입니다."),
                       ),
                     ),
                     //       GestureDetector(
