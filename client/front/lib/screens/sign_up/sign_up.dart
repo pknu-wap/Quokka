@@ -2,6 +2,7 @@ import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front/utils/button_utill.dart';
+import 'package:front/widgets/bar/app_bar.dart';
 import 'package:front/widgets/button/brown_button.dart';
 import 'package:front/widgets/text/button_text.dart';
 import '../../widgets/dialog/custom_dialog.dart';
@@ -229,34 +230,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0.0,
-        leading: Padding(
-          padding: EdgeInsets.only(top: 26.0.h),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
-        title: Padding(
-          padding: EdgeInsets.only(top: 26.0.h),
-          child: SizedBox(
-            height: 25.0.h,
-            child: Text(
-              '회원가입',
-              style: TextStyle(
-                color: Color(0xFF111111),
-                fontFamily: 'Paybooc',
-                fontWeight: FontWeight.w700,
-                fontSize: 20.sp,
-                letterSpacing: 0.01
-              ),
-            ),
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: '회원가입',
+        onBackPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: Column(
         children: [
