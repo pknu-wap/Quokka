@@ -2,7 +2,7 @@ import 'dart:async'; //Timer이용 위함.
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front/utils/button_utill.dart';
-import 'package:front/widgets/bar/app_bar.dart';
+import 'package:front/widgets/bar/custom_app_bar.dart';
 import 'package:front/widgets/button/brown_button.dart';
 import 'package:front/widgets/text/button_text.dart';
 import '../../widgets/dialog/custom_dialog.dart';
