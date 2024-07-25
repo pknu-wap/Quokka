@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomAppBarBackButtonYes extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBarCenter extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBackPressed;
 
-  CustomAppBarBackButtonYes({
+  CustomAppBarCenter({
     required this.title,
     this.onBackPressed,
   });
