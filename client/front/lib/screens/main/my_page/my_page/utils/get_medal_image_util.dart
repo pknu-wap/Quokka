@@ -20,3 +20,22 @@ String getMedalImage(int score) {
       return 'assets/images/default_medal.svg'; // 임의로 저장
   }
 }
+
+// 배지 이미지 사이즈
+double getMedalImageSize(int score) {
+  String color = changeColor(score);
+  switch (color) {
+    case "Bronze":
+      return 20.0;
+    case "Silver":
+      return 22.0;
+    case "Gold":
+      return 16.0;
+    case "Purple":
+      return 20.0;
+    case "Black":
+      return 17.0;
+    default:
+      return 20.0; // 임의로 저장
+  }
+}
