@@ -41,3 +41,22 @@ Color getMedalBoxFillColor(int score){
       return Color(0xFFD3D3D3); // Default color
   }
 }
+
+// 배지 박스 strokeColor
+Color getMedalBoxStrokeColor(int score){
+  String color = changeColor(score);
+  switch (color) {
+    case "Bronze":
+      return Color(0xFFAC6445); // Bronze color
+    case "Silver":
+      return Color(0xFF77787B); // Silver color
+    case "Gold":
+      return Color(0xFFE7B43F); // Gold color
+    case "Purple":
+      return Color(0xFF433B85); // Purple color
+    case "Black":
+      return Color(0xFFB9B6B6); // Black color
+    default:
+      return Color(0xFFB0B0B0); // Default color
+  }
+}
