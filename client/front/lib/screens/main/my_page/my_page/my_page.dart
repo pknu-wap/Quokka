@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/screens/main/my_page/my_page/utils/get_medal_image_util.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 
-import 'utils/change_medal_util.dart';
+import 'utils/change_color_util.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _MyPageState extends State<MyPage> {
                     child: Container(
                       margin: EdgeInsets.only(top: 77.h, left: 107.w),
                       child: SvgPicture.asset(
-                        changeMedal(_score),
+                        getMedalImage(_score),
                         width: 15.w,
                         height: 15.h,
                       ),
