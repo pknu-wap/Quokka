@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
 
 import 'utils/set_button_colors.dart';
+import 'widgets/button/filter_button.dart';
 final storage = FlutterSecureStorage();
 
 
@@ -19,8 +20,8 @@ class HistoryState extends State<History> {
   Color button1BorderColor =const Color(0xff7C3D1A);
   Color button2TextColor = const Color(0xff4A4A4A);
   Color button2BorderColor = const Color(0xffB1B1B1);
-  void updateButtonState() {
-    setState(() {
+  void updateButtonState() { //버튼 상태와 현재 색을 입력 하면
+    setState(() { //변경된 색으로 상태를 update 해줌
       changeButtonState(
         button1state: button1state,
         button2state: button2state,
@@ -85,29 +86,26 @@ class HistoryState extends State<History> {
               onTap: () {
                 button1state = true;
                 button2state = false;
+                updateButtonState();
               },
-              child: Container(width: 70.w, height: 32.h,
-                margin: EdgeInsets.only(left: 27.w, top: 19.h, ),
-                child: Stack(
-                  children: [
-                    Positioned(left: 0.w, top: 0.h,
-                      child: Container(width: 70.w, height: 32.h,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFBFBFB),
-                          border: Border.all(
-                            color: button1BorderColor, width: 1.w,),
-                          borderRadius: BorderRadius.circular(10),
-                        ),),), // Text
-                    Positioned(left: 16.72.w, top: 7.72.h,
-                      child: Text('최신순', style: TextStyle(
-                        fontFamily: 'Pretendard',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.sp,
-                        letterSpacing: 0.001,
-                        color: button1TextColor,
-                      ),),),
-                  ],),),),
+              child: filterButton1(
+                button1BorderColor,
+                button1TextColor,
+                '수행한 심부름'
+              ),
+            ),
+            GestureDetector( //버튼2
+              onTap: () {
+                button1state = false;
+                button2state = true;
+                updateButtonState();
+              },
+              child: filterButton1(
+                  button2BorderColor,
+                  button2TextColor,
+                  '요청한 심부름'
+              ),
+            ),
           ],
         ),
       ],

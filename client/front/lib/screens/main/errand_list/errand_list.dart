@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front/screens/main/utils/set_button_colors.dart';
+import 'package:front/screens/main/widgets/button/filter_button.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -921,8 +922,8 @@ class _HomeState extends State<Home> {
   Color button3BorderColor = Color(0xffB1B1B1);
   Color checkboxTextColor = Color(0xff606060);
 
-  void updateButtonState() {
-    setState(() {
+  void updateButtonState() { //버튼 상태와 현재 색을 입력 하면
+    setState(() { //변경된 색으로 상태를 update 해줌
       changeButtonState(
         button1state: button1state,
         button2state: button2state,
@@ -1373,6 +1374,7 @@ class _HomeState extends State<Home> {
                   Container(
                     child: Row(
                       children: [
+                        SizedBox(width: 16.w),
                         GestureDetector( //버튼1
                           onTap: () {
                             button1state = true;
@@ -1385,28 +1387,12 @@ class _HomeState extends State<Home> {
                             InProgressErrandInit();
                             scrollToTop();
                           },
-                          child: Container(width: 70.w, height: 32.h,
-                            margin: EdgeInsets.only(left: 27.w, top: 19.h, ),
-                            child: Stack(
-                              children: [
-                                Positioned(left: 0.w, top: 0.h,
-                                  child: Container(width: 70.w, height: 32.h,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFBFBFB),
-                                      border: Border.all(
-                                        color: button1BorderColor, width: 1.w,),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),),), // Text
-                                Positioned(left: 16.72.w, top: 7.72.h,
-                                  child: Text('최신순', style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.sp,
-                                    letterSpacing: 0.001,
-                                    color: button1TextColor,
-                                  ),),),
-                              ],),),),
+                          child: filterButton1(
+                              button1BorderColor,
+                              button1TextColor,
+                              '최신순'
+                          ),
+                        ),
                         GestureDetector( //버튼2
                           onTap: () {
                             button1state = false;
@@ -1419,33 +1405,12 @@ class _HomeState extends State<Home> {
                             InProgressErrandInit();
                             scrollToTop();
                           },
-                          child: Container(width: 70.w, height: 32.h,
-                            margin: EdgeInsets.only(
-                                left: 11.w,
-                                top: 19.h,
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(left: 0.w, top: 0.h,
-                                  child: Container(width: 70.w, height: 32.h,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFBFBFB),
-                                      border: Border.all(
-                                        color: button2BorderColor, width: 1.w,),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),),), // Text
-                                Positioned(
-                                  left: 16.72.w,
-                                  top: 7.72.h,
-                                  child: Text('금액순', style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.sp,
-                                    letterSpacing: 0.001,
-                                    color: button2TextColor,
-                                  ),),),
-                              ],),),),
+                          child: filterButton1(
+                              button2BorderColor,
+                              button2TextColor,
+                              '금액순'
+                          ),
+                        ),
                         GestureDetector( //버튼3
                           onTap: () {
                             button1state = false;
@@ -1458,33 +1423,12 @@ class _HomeState extends State<Home> {
                             InProgressErrandInit();
                             scrollToTop();
                           },
-                          child: Container(width: 70.w, height: 32.h,
-                            margin: EdgeInsets.only(
-                                left: 11.w,
-                                top: 19.h,
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(left: 0.w, top: 0.h,
-                                  child: Container(width: 70.w, height: 32.h,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFBFBFB),
-                                      border: Border.all(
-                                        color: button3BorderColor, width: 1.w,),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),),), // Text
-                                Positioned(
-                                   left: 16.72.w,
-                                   top: 7.72.h,
-                                  child: Text('거리순', style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14.sp,
-                                    letterSpacing: 0.001,
-                                    color: button3TextColor,
-                                  ),),),
-                              ],),),)
+                          child: filterButton1(
+                              button3BorderColor,
+                              button3TextColor,
+                              '거리순'
+                          ),
+                        )
                       ],
                     ),
                   ),

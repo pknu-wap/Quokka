@@ -36,7 +36,7 @@ void changeButtonState({
     setTextColor: setButton2TextColor,
     setBorderColor: setButton2BorderColor,
   );
-
+   //버튼이 2개인 경우, 3개인 경우 모두 작동 하도록 설계
   if (button3state != null && setButton3TextColor != null && setButton3BorderColor != null) {
     _setButtonColors(
       state: button3state,
