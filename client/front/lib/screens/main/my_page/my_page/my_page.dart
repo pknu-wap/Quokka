@@ -6,6 +6,8 @@ import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 
 import 'utils/change_color_util.dart';
+import 'utils/get_medal_box_util.dart';
+import 'widgets/my_page_medal_box.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -68,7 +70,19 @@ class _MyPageState extends State<MyPage> {
                       ),
                     ),
                   ),
-
+                  // 등급 박스
+                  Align(
+                    alignment: Alignment.centerLeft, // 왼쪽 정렬
+                    child: Container(
+                      margin: EdgeInsets.only(top: 80.h, left: 125.w),
+                      child: MedalTextBox(
+                        width: getMedalBoxWidth(_score),
+                        colorText: changeColor(_score),
+                        strokeColor: getMedalBoxStrokeColor(_score),
+                        fillColor: getMedalBoxFillColor(_score),
+                      ),
+                    ),
+                  ),
 
                 ],
               ),
