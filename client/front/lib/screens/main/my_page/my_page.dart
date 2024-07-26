@@ -4,12 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 
+import 'utils/change_medal_util.dart';
+
 class MyPage extends StatefulWidget {
   @override
   _MyPageState createState() => _MyPageState();
 }
 
 class _MyPageState extends State<MyPage> {
+  String _medal = 'assets/images/bronze_medal.svg'; // 평점에 따른 등급(배지)
+  int _score = 600; // 평점
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +54,18 @@ class _MyPageState extends State<MyPage> {
                     child: Container(
                       margin: EdgeInsets.only(top: 54.h, left: 110.w),
                       child: title('수현수현이'),
+                    ),
+                  ),
+                  // 등급(점수에 따라 다른 등급 배지와 텍스트)
+                  Align(
+                    alignment: Alignment.centerLeft, // 왼쪽 정렬
+                    child: Container(
+                      margin: EdgeInsets.only(top: 77.h, left: 107.w),
+                      child: SvgPicture.asset(
+                        changeMedal(_score),
+                        width: 20.w,
+                        height: 20.h,
+                      ),
                     ),
                   ),
 
