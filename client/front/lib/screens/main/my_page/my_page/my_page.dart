@@ -83,6 +83,26 @@ class _MyPageState extends State<MyPage> {
                       ),
                     ),
                   ),
+                  //회원 등급 페이지 이동 버튼
+                  Align(
+                    alignment: Alignment.centerLeft, // 왼쪽 정렬
+                    child: Container(
+                      margin: EdgeInsets.only(top: 61.h, left: 148.w),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xffD9D9DE),
+                          size: 10.0,
+                        ),
+                        onPressed: (){
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => UserRanked());
+                          // );
+                        },
+                      ),
+                    ),
+                  ),
 
                 ],
               ),
