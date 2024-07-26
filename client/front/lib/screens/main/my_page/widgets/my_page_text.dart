@@ -16,3 +16,17 @@ Text title(String text)
     ),
   );
 }
+
+Text greyText(String text, double fontSize)
+{
+  return Text(
+    text,
+    style: TextStyle(
+      color: Color(0xFF7E7E7E),
+      fontFamily: 'Pretendard',
+      fontWeight: FontWeight.w400, // Regular
+      fontSize: fontSize.sp,
+      letterSpacing: 0.001,
+    ),
+  );
+}
