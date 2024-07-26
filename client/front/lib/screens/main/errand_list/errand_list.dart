@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:front/screens/main/write_errand/write_errand.dart';
+import 'package:front/screens/main/utils/set_button_colors.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -913,51 +913,42 @@ class _HomeState extends State<Home> {
       curve: Curves.easeOut,
     );
   }
-  Color button1_text_color = Color(0xff7C2E1A); //초기 색상 값
-  Color button1_border_color = Color(0xff7C3D1A);
-  Color button2_text_color = Color(0xff4A4A4A);
-  Color button2_border_color = Color(0xffB1B1B1);
-  Color button3_text_color = Color(0xff4A4A4A);
-  Color button3_border_color = Color(0xffB1B1B1);
-  Color checkbox_text_color = Color(0xff606060);
+  Color button1TextColor = Color(0xff7C2E1A); //초기 색상 값
+  Color button1BorderColor = Color(0xff7C3D1A);
+  Color button2TextColor = Color(0xff4A4A4A);
+  Color button2BorderColor = Color(0xffB1B1B1);
+  Color button3TextColor = Color(0xff4A4A4A);
+  Color button3BorderColor = Color(0xffB1B1B1);
+  Color checkboxTextColor = Color(0xff606060);
 
-
-  void change_Button_State(){ //색 변경
+  void updateButtonState() {
     setState(() {
-      if(button1state)
-      {button1_text_color = Color(0xff7C2E1A);
-        button1_border_color = Color(0xff7C3D1A);}
-      else
-        {button1_text_color = Color(0xff4A4A4A);
-          button1_border_color = Color(0xffB1B1B1);}
-
-      if(button2state)
-      {button2_text_color = Color(0xff7C2E1A);
-        button2_border_color = Color(0xff7C3D1A);}
-      else
-      {button2_text_color = Color(0xff4A4A4A);
-        button2_border_color = Color(0xffB1B1B1);}
-
-      if(button3state)
-      {button3_text_color = Color(0xff7C2E1A);
-      button3_border_color = Color(0xff7C3D1A);}
-      else
-      {button3_text_color = Color(0xff4A4A4A);
-      button3_border_color = Color(0xffB1B1B1);}
+      changeButtonState(
+        button1state: button1state,
+        button2state: button2state,
+        button3state: button3state,
+        setButton1TextColor: (color) => button1TextColor = color,
+        setButton1BorderColor: (color) => button1BorderColor = color,
+        setButton2TextColor: (color) => button2TextColor = color,
+        setButton2BorderColor: (color) => button2BorderColor = color,
+        setButton3TextColor: (color) => button3TextColor = color,
+        setButton3BorderColor: (color) => button3BorderColor = color,
+      );
     });
   }
-  void change_checkbox_state()
+
+  void changeCheckboxState()
   {
     setState(() {
       if(isCheckBox)
         {
-          checkbox_text_color = Color(0xff292929);
+          checkboxTextColor = Color(0xff292929);
           status = "RECRUITING";
         }
 
       else
         {
-          checkbox_text_color = Color(0xff606060);
+          checkboxTextColor = Color(0xff606060);
           status = "";
         }
     });
@@ -1387,7 +1378,7 @@ class _HomeState extends State<Home> {
                             button1state = true;
                             button2state = false;
                             button3state = false;
-                            change_Button_State();
+                            updateButtonState();
                             posts.clear();
                             ErrandLatestInit();
                             InprogressExist();
@@ -1403,7 +1394,7 @@ class _HomeState extends State<Home> {
                                     decoration: BoxDecoration(
                                       color: Color(0xFFFBFBFB),
                                       border: Border.all(
-                                        color: button1_border_color, width: 1.w,),
+                                        color: button1BorderColor, width: 1.w,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
                                 Positioned(left: 16.72.w, top: 7.72.h,
@@ -1413,7 +1404,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
                                     letterSpacing: 0.001,
-                                    color: button1_text_color,
+                                    color: button1TextColor,
                                   ),),),
                               ],),),),
                         GestureDetector( //버튼2
@@ -1421,7 +1412,7 @@ class _HomeState extends State<Home> {
                             button1state = false;
                             button2state = true;
                             button3state = false;
-                            change_Button_State();
+                            updateButtonState();
                             posts.clear();
                             ErrandRewardInit();
                             InprogressExist();
@@ -1440,7 +1431,7 @@ class _HomeState extends State<Home> {
                                     decoration: BoxDecoration(
                                       color: Color(0xFFFBFBFB),
                                       border: Border.all(
-                                        color: button2_border_color, width: 1.w,),
+                                        color: button2BorderColor, width: 1.w,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
                                 Positioned(
@@ -1452,7 +1443,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
                                     letterSpacing: 0.001,
-                                    color: button2_text_color,
+                                    color: button2TextColor,
                                   ),),),
                               ],),),),
                         GestureDetector( //버튼3
@@ -1460,7 +1451,7 @@ class _HomeState extends State<Home> {
                             button1state = false;
                             button2state = false;
                             button3state = true;
-                            change_Button_State();
+                            updateButtonState();
                             posts.clear();
                             ErrandDistanceInit();
                             InprogressExist();
@@ -1479,7 +1470,7 @@ class _HomeState extends State<Home> {
                                     decoration: BoxDecoration(
                                       color: Color(0xFFFBFBFB),
                                       border: Border.all(
-                                        color: button3_border_color, width: 1.w,),
+                                        color: button3BorderColor, width: 1.w,),
                                       borderRadius: BorderRadius.circular(10),
                                     ),),), // Text
                                 Positioned(
@@ -1491,7 +1482,7 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
                                     letterSpacing: 0.001,
-                                    color: button3_text_color,
+                                    color: button3TextColor,
                                   ),),),
                               ],),),)
                       ],
@@ -1524,7 +1515,7 @@ class _HomeState extends State<Home> {
                             onChanged: (value) {
                               setState(() {
                                 isCheckBox = value!;
-                                change_checkbox_state();
+                                changeCheckboxState();
                                 posts.clear();
                                 if (button1state)
                                   ErrandLatestInit();
@@ -1547,7 +1538,7 @@ class _HomeState extends State<Home> {
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
                             letterSpacing: 0.001,
-                            color: checkbox_text_color,
+                            color: checkboxTextColor,
                           ),),
                         ),
                       ],

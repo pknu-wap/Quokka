@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../screens/main/errand_list/errand_list.dart';
+import '../../screens/main/history.dart';
 import '../../screens/main/write_errand/write_errand.dart';
 
 void insertOverlay(BuildContext context) {
@@ -105,7 +106,11 @@ void insertOverlay(BuildContext context) {
                   padding: EdgeInsets.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => History()));
+                },
                 icon: SvgPicture.asset(
                   'assets/images/history_icon.svg',
                   color: Color(0xffADADAD),
