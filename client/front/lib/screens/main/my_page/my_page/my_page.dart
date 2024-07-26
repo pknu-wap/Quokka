@@ -12,7 +12,6 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  String _medal = 'assets/images/bronze_medal.svg'; // 평점에 따른 등급(배지)
   int _score = 600; // 평점
 
   @override
@@ -35,7 +34,7 @@ class _MyPageState extends State<MyPage> {
                   Align(
                     alignment: Alignment.centerLeft, // 왼쪽 정렬
                     child: Container(
-                      margin: EdgeInsets.only(top: 43.h, left: 24),
+                      margin: EdgeInsets.only(top: 43.h, left: 24.w),
                       child: InkWell(
                         onTap: () {
                           print('Image button pressed');
@@ -63,8 +62,8 @@ class _MyPageState extends State<MyPage> {
                       margin: EdgeInsets.only(top: 77.h, left: 107.w),
                       child: SvgPicture.asset(
                         changeMedal(_score),
-                        width: 20.w,
-                        height: 20.h,
+                        width: 15.w,
+                        height: 15.h,
                       ),
                     ),
                   ),
