@@ -8,6 +8,7 @@ import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 import 'utils/change_color_util.dart';
 import 'utils/get_medal_box_util.dart';
 import 'widgets/my_page_medal_box.dart';
+import 'widgets/my_page_user_ranked_button.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -58,45 +59,14 @@ class _MyPageState extends State<MyPage> {
                       child: title('수현수현이'),
                     ),
                   ),
-                  // 등급(점수에 따라 다른 등급 배지와 텍스트)
-                  Align(
-                    alignment: Alignment.centerLeft, // 왼쪽 정렬
-                    child: GestureDetector(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => UserRanked()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top: 78.h, left: 107.w),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // 배지
-                            SvgPicture.asset(
-                              getMedalImage(_score),
-                              width: getMedalImageSize(_score).w,
-                              height: getMedalImageSize(_score).h,
-                            ),
-                            SizedBox(width: 2.w),
-                            // 등급 텍스트 박스
-                            MedalTextBox(
-                              width: getMedalBoxWidth(_score).w,
-                              colorText: changeColor(_score),
-                              strokeColor: getMedalBoxStrokeColor(_score),
-                              fillColor: getMedalBoxFillColor(_score),
-                            ),
-                            SizedBox(width: 5.w),
-                            // 회원 등급 페이지 이동 버튼
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Color(0xffD9D9DE),
-                              size: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  // 회원 등급 페이지 이동 버튼
+                  UserRankedButton(
+                    score: _score,
+                    onTap: (){
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => UserRanked()));
+                    },
                   ),
                 ],
               ),
