@@ -39,8 +39,8 @@ class HistoryState extends State<History> {
       insertOverlay(context);
     });
     //ErrandLatestInit(); //최신순 요청서 12개
-    //InprogressExist(); //진행중인 심부름이 있는지 확인
-    //InProgressErrandInit(); //진행중인 심부름 목록 불러오기
+    //InprogressExist(); //진행 중인 심부름이 있는지 확인
+    //InProgressErrandInit(); //진행 중인 심부름 목록 불러오기
   }
   @override
   void dispose(){
@@ -82,13 +82,14 @@ class HistoryState extends State<History> {
       children: [
         Row(
           children: [
+            SizedBox(width: 22.w,),
             GestureDetector( //버튼1
               onTap: () {
                 button1state = true;
                 button2state = false;
                 updateButtonState();
               },
-              child: filterButton1(
+              child: filterButton2(
                 button1BorderColor,
                 button1TextColor,
                 '수행한 심부름'
@@ -100,7 +101,7 @@ class HistoryState extends State<History> {
                 button2state = true;
                 updateButtonState();
               },
-              child: filterButton1(
+              child: filterButton2(
                   button2BorderColor,
                   button2TextColor,
                   '요청한 심부름'
