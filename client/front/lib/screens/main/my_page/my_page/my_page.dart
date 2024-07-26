@@ -8,6 +8,7 @@ import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 import 'utils/change_color_util.dart';
 import 'utils/get_medal_box_util.dart';
 import 'widgets/my_page_medal_box.dart';
+import 'widgets/my_page_user_info_revise_button.dart';
 import 'widgets/my_page_user_ranked_button.dart';
 
 class MyPage extends StatefulWidget {
@@ -67,6 +68,35 @@ class _MyPageState extends State<MyPage> {
                       //   context,
                       //   MaterialPageRoute(builder: (context) => UserRanked()));
                     },
+                  ),
+                  // 회원 정보 수정 텍스트
+                  Align(
+                    alignment: Alignment.centerRight, // 왼쪽 정렬
+                    child: Container(
+                      margin: EdgeInsets.only(top: 48.h, right: 26.w),
+                      child: greyText("회원 정보 수정", 8.sp),
+                    ),
+                  ),
+                  // 회원 정보 수정 버튼
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 54.h, right: 24.w),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print('회원 정보 수정 버튼 클릭');
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => UserInfo()));
+                        },
+                        style: userInfoReviseButton(),
+                        child: SvgPicture.asset(
+                          "assets/images/user_info_revise.svg",
+                          width: 20.w,
+                          height: 20.h,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
