@@ -30,3 +30,17 @@ Text greyText(String text, double fontSize)
     ),
   );
 }
+
+Text listText(String text)
+{
+  return Text(
+    text,
+    style: TextStyle(
+      color: Color(0xff373737),
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400, // Regular
+      fontFamily: "Pretendard",
+      letterSpacing: 0.00,
+    ),
+  );
+}
