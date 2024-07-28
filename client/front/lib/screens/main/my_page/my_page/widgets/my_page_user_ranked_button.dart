@@ -24,6 +24,11 @@ class UserRankedButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: EdgeInsets.only(top: 78.h, left: 107.w),
+          width: 70.w,
+          height: 21.h,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
