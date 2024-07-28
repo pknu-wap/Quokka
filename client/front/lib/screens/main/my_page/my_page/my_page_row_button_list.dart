@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'widgets/my_page_button_line.dart';
+import 'widgets/my_page_row_button_line.dart';
 import 'widgets/my_page_row_button.dart';
 
 class RowButtonList extends StatefulWidget {
@@ -41,7 +41,7 @@ class _RowButtonListState extends State<RowButtonList> {
               },
             ),
             // 구분선
-            ButtonLine(),
+            RowButtonLine(),
             // 즐겨찾기
             RowButton(
               buttonText: "즐겨찾기",
@@ -54,7 +54,7 @@ class _RowButtonListState extends State<RowButtonList> {
               },
             ),
             // 구분선
-            ButtonLine(),
+            RowButtonLine(),
             // 찜 목록
             RowButton(
               buttonText: "찜 목록",
