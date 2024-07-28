@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'widgets/my_page_row_button.dart';
+
 class RowButtonList extends StatefulWidget {
   @override
   _RowButtonListState createState() => _RowButtonListState();
@@ -21,6 +23,24 @@ class _RowButtonListState extends State<RowButtonList> {
             color: Color(0xffA9A9A9),
             width: 0.5,
           )
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // 최근 본 심부름
+            RowButton(
+              buttonText: "최근 본 심부름",
+              buttonIcon: "assets/images/recent_errand.svg",
+              onTap: (){
+                print("최근 본 심부름 버튼 클릭!");
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => RecentErrand()));
+              },
+            ),
+          ],
+        ),
       ),
     );
 
