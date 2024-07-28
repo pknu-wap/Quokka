@@ -5,14 +5,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 
 class RowButton extends StatelessWidget {
-  final String buttonText;
-  final String buttonIcon;
+  final String rowButtonText;
+  final String rowButtonIcon;
   final VoidCallback onTap;
 
   const RowButton({
     Key? key,
-    required this.buttonText,
-    required this.buttonIcon,
+    required this.rowButtonText,
+    required this.rowButtonIcon,
     required this.onTap,
   }) : super(key: key);
 
@@ -30,12 +30,12 @@ class RowButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: greyText(buttonText, 10.sp),
+              child: greyText(rowButtonText, 10.sp),
             ),
             SizedBox(height: 8.h),
             Container(
               child: SvgPicture.asset(
-                buttonIcon,
+                rowButtonIcon,
                 width: 25.w,
                 height: 25.h,
               ),

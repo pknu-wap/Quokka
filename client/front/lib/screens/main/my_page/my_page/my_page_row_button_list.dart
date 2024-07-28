@@ -31,8 +31,8 @@ class _RowButtonListState extends State<RowButtonList> {
           children: [
             // 최근 본 심부름
             RowButton(
-              buttonText: "최근 본 심부름",
-              buttonIcon: "assets/images/recent_errand.svg",
+              rowButtonText: "최근 본 심부름",
+              rowButtonIcon: "assets/images/recent_errand.svg",
               onTap: (){
                 print("최근 본 심부름 버튼 클릭!");
                 // Navigator.push(
@@ -44,8 +44,8 @@ class _RowButtonListState extends State<RowButtonList> {
             RowButtonLine(),
             // 즐겨찾기
             RowButton(
-              buttonText: "즐겨찾기",
-              buttonIcon: "assets/images/book_mark.svg",
+              rowButtonText: "즐겨찾기",
+              rowButtonIcon: "assets/images/book_mark.svg",
               onTap: (){
                 print("즐겨찾기 버튼 클릭!");
                 // Navigator.push(
@@ -57,8 +57,8 @@ class _RowButtonListState extends State<RowButtonList> {
             RowButtonLine(),
             // 찜 목록
             RowButton(
-              buttonText: "찜 목록",
-              buttonIcon: "assets/images/steamed_list.svg",
+              rowButtonText: "찜 목록",
+              rowButtonIcon: "assets/images/steamed_list.svg",
               onTap: (){
                 print("찜 목록 버튼 클릭!");
                 // Navigator.push(
