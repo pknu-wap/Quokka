@@ -55,6 +55,17 @@ class _RowButtonListState extends State<RowButtonList> {
             ),
             // 구분선
             ButtonLine(),
+            // 찜 목록
+            RowButton(
+              buttonText: "찜 목록",
+              buttonIcon: "assets/images/steamed_list.svg",
+              onTap: (){
+                print("찜 목록 버튼 클릭!");
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => RecentErrand()));
+              },
+            ),
           ],
         ),
       ),
