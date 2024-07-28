@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/screens/main/my_page/my_page/my_page_column_button_list.dart';
 import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
 import 'my_page_user.dart';
 import 'my_page_row_button_list.dart';
@@ -26,7 +27,8 @@ class _MyPageState extends State<MyPage> {
             MyPageUser(),
             // 가로 버튼 목록
             RowButtonList(),
-            // 설정 목록
+            // 세로 버튼 목록
+            ColumnButtonList(),
             // 로그아웃, 회원탈퇴 버튼
           ],
         ),
