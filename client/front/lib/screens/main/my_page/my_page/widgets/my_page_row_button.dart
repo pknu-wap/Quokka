@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 
 class RowButton extends StatelessWidget {
   final String buttonText;
@@ -25,16 +26,7 @@ class RowButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: Color(0xff7E7E7E),
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w400, // Regular
-                  fontFamily: "Pretendard",
-                  letterSpacing: 0.001,
-                ),
-              ),
+              child: greyText(buttonText, 10.sp),
             ),
             SizedBox(height: 8.h),
             Container(
