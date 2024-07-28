@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ButtonLine extends StatelessWidget {
+class RowButtonLine extends StatelessWidget {
 
-  const ButtonLine({
+  const RowButtonLine({
     Key? key,
   }) : super(key: key);
 
