@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'widgets/my_page_button_line.dart';
 import 'widgets/my_page_row_button.dart';
 
 class RowButtonList extends StatefulWidget {
@@ -39,6 +40,9 @@ class _RowButtonListState extends State<RowButtonList> {
                 //   MaterialPageRoute(builder: (context) => RecentErrand()));
               },
             ),
+            // 구분선
+            ButtonLine(),
+
           ],
         ),
       ),
