@@ -41,7 +41,7 @@ class _RowButtonListState extends State<RowButtonList> {
               },
             ),
             // 구분선
-            RowButtonLine(),
+            RowButtonLine(rowLineHeight: 39.h),
             // 즐겨찾기
             RowButton(
               rowButtonText: "즐겨찾기",
@@ -54,7 +54,7 @@ class _RowButtonListState extends State<RowButtonList> {
               },
             ),
             // 구분선
-            RowButtonLine(),
+            RowButtonLine(rowLineHeight: 39.h),
             // 찜 목록
             RowButton(
               rowButtonText: "찜 목록",
