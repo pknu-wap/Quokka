@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RowButton extends StatelessWidget {
   final String buttonText;
@@ -33,6 +34,14 @@ class RowButton extends StatelessWidget {
                   fontFamily: "Pretendard",
                   letterSpacing: 0.001,
                 ),
+              ),
+            ),
+            SizedBox(height: 8.h),
+            Container(
+              child: SvgPicture.asset(
+                buttonIcon,
+                width: 25.w,
+                height: 25.h,
               ),
             ),
           ],
