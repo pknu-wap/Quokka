@@ -42,7 +42,17 @@ class _RowButtonListState extends State<RowButtonList> {
             ),
             // 구분선
             ButtonLine(),
-
+            // 즐겨찾기
+            RowButton(
+              buttonText: "즐겨찾기",
+              buttonIcon: "assets/images/book_mark.svg",
+              onTap: (){
+                print("즐겨찾기 버튼 클릭!");
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => RecentErrand()));
+              },
+            ),
           ],
         ),
       ),
