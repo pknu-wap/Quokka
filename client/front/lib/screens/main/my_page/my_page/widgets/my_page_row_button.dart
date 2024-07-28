@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
@@ -22,6 +23,9 @@ class RowButton extends StatelessWidget {
       child: Container(
         width: 90.w,
         height: 79.h,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
