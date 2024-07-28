@@ -10,6 +10,7 @@ class ColumnButtonList extends StatefulWidget {
 }
 
 class _ColumnButtonListState extends State<ColumnButtonList> {
+  bool isPushNotificationEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,8 @@ class _ColumnButtonListState extends State<ColumnButtonList> {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => RecentErrand()));
               },
+              hasToggle: true,
+              initialToggleValue: isPushNotificationEnabled,
             ),
             ColumnButtonLine(),
             // 알림음 설정
