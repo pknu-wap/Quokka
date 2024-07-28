@@ -53,6 +53,8 @@ class _RowButtonListState extends State<RowButtonList> {
                 //   MaterialPageRoute(builder: (context) => RecentErrand()));
               },
             ),
+            // 구분선
+            ButtonLine(),
           ],
         ),
       ),
