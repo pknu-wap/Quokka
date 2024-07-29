@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/widgets/text/app_bar_text.dart';
 
 class CustomAppBarCenter extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -13,17 +13,7 @@ class CustomAppBarCenter extends StatelessWidget implements PreferredSizeWidget 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        title,
-        style: TextStyle(
-            color: Color(0xFF111111),
-            fontFamily: 'Paybooc',
-            fontWeight: FontWeight.w700,
-            fontSize: 20.sp,
-            letterSpacing: 0.01
-        ),
-        textAlign: TextAlign.center,
-      ),
+      title: appBarText(title),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,
