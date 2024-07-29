@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/widgets/dialog/showLogoutDialog.dart';
 import 'widgets/my_page_out_button.dart';
 import 'widgets/my_page_row_button_line.dart';
 
@@ -25,6 +26,7 @@ class OutButtonList extends StatelessWidget {
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => RecentErrand()));
+                ShowLogoutDialog();
               },
             ),
             RowButtonLine(rowLineHeight: 10.h),
