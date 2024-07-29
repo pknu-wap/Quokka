@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../screens/main/errand_list/errand_list.dart';
-import '../../screens/main/write_errand/write_errand.dart';
+import 'package:front/screens/main/errand_list/errand_list.dart';
+import 'package:front/screens/main/my_page/my_page/my_page.dart';
+import 'package:front/screens/main/write_errand/write_errand.dart';
 
 void insertOverlay(BuildContext context) {
   if (overlayEntry != null) return;
@@ -64,7 +65,11 @@ void insertOverlay(BuildContext context) {
                   padding: EdgeInsets.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyPage()));
+                },
                 icon: SvgPicture.asset(
                   'assets/images/profile_icon.svg',
                   color: Color(0xffADADAD),
