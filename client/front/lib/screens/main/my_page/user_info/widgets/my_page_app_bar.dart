@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
+import 'package:front/widgets/text/app_bar_text.dart';
 
 class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        "회원 정보",
-        style: TextStyle(
-            color: Color(0xFF111111),
-            fontFamily: 'Paybooc',
-            fontWeight: FontWeight.w700,
-            fontSize: 20.sp,
-            letterSpacing: 0.01
-        ),
-        textAlign: TextAlign.center,
-      ),
+      title: appBarText('회원 정보'),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_ios,
@@ -34,15 +25,7 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
             //   context,
             //   MaterialPageRoute(builder: (context) => MyPageUserInfoRevision()));
           },
-          child: Text(
-            '수정',
-            style: TextStyle(
-              color: Color(0xff6B6B6B),
-              fontFamily: 'Paybooc',
-              fontWeight: FontWeight.w700, //semibold
-              fontSize: 14.sp,
-            ),
-          ),
+          child: title('수정'),
         ),
       ],
       centerTitle: true, // 타이틀 중앙 정렬
