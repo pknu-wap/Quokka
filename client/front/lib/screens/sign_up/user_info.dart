@@ -126,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    Signup_Success(username : u1.id, pw : u1.pw),
+                    SignupSuccess(username : u1.id, pw : u1.pw),
               ),
             );
           } else{

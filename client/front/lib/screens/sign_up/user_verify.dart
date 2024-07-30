@@ -7,7 +7,7 @@ import 'user_check.dart';
 
 class UploadImage extends StatefulWidget {
   final String requestMail;
-  const UploadImage( {Key? key, required this.requestMail}) : super(key: key);
+  const UploadImage( {super.key, required this.requestMail});
 
   @override
   UploadImageState createState() => UploadImageState();

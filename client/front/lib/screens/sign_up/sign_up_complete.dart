@@ -1,8 +1,7 @@
 import 'dart:developer';
 import 'package:confetti/confetti.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:async';
@@ -11,10 +10,10 @@ import '../../screens/main/errand_list/errand_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Signup_Success extends StatelessWidget {
+class SignupSuccess extends StatelessWidget {
   final String username;
   final String pw;
-  const Signup_Success({Key? key, required this.username, required this.pw}): super (key: key);
+  const SignupSuccess({super.key, required this.username, required this.pw});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class Signup_Success extends StatelessWidget {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.01,
-                    color: Color(0xff111111),
+                    color: const Color(0xff111111),
                   )),
                 ))),
         body: Confetti(username: username, pw : pw),
@@ -48,7 +47,7 @@ class Signup_Success extends StatelessWidget {
 class Confetti extends StatefulWidget {
   final String username;
   final String pw;
-  const Confetti({required this.username, required this.pw});
+  const Confetti({super.key, required this.username, required this.pw});
   @override
   ConfettiState createState() => ConfettiState();
 }
@@ -65,20 +64,24 @@ class ConfettiState extends State<Confetti> {
   }
 
   void getTokenAndLogin() async{
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}login";
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}login";
     String param = "?username=${widget.username}&password=${widget.pw}";
-    print(url+param);
+    if (kDebugMode) {
+      print(url+param);
+    }
     try {
       var post = await http.post(Uri.parse(url + param));
       if (post.statusCode == 200) {
         Map<String, dynamic> headers = post.headers;
         String? token = headers["authorization"];
-        print("token: $token");
+        if (kDebugMode) {
+          print("token: $token");
+        }
         await storage.write(key: 'TOKEN', value: token);
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Home()));
+            MaterialPageRoute(builder: (context) => const Home()));
       }
       else {
         log("response code != 200");
@@ -135,7 +138,7 @@ class ConfettiState extends State<Confetti> {
             width: 269.64.w,
             height: 396.95.h,
             margin: EdgeInsets.only(left: 10.0.w, top: 79.0.h),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/images/firework.png'), // 배경 이미지
@@ -175,13 +178,13 @@ class ConfettiState extends State<Confetti> {
           Positioned(
             left: 90.49.w,
             top: 239.88.h,
-            child: Container(
+            child: SizedBox(
               width: 200.0.w,
               height: 70.0.h,
               child: TextButton(
                 onPressed: () {
                   _controllerCenter.play();
-                  Timer(Duration(seconds: 4), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
+                  Timer(const Duration(seconds: 4), () { //3초는 폭죽 감상하기에 너무 짧은거 같애서 5초로 했는데 폭죽이 더 빨리 나오게 만들고 수정할게요
                     getTokenAndLogin();
                   });
                 },
@@ -189,7 +192,7 @@ class ConfettiState extends State<Confetti> {
                   textAlign: TextAlign.center, style: TextStyle(
                     fontFamily: 'Pretendard', fontSize: 18.sp,
                     fontWeight: FontWeight.w600, letterSpacing: 0.01,
-                    color: Color(0xff000000),
+                    color: const Color(0xff000000),
                   ),),
               ),
             ),
