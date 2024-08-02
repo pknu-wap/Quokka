@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/screens/main/my_page/user_info/my_page_user_info.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 
 import 'widgets/my_page_user_info_revise_button.dart';
@@ -70,9 +71,9 @@ class _MyPageUserState extends State<MyPageUser> {
               child: ElevatedButton(
                 onPressed: () {
                   print('회원 정보 수정 버튼 클릭');
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => UserInfo()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyPageUserInfo()));
                 },
                 style: userInfoReviseButton(),
                 child: SvgPicture.asset(
