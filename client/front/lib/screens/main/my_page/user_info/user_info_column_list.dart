@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../widgets/my_page_column_button_line.dart';
 import 'widgets/user_info_column.dart';
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:front/screens/main/my_page/user_info_revision/widgets/user_info_revision_text.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
-
 import 'widgets/user_info_revision_text_field.dart';
 
 class RevisionContainer extends StatelessWidget {

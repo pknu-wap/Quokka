@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:front/widgets/bar/app_bar/custom_app_bar_center.dart';
-
 import 'user_info_revision_container.dart';
 
 
