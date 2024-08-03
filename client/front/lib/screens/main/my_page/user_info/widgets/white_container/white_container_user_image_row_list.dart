@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front/screens/main/my_page/user_info/widgets/camera/camera.view.dart';
+import 'package:image_picker/image_picker.dart';
 
 class WhiteContainerUserImageRowList extends StatefulWidget {
   final Function(String) onImageSelected;
@@ -8,12 +10,11 @@ class WhiteContainerUserImageRowList extends StatefulWidget {
   WhiteContainerUserImageRowList({required this.onImageSelected});
 
   @override
-  _WhiteContainerUserImageRowListState createState() =>
-      _WhiteContainerUserImageRowListState();
+  _WhiteContainerUserImageRowListState createState() => _WhiteContainerUserImageRowListState();
 }
 
-class _WhiteContainerUserImageRowListState
-    extends State<WhiteContainerUserImageRowList> {
+class _WhiteContainerUserImageRowListState extends State<WhiteContainerUserImageRowList> {
+  // 이미지 선택 가로 슬라이드 이미지 목록
   final List<String> userImagePaths = [
     'assets/images/userImageCamera.svg',
     'assets/images/userImage1.svg',
@@ -42,13 +43,13 @@ class _WhiteContainerUserImageRowListState
   ];
 
   final PageController _pageController = PageController();
-  int _currentPage = 0;
+  int _currentPage = 0; // 현재 이미지 페이지
 
   @override
   void initState() {
     super.initState();
     _pageController.addListener(() {
-      int next = _pageController.page!.round();
+      final next = _pageController.page?.round() ?? 0;
       if (_currentPage != next) {
         setState(() {
           _currentPage = next;
@@ -63,9 +64,37 @@ class _WhiteContainerUserImageRowListState
     super.dispose();
   }
 
+  Future<void> _selectImage(int imageIndex) async {
+    if (imageIndex == 0) { // 카메라 이미지
+      // 카메라 선택
+      final imagePath = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraView(imageSource: ImageSource.camera),
+        ),
+      );
+      if (imagePath != null && imagePath.isNotEmpty) {
+        widget.onImageSelected(imagePath);
+      }
+    } else if (imageIndex == 4) { // 갤러리 이미지
+      // 갤러리 선택
+      final imagePath = await Navigator.push<String>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraView(imageSource: ImageSource.gallery),
+        ),
+      );
+      if (imagePath != null && imagePath.isNotEmpty) {
+        widget.onImageSelected(imagePath);
+      }
+    } else { // 0, 4 제외한 나머지 이미지
+      widget.onImageSelected(userImagePaths[imageIndex]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int pageCount = (userImagePaths.length / 8).ceil();
+    final pageCount = (userImagePaths.length / 8).ceil(); // 한 페이지 당 이미지 개수
 
     return Expanded(
       child: Column(
@@ -77,9 +106,9 @@ class _WhiteContainerUserImageRowListState
               itemBuilder: (context, pageIndex) {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 28.w,
-                    mainAxisSpacing: 13.h,
+                    crossAxisCount: 4, // 가로 이미지 개수
+                    crossAxisSpacing: 28.w, // 가로 이미지 간격
+                    mainAxisSpacing: 13.h, // 세로 이미지 간격
                   ),
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(
@@ -93,15 +122,15 @@ class _WhiteContainerUserImageRowListState
                     final imageIndex = pageIndex * 8 + index;
                     if (imageIndex < userImagePaths.length) {
                       return GestureDetector(
-                        onTap: () {
-                          widget.onImageSelected(userImagePaths[imageIndex]);
+                        onTap: () async {
+                          await _selectImage(imageIndex);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(200.0),
                           ),
                           child: Center(
-                            child: SvgPicture.asset(
+                            child: SvgPicture.asset( // 가로 슬라이드에 이미지 출력
                               userImagePaths[imageIndex],
                               width: 50.sp,
                               height: 50.sp,
@@ -116,7 +145,8 @@ class _WhiteContainerUserImageRowListState
               },
             ),
           ),
-          // 페이지 수 및 현재 페이지 위치
+
+          // 이미지 슬라이드 페이지 위치 및 페이지 수 확인
           Padding(
             padding: EdgeInsets.only(bottom: 0.h),
             child: Row(
