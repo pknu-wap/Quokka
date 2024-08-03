@@ -4,26 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class UserInfoColumn extends StatefulWidget {
+class UserInfoColumn extends StatelessWidget {
   final String textName;
   final String textInfo;
+  final bool obscureText;
 
   const UserInfoColumn({
     Key? key,
     required this.textName,
     required this.textInfo,
+    this.obscureText = false,
   }) : super(key: key);
-
-  @override
-  _UserInfoColumnState createState() => _UserInfoColumnState();
-}
-
-class _UserInfoColumnState extends State<UserInfoColumn> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +31,7 @@ class _UserInfoColumnState extends State<UserInfoColumn> {
         children: [
           // 텍스트 이름
           Text(
-            widget.textName,
+            textName,
             style: TextStyle(
               color: Color(0xff373737),
               fontSize: 14.sp,
@@ -51,7 +42,7 @@ class _UserInfoColumnState extends State<UserInfoColumn> {
           ),
           // 텍스트 정보
           Text(
-            widget.textInfo,
+            obscureText ? '*' * textInfo.length : textInfo,
             style: TextStyle(
               color: Color(0xff7E7E7E),
               fontSize: 12.sp,
