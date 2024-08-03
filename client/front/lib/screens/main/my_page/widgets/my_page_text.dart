@@ -17,7 +17,7 @@ Text title(String text)
   );
 }
 
-Text greyText(String text, double fontSize)
+Text grayText(String text, double fontSize)
 {
   return Text(
     text,
