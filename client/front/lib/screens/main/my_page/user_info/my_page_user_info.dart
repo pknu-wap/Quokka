@@ -10,17 +10,21 @@ class MyPageUserInfo extends StatefulWidget {
 }
 
 class _MyPageUserInfoState extends State<MyPageUserInfo> {
-  String _profileImagePath = 'assets/images/Avatar.svg'; // Default image path
+  String _profileImagePath = 'assets/images/Avatar.svg'; // 기본 프로필 이미지
+  bool _isSvg = true; // svg 이미지
 
-  void _updateProfileImage(String newImagePath) {
+  void _updateProfileImage(String newImagePath, bool newIsSvg) {
     setState(() {
       _profileImagePath = newImagePath;
+      _isSvg = newIsSvg;
     });
   }
 
+  // 리셋 버튼 클릭 시
   void _resetProfileImage() {
     setState(() {
-      _profileImagePath = 'assets/images/Avatar.svg'; // Reset to default image
+      _profileImagePath = 'assets/images/Avatar.svg'; // 기본 프로필 이미지
+      _isSvg = true;
     });
   }
 
@@ -33,6 +37,7 @@ class _MyPageUserInfoState extends State<MyPageUserInfo> {
           children: [
             UserImage(
               imagePath: _profileImagePath, // Pass current profile image
+              isSvg: _isSvg,
               onTap: () {
                 showModalBottomSheet(
                   context: context,
@@ -44,8 +49,9 @@ class _MyPageUserInfoState extends State<MyPageUserInfo> {
                   builder: (context) => SlideUpBottom(
                     nickName: "수현수현이",
                     initialImagePath: _profileImagePath,
-                    onImageSaved: (newImagePath) {
-                      _updateProfileImage(newImagePath);
+                    initialIsSvg: _isSvg,
+                    onImageSaved: (newImagePath, newIsSvg) {
+                      _updateProfileImage(newImagePath, newIsSvg);
                     },
                     onReset: _resetProfileImage,
                   ),

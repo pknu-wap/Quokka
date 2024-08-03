@@ -5,7 +5,7 @@ import 'package:front/screens/main/my_page/user_info/widgets/camera/camera.view.
 import 'package:image_picker/image_picker.dart';
 
 class WhiteContainerUserImageRowList extends StatefulWidget {
-  final Function(String) onImageSelected;
+  final Function(String, bool) onImageSelected;
 
   WhiteContainerUserImageRowList({required this.onImageSelected});
 
@@ -74,7 +74,7 @@ class _WhiteContainerUserImageRowListState extends State<WhiteContainerUserImage
         ),
       );
       if (imagePath != null && imagePath.isNotEmpty) {
-        widget.onImageSelected(imagePath);
+        widget.onImageSelected(imagePath, false); // 카메라 이미지 출력
       }
     } else if (imageIndex == 4) { // 갤러리 이미지
       // 갤러리 선택
@@ -85,10 +85,10 @@ class _WhiteContainerUserImageRowListState extends State<WhiteContainerUserImage
         ),
       );
       if (imagePath != null && imagePath.isNotEmpty) {
-        widget.onImageSelected(imagePath);
+        widget.onImageSelected(imagePath, false); // 갤러리 이미지 출력
       }
     } else { // 0, 4 제외한 나머지 이미지
-      widget.onImageSelected(userImagePaths[imageIndex]);
+      widget.onImageSelected(userImagePaths[imageIndex], true); // 캐릭터 이미지 출력
     }
   }
 

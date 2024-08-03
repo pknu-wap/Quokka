@@ -6,12 +6,14 @@ import 'widgets/slide_up_bottom_white_container.dart';
 class SlideUpBottom extends StatelessWidget {
   final String nickName;
   final String initialImagePath;
-  final Function(String) onImageSaved;
+  final bool initialIsSvg;
+  final Function(String, bool) onImageSaved;
   final VoidCallback onReset;
 
   SlideUpBottom({
     required this.nickName,
     required this.initialImagePath,
+    required this.initialIsSvg,
     required this.onImageSaved,
     required this.onReset,
   });
@@ -61,6 +63,7 @@ class SlideUpBottom extends StatelessWidget {
             right: 0.w,
             child: SlideUpBottomWhiteContainer( // 흰색 컨테이너 내용
               initialImagePath: initialImagePath,
+              initialIsSvg: initialIsSvg,
               onImageSaved: onImageSaved,
               onReset: onReset,
             ),

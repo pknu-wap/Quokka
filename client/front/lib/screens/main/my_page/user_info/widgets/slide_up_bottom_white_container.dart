@@ -6,11 +6,13 @@ import 'white_container/white_container_user_image_row_list.dart';
 
 class SlideUpBottomWhiteContainer extends StatefulWidget {
   final String initialImagePath;
-  final Function(String) onImageSaved;
+  final bool initialIsSvg;
+  final Function(String, bool) onImageSaved;
   final VoidCallback onReset;
 
   SlideUpBottomWhiteContainer({
     required this.initialImagePath,
+    required this.initialIsSvg,
     required this.onImageSaved,
     required this.onReset,
   });
@@ -21,11 +23,13 @@ class SlideUpBottomWhiteContainer extends StatefulWidget {
 
 class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContainer> {
   late String _selectedImage;
+  late bool _isSvg;
 
   @override
   void initState() {
     super.initState();
     _selectedImage = widget.initialImagePath;
+    _isSvg = widget.initialIsSvg;
   }
 
   @override
@@ -43,14 +47,15 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
       child: Column(
         children: [
           // 흰색 컨테이너 안 프로필 이미지 미리 보기
-          WhiteContainerUserImage(selectedImagePath: _selectedImage),
+          WhiteContainerUserImage(selectedImagePath: _selectedImage, isSvg: _isSvg,),
 
           // 이미지 선택 가로 슬라이드 및 페이지 번호 현황 나타냄
           Expanded(
             child: WhiteContainerUserImageRowList(
-              onImageSelected: (newImagePath) {
+              onImageSelected: (newImagePath, newIsSvg) {
                 setState(() {
                   _selectedImage = newImagePath;
+                  _isSvg = newIsSvg;
                 });
               },
             ),
@@ -61,7 +66,7 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
             padding: EdgeInsets.symmetric(vertical: 20.h),
             child: WhiteContainerRowButtonList(
               onSave: () {
-                widget.onImageSaved(_selectedImage);
+                widget.onImageSaved(_selectedImage, _isSvg);
                 Navigator.pop(context);
               },
               onReset: () {
