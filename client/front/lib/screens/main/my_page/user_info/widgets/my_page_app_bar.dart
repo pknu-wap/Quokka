@@ -21,9 +21,9 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         TextButton(
           onPressed: (){
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => MyPageUserInfoRevision()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserInfoRevision()));
           },
           child: title('수정'),
         ),
