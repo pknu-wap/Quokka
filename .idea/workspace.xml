@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/utils/class/inprogress_errand.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/utils/class/order.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/utils/class/post.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/history_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/inprogress_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/post_widget.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/text/post_price_text.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/text/post_small_gray.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/text/post_title_text.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/front/lib/utils/error_class.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/errand_list/errand_list.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/sign_up_complete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/sign_up/user_verify.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/history_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/widgets/history_widget.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,11 +84,11 @@
       <recent name="C:\2024-1_App1\client\front\assets\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\wap\client\front\assets\images" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\screens\sign_up\widgets" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\screens" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\check_errand\fix_errand\fix_errand_widget" />
       <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\check_errand\fix_errand" />
-      <recent name="C:\Users\user\Desktop\wap\client\front\lib\main\errand_list\fix_errand" />
     </key>
   </component>
   <component name="RunManager">

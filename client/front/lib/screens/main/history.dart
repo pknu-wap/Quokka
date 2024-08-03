@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
@@ -15,7 +16,26 @@ class History extends StatefulWidget {
   State createState() => HistoryState();
 }
 class HistoryState extends State<History> {
-  List<Map<String, dynamic>> historys = [];
+  List<Map<String, dynamic>> historys = [
+    {
+      "orderNo": 1,
+      "nickname": "JohnDoe",
+      "score": 95.0,
+      "errandNo": 101,
+      "createdDate": "2023-08-01",
+      "title": "Grocery Shopping",
+      "reward": 10
+    },
+    {
+      "orderNo": 2,
+      "nickname": "JaneSmith",
+      "score": 87.0,
+      "errandNo": 102,
+      "createdDate": "2023-08-02",
+      "title": "Dog Walking",
+      "reward": 15
+    },
+  ];
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   Color button1TextColor = const Color(0xff7C2E1A); //초기 색상 값
@@ -47,6 +67,7 @@ class HistoryState extends State<History> {
   }
   @override
   void dispose(){
+    _scrollController.dispose();
     super.dispose();
   }
   @override
@@ -82,6 +103,7 @@ class HistoryState extends State<History> {
        ),
      ),
     body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -113,7 +135,7 @@ class HistoryState extends State<History> {
           ],
         ),
         Flexible(
-          child: Container(width: 360.w, height: 581.h,
+          child: Container(width: 300.w, height: 500.h,
             //게시글 큰틀
             margin: EdgeInsets.only(left: 19.w,),
             child: ListView.builder(
@@ -122,18 +144,15 @@ class HistoryState extends State<History> {
                 shrinkWrap: true,
                 itemCount: historys.length,
                 itemBuilder: (BuildContext context, int index) {
-                  String nickname = historys[index]["nickname"];
+    /* String nickname = historys[index]["nickname"];
                   String title = historys[index]['title'];
-                  String destination = historys[index]['destination'];
                   String createdDate = historys[index]["createdDate"];
-                  String decodedNickname = utf8.decode(
+                 String decodedNickname = utf8.decode(
                       nickname.runes.toList());
                   String decodedTitle = utf8.decode(
                       title.runes.toList());
-                  String decodedDestination = utf8.decode(
-                      destination.runes.toList());
                   String decodedCreatedDate = utf8.decode(
-                      createdDate.runes.toList());
+                      createdDate.runes.toList()); */
                   return GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     //게시글 전체를 클릭영역으로 만들어주는 코드
@@ -147,12 +166,18 @@ class HistoryState extends State<History> {
                     },
                     child: HistoryWidget(
                       orderNo: historys[index]["orderNo"],
-                      nickname: decodedNickname,
                       score: historys[index]["score"],
                       errandNo: historys[index]["errandNo"],
+                      reward: historys[index]["reward"],
+                      nickname:  historys[index]["nickname"],
+                      title: historys[index]['title'],
+                      createdDate: historys[index]["createdDate"],
+                   /*
+                      nickname: decodedNickname,
                       createdDate: decodedCreatedDate,
                       title: decodedTitle,
-                      reward: historys[index]["reward"],
+                      */
+
                     ),
                   );
                 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'text/post_price_text.dart';
 import 'text/post_small_gray.dart';
 import 'text/post_title_text.dart';
@@ -32,62 +33,80 @@ class HistoryWidget extends StatelessWidget {
           SizedBox(
             width: 314.w,
             height: 77.h,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  Row( //닉네임, 평점
-                    children: [
-                      Container( //닉네임
-                        margin: EdgeInsets.only(
-                          left: 15.w,
-                          top: 16.h,
-                        ),
-                        child: smallGrayText(nickname),
-                      ),
-                      Container( //평점
-                        margin: EdgeInsets.only(top: 16.h, ),
-                        child: smallGrayText(" ${score.toInt()}점"),
-                      )
-                    ],
-                  ),
-                  Container( //게시글 제목
-                    margin: EdgeInsets.only(
-                      top: 8.h,
-                      left: 15.w,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children:[
+                Container(
+                  margin: EdgeInsets.only(top: 12.32.h, left: 14.w),
+                    child: SvgPicture.asset(
+                      'assets/images/Avatar.svg',
+                      width: 60.w,
+                      height: 63.h,
                     ),
-                    child: titleText(title),
-                  ),
-                  Row( //위치, 가격
-                    children: [
-                      Container( margin: EdgeInsets.only(top: 10.h, ),
-                        child: priceText(reward),
+                ),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Row( //닉네임, 평점
+                        children: [
+                          Container( //닉네임
+                            margin: EdgeInsets.only(
+                              left: 20.w,
+                              top: 9.h,
+                            ),
+                            child: smallGrayText(nickname),
+                          ),
+                          Container( //평점
+                            margin: EdgeInsets.only(top: 9.h, ),
+                            child: smallGrayText(" ${score.toInt()}점"),
+                          )
+                        ],
                       ),
-                      Container(
+                      Container( //게시글 제목
                         margin: EdgeInsets.only(
-                          left: 11.w,
-                          top: 8.95.h,
+                          top: 9.h,
+                          left: 18.w,
                         ),
-                        padding: EdgeInsets.only(left: 2.w, right: 2.w),
-                        width: 44.36.w,
-                        height: 18.1.h,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                          color: const Color(0xffAA7651),
-                          border: Border.all(color: Colors.transparent,width: 1.w),
-                        ),
-                        child: Center( //상태
-                          child: Text("완료됨", style: TextStyle(
-                              fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w500, fontSize: 11.sp,
-                              letterSpacing: 0.01, color: const Color(0xffFFFFFF)
-                          ),
-                          ),
-                        ),
+                        child: titleText(title),
                       ),
-                    ],
-                  ),
-              ]
-            )
+                      Row( //위치, 가격
+                        children: [
+                          Container( margin: EdgeInsets.only(top: 9.h, left: 18.w,),
+                            child: priceText(reward),
+                          ),
+                          Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    right: 13.64.w,
+                                    top: 11.h,
+                                  ),
+                                  padding: EdgeInsets.only(left: 2.w, right: 2.w),
+                                  width: 44.36.w,
+                                  height: 16.99.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                    color: const Color(0xffAA7651),
+                                    border: Border.all(color: Colors.transparent,width: 1.w),
+                                  ),
+                                  child: Center( //상태
+                                    child: Text("완료됨", style: TextStyle(
+                                        fontFamily: 'Pretendard', fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w500, fontSize: 11.sp,
+                                        letterSpacing: 0.01, color: const Color(0xffFFFFFF)
+                                    ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+                    ]
+                )
+              ],
+            ),
           )
         ]
     );
