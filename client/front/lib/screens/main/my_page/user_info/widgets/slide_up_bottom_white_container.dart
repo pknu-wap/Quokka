@@ -30,6 +30,7 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
 
   @override
   Widget build(BuildContext context) {
+    // 프로필 이미지 선택 흰색 컨테이너
     return Container(
       height: 390.h,
       decoration: BoxDecoration(
@@ -41,11 +42,11 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
       ),
       child: Column(
         children: [
-          //사용자 이미지 선택 미리 보기
-          WhiteContainerUserImage(selectedImage: _selectedImage),
-          // Image selection grid
+          // 흰색 컨테이너 안 프로필 이미지 미리 보기
+          WhiteContainerUserImage(selectedImagePath: _selectedImage),
+
+          // 이미지 선택 가로 슬라이드 및 페이지 번호 현황 나타냄
           Expanded(
-            // 사용자 이미지 선택 가로 목록
             child: WhiteContainerUserImageRowList(
               onImageSelected: (newImagePath) {
                 setState(() {
@@ -54,12 +55,13 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
               },
             ),
           ),
+
+          // 지우기 및 저장 버튼
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h),
-            // 지우기 버튼 및 저장 버튼
             child: WhiteContainerRowButtonList(
               onSave: () {
-                widget.onImageSaved(_selectedImage); // 현재 선택한 이미지 함께 회원 정보 페이지로 넘기기
+                widget.onImageSaved(_selectedImage);
                 Navigator.pop(context);
               },
               onReset: () {
@@ -73,3 +75,4 @@ class _SlideUpBottomWhiteContainerState extends State<SlideUpBottomWhiteContaine
     );
   }
 }
+
