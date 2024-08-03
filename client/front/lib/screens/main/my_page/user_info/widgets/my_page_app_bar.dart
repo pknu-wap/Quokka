@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/screens/main/my_page/user_info_revision/user_info_revision.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 import 'package:front/widgets/text/app_bar_text.dart';
 
