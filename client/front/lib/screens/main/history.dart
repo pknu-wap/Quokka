@@ -16,26 +16,102 @@ class History extends StatefulWidget {
   State createState() => HistoryState();
 }
 class HistoryState extends State<History> {
-  List<Map<String, dynamic>> historys = [
+  List<Map<String, dynamic>> historys = [];
+  List<Map<String, dynamic>> doErrandExample = [
     {
       "orderNo": 1,
-      "nickname": "JohnDoe",
-      "score": 95.0,
-      "errandNo": 101,
-      "createdDate": "2023-08-01",
-      "title": "Grocery Shopping",
-      "reward": 10
+      "score": 124.0,
+      "errandNo": 1,
+      "reward": 2000,
+      "nickname": "오감자",
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "errandDate": "7월 26일",
+    },
+    {
+      "orderNo": 1,
+      "score": 124.0,
+      "errandNo": 1,
+      "reward": 2000,
+      "nickname": "오감자",
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "errandDate": "7월 26일",
+    },
+    {
+      "orderNo": 1,
+      "score": 124.0,
+      "errandNo": 1,
+      "reward": 2000,
+      "nickname": "오감자",
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "errandDate": "7월 26일",
+    },
+    {
+      "orderNo": 1,
+      "score": 124.0,
+      "errandNo": 1,
+      "reward": 2000,
+      "nickname": "오감자",
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "errandDate": "7월 26일",
+    },
+    {
+      "orderNo": 1,
+      "score": 124.0,
+      "errandNo": 1,
+      "reward": 2000,
+      "nickname": "오감자",
+      "title": "스타벅스 유스베리티 따뜻한 거",
+      "errandDate": "7월 26일",
+    },
+  ];
+  List<Map<String, dynamic>> requestErrandExample = [
+    {
+      "orderNo": 2,
+      "score": 110.0,
+      "errandNo": 2,
+      "reward": 1500,
+      "nickname": "김지민",
+      "title": "맥도날드 햄버거 세트",
+      "errandDate": "7월 27일",
     },
     {
       "orderNo": 2,
-      "nickname": "JaneSmith",
-      "score": 87.0,
-      "errandNo": 102,
-      "createdDate": "2023-08-02",
-      "title": "Dog Walking",
-      "reward": 15
+      "score": 110.0,
+      "errandNo": 2,
+      "reward": 1500,
+      "nickname": "김지민",
+      "title": "맥도날드 햄버거 세트",
+      "errandDate": "7월 27일",
+    },
+    {
+      "orderNo": 2,
+      "score": 110.0,
+      "errandNo": 2,
+      "reward": 1500,
+      "nickname": "김지민",
+      "title": "맥도날드 햄버거 세트",
+      "errandDate": "7월 27일",
+    },
+    {
+      "orderNo": 2,
+      "score": 110.0,
+      "errandNo": 2,
+      "reward": 1500,
+      "nickname": "김지민",
+      "title": "맥도날드 햄버거 세트",
+      "errandDate": "7월 27일",
+    },
+    {
+      "orderNo": 2,
+      "score": 110.0,
+      "errandNo": 2,
+      "reward": 1500,
+      "nickname": "김지민",
+      "title": "맥도날드 햄버거 세트",
+      "errandDate": "7월 27일",
     },
   ];
+
   bool button1state = true; //초기 설정 값
   bool button2state = false;
   Color button1TextColor = const Color(0xff7C2E1A); //초기 색상 값
@@ -60,6 +136,9 @@ class HistoryState extends State<History> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       insertOverlay(context);
+    });
+    setState(() {
+      historys.addAll(doErrandExample);
     });
     //ErrandLatestInit(); //최신순 요청서 12개
     //InprogressExist(); //진행 중인 심부름이 있는지 확인
@@ -113,6 +192,8 @@ class HistoryState extends State<History> {
                 button1state = true;
                 button2state = false;
                 updateButtonState();
+                historys.clear();
+                historys.addAll(doErrandExample);
               },
               child: filterButton2(
                 button1BorderColor,
@@ -125,6 +206,8 @@ class HistoryState extends State<History> {
                 button1state = false;
                 button2state = true;
                 updateButtonState();
+                historys.clear();
+                historys.addAll(requestErrandExample);
               },
               child: filterButton2(
                   button2BorderColor,
@@ -134,12 +217,12 @@ class HistoryState extends State<History> {
             ),
           ],
         ),
+        SizedBox(height: 15.h),
         Flexible(
-          child: Container(width: 300.w, height: 500.h,
+          child: Container(width: 360.w, height: 700.h,
             //게시글 큰틀
-            margin: EdgeInsets.only(left: 19.w,),
             child: ListView.builder(
-                padding: EdgeInsets.only(top: 0.1.h, bottom: 45.h,),
+                padding: EdgeInsets.only(top: 0.1.h, bottom: 55.h,),
                 controller: _scrollController,
                 shrinkWrap: true,
                 itemCount: historys.length,
@@ -171,7 +254,7 @@ class HistoryState extends State<History> {
                       reward: historys[index]["reward"],
                       nickname:  historys[index]["nickname"],
                       title: historys[index]['title'],
-                      createdDate: historys[index]["createdDate"],
+                      errandDate: historys[index]["errandDate"],
                    /*
                       nickname: decodedNickname,
                       createdDate: decodedCreatedDate,

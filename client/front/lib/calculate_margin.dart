@@ -4,5 +4,5 @@ double calculateWidth(double margin, double screenWidth)
 }
 double calculateHeight(double margin, double screenHeight)
 {
-  return screenHeight * (margin / 800);
+  return screenHeight * (margin / 760);
 }
