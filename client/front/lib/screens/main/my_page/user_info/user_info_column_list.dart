@@ -5,6 +5,19 @@ import '../widgets/my_page_column_button_line.dart';
 import 'widgets/user_info_column.dart';
 
 class ColumnList extends StatefulWidget {
+  final String nickName;
+  final String name;
+  final String email;
+  final String password;
+
+  ColumnList({
+    Key? key,
+    required this.nickName,
+    required this.name,
+    required this.email,
+    required this.password,
+  }) : super(key: key);
+
   @override
   _ColumnListState createState() => _ColumnListState();
 }
@@ -32,25 +45,26 @@ class _ColumnListState extends State<ColumnList> {
             // 닉네임
             UserInfoColumn(
               textName: "닉네임",
-              textInfo: "수현수현이",
+              textInfo: widget.nickName,
             ),
             ColumnButtonLine(),
             // 이름
             UserInfoColumn(
               textName: "이름",
-              textInfo: "김수현",
+              textInfo: widget.name,
             ),
             ColumnButtonLine(),
             // 계정
             UserInfoColumn(
               textName: "계정",
-              textInfo: "202313114@pukyong.ac.kr",
+              textInfo: widget.email,
             ),
             ColumnButtonLine(),
             // 비밀번호
             UserInfoColumn(
               textName: "비밀번호",
-              textInfo: "******",
+              textInfo: widget.password,
+              obscureText: true, // 비밀번호 가리기
             ),
           ],
         ),
