@@ -25,6 +25,7 @@ class UserImage extends StatelessWidget {
         ),
         child: Stack(
           children: [
+            // 프로필 이미지
             Align(
               alignment: Alignment.center,
               child: SvgPicture.asset(
@@ -33,6 +34,7 @@ class UserImage extends StatelessWidget {
                 height: 90.h,
               ),
             ),
+            // 프로필 이미지 카메라 아이콘
             Align(
               alignment: Alignment.centerRight,
               child: Container(
