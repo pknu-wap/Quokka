@@ -30,7 +30,7 @@ class RowButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: greyText(rowButtonText, 10.sp),
+              child: grayText(rowButtonText, 10.sp),
             ),
             SizedBox(height: 8.h),
             Container(

@@ -60,7 +60,7 @@ class _MyPageUserState extends State<MyPageUser> {
             alignment: Alignment.centerRight, // 왼쪽 정렬
             child: Container(
               margin: EdgeInsets.only(top: 48.h, right: 26.w),
-              child: greyText("회원 정보 수정", 8.sp),
+              child: grayText("회원 정보 수정", 8.sp),
             ),
           ),
           // 회원 정보 수정 버튼
