@@ -23,11 +23,14 @@ class WhiteContainerUserImage extends StatelessWidget {
         width: 86.w,
         height: 83.99.h,
       )
-          : Image.file( // 카메라, 갤러리에서 선택한 이미지
-        File(selectedImagePath),
-        width: 86.w,
-        height: 83.99.h,
-        fit: BoxFit.cover,
+          : ClipRRect(
+        borderRadius: BorderRadius.circular(200.0),
+        child: Image.file( // 카메라, 갤러리에서 선택한 이미지
+          File(selectedImagePath),
+          width: 86.w,
+          height: 83.99.h,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
