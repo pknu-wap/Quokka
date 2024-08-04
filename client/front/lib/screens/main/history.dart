@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/screens/main/history_client.dart';
+import 'package:front/screens/main/history_runner.dart';
 import 'package:front/widgets/bar/navigation_bar.dart';
 import 'utils/set_button_colors.dart';
 import 'widgets/button/filter_button.dart';
@@ -241,12 +242,24 @@ class HistoryState extends State<History> {
                     behavior: HitTestBehavior.translucent,
                     //게시글 전체를 클릭영역으로 만들어주는 코드
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HistoryRequest(
-                                    errandNo: historys[index]["errandNo"])
-                        ),);
+                      if (button1state) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => HistoryRequest(
+                              errandNo: historys[index]["errandNo"],
+                            ),
+                          ),
+                        );
+                      }
+                      if (button2state) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => HistoryDoerrand(
+                              errandNo: historys[index]["errandNo"],
+                            ),
+                          ),
+                        );
+                      }
                     },
                     child: HistoryWidget(
                       orderNo: historys[index]["orderNo"],
