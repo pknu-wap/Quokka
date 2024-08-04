@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/status/status_icons/map.dart';
@@ -9,10 +8,8 @@ import 'package:front/screens/status/status_icons/re-show_errand.dart';
 import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/button/brown_button.dart';
 import 'package:front/widgets/text/button_text.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:stomp_dart_client/stomp_dart_client.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
@@ -168,26 +165,6 @@ class HistoryRequest extends StatefulWidget {
   State<HistoryRequest> createState() => _HistoryRequest();
 }
 class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixin{
-
-  late StompClient stompClient;
-  void onConnect(StompClient stompClient,StompFrame frame) {
-    stompClient.subscribe(
-      destination: '/queue/$connectNo',
-      callback: (frame) {
-        setState(() {
-          contents.add(json.decode(frame.body!));
-          addItemAnimation();
-          scrollToBottom();
-          completeCheck();
-        });
-        /**
-         *  이 부분에
-         *  result를 표시 list에 추가하는 코드
-         */
-      },
-    );
-  }
-
   void addItemAnimation() {
     final controller = AnimationController(
       vsync: this,
@@ -205,7 +182,28 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
   }
 
   late int errandNo;
-  List<Map<String, dynamic>> contents = [];
+  List<Map<String, dynamic>> contents = [
+    {
+      "contents": "출발했어요.",
+      "created": "2024-08-04T04:44:56.282Z"
+    },
+    {
+      "contents": "지금 물건을 픽업했어요.",
+      "created": "2024-08-04T05:01:23.456Z"
+    },
+    {
+      "contents": "10분 뒤 도착해요.",
+      "created": "2024-08-04T06:15:37.789Z"
+    },
+    {
+      "contents": "5분 뒤 도착해요.",
+      "created": "2024-08-04T07:30:45.123Z"
+    },
+    {
+      "contents": "완료했어요!",
+      "created": "2024-08-04T08:45:59.456Z"
+    }
+  ];
   List<AnimationController> controllers = [];
   List<Animation<double>> animations = [];
   bool isCompleted = true;
@@ -219,79 +217,17 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
     setState(() {});
     return;
   }
-  Future<void> statusMessageInit() async{
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}statusMessage/$errandNo";
-    String? token = await storage.read(key: 'TOKEN');
-    var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "$token"});
-    print(url);
-    if(response.statusCode == 200) {
-      print('contents add 200');
-      List<dynamic> result = jsonDecode(response.body);
-      for (var item in result) {
-        StatusContent c1 = StatusContent.fromJson(item);
-        addItemAnimation();
-        contents.add({
-          "contents": c1.contents,
-          "created": c1.created,
-        });
-      }
-      setState(() {});
-    }
-    else {
-      print("비정상 요청");
-    }
-  }
-  receiveValue() async{
-    String base_url = dotenv.env['BASE_URL'] ?? '';
-    String url = "${base_url}";
-    String? token = await storage.read(key: 'TOKEN');
-    var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "$token"});
-    if(response.statusCode == 200) {
-      print('contents add 200');
-      List<dynamic> result = jsonDecode(response.body);
-      for (var item in result) {
-        StatusContent c1 = StatusContent.fromJson(item);
-        contents.add({
-          "contents": c1.contents,
-          "created": c1.created,
-        });
-      }
-      completeCheck();
-      setState(() {});
-    }
-    else {
-      print("비정상 요청");
-    }
-  }
-
 
   void initState()
   {
     super.initState();
     errandNo = widget.errandNo;
     connectNo = errandNo.toString();
-    statusMessageInit().then((_) {
-      completeCheck();
-    });
-
-    stompClient = StompClient(
-      config: StompConfig(
-        url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
-        onConnect: (frame) => onConnect(stompClient, frame),
-        beforeConnect: () async {
-          print('waiting to connect...');
-          await Future.delayed(const Duration(milliseconds: 200));
-          print('connecting...');
-        },
-        onWebSocketError: (dynamic error) => print(error.toString()),
-        //stompConnectHeaders: {'Authorization': 'Bearer yourToken'},
-        //webSocketConnectHeaders: {'Authorization': 'Bearer yourToken'},
-      ),
-    );
-    stompClient.activate();
+    addItemAnimation();
+    addItemAnimation();
+    addItemAnimation();
+    addItemAnimation();
+    addItemAnimation();
   }
   void scrollToBottom() {
     if (contents.length > 5) {
@@ -352,7 +288,7 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
                     Container(
                       width: 19.02.w,
                       height: 26.15.h,
-                      margin: EdgeInsets.only(top: 73.65.h, left: 139.98.w),
+                      margin: EdgeInsets.only(top: 73.65.h, left: 113.05.w),
                       child: IconButton(
                         style: IconButton.styleFrom(
                           minimumSize: Size.zero,
@@ -423,14 +359,11 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
               Container(
                 margin: EdgeInsets.only(top: 24.08.h, left: 21.w),
                 child: ElevatedButton(
-                  onPressed: isCompleted
-                      ? () {
-                    confirmDialog(context);
-                  }
-                      : () { },
-
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   style: brownButton318(decideButtonColor(isCompleted)),
-                  child: buttonText("심부름 완료"),
+                  child: buttonText("확인 했어요"),
                 ),
               ),
             ],
