@@ -163,6 +163,10 @@ public class ErrandController {
     }
 
     /** **/
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))) ,
+    })
+    @Operation(summary = "사용자가 요청한 심부름")
     @GetMapping("/myErrand/order")
     public ResponseEntity<List<ErrandListResponseDto>> getMemberOrderErrands() {
         Member member = memberService.getLoginMember();
@@ -170,6 +174,10 @@ public class ErrandController {
                 .body(errandService.getErrandListByOrderNo(member));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "불러오기 성공", content = @Content(schema = @Schema(implementation = ErrandListResponseDto.class))) ,
+    })
+    @Operation(summary = "사용자가 수행한 심부름")
     @GetMapping("/myErrand/errander")
     public ResponseEntity<List<ErrandListResponseDto>> getMemberErranderErrands() {
         Member member = memberService.getLoginMember();
