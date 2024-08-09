@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -154,38 +153,37 @@ class HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-     appBar: AppBar(
-       centerTitle: true,
-       elevation: 0.0,
-       leading: Padding(
-         padding: EdgeInsets.only(top: 26.0.h),
-         child: IconButton(
-           icon: const Icon(Icons.arrow_back_ios),
-           onPressed: () {
-             Navigator.of(context).pop();
-           },
-         ),
-       ),
-       title: Padding(
-         padding: EdgeInsets.only(top: 26.0.h),
-         child: SizedBox(
-           height: 25.0.h,
-           child: Text(
-             '히스토리',
-             style: TextStyle(
-                 color: const Color(0xFF111111),
-                 fontFamily: 'Paybooc',
-                 fontWeight: FontWeight.w700,
-                 fontSize: 20.sp,
-                 letterSpacing: 0.01
-             ),
-           ),
-         ),
-       ),
-     ),
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 10.w, top: 21.h),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            Container(
+              height: 25.0.h,
+              margin: EdgeInsets.only(left: 90.w, top:17.h),
+              child: Text(
+                '히스토리',
+                style: TextStyle(
+                    color: const Color(0xFF111111),
+                    fontFamily: 'Paybooc',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20.sp,
+                    letterSpacing: 0.01
+                ),
+              ),
+            ),
+          ],
+        ),
         Row(
           children: [
             SizedBox(width: 22.w,),
@@ -245,7 +243,7 @@ class HistoryState extends State<History> {
                       if (button1state) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => HistoryRequest(
+                            builder: (context) => HistoryDoerrand(
                               errandNo: historys[index]["errandNo"],
                             ),
                           ),
@@ -254,7 +252,7 @@ class HistoryState extends State<History> {
                       if (button2state) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => HistoryDoerrand(
+                            builder: (context) => HistoryRequest(
                               errandNo: historys[index]["errandNo"],
                             ),
                           ),

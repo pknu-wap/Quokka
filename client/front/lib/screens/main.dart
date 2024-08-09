@@ -127,7 +127,7 @@ class _AppLoadState extends State<AppLoad> with SingleTickerProviderStateMixin {
       else {
         print("valid : false");
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LogIn()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       }
     }
