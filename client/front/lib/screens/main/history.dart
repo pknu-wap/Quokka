@@ -185,7 +185,7 @@ class HistoryState extends State<History> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 10.w, top: 21.h),
+              margin: EdgeInsets.only(left: 10.w, top: 31.h),
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
@@ -195,7 +195,7 @@ class HistoryState extends State<History> {
             ),
             Container(
               height: 25.0.h,
-              margin: EdgeInsets.only(left: 90.w, top:17.h),
+              margin: EdgeInsets.only(left: 90.w, top:27.h),
               child: Text(
                 '히스토리',
                 style: TextStyle(

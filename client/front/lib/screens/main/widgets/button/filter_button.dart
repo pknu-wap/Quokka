@@ -43,7 +43,7 @@ Container filterButton2(Color borderColor, Color textColor, String text){
   return Container(
     width: 134.w, height: 32.h,
     margin: EdgeInsets.only(
-      left: 16.w, top: 20.h,
+      left: 16.w, top: 10.h,
     ),
     child: Stack(
       children: [
