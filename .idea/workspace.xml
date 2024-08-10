@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7bd8076f-4130-41df-9662-7cadfe77036b" name="Changes" comment="Fix: fixerrand.dart 마진 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/history_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/history_client.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/front/lib/screens/main/history_runner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/client/front/lib/screens/main/history_runner.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

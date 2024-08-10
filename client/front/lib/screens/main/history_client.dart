@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:front/screens/status/status_icons/map.dart';
@@ -7,6 +8,7 @@ import 'package:front/utils/button_utill.dart';
 import 'package:front/widgets/button/brown_button.dart';
 import 'package:front/widgets/text/button_text.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -180,28 +182,7 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
   }
 
   late int errandNo;
-  List<Map<String, dynamic>> contents = [
-    {
-      "contents": "출발했어요.",
-      "created": "2024-08-04T04:44:56.282Z"
-    },
-    {
-      "contents": "지금 물건을 픽업했어요.",
-      "created": "2024-08-04T05:01:23.456Z"
-    },
-    {
-      "contents": "10분 뒤 도착해요.",
-      "created": "2024-08-04T06:15:37.789Z"
-    },
-    {
-      "contents": "5분 뒤 도착해요.",
-      "created": "2024-08-04T07:30:45.123Z"
-    },
-    {
-      "contents": "완료했어요!",
-      "created": "2024-08-04T08:45:59.456Z"
-    }
-  ];
+  List<Map<String, dynamic>> contents = [];
   List<AnimationController> controllers = [];
   List<Animation<double>> animations = [];
   bool isCompleted = true;
@@ -215,17 +196,36 @@ class _HistoryRequest extends State<HistoryRequest> with TickerProviderStateMixi
     setState(() {});
     return;
   }
-
+  Future<void> statusMessageInit() async{
+    String base_url = dotenv.env['BASE_URL'] ?? '';
+    String url = "${base_url}statusMessage/$errandNo";
+    String? token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    print(url);
+    if(response.statusCode == 200) {
+      print('contents add 200');
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        StatusContent c1 = StatusContent.fromJson(item);
+        addItemAnimation();
+        contents.add({
+          "contents": c1.contents,
+          "created": c1.created,
+        });
+      }
+      setState(() {});
+    }
+    else {
+      print("비정상 요청");
+    }
+  }
   void initState()
   {
     super.initState();
     errandNo = widget.errandNo;
     connectNo = errandNo.toString();
-    addItemAnimation();
-    addItemAnimation();
-    addItemAnimation();
-    addItemAnimation();
-    addItemAnimation();
+    statusMessageInit();
   }
   void scrollToBottom() {
     if (contents.length > 5) {
