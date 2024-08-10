@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:front/screens/main/history_client.dart';
 import 'package:front/screens/main/history_runner.dart';
@@ -9,6 +13,7 @@ import 'package:front/widgets/bar/navigation_bar.dart';
 import 'utils/set_button_colors.dart';
 import 'widgets/button/filter_button.dart';
 import 'widgets/history_widget.dart';
+import 'widgets/class/history_class.dart';
 const storage = FlutterSecureStorage();
 
 class History extends StatefulWidget {
@@ -18,100 +23,120 @@ class History extends StatefulWidget {
 }
 class HistoryState extends State<History> {
   List<Map<String, dynamic>> historys = [];
-  List<Map<String, dynamic>> doErrandExample = [
-    {
-      "orderNo": 1,
-      "score": 124.0,
-      "errandNo": 1,
-      "reward": 2000,
-      "nickname": "오감자",
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "errandDate": "7월 26일",
-    },
-    {
-      "orderNo": 1,
-      "score": 124.0,
-      "errandNo": 1,
-      "reward": 2000,
-      "nickname": "오감자",
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "errandDate": "7월 26일",
-    },
-    {
-      "orderNo": 1,
-      "score": 124.0,
-      "errandNo": 1,
-      "reward": 2000,
-      "nickname": "오감자",
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "errandDate": "7월 26일",
-    },
-    {
-      "orderNo": 1,
-      "score": 124.0,
-      "errandNo": 1,
-      "reward": 2000,
-      "nickname": "오감자",
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "errandDate": "7월 26일",
-    },
-    {
-      "orderNo": 1,
-      "score": 124.0,
-      "errandNo": 1,
-      "reward": 2000,
-      "nickname": "오감자",
-      "title": "스타벅스 유스베리티 따뜻한 거",
-      "errandDate": "7월 26일",
-    },
-  ];
-  List<Map<String, dynamic>> requestErrandExample = [
-    {
-      "orderNo": 2,
-      "score": 110.0,
-      "errandNo": 2,
-      "reward": 1500,
-      "nickname": "김지민",
-      "title": "맥도날드 햄버거 세트",
-      "errandDate": "7월 27일",
-    },
-    {
-      "orderNo": 2,
-      "score": 110.0,
-      "errandNo": 2,
-      "reward": 1500,
-      "nickname": "김지민",
-      "title": "맥도날드 햄버거 세트",
-      "errandDate": "7월 27일",
-    },
-    {
-      "orderNo": 2,
-      "score": 110.0,
-      "errandNo": 2,
-      "reward": 1500,
-      "nickname": "김지민",
-      "title": "맥도날드 햄버거 세트",
-      "errandDate": "7월 27일",
-    },
-    {
-      "orderNo": 2,
-      "score": 110.0,
-      "errandNo": 2,
-      "reward": 1500,
-      "nickname": "김지민",
-      "title": "맥도날드 햄버거 세트",
-      "errandDate": "7월 27일",
-    },
-    {
-      "orderNo": 2,
-      "score": 110.0,
-      "errandNo": 2,
-      "reward": 1500,
-      "nickname": "김지민",
-      "title": "맥도날드 햄버거 세트",
-      "errandDate": "7월 27일",
-    },
-  ];
+  String? token = "";
+  historyRequestInit() async{
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand/myErrand/order";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        HistoryData h1 = HistoryData.fromJson(item);
+        historys.add({
+          "orderNo": h1.o1.orderNo,
+          "nickname": h1.o1.nickname,
+          "score": h1.o1.score,
+          "errandNo": h1.errandNo,
+          "createdDate": h1.createdDate,
+          "title": h1.title,
+          "destination": h1.destination,
+          "reward": h1.reward,
+          "status": h1.status,
+        });
+        if (kDebugMode) {
+          print('errand latest init 200');
+        }
+      }
+      setState(() {});
+    }
+    else{
+      if (kDebugMode) {
+        print("error");
+      }
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        if (kDebugMode) {
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+      else if(error.code == "INVALID_VALUE")
+      {
+        if (kDebugMode) {
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+      else
+      {
+        if (kDebugMode) {
+          print(error.code);
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+    }
+  }
+  historyDoErrandInit() async{
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}errand/myErrand/errander";
+    token = await storage.read(key: 'TOKEN');
+    var response = await http.get(Uri.parse(url),
+        headers: {"Authorization": "$token"});
+    if(response.statusCode == 200) {
+      List<dynamic> result = jsonDecode(response.body);
+      for (var item in result) {
+        HistoryData h1 = HistoryData.fromJson(item);
+        historys.add({
+          "orderNo": h1.o1.orderNo,
+          "nickname": h1.o1.nickname,
+          "score": h1.o1.score,
+          "errandNo": h1.errandNo,
+          "createdDate": h1.createdDate,
+          "title": h1.title,
+          "destination": h1.destination,
+          "reward": h1.reward,
+          "status": h1.status,
+        });
+        if (kDebugMode) {
+          print('errand latest init 200');
+        }
+      }
+      setState(() {});
+    }
+    else{
+      if (kDebugMode) {
+        print("error");
+      }
+      Map<String, dynamic> json = jsonDecode(response.body);
+      Error error = Error.fromJson(json);
+      if(error.code == "INVALID_FORMAT") {
+        if (kDebugMode) {
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+      else if(error.code == "INVALID_VALUE")
+      {
+        if (kDebugMode) {
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+      else
+      {
+        if (kDebugMode) {
+          print(error.code);
+          print(error.httpStatus);
+          print(error.message);
+        }
+      }
+    }
+  }
+
 
   bool button1state = true; //초기 설정 값
   bool button2state = false;
@@ -139,7 +164,7 @@ class HistoryState extends State<History> {
       insertOverlay(context);
     });
     setState(() {
-      historys.addAll(doErrandExample);
+      historyDoErrandInit();
     });
     //ErrandLatestInit(); //최신순 요청서 12개
     //InprogressExist(); //진행 중인 심부름이 있는지 확인
@@ -193,7 +218,7 @@ class HistoryState extends State<History> {
                 button2state = false;
                 updateButtonState();
                 historys.clear();
-                historys.addAll(doErrandExample);
+                historyDoErrandInit();
               },
               child: filterButton2(
                 button1BorderColor,
@@ -207,7 +232,7 @@ class HistoryState extends State<History> {
                 button2state = true;
                 updateButtonState();
                 historys.clear();
-                historys.addAll(requestErrandExample);
+                historyRequestInit();
               },
               child: filterButton2(
                   button2BorderColor,
@@ -227,15 +252,18 @@ class HistoryState extends State<History> {
                 shrinkWrap: true,
                 itemCount: historys.length,
                 itemBuilder: (BuildContext context, int index) {
-    /* String nickname = historys[index]["nickname"];
+                  String nickname = historys[index]["nickname"];
                   String title = historys[index]['title'];
                   String createdDate = historys[index]["createdDate"];
-                 String decodedNickname = utf8.decode(
+                  String destination = historys[index]["destination"];
+                  String decodedNickname = utf8.decode(
                       nickname.runes.toList());
                   String decodedTitle = utf8.decode(
                       title.runes.toList());
                   String decodedCreatedDate = utf8.decode(
-                      createdDate.runes.toList()); */
+                      createdDate.runes.toList());
+                  String decodedDestination = utf8.decode(
+                      destination.runes.toList());
                   return GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     //게시글 전체를 클릭영역으로 만들어주는 코드
@@ -261,18 +289,14 @@ class HistoryState extends State<History> {
                     },
                     child: HistoryWidget(
                       orderNo: historys[index]["orderNo"],
+                      nickname: decodedNickname,
                       score: historys[index]["score"],
                       errandNo: historys[index]["errandNo"],
-                      reward: historys[index]["reward"],
-                      nickname:  historys[index]["nickname"],
-                      title: historys[index]['title'],
-                      errandDate: historys[index]["errandDate"],
-                   /*
-                      nickname: decodedNickname,
-                      createdDate: decodedCreatedDate,
+                      errandDate: decodedCreatedDate,
                       title: decodedTitle,
-                      */
-
+                      destination: decodedDestination,
+                      reward: historys[index]["reward"],
+                      status: historys[index]["status"],
                     ),
                   );
                 }

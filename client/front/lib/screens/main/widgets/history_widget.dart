@@ -5,7 +5,15 @@ import 'text/post_date_text.dart';
 import 'text/post_price_text.dart';
 import 'text/post_small_gray.dart';
 import 'text/post_title_text.dart';
+String formatDate(String datetime) {
+  // 문자열을 DateTime 객체로 변환
+  DateTime parsedDate = DateTime.parse(datetime);
 
+  // 날짜를 "n월 m일" 형식으로 변환
+  String formattedDate = "${parsedDate.month}월 ${parsedDate.day}일";
+
+  return formattedDate;
+}
 class HistoryWidget extends StatelessWidget {
   final int orderNo; // 상대방 번호
   final String nickname; // 닉네임
@@ -13,7 +21,9 @@ class HistoryWidget extends StatelessWidget {
   final int errandNo; // 게시글 번호
   final String errandDate; // 게시물 날짜
   final String title; // 제목
+  final String destination; //위치
   final int reward; // 보수
+  final String status; //상태
 
   const HistoryWidget({
     super.key,
@@ -23,7 +33,9 @@ class HistoryWidget extends StatelessWidget {
     required this.errandNo,
     required this.errandDate,
     required this.title,
+    required this.destination,
     required this.reward,
+    required this.status,
   });
 
   @override
@@ -93,7 +105,7 @@ class HistoryWidget extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 11.h, left: 8.w,),
-                      child: dateText(errandDate),
+                      child: dateText(formatDate(errandDate)),
                     ),
              Expanded(
           child: Align(
