@@ -117,6 +117,7 @@ class _UserInfoRevisionState extends State<UserInfoRevision> {
                 labelText: '비밀번호',
                 keyboardType: TextInputType.text,
                 obscureText: true,
+                readOnly: true, // 수정 가능한데, 다른 페이지로 이동해서 수정
               ),
             ),
             // 수정 완료 버튼
