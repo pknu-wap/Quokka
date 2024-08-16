@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/screens/main/my_page/user_info_revision/user_info_revision.dart';
 import 'package:front/screens/main/my_page/widgets/my_page_text.dart';
 import 'package:front/widgets/text/app_bar_text.dart';
 
@@ -21,9 +22,14 @@ class MyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         TextButton(
           onPressed: (){
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => MyPageUserInfoRevision()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserInfoRevision(
+                nickName: '수현수현이',
+                name: '김수현',
+                email: '202313114@pukyong.ac.kr',
+                password: 'sssssss',
+              )));
           },
           child: title('수정'),
         ),

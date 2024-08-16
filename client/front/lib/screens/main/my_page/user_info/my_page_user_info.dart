@@ -7,6 +7,19 @@ import 'user_info_user_image.dart';
 import 'widgets/my_page_app_bar.dart';
 
 class MyPageUserInfo extends StatefulWidget {
+  final String nickName;
+  final String name;
+  final String email;
+  final String password;
+
+  const MyPageUserInfo({
+    Key? key,
+    this.nickName = "수현수현이",
+    this.name = "김수현",
+    this.email = "202313114@pukyong.ac.kr",
+    this.password = "sssssss",
+  }) : super(key: key);
+
   @override
   _MyPageUserInfoState createState() => _MyPageUserInfoState();
 }
@@ -75,7 +88,7 @@ class _MyPageUserInfoState extends State<MyPageUserInfo> {
                     borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                   ),
                   builder: (context) => SlideUpBottom(
-                    nickName: "수현수현이",
+                    nickName: widget.nickName,
                     initialImagePath: _profileImagePath,
                     initialIsSvg: _isSvg,
                     onImageSaved: (newImagePath, newIsSvg) {
@@ -87,7 +100,7 @@ class _MyPageUserInfoState extends State<MyPageUserInfo> {
 
               },
             ),
-            ColumnList(),
+            ColumnList(nickName: widget.nickName, name: widget.name, email: widget.email, password: widget.password),
           ],
         ),
       ),

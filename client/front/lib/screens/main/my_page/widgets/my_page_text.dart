@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +16,7 @@ Text title(String text)
   );
 }
 
-Text greyText(String text, double fontSize)
+Text grayText(String text, double fontSize)
 {
   return Text(
     text,
