@@ -6,6 +6,7 @@ class RevisionTextField extends StatelessWidget {
   final String text;
   final TextInputType keyboardType;
   final bool obscureText;
+  final bool readOnly;
 
   const RevisionTextField({
     Key? key,
@@ -13,6 +14,7 @@ class RevisionTextField extends StatelessWidget {
     required this.text,
     required this.keyboardType,
     this.obscureText = false,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class RevisionTextField extends StatelessWidget {
         child: TextField(
           controller: controller,
           obscureText: obscureText, // 텍스트 가리기
+          readOnly: readOnly, // 읽기 전용
           style: TextStyle(
               color: Color(0xFF404040),
               fontSize: 13.sp,
