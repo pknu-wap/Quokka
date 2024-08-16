@@ -79,45 +79,49 @@ class _UserInfoRevisionState extends State<UserInfoRevision> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 5.h,
-            ),
+            SizedBox(height: 5.h),
             // 닉네임
-            RevisionContainer(
-              controller: _nickNameController,
-              labelText: '닉네임',
-              keyboardType: TextInputType.text,
+            Center(
+              child: RevisionContainer(
+                controller: _nickNameController,
+                labelText: '닉네임',
+                keyboardType: TextInputType.text,
+              ),
             ),
             // 이름
-            RevisionContainer(
-              controller: _nameController,
-              labelText: '이름',
-              keyboardType: TextInputType.text,
-              grayText: "수정이 불가합니다.",
+            Center(
+              child: RevisionContainer(
+                controller: _nameController,
+                labelText: '이름',
+                keyboardType: TextInputType.text,
+                grayText: "수정이 불가합니다.",
+                readOnly: true, // 수정 불가능
+              ),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 10.h),
             // 계정
-            RevisionContainer(
-              controller: _emailController,
-              labelText: '계정',
-              keyboardType: TextInputType.emailAddress,
-              grayText: "수정이 불가합니다.",
+            Center(
+              child: RevisionContainer(
+                controller: _emailController,
+                labelText: '계정',
+                keyboardType: TextInputType.emailAddress,
+                grayText: "수정이 불가합니다.",
+                readOnly: true, // 수정 불가능
+              ),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 10.h),
             // 비밀번호
-            RevisionContainer(
-              controller: _passwordController,
-              labelText: '비밀번호',
-              keyboardType: TextInputType.text,
-              obscureText: true,
+            Center(
+              child: RevisionContainer(
+                controller: _passwordController,
+                labelText: '비밀번호',
+                keyboardType: TextInputType.text,
+                obscureText: true,
+              ),
             ),
             // 수정 완료 버튼
             Container(
-              margin: EdgeInsets.only(left: 23.0.w, right: 19.0.w, top: 38.63.h),
+              margin: EdgeInsets.only(left: 23.0.w, right: 19.0.w, top: 220.h),
               child: ElevatedButton(
                 onPressed: _isButtonEnabled
                     ? () {
@@ -132,7 +136,8 @@ class _UserInfoRevisionState extends State<UserInfoRevision> {
                       ),
                     ),
                   );
-                } : null,
+                }
+                    : null,
                 style: brownButton318(decideButtonColor(_isButtonEnabled)),
                 child: Text(
                   "수정 완료",
