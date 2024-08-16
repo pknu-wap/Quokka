@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:front/screens/main/my_page/user_info_revision/password_change/user_info_revistion_password_change.dart';
+import 'package:front/screens/main/my_page/password_change/user_info_revistion_password_change.dart';
 
 
 class RevisionTextField extends StatelessWidget {
@@ -28,7 +28,7 @@ class RevisionTextField extends StatelessWidget {
         if (obscureText) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PasswordChange()),
+            MaterialPageRoute(builder: (context) => PasswordChange(password: controller.text)),
           );
         } else {
           FocusScope.of(context).requestFocus(FocusNode());
