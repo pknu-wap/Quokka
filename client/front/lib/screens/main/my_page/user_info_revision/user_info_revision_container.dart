@@ -8,6 +8,7 @@ class RevisionContainer extends StatelessWidget {
   final String labelText;
   final TextInputType keyboardType;
   final bool obscureText; // 텍스트 가리기
+  final bool readOnly; // 읽기 전용
   final String grayText;
 
   const RevisionContainer({
@@ -16,6 +17,7 @@ class RevisionContainer extends StatelessWidget {
     required this.labelText,
     required this.keyboardType,
     this.obscureText = false,
+    this.readOnly = false,
     this.grayText = "",
   }) : super(key: key);
 
@@ -32,6 +34,7 @@ class RevisionContainer extends StatelessWidget {
           text: "",
           keyboardType: keyboardType,
           obscureText: obscureText,
+          readOnly: readOnly,
         ),
         // 텍스트 필드 회색 설명 문자
         revisionGrayText(grayText),
