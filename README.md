@@ -27,6 +27,7 @@
 ## ✨Project Inroduction
   ### 🌱Start
   - 커카 앱 실행 시 처음 등장하는 화면입니다.<br>
+![image](https://github.com/user-attachments/assets/3450101d-355b-4ec4-b64e-b89a129c69e8)
 ![제목 없는 동영상 - Clipchamp로 제작 (1)](https://github.com/user-attachments/assets/5bc3c25f-a2aa-42b0-a1b4-450b77b94c6d)
 
   ### 🌱Login
