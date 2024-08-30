@@ -1,11 +1,26 @@
 # 커카 - 커피 사러 카페 가기 귀찮을 때
 ![image](https://github.com/user-attachments/assets/d2eee3be-8a5f-43e6-b308-762815fa2c8a)
 
-
 <br>
 
 ## 🪄Planning Intention
 ![image](https://github.com/user-attachments/assets/a425ad3a-caba-4687-907b-92ce62468ce0)
+
+<br>
+
+## 🤷‍♂️User Needs
+![image](https://github.com/user-attachments/assets/281df2a7-84d0-4eb0-b761-fb4370f0ec79)
+
+<br>
+
+## 🚨Service Concept
+<img src="https://github.com/user-attachments/assets/c6707be5-10f3-4710-a229-36461d756637" width=550 height=180>
+<img src="https://github.com/user-attachments/assets/ca8bd4c1-a3ff-45f3-ad2a-0c42e21ac27d" width=165 height=180>
+
+<br>
+
+## ☀️App Concept
+![image](https://github.com/user-attachments/assets/3e18cfbe-ea15-4bb4-946b-5bc0a34a7054)
 
 <br>
 
