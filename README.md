@@ -1,31 +1,80 @@
-# 앱 1팀
+# 커카 - 커피 사러 카페 가기 귀찮을 때
+![image](https://github.com/user-attachments/assets/d2eee3be-8a5f-43e6-b308-762815fa2c8a)
 
-## 프로젝트 소개
-- 시간이 애매하거나 귀찮을 때 이용할 수 있는 부경대학교 학생들을 위한 심부름 서비스 앱입니다!
+
 <br>
-  <div align=center><h1> 주요 기능</h1></div>
+
+## 🪄Planning Intention
+![image](https://github.com/user-attachments/assets/a425ad3a-caba-4687-907b-92ce62468ce0)
+
+<br>
+
+## ✨Project Inroduction
+  ### 🌱Start
+  - 커카 앱 실행 시 처음 등장하는 화면입니다.<br>
+![제목 없는 동영상 - Clipchamp로 제작 (1)](https://github.com/user-attachments/assets/5bc3c25f-a2aa-42b0-a1b4-450b77b94c6d)
+
+  ### 🌱Login
+  - 학번과 비밀번호 입력 후 로그인하는 화면입니다.
+  - 가입하지 않았다면, 회원가입 버튼을 클릭해 회원가입할 수 있습니다.
+<img src="https://github.com/user-attachments/assets/08430b48-76fd-4476-9b24-df8623d60ee5" width=250>
+
+  ### 🌱Sign Up
+  1) 회원가입
+- 부경대학교 학생 이메일을 이용하여 이메일로 인증번호를 받고 입력하여 인증합니다.
+<img src="https://github.com/user-attachments/assets/d3c84d9f-7547-4045-a668-5a2fbe1b1ba4" width=250>
+<img src="https://github.com/user-attachments/assets/e6aa6226-052b-49ac-b410-57a44e4bca0e" width=250>
   
-- 부경대학교 학생 이메일을 이용하여 이메일로 인증번호를 받고 입력하여 부경대생만 가입하여 안전하게 이용 가능
-- 수업 간 공강 시간이 부족해 커피를 사러 가기 시간이 애매하거나 비 오는 날 우산이 필요한 상황 등 다양한 상황에 심부름이 필요할 때 심부름 요청 가능
-- 가는 길에 요청된 커피 심부름이 있다거나 간단한 용돈 벌이가 필요할 경우 심부름 하기 가능
-- 심부름꾼이 심부름 진행 상황 알림을 보냄으로써 현재 진행 상황을 알 수 있는 실시간 현황 표시
-- 문제가 생겼을 경우 사용자간 소통이 가능한 쪽지 기능
+  2) 본인인증
+- 부경대학교 학생만 이용 가능하도록 학생증 이미지 인증을 통해 본인인증을 합니다.
+  3) 회원정보
+- 닉네임과 비밀번호를 생성하면 회원가입이 완료됩니다.
+  4) 가입완료
+- 가입완료 시, 페이지를 클릭하면, 자동으로 메인 화면인 게시글 화면으로 넘어가게 됩니다.
+
+
+
+  ### 🌱Home - 게시글
+  1) 게시글(메인)
+  - 여러 사용자가 올린 게시글 및 자신이 올린 게시글을 스크롤을 통해 확인할 수 있습니다.
+  - 우측 하단의 커카 버튼을 통해 현재 자신이 수행 중인 심부름 또는 요청 중인 심부름을 확인할 수 있습니다.
+  - 현재 진행 중인 심부름 중 새로운 채팅이 도착하면 알림 표시로 빨간 동그라미가 생깁니다.
+ <img src="https://github.com/user-attachments/assets/ab09e9d2-f135-4f6c-a480-4afaf9d7c9a1" width=250>
+ <img src="https://github.com/user-attachments/assets/308c3a4b-bd54-4839-a58a-a769c3bf066e" width=250>
+ 
+  2) 글 보기
+   - 심부름 하는 사람
+    2-1) 심부름 요청서
+   - 심부름 요청하는 사람
+    2-1) 요청서 수정하기
+    2-2) 도착지 검색
+
+  3) 현황 페이지
+    - 심부름 하는 사람
+    - 심부름 요청하는 사람
+
+  ### 🌱My Page
+  
+
+  ### 🌱Write Errand
+
+  ### 🌱History
 
 <br>
 </ul>
 
-<div align=center><h1>🙋‍♂️ 팀원 구성 🙋‍♀️</h1></div>
+## 🐧Contributors
   
 | **이제희** | **민경윤** | **김수현** | **이강민** | **정다은** |
 | :------: |  :------: | :------: | :------: | :------: |
-| [<img src="https://avatars.githubusercontent.com/JehuiLee" height=150 width=150> <br/> @JehuiLee](https://github.com/JehuiLee) | [<img src="https://avatars.githubusercontent.com/unh6unh6" height=150 width=150> <br/> @unh6unh6](https://github.com/unh6unh6) | [<img src="https://avatars.githubusercontent.com/suhyun113" height=150 width=150> <br/> @suhyun113](https://github.com/suhyun113) | [<img src="https://avatars.githubusercontent.com/mututu17" height=150 width=150> <br/> @mututu17](https://github.com/mututu17) | [![쿼카캐](https://github.com/pknu-wap/2024-1_App1/assets/142780364/722c5729-8f0f-443f-9049-2b8e7694bab9) <br/> 정다은]() |
-| **백엔드** |  **백엔드** | **클라이언트** | **클라이언트** | **디자이너** |
+| [<img src="https://avatars.githubusercontent.com/JehuiLee" height=150 width=150> <br/> @JehuiLee](https://github.com/JehuiLee) | [<img src="https://avatars.githubusercontent.com/unh6unh6" height=150 width=150> <br/> @unh6unh6](https://github.com/unh6unh6) | [<img src="https://avatars.githubusercontent.com/suhyun113" height=150 width=150> <br/> @suhyun113](https://github.com/suhyun113) | [<img src="https://avatars.githubusercontent.com/mututu17" height=150 width=150> <br/> @mututu17](https://github.com/mututu17) | <br> [![쿼카캐](https://github.com/user-attachments/assets/6120253f-38e5-464b-8d89-4bc0020c8bb5) <br/> <br> 정다은]() |
+| **Back-End** |  **Back-End** | **Client** | **Client** | **Design** |
 
 </div>
 
 <br>
 
-<div align=center><h1>📚 기술 스택</h1></div>
+## 📚Teck Stacks
 
 <div align=center>
   
