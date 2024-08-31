@@ -1,5 +1,5 @@
 # 커카 - 커피 사러 카페 가기 귀찮을 때
-![image](https://github.com/user-attachments/assets/d2eee3be-8a5f-43e6-b308-762815fa2c8a)
+![Group 1000006457](https://github.com/user-attachments/assets/57b30175-dd5b-4753-8698-60685d2dbc8b)
 
 <br>
 
@@ -9,13 +9,13 @@
 <br>
 
 ## 🤷‍♂️User Needs
-![image](https://github.com/user-attachments/assets/281df2a7-84d0-4eb0-b761-fb4370f0ec79)
+![image](https://github.com/user-attachments/assets/a2cce65e-37ea-4cef-8ea5-7625ad2b492a)
+
 
 <br>
 
 ## 🚨Service Concept
-<img src="https://github.com/user-attachments/assets/c6707be5-10f3-4710-a229-36461d756637" width=550 height=180>
-<img src="https://github.com/user-attachments/assets/ca8bd4c1-a3ff-45f3-ad2a-0c42e21ac27d" width=165 height=180>
+![Group 1000006456](https://github.com/user-attachments/assets/d71017c0-18ef-45eb-bbf0-418f8c80e52f)
 
 <br>
 
@@ -49,8 +49,7 @@
 - 가입완료 시, 페이지를 클릭하면, 자동으로 메인 화면인 게시글 화면으로 넘어가게 됩니다.
 
 
-
-  ### 🌱Home - 게시글
+### 🌱Home - 게시글
   1) 게시글(메인)
   - 여러 사용자가 올린 게시글 및 자신이 올린 게시글을 스크롤을 통해 확인할 수 있습니다.
   - 우측 하단의 커카 버튼을 통해 현재 자신이 수행 중인 심부름 또는 요청 중인 심부름을 확인할 수 있습니다.
