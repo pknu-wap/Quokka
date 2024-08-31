@@ -36,17 +36,26 @@
 <img src="https://github.com/user-attachments/assets/08430b48-76fd-4476-9b24-df8623d60ee5" width=250>
 
   ### 🌱Sign Up
-  1) 회원가입
+  **1) 회원가입**
 - 부경대학교 학생 이메일을 이용하여 이메일로 인증번호를 받고 입력하여 인증합니다.
 <img src="https://github.com/user-attachments/assets/d3c84d9f-7547-4045-a668-5a2fbe1b1ba4" width=250>
 <img src="https://github.com/user-attachments/assets/e6aa6226-052b-49ac-b410-57a44e4bca0e" width=250>
-  
-  2) 본인인증
+
+  **2) 본인인증**
 - 부경대학교 학생만 이용 가능하도록 학생증 이미지 인증을 통해 본인인증을 합니다.
-  3) 회원정보
+<img src="https://github.com/user-attachments/assets/57927e33-9a4b-48c1-bed2-4166a9f9cbbf" width=250>
+<img src="https://github.com/user-attachments/assets/d52842b7-67cd-4eb9-a535-bd472be1a192" width=250>
+
+  **3) 회원정보**
 - 닉네임과 비밀번호를 생성하면 회원가입이 완료됩니다.
-  4) 가입완료
+<img src="https://github.com/user-attachments/assets/b37c7233-8cc1-448a-831c-e22ab6f82b90" width=250>
+<img src="https://github.com/user-attachments/assets/b15324df-ba5c-4f3f-a175-efbc401c09c1" width=250>
+<img src="https://github.com/user-attachments/assets/c0003a26-12a6-424a-9276-a5b5ab9d5896" width=250>
+  
+  **4) 가입완료**
 - 가입완료 시, 페이지를 클릭하면, 자동으로 메인 화면인 게시글 화면으로 넘어가게 됩니다.
+<img src="https://github.com/user-attachments/assets/b37c7233-8cc1-448a-831c-e22ab6f82b90" width=250>
+  
 
 
 ### 🌱Home - 게시글
@@ -55,7 +64,8 @@
   - 우측 하단의 커카 버튼을 통해 현재 자신이 수행 중인 심부름 또는 요청 중인 심부름을 확인할 수 있습니다.
   - 현재 진행 중인 심부름 중 새로운 채팅이 도착하면 알림 표시로 빨간 동그라미가 생깁니다.
  <img src="https://github.com/user-attachments/assets/ab09e9d2-f135-4f6c-a480-4afaf9d7c9a1" width=250>
- <img src="https://github.com/user-attachments/assets/308c3a4b-bd54-4839-a58a-a769c3bf066e" width=250>
+ <img src="https://github.com/user-attachments/assets/82872da4-bbc7-4cd7-a61a-a4c5612902f5" width=250>
+
  
   2) 글 보기
    - 심부름 하는 사람
