@@ -25,58 +25,97 @@
 <br>
 
 ## ✨Project Inroduction
-  ### 🌱Start
+  ### 👟Start
   - 커카 앱 실행 시 처음 등장하는 화면입니다.<br>
 ![image](https://github.com/user-attachments/assets/3450101d-355b-4ec4-b64e-b89a129c69e8)
 ![제목 없는 동영상 - Clipchamp로 제작 (1)](https://github.com/user-attachments/assets/5bc3c25f-a2aa-42b0-a1b4-450b77b94c6d)
 
-  ### 🌱Login
+  ### 🗝️Login
   - 학번과 비밀번호 입력 후 로그인하는 화면입니다.
   - 가입하지 않았다면, 회원가입 버튼을 클릭해 회원가입할 수 있습니다.
 <img src="https://github.com/user-attachments/assets/08430b48-76fd-4476-9b24-df8623d60ee5" width=250>
 
-  ### 🌱Sign Up
+  ### 🧸Sign Up
   **1) 회원가입**
 - 부경대학교 학생 이메일을 이용하여 이메일로 인증번호를 받고 입력하여 인증합니다.
 <img src="https://github.com/user-attachments/assets/d3c84d9f-7547-4045-a668-5a2fbe1b1ba4" width=250>
 <img src="https://github.com/user-attachments/assets/e6aa6226-052b-49ac-b410-57a44e4bca0e" width=250>
+
+<br>
+<br>
 
   **2) 본인인증**
 - 부경대학교 학생만 이용 가능하도록 학생증 이미지 인증을 통해 본인인증을 합니다.
 <img src="https://github.com/user-attachments/assets/57927e33-9a4b-48c1-bed2-4166a9f9cbbf" width=250>
 <img src="https://github.com/user-attachments/assets/d52842b7-67cd-4eb9-a535-bd472be1a192" width=250>
 
+<br>
+<br>
+
   **3) 회원정보**
 - 닉네임과 비밀번호를 생성하면 회원가입이 완료됩니다.
 <img src="https://github.com/user-attachments/assets/b37c7233-8cc1-448a-831c-e22ab6f82b90" width=250>
 <img src="https://github.com/user-attachments/assets/b15324df-ba5c-4f3f-a175-efbc401c09c1" width=250>
 <img src="https://github.com/user-attachments/assets/c0003a26-12a6-424a-9276-a5b5ab9d5896" width=250>
-  
+
+<br>
+<br>
+
   **4) 가입완료**
 - 가입완료 시, 페이지를 클릭하면, 자동으로 메인 화면인 게시글 화면으로 넘어가게 됩니다.
 <img src="https://github.com/user-attachments/assets/b37c7233-8cc1-448a-831c-e22ab6f82b90" width=250>
   
+<br>
+<br>
 
-
-### 🌱Home - 게시글
-  1) 게시글(메인)
+### 🏠Home - 게시글
+  **1) 게시글(메인)**
   - 여러 사용자가 올린 게시글 및 자신이 올린 게시글을 스크롤을 통해 확인할 수 있습니다.
   - 우측 하단의 커카 버튼을 통해 현재 자신이 수행 중인 심부름 또는 요청 중인 심부름을 확인할 수 있습니다.
   - 현재 진행 중인 심부름 중 새로운 채팅이 도착하면 알림 표시로 빨간 동그라미가 생깁니다.
  <img src="https://github.com/user-attachments/assets/ab09e9d2-f135-4f6c-a480-4afaf9d7c9a1" width=250>
  <img src="https://github.com/user-attachments/assets/82872da4-bbc7-4cd7-a61a-a4c5612902f5" width=250>
+ <img src="https://github.com/user-attachments/assets/b0e4be86-2e2d-48a5-8f94-89f9ee13f9e1" width=250>
 
+ <br>
+ <br>
  
-  2) 글 보기
-   - 심부름 하는 사람
-    2-1) 심부름 요청서
-   - 심부름 요청하는 사람
-    2-1) 요청서 수정하기
-    2-2) 도착지 검색
+  **2) 글 보기** <br>
+    **<🐻심부름 하는 사람>** <br>
+     - 심부름을 하는 사람이 심부름을 요청하는 사람의 글을 자세히 볼 수 있습니다.<br>
+     - 심부름을 하고 싶다면, "제가 할게요!" 버튼을 클릭하여 심부름 요청서 페이지로 넘어갈 수 있습니다.<br>
+     <img src="https://github.com/user-attachments/assets/a843c045-ce65-44b7-a27f-c23da7767fb3" width=250>
+     <br>
+    **2-1) 심부름 요청서**
+     - 하고자 하는 심부름 요청서가 나옵니다.<br>
+     - 이 심부름을 하고자 확정하고 싶다면, "확인했어요." 버튼을 클릭합니다.<br>
+     - 버튼 클릭 시, 서명과 도장이 찍히는 애니메이션과 함께 심부름을 진행하게 됩니다.<br>
+     <img src="https://github.com/user-attachments/assets/644c6bb1-ee76-4030-bd6b-0abfc5ee8b0c" width=250>
+     <img src="https://github.com/user-attachments/assets/a8b04577-ae3a-430e-92b1-8829cfaa71f7" width=250> <br>
+<br>
+    **<🐻‍❄️심부름 요청하는 사람>** <br>
+     - 자신이 심부름을 요청하기 위해 올린 게시글을 자세히 볼 수 있습니다.<br>
+     - 자신이 작성한 요청서를 "수정하기" 버튼을 통해 수정하기 화면으로 이동할 수 있습니다.<br>
+     - "삭제하기" 버튼을 통해 작성한 게시글을 삭제합니다.<br>
+     <img src="https://github.com/user-attachments/assets/3cc7f161-8978-4626-82b2-af592e67286e" width=250><br> 
+    **2-1) 요청서 수정하기** <br>
+     - 요청서 작성하기에서 작성한 각 항목의 데이터를 불러옵니다.<br>
+     - 수정하고 싶은 각 항목 부분을 수정합니다.<br>
+     - 수정이 끝나면, "수정 완료" 버튼을 통해 수정을 완료합니다.<br>
+     - 자동적으로 글 보기 페이지로 이동하며, 변경된 사항이 반영됩니다.<br>
+     <img src="https://github.com/user-attachments/assets/105bef97-ae5f-439a-b9b0-1fc3f3004d50" width=250>
+     <img src="https://github.com/user-attachments/assets/0c972d7f-4dea-41b1-96f0-26ed9fa920dc" width=250>
+     <br>
+    **2-2) 도착지 검색**
+     - 항목 중 도착지의 미니 지도를 클릭하면, 도착지 찾기 화면으로 이동하며, 위치를 수정 후 "도착지로 설정할게요." 버튼 클릭 시, 수정 사항이 반영됩니다.<br>
+     <img src="https://github.com/user-attachments/assets/c7a0becd-bb2c-4fad-81b5-aa50d69c937e" width=250>
 
-  3) 현황 페이지
-    - 심부름 하는 사람
-    - 심부름 요청하는 사람
+<br>
+<br>
+
+ **3) 현황 페이지** <br>
+   **<🐻심부름 하는 사람>** <br>
+   **<🐻‍❄️심부름 요청하는 사람>** <br>
 
   ### 🌱My Page
   
