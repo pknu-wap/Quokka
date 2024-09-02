@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
@@ -166,9 +164,6 @@ class HistoryState extends State<History> {
     setState(() {
       historyDoErrandInit();
     });
-    //ErrandLatestInit(); //최신순 요청서 12개
-    //InprogressExist(); //진행 중인 심부름이 있는지 확인
-    //InProgressErrandInit(); //진행 중인 심부름 목록 불러오기
   }
   @override
   void dispose(){

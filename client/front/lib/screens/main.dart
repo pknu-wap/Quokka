@@ -42,7 +42,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<bool> Check_Token() async {
-    String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/token/isValid";
+    String baseUrl = dotenv.env['BASE_URL'] ?? '';
+    String url = "${baseUrl}token/isValid";
+    // String url = "http://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/token/isValid";
     String? token = await storage.read(key: 'TOKEN');
     print(token);
     var response = await http.get(Uri.parse(url),
