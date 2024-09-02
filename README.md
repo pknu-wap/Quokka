@@ -109,13 +109,29 @@
     **2-2) 도착지 검색**
      - 항목 중 도착지의 미니 지도를 클릭하면, 도착지 찾기 화면으로 이동하며, 위치를 수정 후 "도착지로 설정할게요." 버튼 클릭 시, 수정 사항이 반영됩니다.<br>
      <img src="https://github.com/user-attachments/assets/c7a0becd-bb2c-4fad-81b5-aa50d69c937e" width=250>
-
-<br>
 <br>
 
- **3) 현황 페이지** <br>
+ **3) 현황** <br>
+ - 게시글 메인 화면의 커카 버튼 클릭 시, 아래에서 슬라이드가 올라옵니다.<br>
+ - 슬라이드에는 현재 수행 중인 심부름과 현재 요청 중인 심부름을 확인할 수 있습니다.<br>
+ - 각각을 클릭하면, 그 심부름 현황을 알 수 있는 채팅 화면으로 넘어갑니다.<br>
+ <img src="https://github.com/user-attachments/assets/eff683b6-73b4-40a0-a3b9-80a3df5b7bd6" width=250><br>
+<br>
    **<🐻심부름 하는 사람>** <br>
+   <img src="https://github.com/user-attachments/assets/492cce71-315c-44c2-8150-562711dd2214" width=250>
+   <img src="https://github.com/user-attachments/assets/0ccc7a31-ad1e-41fa-9518-ca1bbb1cbe57" width=250>
+   <img src="https://github.com/user-attachments/assets/e1b0cc3f-7c83-4a6e-ae84-b6e5ac2038e3" width=250>
+
+   **3-1) 심부름 요청서(확인)** <br>
+   - 현황 페이지의 우측 상단의 버튼 중 요청서 모양 클릭 시, 이동합니다.<br>
+      <img src="https://github.com/user-attachments/assets/0989f2f2-87a5-44a0-b3a5-4c14c5a4b405" width=250>
+<br>
+   **3-2) 알람**(아직 구현x) <br>
+
    **<🐻‍❄️심부름 요청하는 사람>** <br>
+   <img src="https://github.com/user-attachments/assets/a4d79453-01b3-49c5-8cc6-e428347e4f1c" width=250><br>
+   <img src="https://github.com/user-attachments/assets/c36eccff-3e35-4d88-aab1-e0a4943011b0" width=250><br>
+
 
   ### 🌱My Page
   
