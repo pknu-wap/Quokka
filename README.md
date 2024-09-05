@@ -63,7 +63,7 @@
 
   **4) 가입완료**
 - 가입완료 시, 페이지를 클릭하면, 자동으로 메인 화면인 게시글 화면으로 넘어가게 됩니다.
-<img src="https://github.com/user-attachments/assets/b37c7233-8cc1-448a-831c-e22ab6f82b90" width=250>
+ <img src="https://github.com/user-attachments/assets/82872da4-bbc7-4cd7-a61a-a4c5612902f5" width=250>
   
 <br>
 <br>
@@ -74,7 +74,6 @@
   - 우측 하단의 커카 버튼을 통해 현재 자신이 수행 중인 심부름 또는 요청 중인 심부름을 확인할 수 있습니다.
   - 현재 진행 중인 심부름 중 새로운 채팅이 도착하면 알림 표시로 빨간 동그라미가 생깁니다.
  <img src="https://github.com/user-attachments/assets/ab09e9d2-f135-4f6c-a480-4afaf9d7c9a1" width=250>
- <img src="https://github.com/user-attachments/assets/82872da4-bbc7-4cd7-a61a-a4c5612902f5" width=250>
  <img src="https://github.com/user-attachments/assets/b0e4be86-2e2d-48a5-8f94-89f9ee13f9e1" width=250>
 
  <br>
