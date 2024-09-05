@@ -116,6 +116,7 @@
  - 각각을 클릭하면, 그 심부름 현황을 알 수 있는 채팅 화면으로 넘어갑니다.<br>
  <img src="https://github.com/user-attachments/assets/eff683b6-73b4-40a0-a3b9-80a3df5b7bd6" width=250><br>
 <br>
+
    **<🐻심부름 하는 사람>** <br>
    <img src="https://github.com/user-attachments/assets/492cce71-315c-44c2-8150-562711dd2214" width=250>
    <img src="https://github.com/user-attachments/assets/0ccc7a31-ad1e-41fa-9518-ca1bbb1cbe57" width=250>
@@ -125,6 +126,7 @@
    - 현황 페이지의 우측 상단의 버튼 중 요청서 모양 클릭 시, 이동합니다.<br>
       <img src="https://github.com/user-attachments/assets/0989f2f2-87a5-44a0-b3a5-4c14c5a4b405" width=250>
 <br>
+
    **3-2) 알람**(아직 구현x) <br>
 
    **<🐻‍❄️심부름 요청하는 사람>** <br>
