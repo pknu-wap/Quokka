@@ -924,10 +924,10 @@ class _statuspageQState extends State<statuspageQ> with TickerProviderStateMixin
     statusMessageInit().then((_) {
       completeCheck();
     });
-
+    String stompUrl = dotenv.env['STOMP_URL'] ?? '';
     stompClient = StompClient(
       config: StompConfig(
-        url: 'ws://ec2-43-201-110-178.ap-northeast-2.compute.amazonaws.com:8080/ws',
+        url: stompUrl,
         onConnect: (frame) => onConnect(stompClient, frame),
         beforeConnect: () async {
           print('waiting to connect...');
